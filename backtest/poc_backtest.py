@@ -67,6 +67,9 @@ def parse_args(argv=None):
                    help="Comisión ida y vuelta por contrato en $")
     p.add_argument("--slippage", type=float, default=0.0,
                    help="Deslizamiento en puntos por operación (se descuenta del resultado)")
+    p.add_argument("--min-coverage", type=float, default=0.9,
+                   help="Fracción mínima de velas presentes entre 00:00 y el fin de la ventana para usar el día "
+                        "(descarta días con huecos en los datos; 0 = usar todos)")
     p.add_argument("--out", default="backtest/resultados", help="Carpeta de salida")
     return p.parse_args(argv)
 
@@ -320,6 +323,23 @@ def main(argv=None):
     if df.empty:
         sys.exit("No hay datos en el rango pedido.")
 
+    skipped = 0
+    if a.min_coverage > 0:
+        weh, wem = map(int, a.win_end.split(":"))
+        lim = weh * 60 + wem
+        tm = df.index.hour * 60 + df.index.minute
+        d = pd.Series(df.index.date, index=df.index)
+        cnt = d[tm < lim].groupby(d[tm < lim]).size()
+        prof = d[(tm >= a.prof_hour * 60 + a.prof_min) & (tm < a.prof_hour * 60 + a.prof_min + a.prof_dur)]
+        pcnt = prof.groupby(prof).size()
+        need = lim / a.tf
+        good = set(cnt[cnt >= a.min_coverage * need].index) & set(pcnt[pcnt >= a.prof_dur / a.tf].index)
+        keep = d.isin(good).to_numpy()
+        skipped = len(set(d)) - len(good)
+        df = df[keep]
+        if df.empty:
+            sys.exit("Ningún día tiene datos completos (prueba --min-coverage 0).")
+
     tr, days = run(df, a)
     tr = add_money(tr, a)
     out = Path(a.out)
@@ -331,6 +351,8 @@ def main(argv=None):
           f"{'sin límite' if a.no_window else a.win_start + '-' + a.win_end}, SL {a.sl} pts, "
           f"R:R {a.rr}, TP1 {a.partial_r}R al {a.partial_pct:g}%, {a.qty:g} contratos × "
           f"${a.point_value:g}/pt, comisión ${a.commission:g}/contrato, slippage {a.slippage:g} pts")
+    if skipped:
+        print(f"Días descartados por huecos en los datos: {skipped:,}")
     if not days.empty:
         print("Días: " + ", ".join(f"{k}: {v}" for k, v in days["status"].value_counts().items()))
     if tr.empty:
