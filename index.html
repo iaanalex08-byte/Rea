@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fischer Investments</title>
+  <meta name="description" content="Fischer Investments — Gestión de inversiones con estrategia, disciplina y visión de largo plazo.">
+  <meta name="theme-color" content="#0b4a40">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="progress" aria-hidden="true"><span></span></div>
+  <div class="cursor" aria-hidden="true"></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="top">
+    <a href="#portada" class="brand" aria-label="Fischer Investments, inicio">
+      <span class="brand__mark">F</span>
+      <span class="brand__text"><strong>FISCHER</strong><small>INVESTMENTS</small></span>
+    </a>
+    <nav class="nav__links" aria-label="Principal">
+      <a href="#portada">Portada</a>
+      <a href="#editorial">Editorial</a>
+      <a href="#vision">Visión</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <span class="nav__issue">N.º 01 · Octubre 2026</span>
+    <button class="nav__toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span></button>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="portada">
+      <canvas class="fx fx--hero" data-fx="blueprint" aria-hidden="true"></canvas>
+      <div class="hero__inner">
+        <h1 class="hero__title" aria-label="Fischer">
+          <span class="split" data-split>FISCHER</span>
+        </h1>
+        <img class="hero__tower" src="assets/tower.svg" alt="Ilustración de un rascacielos" data-parallax="0.22">
+        <p class="hero__quote reveal">Invertir no es adivinar el mercado. Es construir con paciencia lo que se levantará por décadas.</p>
+        <p class="hero__vertical">Gestión de inversiones · Estrategia · Largo plazo</p>
+        <a href="#editorial" class="hero__scroll" aria-label="Bajar a la edición"><span></span></a>
+      </div>
+    </section>
+
+    <div class="marquee" aria-label="Estrategia, Disciplina, Paciencia, Largo plazo">
+      <div class="marquee__track">
+        <span>Estrategia</span><i></i><span>Disciplina</span><i></i><span>Paciencia</span><i></i><span>Largo plazo</span><i></i>
+        <span>Estrategia</span><i></i><span>Disciplina</span><i></i><span>Paciencia</span><i></i><span>Largo plazo</span><i></i>
+      </div>
+    </div>
+
+    <!-- ============ EDICIÓN ============ -->
+    <section class="edition" id="editorial">
+      <div class="edition__head reveal">
+        <h2>En esta edición</h2>
+        <span class="rule"></span>
+        <span class="eyebrow">Tres ideas, una disciplina</span>
+      </div>
+      <div class="edition__grid">
+        <article class="card reveal" style="--d:0s">
+          <span class="eyebrow">01 · Filosofía</span>
+          <h3>Capital con criterio, no con ruido</h3>
+          <p class="dropcap">En Fischer Investments cada decisión parte de un método. Seleccionamos oportunidades con reglas claras, medimos el riesgo antes que el rendimiento y dejamos que el tiempo trabaje a favor del capital.</p>
+        </article>
+        <article class="card reveal" style="--d:.12s">
+          <span class="eyebrow">02 · Método</span>
+          <h3>Reglas simples, ejecución constante</h3>
+          <p>Una estrategia sólida cabe en pocas líneas. Definimos entrada, salida y tamaño de posición con anticipación, y evaluamos los resultados con datos, no con emociones.</p>
+        </article>
+        <article class="card reveal" style="--d:.24s">
+          <span class="eyebrow">03 · Visión</span>
+          <h3>Construir hoy lo que durará mañana</h3>
+          <p>Como una gran torre, el patrimonio se levanta piso por piso. Nuestro enfoque es crecer de forma sostenida, cuidando los cimientos en cada etapa.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ FIGURA ============ -->
+    <section class="figure">
+      <figure class="figure__media reveal reveal--mask" data-tilt>
+        <img src="assets/city.svg" alt="Rascacielos sobre el horizonte de la ciudad" data-parallax="0.06">
+        <span class="corner corner--tl"></span><span class="corner corner--tr"></span>
+      </figure>
+      <div class="figure__copy">
+        <span class="eyebrow reveal">Fig. 01 · La ciudad</span>
+        <h2 class="reveal" style="--d:.1s">Cada gran obra empieza con un plano</h2>
+        <p class="lede reveal" style="--d:.2s">Así entendemos el capital: se diseña, se construye con método y se cuida a lo largo del tiempo.</p>
+        <dl class="stats reveal" style="--d:.3s">
+          <div><dt data-count="3">0</dt><dd>Principios</dd></div>
+          <div><dt data-count="1">0</dt><dd>Disciplina</dd></div>
+          <div><dt data-count="10" data-suffix="+">0</dt><dd>Años de visión</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ============ VISIÓN ============ -->
+    <section class="vision" id="vision">
+      <canvas class="fx" data-fx="rise" aria-hidden="true"></canvas>
+      <figure class="vision__media reveal reveal--mask" data-tilt>
+        <div class="vision__frame"><img src="assets/lookup.svg" alt="Rascacielos vistos desde abajo convergiendo hacia el cielo" class="spin-slow"></div>
+      </figure>
+      <div class="vision__copy">
+        <span class="eyebrow reveal">Visión</span>
+        <h2 class="vision__title"><span class="line reveal">Largo</span><span class="line reveal" style="--d:.15s">Plazo</span></h2>
+        <p class="lede reveal" style="--d:.3s">La ciudad más alta empezó con un cimiento. El patrimonio también.</p>
+      </div>
+    </section>
+
+    <!-- ============ CONTACTO ============ -->
+    <section class="contact" id="contacto">
+      <div class="contact__copy">
+        <span class="eyebrow reveal">Contacto</span>
+        <h2 class="reveal" style="--d:.1s">Hablemos de tu próxima inversión</h2>
+      </div>
+      <div class="contact__actions reveal" style="--d:.2s">
+        <a class="btn" data-magnetic href="mailto:iaanfischer@gmail.com"><span>Escríbenos · iaanfischer@gmail.com</span></a>
+        <div class="contact__social">
+          <span class="eyebrow">Síguenos</span>
+          <a href="https://instagram.com/iaanfsc" target="_blank" rel="noopener">Instagram · @iaanfsc</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 Fischer Investments. Este contenido es informativo y no constituye asesoría financiera. Invertir implica riesgo de pérdida.</p>
+    <a href="#top" class="footer__top">Volver arriba ↑</a>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

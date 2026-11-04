@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 600" preserveAspectRatio="xMidYMax meet">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0" stop-color="#b9b6ae"/>
+      <stop offset=".45" stop-color="#8d8a83"/>
+      <stop offset=".5" stop-color="#5d5b56"/>
+      <stop offset="1" stop-color="#2f2e2b"/>
+    </linearGradient>
+    <pattern id="w" width="4" height="6" patternUnits="userSpaceOnUse">
+      <rect width="4" height="6" fill="none"/>
+      <rect x="1.4" y="0" width="1.2" height="4.2" fill="#1d1c1a" opacity=".55"/>
+    </pattern>
+    <pattern id="h" width="200" height="18" patternUnits="userSpaceOnUse">
+      <rect y="16.5" width="200" height="1.5" fill="#1d1c1a" opacity=".25"/>
+    </pattern>
+    <clipPath id="body">
+    <path d="M90 96 Q100 62 110 96Z"/>
+    <rect x="88" y="94" width="24" height="22"/>
+    <rect x="80" y="114" width="40" height="26"/>
+    <rect x="70" y="138" width="60" height="34"/>
+    <rect x="58" y="170" width="84" height="300"/>
+    <rect x="44" y="300" width="112" height="170"/>
+    <rect x="34" y="468" width="132" height="74"/>
+    <rect x="16" y="540" width="168" height="60"/>
+    </clipPath>
+  </defs>
+  <g fill="url(#g)">
+    <rect x="99.4" y="0" width="1.2" height="34"/>
+    <rect x="97" y="30" width="6" height="40"/>
+    <path d="M90 96 Q100 62 110 96Z"/>
+    <rect x="88" y="94" width="24" height="22"/>
+    <rect x="80" y="114" width="40" height="26"/>
+    <rect x="70" y="138" width="60" height="34"/>
+    <rect x="58" y="170" width="84" height="300"/>
+    <rect x="44" y="300" width="112" height="170"/>
+    <rect x="34" y="468" width="132" height="74"/>
+    <rect x="16" y="540" width="168" height="60"/>
+  </g>
+  <g fill="url(#w)">
+    <rect x="80" y="114" width="40" height="26"/>
+    <rect x="70" y="138" width="60" height="34"/>
+    <rect x="58" y="170" width="84" height="300"/>
+    <rect x="44" y="300" width="112" height="170"/>
+    <rect x="34" y="468" width="132" height="74"/>
+    <rect x="16" y="540" width="168" height="60"/>
+  </g>
+  <g fill="url(#h)" clip-path="url(#body)">
+    <rect x="16" y="94" width="168" height="506"/>
+  </g>
+  <g fill="#f1ede5" opacity=".18">
+    <rect x="72" y="170" width="3" height="300"/>
+    <rect x="58" y="300" width="2" height="170"/>
+  </g>
+</svg>
