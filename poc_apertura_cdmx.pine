@@ -33,6 +33,7 @@ rr       = input.float(2.5, "Ratio R:R", minval=0.1, group=gS)
 gK = "Parciales"
 showPartial = input.bool(true, "Mostrar parcial", group=gK)
 partialR    = input.float(1.0, "Parcial en (múltiplo de R)", minval=0.1, step=0.1, group=gK)
+partPct     = input.float(50.0, "% de contratos a cerrar en parcial", minval=1, maxval=99, group=gK)
 cPartial    = input.color(color.orange, "Color del parcial", group=gK)
 
 gC = "Colores"
@@ -68,7 +69,6 @@ var int brkBar = na
 var int entryBar = na
 var bool done = false
 var bool partDone = false
-var bool stopped = false
 var int stage = 0
 var float pocLvl = na
 var float slLvl = na
@@ -84,6 +84,8 @@ var bool resolved = false
 var int wins = 0
 var int losses = 0
 var int unres = 0
+var int partials = 0
+var int beCount = 0
 var float netPts = 0.0
 
 if newDay
@@ -106,7 +108,6 @@ if newDay
     stage := 0
     done := false
     partDone := false
-    stopped := false
     resolved := false
     array.clear(bH)
     array.clear(bL)
@@ -182,38 +183,61 @@ if stage == 1 and bar_index > brkBar and inWin
         if showPartial
             drawLvl(bar_index, partLvl, cPartial, str.tostring(partialR, "#.#") + ":1 PARCIAL " + str.tostring(partLvl, format.mintick), line.style_dotted)
 
+// ---- Gestión y resolución de la operación ----
+// TP1 = parcial (se cierra partPct % de los contratos y el SL pasa a BE)
+// TP2 = TP final con el resto de los contratos
+//   SL antes del parcial            -> PERDIDA (todos los contratos)
+//   Parcial y luego TP2 sin tocar BE -> GANADA
+//   Parcial y luego BE               -> PARCIAL + BE (no cuenta como ganada; se suma lo cobrado en TP1)
+// Criterio conservador si en una misma vela se tocan dos niveles: primero SL / BE.
 partSig = false
-if stage == 2 and not partDone and not stopped and not na(entryBar) and bar_index > entryBar
-    hitSL = dirTrend == 1 ? low <= slLvl : high >= slLvl
-    hitPart = dirTrend == 1 ? high >= partLvl : low <= partLvl
-    if hitSL
-        stopped := true
-    else if hitPart
-        partDone := true
-        partSig := true
-
-// ---- Resolución de la operación (GANADA / PERDIDA) ----
-// Si en una misma vela se tocan SL y TP, se asume SL primero (criterio conservador)
 winSig = false
 lossSig = false
+beSig = false
 if stage == 2 and not resolved and not na(entryBar) and bar_index > entryBar
+    fPart = partPct / 100.0
+    tp1Pts = slPts * partialR
+    tp2Pts = slPts * rr
     slHit = dirTrend == 1 ? low <= slLvl : high >= slLvl
     tpHit = dirTrend == 1 ? high >= tpLvl : low <= tpLvl
-    if slHit
-        resolved := true
-        losses += 1
-        netPts -= slPts
-        lossSig := true
-        if showResLbl
-            label.new(bar_index, slLvl, "✖ PERDIDA -" + str.tostring(slPts, "#.##") + " pts", style=label.style_label_up, color=cDown, textcolor=color.white, size=size.small)
-    else if tpHit
-        resolved := true
-        wins += 1
-        netPts += slPts * rr
-        winSig := true
-        if showResLbl
-            label.new(bar_index, tpLvl, "✔ GANADA +" + str.tostring(slPts * rr, "#.##") + " pts", style=label.style_label_down, color=cUp, textcolor=color.white, size=size.small)
-
+    beHit = dirTrend == 1 ? low <= pocLvl : high >= pocLvl
+    if not partDone
+        partHit = dirTrend == 1 ? high >= partLvl : low <= partLvl
+        if slHit
+            resolved := true
+            losses += 1
+            netPts -= slPts
+            lossSig := true
+            if showResLbl
+                label.new(bar_index, slLvl, "✖ PERDIDA -" + str.tostring(slPts, "#.##") + " pts", style=dirTrend == 1 ? label.style_label_up : label.style_label_down, color=cDown, textcolor=color.white, size=size.small)
+        else if partHit
+            partDone := true
+            partSig := true
+            partials += 1
+            netPts += tp1Pts * fPart
+            if showPartial
+                line.new(bar_index, pocLvl, bar_index + extBars, pocLvl, color=color.gray, style=line.style_dashed)
+            // Misma vela que el parcial: solo cuenta GANADA si llega a TP2 sin regresar a la entrada
+            if tpHit and not beHit
+                resolved := true
+                wins += 1
+                netPts += tp2Pts * (1 - fPart)
+                winSig := true
+    else
+        if beHit
+            resolved := true
+            beCount += 1
+            beSig := true
+        else if tpHit
+            resolved := true
+            wins += 1
+            netPts += tp2Pts * (1 - fPart)
+            winSig := true
+    if winSig and showResLbl
+        winPts = tp1Pts * fPart + tp2Pts * (1 - fPart)
+        label.new(bar_index, tpLvl, "✔ GANADA +" + str.tostring(winPts, "#.##") + " pts", style=dirTrend == 1 ? label.style_label_down : label.style_label_up, color=cUp, textcolor=color.white, size=size.small)
+    if beSig and showResLbl
+        label.new(bar_index, pocLvl, "◐ PARCIAL + BE +" + str.tostring(tp1Pts * fPart, "#.##") + " pts", style=dirTrend == 1 ? label.style_label_up : label.style_label_down, color=cPartial, textcolor=color.white, size=size.small)
 plotshape(showBrk and brkSig and dirTrend == -1, "Ruptura bajista", shape.xcross, location.abovebar, color.new(cDown, 30), size=size.tiny, text="RUPT")
 plotshape(showBrk and brkSig and dirTrend == 1, "Ruptura alcista", shape.xcross, location.belowbar, color.new(cUp, 30), size=size.tiny, text="RUPT")
 plotshape(buySig, "Entrada compra", shape.triangleup, location.belowbar, cUp, size=size.small, text="BUY")
@@ -229,34 +253,40 @@ tPos = switch tblPos
     "Abajo derecha" => position.bottom_right
     => position.bottom_left
 
-var table stats = table.new(tPos, 2, 6, bgcolor=color.new(#1e222d, 0), border_width=1, border_color=color.new(color.gray, 60))
+var table stats = table.new(tPos, 2, 8, bgcolor=color.new(#1e222d, 0), border_width=1, border_color=color.new(color.gray, 60))
 
 if showStats and barstate.islast
     openTrade = (stage == 2 and not resolved) ? 1 : 0
     unresTotal = unres + openTrade
-    closed = wins + losses
+    closed = wins + losses + beCount
     hitRate = closed > 0 ? wins / closed * 100 : 0.0
+    partRate = closed > 0 ? (wins + beCount) / closed * 100 : 0.0
     netQty = netPts * qty
     cGreen = #089981
     cRed = #f23645
     cGray = color.gray
 
-    table.cell(stats, 0, 0, "Ganadas", text_color=color.white, text_halign=text.align_left)
+    table.cell(stats, 0, 0, "Ganadas (TP2)", text_color=color.white, text_halign=text.align_left)
     table.cell(stats, 1, 0, str.tostring(wins), text_color=cGreen)
-    table.cell(stats, 0, 1, "Perdidas", text_color=color.white, text_halign=text.align_left)
-    table.cell(stats, 1, 1, str.tostring(losses), text_color=cRed)
-    table.cell(stats, 0, 2, "Sin resolver", text_color=color.white, text_halign=text.align_left)
-    table.cell(stats, 1, 2, str.tostring(unresTotal), text_color=cGray)
-    table.cell(stats, 0, 3, "% acierto", text_color=color.white, text_halign=text.align_left)
-    table.cell(stats, 1, 3, str.tostring(hitRate, "#.0") + "%", text_color=hitRate >= 50 ? cGreen : cRed)
-    table.cell(stats, 0, 4, "Neto (pts)", text_color=color.white, text_halign=text.align_left)
-    table.cell(stats, 1, 4, str.tostring(netPts, "#.##"), text_color=netPts >= 0 ? cGreen : cRed)
-    table.cell(stats, 0, 5, "Neto (x cant.)", text_color=color.white, text_halign=text.align_left)
-    table.cell(stats, 1, 5, str.tostring(netQty, "#.##"), text_color=netQty >= 0 ? cGreen : cRed)
+    table.cell(stats, 0, 1, "Parcial + BE", text_color=color.white, text_halign=text.align_left)
+    table.cell(stats, 1, 1, str.tostring(beCount), text_color=cPartial)
+    table.cell(stats, 0, 2, "Perdidas", text_color=color.white, text_halign=text.align_left)
+    table.cell(stats, 1, 2, str.tostring(losses), text_color=cRed)
+    table.cell(stats, 0, 3, "Sin resolver", text_color=color.white, text_halign=text.align_left)
+    table.cell(stats, 1, 3, str.tostring(unresTotal), text_color=cGray)
+    table.cell(stats, 0, 4, "% acierto (TP2)", text_color=color.white, text_halign=text.align_left)
+    table.cell(stats, 1, 4, str.tostring(hitRate, "#.0") + "%", text_color=hitRate >= 50 ? cGreen : cRed)
+    table.cell(stats, 0, 5, "% llegó a TP1", text_color=color.white, text_halign=text.align_left)
+    table.cell(stats, 1, 5, str.tostring(partRate, "#.0") + "%", text_color=partRate >= 50 ? cGreen : cRed)
+    table.cell(stats, 0, 6, "Neto (pts)", text_color=color.white, text_halign=text.align_left)
+    table.cell(stats, 1, 6, str.tostring(netPts, "#.##"), text_color=netPts >= 0 ? cGreen : cRed)
+    table.cell(stats, 0, 7, "Neto (x cant.)", text_color=color.white, text_halign=text.align_left)
+    table.cell(stats, 1, 7, str.tostring(netQty, "#.##"), text_color=netQty >= 0 ? cGreen : cRed)
 
 alertcondition(brkSig, "Ruptura del POC", "Ruptura del POC: esperar retroceso")
 alertcondition(buySig, "Entrada COMPRA en POC", "Retroceso al POC tras ruptura alcista: COMPRA")
 alertcondition(sellSig, "Entrada VENTA en POC", "Retroceso al POC tras ruptura bajista: VENTA")
-alertcondition(partSig, "Parcial 1:1", "El precio llegó al 1:1: recoger parciales")
+alertcondition(partSig, "Parcial (TP1)", "TP1 alcanzado: cerrar parcial y mover SL a BE")
 alertcondition(winSig, "Operación GANADA", "TP alcanzado: operación ganada")
 alertcondition(lossSig, "Operación PERDIDA", "SL alcanzado: operación perdida")
+alertcondition(beSig, "Parcial + BE", "Tras el parcial el precio regresó a BE: resto cerrado en la entrada")
