@@ -52,6 +52,21 @@ h1 { margin: 0; font-size: 20px; font-weight: 600; letter-spacing: 0.01em; text-
 button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .hint { font-size: 12px; color: var(--muted); }
 .toggle-card { display: none; }
+[hidden] { display: none !important; }
+.cta { border: 0; border-radius: 8px; background: var(--accent); color: var(--accent-fg); font: 600 15px var(--font-ui); padding: 11px 14px; cursor: pointer; letter-spacing: 0.02em; }
+.tourbar {
+  position: fixed; left: 50%; transform: translateX(-50%);
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+  width: min(460px, calc(100% - 32px)); background: var(--card); border: 1px solid var(--line);
+  border-radius: 10px; padding: 12px 14px; display: grid; gap: 10px;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.tour-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.tour-name { font-size: 18px; font-weight: 600; }
+.tour-btns { display: flex; gap: 6px; flex-shrink: 0; }
+.tourbar .label { margin-bottom: 2px; }
+.progress { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.progress div { height: 100%; width: 0; background: var(--accent); }
 @media (max-width: 560px) {
   .card { top: auto; bottom: calc(env(safe-area-inset-bottom, 0px) + 12px); left: max(12px, env(safe-area-inset-left, 0px)); width: calc(100% - 24px); padding: 12px; gap: 10px; }
   .card.collapsed .body { display: none; }
@@ -87,9 +102,24 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
         <button class="chip" id="vtop" aria-pressed="false">Desde arriba</button>
       </div>
     </div>
+    <button class="cta" id="tour">Iniciar recorrido</button>
     <div class="hint">Arrastra para girar, pellizca o usa la rueda para acercar, dos dedos para mover.</div>
   </div>
 </section>
+
+<div class="tourbar" id="tourbar" hidden>
+  <div class="tour-top">
+    <div>
+      <div class="label" id="tourLevel">Planta baja</div>
+      <div class="tour-name" id="tourName">Llegada</div>
+    </div>
+    <div class="tour-btns">
+      <button class="chip" id="tourPause">Pausa</button>
+      <button class="chip" id="tourExit">Salir</button>
+    </div>
+  </div>
+  <div class="progress"><div id="tourProg"></div></div>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
@@ -101,16 +131,68 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.localClippingEnabled = true;
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.1;
+  renderer.physicallyCorrectLights = false;
   stage.appendChild(renderer.domElement);
 
   const scene = new THREE.Scene();
-  function applySceneBg() {
-    const c = getComputedStyle(document.documentElement).getPropertyValue('--scene').trim() || '#dfe4e1';
-    scene.background = new THREE.Color(c);
+  // Sky: vertical gradient painted on a canvas
+  (function sky() {
+    const cv = document.createElement('canvas'); cv.width = 4; cv.height = 256;
+    const c = cv.getContext('2d'), gr = c.createLinearGradient(0, 0, 0, 256);
+    gr.addColorStop(0, '#5f93c9'); gr.addColorStop(0.55, '#a9c8e4'); gr.addColorStop(1, '#e9eef0');
+    c.fillStyle = gr; c.fillRect(0, 0, 4, 256);
+    const t = new THREE.CanvasTexture(cv); t.encoding = THREE.sRGBEncoding;
+    scene.background = t;
+    scene.fog = new THREE.Fog(new THREE.Color('#dfe8ee').convertSRGBToLinear(), 60, 160);
+  })();
+
+  // Procedural textures (wood planks, tiles, grass, concrete, deck)
+  function canvasTex(size, draw) {
+    const cv = document.createElement('canvas'); cv.width = cv.height = size;
+    draw(cv.getContext('2d'), size);
+    const t = new THREE.CanvasTexture(cv);
+    t.encoding = THREE.sRGBEncoding; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.anisotropy = 8;
+    return t;
   }
-  applySceneBg();
-  try { matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applySceneBg); } catch (e) {}
-  new MutationObserver(applySceneBg).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  function noise(c, s, n, a, light) {
+    for (let i = 0; i < n; i++) {
+      c.fillStyle = (Math.random() < 0.5 ? 'rgba(0,0,0,' : 'rgba(255,255,255,') + (Math.random() * a) + ')';
+      const r = Math.random() * (light || 2) + 0.5; c.fillRect(Math.random() * s, Math.random() * s, r, r);
+    }
+  }
+  const tex = {
+    wood: canvasTex(512, (c, s) => {
+      const rows = 8, tones = ['#b98a5c', '#c49467', '#ad7e52', '#c89c70', '#b5875a'];
+      for (let r = 0; r < rows; r++) {
+        const h = s / rows, off = (r * 137) % s;
+        for (let k = -2; k < 3; k++) {
+          c.fillStyle = tones[(r + k + 5) % tones.length];
+          c.fillRect(off + k * s * 0.6, r * h, s * 0.6, h);
+          c.fillStyle = 'rgba(60,35,15,0.35)'; c.fillRect(off + k * s * 0.6, r * h, 2, h);
+        }
+        for (let g = 0; g < 18; g++) { c.strokeStyle = 'rgba(80,45,20,' + (Math.random() * 0.12) + ')'; c.beginPath(); const y = r * h + Math.random() * h; c.moveTo(0, y); c.bezierCurveTo(s * 0.3, y + 3, s * 0.6, y - 3, s, y); c.stroke(); }
+        c.fillStyle = 'rgba(50,30,10,0.45)'; c.fillRect(0, r * h, s, 2);
+      }
+    }),
+    tile: canvasTex(256, (c, s) => {
+      c.fillStyle = '#e9e8e3'; c.fillRect(0, 0, s, s); noise(c, s, 3000, 0.05);
+      c.fillStyle = '#bdbbb4'; c.fillRect(0, 0, s, 3); c.fillRect(0, 0, 3, s);
+    }),
+    grass: canvasTex(256, (c, s) => {
+      c.fillStyle = '#6f8f4f'; c.fillRect(0, 0, s, s);
+      for (let i = 0; i < 9000; i++) { c.fillStyle = ['#5f8042', '#7fa05c', '#86a863', '#58773c'][i % 4]; c.fillRect(Math.random() * s, Math.random() * s, 1.5, 3); }
+    }),
+    concrete: canvasTex(256, (c, s) => { c.fillStyle = '#bdbab2'; c.fillRect(0, 0, s, s); noise(c, s, 6000, 0.08, 3); c.fillStyle = 'rgba(0,0,0,0.18)'; c.fillRect(0, 0, s, 2); c.fillRect(0, 0, 2, s); }),
+    deck: canvasTex(256, (c, s) => {
+      for (let i = 0; i < 6; i++) { c.fillStyle = ['#8f6544', '#9c6f4b', '#87603f'][i % 3]; c.fillRect(0, i * s / 6, s, s / 6); c.fillStyle = 'rgba(30,18,8,0.6)'; c.fillRect(0, i * s / 6, s, 3); }
+      noise(c, s, 2500, 0.08);
+    }),
+    stucco: canvasTex(256, (c, s) => { c.fillStyle = '#f2f0ea'; c.fillRect(0, 0, s, s); noise(c, s, 5000, 0.04, 2); }),
+    road: canvasTex(256, (c, s) => { c.fillStyle = '#5d6162'; c.fillRect(0, 0, s, s); noise(c, s, 9000, 0.12, 2); }),
+  };
 
   const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 400);
   const controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -119,25 +201,41 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   controls.minDistance = 5; controls.maxDistance = 90;
 
   // Lights
-  scene.add(new THREE.HemisphereLight(0xffffff, 0x8a9a85, 0.65));
-  const sun = new THREE.DirectionalLight(0xfff3e2, 0.95);
+  scene.add(new THREE.HemisphereLight(0xcfe3f5, 0x7d7560, 0.75));
+  scene.add(new THREE.AmbientLight(0xfff4e6, 0.18));
+  const sun = new THREE.DirectionalLight(0xffe9cc, 1.35);
   sun.position.set(18, 30, 20);
   sun.castShadow = true;
-  sun.shadow.mapSize.set(2048, 2048);
+  const big = Math.min(screen.width, screen.height) > 600;
+  sun.shadow.mapSize.set(big ? 4096 : 2048, big ? 4096 : 2048);
+  sun.shadow.radius = 3;
   Object.assign(sun.shadow.camera, { left: -22, right: 22, top: 22, bottom: -22, near: 1, far: 90 });
   sun.shadow.bias = -0.0005;
   scene.add(sun);
 
   // Materials
-  const M = (c, o) => new THREE.MeshStandardMaterial(Object.assign({ color: c, roughness: 0.85, metalness: 0 }, o || {}));
+  const M = (c, o) => { const m = new THREE.MeshStandardMaterial(Object.assign({ color: c, roughness: 0.85, metalness: 0 }, o || {})); m.color.convertSRGBToLinear(); return m; };
+  // Textured material; tile = metres covered by one repeat of the texture
+  const T = (t, tile, o) => { const m = M(0xffffff, Object.assign({ map: t }, o || {})); m.userData.tile = tile; return m; };
   const mat = {
-    grass: M(0x8fa47b), concrete: M(0xc2c0b8), slab: M(0xd9d6cf), wood: M(0xc89f72), deck: M(0xa97c55),
-    tile: M(0xe7e9e6), darkTile: M(0x9aa3a5), lawn: M(0x7f9c62), dark: M(0x2b2f31), metal: M(0x8d9496, { metalness: 0.5, roughness: 0.4 }),
+    grass: T(tex.grass, 3), concrete: T(tex.concrete, 1.2), slab: M(0xd9d6cf), wood: T(tex.wood, 2.4, { roughness: 0.55 }), deck: T(tex.deck, 1.5),
+    tile: T(tex.tile, 0.6, { roughness: 0.35 }), darkTile: M(0x9aa3a5, { roughness: 0.3 }), lawn: T(tex.grass, 2), road: T(tex.road, 4), dark: M(0x2b2f31), metal: M(0x8d9496, { metalness: 0.5, roughness: 0.4 }),
     fabric: M(0xcfc7b8), fabric2: M(0x6e7f88), bed: M(0xf2efe9), pillow: M(0xffffff), brown: M(0x7a5236),
     green: M(0x3f7f4c), leaf: M(0x4e8a3c), leaf2: M(0x6aa34a), trunk: M(0x7b6248), water: M(0x5fb6d0, { roughness: 0.15, metalness: 0.1 }),
     porcelain: M(0xf7f7f5, { roughness: 0.3 }), black: M(0x111111, { roughness: 0.3 }), rug: M(0xa35b3d),
-    umbrella: M(0xece3d0), pool: M(0x2f7a4a), grill: M(0x5b3a8c), road: M(0x6c706f), shelf: M(0xb9a68e),
+    umbrella: M(0xece3d0), pool: M(0x2f7a4a), grill: M(0x3b3d40, { metalness: 0.4, roughness: 0.4 }), shelf: M(0xb9a68e),
+    frame: M(0x2e3236, { metalness: 0.6, roughness: 0.35 }), furnWood: M(0xa7794e, { roughness: 0.6 }),
   };
+  // Clone a textured material so its texture repeats at real-world scale on a w × d surface
+  const tiledCache = {};
+  function tiled(m, w, d) {
+    if (!m.userData.tile) return m;
+    const key = m.uuid + '|' + w.toFixed(2) + '|' + d.toFixed(2);
+    if (tiledCache[key]) return tiledCache[key];
+    const c = m.clone(); c.map = m.map.clone(); c.map.needsUpdate = true;
+    c.map.repeat.set(w / m.userData.tile, d / m.userData.tile);
+    return (tiledCache[key] = c);
+  }
 
   const root = new THREE.Group();
   root.position.set(-11.5, 0, -5);
@@ -151,8 +249,9 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
     const lbl = new THREE.Group(); g.add(lbl);
     return {
       g, lbl, plane, base: i * H,
-      wall: M(0xf1efe9, { side: THREE.DoubleSide, clippingPlanes: [plane] }),
-      glass: new THREE.MeshStandardMaterial({ color: 0xa9d3e0, transparent: true, opacity: 0.28, roughness: 0.05, metalness: 0.1, depthWrite: false, side: THREE.DoubleSide, clippingPlanes: [plane] }),
+      wall: M(0xffffff, { map: tex.stucco, roughness: 0.92, side: THREE.DoubleSide, clippingPlanes: [plane] }),
+      glass: M(0xb7d9e6, { transparent: true, opacity: 0.22, roughness: 0.03, metalness: 0.6, depthWrite: false, side: THREE.DoubleSide, clippingPlanes: [plane] }),
+      frame: M(0x2e3236, { metalness: 0.6, roughness: 0.35, clippingPlanes: [plane] }),
     };
   });
 
@@ -167,7 +266,7 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
     const c = new THREE.Mesh(new THREE.CylinderGeometry(r, r, h, seg || 20), m);
     c.position.set(x, y0 + h / 2, z); return add(g, c);
   }
-  function floor(L, x0, z0, x1, z1, m) { return box(L.g, x0, z0, x1, z1, 0, 0.02, m, false); }
+  function floor(L, x0, z0, x1, z1, m) { return box(L.g, x0, z0, x1, z1, 0, 0.02, tiled(m, Math.abs(x1 - x0), Math.abs(z1 - z0)), false); }
   function slab(L, x0, z0, x1, z1) { return box(L.g, x0, z0, x1, z1, -0.2, 0.2, mat.slab); }
 
   // Wall with door and window openings, given as intervals along the wall
@@ -193,7 +292,19 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
     let cur = a0;
     for (const p of ops) {
       seg(cur, p.a, 0, h, L.wall); seg(p.a, p.b, 0, p.lo, L.wall); seg(p.a, p.b, p.hi, h, L.wall);
-      if (p.glass) seg(p.a, p.b, p.lo, p.hi, L.glass);
+      if (p.glass) {
+        seg(p.a, p.b, p.lo, p.hi, L.glass);
+        // aluminium frame: sill, head, jambs and a centre mullion on wide openings
+        const f = 0.05, fr = (s, e, y0, y1) => {
+          const len = e - s, c = (s + e) / 2;
+          const geo = alongX ? new THREE.BoxGeometry(len, y1 - y0, 0.09) : new THREE.BoxGeometry(0.09, y1 - y0, len);
+          const mesh = new THREE.Mesh(geo, L.frame); mesh.position.set(alongX ? c : fixed, (y0 + y1) / 2, alongX ? fixed : c); add(L.g, mesh);
+        };
+        fr(p.a, p.b, p.lo, p.lo + f); fr(p.a, p.b, p.hi - f, p.hi);
+        fr(p.a, p.a + f, p.lo, p.hi); fr(p.b - f, p.b, p.lo, p.hi);
+        const n = Math.round((p.b - p.a) / 1.4);
+        for (let k = 1; k < n; k++) { const m = p.a + (p.b - p.a) * k / n; fr(m - f / 2, m + f / 2, p.lo, p.hi); }
+      }
       cur = p.b;
     }
     seg(cur, a1, 0, h, L.wall);
@@ -272,9 +383,10 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   function stairs(L, x0, z0, x1, z1) {
     // Two flights with a landing at the back wall: up toward z0, then back toward z1
     const g = L.g, n = 9, xm = (x0 + x1) / 2, landing = z0 + 0.9, rise = H / (2 * n), run = (z1 - landing) / n;
-    for (let i = 0; i < n; i++) box(g, x0 + 0.1, z1 - (i + 1) * run, xm - 0.1, z1 - i * run, 0, (i + 1) * rise, mat.wood);
-    box(g, x0 + 0.1, z0 + 0.05, x1 - 0.1, landing, 0, n * rise, mat.wood);
-    for (let i = 0; i < n; i++) box(g, xm + 0.1, landing + i * run, x1 - 0.1, landing + (i + 1) * run, 0, H / 2 + (i + 1) * rise, mat.wood);
+    // floating treads (open underneath, so the tour camera can pass below the flight above)
+    for (let i = 0; i < n; i++) box(g, x0 + 0.1, z1 - (i + 1) * run, xm - 0.1, z1 - i * run, (i + 1) * rise - 0.06, 0.06, mat.wood);
+    box(g, x0 + 0.1, z0 + 0.05, x1 - 0.1, landing, n * rise - 0.15, 0.15, mat.wood);
+    for (let i = 0; i < n; i++) box(g, xm + 0.1, landing + i * run, x1 - 0.1, landing + (i + 1) * run, H / 2 + (i + 1) * rise - 0.06, 0.06, mat.wood);
     box(g, xm - 0.05, landing, xm + 0.05, z1, 0, H, mat.metal);
   }
   function car(g, x, z, color) {
@@ -310,9 +422,11 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
   // Site
   const site = new THREE.Group(); root.add(site);
-  box(site, -30, -30, 53, 40, -0.32, 0.02, mat.grass, false);
-  box(site, -6, 10, 29, 12.6, -0.3, 0.06, mat.concrete, false);
-  box(site, -6, 12.6, 29, 18, -0.31, 0.04, mat.road, false);
+  box(site, -30, -30, 53, 40, -0.32, 0.02, tiled(mat.grass, 83, 70), false);
+  box(site, -6, 10, 29, 12.6, -0.3, 0.06, tiled(mat.concrete, 35, 2.6), false);
+  box(site, -6, 12.6, 29, 18, -0.31, 0.04, tiled(mat.road, 35, 5.4), false);
+  // neighbouring boundary walls and street trees for context
+  box(site, -0.2, -0.2, -0.05, 10, -0.3, 3.2, mat.slab); box(site, 23.05, -0.2, 23.2, 10, -0.3, 3.2, mat.slab);
 
   // ------------ Planta baja ------------
   const PB = levels[0], g0 = PB.g;
@@ -407,7 +521,7 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   wall(PA, 13.6, 4.5, 13.6, 10, { wins: [[7.0, 9.6, 0, 2.4]] });
   wall(PA, 13.6, 4.5, 16.35, 4.5, { doors: [[13.8, 14.6]] });
   wall(PA, 13.6, 6.0, 16.35, 6.0);
-  rail(PA, 9.65, 2.2, 11.2, 2.2); rail(PA, 9.65, 0, 9.65, 2.2);
+  rail(PA, 9.65, 0, 9.65, 2.2);
   stairs(PA, 9.65, 0, 12.85, 2.2);
   // bedroom 1
   bed(g1, 4.9, 0.12, 6.5, 2.15, 'z0');
@@ -514,8 +628,92 @@ button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   }
   window.addEventListener('resize', resize); resize();
 
+  // ---------- Guided walkthrough at eye level (1.6 m) ----------
+  // [x, z, eyeY, lookX, lookZ, lookY, room, level] in plan metres; heights are world metres
+  const W = [
+    [19.7, 15.0, 1.6, 19.7, 5.0, 1.4, 'Llegada', 0],
+    [17.0, 11.0, 1.6, 17.0, 4.0, 1.5, 'Cochera', 0],
+    [17.0, 4.0, 1.6, 14.0, 4.0, 1.5, 'Cochera', 0],
+    [15.2, 4.0, 1.6, 13.5, 8.0, 1.0, 'Sala', 0],
+    [12.5, 4.6, 1.6, 13.7, 8.5, 0.8, 'Sala', 0],
+    [11.6, 3.3, 1.6, 9.6, 4.75, 0.8, 'Comedor', 0],
+    [8.5, 3.2, 1.6, 5.5, 0.8, 1.0, 'Cocina', 0],
+    [7.45, 5.0, 1.6, 7.45, 8.0, 1.2, 'Estudio', 0],
+    [7.0, 7.4, 1.6, 4.5, 7.8, 1.0, 'Estudio', 0],
+    [7.45, 5.2, 1.6, 2.0, 6.0, 2.5, 'Vista al jardín', 0],
+    [10.5, 3.3, 1.6, 10.5, 0.0, 2.5, 'Escalera', 0],
+    [10.5, 2.2, 1.77, 10.5, 0.5, 3.0, 'Escalera', 0],
+    [10.5, 1.2, 2.9, 12.0, 0.5, 3.2, 'Escalera', 0],
+    [11.25, 0.5, 3.1, 12.0, 2.2, 3.6, 'Escalera', 0],
+    [12.05, 1.0, 3.2, 12.05, 3.0, 4.5, 'Escalera', 0],
+    [12.05, 2.3, 4.6, 12.0, 5.0, 4.4, 'Vestíbulo', 1],
+    [12.05, 4.2, 4.6, 14.0, 2.0, 3.8, 'Sala de juegos', 1],
+    [11.0, 5.0, 4.6, 11.8, 8.8, 3.4, 'Recámara principal', 1],
+    [10.8, 6.6, 4.6, 12.0, 9.0, 3.5, 'Recámara principal', 1],
+    [10.8, 5.2, 4.6, 7.7, 5.2, 4.3, 'Recámara 2', 1],
+    [6.8, 5.3, 4.6, 5.0, 6.4, 3.6, 'Recámara 2', 1],
+    [8.5, 5.3, 4.6, 10.5, 2.5, 5.5, 'Vestíbulo', 1],
+    [10.5, 3.4, 4.6, 10.5, 0.0, 6.0, 'Escalera', 1],
+    [10.5, 2.2, 4.77, 10.5, 0.5, 6.0, 'Escalera', 1],
+    [10.5, 1.2, 5.9, 12.0, 0.5, 6.2, 'Escalera', 1],
+    [11.25, 0.5, 6.1, 12.05, 2.2, 6.6, 'Escalera', 1],
+    [12.05, 1.0, 6.2, 12.05, 3.0, 7.5, 'Escalera', 1],
+    [12.05, 2.6, 7.6, 12.05, 5.0, 7.4, 'Azotea', 2],
+    [12.3, 4.0, 7.6, 14.4, 4.3, 6.4, 'Jacuzzi', 2],
+    [11.5, 6.5, 7.6, 13.3, 8.0, 6.5, 'Asoleadero', 2],
+    [8.5, 7.8, 7.6, 6.6, 6.2, 6.6, 'Comedor exterior', 2],
+    [6.5, 9.2, 7.8, 6.5, 20.0, 5.0, 'Vista a la calle', 2],
+  ];
+  const LEVEL = ['Planta baja', 'Planta alta', 'Azotea'];
+  const wp = W.map(w => new THREE.Vector3(w[0] - 11.5, w[2], w[1] - 5));
+  const wl = W.map(w => new THREE.Vector3(w[3] - 11.5, w[5], w[4] - 5));
+  const curve = new THREE.CatmullRomCurve3(wp, false, 'centripetal');
+  const segDur = wp.slice(1).map((p, i) => Math.max(1.8, p.distanceTo(wp[i]) / 1.1 + wl[i + 1].distanceTo(wl[i]) * 0.12));
+  const total = segDur.reduce((a, b) => a + b, 0);
+  const tour = { on: false, paused: false, time: 0, saved: null };
+  const el = id => document.getElementById(id);
+  const look = new THREE.Vector3();
+  function startTour() {
+    tour.saved = { level: state.level, explode: state.explode, cut: state.cut, labels: state.labels };
+    state.explode = false; state.cut = false; setLevel(2);
+    levels.forEach((L, i) => { L.g.position.y = i * H; L.lbl.visible = false; });
+    levels.forEach(L => { L.plane.constant = 1000; });
+    tour.on = true; tour.paused = false; tour.time = 0; fly = null;
+    controls.enabled = false;
+    camera.fov = 62; camera.updateProjectionMatrix();
+    card.hidden = true; el('tourbar').hidden = false; el('tourPause').textContent = 'Pausa';
+  }
+  function endTour() {
+    tour.on = false; controls.enabled = true;
+    const s = tour.saved;
+    state.explode = s.explode; state.cut = s.cut; state.labels = s.labels; setLevel(s.level);
+    levels.forEach(L => { L.lbl.visible = state.labels; });
+    el('explode').setAttribute('aria-pressed', String(state.explode)); el('cut').setAttribute('aria-pressed', String(state.cut));
+    card.hidden = false; el('tourbar').hidden = true;
+    controls.target.copy(look); resize(); viewIso();
+  }
+  el('tour').addEventListener('click', startTour);
+  el('tourExit').addEventListener('click', endTour);
+  el('tourPause').addEventListener('click', () => { tour.paused = !tour.paused; el('tourPause').textContent = tour.paused ? 'Seguir' : 'Pausa'; });
+  function tourStep(dt) {
+    if (!tour.paused) tour.time += dt;
+    if (tour.time >= total) { endTour(); return; }
+    let t = tour.time, i = 0;
+    while (i < segDur.length - 1 && t > segDur[i]) { t -= segDur[i]; i++; }
+    const f = Math.min(1, t / segDur[i]), e = f * f * (3 - 2 * f);
+    camera.position.copy(curve.getPoint((i + e) / (wp.length - 1)));
+    look.lerpVectors(wl[i], wl[i + 1], e);
+    camera.lookAt(look);
+    const w = W[f < 0.5 ? i : i + 1];
+    el('tourName').textContent = w[6]; el('tourLevel').textContent = LEVEL[w[7]];
+    el('tourProg').style.width = (tour.time / total * 100).toFixed(1) + '%';
+  }
+
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let last = performance.now();
   function tick() {
+    const now = performance.now(), dt = Math.min(0.1, (now - last) / 1000); last = now;
+    if (tour.on) { tourStep(dt); renderer.render(scene, camera); requestAnimationFrame(tick); return; }
     const k = reduce ? 1 : 0.12;
     levels.forEach((L, i) => {
       L.g.position.y += (target(i) - L.g.position.y) * k;
