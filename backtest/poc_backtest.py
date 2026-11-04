@@ -36,9 +36,11 @@ import pandas as pd
 def parse_args(argv=None):
     p = argparse.ArgumentParser(description="Backtest POC Apertura CDMX")
     p.add_argument("csv", nargs="+", help="Archivo(s) CSV con velas OHLCV")
-    p.add_argument("--input-tz", default="America/Mexico_City",
-                   help="Zona horaria de la columna time si no trae offset (default: America/Mexico_City)")
-    p.add_argument("--tz", default="America/Mexico_City", help="Zona horaria de la estrategia")
+    p.add_argument("--input-tz", default="Etc/GMT+6",
+                   help="Zona horaria de la columna time si no trae offset (default: UTC-6)")
+    p.add_argument("--tz", default="Etc/GMT+6",
+                   help="Zona horaria de la estrategia (default: UTC-6 fija, sin horario de verano; "
+                        "en notación IANA 'Etc/GMT+6' = UTC-6)")
     p.add_argument("--tf", type=int, default=3, help="Temporalidad en minutos (default 3)")
     p.add_argument("--start", help="Fecha inicial YYYY-MM-DD (default: 3 años antes del último dato)")
     p.add_argument("--end", help="Fecha final YYYY-MM-DD")

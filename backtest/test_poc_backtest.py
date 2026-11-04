@@ -7,7 +7,7 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).parent))
 import poc_backtest as pb  # noqa: E402
 
-TZ = "America/Mexico_City"
+TZ = "Etc/GMT+6"
 
 
 def make_day(after, trend_up=True, date="2025-03-04"):

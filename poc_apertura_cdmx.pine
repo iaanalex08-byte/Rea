@@ -1,7 +1,7 @@
 //@version=6
 indicator("POC Apertura CDMX", overlay=true, max_boxes_count=500, max_lines_count=500, max_labels_count=500)
 
-tz = "America/Mexico_City"
+tz = "UTC-6"  // CDMX fija, sin horario de verano
 
 gH = "Perfil (hora CDMX)"
 profHour = input.int(9, "Hora inicio del perfil", minval=0, maxval=23, group=gH)
