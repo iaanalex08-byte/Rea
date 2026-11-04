@@ -86,14 +86,17 @@ def load_bars(paths, input_tz, tz, tf):
                 sys.exit(f"{path}: falta columna volume")
             df = df.rename(columns={vc: "volume"})
         t = df[tcol]
-        if np.issubdtype(t.dtype, np.number):
+        if pd.api.types.is_numeric_dtype(t):
             unit = "ms" if t.max() > 1e11 else "s"
             ts = pd.to_datetime(t, unit=unit, utc=True)
         else:
-            ts = pd.to_datetime(t, utc=False, format="mixed")
-            if ts.dt.tz is None:
-                ts = ts.dt.tz_localize(input_tz, ambiguous="NaT", nonexistent="NaT")
-            ts = ts.dt.tz_convert("UTC")
+            t = t.astype(str).str.strip()
+            has_offset = t.str.contains(r"(?:Z|[+-]\d{2}:?\d{2})$", regex=True).all()
+            if has_offset:
+                ts = pd.to_datetime(t, utc=True, format="mixed")
+            else:
+                ts = pd.to_datetime(t, format="mixed")
+                ts = ts.dt.tz_localize(input_tz, ambiguous="NaT", nonexistent="NaT").dt.tz_convert("UTC")
         df = df.assign(ts=ts)[["ts", "open", "high", "low", "close", "volume"]].dropna(subset=["ts"])
         frames.append(df)
     df = pd.concat(frames).drop_duplicates("ts").sort_values("ts").set_index("ts")

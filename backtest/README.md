@@ -4,7 +4,7 @@ Hay dos formas de correr el backtest. Ambas aplican las mismas reglas que el ind
 
 ## 1. Python, con tus datos (`poc_backtest.py`)
 
-1. Exporta velas de **1 min o 3 min** de **MES1!** o **ES1!**. Sirven TradingView ("Exportar datos del gráfico"), NinjaTrader, Sierra Chart o cualquier CSV con `time, open, high, low, close, volume`.
+1. Exporta velas de **3 min** (también acepta 1 min) de **MES1!** o **ES1!**. Sirven TradingView ("Exportar datos del gráfico"), NinjaTrader, Sierra Chart o cualquier CSV con `time, open, high, low, close, volume`.
    - Si las velas son de 1 min, el script las agrupa en velas de 3 min.
    - Si el archivo es grande, puedes pasar varios CSV y el script los une.
 2. Corre:
