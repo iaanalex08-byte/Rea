@@ -3,6 +3,7 @@ indicator("POC Apertura CDMX - Entrada a mercado", overlay=true, max_boxes_count
 
 // Días mínimos en cuenta fondeada: entrada a mercado a favor de la tendencia previa,
 // TP chico (la ganancia mínima del día) y SL amplio. Hora fija UTC-6 (CDMX).
+// Entrada 11:00 y cierre forzado a las 14:00 si no tocó SL ni TP.
 tz = "UTC-6"
 
 gH = "Perfil (hora CDMX)"
@@ -11,8 +12,11 @@ profMin  = input.int(0, "Minuto inicio del perfil", minval=0, maxval=59, group=g
 profDur  = input.int(30, "Duración del perfil (min)", minval=1, maxval=120, group=gH)
 
 gW = "Entrada a mercado (hora CDMX)"
-entHour = input.int(8, "Hora de entrada", minval=0, maxval=23, group=gW)
-entMin  = input.int(30, "Minuto de entrada", minval=0, maxval=59, group=gW)
+entHour = input.int(11, "Hora de entrada", minval=0, maxval=23, group=gW)
+entMin  = input.int(0, "Minuto de entrada", minval=0, maxval=59, group=gW)
+useClose = input.bool(true, "Cerrar si no se resolvió", group=gW)
+clsHour  = input.int(14, "Hora de cierre", minval=0, maxval=23, group=gW)
+clsMin   = input.int(0, "Minuto de cierre", minval=0, maxval=59, group=gW)
 
 gP = "Perfil de volumen"
 autoRow = input.bool(true, "Tamaño de fila automático (20 filas)", group=gP)
@@ -57,6 +61,7 @@ tmin   = hour(time, tz) * 60 + minute(time, tz)
 pStart = profHour * 60 + profMin
 pEnd   = pStart + profDur
 eStart = entHour * 60 + entMin
+cStart = clsHour * 60 + clsMin
 newDay = barstate.isfirst or dayofmonth(time, tz) != dayofmonth(time[1], tz)
 
 var float trendOpen = na
@@ -81,6 +86,8 @@ var array<float> bV = array.new_float()
 var int wins = 0
 var int losses = 0
 var int unres = 0
+var int cierres = 0         // cerradas a la hora de cierre sin tocar SL ni TP
+var float cierresUsd = 0.0
 var int diasValidos = 0     // días con ganancia >= mínimo
 var int racha = 0           // días ganados seguidos (actual)
 var int rachaMax = 0
@@ -147,7 +154,7 @@ if not done and tmin >= pEnd and array.size(bV) > 0
 // ---- Entrada a mercado: OPEN de la primera vela desde la hora de entrada ----
 buySig = false
 sellSig = false
-if stage == 0 and done and dirTrend != 0 and tmin >= eStart
+if stage == 0 and done and dirTrend != 0 and tmin >= eStart and (not useClose or tmin < cStart)
     stage := 2
     entryBar := bar_index
     entryPx := math.round_to_mintick(open)
@@ -168,8 +175,23 @@ if stage == 0 and done and dirTrend != 0 and tmin >= eStart
     alert((isLong ? "COMPRA" : "VENTA") + " " + str.tostring(qty) + " contratos a mercado ~" + str.tostring(entryPx, format.mintick) + " | SL " + str.tostring(slLvl, format.mintick) + " (" + str.tostring(slPts) + " pts) | TP " + str.tostring(tpLvl, format.mintick) + " (" + str.tostring(tpPts) + " pts)", alert.freq_once_per_bar)
 
 // ---- Resolución (desde la vela de entrada; si una vela toca SL y TP se asume SL) ----
+// A la hora de cierre, si sigue abierta, se cierra al OPEN de esa vela.
 winSig = false
 lossSig = false
+closeSig = false
+if stage == 2 and not resolved and useClose and not na(entryBar) and bar_index > entryBar and tmin >= cStart
+    resolved := true
+    pnlCierre = (open - entryPx) * dirTrend * dolarPorPunto - costo
+    cierres += 1
+    cierresUsd += pnlCierre
+    netUsd += pnlCierre
+    if pnlCierre >= minDia
+        diasValidos += 1
+    closeSig := true
+    if showResLbl
+        label.new(bar_index, open, "⏱ CIERRE " + str.format("{0,number,00}:{1,number,00}", clsHour, clsMin) + " " + usd(pnlCierre), style=label.style_label_left, color=color.gray, textcolor=color.white, size=size.small)
+    alert("Cierra la posición: son las " + str.format("{0,number,00}:{1,number,00}", clsHour, clsMin) + " y no tocó SL ni TP (" + usd(pnlCierre) + ")", alert.freq_once_per_bar)
+
 if stage == 2 and not resolved and not na(entryBar) and bar_index >= entryBar
     slHit = dirTrend == 1 ? low <= slLvl : high >= slLvl
     tpHit = dirTrend == 1 ? high >= tpLvl : low <= tpLvl
@@ -205,7 +227,7 @@ tPos = switch tblPos
     "Abajo derecha" => position.bottom_right
     => position.bottom_left
 
-var table stats = table.new(tPos, 2, 10, bgcolor=color.new(#1e222d, 0), border_width=1, border_color=color.new(color.gray, 60))
+var table stats = table.new(tPos, 2, 11, bgcolor=color.new(#1e222d, 0), border_width=1, border_color=color.new(color.gray, 60))
 
 if showStats and barstate.islast
     openTrade = (stage == 2 and not resolved) ? 1 : 0
@@ -223,8 +245,8 @@ if showStats and barstate.islast
     table.cell(stats, 1, 1, str.tostring(wins), text_color=cGreen)
     table.cell(stats, 0, 2, "Perdidas", text_color=cW, text_halign=text.align_left)
     table.cell(stats, 1, 2, str.tostring(losses), text_color=cRed)
-    table.cell(stats, 0, 3, "Sin resolver", text_color=cW, text_halign=text.align_left)
-    table.cell(stats, 1, 3, str.tostring(unres + openTrade), text_color=cGray)
+    table.cell(stats, 0, 3, "Cerradas a la hora de cierre", text_color=cW, text_halign=text.align_left)
+    table.cell(stats, 1, 3, str.tostring(cierres) + " (" + usd(cierresUsd) + ")", text_color=cierresUsd >= 0 ? cGreen : cRed)
     table.cell(stats, 0, 4, "% acierto", text_color=cW, text_halign=text.align_left)
     table.cell(stats, 1, 4, str.tostring(hitRate, "#.0") + "%", text_color=hitRate >= beRate ? cGreen : cRed)
     table.cell(stats, 0, 5, "% necesario (equilibrio)", text_color=cW, text_halign=text.align_left)
@@ -235,10 +257,13 @@ if showStats and barstate.islast
     table.cell(stats, 1, 7, str.tostring(racha), text_color=racha >= 5 ? cGreen : cW)
     table.cell(stats, 0, 8, "Racha máxima", text_color=cW, text_halign=text.align_left)
     table.cell(stats, 1, 8, str.tostring(rachaMax), text_color=cW)
-    table.cell(stats, 0, 9, "Neto", text_color=cW, text_halign=text.align_left)
-    table.cell(stats, 1, 9, usd(netUsd), text_color=netUsd >= 0 ? cGreen : cRed)
+    table.cell(stats, 0, 9, "Sin resolver / abierta", text_color=cW, text_halign=text.align_left)
+    table.cell(stats, 1, 9, str.tostring(unres + openTrade), text_color=cGray)
+    table.cell(stats, 0, 10, "Neto", text_color=cW, text_halign=text.align_left)
+    table.cell(stats, 1, 10, usd(netUsd), text_color=netUsd >= 0 ? cGreen : cRed)
 
 alertcondition(buySig, "Entrada COMPRA a mercado", "Entrada a mercado: COMPRA")
 alertcondition(sellSig, "Entrada VENTA a mercado", "Entrada a mercado: VENTA")
 alertcondition(winSig, "TP alcanzado", "TP alcanzado: día ganado")
 alertcondition(lossSig, "SL alcanzado", "SL alcanzado: día perdido")
+alertcondition(closeSig, "Cierre por hora", "Hora de cierre: cerrar la posición")
