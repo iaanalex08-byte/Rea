@@ -14,6 +14,16 @@ pip install pandas numpy matplotlib
 python3 backtest/poc_backtest.py datos/MES_1m.csv
 ```
 
+**Desde NinjaTrader 8:** también acepta los `.txt` que genera *Tools → Historical Data → Export* (formato `yyyyMMdd HHmmss;open;high;low;close;volume`). Puedes pasar los archivos sueltos, una carpeta o un `.zip`:
+
+- Detecta sola la zona horaria del archivo (o la fijas con `--nt-tz America/Chicago`).
+- Pasa la hora de cierre de vela que usa NinjaTrader a hora de apertura.
+- Si hay un archivo por vencimiento (ES 03-24, ES 06-24, …), cada día usa el contrato con más volumen.
+
+```bash
+python3 backtest/poc_backtest.py export_ninjatrader.zip --start 2024-01-01
+```
+
 Por defecto usa los últimos 3 años del archivo y los valores de tu indicador: perfil 9:00 + 12 min, ventana 9:12–13:30, SL 9, R:R 2.5, TP1 a 1R con 50 %, 50 contratos y **$5/punto (MES)**.
 
 Opciones útiles:

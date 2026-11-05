@@ -26,7 +26,9 @@ Reglas (idénticas al indicador):
 """
 import argparse
 import math
+import re
 import sys
+import zipfile
 from pathlib import Path
 
 import numpy as np
@@ -38,6 +40,8 @@ def parse_args(argv=None):
     p.add_argument("csv", nargs="+", help="Archivo(s) CSV con velas OHLCV")
     p.add_argument("--input-tz", default="Etc/GMT+6",
                    help="Zona horaria de la columna time si no trae offset (default: UTC-6)")
+    p.add_argument("--nt-tz", default="auto",
+                   help="Zona horaria de los archivos de NinjaTrader (default: auto-detectar)")
     p.add_argument("--tz", default="Etc/GMT+6",
                    help="Zona horaria de la estrategia (default: UTC-6 fija, sin horario de verano; "
                         "en notación IANA 'Etc/GMT+6' = UTC-6)")
@@ -77,35 +81,113 @@ def parse_args(argv=None):
 
 
 # ----------------------------------------------------------------------------- datos
-def load_bars(paths, input_tz, tz, tf):
-    frames = []
-    for path in paths:
-        df = pd.read_csv(path)
-        df.columns = [c.strip().lower() for c in df.columns]
-        tcol = next((c for c in ("time", "datetime", "date", "timestamp") if c in df.columns), None)
-        if tcol is None:
-            sys.exit(f"{path}: falta columna de tiempo (time/datetime/date/timestamp)")
-        if "volume" not in df.columns:
-            vc = next((c for c in df.columns if "vol" in c), None)
-            if vc is None:
-                sys.exit(f"{path}: falta columna volume")
-            df = df.rename(columns={vc: "volume"})
-        t = df[tcol]
-        if pd.api.types.is_numeric_dtype(t):
-            unit = "ms" if t.max() > 1e11 else "s"
-            ts = pd.to_datetime(t, unit=unit, utc=True)
+NT_TZ_CANDIDATES = ["UTC", "America/New_York", "America/Chicago", "America/Mexico_City",
+                    "America/Denver", "America/Los_Angeles", "Europe/Madrid"]
+
+
+def _is_ninjatrader(path):
+    """Export de NinjaTrader 8: 'yyyyMMdd HHmmss;open;high;low;close;volume' sin encabezado."""
+    with open(path, "r", errors="ignore") as f:
+        first = f.readline().strip()
+    return bool(re.match(r"^\d{8} \d{6};", first))
+
+
+def _contract_name(path):
+    m = re.search(r"([A-Z0-9]+ \d{2}-\d{2})", Path(path).name)
+    return m.group(1) if m else Path(path).stem
+
+
+def _guess_nt_tz(raw):
+    """Las exportaciones de NinjaTrader no dicen su zona horaria. Se elige la zona en la que
+    el pico de volumen cae en la apertura de Nueva York (9:30 ET)."""
+    best, best_share = None, -1.0
+    sample = raw.iloc[:: max(1, len(raw) // 200000)]
+    for cand in NT_TZ_CANDIDATES:
+        ts = sample["ts_local"].dt.tz_localize(cand, ambiguous="NaT", nonexistent="NaT")
+        ny = ts.dt.tz_convert("America/New_York")
+        m = ny.dt.hour * 60 + ny.dt.minute
+        v = sample["volume"].to_numpy()
+        tot = np.nansum(v)
+        share = np.nansum(v[((m >= 570) & (m < 575)).to_numpy()]) / tot if tot else 0
+        if share > best_share:
+            best, best_share = cand, share
+    return best
+
+
+def _read_one(path, input_tz, nt_tz):
+    if _is_ninjatrader(path):
+        raw = pd.read_csv(path, sep=";", header=None,
+                          names=["t", "open", "high", "low", "close", "volume"])
+        raw["ts_local"] = pd.to_datetime(raw["t"], format="%Y%m%d %H%M%S")
+        tzname = nt_tz
+        if tzname in (None, "auto"):
+            tzname = _guess_nt_tz(raw)
+            print(f"{Path(path).name}: formato NinjaTrader, zona horaria detectada = {tzname}", file=sys.stderr)
+        ts = raw["ts_local"].dt.tz_localize(tzname, ambiguous="NaT", nonexistent="NaT").dt.tz_convert("UTC")
+        # NinjaTrader marca la vela con su hora de CIERRE; se pasa a hora de apertura
+        step = ts.diff().dropna().dt.total_seconds().mode()
+        step = pd.Timedelta(seconds=float(step.iloc[0]) if len(step) else 60)
+        df = raw.assign(ts=ts - step)
+        df["contract"] = _contract_name(path)
+        return df[["ts", "open", "high", "low", "close", "volume", "contract"]].dropna(subset=["ts"])
+
+    df = pd.read_csv(path)
+    df.columns = [c.strip().lower() for c in df.columns]
+    tcol = next((c for c in ("time", "datetime", "date", "timestamp") if c in df.columns), None)
+    if tcol is None:
+        sys.exit(f"{path}: falta columna de tiempo (time/datetime/date/timestamp)")
+    if "volume" not in df.columns:
+        vc = next((c for c in df.columns if "vol" in c), None)
+        if vc is None:
+            sys.exit(f"{path}: falta columna volume")
+        df = df.rename(columns={vc: "volume"})
+    t = df[tcol]
+    if pd.api.types.is_numeric_dtype(t):
+        unit = "ms" if t.max() > 1e11 else "s"
+        ts = pd.to_datetime(t, unit=unit, utc=True)
+    else:
+        t = t.astype(str).str.strip()
+        has_offset = t.str.contains(r"(?:Z|[+-]\d{2}:?\d{2})$", regex=True).all()
+        if has_offset:
+            ts = pd.to_datetime(t, utc=True, format="mixed")
         else:
-            t = t.astype(str).str.strip()
-            has_offset = t.str.contains(r"(?:Z|[+-]\d{2}:?\d{2})$", regex=True).all()
-            if has_offset:
-                ts = pd.to_datetime(t, utc=True, format="mixed")
-            else:
-                ts = pd.to_datetime(t, format="mixed")
-                ts = ts.dt.tz_localize(input_tz, ambiguous="NaT", nonexistent="NaT").dt.tz_convert("UTC")
-        df = df.assign(ts=ts)[["ts", "open", "high", "low", "close", "volume"]].dropna(subset=["ts"])
-        frames.append(df)
-    df = pd.concat(frames).drop_duplicates("ts").sort_values("ts").set_index("ts")
+            ts = pd.to_datetime(t, format="mixed")
+            ts = ts.dt.tz_localize(input_tz, ambiguous="NaT", nonexistent="NaT").dt.tz_convert("UTC")
+    df = df.assign(ts=ts, contract=_contract_name(path))
+    return df[["ts", "open", "high", "low", "close", "volume", "contract"]].dropna(subset=["ts"])
+
+
+def _expand(paths):
+    out = []
+    for p in paths:
+        p = Path(p)
+        if p.is_dir():
+            out += sorted(x for x in p.rglob("*") if x.suffix.lower() in (".txt", ".csv"))
+        elif p.suffix.lower() == ".zip":
+            dest = p.with_suffix("")
+            with zipfile.ZipFile(p) as z:
+                z.extractall(dest)
+            out += sorted(x for x in dest.rglob("*") if x.suffix.lower() in (".txt", ".csv"))
+        else:
+            out.append(p)
+    return out
+
+
+def load_bars(paths, input_tz, tz, tf, nt_tz="auto"):
+    frames = [_read_one(p, input_tz, nt_tz) for p in _expand(paths)]
+    df = pd.concat(frames)
     df["volume"] = df["volume"].fillna(0)
+
+    # Varios contratos (un archivo por vencimiento): cada día se usa el de mayor volumen
+    if df["contract"].nunique() > 1 and df.groupby("ts").size().max() > 1:
+        day = df["ts"].dt.tz_convert(tz).dt.date
+        vol = df.groupby([day, "contract"])["volume"].sum()
+        front = vol.groupby(level=0).idxmax().map(lambda x: x[1])
+        df = df[df["contract"].to_numpy() == day.map(front).to_numpy()]
+        rolls = front[front != front.shift()]
+        print("Contrato usado por fecha: " + ", ".join(f"{d} {c}" for d, c in rolls.items()), file=sys.stderr)
+
+    df = df.drop_duplicates("ts").sort_values("ts").set_index("ts").drop(columns="contract")
 
     step = df.index.to_series().diff().dt.total_seconds().div(60).median()
     if step < tf - 1e-9:
@@ -318,7 +400,7 @@ def fmt(v):
 
 def main(argv=None):
     a = parse_args(argv)
-    df = load_bars(a.csv, a.input_tz, a.tz, a.tf)
+    df = load_bars(a.csv, a.input_tz, a.tz, a.tf, a.nt_tz)
     end = pd.Timestamp(a.end, tz=a.tz) + pd.Timedelta(days=1) if a.end else df.index[-1] + pd.Timedelta(minutes=1)
     start = pd.Timestamp(a.start, tz=a.tz) if a.start else end - pd.DateOffset(years=3)
     df = df[(df.index >= start) & (df.index < end)]
