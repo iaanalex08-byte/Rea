@@ -12,7 +12,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 import poc_backtest as pb  # noqa: E402
 
 VARIANTES = {
-    "Actual (SL 9, R:R 2.5)": [],
+    "Anterior (SL 9, R:R 2.5)": ["--sl", "9", "--rr", "2.5"],
     "TP2 a R:R 1.5": ["--rr", "1.5"],
     "TP2 a R:R 1.75": ["--rr", "1.75"],
     "TP2 a R:R 2": ["--rr", "2"],

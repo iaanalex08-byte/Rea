@@ -34,7 +34,7 @@ def make_day(after, trend_up=True, date="2025-03-04"):
 
 
 def result(after, trend_up=True):
-    a = pb.parse_args(["x.csv"])
+    a = pb.parse_args(["x.csv", "--sl", "9", "--rr", "2.5"])
     tr, _ = pb.run(make_day(after, trend_up), a)
     return tr
 

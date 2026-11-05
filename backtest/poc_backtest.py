@@ -61,8 +61,8 @@ def parse_args(argv=None):
                    help="Tamaño de fila en puntos (si no se da, automático 20 filas)")
     p.add_argument("--brk-mode", choices=["vela", "cierre"], default="vela")
     # Gestión
-    p.add_argument("--sl", type=float, default=9.0, help="Stop loss en puntos")
-    p.add_argument("--rr", type=float, default=2.5, help="Ratio R:R del TP2")
+    p.add_argument("--sl", type=float, default=13.0, help="Stop loss en puntos")
+    p.add_argument("--rr", type=float, default=1.5, help="Ratio R:R del TP2")
     p.add_argument("--partial-r", type=float, default=1.0, help="TP1 en múltiplos de R")
     p.add_argument("--partial-pct", type=float, default=50.0, help="%% de contratos en TP1")
     p.add_argument("--no-be", action="store_true", help="No mover el SL a BE tras el parcial")
@@ -71,7 +71,7 @@ def parse_args(argv=None):
     p.add_argument("--min-trend", type=float, default=0.0, help="Tendencia previa mínima en pts")
     p.add_argument("--min-range", type=float, default=0.0, help="Rango mínimo del perfil en pts")
     # Dinero
-    p.add_argument("--qty", type=float, default=50, help="Contratos")
+    p.add_argument("--qty", type=float, default=35, help="Contratos")
     p.add_argument("--point-value", type=float, default=5.0, help="$ por punto (MES=5, ES=50)")
     p.add_argument("--mintick", type=float, default=0.25)
     p.add_argument("--commission", type=float, default=0.0,

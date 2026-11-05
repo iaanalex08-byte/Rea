@@ -1,5 +1,5 @@
 //@version=6
-strategy("POC Apertura CDMX [Estrategia]", overlay=true, max_boxes_count=500, max_lines_count=500, max_labels_count=500, default_qty_type=strategy.fixed, default_qty_value=50, initial_capital=100000, commission_type=strategy.commission.cash_per_contract, commission_value=0, slippage=0, calc_on_every_tick=false, process_orders_on_close=false)
+strategy("POC Apertura CDMX [Estrategia]", overlay=true, max_boxes_count=500, max_lines_count=500, max_labels_count=500, default_qty_type=strategy.fixed, default_qty_value=35, initial_capital=100000, commission_type=strategy.commission.cash_per_contract, commission_value=0, slippage=0, calc_on_every_tick=false, process_orders_on_close=false)
 
 tz = "UTC-6"  // CDMX fija, sin horario de verano
 
@@ -27,8 +27,8 @@ showBrk = input.bool(true, "Marcar ruptura", group=gB)
 
 gS = "SL / TP"
 showSLTP = input.bool(true, "Mostrar SL / TP", group=gS)
-slPts    = input.float(9.0, "Stop Loss (puntos)", minval=0.01, group=gS)
-rr       = input.float(2.5, "Ratio R:R", minval=0.1, group=gS)
+slPts    = input.float(13.0, "Stop Loss (puntos)", minval=0.01, group=gS)
+rr       = input.float(1.5, "Ratio R:R", minval=0.1, group=gS)
 
 gK = "Parciales"
 showPartial = input.bool(true, "Mostrar parcial", group=gK)
@@ -44,7 +44,7 @@ cDown = input.color(color.new(#f23645, 0), "Venta", group=gC)
 gT = "Estadísticas"
 showStats  = input.bool(true, "Mostrar tabla de estadísticas", group=gT)
 showResLbl = input.bool(true, "Mostrar etiqueta GANADA / PERDIDA", group=gT)
-qty        = input.float(50.0, "Cantidad (contratos)", minval=0.01, group=gT)
+qty        = input.float(35.0, "Cantidad (contratos)", minval=0.01, group=gT)
 tblPos     = input.string("Arriba derecha", "Posición de la tabla", options=["Arriba derecha", "Arriba izquierda", "Abajo derecha", "Abajo izquierda"], group=gT)
 
 drawLvl(int x, float y, color c, string txt, string sty) =>
