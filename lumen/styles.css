@@ -133,3 +133,14 @@ button { font: inherit; cursor: pointer; border: 0; }
   .modal-hero .hero-content { left: 18px; }
   .episode { grid-template-columns: 24px 96px 1fr; }
 }
+
+/* Reproductor simulado */
+.player.sim canvas { width: 100%; height: 100%; display: block; }
+.sim-controls { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px;
+  padding: 18px max(20px, env(safe-area-inset-right, 0px)) calc(18px + env(safe-area-inset-bottom, 0px)) max(20px, env(safe-area-inset-left, 0px));
+  background: linear-gradient(transparent, rgba(0,0,0,.75)); }
+.sim-controls input[type=range] { flex: 1; min-width: 0; accent-color: var(--accent); }
+.sim-play { width: 48px; height: 48px; background: var(--accent); color: #1b1300; border: 0; }
+.sim-time { color: #ddd; font-size: 14px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.btn:focus-visible, .btn-round:focus-visible, .profile:focus-visible, .search:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } .row-track { scroll-behavior: auto; } }

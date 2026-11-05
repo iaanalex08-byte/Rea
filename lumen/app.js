@@ -52,24 +52,27 @@ function toast(msg) {
 }
 
 // ---------- Barra superior ----------
+let searchQuery = "";
 function renderTopbar(route) {
   const logged = !!profile();
   $("#nav").hidden = !logged;
   document.querySelectorAll("#nav a").forEach((a) => a.classList.toggle("active", "#" + route === a.getAttribute("href")));
   const actions = $("#top-actions");
   if (!logged) {
-    actions.innerHTML = route === "/" ? `<a class="btn btn-primary" href="#/profiles">Iniciar sesión</a>` : "";
+    actions.innerHTML = route === "" ? `<a class="btn btn-primary" href="#profiles">Iniciar sesión</a>` : "";
     return;
   }
   const p = profile();
-  const q = route.startsWith("/search/") ? decodeURIComponent(route.slice(8)) : "";
+  const q = route === "search" ? searchQuery : "";
   actions.innerHTML = `
-    <input class="search" id="search" type="search" placeholder="Buscar títulos, géneros" value="${esc(q)}" />
-    <a href="#/profiles" title="Cambiar perfil"><span class="avatar" style="background:hsl(${p.hue} 60% 45%)">${esc(p.name[0])}</span></a>`;
+    <input class="search" id="search" type="search" placeholder="Buscar títulos, géneros" aria-label="Buscar" value="${esc(q)}" />
+    <a href="#profiles" title="Cambiar perfil"><span class="avatar" style="background:hsl(${p.hue} 60% 45%)">${esc(p.name[0])}</span></a>`;
   const input = $("#search");
   input.addEventListener("input", () => {
-    const v = input.value.trim();
-    location.hash = v ? `#/search/${encodeURIComponent(v)}` : "#/browse";
+    searchQuery = input.value.trim();
+    if (!searchQuery) { location.hash = "#browse"; return; }
+    if (location.hash !== "#search") location.hash = "#search";
+    else viewSearch(searchQuery);
   });
   if (q) { input.focus(); input.setSelectionRange(q.length, q.length); }
 }
@@ -92,7 +95,7 @@ function viewLanding() {
         </div>
       </div>
     </section>`;
-  $("#signup").addEventListener("submit", (e) => { e.preventDefault(); location.hash = "#/profiles"; });
+  $("#signup").addEventListener("submit", (e) => { e.preventDefault(); location.hash = "#profiles"; });
 }
 
 function viewProfiles() {
@@ -107,7 +110,7 @@ function viewProfiles() {
       </div>
     </section>`;
   app.querySelectorAll(".profile").forEach((b) =>
-    b.addEventListener("click", () => { store.set("lumen.profile", b.dataset.id); location.hash = "#/browse"; }));
+    b.addEventListener("click", () => { store.set("lumen.profile", b.dataset.id); location.hash = "#browse"; }));
 }
 
 const card = (t) => {
@@ -145,7 +148,7 @@ function viewBrowse(type) {
         ${metaLine(featured)}
         <p>${esc(featured.synopsis)}</p>
         <div class="actions">
-          <a class="btn btn-primary" href="#/watch/${featured.id}">▶ Reproducir</a>
+          <a class="btn btn-primary" href="#watch-${featured.id}">▶ Reproducir</a>
           <button class="btn btn-ghost" data-open="${featured.id}">ⓘ Más información</button>
         </div>
       </div>
@@ -169,7 +172,8 @@ function viewSearch(q) {
 
 function viewWatch(id) {
   const t = byId[id];
-  if (!t) return (location.hash = "#/browse");
+  if (!t) return (location.hash = "#browse");
+  if (window.LUMEN_SIMULATED_PLAYER) return viewSimulatedPlayer(t);
   const v = VIDEOS[t.video];
   app.innerHTML = `
     <section class="player">
@@ -191,6 +195,98 @@ function viewWatch(id) {
   $("#back").addEventListener("click", () => history.back());
 }
 
+// Reproductor simulado: se usa donde no se pueden cargar videos externos.
+// Dibuja una escena animada original en canvas y se comporta como un video
+// (reproducir/pausar, barra de avance, saltos de 10 s y avance guardado).
+function viewSimulatedPlayer(t) {
+  const DURATION = 180; // segundos simulados
+  const fmt = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+  app.innerHTML = `
+    <section class="player sim">
+      <canvas id="screen"></canvas>
+      <div class="player-top">
+        <button class="btn-round" id="back" aria-label="Volver">←</button>
+        <strong>${esc(t.title)}</strong>
+      </div>
+      <div class="sim-controls">
+        <button class="btn-round" id="rew" aria-label="Retroceder 10 segundos">↺</button>
+        <button class="btn-round sim-play" id="play" aria-label="Pausar">❚❚</button>
+        <button class="btn-round" id="fwd" aria-label="Adelantar 10 segundos">↻</button>
+        <input type="range" id="seek" min="0" max="${DURATION}" step="0.1" value="0" aria-label="Posición" />
+        <span class="sim-time" id="time">0:00 / ${fmt(DURATION)}</span>
+      </div>
+      <div class="player-credit">Vista previa animada · demostración</div>
+    </section>`;
+  const canvas = $("#screen"), ctx = canvas.getContext("2d");
+  const seek = $("#seek"), playBtn = $("#play"), timeEl = $("#time");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let pos = (progress()[t.id] ?? 0) < 0.97 ? (progress()[t.id] ?? 0) * DURATION : 0;
+  let playing = true, last = performance.now(), raf;
+
+  const resize = () => { canvas.width = innerWidth * devicePixelRatio; canvas.height = innerHeight * devicePixelRatio; };
+  resize();
+  addEventListener("resize", resize);
+
+  // Estrellas/partículas deterministas por título
+  let seed = [...t.id].reduce((a, c) => a + c.charCodeAt(0), 0);
+  const rnd = () => ((seed = (seed * 9301 + 49297) % 233280) / 233280);
+  const dots = Array.from({ length: 90 }, () => ({ x: rnd(), y: rnd(), r: rnd() * 2 + 0.5, s: rnd() * 0.6 + 0.2 }));
+
+  function draw() {
+    const w = canvas.width, h = canvas.height, k = pos / DURATION, time = pos;
+    const hue = t.hue + Math.sin(time / 20) * 25;
+    const g = ctx.createLinearGradient(0, 0, w, h);
+    g.addColorStop(0, `hsl(${hue - 30} 50% 8%)`);
+    g.addColorStop(1, `hsl(${hue} 60% ${18 + k * 10}%)`);
+    ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+    // Sol / luna que cruza la escena
+    const sx = w * (0.15 + 0.7 * k), sy = h * (0.55 - Math.sin(k * Math.PI) * 0.35);
+    const sun = ctx.createRadialGradient(sx, sy, 0, sx, sy, h * 0.35);
+    sun.addColorStop(0, `hsla(${hue + 40} 90% 70% / .95)`); sun.addColorStop(1, "transparent");
+    ctx.fillStyle = sun; ctx.fillRect(0, 0, w, h);
+    // Partículas
+    for (const d of dots) {
+      const x = ((d.x + time * d.s * 0.01) % 1) * w, y = (d.y + Math.sin(time * d.s + d.x * 9) * 0.01) * h;
+      ctx.fillStyle = `hsla(${hue + 60} 80% 85% / ${0.3 + d.s * 0.6})`;
+      ctx.beginPath(); ctx.arc(x, y, d.r * devicePixelRatio, 0, Math.PI * 2); ctx.fill();
+    }
+    // Montañas en capas (parallax)
+    for (let layer = 0; layer < 3; layer++) {
+      ctx.fillStyle = `hsl(${hue - 10 + layer * 8} 40% ${6 + layer * 5}%)`;
+      ctx.beginPath(); ctx.moveTo(0, h);
+      for (let x = 0; x <= w; x += w / 60) {
+        const n = x / w * (3 + layer) + time * 0.02 * (layer + 1);
+        ctx.lineTo(x, h * (0.62 + layer * 0.1) - Math.sin(n * 2.1) * h * 0.06 - Math.sin(n * 5.3) * h * 0.025);
+      }
+      ctx.lineTo(w, h); ctx.fill();
+    }
+  }
+  function tick(now) {
+    if (!document.body.contains(canvas)) { removeEventListener("resize", resize); return; }
+    const dt = (now - last) / 1000; last = now;
+    if (playing) {
+      pos = Math.min(DURATION, pos + (reduce ? dt * 0.5 : dt));
+      if (pos >= DURATION) setPlaying(false);
+    }
+    seek.value = pos;
+    timeEl.textContent = `${fmt(pos)} / ${fmt(DURATION)}`;
+    saveProgress(t.id, pos / DURATION);
+    draw();
+    raf = requestAnimationFrame(tick);
+  }
+  function setPlaying(v) {
+    playing = v;
+    playBtn.textContent = v ? "❚❚" : "▶";
+    playBtn.setAttribute("aria-label", v ? "Pausar" : "Reproducir");
+  }
+  playBtn.addEventListener("click", () => { if (pos >= DURATION) pos = 0; setPlaying(!playing); });
+  $("#rew").addEventListener("click", () => (pos = Math.max(0, pos - 10)));
+  $("#fwd").addEventListener("click", () => (pos = Math.min(DURATION, pos + 10)));
+  seek.addEventListener("input", () => (pos = Number(seek.value)));
+  $("#back").addEventListener("click", () => { cancelAnimationFrame(raf); location.hash = "#browse"; });
+  raf = requestAnimationFrame(tick);
+}
+
 // ---------- Ventana de detalle ----------
 function openModal(id) {
   const t = byId[id];
@@ -210,7 +306,7 @@ function openModal(id) {
       <div class="hero-content">
         <h2>${esc(t.title)}</h2>
         <div class="actions">
-          <a class="btn btn-primary" href="#/watch/${t.id}">▶ Reproducir</a>
+          <a class="btn btn-primary" href="#watch-${t.id}">▶ Reproducir</a>
           <button class="btn-round" id="toggle-list" aria-label="Mi lista">${inList(t.id) ? "✓" : "+"}</button>
         </div>
       </div>
@@ -237,7 +333,7 @@ document.addEventListener("click", (e) => {
   const open = e.target.closest("[data-open]");
   if (open) return openModal(open.dataset.open);
   const play = e.target.closest("[data-play]");
-  if (play) { closeModal(); location.hash = `#/watch/${play.dataset.play}`; return; }
+  if (play) { closeModal(); location.hash = `#watch-${play.dataset.play}`; return; }
   if (e.target.closest("[data-close]")) return closeModal();
   const arrow = e.target.closest(".arrow");
   if (arrow) {
@@ -252,25 +348,26 @@ document.addEventListener("keydown", (e) => {
 window.addEventListener("scroll", () => $("#topbar").classList.toggle("solid", scrollY > 40));
 
 // ---------- Rutas ----------
+const TYPE_ROUTES = { series: "Serie", peliculas: "Película", documentales: "Documental" };
 function router() {
   closeModal();
-  const route = decodeURIComponent(location.hash.slice(1) || "/");
-  const needsProfile = !["/", "/profiles"].includes(route);
-  if (needsProfile && !profile()) return (location.hash = "#/profiles");
-  if (route === "/" && profile()) return (location.hash = "#/browse");
+  const route = location.hash.slice(1);
+  const needsProfile = !["", "profiles"].includes(route);
+  if (needsProfile && !profile()) return (location.hash = "#profiles");
+  if (route === "" && profile()) return (location.hash = "#browse");
 
-  $("#topbar").hidden = route.startsWith("/watch/");
+  $("#topbar").hidden = route.startsWith("watch-");
   renderTopbar(route);
   scrollTo(0, 0);
 
-  if (route === "/") viewLanding();
-  else if (route === "/profiles") viewProfiles();
-  else if (route === "/browse") viewBrowse();
-  else if (route.startsWith("/browse/")) viewBrowse(route.slice(8));
-  else if (route === "/mylist") viewGrid("Mi lista", myList().map((id) => byId[id]).filter(Boolean), "Aún no agregas nada. Usa el botón + en cualquier título.");
-  else if (route.startsWith("/search/")) viewSearch(route.slice(8));
-  else if (route.startsWith("/watch/")) viewWatch(route.slice(7));
-  else location.hash = "#/browse";
+  if (route === "") viewLanding();
+  else if (route === "profiles") viewProfiles();
+  else if (route === "browse") viewBrowse();
+  else if (TYPE_ROUTES[route]) viewBrowse(TYPE_ROUTES[route]);
+  else if (route === "mylist") viewGrid("Mi lista", myList().map((id) => byId[id]).filter(Boolean), "Aún no agregas nada. Usa el botón + en cualquier título.");
+  else if (route === "search" && searchQuery) viewSearch(searchQuery);
+  else if (route.startsWith("watch-")) viewWatch(route.slice(6));
+  else location.hash = "#browse";
 }
 window.addEventListener("hashchange", router);
 router();
