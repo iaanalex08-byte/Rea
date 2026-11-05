@@ -65,6 +65,11 @@ def parse_args(argv=None):
     p.add_argument("--rr", type=float, default=2.5, help="Ratio R:R del TP2")
     p.add_argument("--partial-r", type=float, default=1.0, help="TP1 en múltiplos de R")
     p.add_argument("--partial-pct", type=float, default=50.0, help="%% de contratos en TP1")
+    p.add_argument("--no-be", action="store_true", help="No mover el SL a BE tras el parcial")
+    p.add_argument("--max-wait", type=float, default=None,
+                   help="Minutos máximos entre la ruptura y el retroceso (si se pasa, no se opera ese día)")
+    p.add_argument("--min-trend", type=float, default=0.0, help="Tendencia previa mínima en pts")
+    p.add_argument("--min-range", type=float, default=0.0, help="Rango mínimo del perfil en pts")
     # Dinero
     p.add_argument("--qty", type=float, default=50, help="Contratos")
     p.add_argument("--point-value", type=float, default=5.0, help="$ por punto (MES=5, ES=50)")
@@ -280,7 +285,8 @@ def run(df, a):
             poc = round_tick(pLow + (pocRow + 0.5) * rs, tick)
             day.update(poc=poc, trend="alcista" if trendClose > trendOpen else
                        ("bajista" if trendClose < trendOpen else "plana"))
-            if trendClose != trendOpen:
+            if trendClose != trendOpen and abs(trendClose - trendOpen) >= a.min_trend \
+                    and (pHigh - pLow) >= a.min_range:
                 isUp = trendClose > trendOpen
                 dirTrend = 1 if isUp else -1
                 pocLvl = poc
@@ -303,6 +309,10 @@ def run(df, a):
 
         # Entrada
         inWin = a.no_window or (wStart <= tmin < wEnd)
+        if stage == 1 and a.max_wait is not None and i > brkBar and \
+                (idx[i] - idx[brkBar]).total_seconds() / 60 > a.max_wait:
+            stage = 3
+            day["status"] = "retroceso tardío"
         if stage == 1 and i > brkBar and inWin:
             retest = H[i] >= pocLvl if dirTrend == -1 else L[i] <= pocLvl
             if retest:
@@ -311,7 +321,9 @@ def run(df, a):
                 cur = {"date": dates[i], "dir": "COMPRA" if dirTrend == 1 else "VENTA",
                        "entry_time": idx[i], "entry": pocLvl, "sl": slLvl, "tp1": partLvl,
                        "tp2": tpLvl, "result": None, "exit_time": None, "banked": 0.0,
-                       "partial": False, "pts": 0.0}
+                       "partial": False, "pts": 0.0,
+                       "brk_time": idx[brkBar], "trend_pts": trendClose - trendOpen,
+                       "prof_range": pHigh - pLow, "entry_idx": i}
                 trades.append(cur)
                 day["status"] = "operó"
 
@@ -320,7 +332,8 @@ def run(df, a):
             up = dirTrend == 1
             slHit = L[i] <= slLvl if up else H[i] >= slLvl
             tpHit = H[i] >= tpLvl if up else L[i] <= tpLvl
-            beHit = L[i] <= pocLvl if up else H[i] >= pocLvl
+            beLvl = slLvl if a.no_be else pocLvl
+            beHit = L[i] <= beLvl if up else H[i] >= beLvl
             if not partDone:
                 partHit = H[i] >= partLvl if up else L[i] <= partLvl
                 if slHit:
@@ -337,7 +350,8 @@ def run(df, a):
             else:
                 if beHit:
                     resolved = True
-                    cur.update(result="PARCIAL + BE", exit_time=idx[i], pts=tp1Pts * fPart)
+                    cur.update(result="PARCIAL + BE" if not a.no_be else "PARCIAL + SL", exit_time=idx[i],
+                               pts=tp1Pts * fPart - (a.sl * (1 - fPart) if a.no_be else 0))
                 elif tpHit:
                     resolved = True
                     cur.update(result="GANADA", exit_time=idx[i],
@@ -347,6 +361,22 @@ def run(df, a):
         cur.update(result="ABIERTA", exit_time=idx[-1], pts=cur["banked"])
     close_day_record()
     return pd.DataFrame(trades), pd.DataFrame(days_info)
+
+
+def filter_days(df, a):
+    """Descarta días con huecos en los datos."""
+    if a.min_coverage <= 0:
+        return df, 0
+    weh, wem = map(int, a.win_end.split(":"))
+    lim = weh * 60 + wem
+    tm = df.index.hour * 60 + df.index.minute
+    d = pd.Series(df.index.date, index=df.index)
+    cnt = d[tm < lim].groupby(d[tm < lim]).size()
+    prof = d[(tm >= a.prof_hour * 60 + a.prof_min) & (tm < a.prof_hour * 60 + a.prof_min + a.prof_dur)]
+    pcnt = prof.groupby(prof).size()
+    good = set(cnt[cnt >= a.min_coverage * lim / a.tf].index) & set(pcnt[pcnt >= a.prof_dur / a.tf].index)
+    keep = d.isin(good).to_numpy()
+    return df[keep], len(set(d)) - len(good)
 
 
 # ----------------------------------------------------------------------------- reporte
@@ -407,23 +437,9 @@ def main(argv=None):
     if df.empty:
         sys.exit("No hay datos en el rango pedido.")
 
-    skipped = 0
-    if a.min_coverage > 0:
-        weh, wem = map(int, a.win_end.split(":"))
-        lim = weh * 60 + wem
-        tm = df.index.hour * 60 + df.index.minute
-        d = pd.Series(df.index.date, index=df.index)
-        cnt = d[tm < lim].groupby(d[tm < lim]).size()
-        prof = d[(tm >= a.prof_hour * 60 + a.prof_min) & (tm < a.prof_hour * 60 + a.prof_min + a.prof_dur)]
-        pcnt = prof.groupby(prof).size()
-        need = lim / a.tf
-        good = set(cnt[cnt >= a.min_coverage * need].index) & set(pcnt[pcnt >= a.prof_dur / a.tf].index)
-        keep = d.isin(good).to_numpy()
-        skipped = len(set(d)) - len(good)
-        df = df[keep]
-        if df.empty:
-            sys.exit("Ningún día tiene datos completos (prueba --min-coverage 0).")
-
+    df, skipped = filter_days(df, a)
+    if df.empty:
+        sys.exit("Ningún día tiene datos completos (prueba --min-coverage 0).")
     tr, days = run(df, a)
     tr = add_money(tr, a)
     out = Path(a.out)
