@@ -45,6 +45,7 @@ gT = "Estadísticas"
 showStats  = input.bool(true, "Mostrar tabla de estadísticas", group=gT)
 showResLbl = input.bool(true, "Mostrar etiqueta GANADA / PERDIDA", group=gT)
 qty        = input.float(1.0, "Cantidad (contratos)", minval=0.01, group=gT)
+ptValue    = input.float(5.0, "Valor del punto por contrato ($)", minval=0.01, tooltip="MES = 5, ES = 50", group=gT)
 tblPos     = input.string("Arriba derecha", "Posición de la tabla", options=["Arriba derecha", "Arriba izquierda", "Abajo derecha", "Abajo izquierda"], group=gT)
 
 drawLvl(int x, float y, color c, string txt, string sty) =>
@@ -261,7 +262,7 @@ if showStats and barstate.islast
     closed = wins + losses + beCount
     hitRate = closed > 0 ? wins / closed * 100 : 0.0
     partRate = closed > 0 ? (wins + beCount) / closed * 100 : 0.0
-    netQty = netPts * qty
+    netQty = netPts * qty * ptValue
     cGreen = #089981
     cRed = #f23645
     cGray = color.gray
@@ -280,7 +281,7 @@ if showStats and barstate.islast
     table.cell(stats, 1, 5, str.tostring(partRate, "#.0") + "%", text_color=partRate >= 50 ? cGreen : cRed)
     table.cell(stats, 0, 6, "Neto (pts)", text_color=color.white, text_halign=text.align_left)
     table.cell(stats, 1, 6, str.tostring(netPts, "#.##"), text_color=netPts >= 0 ? cGreen : cRed)
-    table.cell(stats, 0, 7, "Neto (x cant.)", text_color=color.white, text_halign=text.align_left)
+    table.cell(stats, 0, 7, "Neto ($)", text_color=color.white, text_halign=text.align_left)
     table.cell(stats, 1, 7, str.tostring(netQty, "#.##"), text_color=netQty >= 0 ? cGreen : cRed)
 
 alertcondition(brkSig, "Ruptura del POC", "Ruptura del POC: esperar retroceso")
