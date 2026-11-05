@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compara la entrada a mercado a varias horas (8 MES, TP 4 / SL 20.75, tendencia, cierre 14:00),
+"""Compara la entrada a mercado (cierre 14:00 o el que se indique, ej. 14:30) a varias horas (8 MES, TP 4 / SL 20.75, tendencia, cierre 14:00),
 marca días de noticias y simula cuentas de fondeo (reglas tipo LucidFlex).
 
     python3 backtest/comparativa_horas.py backtest/datos
@@ -17,7 +17,8 @@ import noticias as nw  # noqa: E402
 import poc_backtest as pb  # noqa: E402
 
 HORAS = ["08:30", "10:30", "11:00"]
-TP, SL, TICK, K, COM, CLOSE = 4.0, 20.75, 0.25, 40.0, 9.92, 14 * 60
+TP, SL, TICK, K, COM = 4.0, 20.75, 0.25, 40.0, 9.92
+CLOSE = 14 * 60
 
 
 def trade(H, L, O, tm, i, d):
@@ -40,7 +41,13 @@ def trade(H, L, O, tm, i, d):
 
 
 def main():
+    global CLOSE
     data = sys.argv[1] if len(sys.argv) > 1 else "backtest/datos"
+    sufijo = ""
+    if len(sys.argv) > 2:  # hora de cierre HH:MM
+        hh, mm = map(int, sys.argv[2].split(":"))
+        CLOSE = hh * 60 + mm
+        sufijo = "_" + sys.argv[2].replace(":", "")
     a = pb.parse_args([data, "--tf", "1", "--prof-hour", "7", "--prof-dur", "30", "--win-end", "13:30"])
     df = pb.load_bars([data], a.input_tz, a.tz, 1, "auto")
     df = df[(df.index >= pd.Timestamp("2024-01-01", tz=a.tz)) & (df.index < pd.Timestamp("2026-11-05", tz=a.tz))]
@@ -74,7 +81,7 @@ def main():
                          "fomc": "FOMC" in tags, "cpi": "CPI" in tags, "nfp": "NFP" in tags, "ppi": "PPI" in tags})
     t = pd.DataFrame(rows)
     out = Path("backtest/resultados")
-    t.to_csv(out / "comparativa_horas.csv", index=False)
+    t.to_csv(out / f"comparativa_horas{sufijo}.csv", index=False)
 
     cfg = SimpleNamespace(dd=1000, lock=100, objetivo=1250, min_dia=150, dias=5, tope=1000, min_retiro=500, split=0.9)
     resumen, rachas, lucid_rows, news_rows = [], [], [], []
@@ -125,7 +132,7 @@ def main():
                               "neto_usd": round(sub.usd.sum(), 2)})
     R, RA, LU, NE = map(pd.DataFrame, (resumen, rachas, lucid_rows, news_rows))
     for name, x in (("resumen_horas", R), ("rachas_horas", RA), ("lucid_horas", LU), ("noticias_horas", NE)):
-        x.to_csv(out / f"{name}.csv", index=False)
+        x.to_csv(out / f"{name}{sufijo}.csv", index=False)
     pd.set_option("display.width", 250)
     for x in (R, RA, LU, NE):
         print(x.to_string(index=False)); print()
