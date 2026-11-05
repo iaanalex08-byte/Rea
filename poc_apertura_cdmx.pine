@@ -44,7 +44,7 @@ cDown = input.color(color.new(#f23645, 0), "Venta", group=gC)
 gT = "Estadísticas"
 showStats  = input.bool(true, "Mostrar tabla de estadísticas", group=gT)
 showResLbl = input.bool(true, "Mostrar etiqueta GANADA / PERDIDA", group=gT)
-qty        = input.float(35.0, "Cantidad (contratos)", minval=0.01, group=gT)
+qty        = input.float(1.0, "Cantidad (contratos)", minval=0.01, group=gT)
 tblPos     = input.string("Arriba derecha", "Posición de la tabla", options=["Arriba derecha", "Arriba izquierda", "Abajo derecha", "Abajo izquierda"], group=gT)
 
 drawLvl(int x, float y, color c, string txt, string sty) =>
