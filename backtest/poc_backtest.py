@@ -93,8 +93,8 @@ def _is_ninjatrader(path):
 
 
 def _contract_name(path):
-    m = re.search(r"([A-Z0-9]+ \d{2}-\d{2})", Path(path).name)
-    return m.group(1) if m else Path(path).stem
+    m = re.search(r"([A-Z]{1,4})[ _](\d{2}-\d{2})", Path(path).name)
+    return f"{m.group(1)} {m.group(2)}" if m else Path(path).stem
 
 
 def _guess_nt_tz(raw):
