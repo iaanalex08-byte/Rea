@@ -3,7 +3,7 @@ indicator("POC Apertura CDMX - Entrada a mercado", overlay=true, max_boxes_count
 
 // Días mínimos en cuenta fondeada: entrada a mercado a favor de la tendencia previa,
 // TP chico (la ganancia mínima del día) y SL amplio. Hora fija UTC-6 (CDMX).
-// Entrada 11:00 y cierre forzado a las 14:00 si no tocó SL ni TP.
+// Entrada 11:00 y cierre forzado a las 14:30 si no tocó SL ni TP.
 tz = "UTC-6"
 
 gH = "Perfil (hora CDMX)"
@@ -16,7 +16,7 @@ entHour = input.int(11, "Hora de entrada", minval=0, maxval=23, group=gW)
 entMin  = input.int(0, "Minuto de entrada", minval=0, maxval=59, group=gW)
 useClose = input.bool(true, "Cerrar si no se resolvió", group=gW)
 clsHour  = input.int(14, "Hora de cierre", minval=0, maxval=23, group=gW)
-clsMin   = input.int(0, "Minuto de cierre", minval=0, maxval=59, group=gW)
+clsMin   = input.int(30, "Minuto de cierre", minval=0, maxval=59, group=gW)
 
 gP = "Perfil de volumen"
 autoRow = input.bool(true, "Tamaño de fila automático (20 filas)", group=gP)
