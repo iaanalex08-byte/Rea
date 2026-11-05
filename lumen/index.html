@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lumen — Streaming</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar" id="topbar">
+    <a class="logo" href="#/">lumen<span>.</span></a>
+    <nav class="nav" id="nav" hidden>
+      <a href="#/browse">Inicio</a>
+      <a href="#/browse/Serie">Series</a>
+      <a href="#/browse/Película">Películas</a>
+      <a href="#/mylist">Mi lista</a>
+    </nav>
+    <div class="top-actions" id="top-actions"></div>
+  </header>
+
+  <main id="app"></main>
+
+  <div class="modal" id="modal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <article class="modal-card" role="dialog" aria-modal="true" id="modal-card"></article>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
