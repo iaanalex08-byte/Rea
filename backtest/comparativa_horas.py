@@ -16,7 +16,7 @@ import lucid  # noqa: E402
 import noticias as nw  # noqa: E402
 import poc_backtest as pb  # noqa: E402
 
-HORAS = ["08:30", "10:30", "11:00"]
+HORAS = ["08:30", "10:00", "10:30", "11:00"]
 TP, SL, TICK, K, COM = 4.0, 20.75, 0.25, 40.0, 9.92
 CLOSE = 14 * 60
 
