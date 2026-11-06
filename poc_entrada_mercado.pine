@@ -14,7 +14,7 @@ profDur  = input.int(30, "Duración del perfil (min)", minval=1, maxval=120, gro
 gW = "Entrada a mercado (hora CDMX)"
 entHour = input.int(11, "Hora de entrada", minval=0, maxval=23, group=gW)
 entMin  = input.int(0, "Minuto de entrada", minval=0, maxval=59, group=gW)
-preMin   = input.int(2, "Aviso anticipado (minutos antes de la entrada)", minval=0, maxval=120, tooltip="0 = sin aviso. Con 2 y entrada 11:00 la flecha aparece a las 10:58", group=gW)
+preMin   = input.int(5, "Aviso anticipado (minutos antes de la entrada)", minval=0, maxval=120, tooltip="0 = sin aviso. Con 5 y entrada 11:00 la flecha aparece a las 10:55", group=gW)
 useClose = input.bool(true, "Cerrar si no se resolvió", group=gW)
 clsHour  = input.int(14, "Hora de cierre", minval=0, maxval=23, group=gW)
 clsMin   = input.int(30, "Minuto de cierre", minval=0, maxval=59, group=gW)
@@ -157,7 +157,7 @@ if not done and tmin >= pEnd and array.size(bV) > 0
         label.new(bar_index, poc, "POC " + str.tostring(poc, format.mintick), style=label.style_label_left, color=color.new(color.yellow, 20), textcolor=color.black, size=size.small)
 
 // ---- Entrada a mercado: OPEN de la primera vela desde la hora de entrada ----
-// ---- Aviso anticipado: flecha en la vela que contiene la hora de aviso (10:58 por defecto) ----
+// ---- Aviso anticipado: flecha en la vela que contiene la hora de aviso (10:55 por defecto) ----
 // La dirección ya está decidida desde las 7:00 (tendencia 00:00 -> 7:00), así que se puede avisar antes de entrar.
 preBuy = false
 preSell = false
