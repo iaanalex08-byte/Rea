@@ -70,6 +70,10 @@ def parse_args(argv=None):
                    help="Minutos máximos entre la ruptura y el retroceso (si se pasa, no se opera ese día)")
     p.add_argument("--min-trend", type=float, default=0.0, help="Tendencia previa mínima en pts")
     p.add_argument("--min-range", type=float, default=0.0, help="Rango mínimo del perfil en pts")
+    p.add_argument("--confirm", action="store_true",
+                   help="Tras tocar el POC, esperar una vela que cierre a favor y entrar al cierre (SL/TP desde ahí)")
+    p.add_argument("--max-prev-range", type=float, default=None,
+                   help="No operar si el rango (máx-mín) del día anterior superó este %% del precio")
     # Dinero
     p.add_argument("--qty", type=float, default=35, help="Contratos")
     p.add_argument("--point-value", type=float, default=5.0, help="$ por punto (MES=5, ES=50)")
@@ -254,6 +258,7 @@ def run(df, a):
             pocLvl = slLvl = tpLvl = partLvl = None
             dirTrend = 0
             stage = 0
+            touched = False
             done = False
             partDone = False
             resolved = False
@@ -313,7 +318,31 @@ def run(df, a):
                 (idx[i] - idx[brkBar]).total_seconds() / 60 > a.max_wait:
             stage = 3
             day["status"] = "retroceso tardío"
-        if stage == 1 and i > brkBar and inWin:
+        if stage == 1 and i > brkBar and inWin and a.confirm:
+            d_ = dirTrend
+            if not touched:
+                touched = (H[i] >= pocLvl) if d_ == -1 else (L[i] <= pocLvl)
+            if touched:
+                if (L[i] <= slLvl) if d_ == 1 else (H[i] >= slLvl):
+                    stage = 3
+                    day["status"] = "tocó SL antes de confirmar"
+                elif (C[i] > pocLvl) if d_ == 1 else (C[i] < pocLvl):
+                    e = round_tick(C[i], tick)
+                    slLvl = round_tick(e - d_ * a.sl, tick)
+                    tpLvl = round_tick(e + d_ * tp2Pts, tick)
+                    partLvl = round_tick(e + d_ * tp1Pts, tick)
+                    pocLvl = e
+                    stage = 2
+                    entryBar = i
+                    cur = {"date": dates[i], "dir": "COMPRA" if d_ == 1 else "VENTA",
+                           "entry_time": idx[i], "entry": e, "sl": slLvl, "tp1": partLvl,
+                           "tp2": tpLvl, "result": None, "exit_time": None, "banked": 0.0,
+                           "partial": False, "pts": 0.0,
+                           "brk_time": idx[brkBar], "trend_pts": trendClose - trendOpen,
+                           "prof_range": pHigh - pLow, "entry_idx": i}
+                    trades.append(cur)
+                    day["status"] = "operó"
+        if stage == 1 and i > brkBar and inWin and not a.confirm:
             retest = H[i] >= pocLvl if dirTrend == -1 else L[i] <= pocLvl
             if retest:
                 stage = 2
