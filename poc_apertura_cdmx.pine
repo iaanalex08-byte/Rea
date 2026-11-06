@@ -28,7 +28,8 @@ showBrk = input.bool(true, "Marcar ruptura", group=gB)
 gS = "SL / TP"
 showSLTP = input.bool(true, "Mostrar SL / TP", group=gS)
 slPts    = input.float(13.0, "Stop Loss (puntos)", minval=0.01, group=gS)
-rr       = input.float(1.5, "Ratio R:R", minval=0.1, group=gS)
+rr       = input.float(1.0, "Ratio R:R", minval=0.1, group=gS)
+singleExit = input.bool(true, "Salida única en el TP (sin parcial ni BE)", tooltip="Recomendado con 1 contrato: todo sale en el TP o en el SL", group=gS)
 
 gK = "Parciales"
 showPartial = input.bool(true, "Mostrar parcial", group=gK)
@@ -181,7 +182,7 @@ if stage == 1 and bar_index > brkBar and inWin
             box.new(bar_index, math.max(pocLvl, slLvl), bar_index + extBars, math.min(pocLvl, slLvl), border_color=na, bgcolor=color.new(#f23645, 80))
             drawLvl(bar_index, tpLvl, #089981, "TP " + str.tostring(tpLvl, format.mintick), line.style_dashed)
             drawLvl(bar_index, slLvl, #f23645, "SL " + str.tostring(slLvl, format.mintick), line.style_dashed)
-        if showPartial
+        if showPartial and not singleExit
             drawLvl(bar_index, partLvl, cPartial, str.tostring(partialR, "#.#") + ":1 PARCIAL " + str.tostring(partLvl, format.mintick), line.style_dotted)
 
 // ---- Gestión y resolución de la operación ----
@@ -202,7 +203,20 @@ if stage == 2 and not resolved and not na(entryBar) and bar_index > entryBar
     slHit = dirTrend == 1 ? low <= slLvl : high >= slLvl
     tpHit = dirTrend == 1 ? high >= tpLvl : low <= tpLvl
     beHit = dirTrend == 1 ? low <= pocLvl : high >= pocLvl
-    if not partDone
+    if singleExit
+        if slHit
+            resolved := true
+            losses += 1
+            netPts -= slPts
+            lossSig := true
+            if showResLbl
+                label.new(bar_index, slLvl, "✖ PERDIDA -" + str.tostring(slPts, "#.##") + " pts", style=dirTrend == 1 ? label.style_label_up : label.style_label_down, color=cDown, textcolor=color.white, size=size.small)
+        else if tpHit
+            resolved := true
+            wins += 1
+            netPts += tp2Pts
+            winSig := true
+    else if not partDone
         partHit = dirTrend == 1 ? high >= partLvl : low <= partLvl
         if slHit
             resolved := true
@@ -235,7 +249,7 @@ if stage == 2 and not resolved and not na(entryBar) and bar_index > entryBar
             netPts += tp2Pts * (1 - fPart)
             winSig := true
     if winSig and showResLbl
-        winPts = tp1Pts * fPart + tp2Pts * (1 - fPart)
+        winPts = singleExit ? tp2Pts : tp1Pts * fPart + tp2Pts * (1 - fPart)
         label.new(bar_index, tpLvl, "✔ GANADA +" + str.tostring(winPts, "#.##") + " pts", style=dirTrend == 1 ? label.style_label_down : label.style_label_up, color=cUp, textcolor=color.white, size=size.small)
     if beSig and showResLbl
         label.new(bar_index, pocLvl, "◐ PARCIAL + BE +" + str.tostring(tp1Pts * fPart, "#.##") + " pts", style=dirTrend == 1 ? label.style_label_up : label.style_label_down, color=cPartial, textcolor=color.white, size=size.small)

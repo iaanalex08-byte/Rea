@@ -66,6 +66,7 @@ def parse_args(argv=None):
     p.add_argument("--partial-r", type=float, default=1.0, help="TP1 en múltiplos de R")
     p.add_argument("--partial-pct", type=float, default=50.0, help="%% de contratos en TP1")
     p.add_argument("--no-be", action="store_true", help="No mover el SL a BE tras el parcial")
+    p.add_argument("--single", action="store_true", help="Salida única: sin parcial ni BE, todo en el TP")
     p.add_argument("--max-wait", type=float, default=None,
                    help="Minutos máximos entre la ruptura y el retroceso (si se pasa, no se opera ese día)")
     p.add_argument("--min-trend", type=float, default=0.0, help="Tendencia previa mínima en pts")
@@ -363,7 +364,14 @@ def run(df, a):
             tpHit = H[i] >= tpLvl if up else L[i] <= tpLvl
             beLvl = slLvl if a.no_be else pocLvl
             beHit = L[i] <= beLvl if up else H[i] >= beLvl
-            if not partDone:
+            if a.single:
+                if slHit:
+                    resolved = True
+                    cur.update(result="PERDIDA", exit_time=idx[i], pts=-a.sl)
+                elif tpHit:
+                    resolved = True
+                    cur.update(result="GANADA", exit_time=idx[i], pts=tp2Pts)
+            elif not partDone:
                 partHit = H[i] >= partLvl if up else L[i] <= partLvl
                 if slHit:
                     resolved = True
