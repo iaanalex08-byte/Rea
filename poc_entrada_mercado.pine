@@ -14,6 +14,7 @@ profDur  = input.int(30, "Duración del perfil (min)", minval=1, maxval=120, gro
 gW = "Entrada a mercado (hora CDMX)"
 entHour = input.int(11, "Hora de entrada", minval=0, maxval=23, group=gW)
 entMin  = input.int(0, "Minuto de entrada", minval=0, maxval=59, group=gW)
+preMin   = input.int(2, "Aviso anticipado (minutos antes de la entrada)", minval=0, maxval=120, tooltip="0 = sin aviso. Con 2 y entrada 11:00 la flecha aparece a las 10:58", group=gW)
 useClose = input.bool(true, "Cerrar si no se resolvió", group=gW)
 clsHour  = input.int(14, "Hora de cierre", minval=0, maxval=23, group=gW)
 clsMin   = input.int(30, "Minuto de cierre", minval=0, maxval=59, group=gW)
@@ -61,6 +62,8 @@ tmin   = hour(time, tz) * 60 + minute(time, tz)
 pStart = profHour * 60 + profMin
 pEnd   = pStart + profDur
 eStart = entHour * 60 + entMin
+aStart = eStart - preMin
+tfMin  = timeframe.in_seconds() / 60
 cStart = clsHour * 60 + clsMin
 newDay = barstate.isfirst or dayofmonth(time, tz) != dayofmonth(time[1], tz)
 
@@ -72,6 +75,7 @@ var int startIdx = na
 var int entryBar = na
 var bool done = false
 var bool resolved = false
+var bool avisado = false
 var int stage = 0
 var float pocLvl = na
 var float entryPx = na
@@ -110,6 +114,7 @@ if newDay
     stage := 0
     done := false
     resolved := false
+    avisado := false
     array.clear(bH)
     array.clear(bL)
     array.clear(bV)
@@ -152,6 +157,17 @@ if not done and tmin >= pEnd and array.size(bV) > 0
         label.new(bar_index, poc, "POC " + str.tostring(poc, format.mintick), style=label.style_label_left, color=color.new(color.yellow, 20), textcolor=color.black, size=size.small)
 
 // ---- Entrada a mercado: OPEN de la primera vela desde la hora de entrada ----
+// ---- Aviso anticipado: flecha en la vela que contiene la hora de aviso (10:58 por defecto) ----
+// La dirección ya está decidida desde las 7:00 (tendencia 00:00 -> 7:00), así que se puede avisar antes de entrar.
+preBuy = false
+preSell = false
+if preMin > 0 and not avisado and done and dirTrend != 0 and stage == 0 and tmin < eStart and tmin + tfMin > aStart
+    avisado := true
+    preBuy := dirTrend == 1
+    preSell := dirTrend == -1
+    hEnt = str.format("{0,number,00}:{1,number,00}", entHour, entMin)
+    alert("AVISO: a las " + hEnt + " toca " + (dirTrend == 1 ? "COMPRA" : "VENTA") + " " + str.tostring(qty) + " contratos | TP " + str.tostring(tpPts) + " pts / SL " + str.tostring(slPts) + " pts", alert.freq_once_per_bar)
+
 buySig = false
 sellSig = false
 if stage == 0 and done and dirTrend != 0 and tmin >= eStart and (not useClose or tmin < cStart)
@@ -215,6 +231,8 @@ if stage == 2 and not resolved and not na(entryBar) and bar_index >= entryBar
         if showResLbl
             label.new(bar_index, tpLvl, "✔ GANADA " + usd(tpUsd), style=dirTrend == 1 ? label.style_label_down : label.style_label_up, color=cUp, textcolor=color.white, size=size.small)
 
+plotshape(preBuy, "Aviso compra", shape.arrowup, location.belowbar, cUp, size=size.large, text="AVISO\nCOMPRA")
+plotshape(preSell, "Aviso venta", shape.arrowdown, location.abovebar, cDown, size=size.large, text="AVISO\nVENTA")
 plotshape(buySig, "Entrada compra", shape.triangleup, location.belowbar, cUp, size=size.small, text="BUY")
 plotshape(sellSig, "Entrada venta", shape.triangledown, location.abovebar, cDown, size=size.small, text="SELL")
 
@@ -262,6 +280,8 @@ if showStats and barstate.islast
     table.cell(stats, 0, 10, "Neto", text_color=cW, text_halign=text.align_left)
     table.cell(stats, 1, 10, usd(netUsd), text_color=netUsd >= 0 ? cGreen : cRed)
 
+alertcondition(preBuy, "Aviso: a la hora de entrada toca COMPRA", "Aviso: a la hora de entrada toca COMPRA")
+alertcondition(preSell, "Aviso: a la hora de entrada toca VENTA", "Aviso: a la hora de entrada toca VENTA")
 alertcondition(buySig, "Entrada COMPRA a mercado", "Entrada a mercado: COMPRA")
 alertcondition(sellSig, "Entrada VENTA a mercado", "Entrada a mercado: VENTA")
 alertcondition(winSig, "TP alcanzado", "TP alcanzado: día ganado")
