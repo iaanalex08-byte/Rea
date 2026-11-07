@@ -1,0 +1,264 @@
+//@version=6
+indicator("SMC NQ: barrida + MSS + FVG", overlay=true, max_boxes_count=500, max_lines_count=500, max_labels_count=500)
+
+// Estrategia C del plan. NQ / MNQ en velas de 5 minutos, hora de Nueva York real.
+// 1. Barrida: una vela pasa con MECHA el último máximo (mínimo) de estructura y cierra de regreso.
+// 2. MSS: en las 30 velas siguientes, una vela de cuerpo fuerte (>= 60 % de su rango y >= 1 ATR)
+//    cierra más allá del último mínimo (máximo) de estructura.
+// 3. POI: el FVG que dejó ese tramo. Entrada límite en su borde cuando el precio regresa.
+// 4. SL: 2 pts más allá de la mecha de la barrida. TP: el nuevo extremo creado, solo si queda a >= 1R.
+// Ventana 3:00-11:30 ET, una operación al día, cierre forzado 12:00 ET.
+tz = "America/New_York"
+
+gW = "Horario (hora de Nueva York)"
+wsH = input.int(3, "Inicio de la ventana (hora)", minval=0, maxval=23, group=gW)
+wsM = input.int(0, "Inicio de la ventana (minuto)", minval=0, maxval=59, group=gW)
+weH = input.int(11, "Fin de la ventana (hora)", minval=0, maxval=23, group=gW)
+weM = input.int(30, "Fin de la ventana (minuto)", minval=0, maxval=59, group=gW)
+clH = input.int(12, "Cierre forzado (hora)", minval=0, maxval=23, group=gW)
+clM = input.int(0, "Cierre forzado (minuto)", minval=0, maxval=59, group=gW)
+
+gR = "Reglas"
+pivN    = input.int(2, "Velas a cada lado para un swing", minval=1, maxval=5, group=gR)
+maxMss  = input.int(30, "Velas máximas entre barrida y MSS", minval=5, group=gR)
+maxWait = input.int(60, "Velas máximas para el retroceso", minval=5, group=gR)
+bodyPct = input.float(0.6, "Cuerpo mínimo del MSS (fracción del rango)", minval=0.1, maxval=1, step=0.05, group=gR)
+bodyAtr = input.float(1.0, "Cuerpo mínimo del MSS (en ATR)", minval=0.1, step=0.1, group=gR)
+buf     = input.float(2.0, "Margen del SL más allá de la mecha (pts)", minval=0, group=gR)
+minRisk = input.float(5.0, "Riesgo mínimo (pts)", minval=0.25, group=gR)
+maxRisk = input.float(80.0, "Riesgo máximo (pts)", minval=1, group=gR)
+minRR   = input.float(1.0, "R:R mínimo del objetivo", minval=0.1, step=0.1, group=gR)
+useFilt = input.bool(false, "Cancelar si el retroceso trae 3 velas fuertes seguidas", group=gR)
+
+gS = "Visual y estadísticas"
+qty       = input.float(1, "Contratos", minval=1, group=gS)
+ptValue   = input.float(2.0, "Valor del punto por contrato ($)", minval=0.01, tooltip="MNQ = 2, NQ = 20", group=gS)
+comm      = input.float(1.24, "Comisión por contrato ($)", minval=0, group=gS)
+showStats = input.bool(true, "Mostrar tabla", group=gS)
+extBars   = input.int(24, "Extender niveles (velas)", minval=1, group=gS)
+cUp   = input.color(color.new(#089981, 0), "Compra", group=gS)
+cDown = input.color(color.new(#f23645, 0), "Venta", group=gS)
+
+type Side
+    int dir
+    int stage = 0
+    int t = na
+    float ext = na
+    float struc = na
+    int mss = na
+    float edge = na
+    float tgt = na
+    int run = 0
+
+tmin   = hour(time, tz) * 60 + minute(time, tz)
+wStart = wsH * 60 + wsM
+wEnd   = weH * 60 + weM
+cMin   = clH * 60 + clM
+inWin  = tmin >= wStart and tmin < wEnd
+newDay = barstate.isfirst or dayofmonth(time, tz) != dayofmonth(time[1], tz)
+atr    = ta.sma(ta.tr(true), 14)
+body   = close - open
+rng    = high - low
+
+// swings confirmados pivN velas después
+ph = ta.pivothigh(high, pivN, pivN)
+pl = ta.pivotlow(low, pivN, pivN)
+var float lastSH = na
+var float lastSL = na
+if not na(ph)
+    lastSH := ph
+if not na(pl)
+    lastSL := pl
+
+var Side sell = Side.new(dir=-1)
+var Side buy = Side.new(dir=1)
+var bool tradedToday = false
+var bool inTrade = false
+var int tDir = 0
+var float tEnt = na
+var float tStop = na
+var float tTp = na
+var float tRisk = na
+var float tRR = na
+var int tBar = na
+var int wins = 0
+var int losses = 0
+var int closes = 0
+var float sumR = 0.0
+var float sumUsd = 0.0
+
+method reset(Side s) =>
+    s.stage := 0
+    s.t := na
+    s.ext := na
+    s.struc := na
+    s.mss := na
+    s.edge := na
+    s.tgt := na
+    s.run := 0
+
+if newDay
+    sell.reset()
+    buy.reset()
+    tradedToday := false
+
+// Un paso por vela para un lado. Devuelve [entra, borde, stop, rr]
+method step(Side s, bool active) =>
+    bool enter = false
+    float eEdge = na
+    float eStop = na
+    float eRR = na
+    bool mssSig = false
+    d = s.dir
+    if active and not na(lastSH) and not na(lastSL)
+        if s.stage == 0
+            if inWin
+                lvl = d == -1 ? lastSH : lastSL
+                swept = d == -1 ? (high > lvl and close < lvl) : (low < lvl and close > lvl)
+                if swept
+                    s.stage := 1
+                    s.t := bar_index
+                    s.ext := d == -1 ? high : low
+                    s.struc := d == -1 ? lastSL : lastSH
+                    label.new(bar_index, d == -1 ? high : low, "barrida", style=d == -1 ? label.style_label_down : label.style_label_up, color=color.new(color.gray, 30), textcolor=color.white, size=size.tiny)
+        else if s.stage == 1
+            s.ext := d == -1 ? math.max(s.ext, high) : math.min(s.ext, low)
+            if bar_index - s.t > maxMss
+                s.reset()
+            else
+                strong = math.abs(body) >= bodyPct * rng and math.abs(body) >= bodyAtr * atr and body * d > 0
+                if strong and (d == -1 ? close < s.struc : close > s.struc)
+                    float poc = na
+                    span = math.min(bar_index - s.t - 2, 60)
+                    if span >= 0
+                        for k = 0 to span
+                            if na(poc)
+                                if d == -1 and high[k] < low[k + 2]
+                                    poc := high[k]
+                                if d == 1 and low[k] > high[k + 2]
+                                    poc := low[k]
+                    if na(poc)
+                        s.reset()
+                    else
+                        s.stage := 2
+                        s.mss := bar_index
+                        s.edge := poc
+                        s.tgt := d == -1 ? low : high
+                        s.run := 0
+                        mssSig := true
+                        label.new(bar_index, d == -1 ? low : high, "MSS", style=d == -1 ? label.style_label_up : label.style_label_down, color=color.new(d == -1 ? cDown : cUp, 30), textcolor=color.white, size=size.tiny)
+                        line.new(bar_index, poc, bar_index + extBars, poc, color=color.new(d == -1 ? cDown : cUp, 20), style=line.style_dotted, width=2)
+        else if s.stage == 2
+            if bar_index - s.mss > maxWait or tmin >= wEnd
+                s.reset()
+            else
+                if d == -1 ? low < s.tgt : high > s.tgt
+                    s.tgt := d == -1 ? low : high
+                cancel = false
+                if useFilt
+                    sb = body * d < 0 and math.abs(body) >= 0.5 * atr
+                    s.run := sb ? s.run + 1 : 0
+                    cancel := s.run >= 3
+                if cancel or (d == -1 ? high >= s.ext : low <= s.ext)
+                    s.reset()
+                else if d == -1 ? high >= s.edge : low <= s.edge
+                    stp = d == -1 ? s.ext + buf : s.ext - buf
+                    risk = math.abs(stp - s.edge)
+                    rr = risk > 0 ? math.abs(s.edge - s.tgt) / risk : 0.0
+                    if risk >= minRisk and risk <= maxRisk and rr >= minRR
+                        enter := true
+                        eEdge := s.edge
+                        eStop := stp
+                        eRR := rr
+                    s.reset()
+    [enter, eEdge, eStop, eRR, mssSig]
+
+canLook = not tradedToday and not inTrade
+[eS, edgeS, stopS, rrS, mS] = sell.step(canLook)
+[eB, edgeB, stopB, rrB, mB] = buy.step(canLook)
+
+if mS
+    alert("SMC NQ: MSS bajista. Coloca VENTA límite en " + str.tostring(sell.edge, format.mintick) + " · SL " + str.tostring(sell.ext + buf, format.mintick) + " · TP en el nuevo mínimo (" + str.tostring(sell.tgt, format.mintick) + " por ahora)", alert.freq_once_per_bar)
+if mB
+    alert("SMC NQ: MSS alcista. Coloca COMPRA límite en " + str.tostring(buy.edge, format.mintick) + " · SL " + str.tostring(buy.ext - buf, format.mintick) + " · TP en el nuevo máximo (" + str.tostring(buy.tgt, format.mintick) + " por ahora)", alert.freq_once_per_bar)
+
+buySig = false
+sellSig = false
+if canLook and (eS or eB)
+    tDir := eS ? -1 : 1
+    tEnt := eS ? edgeS : edgeB
+    tStop := eS ? stopS : stopB
+    tRR := eS ? rrS : rrB
+    tRisk := math.abs(tStop - tEnt)
+    tTp := tEnt + tDir * tRR * tRisk
+    tBar := bar_index
+    inTrade := true
+    tradedToday := true
+    sellSig := tDir == -1
+    buySig := tDir == 1
+    col = tDir == 1 ? cUp : cDown
+    label.new(bar_index, tEnt, (tDir == 1 ? "COMPRA @ " : "VENTA @ ") + str.tostring(tEnt, format.mintick) + " · 1:" + str.tostring(tRR, "#.##"), style=tDir == 1 ? label.style_label_up : label.style_label_down, color=col, textcolor=color.white, size=size.small)
+    box.new(bar_index, math.max(tEnt, tTp), bar_index + extBars, math.min(tEnt, tTp), border_color=na, bgcolor=color.new(#089981, 80))
+    box.new(bar_index, math.max(tEnt, tStop), bar_index + extBars, math.min(tEnt, tStop), border_color=na, bgcolor=color.new(#f23645, 80))
+    line.new(bar_index, tTp, bar_index + extBars, tTp, color=#089981, style=line.style_dashed)
+    line.new(bar_index, tStop, bar_index + extBars, tStop, color=#f23645, style=line.style_dashed)
+
+// Gestión: en la vela de entrada solo cuenta el SL; después SL antes que TP; cierre 12:00 ET
+winSig = false
+lossSig = false
+closeSig = false
+if inTrade
+    float r = na
+    if bar_index == tBar
+        if tDir == -1 ? high >= tStop : low <= tStop
+            r := -1.0
+            lossSig := true
+    else if tmin >= cMin or newDay
+        r := (open - tEnt) * tDir / tRisk
+        closeSig := true
+    else if tDir == -1 ? high >= tStop : low <= tStop
+        r := -1.0
+        lossSig := true
+    else if tDir == -1 ? low <= tTp : high >= tTp
+        r := tRR
+        winSig := true
+    if not na(r)
+        inTrade := false
+        sumR += r
+        sumUsd += r * tRisk * ptValue * qty - comm * qty
+        if winSig
+            wins += 1
+        else if lossSig
+            losses += 1
+        else
+            closes += 1
+        label.new(bar_index, close, winSig ? "✔ GANADA +" + str.tostring(r, "#.##") + "R" : lossSig ? "✖ PERDIDA -1R" : "CIERRE 12:00 " + str.tostring(r, "#.##") + "R", style=label.style_label_left, color=winSig ? cUp : lossSig ? cDown : color.orange, textcolor=color.white, size=size.tiny)
+
+plotshape(buySig, "Entrada compra", shape.triangleup, location.belowbar, cUp, size=size.small, text="BUY")
+plotshape(sellSig, "Entrada venta", shape.triangledown, location.abovebar, cDown, size=size.small, text="SELL")
+bgcolor(inWin ? color.new(color.blue, 96) : na, title="Ventana de entradas")
+
+var table stats = table.new(position.top_right, 2, 6, bgcolor=color.new(#1e222d, 0), border_width=1, border_color=color.new(color.gray, 60))
+if showStats and barstate.islast
+    n = wins + losses + closes
+    wr = wins + losses > 0 ? float(wins) / float(wins + losses) * 100 : 0.0
+    table.cell(stats, 0, 0, "Operaciones", text_color=color.white, text_halign=text.align_left)
+    table.cell(stats, 1, 0, str.tostring(n), text_color=color.white)
+    table.cell(stats, 0, 1, "Ganadas / perdidas", text_color=color.white, text_halign=text.align_left)
+    table.cell(stats, 1, 1, str.tostring(wins) + " / " + str.tostring(losses), text_color=color.white)
+    table.cell(stats, 0, 2, "Cierres 12:00", text_color=color.white, text_halign=text.align_left)
+    table.cell(stats, 1, 2, str.tostring(closes), text_color=color.gray)
+    table.cell(stats, 0, 3, "Acierto", text_color=color.white, text_halign=text.align_left)
+    table.cell(stats, 1, 3, str.tostring(wr, "#.0") + "%", text_color=wr >= 40 ? #089981 : #f23645)
+    table.cell(stats, 0, 4, "Total R", text_color=color.white, text_halign=text.align_left)
+    table.cell(stats, 1, 4, str.tostring(sumR, "#.##"), text_color=sumR >= 0 ? #089981 : #f23645)
+    table.cell(stats, 0, 5, "Neto $", text_color=color.white, text_halign=text.align_left)
+    table.cell(stats, 1, 5, str.tostring(sumUsd, "#,###.##"), text_color=sumUsd >= 0 ? #089981 : #f23645)
+
+if buySig or sellSig
+    alert("SMC NQ: " + (buySig ? "COMPRA" : "VENTA") + " límite en " + str.tostring(tEnt, format.mintick) + " · SL " + str.tostring(tStop, format.mintick) + " · TP " + str.tostring(tTp, format.mintick) + " (1:" + str.tostring(tRR, "#.##") + ")", alert.freq_once_per_bar)
+if winSig or lossSig or closeSig
+    alert("SMC NQ: " + (winSig ? "GANADA" : lossSig ? "PERDIDA" : "CIERRE 12:00 ET"), alert.freq_once_per_bar)
+alertcondition(mS or mB, "MSS: colocar orden", "SMC NQ: MSS confirmado, colocar la orden límite en el FVG")
+alertcondition(buySig or sellSig, "Entrada SMC", "SMC NQ: entrada en el FVG")
+alertcondition(closeSig, "Cierre 12:00 ET", "SMC NQ: cerrar la operación abierta")
