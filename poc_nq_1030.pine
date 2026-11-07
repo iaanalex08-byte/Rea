@@ -40,6 +40,7 @@ cPartial    = input.color(color.orange, "Color del parcial", group=gK)
 
 gC = "Colores"
 showTrendBg = input.bool(false, "Sombrear tramo de tendencia", group=gC)
+showDirArrow = input.bool(true, "Flecha de dirección al inicio del perfil (10:30)", group=gC)
 cUp   = input.color(color.new(#089981, 0), "Compra", group=gC)
 cDown = input.color(color.new(#f23645, 0), "Venta", group=gC)
 
@@ -119,9 +120,12 @@ if newDay
 if tmin < pStart
     trendClose := close
 
+// Flecha a las 10:30: dirección del día (cierre antes del perfil vs apertura de medianoche)
+dirSig = 0
 if tmin >= pStart and tmin < pEnd
     if na(startIdx)
         startIdx := bar_index
+        dirSig := trendClose > trendOpen ? 1 : trendClose < trendOpen ? -1 : 0
     pHigh := na(pHigh) ? high : math.max(pHigh, high)
     pLow := na(pLow) ? low : math.min(pLow, low)
     array.push(bH, high)
@@ -256,6 +260,8 @@ if stage == 2 and not resolved and not na(entryBar) and bar_index > entryBar
         label.new(bar_index, pocLvl, "◐ PARCIAL + BE +" + str.tostring(tp1Pts * fPart, "#.##") + " pts", style=dirTrend == 1 ? label.style_label_up : label.style_label_down, color=cPartial, textcolor=color.white, size=size.small)
 plotshape(showBrk and brkSig and dirTrend == -1, "Ruptura bajista", shape.xcross, location.abovebar, color.new(cDown, 30), size=size.tiny, text="RUPT")
 plotshape(showBrk and brkSig and dirTrend == 1, "Ruptura alcista", shape.xcross, location.belowbar, color.new(cUp, 30), size=size.tiny, text="RUPT")
+plotshape(showDirArrow and dirSig == 1, "Dirección del día: compra", shape.arrowup, location.belowbar, cUp, size=size.large, text="COMPRA HOY")
+plotshape(showDirArrow and dirSig == -1, "Dirección del día: venta", shape.arrowdown, location.abovebar, cDown, size=size.large, text="VENTA HOY")
 plotshape(buySig, "Entrada compra", shape.triangleup, location.belowbar, cUp, size=size.small, text="BUY")
 plotshape(sellSig, "Entrada venta", shape.triangledown, location.abovebar, cDown, size=size.small, text="SELL")
 plotchar(showPartial and partSig ? partLvl : na, "Parcial", "◆", location.absolute, cPartial, size=size.small, text="PARCIAL")
@@ -299,6 +305,8 @@ if showStats and barstate.islast
     table.cell(stats, 0, 7, "Neto ($)", text_color=color.white, text_halign=text.align_left)
     table.cell(stats, 1, 7, str.tostring(netQty, "#.##"), text_color=netQty >= 0 ? cGreen : cRed)
 
+alertcondition(dirSig == 1, "Dirección del día: COMPRA", "10:30: hoy solo se buscan COMPRAS en el POC")
+alertcondition(dirSig == -1, "Dirección del día: VENTA", "10:30: hoy solo se buscan VENTAS en el POC")
 alertcondition(brkSig, "Ruptura del POC", "Ruptura del POC: esperar retroceso")
 alertcondition(buySig, "Entrada COMPRA en POC", "Retroceso al POC tras ruptura alcista: COMPRA")
 alertcondition(sellSig, "Entrada VENTA en POC", "Retroceso al POC tras ruptura bajista: VENTA")
