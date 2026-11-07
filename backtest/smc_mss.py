@@ -120,21 +120,22 @@ def run(df, start, poi_mode, filt, tp_mode, min_rr):
             continue
         side, ent, stop, risk, rr, i0 = trade["side"], trade["ent"], trade["stop"], trade["risk"], trade["rr"], trade["i"]
         tp = ent + side * rr * risk
-        res = None
+        res, how = None, "SL"
         if (H[i0] >= stop) if side == -1 else (L[i0] <= stop):
             res = -1.0
         k = i0 + 1
         while res is None and k < len(C) and dates[k] == d:
             if tm[k] >= 720:
-                res = (O[k] - ent) * side / risk; break
+                res, how = (O[k] - ent) * side / risk, "CIERRE"; break
             if (H[k] >= stop) if side == -1 else (L[k] <= stop):
                 res = -1.0; break
             if (L[k] <= tp) if side == -1 else (H[k] >= tp):
-                res = rr; break
+                res, how = rr, "TP"; break
             k += 1
         if res is None:
-            res = (C[k - 1] - ent) * side / risk
-        out.append({"date": d, "side": side, "risk": risk, "rr": rr, "R": res - 0.5 / risk})
+            res, how = (C[k - 1] - ent) * side / risk, "CIERRE"
+        out.append({"date": d, "side": side, "entry_time": df.index[i0], "exit_time": df.index[min(k, len(C) - 1)],
+                    "risk": risk, "rr": rr, "how": how, "R": res - 0.5 / risk})
     return pd.DataFrame(out)
 
 
