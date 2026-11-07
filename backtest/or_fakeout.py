@@ -46,6 +46,14 @@ def run(df, orm, mode, tp, filt, df_cdmx_open):
                     trade = (-1, C[i], H[i:i + 1].max() + BUF, i, lo)
                 elif L[i] < lo and C[i] > lo:
                     trade = (1, C[i], L[i] - BUF, i, hi)
+            elif mode == "falsa al revés":
+                # misma señal, pero se entra A FAVOR de la ruptura; el riesgo es la misma distancia, del otro lado
+                if H[i] > hi and C[i] < hi:
+                    d_ = H[i] + BUF - C[i]
+                    trade = (1, C[i], C[i] - d_, i, None)
+                elif L[i] < lo and C[i] > lo:
+                    d_ = C[i] - (L[i] - BUF)
+                    trade = (-1, C[i], C[i] + d_, i, None)
             else:
                 if C[i] > hi:
                     trade = (1, C[i], lo - BUF, i, None)
@@ -83,6 +91,9 @@ def run(df, orm, mode, tp, filt, df_cdmx_open):
     return pd.DataFrame(out)
 
 
+MODES = sys.argv[1:] or ["falsa", "ruptura", "falsa al revés"]
+
+
 def main():
     nq1 = load("backtest/datos_NQ")
     cd = nq1.index.tz_convert("Etc/GMT+6")
@@ -93,7 +104,7 @@ def main():
     for tf in (1, 5):
         df = resample(nq1, tf)
         for orm in (15, 30):
-            for mode in ("falsa", "ruptura"):
+            for mode in MODES:
                 for tp in (("otro lado", "1", "1.5", "2") if mode == "falsa" else ("1", "1.5", "2")):
                     for filt in (False, True):
                         t = run(df, orm, mode, tp, filt, o0)
@@ -107,7 +118,7 @@ def main():
                                      "R/op verano": round(t.R[t.verano].mean(), 3), "R/op invierno": round(t.R[~t.verano].mean(), 3)})
         print(f"tf {tf} listo", file=sys.stderr)
     T = pd.DataFrame(rows)
-    T.to_csv("backtest/resultados/or_fakeout.csv", index=False)
+    T.to_csv("backtest/resultados/or_fakeout_" + "_".join(m.replace(" ", "") for m in MODES) + ".csv", index=False)
     pd.set_option("display.width", 250)
     print(T.to_string(index=False))
     print("\nRobustas (2024-25 y 2026 > 0):", ((T.R_IS > 0) & (T.R_OOS > 0)).sum(), "de", len(T))
