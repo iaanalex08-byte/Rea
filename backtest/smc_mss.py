@@ -33,7 +33,7 @@ def swings(H, L, n=2):
     return sh, sl
 
 
-def run(df, start, poi_mode, filt, tp_mode, min_rr):
+def run(df, start, poi_mode, filt, tp_mode, min_rr, entry_from=0):
     O, H, L, C = (df[c].to_numpy() for c in ("open", "high", "low", "close"))
     tm = (df.index.hour * 60 + df.index.minute).to_numpy()
     dates = df.index.date
@@ -106,6 +106,9 @@ def run(df, start, poi_mode, filt, tp_mode, min_rr):
                             setup = None; continue
                     if (H[i] >= s["ext"]) if side == -1 else (L[i] <= s["ext"]):
                         setup = None; continue
+                    if ((H[i] >= s["edge"]) if side == -1 else (L[i] <= s["edge"])) and tm[i] < entry_from:
+                        setup = None  # se llenó antes de que llegaras: esa entrada se pierde
+                        continue
                     if (H[i] >= s["edge"]) if side == -1 else (L[i] <= s["edge"]):
                         ent = s["edge"]; stop = s["ext"] + BUF if side == -1 else s["ext"] - BUF
                         risk = (stop - ent) * (-side) * -1 if False else abs(stop - ent)

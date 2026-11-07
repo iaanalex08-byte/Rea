@@ -21,8 +21,9 @@ base["entry"] = pd.to_datetime(base.entry, utc=True); base["exit"] = pd.to_datet
 base["date"] = pd.to_datetime(base.date).dt.date
 nq1 = load("backtest/datos_NQ"); n5 = resample(nq1, 5)
 rows = []
-for h, m in ((3, 0), (6, 0), (7, 0), (8, 0), (8, 30), (9, 0), (9, 30)):
-    s = sm.run(n5, h * 60 + m, "FVG", False, "nuevo extremo", 1.0)
+MODO = sys.argv[1] if len(sys.argv) > 1 else "inicio"  # "inicio": la ventana empieza tarde; "llegada": se vigila desde 3:00 pero solo entras desde esa hora
+for h, m in ((3, 0), (6, 0), (7, 0), (8, 0), (8, 30), (9, 0), (9, 30), (10, 30)):
+    s = sm.run(n5, 180 if MODO == "llegada" else h * 60 + m, "FVG", False, "nuevo extremo", 1.0, entry_from=h * 60 + m if MODO == "llegada" else 0)
     y = pd.to_datetime(s.date).dt.year
     c = []
     for r in s.itertuples():
@@ -43,7 +44,7 @@ for h, m in ((3, 0), (6, 0), (7, 0), (8, 0), (8, 30), (9, 0), (9, 30)):
     D = list(zip(x.u, x.m))
     fr = [LR.fondeada(D, st) for st in range(0, len(D) - 60)]
     first = [f[3] for f in fr if f[3]]
-    rows.append({"SMC desde (ET)": f"{h}:{m:02d}", "CDMX invierno": f"{h - 1}:{m:02d}", "CDMX verano": f"{h - 2}:{m:02d}",
+    rows.append({"desde (ET)": f"{h}:{m:02d}", "CDMX invierno": f"{h - 1}:{m:02d}", "CDMX verano": f"{h - 2}:{m:02d}",
                  "SMC ops": len(s), "SMC acierto": round(100 * (s.R > 0).mean(), 1), "SMC R/op": round(s.R.mean(), 3),
                  "SMC R 24-25": round(s.R[y <= 2025].sum(), 1), "SMC R 2026": round(s.R[y == 2026].sum(), 1),
                  "combo neto $": round(x.u.sum()), "fond 1+ retiro %": round(100 * np.mean([f[1] >= 1 for f in fr]), 1),

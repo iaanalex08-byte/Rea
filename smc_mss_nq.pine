@@ -7,7 +7,7 @@ indicator("SMC NQ: barrida + MSS + FVG", overlay=true, max_boxes_count=500, max_
 //    cierra más allá del último mínimo (máximo) de estructura.
 // 3. POI: el FVG que dejó ese tramo. Entrada límite en su borde cuando el precio regresa.
 // 4. SL: 2 pts más allá de la mecha de la barrida. TP: el nuevo extremo creado, solo si queda a >= 1R.
-// Ventana 3:00-11:30 ET, una operación al día, cierre forzado 12:00 ET.
+// Ventana 3:00-11:30 ET (se vigila de madrugada), entradas solo desde 9:30 ET, una al día, cierre 12:00 ET.
 tz = "America/New_York"
 
 gW = "Horario (hora de Nueva York)"
@@ -15,6 +15,8 @@ wsH = input.int(3, "Inicio de la ventana (hora)", minval=0, maxval=23, group=gW)
 wsM = input.int(0, "Inicio de la ventana (minuto)", minval=0, maxval=59, group=gW)
 weH = input.int(11, "Fin de la ventana (hora)", minval=0, maxval=23, group=gW)
 weM = input.int(30, "Fin de la ventana (minuto)", minval=0, maxval=59, group=gW)
+efH = input.int(9, "Solo entrar desde (hora)", tooltip="Las barridas y MSS se vigilan desde el inicio de la ventana, pero solo se toman entradas desde esta hora. Si el retroceso llega antes, ese setup se pierde.", minval=0, maxval=23, group=gW)
+efM = input.int(30, "Solo entrar desde (minuto)", minval=0, maxval=59, group=gW)
 clH = input.int(12, "Cierre forzado (hora)", minval=0, maxval=23, group=gW)
 clM = input.int(0, "Cierre forzado (minuto)", minval=0, maxval=59, group=gW)
 
@@ -54,6 +56,7 @@ tmin   = hour(time, tz) * 60 + minute(time, tz)
 wStart = wsH * 60 + wsM
 wEnd   = weH * 60 + weM
 cMin   = clH * 60 + clM
+eFrom  = efH * 60 + efM
 inWin  = tmin >= wStart and tmin < wEnd
 newDay = barstate.isfirst or dayofmonth(time, tz) != dayofmonth(time[1], tz)
 atr    = ta.sma(ta.tr(true), 14)
@@ -161,6 +164,8 @@ method step(Side s, bool active) =>
                     cancel := s.run >= 3
                 if cancel or (d == -1 ? high >= s.ext : low <= s.ext)
                     s.reset()
+                else if (d == -1 ? high >= s.edge : low <= s.edge) and tmin < eFrom
+                    s.reset()
                 else if d == -1 ? high >= s.edge : low <= s.edge
                     stp = d == -1 ? s.ext + buf : s.ext - buf
                     risk = math.abs(stp - s.edge)
@@ -238,7 +243,7 @@ plotshape(buySig, "Entrada compra", shape.triangleup, location.belowbar, cUp, si
 plotshape(sellSig, "Entrada venta", shape.triangledown, location.abovebar, cDown, size=size.small, text="SELL")
 bgcolor(inWin ? color.new(color.blue, 96) : na, title="Ventana de entradas")
 
-var table stats = table.new(position.top_right, 2, 6, bgcolor=color.new(#1e222d, 0), border_width=1, border_color=color.new(color.gray, 60))
+var table stats = table.new(position.top_right, 2, 7, bgcolor=color.new(#1e222d, 0), border_width=1, border_color=color.new(color.gray, 60))
 if showStats and barstate.islast
     n = wins + losses + closes
     wr = wins + losses > 0 ? float(wins) / float(wins + losses) * 100 : 0.0
@@ -254,6 +259,9 @@ if showStats and barstate.islast
     table.cell(stats, 1, 4, str.tostring(sumR, "#.##"), text_color=sumR >= 0 ? #089981 : #f23645)
     table.cell(stats, 0, 5, "Neto $", text_color=color.white, text_halign=text.align_left)
     table.cell(stats, 1, 5, str.tostring(sumUsd, "#,###.##"), text_color=sumUsd >= 0 ? #089981 : #f23645)
+    pend = sell.stage == 2 ? "VENTA lím " + str.tostring(sell.edge, format.mintick) + " · SL " + str.tostring(sell.ext + buf, format.mintick) + " · TP " + str.tostring(sell.tgt, format.mintick) : buy.stage == 2 ? "COMPRA lím " + str.tostring(buy.edge, format.mintick) + " · SL " + str.tostring(buy.ext - buf, format.mintick) + " · TP " + str.tostring(buy.tgt, format.mintick) : inTrade ? "Operación abierta" : "Ninguno"
+    table.cell(stats, 0, 6, "Setup pendiente", text_color=color.white, text_halign=text.align_left)
+    table.cell(stats, 1, 6, pend, text_color=color.yellow)
 
 if buySig or sellSig
     alert("SMC NQ: " + (buySig ? "COMPRA" : "VENTA") + " límite en " + str.tostring(tEnt, format.mintick) + " · SL " + str.tostring(tStop, format.mintick) + " · TP " + str.tostring(tTp, format.mintick) + " (1:" + str.tostring(tRR, "#.##") + ")", alert.freq_once_per_bar)
