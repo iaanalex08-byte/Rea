@@ -71,6 +71,9 @@ def parse_args(argv=None):
                    help="Minutos máximos entre la ruptura y el retroceso (si se pasa, no se opera ese día)")
     p.add_argument("--min-trend", type=float, default=0.0, help="Tendencia previa mínima en pts")
     p.add_argument("--min-range", type=float, default=0.0, help="Rango mínimo del perfil en pts")
+    p.add_argument("--contra", choices=["no", "dir", "fade"], default="no",
+                   help="Contra tendencia: 'dir' invierte la dirección del día (ruptura y entrada al lado opuesto); "
+                        "'fade' usa la ruptura normal pero entra al revés en el retroceso")
     p.add_argument("--confirm", action="store_true",
                    help="Tras tocar el POC, esperar una vela que cierre a favor y entrar al cierre (SL/TP desde ahí)")
     p.add_argument("--max-prev-range", type=float, default=None,
@@ -258,6 +261,7 @@ def run(df, a):
             startIdx = sigBar = brkBar = entryBar = None
             pocLvl = slLvl = tpLvl = partLvl = None
             dirTrend = 0
+            tradeDir = 0
             stage = 0
             touched = False
             done = False
@@ -294,12 +298,17 @@ def run(df, a):
             if trendClose != trendOpen and abs(trendClose - trendOpen) >= a.min_trend \
                     and (pHigh - pLow) >= a.min_range:
                 isUp = trendClose > trendOpen
+                contra = getattr(a, "contra", "no")
+                if contra == "dir":
+                    isUp = not isUp
                 dirTrend = 1 if isUp else -1
+                tradeDir = -dirTrend if contra == "fade" else dirTrend
+                tUp = tradeDir == 1
                 pocLvl = poc
                 sigBar = i
-                slLvl = round_tick(poc - a.sl if isUp else poc + a.sl, tick)
-                tpLvl = round_tick(poc + tp2Pts if isUp else poc - tp2Pts, tick)
-                partLvl = round_tick(poc + tp1Pts if isUp else poc - tp1Pts, tick)
+                slLvl = round_tick(poc - a.sl if tUp else poc + a.sl, tick)
+                tpLvl = round_tick(poc + tp2Pts if tUp else poc - tp2Pts, tick)
+                partLvl = round_tick(poc + tp1Pts if tUp else poc - tp1Pts, tick)
                 day["status"] = "sin ruptura"
 
         # Ruptura
@@ -348,7 +357,7 @@ def run(df, a):
             if retest:
                 stage = 2
                 entryBar = i
-                cur = {"date": dates[i], "dir": "COMPRA" if dirTrend == 1 else "VENTA",
+                cur = {"date": dates[i], "dir": "COMPRA" if tradeDir == 1 else "VENTA",
                        "entry_time": idx[i], "entry": pocLvl, "sl": slLvl, "tp1": partLvl,
                        "tp2": tpLvl, "result": None, "exit_time": None, "banked": 0.0,
                        "partial": False, "pts": 0.0,
@@ -359,7 +368,7 @@ def run(df, a):
 
         # Gestión
         if stage == 2 and not resolved and i > entryBar:
-            up = dirTrend == 1
+            up = (tradeDir if tradeDir else dirTrend) == 1
             slHit = L[i] <= slLvl if up else H[i] >= slLvl
             tpHit = H[i] >= tpLvl if up else L[i] <= tpLvl
             beLvl = slLvl if a.no_be else pocLvl
