@@ -114,9 +114,9 @@ def run(df, start, poi_mode, filt, tp_mode, min_rr, entry_from=0):
                         risk = (stop - ent) * (-side) * -1 if False else abs(stop - ent)
                         tgt_dist = abs(ent - s["low"])
                         rr = tgt_dist / risk if risk else 0
-                        if MIN_RISK <= risk <= MAX_RISK and (tp_mode != "nuevo extremo" or rr >= min_rr):
+                        if MIN_RISK <= risk <= MAX_RISK and (not (tp_mode == "nuevo extremo" or tp_mode.startswith("max ")) or rr >= min_rr):
                             trade = trade if trade and trade["i"] <= i else {"i": i, "side": side, "ent": ent, "stop": stop,
-                                                                           "risk": risk, "rr": rr if tp_mode == "nuevo extremo" else float(tp_mode)}
+                                                                           "risk": risk, "rr": rr if tp_mode == "nuevo extremo" else (max(rr, float(tp_mode[4:])) if tp_mode.startswith("max ") else float(tp_mode))}
                         setup = None
                         break
         if trade is None:

@@ -6,7 +6,7 @@ indicator("SMC NQ: barrida + MSS + FVG", overlay=true, max_boxes_count=500, max_
 // 2. MSS: en las 30 velas siguientes, una vela de cuerpo fuerte (>= 60 % de su rango y >= 1 ATR)
 //    cierra más allá del último mínimo (máximo) de estructura.
 // 3. POI: el FVG que dejó ese tramo. Entrada límite en su borde cuando el precio regresa.
-// 4. SL: 2 pts más allá de la mecha de la barrida. TP: el nuevo extremo creado, solo si queda a >= 1R.
+// 4. SL: 2 pts más allá de la mecha de la barrida. TP: el nuevo extremo creado, solo si queda a >= 1.5R.
 // Ventana 3:00-11:30 ET (se vigila de madrugada), entradas solo desde 9:30 ET, una al día, cierre 12:00 ET.
 tz = "America/New_York"
 
@@ -29,7 +29,7 @@ bodyAtr = input.float(1.0, "Cuerpo mínimo del MSS (en ATR)", minval=0.1, step=0
 buf     = input.float(2.0, "Margen del SL más allá de la mecha (pts)", minval=0, group=gR)
 minRisk = input.float(5.0, "Riesgo mínimo (pts)", minval=0.25, group=gR)
 maxRisk = input.float(80.0, "Riesgo máximo (pts)", minval=1, group=gR)
-minRR   = input.float(1.0, "R:R mínimo del objetivo", minval=0.1, step=0.1, group=gR)
+minRR   = input.float(1.5, "R:R mínimo del objetivo", minval=0.1, step=0.1, group=gR)
 useFilt = input.bool(false, "Cancelar si el retroceso trae 3 velas fuertes seguidas", group=gR)
 
 gS = "Visual y estadísticas"
