@@ -2,7 +2,8 @@
 indicator("POC NQ 8:30 + 10:30", overlay=true, max_boxes_count=500, max_lines_count=500, max_labels_count=500)
 
 // Dos operaciones al día en NQ / MNQ, velas de 3 minutos, hora CDMX fija (UTC-6, sin horario de verano).
-// Sesión 1: perfil 8:30-8:42, SL 46, 1:1.25.  Sesión 2: perfil 10:30-10:42, SL 66.5, 1:1.
+// Sesión 1: perfil 8:30-8:42, dirección CONTRA LONDRES (00:00 -> 05:59), SL 66.5, 1:1.25.
+// Sesión 2: perfil 10:30-10:42, dirección con la TENDENCIA (00:00 -> 10:30), SL 66.5, 1:1.
 // Regla: si la de 8:30 sigue abierta cuando sale la entrada de 10:30, esa entrada se omite.
 // Lo que no toque SL ni TP se cierra a las 14:30.
 tz = "UTC-6"
@@ -12,7 +13,8 @@ on1 = input.bool(true, "Activar sesión 1", group=g1)
 h1  = input.int(8, "Hora inicio del perfil", minval=0, maxval=23, group=g1)
 m1  = input.int(30, "Minuto inicio del perfil", minval=0, maxval=59, group=g1)
 d1  = input.int(12, "Duración del perfil (min)", minval=1, maxval=120, group=g1)
-sl1 = input.float(46.0, "Stop loss (puntos)", minval=0.25, group=g1)
+md1 = input.string("Contra Londres", "Dirección", options=["Tendencia", "Contra Londres"], tooltip="Tendencia: precio al inicio del perfil vs apertura de 00:00. Contra Londres: al revés del movimiento 00:00 -> 05:59.", group=g1)
+sl1 = input.float(66.5, "Stop loss (puntos)", minval=0.25, group=g1)
 rr1 = input.float(1.25, "Ratio R:R", minval=0.1, step=0.05, group=g1)
 q1  = input.float(2, "Contratos", minval=1, group=g1)
 
@@ -21,11 +23,13 @@ on2 = input.bool(true, "Activar sesión 2", group=g2)
 h2  = input.int(10, "Hora inicio del perfil", minval=0, maxval=23, group=g2)
 m2  = input.int(30, "Minuto inicio del perfil", minval=0, maxval=59, group=g2)
 d2  = input.int(12, "Duración del perfil (min)", minval=1, maxval=120, group=g2)
+md2 = input.string("Tendencia", "Dirección", options=["Tendencia", "Contra Londres"], group=g2)
 sl2 = input.float(66.5, "Stop loss (puntos)", minval=0.25, group=g2)
 rr2 = input.float(1.0, "Ratio R:R", minval=0.1, step=0.05, group=g2)
 q2  = input.float(2, "Contratos", minval=1, group=g2)
 
 gH = "Horarios comunes (CDMX)"
+lonEnd = input.int(6, "Fin de Londres (hora, exclusiva)", minval=1, maxval=12, tooltip="Londres = 00:00 hasta esta hora. Se usa el cierre de la última vela antes de esta hora.", group=gH)
 wEH = input.int(13, "Última entrada: hora", minval=0, maxval=23, group=gH)
 wEM = input.int(30, "Última entrada: minuto", minval=0, maxval=59, group=gH)
 cH  = input.int(14, "Cierre forzado: hora", minval=0, maxval=23, group=gH)
@@ -53,6 +57,7 @@ cS2   = input.color(color.new(color.yellow, 0), "Color POC sesión 2", group=gV)
 type Ses
     string name
     bool enabled
+    bool contra
     int pStart
     int pEnd
     float sl
@@ -109,7 +114,7 @@ method book(Ses s, float pts) =>
     s.netUsd += pts * ptValue * s.qty - comm * s.qty
 
 // Un paso por vela. Devuelve [dirección marcada, ruptura, compra, venta, ganada, perdida, cierre 14:30, omitida]
-method step(Ses s, float trendOpen, int tmin, int wEnd, int cMin, bool blocked) =>
+method step(Ses s, float trendOpen, int lonDir, int tmin, int wEnd, int cMin, bool blocked) =>
     int dirSig = 0
     bool brkSig = false
     bool buySig = false
@@ -124,7 +129,9 @@ method step(Ses s, float trendOpen, int tmin, int wEnd, int cMin, bool blocked) 
         if tmin >= s.pStart and tmin < s.pEnd
             if na(s.startIdx)
                 s.startIdx := bar_index
-                dirSig := s.trendClose > trendOpen ? 1 : s.trendClose < trendOpen ? -1 : 0
+                dirSig := s.contra ? lonDir : (s.trendClose > trendOpen ? 1 : s.trendClose < trendOpen ? -1 : 0)
+                if dirSig != 0
+                    label.new(bar_index, dirSig == 1 ? low : high, s.name + (s.contra ? " contra Londres: " : " tendencia: ") + (dirSig == 1 ? "COMPRA" : "VENTA"), style=dirSig == 1 ? label.style_label_up : label.style_label_down, color=color.new(dirSig == 1 ? cUp : cDown, 40), textcolor=color.white, size=size.small, yloc=dirSig == 1 ? yloc.belowbar : yloc.abovebar)
             s.pHigh := na(s.pHigh) ? high : math.max(s.pHigh, high)
             s.pLow := na(s.pLow) ? low : math.min(s.pLow, low)
             array.push(s.bH, high)
@@ -149,8 +156,9 @@ method step(Ses s, float trendOpen, int tmin, int wEnd, int cMin, bool blocked) 
                 w = maxV > 0 ? math.max(1, int(math.round(array.get(vols, r) / maxV * histW))) : 1
                 box.new(s.startIdx, s.pLow + (r + 1) * rs, s.startIdx + w, s.pLow + r * rs, border_color=na, bgcolor=(r == pocRow) ? color.new(s.col, 35) : color.new(color.gray, 75))
             line.new(s.startIdx, poc, bar_index + extBars, poc, color=s.col, width=2)
-            if s.trendClose != trendOpen
-                isUp = s.trendClose > trendOpen
+            dDay = s.contra ? lonDir : (s.trendClose > trendOpen ? 1 : s.trendClose < trendOpen ? -1 : 0)
+            if dDay != 0
+                isUp = dDay > 0
                 s.dirTrend := isUp ? 1 : -1
                 s.poc := poc
                 s.sigBar := bar_index
@@ -213,9 +221,10 @@ method step(Ses s, float trendOpen, int tmin, int wEnd, int cMin, bool blocked) 
     [dirSig, brkSig, buySig, sellSig, winSig, lossSig, closeSig, skipSig]
 
 // ---- Estado ----
-var Ses s1 = Ses.new(name="8:30", enabled=on1, pStart=h1 * 60 + m1, pEnd=h1 * 60 + m1 + d1, sl=sl1, rr=rr1, qty=q1, col=cS1, bH=array.new_float(), bL=array.new_float(), bV=array.new_float())
-var Ses s2 = Ses.new(name="10:30", enabled=on2, pStart=h2 * 60 + m2, pEnd=h2 * 60 + m2 + d2, sl=sl2, rr=rr2, qty=q2, col=cS2, bH=array.new_float(), bL=array.new_float(), bV=array.new_float())
+var Ses s1 = Ses.new(name="8:30", enabled=on1, contra=md1 == "Contra Londres", pStart=h1 * 60 + m1, pEnd=h1 * 60 + m1 + d1, sl=sl1, rr=rr1, qty=q1, col=cS1, bH=array.new_float(), bL=array.new_float(), bV=array.new_float())
+var Ses s2 = Ses.new(name="10:30", enabled=on2, contra=md2 == "Contra Londres", pStart=h2 * 60 + m2, pEnd=h2 * 60 + m2 + d2, sl=sl2, rr=rr2, qty=q2, col=cS2, bH=array.new_float(), bL=array.new_float(), bV=array.new_float())
 var float trendOpen = na
+var float lonClose = na
 
 tmin   = hour(time, tz) * 60 + minute(time, tz)
 wEnd   = wEH * 60 + wEM
@@ -224,12 +233,17 @@ newDay = barstate.isfirst or dayofmonth(time, tz) != dayofmonth(time[1], tz)
 
 if newDay
     trendOpen := open
+    lonClose := na
     s1.reset()
     s2.reset()
 
-[dir1, brk1, buy1, sell1, win1, loss1, cls1, skip1] = s1.step(trendOpen, tmin, wEnd, cMin, false)
+if tmin < lonEnd * 60
+    lonClose := close
+lonDir = na(lonClose) or na(trendOpen) ? 0 : lonClose > trendOpen ? -1 : lonClose < trendOpen ? 1 : 0
+
+[dir1, brk1, buy1, sell1, win1, loss1, cls1, skip1] = s1.step(trendOpen, lonDir, tmin, wEnd, cMin, false)
 blocked2 = noOverlap and s1.stage == 2 and not s1.resolved
-[dir2, brk2, buy2, sell2, win2, loss2, cls2, skip2] = s2.step(trendOpen, tmin, wEnd, cMin, blocked2)
+[dir2, brk2, buy2, sell2, win2, loss2, cls2, skip2] = s2.step(trendOpen, lonDir, tmin, wEnd, cMin, blocked2)
 
 // ---- Marcas ----
 plotshape(showArrow and dir1 == 1, "8:30 dirección compra", shape.arrowup, location.belowbar, cUp, size=size.normal, text="8:30 COMPRA")
