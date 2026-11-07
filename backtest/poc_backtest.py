@@ -295,9 +295,11 @@ def run(df, a):
             poc = round_tick(pLow + (pocRow + 0.5) * rs, tick)
             day.update(poc=poc, trend="alcista" if trendClose > trendOpen else
                        ("bajista" if trendClose < trendOpen else "plana"))
-            if trendClose != trendOpen and abs(trendClose - trendOpen) >= a.min_trend \
+            dmap = getattr(a, "dir_map", None)  # dirección externa por fecha (+1 / -1 / 0)
+            dext = dmap.get(dates[i], 0) if dmap is not None else None
+            if (dext if dmap is not None else trendClose != trendOpen) and abs(trendClose - trendOpen) >= a.min_trend \
                     and (pHigh - pLow) >= a.min_range:
-                isUp = trendClose > trendOpen
+                isUp = (dext > 0) if dmap is not None else trendClose > trendOpen
                 contra = getattr(a, "contra", "no")
                 if contra == "dir":
                     isUp = not isUp

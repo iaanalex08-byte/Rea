@@ -44,6 +44,7 @@ def trades(c):
                        "--prof-dur", str(c["dur"]), "--win-start", c["ws"], "--win-end", "13:30",
                        "--sl", str(c["sl"]), "--rr", str(c["rr"]), "--single"])
     d, _ = pb.filter_days(bars(c["tf"]), a)
+    a.dir_map = c.get("dmap")
     tr, _ = pb.run(d, a)
     tr = an.excursions(d, tr)
     O, C = d.open.to_numpy(), d.close.to_numpy()
