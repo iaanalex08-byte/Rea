@@ -182,10 +182,17 @@ canLook = not tradedToday and not inTrade
 [eS, edgeS, stopS, rrS, mS] = sell.step(canLook)
 [eB, edgeB, stopB, rrB, mB] = buy.step(canLook)
 
-if mS
+if mS and tmin >= eFrom
     alert("SMC NQ: MSS bajista. Coloca VENTA límite en " + str.tostring(sell.edge, format.mintick) + " · SL " + str.tostring(sell.ext + buf, format.mintick) + " · TP en el nuevo mínimo (" + str.tostring(sell.tgt, format.mintick) + " por ahora)", alert.freq_once_per_bar)
-if mB
+if mB and tmin >= eFrom
     alert("SMC NQ: MSS alcista. Coloca COMPRA límite en " + str.tostring(buy.edge, format.mintick) + " · SL " + str.tostring(buy.ext - buf, format.mintick) + " · TP en el nuevo máximo (" + str.tostring(buy.tgt, format.mintick) + " por ahora)", alert.freq_once_per_bar)
+
+// Al llegar la hora de entrada: aviso del setup que quedó armado en la madrugada
+if tmin >= eFrom and tmin[1] < eFrom and not newDay and not inTrade and not tradedToday
+    if sell.stage == 2
+        alert("SMC NQ (" + str.tostring(efH) + ":" + str.tostring(efM, "00") + " ET): setup pendiente. VENTA límite en " + str.tostring(sell.edge, format.mintick) + " · SL " + str.tostring(sell.ext + buf, format.mintick) + " · TP " + str.tostring(sell.tgt, format.mintick), alert.freq_once_per_bar)
+    if buy.stage == 2
+        alert("SMC NQ (" + str.tostring(efH) + ":" + str.tostring(efM, "00") + " ET): setup pendiente. COMPRA límite en " + str.tostring(buy.edge, format.mintick) + " · SL " + str.tostring(buy.ext - buf, format.mintick) + " · TP " + str.tostring(buy.tgt, format.mintick), alert.freq_once_per_bar)
 
 buySig = false
 sellSig = false
