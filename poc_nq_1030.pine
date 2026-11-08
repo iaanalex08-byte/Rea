@@ -3,6 +3,7 @@ indicator("POC Apertura CDMX - NQ 10:30", overlay=true, max_boxes_count=500, max
 
 tz = "UTC-6"  // CDMX fija, sin horario de verano
 // Versión para NQ / MNQ: perfil 10:30-10:42, entrada 10:42-13:30, SL 66.5 pts, 1:1, salida única (velas de 3 min).
+// Filtros: no entra si el último BMS/CHoCH de 5 min va en contra o si el ES diverge; A+ = CHoCH de 5 min a favor o POC en FVG/OB.
 
 gH = "Perfil (hora CDMX)"
 profHour = input.int(10, "Hora inicio del perfil", minval=0, maxval=23, group=gH)
@@ -51,9 +52,50 @@ qty        = input.float(2.0, "Cantidad (contratos)", minval=0.01, group=gT)
 ptValue    = input.float(2.0, "Valor del punto por contrato ($)", minval=0.01, tooltip="MNQ = 2, NQ = 20", group=gT)
 tblPos     = input.string("Arriba derecha", "Posición de la tabla", options=["Arriba derecha", "Arriba izquierda", "Abajo derecha", "Abajo izquierda"], group=gT)
 
+gF = "Filtros (CHoCH, FVG, OB, SMT)"
+filtMode  = input.string("Evitar días malos", "Modo", options=["Ninguno", "Evitar días malos", "Solo A+"], tooltip="Evitar días malos: no entra si el último quiebre de 5 min va en contra o si el ES diverge. Solo A+: además exige CHoCH de 5 min a favor o POC dentro de un FVG/OB a favor (recomendado para la evaluación).", group=gF)
+useStruct = input.bool(true, "Día malo: último quiebre (BMS/CHoCH) de 5 min en contra", group=gF)
+useEs     = input.bool(true, "Día malo: ES diverge del NQ desde las 00:00 (SMT)", group=gF)
+esSym     = input.symbol("CME_MINI:ES1!", "Símbolo del ES", group=gF)
+minTrend  = input.float(0.0, "Tendencia mínima 00:00 → 10:30 (pts, 0 = sin filtro)", minval=0, tooltip="En el backtest, 100 pts mejoró la evaluación", group=gF)
+useEma15  = input.bool(false, "Exigir EMA 20/50 de 15 min a favor", group=gF)
+
 drawLvl(int x, float y, color c, string txt, string sty) =>
     line.new(x, y, x + extBars, y, color=c, style=sty)
     label.new(x + extBars, y, txt, style=label.style_label_left, color=c, textcolor=color.white, size=size.tiny)
+
+// Estructura de 5 min: último quiebre del día (desde 7:30 CDMX). 1 = alcista, -1 = bajista; tipo 1 = BMS, 2 = CHoCH
+f_struct() =>
+    var float h1 = na
+    var float h2 = na
+    var float l1 = na
+    var float l2 = na
+    var int evDir = 0
+    var int evType = 0
+    ph5 = ta.pivothigh(high, 2, 2)
+    pl5 = ta.pivotlow(low, 2, 2)
+    if not na(ph5)
+        h2 := h1
+        h1 := ph5
+    if not na(pl5)
+        l2 := l1
+        l1 := pl5
+    if dayofmonth(time, "UTC-6") != dayofmonth(time[1], "UTC-6")
+        evDir := 0
+        evType := 0
+    if not na(h2) and not na(l2) and hour(time, "UTC-6") * 60 + minute(time, "UTC-6") >= 450
+        tr5 = h1 > h2 and l1 > l2 ? 1 : h1 < h2 and l1 < l2 ? -1 : 0
+        if close > h1
+            evDir := 1
+            evType := tr5 == 1 ? 1 : 2
+        else if close < l1
+            evDir := -1
+            evType := tr5 == -1 ? 1 : 2
+    [evDir[1], evType[1]]
+[ev5Dir, ev5Type] = request.security(syminfo.tickerid, "5", f_struct(), lookahead=barmerge.lookahead_on)
+[ema20_15, ema50_15] = request.security(syminfo.tickerid, "15", [ta.ema(close, 20)[1], ta.ema(close, 50)[1]], lookahead=barmerge.lookahead_on)
+esClose = request.security(esSym, timeframe.period, close)
+esOpenS = request.security(esSym, timeframe.period, open)
 
 tmin   = hour(time, tz) * 60 + minute(time, tz)
 pStart = profHour * 60 + profMin
@@ -79,6 +121,10 @@ var float slLvl = na
 var float tpLvl = na
 var float partLvl = na
 var int dirTrend = 0
+var bool pocFvg = false
+var bool pocOb = false
+var float esOpen00 = na
+var int skipped = 0
 var array<float> bH = array.new_float()
 var array<float> bL = array.new_float()
 var array<float> bV = array.new_float()
@@ -98,6 +144,9 @@ if newDay
         unres += 1
     trendOpen := open
     trendClose := close
+    esOpen00 := esOpenS
+    pocFvg := false
+    pocOb := false
     pHigh := na
     pLow := na
     startIdx := na
@@ -169,12 +218,51 @@ if stage == 0 and dirTrend != 0 and not na(pocLvl) and bar_index > sigBar and ba
         stage := 1
         brkBar := bar_index
         brkSig := true
+        // OB: última vela contraria antes de la ruptura; ¿contiene el POC?
+        nb = math.min(bar_index - sigBar, 40)
+        if nb >= 1
+            for k = 1 to nb
+                if (close[k] - open[k]) * dirTrend < 0
+                    pocOb := pocLvl >= low[k] - 2 and pocLvl <= high[k] + 2
+                    break
+
+// FVG a favor formado después del perfil que contiene el POC
+if (stage == 0 or stage == 1) and dirTrend != 0 and not na(pocLvl) and bar_index >= sigBar + 2
+    if dirTrend == 1 and low > high[2] and pocLvl >= high[2] - 2 and pocLvl <= low + 2
+        pocFvg := true
+    if dirTrend == -1 and high < low[2] and pocLvl <= low[2] + 2 and pocLvl >= high - 2
+        pocFvg := true
 
 buySig = false
 sellSig = false
 if stage == 1 and bar_index > brkBar and inWin
     retest = dirTrend == -1 ? high >= pocLvl : low <= pocLvl
-    if retest
+    // ---- Filtros de las otras estrategias ----
+    structAgainst = ev5Dir == -dirTrend
+    esDiv = not na(esOpen00) and math.sign(esClose - esOpen00) == -dirTrend
+    chochFavor = ev5Dir == dirTrend and ev5Type == 2
+    aPlus = chochFavor or pocFvg or pocOb
+    trendOk = minTrend <= 0 or math.abs(trendClose - trendOpen) >= minTrend
+    emaOk = not useEma15 or (dirTrend == 1 ? ema20_15 > ema50_15 : ema20_15 < ema50_15)
+    string why = ""
+    if filtMode != "Ninguno"
+        if useStruct and structAgainst
+            why := "quiebre de 5 min en contra"
+        else if useEs and esDiv
+            why := "ES diverge (SMT)"
+    if why == "" and not trendOk
+        why := "tendencia menor a " + str.tostring(minTrend, "#")
+    if why == "" and not emaOk
+        why := "EMA 15 min en contra"
+    if why == "" and filtMode == "Solo A+" and not aPlus
+        why := "no es A+"
+    if retest and why != ""
+        stage := 3
+        skipped += 1
+        label.new(bar_index, pocLvl, "OMITIDA: " + why, style=label.style_label_left, color=color.new(color.gray, 20), textcolor=color.white, size=size.tiny)
+    else if retest
+        if aPlus
+            label.new(bar_index, pocLvl, "A+ " + (chochFavor ? "CHoCH " : "") + (pocFvg ? "FVG " : "") + (pocOb ? "OB" : ""), style=label.style_label_right, color=color.new(color.yellow, 10), textcolor=color.black, size=size.tiny)
         stage := 2
         entryBar := bar_index
         buySig := dirTrend == 1
@@ -275,7 +363,7 @@ tPos = switch tblPos
     "Abajo derecha" => position.bottom_right
     => position.bottom_left
 
-var table stats = table.new(tPos, 2, 8, bgcolor=color.new(#1e222d, 0), border_width=1, border_color=color.new(color.gray, 60))
+var table stats = table.new(tPos, 2, 10, bgcolor=color.new(#1e222d, 0), border_width=1, border_color=color.new(color.gray, 60))
 
 if showStats and barstate.islast
     openTrade = (stage == 2 and not resolved) ? 1 : 0
@@ -304,6 +392,12 @@ if showStats and barstate.islast
     table.cell(stats, 1, 6, str.tostring(netPts, "#.##"), text_color=netPts >= 0 ? cGreen : cRed)
     table.cell(stats, 0, 7, "Neto ($)", text_color=color.white, text_halign=text.align_left)
     table.cell(stats, 1, 7, str.tostring(netQty, "#.##"), text_color=netQty >= 0 ? cGreen : cRed)
+    table.cell(stats, 0, 8, "Omitidas por filtro", text_color=color.white, text_halign=text.align_left)
+    table.cell(stats, 1, 8, str.tostring(skipped), text_color=cGray)
+    hoy5 = ev5Dir == 0 ? "sin quiebre" : (ev5Type == 1 ? "BMS " : "CHoCH ") + (ev5Dir == 1 ? "alcista" : "bajista")
+    hoyEs = na(esOpen00) ? "ES: s/d" : esClose > esOpen00 ? "ES sube" : "ES baja"
+    table.cell(stats, 0, 9, "Hoy (5 min · ES)", text_color=color.white, text_halign=text.align_left)
+    table.cell(stats, 1, 9, hoy5 + " · " + hoyEs, text_color=color.yellow)
 
 alertcondition(dirSig == 1, "Dirección del día: COMPRA", "10:30: hoy solo se buscan COMPRAS en el POC")
 alertcondition(dirSig == -1, "Dirección del día: VENTA", "10:30: hoy solo se buscan VENTAS en el POC")
