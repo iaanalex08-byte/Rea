@@ -48,7 +48,9 @@ def main():
             rec[f"usd_{sl}"] = round((r * 2 - 1.74) * Q, 2)
         # peor punto en contra en el día (para ver qué tan cerca estuvo del SL)
         r, how = None, "Cierre 15:55"
+        mae50k = 0.0
         for i in range(len(O)):
+            mae50k = max(mae50k, (e - L[i]) if s == 1 else (H[i] - e))
             if (L[i] <= e - s * 105) if s == 1 else (H[i] >= e - s * 105):
                 r, how = -105, "SL"; break
             if (H[i] >= e + s * 10) if s == 1 else (L[i] <= e + s * 10):
@@ -58,6 +60,7 @@ def main():
         rec["res_50k"] = how
         rec["pts_50k"] = round(r, 2)
         rec["usd_50k"] = round((r * 2 - 1.74) * 9, 2)
+        rec["mae_50k"] = round(min(max(mae50k, 0.0), 105), 2)
         rec["max_en_contra"] = round(float(max((e - L.min()) if s == 1 else (H.max() - e), 0)), 2)
         trades[d] = rec
     rows = []
