@@ -1,0 +1,121 @@
+//@version=6
+// Versión "strategy" del indicador R3D Jackofxc RTP (vela de 3 h, barrido + entrada en el 50%).
+// Sirve para medir en el Strategy Tester de TradingView el % de acierto real en NQ/MNQ y ES/MES.
+// Diferencias con el indicador original:
+//   - Horarios en hora de Nueva York (evita el desfase de 1 h en las semanas de cambio de horario).
+//   - Entrada con orden stop en el 50% (no asume que se rellena al 50% si el precio ya lo había cruzado).
+//   - Margen del stop en ticks detrás de la manipulación.
+//   - Calcula el resultado real (TP o SL), con comisiones y deslizamiento.
+//   - Un solo trade por día, filtro opcional si se barren los dos extremos y cierre forzado al final de la sesión.
+strategy("Vela 3h RTP - Backtest", overlay=true, initial_capital=50000,
+     default_qty_type=strategy.fixed, default_qty_value=1,
+     commission_type=strategy.commission.cash_per_contract, commission_value=0.5,
+     slippage=1, max_boxes_count=500, max_lines_count=500, max_labels_count=500)
+
+// --- INPUTS ---
+tz         = input.string("America/New_York", "Zona horaria", group="Horarios")
+box_sess   = input.session("0600-0900", "1. Vela de 3 h (caja)", group="Horarios")
+hunt_sess  = input.session("0900-1100", "2. Ventana de barrido", group="Horarios")
+entry_sess = input.session("0900-1100", "3. Ventana de entrada (50%)", group="Horarios")
+flat_sess  = input.session("1555-1600", "4. Cierre forzado", group="Horarios")
+
+rr         = input.float(1.0, "Take profit (R)", minval=0.1, step=0.25, group="Posición")
+buf_ticks  = input.int(4, "Margen del stop (ticks)", minval=0, group="Posición")
+skip_both  = input.bool(true, "Anular el día si barre los dos extremos antes de entrar", group="Filtros")
+show_draw  = input.bool(true, "Dibujar caja, 50% y operaciones", group="Visual")
+
+// --- ESTADO ---
+var float bh      = na     // alto de la vela de 3 h
+var float bl      = na     // bajo de la vela de 3 h
+var int   dir     = 0      // 1 = compras (barrió el bajo), -1 = ventas (barrió el alto)
+var float ext     = na     // extremo de la manipulación
+var bool  done    = false  // día terminado (ya operado o anulado)
+var float o_sl    = na
+var float o_tp    = na
+var box   bx      = na
+var line  eq      = na
+
+in_box   = not na(time(timeframe.period, box_sess, tz))
+in_hunt  = not na(time(timeframe.period, hunt_sess, tz))
+in_entry = not na(time(timeframe.period, entry_sess, tz))
+in_flat  = not na(time(timeframe.period, flat_sess, tz))
+box_start = in_box and not in_box[1]
+
+// --- CAJA DE 3 H ---
+if box_start
+    bh   := high
+    bl   := low
+    dir  := 0
+    ext  := na
+    done := false
+    strategy.cancel("Setup")
+    if show_draw
+        bx := box.new(bar_index, bh, bar_index, bl, border_color=color.new(color.blue, 30), bgcolor=color.new(color.blue, 92))
+else if in_box
+    bh := math.max(bh, high)
+    bl := math.min(bl, low)
+    if show_draw
+        box.set_top(bx, bh)
+        box.set_bottom(bx, bl)
+        box.set_right(bx, bar_index)
+
+flat = strategy.position_size == 0
+
+// --- DETECCIÓN DEL BARRIDO ---
+if in_hunt and dir == 0 and not done and not na(bh)
+    if high > bh and low < bl
+        done := skip_both
+        if not skip_both
+            dir := close < (bh + bl) / 2 ? -1 : 1
+            ext := dir == -1 ? high : low
+    else if high > bh
+        dir := -1
+        ext := high
+    else if low < bl
+        dir := 1
+        ext := low
+    if dir != 0 and show_draw
+        eq := line.new(bar_index, na, bar_index, na, color=dir == -1 ? color.red : color.green, width=2)
+        alert((dir == -1 ? "Barrido del alto: buscando ventas" : "Barrido del bajo: buscando compras") + " | " + syminfo.ticker, alert.freq_once_per_bar)
+
+// --- EXTREMO DINÁMICO Y ANULACIÓN ---
+if dir != 0 and not done and flat
+    if dir == -1 and high > ext
+        ext := high
+    if dir == 1 and low < ext
+        ext := low
+    if skip_both and ((dir == -1 and low < bl) or (dir == 1 and high > bh))
+        done := true
+        strategy.cancel("Setup")
+
+// --- ORDEN PENDIENTE EN EL 50% ---
+if dir != 0 and not done and flat
+    float lvl  = math.round_to_mintick(dir == -1 ? (ext + bl) / 2 : (ext + bh) / 2)
+    float sl   = ext - dir * buf_ticks * syminfo.mintick
+    float risk = math.abs(lvl - sl)
+    float tp   = math.round_to_mintick(lvl + dir * risk * rr)
+    if show_draw
+        line.set_y1(eq, lvl)
+        line.set_y2(eq, lvl)
+        line.set_x2(eq, bar_index)
+    if in_entry
+        o_sl := sl
+        o_tp := tp
+        // Orden stop: en ventas se vende cuando el precio cae hasta el 50%; en compras, cuando sube hasta él.
+        strategy.entry("Setup", dir == 1 ? strategy.long : strategy.short, stop=lvl)
+        strategy.exit("Salida", "Setup", stop=sl, limit=tp)
+    else
+        strategy.cancel("Setup")
+
+// --- ENTRADA EJECUTADA ---
+if strategy.position_size != 0 and strategy.position_size[1] == 0
+    done := true
+    if show_draw
+        float ep = strategy.position_avg_price
+        box.new(bar_index, math.max(ep, o_tp), bar_index + 5, math.min(ep, o_tp), bgcolor=color.new(color.blue, 85), border_color=color.blue)
+        box.new(bar_index, math.max(ep, o_sl), bar_index + 5, math.min(ep, o_sl), bgcolor=color.new(color.gray, 85), border_color=color.gray)
+    alert((strategy.position_size > 0 ? "BUY" : "SELL") + " @ " + str.tostring(strategy.position_avg_price, format.mintick) + " | SL: " + str.tostring(o_sl, format.mintick) + " | TP: " + str.tostring(o_tp, format.mintick), alert.freq_once_per_bar)
+
+// --- CIERRE FORZADO ---
+if in_flat and strategy.position_size != 0
+    strategy.close_all(comment="Cierre de sesión")
