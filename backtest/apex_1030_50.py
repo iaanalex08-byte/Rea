@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Apex 25K intradía arriesgando el 50 % ($500) por operación, solo con la 10:30, para pasar en 1-2 días.
+"""Apex 25K intradía arriesgando $500-$700 por operación, solo con la 10:30, para pasar en 1-2 días.
 
 Entrada: la 10:30 (POC 10:30-10:42, orden límite en el POC), con y sin "Evitar días malos". SL 66.5 pts.
 Tamaño: el que hace que el SL valga $500 (4 MNQ = $532, o tamaño exacto como referencia).
@@ -23,6 +23,7 @@ import apex_all_in as ap  # noqa: E402
 import retroceso_1100 as rf  # noqa: E402
 
 TARGET, DD, LOCK, SL = 1500, 1000, 100, 66.5
+SIZES = [("4 MNQ ($532 de riesgo)", 8.0, 4 * 1.24), ("5 MNQ ($671 de riesgo)", 10.0, 5 * 1.24), ("tamaño exacto ($700)", 700 / SL, 5.26 * 1.24)]
 
 
 def main():
@@ -59,7 +60,7 @@ def main():
     for filt in ("sin filtro", "Evitar días malos"):
         X = S[S.date.isin(good)] if filt != "sin filtro" else S
         X = X.reset_index(drop=True)
-        for sz, ppt, com in (("4 MNQ ($532 de riesgo)", 8.0, 4 * 1.24), ("tamaño exacto ($500)", 500 / SL, 4 * 1.24)):
+        for sz, ppt, com in SIZES:
             sl_usd = SL * ppt
             resA, resB, resC = [], [], []
             for k in range(len(X) - 2):
