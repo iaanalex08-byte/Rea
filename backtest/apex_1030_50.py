@@ -10,7 +10,8 @@ Planes:
   C) 2 días: día 1 TP $1,500; si pierde, día 2 con lo que queda de margen y TP por lo que falta.
 Cierre forzado 15:55 CDMX. Se prueba empezando en cada día con señal (2024-2026).
 
-    python3 backtest/apex_1030_50.py
+    python3 backtest/apex_1030_50.py [10:30 | 8:30]
+(filtro del plan: 10:30 = "Evitar días malos"; 8:30 = noche >= 40 pts)
 """
 import sys
 from pathlib import Path
@@ -30,9 +31,17 @@ def main():
     m1 = rf.bars()
     tm = (m1.index.hour * 60 + m1.index.minute).to_numpy()
     H, L, C = m1.high.to_numpy(), m1.low.to_numpy(), m1.close.to_numpy()
-    S = ap.poc_entries("10:30", None).dropna().drop_duplicates("date")
+    hora = sys.argv[1] if len(sys.argv) > 1 else "10:30"
     ops = pd.read_csv("backtest/resultados/ops_3_estrategias.csv")
-    good = set(pd.to_datetime(ops[ops.estrategia == "10:30 con tendencia"].fecha).dt.date)
+    if hora == "8:30":
+        o00 = m1.groupby(m1.index.date).open.first()
+        lc = m1[tm < 360].groupby(m1[tm < 360].index.date).close.last()
+        judas = {d: -int(np.sign(lc[d] - o00[d])) for d in o00.index if d in lc.index}
+        S = ap.poc_entries("08:30", judas).dropna().drop_duplicates("date")
+        good = set(pd.to_datetime(ops[ops.estrategia == "8:30 contra Londres"].fecha).dt.date)
+    else:
+        S = ap.poc_entries("10:30", None).dropna().drop_duplicates("date")
+        good = set(pd.to_datetime(ops[ops.estrategia == "10:30 con tendencia"].fecha).dt.date)
 
     def trade(sg, bal, peak, ppt, com, tp_usd, sl_usd):
         """Devuelve (estado, bal, peak). estado: tp, sl, quemada, cierre."""
@@ -57,7 +66,7 @@ def main():
         return "cierre", b, max(peak, b)
 
     rows = []
-    for filt in ("sin filtro", "Evitar días malos"):
+    for filt in ("sin filtro", "filtro del plan"):
         X = S[S.date.isin(good)] if filt != "sin filtro" else S
         X = X.reset_index(drop=True)
         for sz, ppt, com in SIZES:
@@ -86,13 +95,13 @@ def main():
             yrs = pd.to_datetime(X.date.iloc[:len(resA)]).dt.year.to_numpy()
             for plan, r in (("A) 1 día, TP $1,500", resA), ("B) 2 días, $750 + $750", resB), ("C) 2 días, segundo intento", resC)):
                 r = np.array(r)
-                rows.append({"10:30": filt, "tamaño": sz, "plan": plan, "pasa %": round(100 * r.mean(), 1),
+                rows.append({"estrategia": hora, "filtro": filt, "tamaño": sz, "plan": plan, "pasa %": round(100 * r.mean(), 1),
                              "2024-25 %": round(100 * r[yrs <= 2025].mean(), 1), "2026 %": round(100 * r[yrs == 2026].mean(), 1),
                              "pasa al menos 1 de 10 (misma op.) %": round(100 * r.mean(), 1),
                              "pasa al menos 1 de 10 (días distintos) %": round(100 * (1 - (1 - r.mean()) ** 10), 1),
                              "muestras": len(r)})
     T = pd.DataFrame(rows)
-    T.to_csv("backtest/resultados/apex_1030_50.csv", index=False)
+    T.to_csv(f"backtest/resultados/apex_{hora.replace(':', '')}_riesgo.csv", index=False)
     pd.set_option("display.width", 250)
     print(T.to_string(index=False))
 
