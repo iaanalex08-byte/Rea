@@ -127,7 +127,7 @@ alertcondition(hit1 or hit2, "Promedia Rascacielos", "Rascacielos: entra el prom
 alertcondition(not na(res), "Cierre Rascacielos", "Rascacielos: operación cerrada en {{ticker}}")
 
 // Tabla
-var table tb = table.new(position.top_right, 2, 6, bgcolor=color.new(#1e222d, 0), border_width=1, border_color=color.new(color.gray, 60))
+var table tb = table.new(position.top_right, 2, 8, bgcolor=color.new(#1e222d, 0), border_width=1, border_color=color.new(color.gray, 60))
 dirNow = na(e20) or na(e50) ? "—" : (modo == "A favor de las EMAs" ? (e20 > e50 ? "COMPRA" : "VENTA") : (e20 > e50 ? "VENTA" : "COMPRA"))
 table.cell(tb, 0, 0, "Rascacielos hoy", text_color=color.white, text_halign=text.align_left)
 table.cell(tb, 1, 0, estado, text_color=color.yellow)
@@ -141,3 +141,7 @@ table.cell(tb, 0, 4, "Neto $ (en el gráfico)", text_color=color.white, text_hal
 table.cell(tb, 1, 4, str.tostring(net, "#,###.##"), text_color=net >= 0 ? cUp : cDown)
 table.cell(tb, 0, 5, "Pérdida máx. posible por día", text_color=color.white, text_halign=text.align_left)
 table.cell(tb, 1, 5, "$" + str.tostring(slPts * pv * qty0 * (1 + add1 * f2 + add2 * f1), "#,###"), text_color=cDown)
+table.cell(tb, 0, 6, "Winrate (en el gráfico)", text_color=color.white, text_halign=text.align_left)
+table.cell(tb, 1, 6, wins + losses > 0 ? str.tostring(100.0 * wins / (wins + losses), "#.#") + " %" : "—", text_color=color.white)
+table.cell(tb, 0, 7, "TP / SL (backtest: 93 % con 10 / 700)", text_color=color.white, text_halign=text.align_left)
+table.cell(tb, 1, 7, str.tostring(tpPts) + " / " + str.tostring(slPts) + " pts", text_color=color.yellow)
