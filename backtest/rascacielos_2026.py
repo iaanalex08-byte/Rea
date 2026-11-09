@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Rascacielos 2026 día por día (todos los días hábiles): entrada 9:30 NY a favor de la EMA 20/50 de 15 min,
-TP 10.5 pts, 6 MNQ, con SL 50, 80 (lo que aguanta una 25K) y 700. Cierre 15:55 NY. Comisión $1.24 + 1 tick por contrato.
+TP 10.5 pts, 6 MNQ, con SL 50, 80 (lo que aguanta una 25K) y 700; y la versión 93 % para una 50K:
+TP 10 pts, 9 MNQ (para días de >= $150), SL 105 (lo que aguanta la 50K con 9 MNQ). Cierre 15:55 NY. Comisión $1.24 + 1 tick por contrato.
 
 Salida: backtest/resultados/rascacielos_2026.csv
     python3 backtest/rascacielos_2026.py
@@ -46,6 +47,17 @@ def main():
             rec[f"pts_{sl}"] = round(r, 2)
             rec[f"usd_{sl}"] = round((r * 2 - 1.74) * Q, 2)
         # peor punto en contra en el día (para ver qué tan cerca estuvo del SL)
+        r, how = None, "Cierre 15:55"
+        for i in range(len(O)):
+            if (L[i] <= e - s * 105) if s == 1 else (H[i] >= e - s * 105):
+                r, how = -105, "SL"; break
+            if (H[i] >= e + s * 10) if s == 1 else (L[i] <= e + s * 10):
+                r, how = 10, "TP"; break
+        if r is None:
+            r = (C[-1] - e) * s
+        rec["res_50k"] = how
+        rec["pts_50k"] = round(r, 2)
+        rec["usd_50k"] = round((r * 2 - 1.74) * 9, 2)
         rec["max_en_contra"] = round(float(max((e - L.min()) if s == 1 else (H.max() - e), 0)), 2)
         trades[d] = rec
     rows = []
@@ -62,6 +74,8 @@ def main():
     for sl in SLS:
         u = x[f"usd_{sl}"]
         print(f"SL {sl}: días {len(x)}, ganadas {int((u > 0).sum())}, perdidas {int((u <= 0).sum())}, neto ${u.sum():,.0f}")
+    u = x["usd_50k"]
+    print(f"50K 93 %: ganadas {int((u > 0).sum())}, perdidas {int((u <= 0).sum())}, neto ${u.sum():,.0f}")
     print("días hábiles:", len(T), "sin operación:", int((T.opero != 'Sí').sum()))
 
 
