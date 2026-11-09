@@ -138,7 +138,7 @@ def run(df, start, poi_mode, filt, tp_mode, min_rr, entry_from=0):
         if res is None:
             res, how = (C[k - 1] - ent) * side / risk, "CIERRE"
         out.append({"date": d, "side": side, "entry_time": df.index[i0], "exit_time": df.index[min(k, len(C) - 1)],
-                    "risk": risk, "rr": rr, "how": how, "R": res - 0.5 / risk})
+                    "risk": risk, "rr": rr, "how": how, "R": res - 0.5 / risk, "ent": ent})
     return pd.DataFrame(out)
 
 
