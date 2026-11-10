@@ -55,6 +55,10 @@ class Params:
     cost_pts: float = 1.0            # spread + comisión + deslizamiento (ida y vuelta)
     news_filter: bool = True
     directions: str = "both"         # "both" | "long" | "short"
+    zone_scope: str = "leg"          # "leg": solo zonas del impulso actual | "all": cualquier zona reciente
+    max_age_days: float = 10.0       # con zone_scope="all": antigüedad máxima de la zona
+    max_dist_atr: float = 1.0        # con zone_scope="all": distancia máx. a la apertura (x ATR diario)
+    mitigation: str = "touch"        # "touch": mitigada al tocarla | "half": mitigada al llegar al 50%
 
     def label(self):
         return ", ".join(f"{k}={v}" for k, v in asdict(self).items())
@@ -83,10 +87,12 @@ def find_zones(b: Bars, tf: str, p: Params):
     return pd.DataFrame(z, columns=["anchor", "created", "bottom", "top", "kind", "tf"])
 
 
-def first_touch(zones, m1: Bars, h1: Bars):
-    """Índice 1m del primer toque (low <= top) posterior a la creación."""
+def first_touch(zones, m1: Bars, h1: Bars, levels=None):
+    """Índice 1m del primer toque (low <= nivel) posterior a la creación."""
     out = np.full(len(zones), len(m1.l), dtype=np.int64)
-    for r, (cr, top) in enumerate(zip(zones["created"].to_numpy(), zones["top"].to_numpy())):
+    if levels is None:
+        levels = zones["top"].to_numpy()
+    for r, (cr, top) in enumerate(zip(zones["created"].to_numpy(), levels)):
         b0 = np.searchsorted(h1.start, cr)
         # minutos entre la creación y el inicio de la siguiente H1 (si los hay)
         if b0 < len(h1.start) and h1.start[b0] > cr:
@@ -183,19 +189,35 @@ class Side:
         for tf in p.zone_tfs:
             frames.append(find_zones(getattr(mk, tf.lower()), tf, p))
         z = pd.concat(frames, ignore_index=True)
-        z["touch"] = first_touch(z, mk.m1, mk.h1)
+        lvl = z["top"].to_numpy()
+        if p.mitigation == "half":
+            lvl = ((z["top"] + z["bottom"]) / 2).to_numpy()
+        z["mit_level"] = lvl
+        z["touch"] = first_touch(z, mk.m1, mk.h1, lvl)
         self.z = z.sort_values("created").reset_index(drop=True)
         self.sw_conf, self.sw_anchor = swing_lows(getattr(mk, p.leg_tf.lower()))
         self.ref = fractal_high_ref(mk.m1)
+        d = mk.d1
+        tr_ = np.maximum(d.h[1:], d.c[:-1]) - np.minimum(d.l[1:], d.c[:-1])
+        atr = pd.Series(np.r_[d.h[0] - d.l[0], tr_]).rolling(14, min_periods=5).mean()
+        self.atr = atr.to_numpy()
+        self.created_t = mk.local[self.z["created"].clip(upper=len(mk.local) - 1)].to_numpy()
 
     def candidates(self, S):
-        k = np.searchsorted(self.sw_conf, S, side="right") - 1
-        if k < 0:
-            return self.z.iloc[0:0]
-        leg = self.sw_anchor[k]
-        z = self.z
-        m = (z["anchor"].to_numpy() >= leg) & (z["created"].to_numpy() <= S) \
-            & (z["touch"].to_numpy() >= S) & (z["top"].to_numpy() < self.mk.m1.c[S - 1])
+        z, p = self.z, self.p
+        px = self.mk.m1.c[S - 1]
+        m = (z["created"].to_numpy() <= S) & (z["touch"].to_numpy() >= S) \
+            & (z["mit_level"].to_numpy() < px)
+        if p.zone_scope == "leg":
+            k = np.searchsorted(self.sw_conf, S, side="right") - 1
+            if k < 0:
+                return z.iloc[0:0]
+            m &= z["anchor"].to_numpy() >= self.sw_anchor[k]
+        else:
+            t0 = self.mk.local[S] - pd.Timedelta(days=p.max_age_days)
+            di = np.searchsorted(self.mk.d1.start, S, side="right") - 2
+            atr = self.atr[max(di, 0)]
+            m &= (self.created_t >= np.datetime64(t0)) & (z["top"].to_numpy() >= px - p.max_dist_atr * atr)
         return z[m].sort_values("top", ascending=False)
 
     def run_day(self, S, E, X):
