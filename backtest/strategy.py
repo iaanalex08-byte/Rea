@@ -38,7 +38,7 @@ NEWS = os.path.join(os.path.dirname(__file__), "news_calendar.csv")
 @dataclass
 class Params:
     session_start: str = "09:30"
-    entry_end: str = "11:30"
+    entry_end: str = "10:30"          # apertura de NY: primera hora
     exit_time: str = "15:55"
     zone_tfs: tuple = ("H1", "H4")
     leg_tf: str = "H4"               # temporalidad del swing que define el impulso

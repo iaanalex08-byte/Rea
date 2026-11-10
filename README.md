@@ -1,7 +1,7 @@
 # Rea — backtest de la estrategia FVG / envolventes en Nasdaq
 
 Backtest 2025–2026 de una versión **mecánica** de la estrategia (sesgo diario →
-zonas H4/H1 → gatillo en 1 minuto, RR 1:2, ventana horaria y filtro de noticias).
+zonas H4/H1 → gatillo en 1 minuto, RR 1:2, ventana de apertura de NY 9:30–10:30 y filtro de noticias).
 
 - Reglas exactas: docstring de [`backtest/strategy.py`](backtest/strategy.py) (todas son parámetros de `Params`).
 - Resultados: [`results/RESULTS.md`](results/RESULTS.md), [`results/trades.csv`](results/trades.csv),
