@@ -55,6 +55,7 @@
     <h1>ES · entradas de las 9:00 y 9:12 a favor de la tendencia de 3 minutos</h1>
     <p class="es-lead" data-draw="frase-resumen">—</p>
     <p class="es-muted">Backtest del 2 de enero de 2025 al 6 de noviembre de 2026 con velas de 1 minuto del S&amp;P 500. Resultados en USD con 2 contratos ES (1 tick = 12,50 USD), descontando 1 tick de deslizamiento y 4,50 USD de comisión por contrato.</p>
+    <p><a href="#analisis-b45">Ir al análisis a fondo de B · 9:12 CDMX · SL 45 · TP1 30 · TP2 60</a></p>
     <div class="es-controls">
       <label for="sel-zone">Hora de las entradas
         <select class="dash-select" id="sel-zone" aria-label="Zona horaria">
@@ -181,6 +182,73 @@
         </tr></thead>
         <tbody data-draw="tabla-resumen"></tbody>
       </table>
+    </div>
+  </section>
+
+  <section class="es-sec" id="analisis-b45">
+    <h2>Análisis a fondo: modelo B · 9:12 hora de Ciudad de México · SL 45 · TP1 30 · TP2 60</h2>
+    <p class="es-muted">Configuración fija, independiente de los selectores de arriba. Tendencia por EMA 20 en velas de 3 minutos, 2 contratos, stop a break-even al tocar TP1. Una operación por día hábil.</p>
+    <p class="es-lead" data-draw="b45-frase">—</p>
+    <div class="es-kpis">
+      <div class="es-kpi"><span class="es-kpi-label">Tasa de acierto</span><span class="es-kpi-value" data-draw="b45-k-winrate">—</span><span class="es-kpi-note">incluye TP1 + break-even</span></div>
+      <div class="es-kpi"><span class="es-kpi-label">Factor de beneficio</span><span class="es-kpi-value" data-draw="b45-k-pf">—</span><span class="es-kpi-note">ganancias ÷ pérdidas</span></div>
+      <div class="es-kpi"><span class="es-kpi-label">Resultado neto</span><span class="es-kpi-value" data-draw="b45-k-net">—</span><span class="es-kpi-note">USD, 2 contratos, con costes</span></div>
+      <div class="es-kpi"><span class="es-kpi-label">Esperanza por operación</span><span class="es-kpi-value" data-draw="b45-k-avg">—</span><span class="es-kpi-note">USD de media</span></div>
+      <div class="es-kpi"><span class="es-kpi-label">Ganancia media</span><span class="es-kpi-value" data-draw="b45-k-avgwin">—</span><span class="es-kpi-note">USD en operaciones ganadoras</span></div>
+      <div class="es-kpi"><span class="es-kpi-label">Pérdida media</span><span class="es-kpi-value" data-draw="b45-k-avgloss">—</span><span class="es-kpi-note">USD en operaciones perdedoras</span></div>
+      <div class="es-kpi"><span class="es-kpi-label">Peor racha</span><span class="es-kpi-value" data-draw="b45-k-streak">—</span><span class="es-kpi-note">pérdidas seguidas</span></div>
+      <div class="es-kpi"><span class="es-kpi-label">Drawdown máximo</span><span class="es-kpi-value" data-draw="b45-k-dd">—</span><span class="es-kpi-note">USD en el orden histórico</span></div>
+      <div class="es-kpi"><span class="es-kpi-label">¿Ventaja estadística?</span><span class="es-kpi-value" data-draw="b45-k-t">—</span><span class="es-kpi-note">estadístico t; hace falta más de 2</span></div>
+    </div>
+
+    <div class="es-card">
+      <h2>Curva de capital</h2>
+      <div class="es-chart" data-draw="b45-curva" data-source="b45_curva"></div>
+    </div>
+
+    <div class="es-grid2">
+      <div class="es-card" id="b45-desenlace">
+        <h2>Cómo termina cada operación</h2>
+        <div class="es-chart es-chart-sm" data-draw="b45-outcome" data-source="b45_grupos"></div>
+        <p class="es-muted" data-draw="b45-frase-math">—</p>
+      </div>
+      <div class="es-card" id="b45-riesgo">
+        <h2>Qué rango de resultados esperar</h2>
+        <div class="es-tablewrap">
+          <table data-source="b45_riesgo" data-row-key="metrica" aria-label="Rango de resultados por bootstrap y Monte Carlo">
+            <thead><tr><th data-field="etiqueta">Medida</th><th data-field="valor">Valor</th></tr></thead>
+            <tbody data-draw="b45-tabla-riesgo"></tbody>
+          </table>
+        </div>
+        <p class="es-muted">Bootstrap y Monte Carlo con 5 000–20 000 reordenaciones de las 476 operaciones reales.</p>
+      </div>
+    </div>
+
+    <div class="es-card" id="b45-tiempos">
+      <h2>Tiempos y recorrido del precio</h2>
+      <p data-draw="b45-frase-tiempo">—</p>
+    </div>
+
+    <div class="es-grid2">
+      <div class="es-card" id="b45-grupos">
+        <h2>Por grupo</h2>
+        <div class="es-tablewrap">
+          <table data-source="b45_grupos" data-row-key="clave" aria-label="Resultados por grupo">
+            <thead><tr><th data-field="dim" class="es-l">Grupo</th><th data-field="k" class="es-l">Valor</th><th data-field="n">Ops</th><th data-field="winrate">Acierto</th><th data-field="net">Neto USD</th><th data-field="avg">Media</th></tr></thead>
+            <tbody data-draw="b45-tabla-grupos"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="es-card" id="b45-sensibilidad">
+        <h2>¿Es robusta? Configuraciones vecinas</h2>
+        <p class="es-muted">Mismo modelo cambiando SL y objetivos. Si los vecinos se parecen, el resultado no depende de un número exacto.</p>
+        <div class="es-tablewrap">
+          <table data-source="b45_sensibilidad" data-row-key="sl,tp1" aria-label="Sensibilidad a SL y TP">
+            <thead><tr><th data-field="sl">SL</th><th data-field="tp1">TP1</th><th data-field="tp2">TP2</th><th data-field="winrate">Acierto</th><th data-field="pf">Factor</th><th data-field="net">Neto USD</th><th data-field="t">t</th></tr></thead>
+            <tbody data-draw="b45-tabla-sens"></tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -845,6 +913,258 @@
           mark('b', 'patrones', 'winrate', w(sn), pct(sn.winrate)), ` de los días sin noticia, con solo ${cn.n} operaciones.`);
       }
       el.replaceChildren(...parts);
+    });
+  })();
+</script>
+
+<script>
+  // ---------- análisis B · CDMX · 45/30/60
+  dash.calc('b45_resumen', {
+    inputs: ['b45_operaciones'],
+    title: 'Métricas de B · CDMX · SL 45 / TP 30 / 60',
+    description: 'Acierto, factor de beneficio, neto, medias, peor racha, drawdown y estadístico t de la configuración.',
+    fn: (operaciones) => {
+      const usd = operaciones.map((o) => Number(o.usd));
+      const n = usd.length;
+      let eq = 0, peak = 0, maxdd = 0, run = 0, worst = 0, gw = 0, gl = 0;
+      for (const v of usd) {
+        eq += v; peak = Math.max(peak, eq); maxdd = Math.max(maxdd, peak - eq);
+        run = v < 0 ? run + 1 : 0; worst = Math.max(worst, run);
+        if (v > 0) gw += v; else gl -= v;
+      }
+      const avg = eq / n;
+      const sd = Math.sqrt(usd.reduce((s, v) => s + (v - avg) ** 2, 0) / (n - 1));
+      const wins = usd.filter((v) => v > 0), losses = usd.filter((v) => v < 0);
+      return [{
+        n, winrate: wins.length / n, pf: gw / gl, net: eq, avg, maxdd, worst_streak: worst,
+        t: (avg / sd) * Math.sqrt(n),
+        avg_win: wins.reduce((a, b) => a + b, 0) / wins.length,
+        avg_loss: losses.reduce((a, b) => a + b, 0) / losses.length,
+      }];
+    },
+  });
+
+  dash.calc('b45_curva', {
+    inputs: ['b45_operaciones'],
+    title: 'Curva de capital de B · CDMX · 45/30/60',
+    description: 'USD acumulados y drawdown operación a operación.',
+    fn: (operaciones) => {
+      let eq = 0, peak = 0;
+      return [...operaciones].sort((a, b) => (a.date < b.date ? -1 : 1)).map((o) => {
+        eq += Number(o.usd); peak = Math.max(peak, eq);
+        return { date: o.date, eq, dd: eq - peak };
+      });
+    },
+  });
+
+  dash.calc('b45_grupos', {
+    inputs: ['b45_operaciones'],
+    title: 'B · CDMX · 45/30/60 por grupo',
+    description: 'Operaciones, acierto, neto y media por desenlace, lado, año, horario en NY, volatilidad del día anterior, noticias, día y semana del mes.',
+    fn: (operaciones) => {
+      const dims = { 'Desenlace': 'outcome', 'Lado': 'side', 'Año': 'year', 'Horario en NY': 'horario_ny', 'Volatilidad día anterior': 'vol', 'Noticias': 'news', 'Día': 'weekday', 'Semana del mes': 'wom' };
+      const out = [];
+      for (const [dim, col] of Object.entries(dims)) {
+        for (const [k, v] of d3.group(operaciones.filter((o) => o[col] !== null && o[col] !== ''), (o) => o[col])) {
+          const usd = v.map((o) => Number(o.usd));
+          out.push({ clave: `${dim}|${k}`, dim, k, n: v.length, winrate: usd.filter((x) => x > 0).length / v.length, net: d3.sum(usd), avg: d3.mean(usd) });
+        }
+      }
+      return out;
+    },
+  });
+
+  dash.calc('b45_tiempos', {
+    inputs: ['b45_operaciones'],
+    title: 'Tiempos y recorrido de B · CDMX · 45/30/60',
+    description: 'Minutos medianos hasta TP1, hasta el stop y hasta la salida; recorrido a favor y en contra en la primera hora (ticks).',
+    fn: (operaciones) => {
+      const num = (k, f = () => true) => operaciones.filter(f).map((o) => Number(o[k])).filter((v) => Number.isFinite(v));
+      const tp1 = operaciones.filter((o) => o.mins_tp1 !== null && o.mins_tp1 !== '').map((o) => Number(o.mins_tp1));
+      return [{
+        med_tp1: d3.median(tp1),
+        pct_tp1_15: tp1.filter((m) => m <= 15).length / tp1.length,
+        med_stop: d3.median(num('mins', (o) => o.outcome === 'Stop (−2)')),
+        med_exit: d3.median(num('mins')),
+        mfe60: d3.median(num('mfe60')),
+        mae60: d3.median(num('mae60')),
+        pct_mae60_45: operaciones.filter((o) => Number(o.mae60) >= 45).length / operaciones.length,
+      }];
+    },
+  });
+
+  (() => {
+    const { money, pct, pf, n0, mark, enc, tip, placeTip, tipLines } = ES;
+    const one = (id) => { const d = dash.data(id); return d.status === 'ok' && d.data && d.data[0] ? d.data[0] : null; };
+    const kpi = (name, field, fmt, cls) => dash.draw(name, (el) => {
+      const r = one('b45_resumen');
+      if (!r) { el.replaceChildren('—'); el.className = 'es-kpi-value'; return; }
+      el.replaceChildren(mark('span', 'b45_resumen', field, null, fmt(r[field])));
+      el.className = 'es-kpi-value ' + (cls ? cls(r[field]) : '');
+    });
+    const sg = (v) => (v >= 0 ? 'es-good' : 'es-bad');
+    kpi('b45-k-winrate', 'winrate', pct);
+    kpi('b45-k-pf', 'pf', pf, (v) => (v >= 1 ? 'es-good' : 'es-bad'));
+    kpi('b45-k-net', 'net', money, sg);
+    kpi('b45-k-avg', 'avg', money, sg);
+    kpi('b45-k-avgwin', 'avg_win', money, () => 'es-good');
+    kpi('b45-k-avgloss', 'avg_loss', money, () => 'es-bad');
+    kpi('b45-k-streak', 'worst_streak', n0);
+    kpi('b45-k-dd', 'maxdd', money, () => 'es-bad');
+    kpi('b45-k-t', 't', (v) => ES.loc.format('.2f')(v), (v) => (v >= 2 ? 'es-good' : 'es-warn'));
+
+    dash.draw('b45-frase', (el) => {
+      const r = one('b45_resumen');
+      const rk = dash.data('b45_riesgo');
+      if (!r || rk.status !== 'ok') { el.replaceChildren('—'); return; }
+      const v = (m) => rk.data.find((x) => x.metrica === m);
+      const p0 = v('p_le_0'), lo = v('ci_low'), hi = v('ci_high');
+      el.replaceChildren(
+        'Acierta el ', mark('b', 'b45_resumen', 'winrate', null, pct(r.winrate)), ' de las veces, pero cada pérdida (',
+        mark('span', 'b45_resumen', 'avg_loss', null, money(r.avg_loss)), ') pesa más que una ganancia media (',
+        mark('span', 'b45_resumen', 'avg_win', null, money(r.avg_win)), '). El resultado neto es ',
+        mark('b', 'b45_resumen', 'net', null, money(r.net)), ', pero la esperanza real podría estar entre ',
+        mark('span', 'b45_riesgo', 'valor', 'metrica=ci_low', money(Number(lo.valor))), ' y ',
+        mark('span', 'b45_riesgo', 'valor', 'metrica=ci_high', money(Number(hi.valor))), ' por operación: hay un ',
+        mark('b', 'b45_riesgo', 'valor', 'metrica=p_le_0', pct(Number(p0.valor))), ' de probabilidad de que no tenga ventaja.'
+      );
+    });
+
+    dash.draw('b45-curva', (el) => {
+      const c = dash.data('b45_curva');
+      if (c.status !== 'ok' || !c.data || !c.data.length) { el.replaceChildren('—'); return; }
+      const parse = d3.utcParse('%Y-%m-%d');
+      const rows = c.data.map((r) => ({ d: parse(r.date), eq: r.eq, dd: r.dd }));
+      const W = el.clientWidth || 600, H1 = 240, H2 = 70, gap = 16;
+      el.replaceChildren();
+      const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H1 + gap + H2 + 24}`)
+        .attr('role', 'img').attr('aria-label', 'Curva de capital y drawdown del modelo B con hora de Ciudad de México, SL 45, TP1 30 y TP2 60');
+      const y = d3.scaleLinear().domain(d3.extent([0, ...rows.map((r) => r.eq)])).nice();
+      const yd = d3.scaleLinear().domain([d3.min(rows, (r) => r.dd) || -1, 0]).nice();
+      const probe = svg.append('text').text(money(y.domain()[0]));
+      const ml = Math.ceil(probe.node().getComputedTextLength() || 50) + 10; probe.remove();
+      const mr = 64;
+      const x = d3.scaleUtc().domain(d3.extent(rows, (r) => r.d)).range([ml, W - mr]);
+      y.range([H1, 8]); yd.range([H1 + gap + H2, H1 + gap]);
+      svg.append('g').attr('class', 'es-grid').selectAll('line').data(y.ticks(5)).join('line').attr('x1', ml).attr('x2', W - mr).attr('y1', y).attr('y2', y);
+      svg.append('g').attr('class', 'es-axis').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(y).ticks(5).tickFormat(money).tickSize(0)).call((g) => g.select('.domain').remove());
+      svg.append('line').attr('x1', ml).attr('x2', W - mr).attr('y1', y(0)).attr('y2', y(0)).style('stroke', 'var(--cds-chart-reference)');
+      svg.append('path').datum(rows).attr('fill', 'none').style('stroke', dash.colors[0]).attr('stroke-width', 2.2)
+        .attr('d', d3.line().x((r) => x(r.d)).y((r) => y(r.eq)));
+      const last = rows.at(-1);
+      svg.append('circle').attr('cx', x(last.d)).attr('cy', y(last.eq)).attr('r', 3.5).style('fill', dash.colors[0]);
+      svg.append('text').attr('x', W - mr + 6).attr('y', y(last.eq) + 4).style('fill', dash.colors[0]).text(money(last.eq));
+      svg.append('path').datum(rows).style('fill', 'var(--color-bad)').attr('opacity', 0.35)
+        .attr('d', d3.area().x((r) => x(r.d)).y0(yd(0)).y1((r) => yd(r.dd)));
+      svg.append('g').attr('class', 'es-axis').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(yd).ticks(2).tickFormat(money).tickSize(0)).call((g) => g.select('.domain').remove());
+      svg.append('g').attr('class', 'es-axis').attr('transform', `translate(0,${H1 + gap + H2})`)
+        .call(d3.axisBottom(x).ticks(Math.max(2, Math.floor((W - ml - mr) / 90))).tickFormat(d3.utcFormat('%b %Y')).tickSizeOuter(0));
+      const t = tip(el);
+      const guide = svg.append('line').attr('y1', 8).attr('y2', H1 + gap + H2).style('stroke', 'var(--cds-chart-reference)').attr('opacity', 0);
+      const bis = d3.bisector((r) => r.d).right;
+      svg.append('rect').attr('x', ml).attr('y', 0).attr('width', W - ml - mr).attr('height', H1 + gap + H2).attr('fill', 'transparent')
+        .on('pointermove', (ev) => {
+          const [mx] = d3.pointer(ev);
+          const i = Math.max(0, bis(rows, x.invert(mx)) - 1), r = rows[i];
+          guide.attr('x1', x(r.d)).attr('x2', x(r.d)).attr('opacity', 1);
+          tipLines(t, [[d3.utcFormat('%d %b %Y')(r.d), ''], ['Capital', money(r.eq)], ['Drawdown', money(r.dd)]]);
+          const box = el.getBoundingClientRect(); placeTip(t, el, ev.clientX - box.left, ev.clientY - box.top);
+        })
+        .on('pointerleave', () => { t.hidden = true; guide.attr('opacity', 0); });
+    });
+
+    const grupos = (dim) => { const g = dash.data('b45_grupos'); return g.status === 'ok' && g.data ? g.data.filter((r) => r.dim === dim) : null; };
+
+    dash.draw('b45-outcome', (el) => {
+      const rs = grupos('Desenlace');
+      if (!rs) { el.replaceChildren('—'); return; }
+      const order = ['TP1 + TP2', 'TP1 + BE', 'TP1 + cierre', 'Cierre 15:59', 'Stop (−2)'];
+      rs.sort((a, b) => order.indexOf(a.k) - order.indexOf(b.k));
+      const total = d3.sum(rs, (r) => r.n);
+      const W = el.clientWidth || 300, rowH = 30, H = rs.length * rowH + 6;
+      el.replaceChildren();
+      const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`)
+        .attr('role', 'img').attr('aria-label', 'Reparto de operaciones por desenlace');
+      const probe = svg.append('text').text('TP1 + cierre');
+      const ml = Math.ceil(probe.node().getComputedTextLength() || 80) + 10; probe.remove();
+      const mr = 150;
+      const x = d3.scaleLinear().domain([0, d3.max(rs, (r) => r.n)]).range([ml, W - mr]);
+      const t = tip(el);
+      const g = svg.append('g').selectAll('g').data(rs).join('g').attr('transform', (r, i) => `translate(0,${i * rowH + 2})`);
+      g.append('text').attr('x', ml - 8).attr('y', 16).attr('text-anchor', 'end').text((r) => r.k);
+      g.append('rect').attr('x', ml).attr('y', 4).attr('height', rowH - 10).attr('rx', 2).attr('width', (r) => Math.max(1, x(r.n) - ml))
+        .style('fill', (r) => (r.net >= 0 ? 'var(--color-ok)' : 'var(--color-bad)')).attr('opacity', 0.85)
+        .on('pointermove', (ev, r) => {
+          tipLines(t, [[r.k, ''], ['Operaciones', n0(r.n)], ['Neto', money(r.net)], ['Por operación', money(r.avg)]]);
+          const box = el.getBoundingClientRect(); placeTip(t, el, ev.clientX - box.left, ev.clientY - box.top);
+        })
+        .on('pointerleave', () => { t.hidden = true; });
+      g.append('text').attr('x', (r) => x(r.n) + 6).attr('y', 16).text((r) => `${n0(r.n)} (${pct(r.n / total)}) · ${money(r.net)}`);
+    });
+
+    dash.draw('b45-frase-math', (el) => {
+      const rs = grupos('Desenlace');
+      if (!rs) { el.replaceChildren('—'); return; }
+      const f = (k) => rs.find((r) => r.k === k);
+      const s = f('Stop (−2)'), be = f('TP1 + BE'), tt = f('TP1 + TP2');
+      if (!s || !be || !tt) { el.replaceChildren('—'); return; }
+      const w = (r) => 'clave=' + enc(r.clave);
+      el.replaceChildren(
+        'Un stop cuesta ', mark('span', 'b45_grupos', 'avg', w(s), money(s.avg)), '; TP1 + break-even deja ',
+        mark('span', 'b45_grupos', 'avg', w(be), money(be.avg)), ' y TP1 + TP2, ', mark('span', 'b45_grupos', 'avg', w(tt), money(tt.avg)),
+        '. Con un stop de 45 ticks por contrato frente a un TP1 de 30, cada stop borra más de tres TP1 + break-even.'
+      );
+    });
+
+    dash.draw('b45-tabla-riesgo', (tb) => {
+      const d = dash.data('b45_riesgo');
+      if (d.status !== 'ok') { tb.replaceChildren(); return; }
+      const fmt = { ci_low: money, ci_high: money, dd_p50: money, dd_p95: money, p_le_0: pct, p_loss_100: pct, streak_p95: (v) => n0(v) + ' pérdidas' };
+      tb.replaceChildren(...d.data.map((r) => {
+        const tr = document.createElement('tr'); tr.dataset.key = r.metrica;
+        const a = document.createElement('td'); a.textContent = r.etiqueta;
+        const b = document.createElement('td'); b.textContent = (fmt[r.metrica] || String)(Number(r.valor));
+        tr.append(a, b); return tr;
+      }));
+    });
+
+    dash.draw('b45-frase-tiempo', (el) => {
+      const r = one('b45_tiempos');
+      if (!r) { el.replaceChildren('—'); return; }
+      const m = (f, txt) => mark('b', 'b45_tiempos', f, null, txt);
+      el.replaceChildren(
+        'Cuando llega, TP1 tarda una mediana de ', m('med_tp1', n0(r.med_tp1)), ' minutos (el ', m('pct_tp1_15', pct(r.pct_tp1_15)),
+        ' en 15 minutos o menos). Los stops llegan en una mediana de ', m('med_stop', n0(r.med_stop)),
+        ' minutos, y la operación completa dura unos ', m('med_exit', n0(r.med_exit)), ' minutos. En la primera hora el precio recorre una mediana de ',
+        m('mfe60', n0(r.mfe60)), ' ticks a favor y ', m('mae60', n0(r.mae60)), ' en contra: un recorrido adverso tan cercano al stop de 45 hace que el ',
+        m('pct_mae60_45', pct(r.pct_mae60_45)), ' de los días el precio llegue a la distancia del stop en esa hora.'
+      );
+    });
+
+    dash.draw('b45-tabla-grupos', (tb) => {
+      const g = dash.data('b45_grupos');
+      if (g.status !== 'ok' || !g.data) { tb.replaceChildren(); return; }
+      const rs = g.data.filter((r) => r.dim !== 'Desenlace');
+      tb.replaceChildren(...rs.map((r) => {
+        const tr = document.createElement('tr'); tr.dataset.key = r.clave;
+        [[r.dim, 'es-l'], [r.k, 'es-l'], [n0(r.n)], [pct(r.winrate)], [money(r.net), r.net >= 0 ? 'es-good' : 'es-bad'], [money(r.avg)]].forEach(([txt, cls]) => {
+          const td = document.createElement('td'); td.textContent = txt; if (cls) td.className = cls; tr.append(td);
+        });
+        return tr;
+      }));
+    });
+
+    dash.draw('b45-tabla-sens', (tb) => {
+      const s = dash.data('b45_sensibilidad');
+      if (s.status !== 'ok') { tb.replaceChildren(); return; }
+      tb.replaceChildren(...s.data.map((r) => {
+        const tr = document.createElement('tr'); tr.dataset.key = `${r.sl},${r.tp1}`;
+        if (Number(r.sl) === 45 && Number(r.tp1) === 30) tr.className = 'es-sel';
+        [[r.sl], [r.tp1], [r.tp2], [pct(Number(r.winrate))], [pf(Number(r.pf)), Number(r.pf) >= 1 ? 'es-good' : 'es-bad'], [money(Number(r.net)), Number(r.net) >= 0 ? 'es-good' : 'es-bad'], [ES.loc.format('.2f')(Number(r.t))]].forEach(([txt, cls]) => {
+          const td = document.createElement('td'); td.textContent = txt; if (cls) td.className = cls; tr.append(td);
+        });
+        return tr;
+      }));
     });
   })();
 </script>
