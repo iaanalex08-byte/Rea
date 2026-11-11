@@ -81,7 +81,7 @@ namespace NinjaTrader.NinjaScript.Indicators
 				{
 					string carpeta = Path.Combine(NinjaTrader.Core.Globals.UserDataDir, "export", "ORDERFLOW");
 					Directory.CreateDirectory(carpeta);
-					string nombre = Instrument.FullName.Replace(" ", "_").Replace("/", "-") + "_" + BarsPeriod.Value + "min.csv";
+					string nombre = Instrument.FullName.Replace(" ", "_").Replace("/", "-") + "_" + MinutosVela() + "min.csv";
 					sw = new StreamWriter(Path.Combine(carpeta, nombre), false);
 					sw.WriteLine("time,open,high,low,close,volume,buy,sell,delta,cvd");
 					Print("ExportarDelta: escribiendo " + Path.Combine(carpeta, nombre));
@@ -146,10 +146,18 @@ namespace NinjaTrader.NinjaScript.Indicators
 			PlotBrushes[0][0] = d >= 0 ? Brushes.SeaGreen : Brushes.Crimson;
 		}
 
+		// En velas Volumetric, BarsPeriod.Value son los "ticks per level"; los minutos están en el periodo base
+		private int MinutosVela()
+		{
+			if (BarsPeriod.BarsPeriodType != BarsPeriodType.Minute && BarsPeriod.BaseBarsPeriodType == BarsPeriodType.Minute)
+				return BarsPeriod.BaseBarsPeriodValue;
+			return BarsPeriod.Value;
+		}
+
 		private void CerrarVela(int ago)
 		{
 			DateTime local = DateTime.SpecifyKind(Time[ago], DateTimeKind.Unspecified);
-			DateTime utcOpen = TimeZoneInfo.ConvertTimeToUtc(local, tzNT).AddMinutes(-BarsPeriod.Value);
+			DateTime utcOpen = TimeZoneInfo.ConvertTimeToUtc(local, tzNT).AddMinutes(-MinutosVela());
 			DateTime cdmx = TimeZoneInfo.ConvertTimeFromUtc(utcOpen, tzCdmx);
 			if (cdmx.Date != cvdDay)
 			{
