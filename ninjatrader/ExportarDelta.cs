@@ -81,7 +81,7 @@ namespace NinjaTrader.NinjaScript.Indicators
 				{
 					string carpeta = Path.Combine(NinjaTrader.Core.Globals.UserDataDir, "export", "ORDERFLOW");
 					Directory.CreateDirectory(carpeta);
-					string nombre = Instrument.FullName.Replace(" ", "_").Replace("/", "-") + "_" + MinutosVela() + "min.csv";
+					string nombre = Instrument.FullName.Replace(" ", "_").Replace("/", "-") + "_" + MinutosVela() + "min_" + DateTime.Now.ToString("yyyyMMdd_HHmm") + ".csv";
 					sw = new StreamWriter(Path.Combine(carpeta, nombre), false);
 					sw.WriteLine("time,open,high,low,close,volume,buy,sell,delta,cvd");
 					Print("ExportarDelta: escribiendo " + Path.Combine(carpeta, nombre));
