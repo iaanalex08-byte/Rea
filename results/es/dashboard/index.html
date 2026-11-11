@@ -1,0 +1,850 @@
+<meta name="dash-one-writer">
+<style>
+  .es { display: grid; gap: var(--cds-gap-xl); font-family: var(--font-anthropic-sans); color: var(--color-fg); }
+  .es h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+  .es h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; text-wrap: balance; }
+  .es p { margin: 0; max-width: 72ch; line-height: 1.5; }
+  .es-head { display: grid; gap: var(--cds-gap-md); }
+  .es-lead { font-size: var(--cds-font-size-body); }
+  .es-muted { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+  .es-controls { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); align-items: end; }
+  .es-controls label { display: grid; gap: var(--cds-gap-xs); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); letter-spacing: .02em; }
+  .es-sec { display: grid; gap: var(--cds-gap-md); min-width: 0; }
+  .es-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--cds-gap-md); }
+  .es-kpi { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-xs); align-content: start; }
+  .es-kpi-label { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); letter-spacing: .02em; }
+  .es-kpi-value { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: 1.9rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .es-kpi-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .es-good { color: var(--color-ok); }
+  .es-bad { color: var(--color-bad); }
+  .es-warn { color: var(--color-warn); }
+  .es-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-sm); min-width: 0; }
+  .es-grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--cds-gap-md); }
+  .es-chart { position: relative; min-height: 260px; min-width: 0; }
+  .es-chart-3d { min-height: 380px; touch-action: none; cursor: grab; }
+  .es-chart-3d:active { cursor: grabbing; }
+  .es-chart-sm { min-height: 200px; }
+  .es-chart svg { display: block; overflow: visible; }
+  .es-chart svg:focus-visible { outline: 2px solid var(--color-fg-muted); outline-offset: 4px; }
+  .es-chart text { fill: var(--cds-text-secondary); font-size: var(--cds-font-size-caption); font-family: var(--font-anthropic-sans); }
+  .es-chart .es-axis path, .es-chart .es-axis line { stroke: var(--cds-chart-axis); }
+  .es-chart .es-grid line { stroke: var(--cds-chart-grid); }
+  .es-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); box-shadow: var(--cds-shadow-popover); border-radius: var(--cds-radius); padding: var(--cds-pad-sm) var(--cds-pad-md); font-size: var(--cds-font-size-caption); line-height: 1.45; white-space: nowrap; z-index: 5; font-variant-numeric: tabular-nums; }
+  .es-tip b { font-weight: var(--cds-font-weight-medium); }
+  .es-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .es-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .es-sw { width: 14px; height: 3px; border-radius: 2px; background: var(--color-fg-muted); display: inline-block; }
+  .es-sw-ok, .es-sw-bad { height: 10px; width: 10px; border-radius: 2px; }
+  .es-sw-ok { background: var(--color-ok); }
+  .es-sw-bad { background: var(--color-bad); }
+  .es-tablewrap { overflow-x: auto; min-width: 0; }
+  .es table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; font-size: var(--cds-font-size-body); }
+  .es th { text-align: right; font-weight: var(--cds-font-weight-medium); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .es td { text-align: right; padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .es th:first-child, .es td:first-child, .es th.es-l, .es td.es-l { text-align: left; }
+  .es tr.es-sel td { background: color-mix(in srgb, var(--color-fg) 6%, transparent); font-weight: var(--cds-font-weight-medium); }
+  .es-pill { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: var(--cds-font-size-caption); border: 1px solid currentColor; }
+  .es details { border-top: 1px solid var(--color-border-line); padding-top: var(--cds-pad-md); }
+  .es summary { cursor: pointer; font-weight: var(--cds-font-weight-medium); }
+  .es details ul { margin: var(--cds-gap-sm) 0 0; padding-left: 1.2em; display: grid; gap: var(--cds-gap-xs); max-width: 80ch; line-height: 1.5; }
+  [data-dash-source-state=refreshing] { opacity: .5; }
+</style>
+
+<div class="es">
+  <header class="es-head" id="encabezado">
+    <h1>ES · entradas de las 9:00 y 9:12 a favor de la tendencia</h1>
+    <p class="es-lead" data-draw="frase-resumen">—</p>
+    <p class="es-muted">Backtest del 2 de enero de 2025 al 6 de noviembre de 2026 con velas de 1 minuto del S&amp;P 500. Resultados en USD con 2 contratos ES (1 tick = 12,50 USD), descontando 1 tick de deslizamiento y 4,50 USD de comisión por contrato.</p>
+    <div class="es-controls">
+      <label for="sel-zone">Hora de las entradas
+        <select class="dash-select" id="sel-zone" aria-label="Zona horaria">
+          <option value="NY">Nueva York</option>
+          <option value="CDMX">Ciudad de México</option>
+        </select>
+      </label>
+      <label for="sel-model">Modelo
+        <select class="dash-select" id="sel-model" aria-label="Modelo">
+          <option value="A">A · 9:00 · SL 60 · TP1 60 · TP2 120</option>
+          <option value="B">B · 9:12 · SL 30 · TP1 30 · TP2 60</option>
+          <option value="AB">A + B juntos</option>
+        </select>
+      </label>
+    </div>
+  </header>
+
+  <section class="es-sec" id="indicadores">
+    <div class="es-kpis">
+      <div class="es-kpi"><span class="es-kpi-label">Tasa de acierto</span><span class="es-kpi-value" data-draw="k-winrate">—</span><span class="es-kpi-note">operaciones que terminan en ganancia</span></div>
+      <div class="es-kpi"><span class="es-kpi-label">Factor de beneficio</span><span class="es-kpi-value" data-draw="k-pf">—</span><span class="es-kpi-note">ganancias ÷ pérdidas; por encima de 1 gana</span></div>
+      <div class="es-kpi"><span class="es-kpi-label">Resultado neto</span><span class="es-kpi-value" data-draw="k-net">—</span><span class="es-kpi-note">USD en todo el periodo</span></div>
+      <div class="es-kpi"><span class="es-kpi-label">Esperanza por operación</span><span class="es-kpi-value" data-draw="k-avg">—</span><span class="es-kpi-note">USD de media por operación</span></div>
+      <div class="es-kpi"><span class="es-kpi-label">Peor racha</span><span class="es-kpi-value" data-draw="k-streak">—</span><span class="es-kpi-note">pérdidas seguidas</span></div>
+      <div class="es-kpi"><span class="es-kpi-label">Drawdown máximo</span><span class="es-kpi-value" data-draw="k-dd">—</span><span class="es-kpi-note">USD desde el máximo de la curva</span></div>
+      <div class="es-kpi"><span class="es-kpi-label">Operaciones</span><span class="es-kpi-value" data-draw="k-n">—</span><span class="es-kpi-note">una por día hábil por modelo</span></div>
+      <div class="es-kpi"><span class="es-kpi-label">¿Ventaja estadística?</span><span class="es-kpi-value" data-draw="k-t">—</span><span class="es-kpi-note">estadístico t; hace falta más de 2</span></div>
+    </div>
+  </section>
+
+  <section class="es-sec" id="curva-capital">
+    <h2>Curva de capital</h2>
+    <p class="es-muted">USD acumulados, 2 contratos por modelo. Debajo, el drawdown del modelo elegido.</p>
+    <div class="es-legend">
+      <span><i class="es-sw" data-sw="0"></i>Modelo A (9:00)</span>
+      <span><i class="es-sw" data-sw="1"></i>Modelo B (9:12)</span>
+      <span><i class="es-sw" data-sw="2"></i>A + B</span>
+    </div>
+    <div class="es-chart" data-draw="curva" data-source="curva"></div>
+  </section>
+
+  <section class="es-sec" id="superficie-3d">
+    <h2>Superficie 3D: stop × objetivo</h2>
+    <p class="es-muted">Cada punto es un backtest completo con 1 contrato y una sola salida, a la hora y con la tendencia del modelo elegido. Arrastra el gráfico (o usa las flechas del teclado) para girarlo. Verde gana, rojo pierde.</p>
+    <div class="es-controls">
+      <label for="sel-metric">Altura y color
+        <select class="dash-select" id="sel-metric" aria-label="Métrica de la superficie">
+          <option value="avg">Esperanza por operación (USD)</option>
+          <option value="pf">Factor de beneficio</option>
+          <option value="wr">Tasa de acierto (%)</option>
+        </select>
+      </label>
+    </div>
+    <div class="es-card">
+      <div class="es-chart es-chart-3d" data-draw="sup3d" data-source="superficie"></div>
+      <p class="es-muted" data-draw="frase-sup">—</p>
+    </div>
+  </section>
+
+  <div class="es-grid2">
+    <section class="es-sec" id="relacion">
+      <h2>¿Conviene 1:1?</h2>
+      <p data-draw="frase-rr">—</p>
+      <div class="es-tablewrap">
+        <table data-source="variantes" data-row-key="zone,model,group,label" aria-label="Comparación de relaciones riesgo beneficio">
+          <thead><tr>
+            <th data-field="label">Relación</th><th data-field="tp1">TP (ticks)</th><th data-field="winrate">Acierto</th>
+            <th data-field="pf">Factor</th><th data-field="net">Neto USD</th><th data-field="worst_streak">Peor racha</th>
+          </tr></thead>
+          <tbody data-draw="tabla-rr"></tbody>
+        </table>
+      </div>
+      <p class="es-muted">1 contrato, stop del modelo y una sola salida.</p>
+    </section>
+
+    <section class="es-sec" id="tendencia">
+      <h2>¿Qué definición de tendencia?</h2>
+      <p class="es-muted">Mismo modelo (2 contratos, TP1 y TP2) cambiando solo cómo se decide si comprar o vender.</p>
+      <div class="es-tablewrap">
+        <table data-source="variantes" data-row-key="zone,model,group,label" aria-label="Comparación de definiciones de tendencia">
+          <thead><tr>
+            <th data-field="label">Tendencia</th><th data-field="winrate">Acierto</th><th data-field="pf">Factor</th>
+            <th data-field="net">Neto USD</th><th data-field="maxdd">Drawdown</th>
+          </tr></thead>
+          <tbody data-draw="tabla-tend"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <section class="es-sec" id="variantes-sltp">
+    <h2>Variaciones de SL, TP1 y TP2</h2>
+    <p class="es-muted">2 contratos: uno sale en TP1 y el otro en TP2, con el stop en break-even al tocar TP1. Ordenadas de mejor a peor resultado neto; la fila resaltada es el modelo original.</p>
+    <div class="es-tablewrap">
+      <table data-source="variantes" data-row-key="zone,model,group,label" aria-label="Variantes de stop y objetivos">
+        <thead><tr>
+          <th data-field="label">Configuración (ticks)</th><th data-field="winrate">Acierto</th><th data-field="pf">Factor</th>
+          <th data-field="net">Neto USD</th><th data-field="maxdd">Drawdown</th><th data-field="worst_streak">Peor racha</th>
+        </tr></thead>
+        <tbody data-draw="tabla-var"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="es-sec" id="patrones-tiempo">
+    <h2>Patrones por día, semana y noticias</h2>
+    <p data-draw="frase-pat">—</p>
+    <div class="es-legend"><span><i class="es-sw es-sw-ok"></i>neto positivo</span><span><i class="es-sw es-sw-bad"></i>neto negativo</span><span>Barra = tasa de acierto; línea = 50%</span></div>
+    <div class="es-grid2">
+      <div class="es-card" id="pat-dia-semana"><h2>Día de la semana</h2><div class="es-chart es-chart-sm" data-draw="pat-dia" data-source="patrones"></div></div>
+      <div class="es-card" id="pat-semana-mes"><h2>Semana del mes</h2><div class="es-chart es-chart-sm" data-draw="pat-semana" data-source="patrones"></div></div>
+      <div class="es-card" id="pat-noticias"><h2>¿Afectan las noticias?</h2><div class="es-chart es-chart-sm" data-draw="pat-noticia" data-source="patrones"></div><p class="es-muted">NFP y CPI salen a las 8:30 de Nueva York; FOMC a las 14:00.</p></div>
+      <div class="es-card" id="pat-mes"><h2>Resultado neto por mes</h2><div class="es-chart es-chart-sm" data-draw="pat-mes" data-source="patrones"></div></div>
+    </div>
+  </section>
+
+  <section class="es-sec" id="comparativa">
+    <h2>Todos los modelos en las dos zonas horarias</h2>
+    <div class="es-tablewrap">
+      <table data-source="resumen" data-row-key="clave" aria-label="Resumen por zona y modelo">
+        <thead><tr>
+          <th data-field="zone">Hora</th><th data-field="model" class="es-l">Modelo</th><th data-field="n">Ops</th><th data-field="winrate">Acierto</th>
+          <th data-field="pf">Factor</th><th data-field="net">Neto USD</th><th data-field="maxdd">Drawdown</th><th data-field="worst_streak">Peor racha</th><th data-field="t">t</th>
+        </tr></thead>
+        <tbody data-draw="tabla-resumen"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <details id="supuestos">
+    <summary>Cómo se hizo el backtest y qué supuestos tiene</summary>
+    <ul>
+      <li>Datos: velas de 1 minuto del índice S&amp;P 500 (SPXUSD, HistData.com). No es el futuro ES: el nivel difiere por la base, pero los movimientos en ticks son prácticamente iguales.</li>
+      <li>Entrada al precio de apertura del minuto de las 9:00 (modelo A) o 9:12 (modelo B), un intento por día hábil. El selector de arriba cambia si esas horas son de Nueva York o de Ciudad de México.</li>
+      <li>Tendencia: compra si el precio está por encima de la EMA de 50 velas de 5 minutos (ya cerradas) y vende si está por debajo. La tabla de tendencia compara otras tres definiciones.</li>
+      <li>2 contratos: el primero sale en TP1, el segundo en TP2. Al tocar TP1, el stop del segundo pasa al precio de entrada. Lo que siga abierto a las 15:59 de Nueva York se cierra a mercado.</li>
+      <li>Si una vela de 1 minuto toca a la vez el stop y el objetivo, se cuenta como stop.</li>
+      <li>Noticias: lista aproximada de días de NFP, CPI y FOMC; conviene revisarla con un calendario oficial.</li>
+      <li>Estadístico t = esperanza ÷ desviación típica × √operaciones. Por debajo de 2, el resultado no se distingue del azar.</li>
+    </ul>
+  </details>
+</div>
+
+<script>
+  // ---------- constantes y utilidades compartidas
+  window.ES = (() => {
+    const BASE = { A: { sl: 60, tp1: 60, tp2: 120, hora: '9:00' }, B: { sl: 30, tp1: 30, tp2: 60, hora: '9:12' } };
+    const ZONA = { NY: 'Nueva York', CDMX: 'Ciudad de México' };
+    const MODELO = { A: 'A · 9:00', B: 'B · 9:12', AB: 'A + B' };
+    const loc = d3.formatLocale({ decimal: '.', thousands: ',', grouping: [3], currency: ['$', ''] });
+    const n0 = loc.format(',.0f');
+    const money = (v) => (v < 0 ? '−' : '') + '$' + n0(Math.abs(v));
+    const pct = (v) => loc.format('.0%')(v);
+    const pf = (v) => loc.format('.2f')(v);
+    const params = () => {
+      const p = dash.params();
+      return { zone: p.zone || 'NY', model: p.model || 'A', metric: p.metric || 'avg' };
+    };
+    const enc = (s) => encodeURIComponent(String(s));
+    const mark = (tag, source, field, where, text, cls) => {
+      const e = document.createElement(tag);
+      e.dataset.source = source; e.dataset.field = field;
+      if (where) e.dataset.where = where;
+      e.textContent = text;
+      if (cls) e.className = cls;
+      return e;
+    };
+    const resolveColor = (el, cssVar, fallback) => {
+      try {
+        const probe = document.createElement('i');
+        probe.style.color = `var(${cssVar})`;
+        el.appendChild(probe);
+        const c = getComputedStyle(probe).color;
+        probe.remove();
+        const cv = document.createElement('canvas'); cv.width = cv.height = 1;
+        const ctx = cv.getContext('2d'); ctx.fillStyle = fallback; ctx.fillStyle = c; ctx.fillRect(0, 0, 1, 1);
+        const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
+        return `rgb(${r},${g},${b})`;
+      } catch (e) { return fallback; }
+    };
+    const tip = (parent) => {
+      let t = parent.querySelector(':scope > .es-tip');
+      if (!t) { t = document.createElement('div'); t.className = 'es-tip'; t.hidden = true; parent.appendChild(t); }
+      return t;
+    };
+    const placeTip = (t, parent, x, y) => {
+      const w = parent.clientWidth;
+      t.hidden = false;
+      const tw = t.offsetWidth, th = t.offsetHeight;
+      let left = x + 14; if (left + tw > w) left = Math.max(0, x - tw - 14);
+      let top = y - th - 10; if (top < 0) top = y + 14;
+      t.style.left = left + 'px'; t.style.top = top + 'px';
+    };
+    const tipLines = (t, lines) => {
+      t.replaceChildren(...lines.map(([k, v]) => {
+        const d = document.createElement('div');
+        if (k) { const b = document.createElement('b'); b.textContent = k + ' '; d.append(b); }
+        d.append(document.createTextNode(v));
+        return d;
+      }));
+    };
+    const reduced = () => window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    return { BASE, ZONA, MODELO, money, pct, pf, n0, params, enc, mark, resolveColor, tip, placeTip, tipLines, reduced, loc };
+  })();
+
+  // ---------- cálculos a partir de las operaciones
+  dash.calc('resumen', {
+    inputs: ['operaciones'],
+    title: 'Métricas por zona horaria y modelo',
+    description: 'Tasa de acierto, factor de beneficio, neto, drawdown, peor racha y estadístico t de cada modelo y de A + B.',
+    fn: (operaciones) => {
+      const out = [];
+      for (const zone of ['NY', 'CDMX']) {
+        for (const model of ['A', 'B', 'AB']) {
+          const ops = operaciones
+            .filter((o) => o.zone === zone && (model === 'AB' || o.model === model))
+            .sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : a.model < b.model ? -1 : 1));
+          const usd = ops.map((o) => Number(o.usd));
+          const n = usd.length;
+          let eq = 0, peak = 0, maxdd = 0, run = 0, worst = 0, gw = 0, gl = 0;
+          for (const v of usd) {
+            eq += v; peak = Math.max(peak, eq); maxdd = Math.max(maxdd, peak - eq);
+            run = v < 0 ? run + 1 : 0; worst = Math.max(worst, run);
+            if (v > 0) gw += v; else gl -= v;
+          }
+          const avg = eq / n;
+          const sd = Math.sqrt(usd.reduce((s, v) => s + (v - avg) ** 2, 0) / (n - 1));
+          out.push({
+            clave: `${zone}-${model}`, zone, model, n,
+            winrate: ops.filter((o) => Number(o.usd) > 0).length / n,
+            pf: gw / gl, net: eq, avg, maxdd, worst_streak: worst, t: (avg / sd) * Math.sqrt(n),
+          });
+        }
+      }
+      return out;
+    },
+  });
+
+  dash.calc('curva', {
+    inputs: ['operaciones'],
+    title: 'Curva de capital',
+    description: 'USD acumulados día a día y drawdown, por zona horaria y modelo (A, B y A + B).',
+    fn: (operaciones) => {
+      const out = [];
+      for (const zone of ['NY', 'CDMX']) {
+        for (const model of ['A', 'B', 'AB']) {
+          const porDia = d3.rollup(
+            operaciones.filter((o) => o.zone === zone && (model === 'AB' || o.model === model)),
+            (v) => d3.sum(v, (o) => Number(o.usd)), (o) => o.date);
+          let eq = 0, peak = 0;
+          for (const date of [...porDia.keys()].sort()) {
+            eq += porDia.get(date); peak = Math.max(peak, eq);
+            out.push({ zone, model, date, eq, dd: eq - peak });
+          }
+        }
+      }
+      return out;
+    },
+  });
+
+  dash.calc('patrones', {
+    inputs: ['operaciones'],
+    title: 'Patrones por día, semana del mes, noticias y mes',
+    description: 'Operaciones, tasa de acierto y neto agrupados por día de la semana, semana del mes, tipo de noticia y mes.',
+    fn: (operaciones) => {
+      const dias = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+      const dims = {
+        dia: (o) => dias[new Date(o.date + 'T12:00:00Z').getUTCDay()],
+        semana: (o) => 'Semana ' + (Math.floor((Number(o.date.slice(8, 10)) - 1) / 7) + 1),
+        noticia: (o) => o.news,
+        mes: (o) => o.date.slice(0, 7),
+      };
+      const out = [];
+      for (const zone of ['NY', 'CDMX']) {
+        for (const model of ['A', 'B', 'AB']) {
+          const ops = operaciones.filter((o) => o.zone === zone && (model === 'AB' || o.model === model));
+          for (const [dim, key] of Object.entries(dims)) {
+            for (const [k, v] of d3.group(ops, key)) {
+              const usd = v.map((o) => Number(o.usd));
+              out.push({
+                clave: `${zone}|${model}|${dim}|${k}`, zone, model, dim, k, n: v.length,
+                winrate: usd.filter((x) => x > 0).length / v.length, net: d3.sum(usd), avg: d3.mean(usd),
+              });
+            }
+          }
+        }
+      }
+      return out;
+    },
+  });
+</script>
+
+<script>
+  // ---------- controles
+  (() => {
+    const sels = [['sel-zone', 'zone', 'NY'], ['sel-model', 'model', 'A'], ['sel-metric', 'metric', 'avg']];
+    for (const [id, name] of sels) {
+      for (const el of document.querySelectorAll('#' + id)) {
+        el.addEventListener('change', () => dash.setParams({ [name]: el.value }));
+      }
+    }
+    dash.onData(() => {
+      const p = dash.params();
+      for (const [id, name, def] of sels) {
+        for (const el of document.querySelectorAll('#' + id)) {
+          if (document.activeElement !== el) el.value = p[name] || def;
+        }
+      }
+      for (const sw of document.querySelectorAll('[data-sw]')) {
+        sw.style.background = dash.colors[Number(sw.dataset.sw)] || 'var(--color-fg-muted)';
+      }
+    });
+  })();
+</script>
+
+<script>
+  // ---------- indicadores y frases
+  (() => {
+    const { money, pct, pf, n0, params, enc, mark, ZONA, MODELO } = ES;
+    const fila = (zone, model) => {
+      const r = dash.data('resumen');
+      return r.status === 'ok' && r.data ? r.data.find((x) => x.zone === zone && x.model === model) : null;
+    };
+    const kpi = (name, field, fmt, cls) => dash.draw(name, (el) => {
+      const p = params();
+      const r = fila(p.zone, p.model);
+      if (!r) { el.replaceChildren('—'); el.className = 'es-kpi-value'; return; }
+      el.replaceChildren(mark('span', 'resumen', field, 'clave=' + enc(r.clave), fmt(r[field])));
+      el.className = 'es-kpi-value ' + (cls ? cls(r[field], r) : '');
+    });
+    kpi('k-winrate', 'winrate', pct);
+    kpi('k-pf', 'pf', pf, (v) => (v >= 1 ? 'es-good' : 'es-bad'));
+    kpi('k-net', 'net', money, (v) => (v >= 0 ? 'es-good' : 'es-bad'));
+    kpi('k-avg', 'avg', money, (v) => (v >= 0 ? 'es-good' : 'es-bad'));
+    kpi('k-streak', 'worst_streak', (v) => n0(v));
+    kpi('k-dd', 'maxdd', money, () => 'es-bad');
+    kpi('k-n', 'n', (v) => n0(v));
+    kpi('k-t', 't', (v) => ES.loc.format('.2f')(v), (v) => (Math.abs(v) >= 2 ? (v > 0 ? 'es-good' : 'es-bad') : 'es-warn'));
+
+    dash.draw('frase-resumen', (el) => {
+      const p = params();
+      const a = fila(p.zone, 'A'), b = fila(p.zone, 'B');
+      const other = p.zone === 'NY' ? 'CDMX' : 'NY';
+      const oa = fila(other, 'A'), ob = fila(other, 'B');
+      if (!a || !b || !oa || !ob) { el.replaceChildren('—'); return; }
+      const verb = (r) => (r.net >= 0 ? 'gana ' : 'pierde ');
+      const w = (r) => 'clave=' + enc(r.clave);
+      const sig = [a, b].some((r) => Math.abs(r.t) >= 2 && r.t > 0);
+      el.replaceChildren(
+        `Con hora de ${ZONA[p.zone]}, el modelo A ${verb(a)}`,
+        mark('b', 'resumen', 'net', w(a), money(Math.abs(a.net))), ' (factor ',
+        mark('span', 'resumen', 'pf', w(a), pf(a.pf)), ') y el B ', verb(b),
+        mark('b', 'resumen', 'net', w(b), money(Math.abs(b.net))), ' (factor ',
+        mark('span', 'resumen', 'pf', w(b), pf(b.pf)), `). Con hora de ${ZONA[other]} el factor es `,
+        mark('span', 'resumen', 'pf', w(oa), pf(oa.pf)), ' y ', mark('span', 'resumen', 'pf', w(ob), pf(ob.pf)), '. ',
+        sig ? 'Algún modelo muestra ventaja estadística.' : 'Ninguno muestra una ventaja que se distinga del azar.'
+      );
+    });
+
+    dash.draw('tabla-resumen', (tb) => {
+      const r = dash.data('resumen');
+      if (r.status !== 'ok' || !r.data) { tb.replaceChildren(); return; }
+      const p = params();
+      tb.replaceChildren(...r.data.map((x) => {
+        const tr = document.createElement('tr');
+        tr.dataset.key = x.clave;
+        if (x.zone === p.zone && x.model === p.model) tr.className = 'es-sel';
+        const cells = [x.zone, MODELO[x.model], n0(x.n), pct(x.winrate), pf(x.pf), money(x.net), money(x.maxdd), n0(x.worst_streak), ES.loc.format('.2f')(x.t)];
+        cells.forEach((c, i) => {
+          const td = document.createElement('td'); td.textContent = c;
+          if (i === 1) td.className = 'es-l';
+          if (i === 4) td.classList.add(x.pf >= 1 ? 'es-good' : 'es-bad');
+          if (i === 5) td.classList.add(x.net >= 0 ? 'es-good' : 'es-bad');
+          tr.append(td);
+        });
+        return tr;
+      }));
+    });
+  })();
+</script>
+
+<script>
+  // ---------- curva de capital
+  dash.draw('curva', (el) => {
+    const { money, params, tip, placeTip, tipLines, ZONA } = ES;
+    const c = dash.data('curva');
+    if (c.status === 'error') { el.replaceChildren('No se pudo cargar la curva.'); return; }
+    if (c.status !== 'ok' || !c.data) { el.replaceChildren('—'); return; }
+    const p = params();
+    const parse = d3.utcParse('%Y-%m-%d');
+    const series = ['A', 'B', 'AB'].map((m, i) => ({
+      m, color: dash.colors[i],
+      rows: c.data.filter((r) => r.zone === p.zone && r.model === m).map((r) => ({ d: parse(r.date), eq: r.eq, dd: r.dd, date: r.date })),
+    }));
+    const sel = series.find((s) => s.m === p.model) || series[0];
+    const W = el.clientWidth || 600, H1 = 260, H2 = 80, gap = 18;
+    const all = series.flatMap((s) => s.rows);
+    const x0 = d3.scaleUtc().domain(d3.extent(all, (r) => r.d));
+    const y = d3.scaleLinear().domain(d3.extent([0, ...all.map((r) => r.eq)])).nice();
+    const yd = d3.scaleLinear().domain([d3.min(sel.rows, (r) => r.dd) || -1, 0]).nice();
+
+    el.replaceChildren();
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H1 + gap + H2 + 24}`)
+      .attr('role', 'img').attr('aria-label', `Curva de capital en USD de los modelos A, B y A + B con hora de ${ZONA[p.zone]}`);
+    // margen izquierdo según la etiqueta más ancha
+    const probe = svg.append('text').text(money(y.domain()[0]).length > money(y.domain()[1]).length ? money(y.domain()[0]) : money(y.domain()[1]));
+    const ml = Math.ceil(probe.node().getComputedTextLength() || 50) + 10; probe.remove();
+    const mr = 70;
+    const x = x0.range([ml, W - mr]);
+    y.range([H1, 8]); yd.range([H1 + gap + H2, H1 + gap]);
+    const ticks = Math.max(2, Math.floor((W - ml - mr) / 90));
+    svg.append('g').attr('class', 'es-grid').selectAll('line').data(y.ticks(5)).join('line')
+      .attr('x1', ml).attr('x2', W - mr).attr('y1', y).attr('y2', y);
+    svg.append('g').attr('class', 'es-axis').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(y).ticks(5).tickFormat(money).tickSize(0)).call((g) => g.select('.domain').remove());
+    svg.append('line').attr('x1', ml).attr('x2', W - mr).attr('y1', y(0)).attr('y2', y(0)).style('stroke', 'var(--cds-chart-reference)');
+    for (const s of series) {
+      svg.append('path').datum(s.rows).attr('fill', 'none').style('stroke', s.color)
+        .attr('stroke-width', s.m === p.model ? 2.4 : 1.3).attr('opacity', s.m === p.model ? 1 : 0.75)
+        .attr('d', d3.line().x((r) => x(r.d)).y((r) => y(r.eq)));
+    }
+    // valores finales, separados para que no se toquen
+    const ends = series.map((s) => ({ s, v: s.rows.at(-1).eq, y: y(s.rows.at(-1).eq) })).sort((a, b) => a.y - b.y);
+    for (let i = 1; i < ends.length; i++) ends[i].y = Math.max(ends[i].y, ends[i - 1].y + 14);
+    svg.append('g').selectAll('text').data(ends).join('text').attr('x', W - mr + 6).attr('y', (e) => e.y + 4)
+      .text((e) => money(e.v)).style('fill', (e) => e.s.color);
+    // drawdown
+    svg.append('path').datum(sel.rows).style('fill', 'var(--color-bad)').attr('opacity', 0.35)
+      .attr('d', d3.area().x((r) => x(r.d)).y0(yd(0)).y1((r) => yd(r.dd)));
+    svg.append('g').attr('class', 'es-axis').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(yd).ticks(2).tickFormat(money).tickSize(0)).call((g) => g.select('.domain').remove());
+    svg.append('g').attr('class', 'es-axis').attr('transform', `translate(0,${H1 + gap + H2})`)
+      .call(d3.axisBottom(x).ticks(ticks).tickFormat(d3.utcFormat('%b %Y')).tickSizeOuter(0));
+    // tooltip
+    const t = tip(el);
+    const guide = svg.append('line').attr('y1', 8).attr('y2', H1 + gap + H2).style('stroke', 'var(--cds-chart-reference)').attr('opacity', 0);
+    const bis = d3.bisector((r) => r.d).right;
+    svg.append('rect').attr('x', ml).attr('y', 0).attr('width', W - ml - mr).attr('height', H1 + gap + H2).attr('fill', 'transparent')
+      .on('pointermove', (ev) => {
+        const [mx] = d3.pointer(ev);
+        const d = x.invert(mx);
+        guide.attr('x1', mx).attr('x2', mx).attr('opacity', 1);
+        const at = (s) => { const i = bis(s.rows, d) - 1; return i >= 0 ? s.rows[i] : null; };
+        const rs = series.map(at);
+        tipLines(t, [[d3.utcFormat('%d %b %Y')(d), ''], ['A', rs[0] ? money(rs[0].eq) : '—'], ['B', rs[1] ? money(rs[1].eq) : '—'], ['A + B', rs[2] ? money(rs[2].eq) : '—'], ['Drawdown', at(sel) ? money(at(sel).dd) : '—']]);
+        const box = el.getBoundingClientRect();
+        placeTip(t, el, ev.clientX - box.left, ev.clientY - box.top);
+      })
+      .on('pointerleave', () => { t.hidden = true; guide.attr('opacity', 0); });
+  });
+</script>
+
+<script>
+  // ---------- superficie 3D
+  dash.draw('sup3d', {
+    mount: (el) => {
+      const st = { yaw: -0.85, pitch: 0.62, drag: null };
+      const svg = d3.select(el).append('svg').attr('width', '100%').attr('tabindex', 0).attr('role', 'img');
+      const t = ES.tip(el);
+      st.svg = svg; st.t = t;
+      el.addEventListener('pointerdown', (e) => { st.drag = { x: e.clientX, y: e.clientY }; el.setPointerCapture(e.pointerId); t.hidden = true; });
+      el.addEventListener('pointermove', (e) => {
+        if (!st.drag) return;
+        st.yaw += (e.clientX - st.drag.x) * 0.01;
+        st.pitch = Math.max(0.12, Math.min(1.4, st.pitch + (e.clientY - st.drag.y) * 0.008));
+        st.drag = { x: e.clientX, y: e.clientY };
+        st.render && st.render();
+      });
+      const end = () => { st.drag = null; };
+      el.addEventListener('pointerup', end); el.addEventListener('pointercancel', end);
+      svg.on('keydown', (e) => {
+        const k = { ArrowLeft: [-0.12, 0], ArrowRight: [0.12, 0], ArrowUp: [0, -0.08], ArrowDown: [0, 0.08] }[e.key];
+        if (!k) return;
+        e.preventDefault();
+        st.yaw += k[0]; st.pitch = Math.max(0.12, Math.min(1.4, st.pitch + k[1]));
+        st.render && st.render();
+      });
+      return st;
+    },
+    update: (el, st) => {
+      const { money, pf, params, tipLines, placeTip, BASE, resolveColor, ZONA } = ES;
+      const s = dash.data('superficie');
+      const svg = st.svg;
+      if (s.status !== 'ok') { svg.selectAll('*').remove(); st.render = null; return; }
+      const p = params();
+      const model = p.model === 'AB' ? 'A' : p.model;
+      const rows = s.data.filter((r) => r.zone === p.zone && r.model === model)
+        .map((r) => ({ sl: +r.sl, tp: +r.tp, avg: +r.avg, pf: +r.pf, wr: +r.wr * 100 }));
+      const metric = p.metric;
+      const label = { avg: 'USD por operación', pf: 'Factor de beneficio', wr: 'Acierto %' }[metric];
+      const fmt = { avg: money, pf: pf, wr: (v) => d3.format('.0f')(v) + '%' }[metric];
+      const be = { avg: 0, pf: 1, wr: 50 }[metric];
+      const sls = [...new Set(rows.map((r) => r.sl))].sort((a, b) => a - b);
+      const tps = [...new Set(rows.map((r) => r.tp))].sort((a, b) => a - b);
+      const grid = new Map(rows.map((r) => [r.sl + '|' + r.tp, r]));
+      const vals = rows.map((r) => r[metric]);
+      let zmin = d3.min(vals), zmax = d3.max(vals);
+      if (zmin === zmax) { zmin -= 1; zmax += 1; }
+      const Z = 0.62;
+      const zN = (v) => ((v - zmin) / (zmax - zmin)) * 2 * Z - Z;
+      const cOk = resolveColor(el, '--color-ok', '#2f9e44'), cBad = resolveColor(el, '--color-bad', '#d6336c'), cMid = resolveColor(el, '--color-panel', '#eee');
+      const color = (v) => v >= be
+        ? d3.interpolateRgb(cMid, cOk)(Math.min(1, 0.25 + 0.75 * (zmax > be ? (v - be) / (zmax - be) : 0)))
+        : d3.interpolateRgb(cMid, cBad)(Math.min(1, 0.25 + 0.75 * (be > zmin ? (be - v) / (be - zmin) : 0)));
+      const xi = (j) => -1 + (2 * j) / (sls.length - 1);
+      const yi = (i) => -1 + (2 * i) / (tps.length - 1);
+      const base = BASE[model];
+      const best = rows.reduce((a, r) => (r[metric] > a[metric] ? r : a), rows[0]);
+      svg.attr('aria-label', `Superficie 3D de ${label} según stop y objetivo, modelo ${model}, hora de ${ZONA[p.zone]}`);
+
+      st.render = () => {
+        const W = el.clientWidth || 600;
+        const H = Math.round(Math.max(340, Math.min(540, W * 0.72)));
+        svg.attr('viewBox', `0 0 ${W} ${H}`);
+        const S = Math.min(W * 0.34, H * 0.5), cx = W / 2, cy = H * 0.52;
+        const ca = Math.cos(st.yaw), sa = Math.sin(st.yaw), cb = Math.cos(st.pitch), sb = Math.sin(st.pitch);
+        const P = (x, y, z) => {
+          const X = x * ca - y * sa, Y = x * sa + y * ca;
+          return { x: cx + X * S, y: cy + (Y * sb - z * cb) * S, d: -Y * cb - z * sb };
+        };
+        svg.selectAll('*').remove();
+        const floor = [[-1, -1], [1, -1], [1, 1], [-1, 1]].map(([x, y]) => P(x, y, -Z));
+        svg.append('path').attr('d', 'M' + floor.map((q) => q.x + ',' + q.y).join('L') + 'Z')
+          .style('fill', 'none').style('stroke', 'var(--cds-chart-grid)');
+        const gFloor = svg.append('g').attr('class', 'es-grid');
+        sls.forEach((_, j) => { const a = P(xi(j), -1, -Z), b = P(xi(j), 1, -Z); gFloor.append('line').attr('x1', a.x).attr('y1', a.y).attr('x2', b.x).attr('y2', b.y); });
+        tps.forEach((_, i) => { const a = P(-1, yi(i), -Z), b = P(1, yi(i), -Z); gFloor.append('line').attr('x1', a.x).attr('y1', a.y).attr('x2', b.x).attr('y2', b.y); });
+        // eje vertical en la esquina más a la izquierda
+        const corners = [[-1, -1], [1, -1], [1, 1], [-1, 1]];
+        const ci = d3.minIndex(corners, ([x, y]) => P(x, y, -Z).x);
+        const [ax, ay] = corners[ci];
+        const zb = P(ax, ay, -Z), zt = P(ax, ay, Z);
+        svg.append('line').attr('x1', zb.x).attr('y1', zb.y).attr('x2', zt.x).attr('y2', zt.y).style('stroke', 'var(--cds-chart-axis)');
+        const zt5 = d3.ticks(zmin, zmax, 4);
+        for (const v of zt5) {
+          const q = P(ax, ay, zN(v));
+          svg.append('text').attr('x', q.x - 6).attr('y', q.y + 4).attr('text-anchor', 'end').text(fmt(v));
+        }
+        svg.append('text').attr('x', zt.x).attr('y', zt.y - 10).attr('text-anchor', 'middle').text(label);
+        // cuadros de la superficie, de atrás hacia adelante
+        const quads = [];
+        for (let i = 0; i < tps.length - 1; i++) {
+          for (let j = 0; j < sls.length - 1; j++) {
+            const cs = [[j, i], [j + 1, i], [j + 1, i + 1], [j, i + 1]].map(([jj, ii]) => {
+              const r = grid.get(sls[jj] + '|' + tps[ii]);
+              return { r, q: P(xi(jj), yi(ii), zN(r[metric])) };
+            });
+            quads.push({ cs, d: d3.mean(cs, (c) => c.q.d), v: d3.mean(cs, (c) => c.r[metric]) });
+          }
+        }
+        quads.sort((a, b) => b.d - a.d);
+        const t = st.t;
+        svg.append('g').selectAll('path').data(quads).join('path')
+          .attr('d', (qd) => 'M' + qd.cs.map((c) => c.q.x + ',' + c.q.y).join('L') + 'Z')
+          .style('fill', (qd) => color(qd.v)).style('stroke', 'var(--color-bg)').attr('stroke-width', 0.6).attr('stroke-opacity', 0.7)
+          .on('pointermove', (ev, qd) => {
+            if (st.drag) return;
+            const [mx, my] = d3.pointer(ev, svg.node());
+            const k = d3.minIndex(qd.cs, (c) => (c.q.x - mx) ** 2 + (c.q.y - my) ** 2);
+            const r = qd.cs[k].r;
+            tipLines(t, [['SL', r.sl + ' ticks'], ['TP', r.tp + ' ticks'], ['Esperanza', money(r.avg) + ' / op'], ['Factor', pf(r.pf)], ['Acierto', d3.format('.0f')(r.wr) + '%']]);
+            const box = el.getBoundingClientRect();
+            placeTip(t, el, ev.clientX - box.left, ev.clientY - box.top);
+          })
+          .on('pointerleave', () => { t.hidden = true; });
+        // etiquetas de los ejes del suelo, en los bordes más cercanos
+        const yFront = P(0, -1, -Z).d < P(0, 1, -Z).d ? -1 : 1;
+        const xFront = P(-1, 0, -Z).d < P(1, 0, -Z).d ? -1 : 1;
+        const step = (n) => Math.max(1, Math.ceil(n / Math.max(3, Math.floor(W / 110))));
+        sls.forEach((v, j) => {
+          if (j % step(sls.length)) return;
+          const q = P(xi(j), yFront * 1.12, -Z);
+          svg.append('text').attr('x', q.x).attr('y', q.y + 4).attr('text-anchor', 'middle').text(v);
+        });
+        tps.forEach((v, i) => {
+          if (i % step(tps.length)) return;
+          const q = P(xFront * 1.12, yi(i), -Z);
+          svg.append('text').attr('x', q.x).attr('y', q.y + 4).attr('text-anchor', 'middle').text(v);
+        });
+        const ls = P(0, yFront * 1.3, -Z), lt = P(xFront * 1.3, 0, -Z);
+        svg.append('text').attr('x', ls.x).attr('y', ls.y + 6).attr('text-anchor', 'middle').style('font-weight', 600).text('Stop (ticks)');
+        svg.append('text').attr('x', lt.x).attr('y', lt.y + 6).attr('text-anchor', 'middle').style('font-weight', 600).text('Objetivo (ticks)');
+        // marcadores: configuración del modelo y mejor punto
+        const marks = [];
+        for (const [tp, name] of [[base.tp1, 'Tu TP1'], [base.tp2, 'Tu TP2']]) {
+          const j = sls.indexOf(base.sl), i = tps.indexOf(tp);
+          if (j >= 0 && i >= 0) marks.push({ q: P(xi(j), yi(i), zN(grid.get(base.sl + '|' + tp)[metric])), name, cls: 'var(--color-fg)' });
+        }
+        marks.push({ q: P(xi(sls.indexOf(best.sl)), yi(tps.indexOf(best.tp)), zN(best[metric])), name: 'Mejor', cls: 'var(--color-ok)' });
+        const gm = svg.append('g').style('pointer-events', 'none');
+        for (const m of marks) {
+          gm.append('circle').attr('cx', m.q.x).attr('cy', m.q.y).attr('r', 5).style('fill', m.cls).style('stroke', 'var(--color-bg)').attr('stroke-width', 2);
+          gm.append('text').attr('x', m.q.x + 8).attr('y', m.q.y - 8).style('fill', 'var(--color-fg)').style('font-weight', 600).text(m.name);
+        }
+      };
+      st.render();
+    },
+  });
+
+  dash.draw('frase-sup', (el) => {
+    const { money, pf, params, BASE, mark, enc } = ES;
+    const s = dash.data('superficie');
+    if (s.status !== 'ok') { el.replaceChildren('—'); return; }
+    const p = params();
+    const model = p.model === 'AB' ? 'A' : p.model;
+    const rows = s.data.filter((r) => r.zone === p.zone && r.model === model);
+    const best = rows.reduce((a, r) => (+r.avg > +a.avg ? r : a), rows[0]);
+    const worst = rows.reduce((a, r) => (+r.avg < +a.avg ? r : a), rows[0]);
+    const b = BASE[model];
+    const mine = rows.find((r) => +r.sl === b.sl && +r.tp === b.tp2);
+    const pos = rows.filter((r) => +r.avg > 0).length;
+    const w = (r) => `zone=${enc(r.zone)}&model=${enc(r.model)}&sl=${enc(r.sl)}&tp=${enc(r.tp)}`;
+    el.replaceChildren(
+      `Modelo ${model}${p.model === 'AB' ? ' (la superficie se muestra por modelo)' : ''}: ${pos} de ${rows.length} combinaciones dan esperanza positiva. La mejor es SL ${best.sl} / TP ${best.tp} con `,
+      mark('b', 'superficie', 'avg', w(best), money(+best.avg)), ' por operación (factor ', mark('span', 'superficie', 'pf', w(best), pf(+best.pf)),
+      `); la peor, SL ${worst.sl} / TP ${worst.tp} con `, mark('span', 'superficie', 'avg', w(worst), money(+worst.avg)), '.',
+      ...(mine ? [` Tu SL ${b.sl} con TP ${b.tp2} da `, mark('span', 'superficie', 'avg', w(mine), money(+mine.avg)), '.'] : []),
+      ' Como la superficie es casi plana y cercana a cero, elegir el pico es sobreajuste.'
+    );
+  });
+</script>
+
+<script>
+  // ---------- tablas de variantes, relación y tendencia
+  (() => {
+    const { money, pct, pf, n0, params, BASE } = ES;
+    const filas = (group, model) => {
+      const v = dash.data('variantes');
+      if (v.status !== 'ok') return null;
+      const p = params();
+      return v.data.filter((r) => r.zone === p.zone && r.model === model && r.group === group);
+    };
+    const keyOf = (r) => [r.zone, r.model, r.group, r.label].map(encodeURIComponent).join(',');
+    const row = (r, cells, sel) => {
+      const tr = document.createElement('tr');
+      tr.dataset.key = keyOf(r);
+      if (sel) tr.className = 'es-sel';
+      cells.forEach(([txt, cls], i) => {
+        const td = document.createElement('td'); td.textContent = txt;
+        if (i === 0) td.className = 'es-l';
+        if (cls) td.classList.add(cls);
+        tr.append(td);
+      });
+      return tr;
+    };
+    const good = (v, t) => (v >= t ? 'es-good' : 'es-bad');
+    const modelOf = () => (params().model === 'AB' ? 'A' : params().model);
+
+    dash.draw('tabla-rr', (tb) => {
+      const rs = filas('rr', modelOf());
+      if (!rs) { tb.replaceChildren(); return; }
+      tb.replaceChildren(...rs.map((r) => row(r, [[r.label], [r.tp1], [pct(+r.winrate)], [pf(+r.pf), good(+r.pf, 1)], [money(+r.net), good(+r.net, 0)], [n0(+r.worst_streak)]], r.label === '1:1')));
+    });
+
+    dash.draw('frase-rr', (el) => {
+      const rs = filas('rr', modelOf());
+      if (!rs || !rs.length) { el.replaceChildren('—'); return; }
+      const g = (l) => rs.find((r) => r.label === l);
+      const a = g('1:1'), b = g('1:2');
+      const best = rs.reduce((x, r) => (+r.net > +x.net ? r : x), rs[0]);
+      const w = (r) => `zone=${encodeURIComponent(r.zone)}&model=${encodeURIComponent(r.model)}&group=rr&label=${encodeURIComponent(r.label)}`;
+      const mk = (r, f, txt) => ES.mark('b', 'variantes', f, w(r), txt);
+      const verdict = +a.pf >= 1 && +a.net >= +b.net ? 'Aquí 1:1 conviene más que 1:2.' : +a.pf < 1 && +b.pf < 1 ? 'Ninguna relación convierte el modelo en rentable: el problema es la entrada, no el objetivo.' : 'Aquí 1:1 no mejora a 1:2.';
+      el.replaceChildren(
+        'Con 1:1 aciertas el ', mk(a, 'winrate', pct(+a.winrate)), ' (factor ', mk(a, 'pf', pf(+a.pf)), '); con 1:2, el ',
+        mk(b, 'winrate', pct(+b.winrate)), ' (factor ', mk(b, 'pf', pf(+b.pf)), `). La mejor relación es ${best.label}. ${verdict}`
+      );
+    });
+
+    dash.draw('tabla-var', (tb) => {
+      const m = modelOf();
+      const rs = filas('variante', m);
+      if (!rs) { tb.replaceChildren(); return; }
+      const b = BASE[m];
+      rs.sort((x, y) => +y.net - +x.net);
+      tb.replaceChildren(...rs.map((r) => row(r,
+        [[r.label], [pct(+r.winrate)], [pf(+r.pf), good(+r.pf, 1)], [money(+r.net), good(+r.net, 0)], [money(+r.maxdd)], [n0(+r.worst_streak)]],
+        +r.sl === b.sl && +r.tp1 === b.tp1 && +r.tp2 === b.tp2 && !r.label.includes('sin BE'))));
+    });
+
+    dash.draw('tabla-tend', (tb) => {
+      const rs = filas('tendencia', modelOf());
+      if (!rs) { tb.replaceChildren(); return; }
+      rs.sort((x, y) => +y.net - +x.net);
+      tb.replaceChildren(...rs.map((r) => row(r, [[r.label], [pct(+r.winrate)], [pf(+r.pf), good(+r.pf, 1)], [money(+r.net), good(+r.net, 0)], [money(+r.maxdd)]], r.label === 'EMA50 5m')));
+    });
+  })();
+</script>
+
+<script>
+  // ---------- patrones
+  (() => {
+    const { money, pct, n0, params, tip, placeTip, tipLines, mark, enc, ZONA } = ES;
+    const ORDER = {
+      dia: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie'],
+      semana: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4', 'Semana 5'],
+      noticia: ['Sin noticia', 'NFP/CPI 8:30', 'FOMC'],
+    };
+    const get = (dim, zone, model) => {
+      const d = dash.data('patrones');
+      if (d.status !== 'ok' || !d.data) return null;
+      const p = params();
+      return d.data.filter((r) => r.zone === (zone || p.zone) && r.model === (model || p.model) && r.dim === dim);
+    };
+    const hbars = (name, dim) => dash.draw(name, (el) => {
+      const rs = get(dim);
+      if (!rs) { el.replaceChildren('—'); return; }
+      const order = ORDER[dim];
+      rs.sort((a, b) => order.indexOf(a.k) - order.indexOf(b.k));
+      const W = el.clientWidth || 300, rowH = 30, H = rs.length * rowH + 22;
+      el.replaceChildren();
+      const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`)
+        .attr('role', 'img').attr('aria-label', `Tasa de acierto por ${dim}`);
+      const probe = svg.append('text').text(rs.reduce((a, r) => (r.k.length > a.length ? r.k : a), ''));
+      const ml = Math.ceil(probe.node().getComputedTextLength() || 60) + 10; probe.remove();
+      const mr = 120;
+      const x = d3.scaleLinear().domain([0, Math.max(0.8, d3.max(rs, (r) => r.winrate))]).range([ml, W - mr]);
+      const y = (i) => i * rowH + 4;
+      const t = tip(el);
+      const g = svg.append('g').selectAll('g').data(rs).join('g').attr('transform', (r, i) => `translate(0,${y(i)})`);
+      g.append('text').attr('x', ml - 8).attr('y', 15).attr('text-anchor', 'end').text((r) => r.k);
+      g.append('rect').attr('x', ml).attr('y', 3).attr('height', rowH - 10).attr('width', (r) => x(r.winrate) - ml)
+        .style('fill', (r) => (r.net >= 0 ? 'var(--color-ok)' : 'var(--color-bad)')).attr('opacity', 0.85).attr('rx', 2)
+        .on('pointermove', (ev, r) => {
+          tipLines(t, [[r.k, ''], ['Operaciones', n0(r.n)], ['Acierto', pct(r.winrate)], ['Neto', money(r.net)], ['Media', money(r.avg) + ' / op']]);
+          const box = el.getBoundingClientRect(); placeTip(t, el, ev.clientX - box.left, ev.clientY - box.top);
+        })
+        .on('pointerleave', () => { t.hidden = true; });
+      g.append('text').attr('x', (r) => x(r.winrate) + 6).attr('y', 15).text((r) => `${pct(r.winrate)} · ${money(r.net)}`)
+        ;
+      g.append('text').attr('x', W - 4).attr('y', 15).attr('text-anchor', 'end').text((r) => `${n0(r.n)} ops`);
+      svg.append('line').attr('x1', x(0.5)).attr('x2', x(0.5)).attr('y1', 0).attr('y2', rs.length * rowH).style('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '3 3');
+      svg.append('text').attr('x', x(0.5)).attr('y', rs.length * rowH + 16).attr('text-anchor', 'middle').text('50%');
+    });
+    hbars('pat-dia', 'dia');
+    hbars('pat-semana', 'semana');
+    hbars('pat-noticia', 'noticia');
+
+    dash.draw('pat-mes', (el) => {
+      const rs = get('mes');
+      if (!rs) { el.replaceChildren('—'); return; }
+      rs.sort((a, b) => (a.k < b.k ? -1 : 1));
+      const W = el.clientWidth || 300, H = 200, mb = 22;
+      el.replaceChildren();
+      const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`)
+        .attr('role', 'img').attr('aria-label', 'Resultado neto por mes en USD');
+      const y = d3.scaleLinear().domain(d3.extent([0, ...rs.map((r) => r.net)])).nice();
+      const probe = svg.append('text').text(money(y.domain()[0]));
+      const ml = Math.ceil(probe.node().getComputedTextLength() || 50) + 8; probe.remove();
+      y.range([H - mb, 6]);
+      const x = d3.scaleBand().domain(rs.map((r) => r.k)).range([ml, W - 4]).padding(0.2);
+      svg.append('g').attr('class', 'es-grid').selectAll('line').data(y.ticks(4)).join('line').attr('x1', ml).attr('x2', W - 4).attr('y1', y).attr('y2', y);
+      svg.append('g').attr('class', 'es-axis').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(y).ticks(4).tickFormat(money).tickSize(0)).call((g) => g.select('.domain').remove());
+      const t = tip(el);
+      svg.append('g').selectAll('rect').data(rs).join('rect')
+        .attr('x', (r) => x(r.k)).attr('width', x.bandwidth()).attr('y', (r) => y(Math.max(0, r.net))).attr('height', (r) => Math.abs(y(r.net) - y(0)))
+        .style('fill', (r) => (r.net >= 0 ? 'var(--color-ok)' : 'var(--color-bad)')).attr('opacity', 0.85)
+        .on('pointermove', (ev, r) => {
+          tipLines(t, [[r.k, ''], ['Neto', money(r.net)], ['Acierto', pct(r.winrate)], ['Operaciones', n0(r.n)]]);
+          const box = el.getBoundingClientRect(); placeTip(t, el, ev.clientX - box.left, ev.clientY - box.top);
+        })
+        .on('pointerleave', () => { t.hidden = true; });
+      svg.append('line').attr('x1', ml).attr('x2', W - 4).attr('y1', y(0)).attr('y2', y(0)).style('stroke', 'var(--cds-chart-reference)');
+      const every = Math.max(1, Math.ceil(rs.length / Math.max(2, Math.floor((W - ml) / 60))));
+      svg.append('g').selectAll('text').data(rs.filter((r, i) => i % every === 0)).join('text')
+        .attr('x', (r) => x(r.k) + x.bandwidth() / 2).attr('y', H - 6).attr('text-anchor', 'middle').text((r) => r.k);
+    });
+
+    dash.draw('frase-pat', (el) => {
+      const p = params();
+      const rs = get('dia');
+      const other = p.zone === 'NY' ? 'CDMX' : 'NY';
+      const ro = get('dia', other, p.model);
+      const nw = get('noticia');
+      if (!rs || !ro || !nw || !rs.length) { el.replaceChildren('—'); return; }
+      const best = rs.reduce((a, r) => (r.winrate > a.winrate ? r : a), rs[0]);
+      const worst = rs.reduce((a, r) => (r.winrate < a.winrate ? r : a), rs[0]);
+      const bestO = ro.reduce((a, r) => (r.winrate > a.winrate ? r : a), ro[0]);
+      const sn = nw.find((r) => r.k === 'Sin noticia'), cn = nw.find((r) => r.k === 'NFP/CPI 8:30');
+      const w = (r) => 'clave=' + enc(r.clave);
+      const parts = [
+        'El mejor día es el ', best.k, ' (', mark('b', 'patrones', 'winrate', w(best), pct(best.winrate)), ' de acierto) y el peor el ', worst.k,
+        ' (', mark('b', 'patrones', 'winrate', w(worst), pct(worst.winrate)), ').',
+        bestO.k === best.k
+          ? ` Con hora de ${ZONA[other]} el mejor día también es el ${bestO.k}, aunque con unas 95 operaciones por día la diferencia sigue siendo pequeña.`
+          : ` Con hora de ${ZONA[other]} el mejor día pasa a ser el ${bestO.k}: estos patrones cambian con un desfase de una hora y no son fiables.`,
+      ];
+      if (sn && cn) {
+        parts.push(' Los días de NFP o CPI aciertan el ', mark('b', 'patrones', 'winrate', w(cn), pct(cn.winrate)), ' frente al ',
+          mark('b', 'patrones', 'winrate', w(sn), pct(sn.winrate)), ` de los días sin noticia, con solo ${cn.n} operaciones.`);
+      }
+      el.replaceChildren(...parts);
+    });
+  })();
+</script>
