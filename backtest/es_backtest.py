@@ -7,8 +7,10 @@ Modelos pedidos:
 Supuestos (todos parametrizables):
   - Se calcula con hora de Nueva York y con hora de Ciudad de México.
     Entrada al precio de apertura del minuto indicado.
-  - Tendencia = precio de entrada vs EMA 50 de velas de 5 minutos
-    (arriba = compra, abajo = venta). Se comparan otras definiciones.
+  - Tendencia en temporalidad de 3 minutos: precio de entrada vs EMA 20 de
+    velas de 3 minutos ya cerradas (arriba = compra, abajo = venta). Se comparan
+    otras definiciones en 3m (EMA 9, EMA 50, cruce EMA 9/20, última vela) y en
+    otras temporalidades.
   - 2 contratos: uno sale en TP1, otro en TP2. Tras tocar TP1 el stop del
     segundo pasa a break-even (variante sin BE incluida).
   - Si una misma vela de 1 minuto toca stop y objetivo, cuenta como stop.
@@ -58,10 +60,23 @@ def trend_series(df):
     dopen = df["o"].groupby(tday).first()
     prev_dir = np.sign(daily - dopen).shift(1)
     prev = pd.Series(prev_dir.reindex(tday).to_numpy(), index=df.index)
+    # temporalidad de 3 minutos (solo velas ya cerradas)
+    o3 = df["o"].resample("3min").first().dropna()
+    c3 = df["c"].resample("3min").last().dropna()
+    def on_1m(s):
+        return s.shift(1).reindex(df.index, method="ffill")
+    e9, e20, e50 = (c3.ewm(span=n, adjust=False).mean() for n in (9, 20, 50))
+    cross = on_1m(np.sign(e9 - e20))
+    last3 = on_1m(np.sign(c3 - o3))
     return {
+        "EMA20 3m": on_1m(e20), "EMA9 3m": on_1m(e9), "EMA50 3m": on_1m(e50),
+        "Cruce EMA9/20 3m": cross, "Vela 3m anterior": last3,
         "EMA50 5m": ema5, "EMA20 1h": ema60, "Apertura Globex": globex_open,
         "Vela diaria anterior": prev,
     }
+
+
+SIGN_TRENDS = {"Vela diaria anterior", "Cruce EMA9/20 3m", "Vela 3m anterior"}
 
 
 def day_paths(df, entry_hm, tz="America/New_York"):
@@ -153,7 +168,7 @@ def run_model(paths, trends, tname, sl, tp1, tp2, be=True, contracts=2):
         ref = tr.get(t0, np.nan)
         if np.isnan(ref):
             continue
-        side = (1 if e > ref else -1) if tname != "Vela diaria anterior" else int(ref)
+        side = (1 if e > ref else -1) if tname not in SIGN_TRENDS else int(ref)
         if side == 0:
             continue
         h, l, c = g["h"].to_numpy(), g["l"].to_numpy(), g["c"].to_numpy()
@@ -194,7 +209,7 @@ def run_zone(df, trends, tz, zk):
 
     models = {"A": dict(time="9:00", sl=60, tp1=60, tp2=120),
               "B": dict(time="9:12", sl=30, tp1=30, tp2=60)}
-    T = "EMA50 5m"
+    T = "EMA20 3m"
     data = {"meta": dict(start=str(df.index[0].date()), end=str(df.index[-1].date()),
                          tick_usd=TICK_USD, cost_ticks=round(COST_T, 2), trend=T),
             "models": {}}

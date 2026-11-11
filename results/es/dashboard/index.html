@@ -52,7 +52,7 @@
 
 <div class="es">
   <header class="es-head" id="encabezado">
-    <h1>ES · entradas de las 9:00 y 9:12 a favor de la tendencia</h1>
+    <h1>ES · entradas de las 9:00 y 9:12 a favor de la tendencia de 3 minutos</h1>
     <p class="es-lead" data-draw="frase-resumen">—</p>
     <p class="es-muted">Backtest del 2 de enero de 2025 al 6 de noviembre de 2026 con velas de 1 minuto del S&amp;P 500. Resultados en USD con 2 contratos ES (1 tick = 12,50 USD), descontando 1 tick de deslizamiento y 4,50 USD de comisión por contrato.</p>
     <div class="es-controls">
@@ -132,7 +132,7 @@
 
     <section class="es-sec" id="tendencia">
       <h2>¿Qué definición de tendencia?</h2>
-      <p class="es-muted">Mismo modelo (2 contratos, TP1 y TP2) cambiando solo cómo se decide si comprar o vender.</p>
+      <p class="es-muted">Mismo modelo (2 contratos, TP1 y TP2) cambiando solo cómo se decide si comprar o vender. La fila resaltada es la que usa el resto del dashboard: EMA 20 en 3 minutos.</p>
       <div class="es-tablewrap">
         <table data-source="variantes" data-row-key="zone,model,group,label" aria-label="Comparación de definiciones de tendencia">
           <thead><tr>
@@ -189,7 +189,7 @@
     <ul>
       <li>Datos: velas de 1 minuto del índice S&amp;P 500 (SPXUSD, HistData.com). No es el futuro ES: el nivel difiere por la base, pero los movimientos en ticks son prácticamente iguales.</li>
       <li>Entrada al precio de apertura del minuto de las 9:00 (modelo A) o 9:12 (modelo B), un intento por día hábil. El selector de arriba cambia si esas horas son de Nueva York o de Ciudad de México.</li>
-      <li>Tendencia: compra si el precio está por encima de la EMA de 50 velas de 5 minutos (ya cerradas) y vende si está por debajo. La tabla de tendencia compara otras tres definiciones.</li>
+      <li>Tendencia en temporalidad de 3 minutos: compra si el precio de entrada está por encima de la EMA de 20 velas de 3 minutos (ya cerradas) y vende si está por debajo. La tabla de tendencia compara otras definiciones en 3 minutos y en otras temporalidades. El stop y los objetivos se siguen vela a vela de 1 minuto.</li>
       <li>2 contratos: el primero sale en TP1, el segundo en TP2. Al tocar TP1, el stop del segundo pasa al precio de entrada. Lo que siga abierto a las 15:59 de Nueva York se cierra a mercado.</li>
       <li>Si una vela de 1 minuto toca a la vez el stop y el objetivo, se cuenta como stop.</li>
       <li>Noticias: lista aproximada de días de NFP, CPI y FOMC; conviene revisarla con un calendario oficial.</li>
@@ -737,7 +737,7 @@
       const rs = filas('tendencia', modelOf());
       if (!rs) { tb.replaceChildren(); return; }
       rs.sort((x, y) => +y.net - +x.net);
-      tb.replaceChildren(...rs.map((r) => row(r, [[r.label], [pct(+r.winrate)], [pf(+r.pf), good(+r.pf, 1)], [money(+r.net), good(+r.net, 0)], [money(+r.maxdd)]], r.label === 'EMA50 5m')));
+      tb.replaceChildren(...rs.map((r) => row(r, [[r.label], [pct(+r.winrate)], [pf(+r.pf), good(+r.pf, 1)], [money(+r.net), good(+r.net, 0)], [money(+r.maxdd)]], r.label === 'EMA20 3m')));
     });
   })();
 </script>
