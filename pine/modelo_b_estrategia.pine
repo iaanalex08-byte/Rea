@@ -1,0 +1,82 @@
+// This Pine Script® code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// Modelo B · ES · estrategia para el Probador de estrategias de TradingView
+// Entrada 9:12 hora de Ciudad de México · SL 45 ticks · TP1 30 ticks (contrato 1) · TP2 60 ticks (contrato 2)
+// Break-even del segundo contrato al tocar TP1 · cierre forzado 15:59 Nueva York
+// Costos: 4.50 USD de comisión por contrato y 1 tick de deslizamiento (se cambian en Propiedades)
+//@version=6
+strategy("Modelo B · Estrategia ES 9:12 CDMX · 45/30/60", shorttitle = "Modelo B (estrategia)", overlay = true,
+     pyramiding = 2, default_qty_type = strategy.fixed, default_qty_value = 1, initial_capital = 50000, currency = currency.USD,
+     commission_type = strategy.commission.cash_per_contract, commission_value = 4.5, slippage = 1,
+     process_orders_on_close = false, calc_on_every_tick = false)
+
+const string TZ_MX = "America/Mexico_City"
+const string TZ_NY = "America/New_York"
+
+string gEnt   = "Entrada"
+int    hEnt   = input.int(9,  "Hora de entrada (CDMX)",   minval = 0, maxval = 23, group = gEnt)
+int    mEnt   = input.int(12, "Minuto de entrada (CDMX)", minval = 0, maxval = 59, group = gEnt)
+string tfEma  = input.timeframe("3", "Marco de la EMA", group = gEnt)
+int    lenEma = input.int(20, "Periodo de la EMA", minval = 1, group = gEnt)
+
+string gBr   = "Bracket (ticks)"
+int    slT   = input.int(45, "Stop loss",        minval = 1, group = gBr)
+int    tp1T  = input.int(30, "TP1 (contrato 1)", minval = 1, group = gBr)
+int    tp2T  = input.int(60, "TP2 (contrato 2)", minval = 1, group = gBr)
+bool   useBE = input.bool(true, "Stop a break-even al tocar TP1", group = gBr)
+int    qty   = input.int(1, "Contratos por pierna", minval = 1, group = gBr)
+
+string gCl = "Cierre forzado (hora de Nueva York)"
+int    hCl = input.int(15, "Hora",   minval = 0, maxval = 23, group = gCl)
+int    mCl = input.int(59, "Minuto", minval = 0, maxval = 59, group = gCl)
+
+string gRg   = "Rango de fechas"
+int    tFrom = input.time(timestamp("2025-01-01T00:00:00"), "Desde", group = gRg)
+int    tTo   = input.time(timestamp("2099-12-31T00:00:00"), "Hasta", group = gRg)
+
+// EMA del marco superior sin repintar: última vela de 3 min cerrada
+float emaHtf = request.security(syminfo.tickerid, tfEma, ta.ema(close, lenEma)[1], lookahead = barmerge.lookahead_on)
+plot(emaHtf, "EMA 20 (3 min)", color = #E9A23B, linewidth = 2)
+
+int yMx  = year(time, TZ_MX)
+int moMx = month(time, TZ_MX)
+int dMx  = dayofmonth(time, TZ_MX)
+int tEntry = timestamp(TZ_MX, yMx, moMx, dMx, hEnt, mEnt)
+int yNy  = year(time, TZ_NY)
+int moNy = month(time, TZ_NY)
+int dNy  = dayofmonth(time, TZ_NY)
+int tClose = timestamp(TZ_NY, yNy, moNy, dNy, hCl, mCl)
+int dayKey = yMx * 10000 + moMx * 100 + dMx
+
+// La orden se envía al cierre de la vela que termina a las 9:12 CDMX y se llena en la apertura de la vela de las 9:12.
+// Usa un gráfico de 1 minuto (o de 3 minutos) para que exista una vela que termine exactamente a las 9:12.
+bool signalBar = timeframe.isintraday and time_close == tEntry and time >= tFrom and time <= tTo
+var int   lastDay = -1
+var bool  beDone  = false
+
+if signalBar and dayKey != lastDay and strategy.position_size == 0 and not na(emaHtf)
+    lastDay := dayKey
+    int dir = close > emaHtf ? 1 : -1
+    beDone  := false
+    if dir == 1
+        strategy.entry("B1", strategy.long,  qty = qty, comment = "Compra 9:12")
+        strategy.entry("B2", strategy.long,  qty = qty, comment = "Compra 9:12")
+    else
+        strategy.entry("B1", strategy.short, qty = qty, comment = "Venta 9:12")
+        strategy.entry("B2", strategy.short, qty = qty, comment = "Venta 9:12")
+    // profit/loss en ticks desde el precio de llenado
+    strategy.exit("X1", "B1", profit = tp1T, loss = slT, comment_profit = "TP1", comment_loss = "SL")
+    strategy.exit("X2", "B2", profit = tp2T, loss = slT, comment_profit = "TP2", comment_loss = "SL")
+
+// Break-even: cuando el contrato 1 ya salió por TP1 y el 2 sigue abierto
+if useBE and not beDone and strategy.opentrades == 1 and strategy.closedtrades > 0
+    if strategy.closedtrades.exit_comment(strategy.closedtrades - 1) == "TP1"
+        float be  = strategy.opentrades.entry_price(0)
+        float tgt = be + math.sign(strategy.position_size) * tp2T * syminfo.mintick
+        strategy.exit("X2", "B2", stop = be, limit = tgt, comment_profit = "TP2", comment_loss = "BE")
+        beDone := true
+
+// Cierre forzado 15:59 NY al cierre de esa vela
+if strategy.position_size != 0 and time <= tClose and tClose < time_close
+    strategy.close_all(comment = "Cierre 15:59 NY", immediately = true)
+
+bgcolor(signalBar ? color.new(#E9A23B, 85) : na, title = "Vela previa a la entrada")
