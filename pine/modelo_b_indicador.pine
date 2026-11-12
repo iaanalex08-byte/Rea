@@ -1,0 +1,238 @@
+// This Pine Script® code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// Modelo B · ES · entrada 9:12 hora de Ciudad de México
+// SL 45 ticks · TP1 30 ticks (contrato 1) · TP2 60 ticks (contrato 2) · break-even tras TP1 · cierre 15:59 Nueva York
+//@version=6
+indicator("Modelo B · ES 9:12 CDMX · SL 45 · TP1 30 · TP2 60", shorttitle = "Modelo B", overlay = true, max_labels_count = 500, max_lines_count = 500)
+
+// ───────────── Entradas ─────────────
+const string TZ_MX = "America/Mexico_City"
+const string TZ_NY = "America/New_York"
+
+string gEnt  = "Entrada"
+int    hEnt  = input.int(9,  "Hora de entrada (CDMX)",   minval = 0, maxval = 23, group = gEnt)
+int    mEnt  = input.int(12, "Minuto de entrada (CDMX)", minval = 0, maxval = 59, group = gEnt)
+string tfEma = input.timeframe("3", "Marco de la EMA", group = gEnt)
+int    lenEma = input.int(20, "Periodo de la EMA", minval = 1, group = gEnt)
+
+string gBr  = "Bracket (ticks)"
+int    slT  = input.int(45, "Stop loss",          minval = 1, group = gBr)
+int    tp1T = input.int(30, "TP1 (contrato 1)",   minval = 1, group = gBr)
+int    tp2T = input.int(60, "TP2 (contrato 2)",   minval = 1, group = gBr)
+bool   useBE = input.bool(true, "Stop a break-even al tocar TP1", group = gBr)
+
+string gCl = "Cierre forzado (hora de Nueva York)"
+int    hCl = input.int(15, "Hora",   minval = 0, maxval = 23, group = gCl)
+int    mCl = input.int(59, "Minuto", minval = 0, maxval = 59, group = gCl)
+
+string gCo  = "Costos para las estadísticas"
+int    qty  = input.int(1, "Contratos por pierna (2 piernas)", minval = 1, group = gCo)
+float  comm = input.float(4.5, "Comisión ida y vuelta por contrato (USD)", minval = 0, step = 0.25, group = gCo)
+float  slip = input.float(1.0, "Deslizamiento por contrato (ticks)", minval = 0, step = 0.5, group = gCo)
+
+string gVi       = "Visual"
+bool   showEma   = input.bool(true, "Mostrar EMA", group = gVi)
+bool   showTable = input.bool(true, "Mostrar tabla de estadísticas", group = gVi)
+color  cUp   = input.color(#1FAE89, "Color compra / ganancia", group = gVi)
+color  cDn   = input.color(#E2582F, "Color venta / pérdida", group = gVi)
+
+// ───────────── Datos ─────────────
+float tick      = syminfo.mintick
+float tickValue = syminfo.mintick * syminfo.pointvalue   // ES: 0.25 × 50 = 12.50 USD
+
+// EMA del marco superior sin repintar: valor de la última vela de 3 min ya cerrada
+float emaHtf = request.security(syminfo.tickerid, tfEma, ta.ema(close, lenEma)[1], lookahead = barmerge.lookahead_on)
+plot(showEma ? emaHtf : na, "EMA 20 (3 min)", color = color.new(#E9A23B, 0), linewidth = 2)
+
+// Horarios del día de la vela
+int yMx  = year(time, TZ_MX)
+int moMx = month(time, TZ_MX)
+int dMx  = dayofmonth(time, TZ_MX)
+int tEntry = timestamp(TZ_MX, yMx, moMx, dMx, hEnt, mEnt)
+int yNy  = year(time, TZ_NY)
+int moNy = month(time, TZ_NY)
+int dNy  = dayofmonth(time, TZ_NY)
+int tClose = timestamp(TZ_NY, yNy, moNy, dNy, hCl, mCl)
+int dayKey = yMx * 10000 + moMx * 100 + dMx
+
+bool isEntryBar = timeframe.isintraday and time <= tEntry and tEntry < time_close
+bool isCloseBar = time <= tClose and tClose < time_close
+
+// ───────────── Estado de la operación ─────────────
+var int   dir      = 0        // 1 compra, -1 venta, 0 sin operación
+var float ent      = na
+var float sl       = na
+var float tp1      = na
+var float tp2      = na
+var bool  leg1Open = false
+var bool  leg2Open = false
+var float r1       = 0.0      // resultado de cada pierna en ticks
+var float r2       = 0.0
+var string why1    = ""
+var string why2    = ""
+var int   lastDay  = -1
+var int   entBar   = na
+var line  lnEnt    = na
+var line  lnSl     = na
+var line  lnTp1    = na
+var line  lnTp2    = na
+
+// Estadísticas acumuladas
+var int   nOps   = 0
+var int   nWin   = 0
+var float gp     = 0.0
+var float gl     = 0.0
+var int   nTp2   = 0
+var int   nBe    = 0
+var int   nStop  = 0
+var int   nOther = 0
+var float lastUsd = na
+var string lastOut = ""
+
+// Eventos para alertas
+bool evLong  = false
+bool evShort = false
+bool evTp1   = false
+bool evTp2   = false
+bool evSl    = false
+bool evBe    = false
+bool evCl    = false
+
+endLine(line l) =>
+    if not na(l)
+        line.set_x2(l, bar_index)
+
+// Entrada
+if isEntryBar and dayKey != lastDay and dir == 0 and not na(emaHtf)
+    lastDay := dayKey
+    float px = time == tEntry ? open : close
+    dir      := px > emaHtf ? 1 : -1
+    ent      := px
+    sl       := ent - dir * slT  * tick
+    tp1      := ent + dir * tp1T * tick
+    tp2      := ent + dir * tp2T * tick
+    leg1Open := true
+    leg2Open := true
+    entBar   := bar_index
+    r1       := 0.0
+    r2       := 0.0
+    why1     := ""
+    why2     := ""
+    evLong  := dir == 1
+    evShort := dir == -1
+    lnEnt := line.new(bar_index, ent, bar_index, ent, color = color.new(color.gray, 0), width = 1)
+    lnSl  := line.new(bar_index, sl,  bar_index, sl,  color = cDn, width = 1, style = line.style_dashed)
+    lnTp1 := line.new(bar_index, tp1, bar_index, tp1, color = color.new(cUp, 30), width = 1, style = line.style_dashed)
+    lnTp2 := line.new(bar_index, tp2, bar_index, tp2, color = cUp, width = 1, style = line.style_dashed)
+    label.new(bar_index, dir == 1 ? low : high, (dir == 1 ? "COMPRA" : "VENTA") + " 9:12 CDMX\n" + str.tostring(ent, format.mintick),
+         style = dir == 1 ? label.style_label_up : label.style_label_down, color = dir == 1 ? cUp : cDn, textcolor = color.white, size = size.small)
+
+// Gestión de la operación (incluye la vela de entrada)
+if dir != 0
+    bool entryNow = bar_index == entBar
+    // stop primero: si en la misma vela se tocan stop y objetivo, se cuenta el stop (criterio conservador)
+    bool hitSl = dir == 1 ? low <= sl : high >= sl
+    if hitSl
+        float fill = entryNow ? sl : (dir == 1 ? math.min(open, sl) : math.max(open, sl))
+        bool isBe = leg2Open and not leg1Open and sl == ent
+        if leg1Open
+            r1       := (fill - ent) * dir / tick
+            why1     := "SL"
+            leg1Open := false
+        if leg2Open
+            r2       := (fill - ent) * dir / tick
+            why2     := isBe ? "BE" : "SL"
+            leg2Open := false
+        if isBe
+            evBe := true
+        else
+            evSl := true
+    else
+        if leg1Open and (dir == 1 ? high >= tp1 : low <= tp1)
+            r1       := tp1T
+            why1     := "TP1"
+            leg1Open := false
+            evTp1 := true
+            line.set_x2(lnTp1, bar_index)
+            if useBE and leg2Open
+                line.set_x2(lnSl, bar_index)
+                sl   := ent
+                lnSl := line.new(bar_index, sl, bar_index, sl, color = color.new(color.gray, 20), width = 1, style = line.style_dotted)
+        if leg2Open and (dir == 1 ? high >= tp2 : low <= tp2)
+            r2       := tp2T
+            why2     := "TP2"
+            leg2Open := false
+            evTp2 := true
+    // cierre forzado 15:59 NY
+    if (leg1Open or leg2Open) and isCloseBar
+        if leg1Open
+            r1       := (close - ent) * dir / tick
+            why1     := "Cierre"
+            leg1Open := false
+        if leg2Open
+            r2       := (close - ent) * dir / tick
+            why2     := "Cierre"
+            leg2Open := false
+        evCl := true
+    endLine(lnEnt)
+    endLine(lnSl)
+    endLine(lnTp2)
+    if leg1Open
+        endLine(lnTp1)
+    if not leg1Open and not leg2Open
+        float usd = (r1 + r2) * qty * tickValue - 2 * qty * (comm + slip * tickValue)
+        string outc = why1 == "TP1" and why2 == "TP2" ? "TP1 + TP2" : why1 == "TP1" and why2 == "BE" ? "TP1 + BE" : why1 == "TP1" ? "TP1 + cierre" : why1 == "SL" ? "Stop" : "Cierre"
+        nOps += 1
+        if usd > 0
+            nWin += 1
+            gp += usd
+        else
+            gl -= usd
+        if outc == "TP1 + TP2"
+            nTp2 += 1
+        else if outc == "TP1 + BE"
+            nBe += 1
+        else if outc == "Stop"
+            nStop += 1
+        else
+            nOther += 1
+        lastUsd := usd
+        lastOut := outc
+        label.new(bar_index, dir == 1 ? high : low, outc + "\n" + (usd >= 0 ? "+" : "") + str.tostring(usd, "#,##0.00") + " USD",
+             style = dir == 1 ? label.style_label_down : label.style_label_up, color = usd > 0 ? color.new(cUp, 20) : color.new(cDn, 20), textcolor = color.white, size = size.small)
+        dir := 0
+
+// ───────────── Tabla ─────────────
+var table tb = table.new(position.top_right, 2, 10, bgcolor = color.new(#0F1112, 10), border_color = color.new(color.white, 85), border_width = 1)
+if showTable and barstate.islast
+    float net = gp - gl
+    float pf  = gl > 0 ? gp / gl : na
+    string estado = dir == 0 ? "Sin operación" : (dir == 1 ? "Compra" : "Venta") + (leg1Open ? " · 2 contratos" : " · TP1 cobrado, stop en " + (sl == ent ? "BE" : str.tostring(sl, format.mintick)))
+    table.cell(tb, 0, 0, "Modelo B · " + str.tostring(slT) + "/" + str.tostring(tp1T) + "/" + str.tostring(tp2T), text_color = color.white, text_size = size.small)
+    table.cell(tb, 1, 0, estado, text_color = color.white, text_size = size.small)
+    table.cell(tb, 0, 1, "Operaciones", text_color = color.gray, text_size = size.small)
+    table.cell(tb, 1, 1, str.tostring(nOps), text_color = color.white, text_size = size.small)
+    table.cell(tb, 0, 2, "Win rate", text_color = color.gray, text_size = size.small)
+    table.cell(tb, 1, 2, nOps > 0 ? str.tostring(100.0 * nWin / nOps, "0.0") + "%" : "—", text_color = color.white, text_size = size.small)
+    table.cell(tb, 0, 3, "Factor de beneficio", text_color = color.gray, text_size = size.small)
+    table.cell(tb, 1, 3, na(pf) ? "—" : str.tostring(pf, "0.000"), text_color = na(pf) ? color.white : pf >= 1 ? cUp : cDn, text_size = size.small)
+    table.cell(tb, 0, 4, "Neto (USD)", text_color = color.gray, text_size = size.small)
+    table.cell(tb, 1, 4, str.tostring(net, "#,##0"), text_color = net >= 0 ? cUp : cDn, text_size = size.small)
+    table.cell(tb, 0, 5, "Expectativa / op", text_color = color.gray, text_size = size.small)
+    table.cell(tb, 1, 5, nOps > 0 ? str.tostring(net / nOps, "#,##0.00") : "—", text_color = color.white, text_size = size.small)
+    table.cell(tb, 0, 6, "TP1 + TP2 / TP1 + BE", text_color = color.gray, text_size = size.small)
+    table.cell(tb, 1, 6, str.tostring(nTp2) + " / " + str.tostring(nBe), text_color = color.white, text_size = size.small)
+    table.cell(tb, 0, 7, "Stop / otros cierres", text_color = color.gray, text_size = size.small)
+    table.cell(tb, 1, 7, str.tostring(nStop) + " / " + str.tostring(nOther), text_color = color.white, text_size = size.small)
+    table.cell(tb, 0, 8, "Última", text_color = color.gray, text_size = size.small)
+    table.cell(tb, 1, 8, na(lastUsd) ? "—" : lastOut + " · " + str.tostring(lastUsd, "#,##0.00"), text_color = color.white, text_size = size.small)
+    table.cell(tb, 0, 9, "Costos", text_color = color.gray, text_size = size.small)
+    table.cell(tb, 1, 9, str.tostring(comm, "0.00") + " USD + " + str.tostring(slip) + " tick / contrato", text_color = color.gray, text_size = size.small)
+
+// ───────────── Alertas ─────────────
+alertcondition(evLong,  "Modelo B · Compra",       "Modelo B: COMPRA a las 9:12 CDMX en {{ticker}} cerca de {{open}}")
+alertcondition(evShort, "Modelo B · Venta",        "Modelo B: VENTA a las 9:12 CDMX en {{ticker}} cerca de {{open}}")
+alertcondition(evTp1,   "Modelo B · TP1",          "Modelo B: TP1 tocado en {{ticker}}; stop del segundo contrato a break-even")
+alertcondition(evTp2,   "Modelo B · TP2",          "Modelo B: TP2 tocado en {{ticker}}")
+alertcondition(evSl,    "Modelo B · Stop",         "Modelo B: stop tocado en {{ticker}}")
+alertcondition(evBe,    "Modelo B · Break-even",   "Modelo B: segundo contrato cerrado en break-even en {{ticker}}")
+alertcondition(evCl,    "Modelo B · Cierre 15:59", "Modelo B: cierre forzado 15:59 NY en {{ticker}}")
