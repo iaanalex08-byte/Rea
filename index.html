@@ -265,6 +265,47 @@ tr.gfirst td{border-top:1px solid var(--line-2)}
 #bSum td:last-child,#bRisk td:last-child{text-align:right}
 #bSum td:first-child,#bRisk td:first-child{color:var(--ink-2);font-family:var(--interv)}
 @media (max-width:520px){.orow{grid-template-columns:90px minmax(40px,1fr) 64px 70px}.fil-n{margin-left:0}}
+.bt-ctl{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:12px}
+.costs .pgrid{grid-template-columns:1fr 1fr}
+.cost-out{margin:12px 0 0;font:400 12px/1.6 var(--mono);color:var(--ink-3)}
+.cost-out b{color:#fff;font-weight:500}
+.costs .btn{margin-top:12px}
+.rangewrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.7fr);gap:12px}
+.rangecard{align-self:start;display:flex;flex-direction:column;gap:14px;border-color:rgba(196,128,31,.55);background:radial-gradient(120% 90% at 0% 0%,rgba(196,128,31,.16),transparent 60%),linear-gradient(180deg,var(--panel-2),var(--panel));box-shadow:0 0 0 1px rgba(196,128,31,.15),0 20px 60px -30px rgba(196,128,31,.6)}
+.rc-big{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;font:300 clamp(34px,4vw,52px)/1 var(--news);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.rc-big i{font:400 14px var(--mono);color:var(--ink-3);font-style:normal}
+.rc-bar{position:relative;height:16px;border-radius:8px;background:rgba(255,255,255,.06)}
+.rc-band{position:absolute;top:0;bottom:0;border-radius:8px;background:linear-gradient(90deg,rgba(196,128,31,.55),rgba(233,170,70,.9),rgba(196,128,31,.55))}
+.rc-zero{position:absolute;top:-6px;width:2px;height:28px;background:var(--down)}
+.rc-pt{position:absolute;top:1px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px rgba(0,0,0,.5)}
+.rc-scale{display:flex;justify-content:space-between;font:400 11px var(--mono);color:var(--ink-3)}
+.rc-txt{margin:0;color:var(--ink-2);font-size:14px;line-height:1.55}
+.rc-txt b{color:#fff;font-weight:500}
+.rangewrap .gl{height:clamp(300px,30vw,400px)}
+.mc{display:grid;gap:12px}
+.mc-head{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start}
+.mc-desc{margin:8px 0 0;color:var(--ink-2);font-size:13px;max-width:70ch}
+.mc-ctl{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.seg{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.seg-l{font:500 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-right:6px}
+.seg button,.tabs button{font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);background:var(--panel);border:1px solid var(--line-2);border-radius:6px;padding:8px 10px;cursor:pointer}
+.seg button[aria-pressed=true],.tabs button[aria-selected=true]{background:#fff;color:#0F1112;border-color:#fff}
+.mc .btn{padding:9px 12px;font-size:11px}
+.mc-kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.mc-kpis div{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:grid;gap:6px}
+.mc-kpis span{font:400 11px/1.3 var(--interv);color:var(--ink-3)}
+.mc-kpis b{font:500 15px/1 var(--mono);font-variant-numeric:tabular-nums}
+.mc-bar{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.tabs,.mc-act{display:flex;gap:6px;flex-wrap:wrap}
+.mc-gl{height:clamp(340px,40vw,520px);border-radius:10px;background:#0A0B0C;border:1px solid var(--line)}
+.sel-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.sel-row select{max-width:100%}
+.mono.sm{font-size:10px;letter-spacing:.1em;color:var(--ink-3)}
+.s-txt{margin:0;padding:0 14px 14px;color:var(--ink-2);font-size:13px;line-height:1.55}
+.s-txt b{color:#fff;font-weight:500}
+.p3.span3{grid-column:1/-1}
+@media (max-width:1100px){.bt-ctl,.rangewrap{grid-template-columns:minmax(0,1fr)}.mc-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:680px){.p3.span3{grid-column:auto}.costs .pgrid{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .lab-panel::before{animation:none}
@@ -380,23 +421,34 @@ tr.gfirst td{border-top:1px solid var(--line-2)}
 <section class="bt gut" id="es2026" aria-label="Backtesting del Modelo B en ES">
   <div class="bt-in">
     <div class="bt-head">
-      <p class="eyebrow">Backtesting · ES · Modelo B real · 476 operaciones</p>
+      <p class="eyebrow">Backtesting · ES · Modelo B real · 476 operaciones · horario CDMX</p>
       <h2 class="sec-h">Modelo B · <em>SL 45</em> · TP1 30 · TP2 60</h2>
-      <p class="bt-lede">Backtest del <b>2 de enero de 2025</b> al <b>6 de noviembre de 2026</b> con velas de 1 minuto del S&amp;P 500, operando el futuro ES con <b>2 contratos</b> (1 tick = 12.50 USD). Una entrada al día a las <b>9:12 de Ciudad de México</b>. Los datos son los de tu tablero “ES Modelo B · CDMX 45/30/60”.</p>
-      <div class="note"><b>Reglas.</b> Compra si el precio de entrada está por encima de la EMA 20 de velas de 3 minutos y vende si está por debajo. Stop a 45 ticks. Un contrato sale en TP1 (30 ticks) y el otro en TP2 (60 ticks); al tocar TP1 el stop pasa a break-even. Lo que siga abierto se cierra a las 15:59 de NY. Cada operación descuenta 1 tick de deslizamiento y 4.50 USD de comisión por contrato: un stop completo cuesta <b>−$1,159</b> y TP1 + TP2 deja <b>+$1,091</b>.</div>
+      <p class="bt-lede">Backtest del <b>2 de enero de 2025</b> al <b>6 de noviembre de 2026</b> con velas de 1 minuto del S&amp;P 500, operando el futuro ES con <b>2 contratos</b> (1 tick = 12.50 USD). Una entrada al día a las <b>9:12 hora de Ciudad de México</b>. Los datos son los de tu tablero “ES Modelo B · CDMX 45/30/60”.</p>
+      <div class="note"><b>Reglas.</b> A las 9:12 CDMX compra si el precio está por encima de la EMA 20 de velas de 3 minutos y vende si está por debajo. Stop a 45 ticks. Un contrato sale en TP1 (30 ticks) y el otro en TP2 (60 ticks); al tocar TP1 el stop pasa a break-even. Lo que siga abierto se cierra al final de la sesión de NY: <b>14:59 CDMX</b> cuando EE. UU. está en horario de invierno y <b>13:59 CDMX</b> en horario de verano. Los costos se ajustan abajo.</div>
     </div>
 
-    <form class="filters box" id="bFil" aria-label="Filtros del backtest">
-      <div class="prm"><label for="fY">Periodo</label><select id="fY"><option value="2026">2026</option><option value="2025">2025</option><option value="all">2025 – 2026</option></select></div>
-      <div class="prm"><label for="fSide">Lado</label><select id="fSide"><option value="all">Compras y ventas</option><option value="1">Solo compras</option><option value="-1">Solo ventas</option></select></div>
-      <div class="prm"><label for="fNews">Noticias</label><select id="fNews"><option value="all">Todas</option><option value="Sin noticia">Sin noticia</option><option value="NFP/CPI 8:30">NFP / CPI 8:30</option><option value="FOMC">FOMC</option></select></div>
-      <div class="prm"><label for="fHor">Horario en NY</label><select id="fHor"><option value="all">Todos</option><option value="10:12 NY (invierno)">10:12 (invierno)</option><option value="11:12 NY (verano)">11:12 (verano)</option></select></div>
-      <div class="prm"><label for="fVol">Volatilidad día anterior</label><select id="fVol"><option value="all">Todas</option><option value="Baja">Baja</option><option value="Media">Media</option><option value="Alta">Alta</option></select></div>
-      <p class="fil-n" id="bFilN">—</p>
-    </form>
+    <div class="bt-ctl">
+      <form class="filters box" id="bFil" aria-label="Filtros del backtest">
+        <div class="prm"><label for="fY">Periodo</label><select id="fY"><option value="all">2025 – 2026 (como tu tablero)</option><option value="2026">2026</option><option value="2025">2025</option></select></div>
+        <div class="prm"><label for="fSide">Lado</label><select id="fSide"><option value="all">Compras y ventas</option><option value="1">Solo compras</option><option value="-1">Solo ventas</option></select></div>
+        <div class="prm"><label for="fNews">Noticias</label><select id="fNews"><option value="all">Todas</option><option value="Sin noticia">Sin noticia</option><option value="NFP/CPI 8:30">NFP / CPI (7:30 CDMX en invierno EE. UU., 6:30 en verano)</option><option value="FOMC">FOMC</option></select></div>
+        <div class="prm"><label for="fHor">Temporada (entrada 9:12 CDMX)</label><select id="fHor"><option value="all">Todo el año</option><option value="10:12 NY (invierno)">Invierno EE. UU. (= 10:12 NY)</option><option value="11:12 NY (verano)">Verano EE. UU. (= 11:12 NY)</option></select></div>
+        <div class="prm"><label for="fVol">Volatilidad día anterior</label><select id="fVol"><option value="all">Todas</option><option value="Baja">Baja</option><option value="Media">Media</option><option value="Alta">Alta</option></select></div>
+        <p class="fil-n" id="bFilN">—</p>
+      </form>
+      <form class="box params costs" id="bCost" aria-label="Costos de la simulación">
+        <h3>Costos por contrato <span>SIMULA EN VIVO</span></h3>
+        <div class="pgrid">
+          <div class="prm"><label for="cCom">Comisión ida y vuelta <output id="ocCom">$4.50</output></label><input id="cCom" type="range" min="0" max="10" step="0.25" value="4.5"></div>
+          <div class="prm"><label for="cSlip">Deslizamiento (ticks) <output id="ocSlip">1</output></label><input id="cSlip" type="range" min="0" max="4" step="0.5" value="1"></div>
+        </div>
+        <p class="cost-out" id="bCostOut">—</p>
+        <button class="btn btn-d" type="button" id="cReset">Costos de tu tablero</button>
+      </form>
+    </div>
 
     <div class="bt-kpis">
-      <div class="box kp"><div class="kl"><i style="background:var(--up)"></i>Win rate</div><div class="kv" id="bWR">—</div><div class="meter"><span id="bWRbar"></span><b style="left:50%" title="50%"></b></div><div class="sub" id="bWRs">—</div></div>
+      <div class="box kp"><div class="kl"><i style="background:var(--up)"></i>Win rate</div><div class="kv" id="bWR">—</div><div class="meter"><span id="bWRbar"></span><b id="bWRmed" style="left:50%" title="50%"></b></div><div class="sub" id="bWRs">—</div></div>
       <div class="box kp"><div class="kl"><i style="background:var(--amber)"></i>Factor de beneficio</div><div class="kv" id="bPF">—</div><div class="meter"><span id="bPFbar"></span><b style="left:50%" title="1.0"></b></div><div class="sub" id="bPFs">—</div></div>
       <div class="box kp"><div class="kl"><i style="background:var(--blue)"></i>P&amp;L neto (2 contratos)</div><div class="kv" id="bNet">—</div><div class="sub" id="bNets">—</div></div>
       <div class="box kp"><div class="kl"><i style="background:var(--violet)"></i>Operaciones</div><div class="kv" id="bN">—</div><div class="sub" id="bNs">—</div></div>
@@ -406,16 +458,48 @@ tr.gfirst td{border-top:1px solid var(--line-2)}
       <div class="box kp"><div class="kl"><i style="background:var(--glow-t)"></i>Sharpe anualizado</div><div class="kv" id="bSh">—</div><div class="sub" id="bShs">—</div></div>
     </div>
 
+    <div class="rangewrap">
+      <div class="box rangecard" id="bRange">
+        <p class="eyebrow">Rango de esperanza por operación · IC 95%</p>
+        <div class="rc-big"><span id="rcLo">—</span><i>a</i><span id="rcHi">—</span></div>
+        <div class="rc-bar" aria-hidden="true"><div class="rc-band" id="rcBand"></div><b class="rc-zero" id="rcZero"></b><b class="rc-pt" id="rcPt"></b></div>
+        <div class="rc-scale"><span id="rcMin">—</span><span id="rcMax">—</span></div>
+        <p class="rc-txt" id="rcTxt">—</p>
+      </div>
+      <article class="box p3" id="eRidge">
+        <header><h3>Rango de esperanza en 3D<small>Distribución bootstrap (20,000 remuestreos) por nivel de comisión; banda ámbar = IC 95%, plano rojo = $0</small></h3>
+          <div class="legend"><span><i style="background:var(--amber)"></i>IC 95%</span><span><i style="background:var(--down)"></i>$0</span><span><i style="background:#fff"></i>Tus costos</span></div></header>
+        <div class="gl"><canvas aria-label="Distribución 3D de la esperanza por nivel de comisión"></canvas><div class="tip" hidden></div><span class="hint">ARRASTRA PARA GIRAR</span></div>
+      </article>
+    </div>
+
     <div class="bt-mid">
       <div class="box an"><h3>Análisis</h3><ul id="bAn"></ul></div>
       <div class="box">
         <h3 class="tt">Qué rango de resultados esperar</h3>
-        <p class="src" style="margin:0 0 10px">Bootstrap (20,000 remuestreos) y Monte Carlo (5,000 reordenaciones) de las 476 operaciones, calculados en tu tablero. No cambian con los filtros.</p>
-        <div class="tbl-wrap"><table><tbody id="bRisk"></tbody></table></div>
+        <p class="src" style="margin:0 0 10px">Bootstrap y Monte Carlo. “Tu tablero” es el cálculo guardado con las 476 operaciones y costos base; “Ahora” se recalcula con los filtros y costos actuales.</p>
+        <div class="tbl-wrap"><table><thead><tr><th>Métrica</th><th>Tu tablero</th><th>Ahora</th></tr></thead><tbody id="bRisk"></tbody></table></div>
         <h3 class="tt" style="margin-top:16px">Cómo termina cada operación</h3>
         <div id="bOut" class="outs"></div>
       </div>
     </div>
+
+    <article class="box mc" id="bMC">
+      <div class="mc-head">
+        <div><p class="eyebrow">Simulación Monte Carlo</p><p class="mc-desc" id="mcDesc">—</p></div>
+        <div class="mc-ctl">
+          <div class="seg" role="group" aria-label="Horizonte en días"><span class="seg-l">Horizonte (días)</span><button type="button" data-h="20">20</button><button type="button" data-h="60">60</button><button type="button" data-h="190" aria-pressed="true">190</button><button type="button" data-h="250">250</button></div>
+          <div class="seg" role="group" aria-label="Método"><span class="seg-l">Método</span><button type="button" data-m="d" aria-pressed="true">Días sueltos</button><button type="button" data-m="b5">Bloques de 5 días</button></div>
+          <button type="button" class="btn btn-l" id="mcSeed">Nueva semilla</button>
+        </div>
+      </div>
+      <div class="mc-kpis" id="mcK"></div>
+      <div class="mc-bar">
+        <div class="tabs" role="tablist"><button type="button" role="tab" data-t="tray" aria-selected="true">Trayectorias</button><button type="button" role="tab" data-t="dens">Densidad en el tiempo</button><button type="button" role="tab" data-t="var">Superficie de varianza</button></div>
+        <div class="mc-act"><button type="button" class="btn btn-d" id="mcStop">Detener</button><button type="button" class="btn btn-d" id="mcCenter">Centrar</button></div>
+      </div>
+      <div class="gl mc-gl"><canvas aria-label="Simulación Monte Carlo 3D"></canvas><div class="tip" hidden></div><span class="hint">ARRASTRA PARA GIRAR · DOBLE CLIC PARA CENTRAR</span></div>
+    </article>
 
     <div class="grid-charts">
       <article class="box p3 span2" id="eDaily">
@@ -429,30 +513,36 @@ tr.gfirst td{border-top:1px solid var(--line-2)}
         <div class="gl"><canvas aria-label="Curva de capital 3D"></canvas><div class="tip" hidden></div><span class="hint">ARRASTRA PARA GIRAR</span></div>
       </article>
       <article class="box p3" id="eMon">
-        <header><h3>P&amp;L mensual<small>Compras y ventas por mes; el punto blanco es el neto</small></h3>
+        <header><h3>Resultado neto por mes<small>Compras y ventas por mes; el punto blanco es el neto</small></h3>
           <div class="legend"><span><i style="background:var(--blue)"></i>Compras</span><span><i style="background:var(--violet)"></i>Ventas</span></div></header>
         <div class="gl"><canvas aria-label="P&L mensual 3D"></canvas><div class="tip" hidden></div><span class="hint">ARRASTRA PARA GIRAR</span></div>
       </article>
-      <article class="box p3" id="eHr">
-        <header><h3>Día × volatilidad previa<small>P&amp;L neto por día de la semana y rango del día anterior</small></h3>
-          <div class="legend"><span><i style="background:var(--up)"></i>Gana</span><span><i style="background:var(--down)"></i>Pierde</span></div></header>
-        <div class="gl"><canvas aria-label="P&L 3D por día y volatilidad"></canvas><div class="tip" hidden></div><span class="hint">ARRASTRA PARA GIRAR</span></div>
+      <article class="box p3" id="eGrp">
+        <header><h3>Por grupo en 3D<small id="gSub">—</small></h3>
+          <div class="sel-row"><select id="gDim" aria-label="Grupo"><option value="vol">Volatilidad del día anterior</option><option value="news">Noticias</option><option value="wd">Día de la semana</option><option value="side">Compras y ventas</option><option value="wom">Semana del mes</option><option value="hor">Temporada</option><option value="out">Desenlace</option></select><select id="gMet" aria-label="Métrica"><option value="wr">Tasa de acierto (%)</option><option value="net">Neto (USD)</option><option value="exp">Esperanza por operación</option></select></div></header>
+        <div class="gl"><canvas aria-label="Resultados por grupo en 3D"></canvas><div class="tip" hidden></div><span class="hint">ARRASTRA PARA GIRAR</span></div>
       </article>
-      <article class="box p3" id="eSens">
-        <header><h3>Superficie stop × TP1<small>176 backtests, TP2 = 2 × TP1; plano gris = PF 1.0</small></h3>
-          <div class="legend"><span><i style="background:var(--down)"></i>PF &lt; 1</span><span><i style="background:var(--up)"></i>PF &gt; 1</span><span><i style="background:#fff;border-radius:50%"></i>45 / 30</span></div></header>
-        <div class="gl"><canvas aria-label="Superficie 3D de factor de beneficio por stop y objetivo"></canvas><div class="tip" hidden></div><span class="hint">ARRASTRA PARA GIRAR</span></div>
+      <article class="box p3" id="eTraj">
+        <header><h3>Trayectoria 3D<small>Operación × capital × varianza móvil (20 ops) del P&amp;L</small></h3>
+          <div class="legend"><span><i style="background:var(--up)"></i>TP1 + TP2</span><span><i style="background:var(--blue)"></i>TP1 + BE</span><span><i style="background:var(--down)"></i>Stop</span></div></header>
+        <div class="gl"><canvas aria-label="Trayectoria 3D del capital y la varianza"></canvas><div class="tip" hidden></div><span class="hint">ARRASTRA PARA GIRAR</span></div>
       </article>
-      <article class="box p3 span2" id="eMfe">
-        <header><h3>Recorrido en la primera hora<small>Contra (MAE) × a favor (MFE) en ticks × minutos hasta cerrar, por desenlace</small></h3>
-          <div class="legend"><span><i style="background:var(--up)"></i>TP1 + TP2</span><span><i style="background:var(--blue)"></i>TP1 + BE</span><span><i style="background:var(--down)"></i>Stop</span><span><i style="background:var(--flat)"></i>Cierre 15:59</span></div></header>
-        <div class="gl"><canvas aria-label="Dispersión 3D de MAE, MFE y duración"></canvas><div class="tip" hidden></div><span class="hint">ARRASTRA PARA GIRAR</span></div>
+      <article class="box p3 span2" id="eSens">
+        <header><h3>Superficie 3D: stop × objetivos<small>176 backtests con 2 contratos, TP2 = 2 × TP1 y break-even tras TP1. Verde gana, rojo pierde.</small></h3>
+          <div class="sel-row"><label class="mono sm" for="sMet">ALTURA Y COLOR</label><select id="sMet"><option value="avg">Esperanza por operación (USD)</option><option value="pf">Factor de beneficio</option><option value="wr">Tasa de acierto (%)</option></select></div></header>
+        <div class="gl"><canvas aria-label="Superficie 3D por stop y objetivo"></canvas><div class="tip" hidden></div><span class="hint">ARRASTRA PARA GIRAR</span></div>
+        <p class="s-txt" id="sTxt">—</p>
       </article>
       <div class="box">
         <h3 class="tt">¿Es robusta? Configuraciones vecinas</h3>
         <p class="src" style="margin:0 0 10px">Mismo modelo cambiando el stop y los objetivos, 2025 – 2026.</p>
         <div class="tbl-wrap"><table><thead><tr><th>SL</th><th>TP1 / TP2</th><th>Win %</th><th>PF</th><th>Neto</th></tr></thead><tbody id="bSens"></tbody></table></div>
       </div>
+      <article class="box p3 span3" id="eMfe">
+        <header><h3>Recorrido en la primera hora (9:12 – 10:12 CDMX)<small>Contra (MAE) × a favor (MFE) en ticks × minutos hasta cerrar, por desenlace</small></h3>
+          <div class="legend"><span><i style="background:var(--up)"></i>TP1 + TP2</span><span><i style="background:var(--blue)"></i>TP1 + BE</span><span><i style="background:var(--down)"></i>Stop</span><span><i style="background:var(--flat)"></i>Cierre fin de sesión</span></div></header>
+        <div class="gl"><canvas aria-label="Dispersión 3D de MAE, MFE y duración"></canvas><div class="tip" hidden></div><span class="hint">ARRASTRA PARA GIRAR</span></div>
+      </article>
     </div>
 
     <div class="bt-tables">
@@ -471,9 +561,9 @@ tr.gfirst td{border-top:1px solid var(--line-2)}
     </div>
     <details class="box ticks" id="esTrades">
       <summary><span>Registro de operaciones · <span id="bTN">—</span></span></summary>
-      <div class="tbl-wrap"><table><thead><tr><th>#</th><th>Fecha</th><th>Entrada NY</th><th>Lado</th><th>Desenlace</th><th>USD</th><th>Acumulado</th><th>Min</th><th>Min a TP1</th><th>MFE 60</th><th>MAE 60</th><th>Noticias</th><th>Vol.</th></tr></thead><tbody id="bTB"></tbody></table></div>
+      <div class="tbl-wrap"><table><thead><tr><th>#</th><th>Fecha</th><th>Hora CDMX</th><th>Lado</th><th>Desenlace</th><th>USD</th><th>Acumulado</th><th>Min</th><th>Min a TP1</th><th>MFE 60</th><th>MAE 60</th><th>Noticias</th><th>Vol.</th></tr></thead><tbody id="bTB"></tbody></table></div>
     </details>
-    <p class="src">Operaciones, rejilla, vecinos y riesgo: tu tablero “ES Modelo B · CDMX 45/30/60”, backtest con velas de 1 minuto SPXUSD de HistData (el índice al contado, no el futuro: precios y horarios del ES pueden diferir). Velas diarias del ES: Yahoo Finance, símbolo ES=F, consultado el 12 nov 2026. MFE y MAE en ticks. Resultados hipotéticos.</p>
+    <p class="src">Operaciones, rejilla, vecinos y riesgo de referencia: tu tablero “ES Modelo B · CDMX 45/30/60”, backtest con velas de 1 minuto SPXUSD de HistData (el índice al contado, no el futuro). Horas en Ciudad de México (UTC−6 todo el año). Al cambiar costos, cada operación se recalcula como bruto − 2 contratos × (deslizamiento × $12.50 + comisión); el factor de beneficio y el acierto de la rejilla SL × TP se aproximan con sus totales. Velas diarias del ES: Yahoo Finance, ES=F, consultado el 12 nov 2026. Resultados hipotéticos.</p>
   </div>
 </section>
 
@@ -489,8 +579,8 @@ vende  si P &lt; EMA20(3 min)</code><p>La media es de 20 velas de 3 minutos, med
 TP1 = 30 ticks (contrato 1)
 TP2 = 60 ticks (contrato 2)</code><p>1 tick = 0.25 puntos = 12.50 USD por contrato.</p></li>
     <li><span class="n">PASO 4 · GESTIÓN</span><h3>Break-even y cierre</h3><code>tras TP1: stop → entrada
-15:59 NY: cierre de lo abierto
-costo: 1 tick + $4.50 / contrato</code><p>Resultados posibles: −$1,159 (stop), +$341 (TP1 + BE), +$1,091 (TP1 + TP2) o un cierre intermedio.</p></li>
+14:59 / 13:59 CDMX: cierre de lo abierto
+costo: 1 tick + $4.50 / contrato</code><p>Con costos base: −$1,159 (stop), +$341 (TP1 + BE), +$1,091 (TP1 + TP2) o un cierre al final de la sesión (14:59 CDMX en invierno de EE. UU., 13:59 en verano).</p></li>
   </ol>
   <p class="src" style="margin-top:22px">El simulador de arriba usa 45 ticks sintéticos con reglas simplificadas para ilustrar varianza y equity en 3D; las cifras del backtest están en la sección Backtest ES.</p>
 </section>
@@ -745,7 +835,7 @@ class Chart3D{
   clear(){ this.hover=[]; this.root.traverse(o=>{ if(o.geometry) o.geometry.dispose(); if(o.material){ const ms=Array.isArray(o.material)?o.material:[o.material]; ms.forEach(m=>{ if(m.map) m.map.dispose(); m.dispose(); }); } }); while(this.root.children.length) this.root.remove(this.root.children[0]); }
   frame(t){
     if(!this.vis) return;
-    if(!this.drag && !RM) this.yaw = this.base + .2*Math.sin((t-this.t0)/4200);
+    if(!this.drag && !RM && !this.paused) this.yaw = this.base + .2*Math.sin((t-this.t0)/4200);
     const {yaw,pitch,dist,target}=this;
     this.cam.position.set(target.x+dist*Math.sin(yaw)*Math.cos(pitch), target.y+dist*Math.sin(pitch), target.z+dist*Math.cos(yaw)*Math.cos(pitch));
     this.cam.lookAt(target); this.r.render(this.scene,this.cam);
@@ -894,8 +984,11 @@ Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,1500))]).then(sta
 
 /* ---------- Modelo B real · ES (SL 45 · TP1 30 · TP2 60) ---------- */
 const d3={median:(a,f)=>{ const v=a.map(f).filter(x=>x!=null&&!isNaN(x)).sort((x,y)=>x-y); if(!v.length) return NaN; const m=v.length>>1; return v.length%2?v[m]:(v[m-1]+v[m])/2; }, group:(a,f)=>{ const m=new Map(); a.forEach(x=>{ const k=f(x); if(!m.has(k)) m.set(k,[]); m.get(k).push(x); }); return m; }};
+/* ---------- Modelo B real · ES (SL 45 · TP1 30 · TP2 60) · horario CDMX ---------- */
 const B45 = JSON.parse(document.getElementById('es-data').textContent);
-const TR = B45.trades.map((r,i)=>({i,date:r[0],entry:r[1],dir:r[2],usd:r[3],out:r[4],news:r[5],hor:r[6],vol:r[7]||'—',wd:r[8],wom:r[9],mins:r[10],minsTp1:r[11],mfe:r[12],mae:r[13],year:r[0].slice(0,4)}));
+const BASE_COST = 2*(1*12.5+4.5); // 34 USD por operación (2 contratos)
+const toCdmx=(hhmm,winter)=>{ const [h,m]=hhmm.split(':').map(Number); const H=h-(winter?1:2); return H+':'+String(m).padStart(2,'0'); };
+const TR = B45.trades.map((r,i)=>{ const winter=r[6].includes('invierno'); return {i,date:r[0],entryNY:r[1],cdmx:toCdmx(r[1],winter),winter,dir:r[2],usd0:r[3],gross:r[3]+BASE_COST,usd:r[3],out:r[4],news:r[5],hor:r[6],vol:r[7]||'—',wd:r[8],wom:r[9],mins:r[10],minsTp1:r[11],mfe:r[12],mae:r[13],year:r[0].slice(0,4)}; });
 const DAILY = (()=>{ const D={t:[],o:[],h:[],l:[],c:[]}; B45.d.forEach(x=>{ D.t.push(B45.t0+x[0]*60); D.o.push(x[1]/4); D.h.push(x[2]/4); D.l.push(x[3]/4); D.c.push(x[4]/4); }); return D; })();
 const MES=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
 const WDS=['Lun','Mar','Mié','Jue','Vie'], VOLS=['Baja','Media','Alta'];
@@ -907,7 +1000,15 @@ const usdA=(v,d=0)=>(v<0?'−':'')+'$'+Math.abs(v).toLocaleString('es-MX',{minim
 const usdk=v=>(v<0?'−':'')+'$'+(Math.abs(v)/1000).toFixed(Math.abs(v)<10000&&v!==0?1:0)+'k';
 const pfTxt=v=>isFinite(v)?v.toFixed(2):'∞';
 const OUTC={'TP1 + TP2':C.up,'TP1 + BE':C.blue,'TP1 + cierre':C.amber,'Stop (−2)':C.down,'Cierre 15:59':C.flat};
-let bCh=null, bLast=null;
+const outLabel=t=>t.out==='Cierre 15:59'?`Cierre ${t.winter?'14:59':'13:59'} CDMX`:t.out;
+const OUTNAME={'Cierre 15:59':'Cierre fin de sesión (14:59 / 13:59 CDMX)'};
+const horLabel=h=>h.includes('invierno')?'Invierno EE. UU. (9:12 CDMX = 10:12 NY)':'Verano EE. UU. (9:12 CDMX = 11:12 NY)';
+let bCh=null, bLast=null, COST={comm:4.5,slip:1}, RISK=null;
+
+/* costs */
+const costPerTrade=()=>2*(COST.slip*12.5+COST.comm);
+const isBaseCost=()=>COST.comm===4.5&&COST.slip===1;
+function applyCosts(){ const c=costPerTrade(); TR.forEach(t=>{ t.usd=isBaseCost()?t.usd0:+(t.gross-c).toFixed(2); }); }
 
 function agg(T){ let gp=0,gl=0,w=0; T.forEach(t=>{ if(t.usd>0){gp+=t.usd;w++;} else gl-=t.usd; }); return {n:T.length,w,wr:T.length?w/T.length:0,gp,gl,net:gp-gl,pf:gl?gp/gl:(gp?Infinity:0),exp:T.length?(gp-gl)/T.length:0}; }
 function stats(T){
@@ -921,71 +1022,233 @@ function stats(T){
 }
 function filt(){ const g=id=>document.getElementById(id).value; const F={y:g('fY'),side:g('fSide'),news:g('fNews'),hor:g('fHor'),vol:g('fVol')};
   return {F,T:TR.filter(t=>(F.y==='all'||t.year===F.y)&&(F.side==='all'||t.dir===+F.side)&&(F.news==='all'||t.news===F.news)&&(F.hor==='all'||t.hor===F.hor)&&(F.vol==='all'||t.vol===F.vol))}; }
+const isDefaultView=F=>F.y==='all'&&F.side==='all'&&F.news==='all'&&F.hor==='all'&&F.vol==='all'&&isBaseCost();
 const perTxt=F=>F.y==='all'?'2025 – 2026':F.y;
 
-function bRun(){ const {F,T}=filt(); const S=stats(T); bLast={F,T,S}; bDOM(F,T,S);
-  if(bCh){ buildBDaily(bCh.d,F); buildBEq(bCh.e,S,T); buildBMon(bCh.m,S); buildBGrid(bCh.h,T); buildBSurf(bCh.s); buildBMfe(bCh.x,T); } }
+/* risk: bootstrap + Monte Carlo (seeded, recomputed live) */
+function riskCalc(T){
+  const u=T.map(t=>t.usd), n=u.length; if(n<5) return null;
+  const r=rng(2026), B=20000, means=new Float64Array(B);
+  for(let b=0;b<B;b++){ let s=0; for(let k=0;k<n;k++) s+=u[(r()*n)|0]; means[b]=s/n; }
+  const sorted=Float64Array.from(means).sort(); const q=p=>sorted[Math.min(B-1,Math.floor(p*(B-1)))];
+  let le0=0; for(let b=0;b<B;b++) if(means[b]<=0) le0++;
+  const M=5000, dds=new Float64Array(M), streaks=new Float64Array(M), arr=u.slice(); let loss100=0;
+  for(let m=0;m<M;m++){ for(let k=n-1;k>0;k--){ const j=(r()*(k+1))|0; const x=arr[k]; arr[k]=arr[j]; arr[j]=x; }
+    let eq=0,pk=0,dd=0,cl=0,ms=0; for(let k=0;k<n;k++){ eq+=arr[k]; pk=Math.max(pk,eq); dd=Math.min(dd,eq-pk); if(arr[k]<=0){cl++; ms=Math.max(ms,cl);} else cl=0; } dds[m]=-dd; streaks[m]=ms;
+    let s=0; for(let k=0;k<100;k++) s+=u[(r()*n)|0]; if(s<0) loss100++; }
+  dds.sort(); streaks.sort(); const qa=(a,p)=>a[Math.min(a.length-1,Math.floor(p*(a.length-1)))];
+  return {means,ci_low:q(.025),ci_high:q(.975),p_le_0:le0/B,dd_p50:qa(dds,.5),dd_p95:qa(dds,.95),streak_p95:qa(streaks,.95),p_loss_100:loss100/M,mean:u.reduce((a,b)=>a+b,0)/n};
+}
+
+let pendR=0;
+function bRun(){ applyCosts(); const {F,T}=filt(); const S=stats(T); RISK=riskCalc(T); bLast={F,T,S}; bDOM(F,T,S);
+  if(bCh){ buildBDaily(bCh.d,F); buildBEq(bCh.e,S,T); buildBMon(bCh.m,S); buildBGrp(bCh.g,T,S); buildBTraj(bCh.t,T,S); buildBSurf(bCh.s); buildBMfe(bCh.x,T); buildRidge(bCh.r); } mcRun(); }
+
+function costText(){ const c=costPerTrade(); return `Costo por operación (2 contratos): <b>${usdA(c,2)}</b> · stop completo <b>${usd(-1125-c,0)}</b> · TP1 + BE <b>${usd(375-c,0)}</b> · TP1 + TP2 <b>${usd(1125-c,0)}</b>`; }
 
 function bDOM(F,T,S){
   const cls=v=>v>=0?'pos':'neg', set=(id,h)=>{ document.getElementById(id).innerHTML=h; };
+  set('bCostOut',costText());
   set('bFilN',`<b>${S.n}</b> de ${TR.length} operaciones · ${T.length?fDate(T[0].date)+' – '+fDate(T[T.length-1].date):'sin datos'}`);
   set('bWR',`<span class="${S.wr>=.5?'pos':'neg'}">${(S.wr*100).toFixed(1)}%</span>`); $('#bWRbar').style.width=(S.wr*100)+'%'; $('#bWRbar').style.background=S.wr>=.5?'var(--up)':'var(--down)';
   set('bWRs',`${S.w} ganadoras · ${S.n-S.w} perdedoras<br>ganadora = cerró con P&amp;L positivo`);
   set('bPF',`<span class="${S.pf>=1?'pos':'neg'}">${pfTxt(S.pf)}</span>`); $('#bPFbar').style.width=Math.min(100,(isFinite(S.pf)?S.pf:2)/2*100)+'%'; $('#bPFbar').style.background=S.pf>=1?'var(--up)':'var(--down)';
   set('bPFs',`bruto ganado <b>${usdA(S.gp)}</b><br>bruto perdido <b>${usdA(S.gl)}</b>`);
-  set('bNet',`<span class="${cls(S.net)}">${usd(S.net)}</span>`); set('bNets',`${perTxt(F)}<br>${(S.net/25).toFixed(0)} ticks netos por contrato`);
-  set('bN',String(S.n)); set('bNs',`${S.long.n} compras · ${S.short.n} ventas<br>1 operación por día hábil`);
+  set('bNet',`<span class="${cls(S.net)}">${usd(S.net)}</span>`); set('bNets',`${perTxt(F)}<br>costos totales ${usdA(S.n*costPerTrade())}`);
+  set('bN',String(S.n)); set('bNs',`${S.long.n} compras · ${S.short.n} ventas<br>1 operación por día hábil, 9:12 CDMX`);
   set('bExp',`<span class="${cls(S.exp)}">${usd(S.exp,2)}</span>`); set('bExps',`${(S.exp/25).toFixed(2)} ticks por contrato<br>duración mediana ${S.n?d3.median(T,t=>t.mins).toFixed(0):'—'} min`);
   set('bDD',`<span class="neg">${usdA(S.mdd)}</span>`); set('bDDs',`fondo el ${S.mddAt?fDate(S.mddAt.date):'—'}<br>racha perdedora máx. <b>${S.sl}</b>`);
   set('bPay',`${usdA(S.avgW)} / ${usdA(S.avgL)}`); set('bPays',`ratio de pago <b>${S.avgL?(S.avgW/S.avgL).toFixed(2):'—'}</b><br>racha ganadora máx. <b>${S.sw}</b>`);
   set('bSh',`<span class="${cls(S.sharpe)}">${S.sharpe.toFixed(2)}</span>`); set('bShs',`por operación × √252<br>(una operación por día)`);
+  // expectancy range card (exact stored values in the default view)
+  const R=B45.risk, ref=isDefaultView(F);
+  const lo=ref?R.ci_low[1]:RISK?RISK.ci_low:NaN, hi=ref?R.ci_high[1]:RISK?RISK.ci_high:NaN, ple=ref?R.p_le_0[1]:RISK?RISK.p_le_0:NaN;
+  set('rcLo',`<span class="${cls(lo)}">${usd(lo,2)}</span>`); set('rcHi',`<span class="${cls(hi)}">${usd(hi,2)}</span>`);
+  const mn=Math.min(lo,S.exp,0)-30, mx=Math.max(hi,S.exp,0)+30, P=v=>((v-mn)/(mx-mn)*100)+'%';
+  $('#rcBand').style.left=P(lo); $('#rcBand').style.width=`calc(${P(hi)} - ${P(lo)})`; $('#rcZero').style.left=P(0); $('#rcPt').style.left=P(S.exp);
+  set('rcMin',usd(mn,0)); set('rcMax',usd(mx,0));
+  set('rcTxt',`Esperanza observada <b>${usd(S.exp,2)}</b> por operación (${S.n} ops, ${perTxt(F)}). Con 95% de confianza la esperanza real está entre ${usd(lo,2)} y ${usd(hi,2)}; ${lo<0&&hi>0?'<b>el rango incluye el $0</b>':'el rango no incluye el $0'}. Probabilidad de que la esperanza sea ≤ 0: <b>${(ple*100).toFixed(1)}%</b>. ${ref?'Valores de tu tablero.':'Recalculado con filtros y costos actuales.'}`);
   // outcomes
   const order=['TP1 + TP2','TP1 + BE','TP1 + cierre','Cierre 15:59','Stop (−2)'];
-  set('bOut',order.filter(k=>S.outs[k]).map(k=>{ const a=S.outs[k], p=a.length/S.n*100, s=a.reduce((x,t)=>x+t.usd,0); return `<div class="orow"><span>${k}</span><div class="obar"><i style="width:${p}%;background:#${OUTC[k].toString(16).padStart(6,'0')}"></i></div><em>${a.length} · ${p.toFixed(0)}%</em><em class="${cls(s)}">${usd(s)}</em></div>`; }).join(''));
-  // risk (fixed, all 476)
-  const R=B45.risk, rr=k=>R[k]?R[k][1]:NaN;
-  set('bRisk',[['Esperanza por operación, IC 95%',`${usd(rr('ci_low'),2)} a ${usd(rr('ci_high'),2)}`],['Probabilidad de esperanza ≤ 0',(rr('p_le_0')*100).toFixed(1)+'%'],['Drawdown mediano (reordenando)',usdA(-rr('dd_p50'))],['Drawdown percentil 95',usdA(-rr('dd_p95'))],['Peor racha perdedora, percentil 95',rr('streak_p95').toFixed(0)+' operaciones'],['Probabilidad de perder en 100 operaciones',(rr('p_loss_100')*100).toFixed(1)+'%']].map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join(''));
-  // neighbours
+  set('bOut',order.filter(k=>S.outs[k]).map(k=>{ const a=S.outs[k], p=a.length/S.n*100, s=a.reduce((x,t)=>x+t.usd,0); return `<div class="orow"><span>${OUTNAME[k]||k}</span><div class="obar"><i style="width:${p}%;background:#${OUTC[k].toString(16).padStart(6,'0')}"></i></div><em>${a.length} (${p.toFixed(0)}%)</em><em class="${cls(s)}">${usd(s)}</em></div>`; }).join(''));
+  // risk table: stored vs now
+  const rr=k=>R[k]?R[k][1]:NaN, now=k=>RISK?RISK[k]:NaN;
+  const rows=[['Esperanza por operación, IC 95%',k=>`${usd(k('ci_low'),2)} a ${usd(k('ci_high'),2)}`],['Probabilidad de esperanza ≤ 0',k=>(k('p_le_0')*100).toFixed(1)+'%'],['Drawdown mediano (reordenando)',k=>usdA(-k('dd_p50'))],['Drawdown percentil 95',k=>usdA(-k('dd_p95'))],['Peor racha perdedora, percentil 95',k=>k('streak_p95').toFixed(0)+' ops'],['Probabilidad de perder en 100 operaciones',k=>(k('p_loss_100')*100).toFixed(1)+'%']];
+  set('bRisk',rows.map(([nm,f])=>`<tr><td>${nm}</td><td>${f(rr)}</td><td>${RISK?f(now):'—'}</td></tr>`).join(''));
   set('bSens',B45.sens.map(r=>{ const cur=r[0]===45&&r[1]===30; return `<tr${cur?' class="cur"':''}><td>${r[0]}</td><td>${r[1]} / ${r[2]}</td><td>${(r[5]*100).toFixed(1)}%</td><td class="${r[3]>=1?'pos':'neg'}">${r[3].toFixed(3)}</td><td class="${cls(r[4])}">${usd(r[4])}</td></tr>`; }).join(''));
-  // months
   const mk=Object.keys(S.months).sort();
   set('bMonT',mk.map(k=>{ const m=S.months[k], a=agg(m.T); return `<tr><td>${MES[+k.slice(5)-1]} ${k.slice(0,4)}</td><td>${a.n}</td><td>${(a.wr*100).toFixed(0)}%</td><td>${pfTxt(a.pf)}</td><td class="${cls(m.L)}">${usd(m.L)}</td><td class="${cls(m.S)}">${usd(m.S)}</td><td class="${cls(a.net)}">${usd(a.net)}</td></tr>`; }).join('')
     +`<tr><td><b>Total</b></td><td>${S.n}</td><td>${(S.wr*100).toFixed(0)}%</td><td>${pfTxt(S.pf)}</td><td class="${cls(S.long.net)}">${usd(S.long.net)}</td><td class="${cls(S.short.net)}">${usd(S.short.net)}</td><td class="${cls(S.net)}"><b>${usd(S.net)}</b></td></tr>`);
-  // compiled summary
   const tp1=T.filter(t=>t.minsTp1!=null);
-  set('bSum',[['Instrumento','ES (E-mini S&P 500), 2 contratos'],['Periodo',perTxt(F)+(T.length?` (${fDate(T[0].date)} – ${fDate(T[T.length-1].date)})`:'')],['Entrada','9:12 CDMX (10:12 NY invierno, 11:12 NY verano)'],['Dirección','precio vs EMA 20 de 3 min'],
-    ['Stop / TP1 / TP2','45 / 30 / 60 ticks, break-even tras TP1'],['Costos','1 tick + $4.50 por contrato'],['Operaciones',S.n],['Win rate',(S.wr*100).toFixed(2)+'%'],['Factor de beneficio',pfTxt(S.pf)],['P&L neto',usd(S.net)],
+  set('bSum',[['Instrumento','ES (E-mini S&P 500), 2 contratos'],['Periodo',perTxt(F)+(T.length?` (${fDate(T[0].date)} – ${fDate(T[T.length-1].date)})`:'')],['Entrada','9:12 hora de Ciudad de México, todos los días hábiles'],['Dirección','precio vs EMA 20 de velas de 3 min'],
+    ['Stop / TP1 / TP2','45 / 30 / 60 ticks, break-even tras TP1'],['Cierre forzado','14:59 CDMX (invierno EE. UU.) / 13:59 CDMX (verano EE. UU.)'],['Costos',`${COST.slip} tick + ${usdA(COST.comm,2)} por contrato (${usdA(costPerTrade(),2)} por operación)`],['Operaciones',S.n],['Win rate',(S.wr*100).toFixed(2)+'%'],['Factor de beneficio',S.pf.toFixed(3)],['P&L neto',usd(S.net,2)],
     ['Expectativa',usd(S.exp,2)],['Máx. drawdown',usdA(S.mdd)],['Sharpe anualizado',S.sharpe.toFixed(2)],['Compras: ops / win / PF / neto',`${S.long.n} / ${(S.long.wr*100).toFixed(1)}% / ${pfTxt(S.long.pf)} / ${usd(S.long.net)}`],
     ['Ventas: ops / win / PF / neto',`${S.short.n} / ${(S.short.wr*100).toFixed(1)}% / ${pfTxt(S.short.pf)} / ${usd(S.short.net)}`],['Llegan a TP1',`${tp1.length} (${S.n?(tp1.length/S.n*100).toFixed(1):0}%), mediana ${tp1.length?d3.median(tp1,t=>t.minsTp1).toFixed(0):'—'} min`],
-    ['MFE / MAE mediano 1.ª hora',`${S.n?d3.median(T,t=>t.mfe).toFixed(0):'—'} / ${S.n?d3.median(T,t=>t.mae).toFixed(0):'—'} ticks`],['Mejor día',S.best?usd(S.best.usd)+' · '+fDate(S.best.date):'—'],['Peor día',S.worst?usd(S.worst.usd)+' · '+fDate(S.worst.date):'—']].map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join(''));
-  // groups
-  const dims=[['Lado',t=>t.dir>0?'Compra':'Venta'],['Horario en NY',t=>t.hor],['Volatilidad día anterior',t=>t.vol],['Noticias',t=>t.news],['Día',t=>t.wd],['Semana del mes',t=>t.wom],['Desenlace',t=>t.out]];
-  set('bGrp',dims.map(([nm,fn])=>{ const g=d3.group(T,fn); return [...g.keys()].sort().map((k,ix)=>{ const a=agg(g.get(k)); return `<tr${ix===0?' class="gfirst"':''}><td>${ix===0?nm:''}</td><td>${k}</td><td>${a.n}</td><td>${(a.wr*100).toFixed(1)}%</td><td class="${a.pf>=1?'pos':'neg'}">${pfTxt(a.pf)}</td><td class="${cls(a.exp)}">${usd(a.exp,2)}</td><td class="${cls(a.net)}">${usd(a.net)}</td></tr>`; }).join(''); }).join(''));
-  // trades
+    ['MFE / MAE mediano 1.ª hora',`${S.n?d3.median(T,t=>t.mfe).toFixed(1):'—'} / ${S.n?d3.median(T,t=>t.mae).toFixed(1):'—'} ticks`],['Mejor día',S.best?usd(S.best.usd)+' · '+fDate(S.best.date):'—'],['Peor día',S.worst?usd(S.worst.usd)+' · '+fDate(S.worst.date):'—']].map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join(''));
+  set('bGrp',DIMS.map(([key,nm,fn])=>{ const g=d3.group(T,fn); return grpKeys(key,g).map((k,ix)=>{ const a=agg(g.get(k)); return `<tr${ix===0?' class="gfirst"':''}><td>${ix===0?nm:''}</td><td>${k}</td><td>${a.n}</td><td>${(a.wr*100).toFixed(1)}%</td><td class="${a.pf>=1?'pos':'neg'}">${pfTxt(a.pf)}</td><td class="${cls(a.exp)}">${usd(a.exp,2)}</td><td class="${cls(a.net)}">${usd(a.net)}</td></tr>`; }).join(''); }).join(''));
   let acc=0; $('#bTN').textContent=T.length+' operaciones';
-  set('bTB',T.map((t,i)=>{ acc+=t.usd; return `<tr><td>${i+1}</td><td>${fDate(t.date)}</td><td>${t.entry}</td><td>${t.dir>0?'Compra':'Venta'}</td><td>${t.out}</td><td class="${cls(t.usd)}">${usd(t.usd,2)}</td><td>${usd(acc)}</td><td>${t.mins}</td><td>${t.minsTp1??'—'}</td><td>${t.mfe??'—'}</td><td>${t.mae??'—'}</td><td>${t.news}</td><td>${t.vol}</td></tr>`; }).join(''));
+  set('bTB',T.map((t,i)=>{ acc+=t.usd; return `<tr><td>${i+1}</td><td>${fDate(t.date)}</td><td>${t.cdmx}</td><td>${t.dir>0?'Compra':'Venta'}</td><td>${outLabel(t)}</td><td class="${cls(t.usd)}">${usd(t.usd,2)}</td><td>${usd(acc)}</td><td>${t.mins}</td><td>${t.minsTp1??'—'}</td><td>${t.mfe??'—'}</td><td>${t.mae??'—'}</td><td>${t.news}</td><td>${t.vol}</td></tr>`; }).join(''));
   set('bAn',bAnalysis(F,T,S).map(([c,h])=>`<li class="${c}">${h}</li>`).join(''));
+  set('sTxt',surfText());
 }
+const DIMS=[['side','Compras y ventas',t=>t.dir>0?'Compra':'Venta'],['hor','Temporada',t=>horLabel(t.hor)],['vol','Volatilidad del día anterior',t=>t.vol],['news','Noticias',t=>t.news],['wd','Día de la semana',t=>t.wd],['wom','Semana del mes',t=>t.wom],['out','Desenlace',t=>OUTNAME[t.out]||t.out]];
+const ORD={vol:['Baja','Media','Alta','—'],wd:WDS,news:['Sin noticia','NFP/CPI 8:30','FOMC'],side:['Compra','Venta'],out:['TP1 + TP2','TP1 + BE','TP1 + cierre',OUTNAME['Cierre 15:59'],'Stop (−2)']};
+const grpKeys=(key,g)=>{ const o=ORD[key]; const ks=[...g.keys()]; return o?o.filter(k=>g.has(k)).concat(ks.filter(k=>!o.includes(k)).sort()):ks.sort(); };
 
 function bAnalysis(F,T,S){
   if(!S.n) return [['r','Ningún día cumple estos filtros.']];
-  const out=[], p=perTxt(F);
-  out.push([S.pf>=1?'g':'r',`En ${p}, ${S.n} operaciones con <b>${(S.wr*100).toFixed(1)}%</b> de aciertos y factor de beneficio <b>${pfTxt(S.pf)}</b>: neto <b>${usd(S.net)}</b> con 2 contratos, ${usd(S.exp,2)} por operación.`]);
-  out.push(['a',`El acierto es alto porque TP1 + break-even cuenta como ganadora (+$341), pero un stop completo cuesta $1,159: hacen falta unas 3.4 de esas para cubrir un stop. La ganancia media es ${usdA(S.avgW)} contra ${usdA(S.avgL)} de pérdida media.`]);
-  if(F.y!=='2025'&&F.y!=='2026'){ const a=agg(T.filter(t=>t.year==='2025')), b=agg(T.filter(t=>t.year==='2026')); out.push([b.net>=a.net?'g':'a',`Por año: 2025 deja ${usd(a.net)} (PF ${pfTxt(a.pf)}) y 2026 deja ${usd(b.net)} (PF ${pfTxt(b.pf)}).`]); }
-  const L=S.long, Sh=S.short; out.push([L.net>=Sh.net?(L.net>=0?'g':'a'):(Sh.net>=0?'g':'a'),`Compras: ${L.n} ops, PF ${pfTxt(L.pf)}, ${usd(L.net)}. Ventas: ${Sh.n} ops, PF ${pfTxt(Sh.pf)}, ${usd(Sh.net)}.`]);
-  const best=(fn,min)=>{ const g=[...d3.group(T,fn)].map(([k,v])=>[k,agg(v)]).filter(([,a])=>a.n>=min).sort((a,b)=>b[1].exp-a[1].exp); return g; };
-  const v=best(t=>t.vol,15); if(v.length>1) out.push(['',`Volatilidad del día anterior: mejor con <b>${v[0][0]}</b> (${usd(v[0][1].exp,2)} por operación, ${v[0][1].n} ops), peor con <b>${v[v.length-1][0]}</b> (${usd(v[v.length-1][1].exp,2)}).`]);
-  const n=best(t=>t.news,8); if(n.length>1) out.push(['',`Noticias: ${n.map(([k,a])=>`${k} ${usd(a.exp,2)}/op (${a.n})`).join(' · ')}.`]);
-  const w=best(t=>t.wd,10); if(w.length>1) out.push(['',`Día de la semana: mejor <b>${w[0][0]}</b> (${usd(w[0][1].net)}), peor <b>${w[w.length-1][0]}</b> (${usd(w[w.length-1][1].net)}).`]);
+  const out=[], p=perTxt(F), c=costPerTrade();
+  out.push([S.pf>=1?'g':'r',`En ${p}, ${S.n} operaciones con <b>${(S.wr*100).toFixed(1)}%</b> de aciertos y factor de beneficio <b>${S.pf.toFixed(3)}</b>: neto <b>${usd(S.net)}</b> con 2 contratos, ${usd(S.exp,2)} por operación.`]);
+  out.push(['a',`Con costos de ${usdA(c,2)} por operación, TP1 + break-even deja ${usd(375-c)} y un stop completo cuesta ${usdA(1125+c)}: hacen falta ${((1125+c)/Math.max(1,375-c)).toFixed(1)} de esas para cubrir un stop. Los costos se llevan ${usdA(S.n*c)} en total.`]);
+  const be=(()=>{ const g=T.reduce((a,t)=>a+t.gross,0)/S.n; return g/2; })(); out.push([be>0?'':'r',`Antes de costos la ventaja es de ${usd(be*2,2)} por operación: el modelo sigue en positivo mientras el costo por contrato (comisión + deslizamiento) sea menor a <b>${usdA(be,2)}</b>.`]);
+  if(F.y==='all'){ const a=agg(T.filter(t=>t.year==='2025')), b=agg(T.filter(t=>t.year==='2026')); out.push([b.net>=a.net?'g':'a',`Por año: 2025 deja ${usd(a.net)} (PF ${a.pf.toFixed(3)}) y 2026 deja ${usd(b.net)} (PF ${b.pf.toFixed(3)}).`]); }
+  const L=S.long, Sh=S.short; out.push(['',`Compras: ${L.n} ops, ${(L.wr*100).toFixed(0)}% de acierto, ${usd(L.net)}. Ventas: ${Sh.n} ops, ${(Sh.wr*100).toFixed(0)}%, ${usd(Sh.net)}.`]);
+  const v=[...d3.group(T,t=>t.vol)].filter(([k])=>k!=='—').map(([k,x])=>[k,agg(x)]); if(v.length>1) out.push(['',`Volatilidad del día anterior: ${v.sort((a,b)=>VOLS.indexOf(a[0])-VOLS.indexOf(b[0])).map(([k,a])=>`${k} ${(a.wr*100).toFixed(0)}% · ${usd(a.net)} · ${a.n} ops`).join('; ')}.`]);
+  const n=[...d3.group(T,t=>t.news)].map(([k,x])=>[k,agg(x)]); if(n.length>1) out.push(['',`Noticias: ${n.map(([k,a])=>`${k} ${(a.wr*100).toFixed(0)}% · ${usd(a.net)} · ${a.n} ops`).join('; ')}.`]);
   const mk=Object.entries(S.months).map(([k,m])=>[k,agg(m.T)]).sort((a,b)=>b[1].net-a[1].net);
   if(mk.length>1) out.push(['',`Mejor mes: <b>${MES[+mk[0][0].slice(5)-1]} ${mk[0][0].slice(0,4)}</b> (${usd(mk[0][1].net)}). Peor: <b>${MES[+mk[mk.length-1][0].slice(5)-1]} ${mk[mk.length-1][0].slice(0,4)}</b> (${usd(mk[mk.length-1][1].net)}). ${mk.filter(m=>m[1].net>0).length} de ${mk.length} meses en positivo.`]);
-  const R=B45.risk; out.push(['a',`Riesgo con las 476 operaciones: el IC 95% de la esperanza va de ${usd(R.ci_low[1],0)} a ${usd(R.ci_high[1],0)}, así que incluye el cero (probabilidad ${(R.p_le_0[1]*100).toFixed(0)}% de que la esperanza real sea ≤ 0). Planea para un drawdown de hasta ${usdA(-R.dd_p95[1])}.`]);
-  const nb=B45.sens, pos=nb.filter(r=>r[3]>1).length; out.push(['',`Robustez: ${pos} de ${nb.length} configuraciones vecinas tienen PF &gt; 1. Con SL 50 y 60 y objetivos 30/60 el resultado pasa a negativo, así que el modelo depende bastante del stop elegido.`]);
+  const nb=B45.sens, pos=nb.filter(r=>r[3]>1).length; out.push(['',`Robustez: ${pos} de ${nb.length} configuraciones vecinas tienen PF &gt; 1 con costos base. Con SL 50 y 60 y objetivos 30/60 el resultado pasa a negativo.`]);
   return out;
 }
 
-/* 3D builders */
+/* ---- SL × TP surface with metric selector (cost-adjusted) ---- */
+const SLs=[...new Set(B45.surf.map(r=>r[0]))].sort((a,b)=>a-b), TPs=[...new Set(B45.surf.map(r=>r[1]))].sort((a,b)=>a-b);
+function surfRows(){ const d=costPerTrade()-BASE_COST, n=476;
+  return B45.surf.map(([sl,tp1,tp2,avg,pf,wr,net])=>{ if(!d) return {sl,tp1,tp2,avg,pf,wr,net,approx:false};
+    const nw=wr*n; let gl=Math.abs(pf-1)>.01? net/(pf-1) : (n-nw)*(sl*25+BASE_COST); let gp=gl+net; gp-=nw*d; gl+=(n-nw)*d;
+    return {sl,tp1,tp2,avg:avg-d,net:net-n*d,pf:gl>0?gp/gl:pf,wr,approx:true}; }); }
+const SM={avg:{lab:'USD POR OPERACIÓN',f:r=>r.avg,fmt:v=>usd(v,0),good:v=>v>0},pf:{lab:'FACTOR DE BENEFICIO',f:r=>r.pf,fmt:v=>v.toFixed(2),good:v=>v>1},wr:{lab:'ACIERTO %',f:r=>r.wr*100,fmt:v=>v.toFixed(0)+'%',good:null}};
+function surfText(){ const rows=surfRows(); const pos=rows.filter(r=>r.avg>0).length; const b=rows.reduce((a,r)=>r.avg>a.avg?r:a); const me=rows.find(r=>r.sl===45&&r.tp1===30);
+  return `${pos} de ${rows.length} combinaciones dan esperanza positiva${isBaseCost()?'':' con los costos actuales'}. La mejor es SL ${b.sl} con TP ${b.tp1}/${b.tp2}: <b>${usd(b.avg,0)}</b> por operación (factor ${b.pf.toFixed(2)}). Tu SL 45 con TP 30/60 da <b>${usd(me.avg,0)}</b> (factor ${me.pf.toFixed(2)}). Los stops cortos (15–20 ticks) salen mejor en este periodo, pero elegirlos mirando estos mismos datos es sobreajuste: habría que confirmarlo en otros años.${isBaseCost()?'':' Con costos distintos de los base, el factor de la rejilla es aproximado.'}`; }
+function buildBSurf(ch){
+  ch.clear(); const g=ch.root; const met=SM[$('#sMet').value]; const rows=surfRows(); const get=(sl,tp)=>rows.find(r=>r.sl===sl&&r.tp1===tp);
+  const vals=rows.map(met.f), vmin=Math.min(...vals), vmax=Math.max(...vals), mid=met.good?null:d3.median(rows,met.f);
+  const XS=i=>-4.8+i*(9.6/(SLs.length-1)), ZT=j=>-2.3+j*(4.6/(TPs.length-1)); const Y=v=>.15+(v-vmin)/((vmax-vmin)||1)*3.2;
+  axes(g,{y1:3.6,z0:-2.6,z1:2.6,xT:SLs.filter((_,i)=>i%3===0).map(sl=>({x:XS(SLs.indexOf(sl)),label:String(sl)})),zT:TPs.filter((_,j)=>j%2===0).map(tp=>({z:ZT(TPs.indexOf(tp)),label:String(tp)})),yT:ticks(vmin,vmax,4).filter(v=>v>=vmin&&v<=vmax).map(v=>({y:Y(v),label:met===SM.avg?usd(v,0):met===SM.pf?v.toFixed(2):v.toFixed(0)+'%'})),yTitle:met.lab,zTitle:'TP1 (TICKS)'});
+  g.add(at(sprite('STOP (TICKS) →',{align:'left'}),2.4,-.75,2.95));
+  const pos=[],col=[],idx=[]; const L=TPs.length; const gr=[.10,.55,.16], rd=[.80,.36,.36];
+  SLs.forEach((sl,i)=>TPs.forEach((tp,j)=>{ const r=get(sl,tp), v=met.f(r); pos.push(XS(i),Y(v),ZT(j)); const good=met.good?met.good(v):v>=mid; const s=met.good?Math.min(1,Math.abs(met===SM.pf?(v-1)/.15:v/60)):Math.min(1,Math.abs(v-mid)/15); const base=good?gr:rd; col.push(...base.map(x=>x*(.55+.45*s)));
+    ch.hover.push({p:V(XS(i),Y(v),ZT(j)),html:tipHTML(`SL ${sl} · TP ${tp}/${r.tp2}`,[['Esperanza',usd(r.avg,2)],['Factor',r.pf.toFixed(3)+(r.approx?' (aprox.)':'')],['Acierto',(r.wr*100).toFixed(1)+'%'],['Neto',usd(r.net)]])}); }));
+  for(let i=0;i<SLs.length-1;i++) for(let j=0;j<L-1;j++){ const a=i*L+j, b=a+1, c=a+L, d=c+1; idx.push(a,b,c,b,d,c); }
+  const sg=new THREE.BufferGeometry(); sg.setAttribute('position',new THREE.Float32BufferAttribute(pos,3)); sg.setAttribute('color',new THREE.Float32BufferAttribute(col,3)); sg.setIndex(idx); sg.computeVertexNormals();
+  g.add(new THREE.Mesh(sg,new THREE.MeshStandardMaterial({vertexColors:true,side:THREE.DoubleSide,roughness:.6,flatShading:true})));
+  const wire=[]; SLs.forEach((_,i)=>TPs.forEach((_,j)=>{ const p=i*L+j; if(j<L-1) wire.push(...pos.slice(p*3,p*3+3),...pos.slice((p+1)*3,(p+1)*3+3)); if(i<SLs.length-1) wire.push(...pos.slice(p*3,p*3+3),...pos.slice((p+L)*3,(p+L)*3+3)); }));
+  const wg=new THREE.BufferGeometry(); wg.setAttribute('position',new THREE.Float32BufferAttribute(wire.map((v,k)=>k%3===1?v+.01:v),3)); g.add(new THREE.LineSegments(wg,new THREE.LineBasicMaterial({color:0x000000,transparent:true,opacity:.35})));
+  if(met.good){ const ref=met===SM.pf?1:0; if(ref>vmin&&ref<vmax){ const pl=new THREE.Mesh(new THREE.PlaneGeometry(10,5.2),new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.06,side:THREE.DoubleSide,depthWrite:false})); pl.rotation.x=-Math.PI/2; pl.position.y=Y(ref); g.add(pl); } }
+  const mark=(r,txt)=>{ const i=SLs.indexOf(r.sl), j=TPs.indexOf(r.tp1), y=Y(met.f(r)); const s=new THREE.Mesh(new THREE.SphereGeometry(.12,18,14),std(0xffffff,{emissiveIntensity:.8})); s.position.set(XS(i),y+.08,ZT(j)); g.add(s); g.add(at(sprite(txt,{align:'left',color:'#fff',px:28}),XS(i)+.15,y+.42,ZT(j))); };
+  const best=rows.reduce((a,r)=>met.f(r)>met.f(a)?r:a); const me=get(45,30);
+  mark(best,'Mejor'); mark(me,'Tu config');
+}
+
+/* ---- groups 3D ---- */
+function buildBGrp(ch,T,S){
+  ch.clear(); const g=ch.root; const key=$('#gDim').value, mt=$('#gMet').value; const dim=DIMS.find(d=>d[0]===key); const gm=d3.group(T,dim[2]); const ks=grpKeys(key,gm).filter(k=>k!=='—');
+  $('#gSub').textContent=`${dim[1]} · ${ {wr:'tasa de acierto con la media',net:'neto en USD',exp:'esperanza por operación'}[mt] }`;
+  if(!ks.length) return; const A=ks.map(k=>agg(gm.get(k))); const f=a=>mt==='wr'?a.wr*100:mt==='net'?a.net:a.exp; const ref=mt==='wr'?S.wr*100:mt==='net'?0:S.exp;
+  const vals=A.map(f); let lo=Math.min(...vals,ref), hi=Math.max(...vals,ref); if(mt==='wr'){ lo=Math.min(lo,0); hi=Math.max(hi,100); } else { lo=Math.min(lo,0); hi=Math.max(hi,0); }
+  const Y=lin(lo,hi,.15,3.6), y0=Y(mt==='wr'?0:0); const K=ks.length; const XK=i=>K>1?-4.2+i*(8.4/(K-1)):0; const w=Math.min(1.6,8.4/K*.6);
+  const fm=v=>mt==='wr'?v.toFixed(0)+'%':usd(v,mt==='exp'?2:0);
+  axes(g,{y1:3.9,z0:-1.6,z1:1.6,xT:[],yT:ticks(lo,hi,4).filter(v=>v>=lo&&v<=hi).map(v=>({y:Y(v),label:mt==='wr'?v.toFixed(0)+'%':usdk(v)})),yTitle:mt==='wr'?'ACIERTO %':mt==='net'?'NETO USD':'USD POR OPERACIÓN'});
+  const box=new THREE.BoxGeometry(1,1,1);
+  A.forEach((a,i)=>{ const v=vals[i]; const good=mt==='wr'?v>=ref:v>=0; const h=Math.max(.02,Math.abs(Y(v)-y0)); const b=new THREE.Mesh(box,std(good?C.up:C.down)); b.scale.set(w,h,1.1); b.position.set(XK(i),(Y(v)+y0)/2,0); g.add(b);
+    g.add(at(sprite(fm(v),{color:'#fff',px:26}),XK(i),Math.max(Y(v),y0)+.3,0));
+    g.add(at(sprite(`${usd(a.net)} · ${a.n} ops`,{px:22}),XK(i),Math.max(Y(v),y0)+.62,0));
+    const lab=ks[i].length>16?ks[i].slice(0,16)+'…':ks[i]; g.add(at(sprite(lab,{px:24,color:'rgba(255,255,255,.75)'}),XK(i),-.35,1.9));
+    ch.hover.push({p:V(XK(i),Math.max(Y(v),y0),0),html:tipHTML(ks[i],[['Ops',String(a.n)],['Acierto',(a.wr*100).toFixed(1)+'%'],['Factor',pfTxt(a.pf)],['Esperanza',usd(a.exp,2)],['Neto',usd(a.net)]])}); });
+  if(mt!=='net'){ const ry=Y(ref); const pl=new THREE.Mesh(new THREE.PlaneGeometry(10.4,3.2),new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.07,side:THREE.DoubleSide,depthWrite:false})); pl.rotation.x=-Math.PI/2; pl.position.y=ry; g.add(pl);
+    g.add(line([V(-5.2,ry,1.6),V(5.2,ry,1.6)],{opacity:.7})); g.add(at(sprite('media '+fm(ref),{align:'left',color:'#fff'}),5.3,ry,1.6)); }
+}
+
+/* ---- historical trajectory 3D ---- */
+function buildBTraj(ch,T,S){
+  ch.clear(); const g=ch.root, N=T.length; if(N<3) return;
+  const W=20, vr=T.map((_,i)=>{ const s=T.slice(Math.max(0,i-W+1),i+1).map(t=>t.usd); if(s.length<2) return 0; const m=s.reduce((a,b)=>a+b,0)/s.length; return s.reduce((a,b)=>a+(b-m)**2,0)/(s.length-1); });
+  const XT=i=>-5+i*(10/(N-1)); const lo=Math.min(0,...S.curve), hi=Math.max(0,...S.curve); const Y=lin(lo,hi,.2,3.8); const vmax=Math.max(...vr)||1; const Z=v=>-2.4+v/vmax*4.8;
+  axes(g,{y1:4.1,z0:-2.6,z1:2.6,xT:[0,Math.round((N-1)/2),N-1].map(i=>({x:XT(i),label:'#'+(i+1)})),yT:ticks(lo,hi,4).filter(v=>v>=lo&&v<=hi).map(v=>({y:Y(v),label:usdk(v)})),zT:[0,.5,1].map(f=>({z:Z(vmax*f),label:'σ '+usdA(Math.sqrt(vmax*f))})),yTitle:'CAPITAL',zTitle:'VARIANZA'});
+  const pts=S.curve.map((v,i)=>V(XT(i),Y(v),Z(vr[i])));
+  g.add(tube(pts,0xffffff,.02,.35)); g.add(line(pts.map(p=>V(p.x,.002,p.z)),{opacity:.22}));
+  const drops=[]; pts.forEach((p,i)=>{ if(i%3===0) drops.push(p.x,p.y,p.z,p.x,0,p.z); }); const dg=new THREE.BufferGeometry(); dg.setAttribute('position',new THREE.Float32BufferAttribute(drops,3)); g.add(new THREE.LineSegments(dg,new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:.07})));
+  const sg=new THREE.SphereGeometry(.055,10,8); const mats={}; const mat=o=>mats[o]||(mats[o]=std(OUTC[o]||C.flat,{emissiveIntensity:.5}));
+  T.forEach((t,i)=>{ const m=new THREE.Mesh(sg,mat(t.out)); m.position.copy(pts[i]); g.add(m);
+    ch.hover.push({p:pts[i],html:tipHTML(`#${i+1} · ${fDate(t.date)} · ${t.cdmx} CDMX`,[['Desenlace',outLabel(t)],['Resultado',usd(t.usd,2)],['Capital',usd(S.curve[i])],['σ móvil 20',usdA(Math.sqrt(vr[i]))]])}); });
+}
+
+/* ---- expectancy range ridges 3D ---- */
+function buildRidge(ch){
+  ch.clear(); const g=ch.root; if(!RISK) return; const base=RISK.means, B=base.length;
+  const lv=[...new Set([0,1.5,3,4.5,6,7.5,9,COST.comm])].sort((a,b)=>a-b);
+  const shifts=lv.map(c=>2*(c-COST.comm)); const mn=Math.min(...shifts.map(s=>RISK.ci_low-s))-60, mx=Math.max(...shifts.map(s=>RISK.ci_high-s))+60;
+  const NB=70, bw=(mx-mn)/NB; const hist=new Float64Array(NB); for(let b=0;b<B;b++){ const k=Math.floor((base[b]-mn)/bw); if(k>=0&&k<NB) hist[k]++; }
+  const hmax=Math.max(...hist); const X=v=>-5+(v-mn)/(mx-mn)*10; const Z=i=>-2.4+i*(4.8/(lv.length-1)); const Yh=h=>h/hmax*2.8;
+  axes(g,{y1:3.2,z0:-2.7,z1:2.7,xT:ticks(mn,mx,5).filter(v=>v>=mn&&v<=mx).map(v=>({x:X(v),label:usd(v,0)})),yT:[],zT:lv.map((c,i)=>({z:Z(i),label:'$'+c.toFixed(2)})),yTitle:'DENSIDAD',zTitle:'COMISIÓN'});
+  lv.forEach((c,i)=>{ const s=shifts[i], lo=RISK.ci_low-s, hi=RISK.ci_high-s, z=Z(i), cur=c===COST.comm;
+    const pos=[],col=[],idx=[]; for(let k=0;k<NB;k++){ const xv=mn+(k+.5)*bw+(-s); const h=Yh(hist[k]); // shift: value base - s
+      const x=X(mn+(k+.5)*bw - s); const inCI=(mn+(k+.5)*bw - s)>=lo&&(mn+(k+.5)*bw - s)<=hi; const c1=inCI?(cur?[1,.75,.3]:[.77,.5,.12]):[.32,.34,.36]; pos.push(x,h,z, x,0,z); col.push(...c1, ...c1.map(v=>v*.25)); }
+    for(let k=0;k<NB-1;k++){ const a=k*2; idx.push(a,a+1,a+2,a+1,a+3,a+2); }
+    const geo=new THREE.BufferGeometry(); geo.setAttribute('position',new THREE.Float32BufferAttribute(pos,3)); geo.setAttribute('color',new THREE.Float32BufferAttribute(col,3)); geo.setIndex(idx);
+    g.add(new THREE.Mesh(geo,new THREE.MeshBasicMaterial({vertexColors:true,side:THREE.DoubleSide,transparent:true,opacity:cur?.95:.75})));
+    const top=[]; for(let k=0;k<NB;k++) top.push(V(X(mn+(k+.5)*bw-s),Yh(hist[k])+.005,z)); g.add(line(top,{color:cur?0xffffff:0xbfc4c8,opacity:cur?1:.5}));
+    let le0=0; for(let b=0;b<B;b++) if(base[b]-s<=0) le0++;
+    const pk=top.reduce((a,p)=>p.y>a.y?p:a); ch.hover.push({p:pk,html:tipHTML(`Comisión $${c.toFixed(2)} / contrato`+(cur?' (actual)':''),[['Esperanza',usd(RISK.mean-s,2)],['IC 95%',`${usd(lo,0)} a ${usd(hi,0)}`],['P(esperanza ≤ 0)',(le0/B*100).toFixed(1)+'%']])});
+    if(cur) g.add(at(sprite(`IC 95%: ${usd(lo,0)} a ${usd(hi,0)}`,{color:'#fff',px:28}),X((lo+hi)/2),pk.y+.45,z));
+  });
+  if(0>mn&&0<mx){ const pl=new THREE.Mesh(new THREE.PlaneGeometry(5.6,3.1),new THREE.MeshBasicMaterial({color:C.down,transparent:true,opacity:.16,side:THREE.DoubleSide,depthWrite:false})); pl.rotation.y=Math.PI/2; pl.position.set(X(0),1.55,0); g.add(pl);
+    g.add(line([V(X(0),0,-2.7),V(X(0),0,2.7)],{color:C.down,opacity:.9})); g.add(at(sprite('$0',{color:'rgba(242,140,110,.95)'}),X(0),3.3,-2.7)); }
+}
+
+/* ---- Monte Carlo panel ---- */
+const MC={H:190,m:'d',seed:7,tab:'tray',res:null};
+function mcText(){ const {T}=bLast||filt(); $('#mcDesc').textContent=`10,000 simulaciones de ${MC.H} días: ${MC.m==='d'?'cada día se elige al azar':'se eligen al azar bloques de 5 días seguidos'} entre las ${T.length} operaciones filtradas, con los costos actuales (semilla ${MC.seed}).`; }
+function mcCompute(){
+  const {T}=bLast; const u=T.map(t=>t.usd), n=u.length, H=MC.H, N=10000; if(n<5) return null; const r=rng(MC.seed*977+H+(MC.m==='d'?0:1));
+  const E=new Float32Array(N*H), fin=new Float32Array(N), dds=new Float32Array(N);
+  for(let s=0;s<N;s++){ let eq=0,pk=0,dd=0,d=0; while(d<H){ if(MC.m==='b5'){ const st=(r()*Math.max(1,n-4))|0; for(let k=0;k<5&&d<H;k++,d++){ eq+=u[Math.min(n-1,st+k)]; if(eq>pk)pk=eq; if(eq-pk<dd)dd=eq-pk; E[s*H+d]=eq; } } else { eq+=u[(r()*n)|0]; if(eq>pk)pk=eq; if(eq-pk<dd)dd=eq-pk; E[s*H+d]=eq; d++; } } fin[s]=eq; dds[s]=-dd; }
+  const step=Math.max(1,Math.ceil(H/110)), days=[]; for(let d=0;d<H;d+=step) days.push(d); if(days[days.length-1]!==H-1) days.push(H-1);
+  const col=new Float32Array(N), Q=days.map(d=>{ for(let s=0;s<N;s++) col[s]=E[s*H+d]; const so=Float32Array.from(col).sort(); const q=p=>so[Math.floor(p*(N-1))]; return {d,p05:q(.05),p25:q(.25),p50:q(.5),p75:q(.75),p95:q(.95),p005:q(.005),p995:q(.995),so}; });
+  const fs=Float32Array.from(fin).sort(), ds=Float32Array.from(dds).sort(); let neg=0; for(let s=0;s<N;s++) if(fin[s]<0) neg++;
+  const order=Array.from({length:N},(_,i)=>i).sort((a,b)=>fin[a]-fin[b]);
+  return {N,H,E,fin,Q,days,order,p05:fs[Math.floor(.05*(N-1))],p50:fs[Math.floor(.5*(N-1))],p95:fs[Math.floor(.95*(N-1))],pneg:neg/N,dd50:ds[Math.floor(.5*(N-1))],dd95:ds[Math.floor(.95*(N-1))]};
+}
+function mcRun(){ mcText(); MC.res=mcCompute(); const R=MC.res; const k=document.getElementById('mcK');
+  k.innerHTML=R?[['Mediana al final',usd(R.p50)],['Percentil 5 – 95',`${usd(R.p05)} a ${usd(R.p95)}`],['Probabilidad de terminar en pérdida',(R.pneg*100).toFixed(1)+'%'],['Drawdown mediano',usdA(-R.dd50)],['Drawdown percentil 95',usdA(-R.dd95)]].map(([a,b])=>`<div><span>${a}</span><b>${b}</b></div>`).join(''):'<div><span>Muy pocas operaciones para simular</span></div>';
+  if(bCh) buildMC(bCh.mc); }
+function buildMC(ch){
+  ch.clear(); const R=MC.res; if(!R) return; const g=ch.root, H=R.H; const XD=d=>-5+d/(H-1)*10;
+  const lo=Math.min(0,...R.Q.map(q=>q.p005)), hi=Math.max(0,...R.Q.map(q=>q.p995)); const Y=lin(lo,hi,.2,4);
+  const dT=[0,Math.round((H-1)/4),Math.round((H-1)/2),Math.round(3*(H-1)/4),H-1].map(d=>({x:XD(d),label:'día '+(d+1)}));
+  if(MC.tab==='tray'){
+    axes(g,{y1:4.3,z0:-2.6,z1:2.6,xT:dT,yT:ticks(lo,hi,4).filter(v=>v>=lo&&v<=hi).map(v=>({y:Y(v),label:usdk(v)})),yTitle:'P&L USD'});
+    const K=260, pos=[]; for(let k=0;k<K;k++){ const s=R.order[Math.floor(k/(K-1)*(R.N-1))]; const z=-2.3+k/(K-1)*4.6; for(let d=0;d<H-1;d+=1){ const a=R.E[s*H+d], b=R.E[s*H+d+1]; pos.push(XD(d),Y(clamp(a,lo,hi)),z,XD(d+1),Y(clamp(b,lo,hi)),z); } }
+    const lg=new THREE.BufferGeometry(); lg.setAttribute('position',new THREE.Float32BufferAttribute(pos,3)); g.add(new THREE.LineSegments(lg,new THREE.LineBasicMaterial({color:0xb7c9e2,transparent:true,opacity:.13,blending:THREE.AdditiveBlending,depthWrite:false})));
+    g.add(tube(R.Q.map(q=>V(XD(q.d),Y(q.p50),0)),0xffffff,.035,.7));
+    [['p05',C.down],['p95',C.up]].forEach(([k,c])=>g.add(tube(R.Q.map(q=>V(XD(q.d),Y(q[k]),0)),c,.022,.6)));
+    g.add(line([V(-5.4,Y(0),-2.6),V(5.4,Y(0),-2.6),V(5.4,Y(0),2.6)],{opacity:.45}));
+    R.Q.forEach(q=>ch.hover.push({p:V(XD(q.d),Y(q.p50),0),html:tipHTML('Día '+(q.d+1),[['Percentil 95',usd(q.p95)],['Mediana',usd(q.p50)],['Percentil 5',usd(q.p05)]])}));
+  } else if(MC.tab==='dens'){
+    const NB=46, bw=(hi-lo)/NB; const ZB=b=>-2.4+b/(NB-1)*4.8; const cols=R.Q.length; const dens=R.Q.map(q=>{ const h=new Float32Array(NB); for(let s=0;s<q.so.length;s++){ const k=Math.floor((q.so[s]-lo)/bw); if(k>=0&&k<NB) h[k]++; } return h; });
+    dens.forEach(h=>{ const m=Math.max(...h)||1; for(let k=0;k<h.length;k++) h[k]/=m; }); const dmax=1; const Yd=v=>v*2.6;
+    axes(g,{y1:3.6,z0:-2.6,z1:2.6,xT:dT,yT:[],zT:ticks(lo,hi,4).filter(v=>v>=lo&&v<=hi).map(v=>({z:ZB((v-lo)/bw),label:usdk(v)})),yTitle:'DENSIDAD (RELATIVA POR DÍA)',zTitle:'P&L USD'});
+    const pos=[],col=[],idx=[]; R.Q.forEach((q,i)=>{ for(let b=0;b<NB;b++){ const v=dens[i][b]; pos.push(XD(q.d),Yd(v),ZB(b)); const t=Math.pow(v/dmax,.5); col.push(.25+.65*t,.35+.6*t,.5+.5*t); } });
+    for(let i=0;i<cols-1;i++) for(let b=0;b<NB-1;b++){ const a=i*NB+b, c=a+NB; idx.push(a,c,a+1,a+1,c,c+1); }
+    const sg=new THREE.BufferGeometry(); sg.setAttribute('position',new THREE.Float32BufferAttribute(pos,3)); sg.setAttribute('color',new THREE.Float32BufferAttribute(col,3)); sg.setIndex(idx); sg.computeVertexNormals();
+    g.add(new THREE.Mesh(sg,new THREE.MeshStandardMaterial({vertexColors:true,side:THREE.DoubleSide,roughness:.5,transparent:true,opacity:.95})));
+    g.add(line(R.Q.map(q=>V(XD(q.d),.01,ZB((q.p50-lo)/bw))),{opacity:.8}));
+    const z0=ZB((0-lo)/bw); g.add(line([V(-5.4,.005,z0),V(5.4,.005,z0)],{color:C.down,opacity:.9})); g.add(at(sprite('$0',{color:'rgba(242,140,110,.95)',align:'left'}),5.5,.05,z0));
+    R.Q.forEach((q,i)=>{ const b=Math.min(NB-1,Math.max(0,Math.floor((q.p50-lo)/bw))); ch.hover.push({p:V(XD(q.d),Yd(dens[i][b]),ZB(b)),html:tipHTML('Día '+(q.d+1),[['Mediana',usd(q.p50)],['50% central',`${usd(q.p25)} a ${usd(q.p75)}`],['90% central',`${usd(q.p05)} a ${usd(q.p95)}`]])}); });
+  } else {
+    const P=44, W=10, cols=R.Q.map(q=>q.d).filter(d=>d>=W); const paths=Array.from({length:P},(_,k)=>R.order[Math.floor(k/(P-1)*(R.N-1))]);
+    const V2=paths.map(s=>cols.map(d=>{ const a=Math.max(1,d-W+1); let m=0,c=0; const inc=[]; for(let j=a;j<=d;j++){ const x=R.E[s*H+j]-R.E[s*H+j-1]; inc.push(x); m+=x; c++; } if(c<2) return 0; m/=c; return inc.reduce((acc,x)=>acc+(x-m)**2,0)/(c-1); }));
+    const vmax=Math.max(...V2.map(r=>Math.max(...r)))||1; const Yv=v=>v/vmax*3.2; const ZP=k=>-2.4+k/(P-1)*4.8;
+    axes(g,{y1:3.5,z0:-2.6,z1:2.6,xT:dT,yT:[0,.5,1].map(f=>({y:Yv(vmax*f),label:'σ '+usdA(Math.sqrt(vmax*f))})),zT:[{z:ZP(0),label:'peor'},{z:ZP((P-1)/2),label:'mediana'},{z:ZP(P-1),label:'mejor'}],yTitle:'VARIANZA MÓVIL (10 DÍAS)',zTitle:'CAMINOS'});
+    const pos=[],col=[],idx=[],C2=cols.length; V2.forEach((row,k)=>row.forEach((v,i)=>{ pos.push(XD(cols[i]),Yv(v),ZP(k)); const t=v/vmax; col.push(.35+.6*t,.45+.5*t,.6+.4*t); }));
+    for(let k=0;k<P-1;k++) for(let i=0;i<C2-1;i++){ const a=k*C2+i, c=a+C2; idx.push(a,c,a+1,a+1,c,c+1); }
+    const sg=new THREE.BufferGeometry(); sg.setAttribute('position',new THREE.Float32BufferAttribute(pos,3)); sg.setAttribute('color',new THREE.Float32BufferAttribute(col,3)); sg.setIndex(idx); sg.computeVertexNormals();
+    g.add(new THREE.Mesh(sg,new THREE.MeshStandardMaterial({vertexColors:true,side:THREE.DoubleSide,roughness:.55})));
+    V2.forEach((row,k)=>{ if(k%4) return; row.forEach((v,i)=>{ if(i%3) return; ch.hover.push({p:V(XD(cols[i]),Yv(v),ZP(k)),html:tipHTML(`Día ${cols[i]+1} · camino ${k+1}/${P}`,[['σ móvil',usdA(Math.sqrt(v))],['P&L acumulado',usd(R.E[paths[k]*H+cols[i]])]])}); }); });
+  }
+}
+
+/* ---- other 3D builders ---- */
 function buildBDaily(ch,F){
   ch.clear(); const g=ch.root, Dd=DAILY, n=Dd.c.length; const XD=i=>-5+i*(10/(n-1));
   const lo=Math.min(...Dd.l), hi=Math.max(...Dd.h); const Y=lin(lo,hi,.3,4.2);
@@ -998,13 +1261,13 @@ function buildBDaily(ch,F){
     const b=new THREE.Mesh(box,m); b.scale.set(.032,Math.max(.012,Math.abs(Y(Dd.c[i])-Y(Dd.o[i]))),.3); b.position.set(x,(Y(Dd.c[i])+Y(Dd.o[i]))/2,0); g.add(b);
     const w=new THREE.Mesh(box,m); w.scale.set(.01,Y(Dd.h[i])-Y(Dd.l[i]),.01); w.position.set(x,(Y(Dd.h[i])+Y(Dd.l[i]))/2,0); g.add(w);
     const t=byDate.get(keys[i]); if(t){ const hh=Math.max(.03,Math.abs(t.usd)/1159*.7); const pb=new THREE.Mesh(box,t.usd>0?aU:aD); pb.scale.set(.034,hh,.22); pb.position.set(x,hh/2,-1.5); g.add(pb); }
-    ch.hover.push({p:V(x,Y(Dd.h[i])+.03,0),html:tipHTML(nyDay.format(new Date(Dd.t[i]*1000)),[['Apertura',f2(Dd.o[i])],['Máx',f2(Dd.h[i])],['Mín',f2(Dd.l[i])],['Cierre',f2(Dd.c[i])],['Modelo B',t?(t.dir>0?'Compra':'Venta')+' · '+t.out:'sin operación'],['P&L',t?usd(t.usd,2):'—']])});
+    ch.hover.push({p:V(x,Y(Dd.h[i])+.03,0),html:tipHTML(nyDay.format(new Date(Dd.t[i]*1000)),[['Apertura',f2(Dd.o[i])],['Máx',f2(Dd.h[i])],['Mín',f2(Dd.l[i])],['Cierre',f2(Dd.c[i])],['Modelo B 9:12 CDMX',t?(t.dir>0?'Compra':'Venta')+' · '+outLabel(t):'sin operación'],['P&L',t?usd(t.usd,2):'—']])});
   }
   g.add(at(sprite('P&L MODELO B',{align:'left'}),5.5,.25,-1.5));
 }
 function buildBEq(ch,S,T){
   ch.clear(); const g=ch.root, N=T.length; if(N<2) return;
-  const XT=i=>-5+i*(10/(N-1)); const lo=Math.min(0,...S.curve,...S.dd,-1159), hi=Math.max(0,...S.curve,1091); const Y=lin(lo,hi,.2,4), y0=Y(0);
+  const XT=i=>-5+i*(10/(N-1)); const lo=Math.min(0,...S.curve,...S.dd,...T.map(t=>t.usd)), hi=Math.max(0,...S.curve,...T.map(t=>t.usd)); const Y=lin(lo,hi,.2,4), y0=Y(0);
   axes(g,{y1:4.3,z0:-2.2,z1:1.8,xT:[0,Math.round((N-1)/3),Math.round(2*(N-1)/3),N-1].map(i=>({x:XT(i),label:fDate(T[i].date).replace(/ 20(\d\d)$/," '$1")})),yT:ticks(lo,hi,4).filter(v=>v>=lo&&v<=hi).map(v=>({y:Y(v),label:usdk(v)})),yTitle:'P&L USD'});
   g.add(line([V(-5.4,y0,-2.2),V(5.4,y0,-2.2),V(5.4,y0,1.8)],{opacity:.4}));
   const pos=[],col=[],idx=[]; S.dd.forEach((d,i)=>{ pos.push(XT(i),Y(d),-1.5, XT(i),y0,-1.5); col.push(.55,.2,.1, .1,.03,0); });
@@ -1013,9 +1276,10 @@ function buildBEq(ch,S,T){
   g.add(new THREE.Mesh(cg,new THREE.MeshBasicMaterial({vertexColors:true,transparent:true,opacity:.9,blending:THREE.AdditiveBlending,side:THREE.DoubleSide,depthWrite:false})));
   g.add(line(S.dd.map((d,i)=>V(XT(i),Y(d),-1.5)),{color:C.down,opacity:.9})); g.add(at(sprite('DRAWDOWN',{align:'left'}),5.5,y0-.2,-1.5));
   g.add(tube(S.curve.map((v,i)=>V(XT(i),Y(v),0)),S.net>=0?C.up:0xffffff,.035,.55));
-  const box=new THREE.BoxGeometry(1,1,1); const bw=Math.min(.12,10/N*.6);
-  T.forEach((t,i)=>{ const h=Math.max(.01,Math.abs(Y(t.usd)-y0)); const b=new THREE.Mesh(box,std(OUTC[t.out]||C.flat)); b.scale.set(bw,h,.18); b.position.set(XT(i),(Y(t.usd)+y0)/2,1.3); g.add(b);
-    ch.hover.push({p:V(XT(i),Y(S.curve[i]),0),html:tipHTML(fDate(t.date)+' · '+t.entry+' NY',[['Lado',t.dir>0?'Compra':'Venta'],['Desenlace',t.out],['Resultado',usd(t.usd,2)],['Acumulado',usd(S.curve[i])],['Drawdown',usdA(S.dd[i])]])}); });
+  g.add(at(sprite(usd(S.net),{align:'left',color:'#fff',px:28}),XT(N-1)+.15,Y(S.curve[N-1])+.2,0));
+  const box=new THREE.BoxGeometry(1,1,1); const bw=Math.min(.12,10/N*.6); const mats={}; const mat=o=>mats[o]||(mats[o]=std(OUTC[o]||C.flat));
+  T.forEach((t,i)=>{ const h=Math.max(.01,Math.abs(Y(t.usd)-y0)); const b=new THREE.Mesh(box,mat(t.out)); b.scale.set(bw,h,.18); b.position.set(XT(i),(Y(t.usd)+y0)/2,1.3); g.add(b);
+    ch.hover.push({p:V(XT(i),Y(S.curve[i]),0),html:tipHTML(fDate(t.date)+' · '+t.cdmx+' CDMX',[['Lado',t.dir>0?'Compra':'Venta'],['Desenlace',outLabel(t)],['Resultado',usd(t.usd,2)],['Acumulado',usd(S.curve[i])],['Drawdown',usdA(S.dd[i])]])}); });
   g.add(at(sprite('POR OPERACIÓN',{align:'left'}),5.5,y0+.25,1.3));
 }
 function buildBMon(ch,S){
@@ -1023,7 +1287,7 @@ function buildBMon(ch,S){
   const XM=j=>M>1?-4.6+j*(9.2/(M-1)):0; const nets=mk.map(k=>agg(S.months[k].T).net);
   const vals=mk.flatMap((k,j)=>[S.months[k].L,S.months[k].S,nets[j]]); const lo=Math.min(0,...vals), hi=Math.max(0,...vals); const Y=lin(lo,hi,.2,3.6), y0=Y(0);
   const step=Math.ceil(M/12);
-  axes(g,{y1:3.9,z0:-2,z1:2,xT:mk.map((k,j)=>({x:XM(j),label:MES[+k.slice(5)-1]+(M>12&&k.slice(5)==='01'?" '"+k.slice(2,4):'')})).filter((_,j)=>j%step===0),yT:ticks(lo,hi,4).filter(v=>v>=lo&&v<=hi).map(v=>({y:Y(v),label:usdk(v)})),zT:[{z:-.75,label:'Compras'},{z:.75,label:'Ventas'}],yTitle:'P&L USD'});
+  axes(g,{y1:3.9,z0:-2,z1:2,xT:mk.map((k,j)=>({x:XM(j),label:MES[+k.slice(5)-1]+(M>12&&(k.slice(5)==='01'||j===0)?" '"+k.slice(2,4):'')})).filter((_,j)=>j%step===0),yT:ticks(lo,hi,4).filter(v=>v>=lo&&v<=hi).map(v=>({y:Y(v),label:usdk(v)})),zT:[{z:-.75,label:'Compras'},{z:.75,label:'Ventas'}],yTitle:'P&L USD'});
   g.add(line([V(-5.4,y0,-2),V(5.4,y0,-2),V(5.4,y0,2),V(-5.4,y0,2),V(-5.4,y0,-2)],{opacity:.35}));
   const box=new THREE.BoxGeometry(1,1,1), mL=std(C.blue), mS=std(C.violet); const bw=Math.min(.42,9/M*.55);
   mk.forEach((k,j)=>{ const m=S.months[k], nm=MES[+k.slice(5)-1]+' '+k.slice(0,4);
@@ -1031,38 +1295,7 @@ function buildBMon(ch,S){
       ch.hover.push({p:V(XM(j),Math.max(Y(v),y0),z),html:tipHTML(nm+' · '+s,[['Neto',usd(v)]])}); });
     const a=agg(m.T); ch.hover.push({p:V(XM(j),Y(a.net),0),html:tipHTML(nm,[['Ops',String(a.n)],['Win rate',(a.wr*100).toFixed(0)+'%'],['PF',pfTxt(a.pf)],['Neto',usd(a.net)]])}); });
   if(M>1) g.add(tube(mk.map((k,j)=>V(XM(j),Y(nets[j]),0)),0xffffff,.02,.4));
-  const sg=new THREE.SphereGeometry(.09,16,12), sm=std(0xffffff,{emissiveIntensity:.5}); mk.forEach((k,j)=>{ const s=new THREE.Mesh(sg,sm); s.position.set(XM(j),Y(nets[j]),0); g.add(s); });
-}
-function buildBGrid(ch,T){
-  ch.clear(); const g=ch.root; const XW=i=>-4+i*2, ZV=j=>-1.8+j*1.8;
-  const cells=[]; WDS.forEach((w,i)=>VOLS.forEach((v,j)=>{ const a=agg(T.filter(t=>t.wd===w&&t.vol===v)); if(a.n) cells.push({i,j,w,v,a}); })); if(!cells.length) return;
-  const lo=Math.min(0,...cells.map(c=>c.a.net)), hi=Math.max(0,...cells.map(c=>c.a.net)); const Y=lin(lo,hi,.2,3.4), y0=Y(0);
-  axes(g,{y1:3.7,z0:-2.6,z1:2.6,xT:WDS.map((w,i)=>({x:XW(i),label:w})),yT:ticks(lo,hi,4).filter(v=>v>=lo&&v<=hi).map(v=>({y:Y(v),label:usdk(v)})),zT:VOLS.map((v,j)=>({z:ZV(j),label:'Vol. '+v})),yTitle:'P&L USD'});
-  const pl=new THREE.Mesh(new THREE.PlaneGeometry(10.8,5.2),new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.05,side:THREE.DoubleSide,depthWrite:false})); pl.rotation.x=-Math.PI/2; pl.position.y=y0; g.add(pl);
-  const box=new THREE.BoxGeometry(1,1,1), mU=std(C.up), mD=std(C.down);
-  cells.forEach(c=>{ const h=Math.max(.015,Math.abs(Y(c.a.net)-y0)); const b=new THREE.Mesh(box,c.a.net>=0?mU:mD); b.scale.set(1.3,h,1.2); b.position.set(XW(c.i),(Y(c.a.net)+y0)/2,ZV(c.j)); g.add(b);
-    ch.hover.push({p:V(XW(c.i),Math.max(Y(c.a.net),y0),ZV(c.j)),html:tipHTML(c.w+' · volatilidad '+c.v,[['Ops',String(c.a.n)],['Win rate',(c.a.wr*100).toFixed(0)+'%'],['PF',pfTxt(c.a.pf)],['Neto',usd(c.a.net)]])}); });
-}
-function buildBSurf(ch){
-  if(ch.built) return; ch.built=true; ch.clear(); const g=ch.root;
-  const SLs=[...new Set(B45.surf.map(r=>r[0]))].sort((a,b)=>a-b), TPs=[...new Set(B45.surf.map(r=>r[1]))].sort((a,b)=>a-b);
-  const get=(sl,tp)=>B45.surf.find(r=>r[0]===sl&&r[1]===tp);
-  const XS=i=>-4.8+i*(9.6/(SLs.length-1)), ZT=j=>-2.3+j*(4.6/(TPs.length-1)); const PFM=1.4, Y=v=>clamp(v,0,PFM)/PFM*3.3;
-  axes(g,{y1:3.6,z0:-2.6,z1:2.6,xT:SLs.filter((_,i)=>i%3===0).map(sl=>({x:XS(SLs.indexOf(sl)),label:'SL '+sl})),zT:TPs.filter((_,j)=>j%2===0).map(tp=>({z:ZT(TPs.indexOf(tp)),label:'TP1 '+tp})),yT:[0,.5,1].map(v=>({y:Y(v),label:v.toFixed(1)})),yTitle:'FACTOR DE BENEFICIO'});
-  const pos=[],col=[],idx=[]; const grey=[.42,.45,.47], up=[.12,.68,.54], dn=[.89,.35,.18]; const L=TPs.length;
-  SLs.forEach((sl,i)=>TPs.forEach((tp,j)=>{ const r=get(sl,tp); pos.push(XS(i),Y(r[4]),ZT(j)); const d=clamp((r[4]-1)/.15,-1,1); const tg=d<0?dn:up, a=Math.abs(d); col.push(...grey.map((v,k)=>v+(tg[k]-v)*a));
-    ch.hover.push({p:V(XS(i),Y(r[4]),ZT(j)),html:tipHTML(`SL ${sl} · TP1 ${tp} · TP2 ${r[2]}`,[['PF',r[4].toFixed(3)],['Win rate',(r[5]*100).toFixed(1)+'%'],['Expectativa',usd(r[3],2)],['Neto',usd(r[6])]])}); }));
-  for(let i=0;i<SLs.length-1;i++) for(let j=0;j<L-1;j++){ const a=i*L+j, b=a+1, c=a+L, d=c+1; idx.push(a,b,c,b,d,c); }
-  const sg=new THREE.BufferGeometry(); sg.setAttribute('position',new THREE.Float32BufferAttribute(pos,3)); sg.setAttribute('color',new THREE.Float32BufferAttribute(col,3)); sg.setIndex(idx); sg.computeVertexNormals();
-  g.add(new THREE.Mesh(sg,new THREE.MeshStandardMaterial({vertexColors:true,side:THREE.DoubleSide,roughness:.6,flatShading:true})));
-  const wire=[]; SLs.forEach((_,i)=>TPs.forEach((_,j)=>{ const p=i*L+j; if(j<L-1) wire.push(...pos.slice(p*3,p*3+3),...pos.slice((p+1)*3,(p+1)*3+3)); if(i<SLs.length-1) wire.push(...pos.slice(p*3,p*3+3),...pos.slice((p+L)*3,(p+L)*3+3)); }));
-  const wg=new THREE.BufferGeometry(); wg.setAttribute('position',new THREE.Float32BufferAttribute(wire.map((v,k)=>k%3===1?v+.01:v),3)); g.add(new THREE.LineSegments(wg,new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:.15})));
-  const one=new THREE.Mesh(new THREE.PlaneGeometry(10,5.2),new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.07,side:THREE.DoubleSide,depthWrite:false})); one.rotation.x=-Math.PI/2; one.position.y=Y(1); g.add(one);
-  g.add(at(sprite('PF 1.0',{align:'left',color:'rgba(255,255,255,.8)'}),5.1,Y(1),-2.6));
-  const i=SLs.indexOf(45), j=TPs.indexOf(30), r=get(45,30);
-  const mk=new THREE.Mesh(new THREE.SphereGeometry(.14,20,16),std(0xffffff,{emissiveIntensity:.8})); mk.position.set(XS(i),Y(r[4])+.12,ZT(j)); g.add(mk);
-  g.add(line([V(XS(i),0,ZT(j)),V(XS(i),Y(r[4])+.12,ZT(j))],{opacity:.6}));
-  g.add(at(sprite(`MODELO B 45/30/60 · PF ${r[4].toFixed(3)}`,{align:'left',color:'#fff'}),XS(i)+.2,Y(r[4])+.45,ZT(j)));
+  const sg=new THREE.SphereGeometry(.09,16,12), sU=std(C.up,{emissiveIntensity:.6}), sD=std(C.down,{emissiveIntensity:.6}); mk.forEach((k,j)=>{ const s=new THREE.Mesh(sg,nets[j]>=0?sU:sD); s.position.set(XM(j),Y(nets[j]),0); g.add(s); });
 }
 function buildBMfe(ch,T){
   ch.clear(); const g=ch.root; const P=T.filter(t=>t.mfe!=null&&t.mae!=null); if(!P.length) return;
@@ -1072,13 +1305,29 @@ function buildBMfe(ch,T){
   g.add(line([V(XA(45),0,-2.6),V(XA(45),4,-2.6)],{color:C.down,opacity:.8})); g.add(at(sprite('STOP 45',{align:'left',color:'rgba(242,140,110,.95)'}),XA(45)+.08,3.9,-2.6));
   const sgeo=new THREE.SphereGeometry(.075,10,8); const mats={}; const mat=o=>mats[o]||(mats[o]=std(OUTC[o]||C.flat,{emissiveIntensity:.45}));
   P.forEach(t=>{ const p=V(XA(t.mae),YF(t.mfe),ZM(t.mins)); const m=new THREE.Mesh(sgeo,mat(t.out)); m.position.copy(p); g.add(m);
-    ch.hover.push({p,html:tipHTML(fDate(t.date)+' · '+(t.dir>0?'Compra':'Venta'),[['Desenlace',t.out],['MFE 60',t.mfe+' ticks'],['MAE 60',t.mae+' ticks'],['Minutos',String(t.mins)],['Resultado',usd(t.usd,2)]])}); });
+    ch.hover.push({p,html:tipHTML(fDate(t.date)+' · '+(t.dir>0?'Compra':'Venta')+' · '+t.cdmx+' CDMX',[['Desenlace',outLabel(t)],['MFE 60',t.mfe+' ticks'],['MAE 60',t.mae+' ticks'],['Minutos',String(t.mins)],['Resultado',usd(t.usd,2)]])}); });
 }
 
-$('#bFil').addEventListener('change',bRun); $('#bFil').addEventListener('submit',e=>e.preventDefault());
+/* ---- wiring ---- */
+const reRun=()=>{ cancelAnimationFrame(pendR); pendR=requestAnimationFrame(bRun); };
+$('#bFil').addEventListener('change',reRun); $('#bFil').addEventListener('submit',e=>e.preventDefault());
+$('#bCost').addEventListener('input',()=>{ COST.comm=+$('#cCom').value; COST.slip=+$('#cSlip').value; $('#ocCom').textContent='$'+COST.comm.toFixed(2); $('#ocSlip').textContent=String(COST.slip); $('#bCostOut').innerHTML=costText(); reRun(); });
+$('#bCost').addEventListener('submit',e=>e.preventDefault());
+$('#cReset').addEventListener('click',()=>{ $('#cCom').value=4.5; $('#cSlip').value=1; $('#bCost').dispatchEvent(new Event('input')); });
+$('#gDim').addEventListener('change',()=>bCh&&buildBGrp(bCh.g,bLast.T,bLast.S)); $('#gMet').addEventListener('change',()=>bCh&&buildBGrp(bCh.g,bLast.T,bLast.S));
+$('#sMet').addEventListener('change',()=>bCh&&buildBSurf(bCh.s));
+const pressGroup=(sel,attr,fn)=>document.querySelectorAll(sel).forEach(b=>b.addEventListener('click',()=>{ document.querySelectorAll(sel).forEach(x=>x.setAttribute(attr,String(x===b))); fn(b); }));
+pressGroup('#bMC [data-h]','aria-pressed',b=>{ MC.H=+b.dataset.h; mcRun(); });
+pressGroup('#bMC [data-m]','aria-pressed',b=>{ MC.m=b.dataset.m; mcRun(); });
+const MCV={tray:[.12,.14],dens:[.85,.5],var:[.7,.45]};
+pressGroup('#bMC [data-t]','aria-selected',b=>{ MC.tab=b.dataset.t; if(bCh){ const c=bCh.mc, v=MCV[MC.tab]; c.home={yaw:v[0],pitch:v[1]}; c.yaw=c.base=v[0]; c.pitch=v[1]; c.t0=performance.now(); buildMC(c); } });
+$('#mcSeed').addEventListener('click',()=>{ MC.seed=1+Math.floor(Math.random()*9999); mcRun(); });
+$('#mcStop').addEventListener('click',()=>{ if(!bCh) return; const c=bCh.mc; c.paused=!c.paused; if(!c.paused){ c.base=c.yaw; c.t0=performance.now(); } $('#mcStop').textContent=c.paused?'Girar':'Detener'; });
+$('#mcCenter').addEventListener('click',()=>{ if(!bCh) return; const c=bCh.mc; c.yaw=c.base=c.home.yaw; c.pitch=c.home.pitch; c.t0=performance.now(); });
 function startBCharts(){
   if(window.THREE) bCh={ d:new Chart3D($('#eDaily'),{yaw:.4,pitch:.3,dist:12,target:[0,1.9,0]}), e:new Chart3D($('#eEq'),{yaw:.5,pitch:.32,dist:15.5,target:[0,1.8,0]}), m:new Chart3D($('#eMon'),{yaw:.5,pitch:.36,dist:15.2,target:[0,1.5,0]}),
-    h:new Chart3D($('#eHr'),{yaw:.6,pitch:.5,dist:15.2,target:[0,1.3,0]}), s:new Chart3D($('#eSens'),{yaw:.7,pitch:.45,dist:15,target:[0,1.2,0]}), x:new Chart3D($('#eMfe'),{yaw:.5,pitch:.35,dist:12.5,target:[0,1.7,0]}) };
+    g:new Chart3D($('#eGrp'),{yaw:.35,pitch:.3,dist:14.5,target:[0,1.7,0]}), t:new Chart3D($('#eTraj'),{yaw:.7,pitch:.38,dist:15,target:[0,1.6,0]}), s:new Chart3D($('#eSens'),{yaw:.65,pitch:.42,dist:14,target:[0,1.4,0]}),
+    x:new Chart3D($('#eMfe'),{yaw:.5,pitch:.35,dist:12.5,target:[0,1.7,0]}), r:new Chart3D($('#eRidge'),{yaw:.55,pitch:.42,dist:14,target:[0,1.1,0]}), mc:new Chart3D($('#bMC'),{yaw:.12,pitch:.14,dist:12.5,target:[0,1.9,0]}) };
   bRun();
   if(bCh){ const loop=t=>{ Object.values(bCh).forEach(c=>c.frame(t)); requestAnimationFrame(loop); }; requestAnimationFrame(loop); }
 }
