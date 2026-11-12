@@ -1,0 +1,44 @@
+clave,dim,k,n,winrate,pf,net,avg,best_streak,worst_streak,wr25,wr26,avg25,avg26,consistencia
+Día de la semana|Jue,Día de la semana,Jue,94,0.234,1.1563,4543.7,48.3372,2,8,0.26,0.2045,94.544,-4.1705,Cambia según el año
+Día de la semana|Lun,Día de la semana,Lun,96,0.25,1.1179,3399.15,35.4078,2,14,0.1538,0.3636,-149.3192,253.7216,Cambia según el año
+Día de la semana|Mar,Día de la semana,Mar,95,0.2947,1.5736,15717.4,165.4463,4,15,0.3077,0.2791,248.0769,65.5209,Cambia según el año
+Día de la semana|Mié,Día de la semana,Mié,96,0.2917,1.4756,13228.6,137.7979,2,7,0.25,0.3409,48.5404,243.2841,Mejor en los dos años
+Día de la semana|Vie,Día de la semana,Vie,95,0.2316,0.8866,-3345.5,-35.2158,3,11,0.2353,0.2273,-8.7333,-65.9114,Peor en los dos años
+Semana del mes|Semana 1,Semana del mes,Semana 1,112,0.3036,1.504,16079.45,143.5665,4,12,0.2712,0.3396,109.2178,181.8038,Mejor en los dos años
+Semana del mes|Semana 2,Semana del mes,Semana 2,109,0.2752,1.4304,13906.6,127.5835,3,16,0.2881,0.26,138.4593,114.75,Mejor en los dos años
+Semana del mes|Semana 3,Semana del mes,Semana 3,109,0.211,0.8201,-6201.75,-56.8968,2,12,0.1695,0.26,-144.2059,46.128,Peor en los dos años
+Semana del mes|Semana 4,Semana del mes,Semana 4,108,0.287,1.435,13426.05,124.3153,2,8,0.2881,0.2857,185.178,51.0316,Cambia según el año
+Semana del mes|Semana 5,Semana del mes,Semana 5,38,0.1579,0.7198,-3667.0,-96.5,1,11,0.0952,0.2353,-242.3333,83.6471,Peor en los dos años
+Mes|Abr,Mes,Abr,42,0.2381,1.1297,1697.0,40.4048,2,9,0.1905,0.2857,-75.6667,156.4762,Cambia según el año
+Mes|Ago,Mes,Ago,42,0.3095,1.6511,7558.4,179.9619,4,16,0.4762,0.1429,420.7095,-60.7857,Cambia según el año
+Mes|Dic,Mes,Dic,22,0.2727,1.3171,2075.15,94.325,4,5,0.2727,,94.325,,Cambia según el año
+Mes|Ene,Mes,Ene,42,0.2857,1.3408,4182.15,99.575,2,9,0.2381,0.3333,-25.0714,224.2214,Cambia según el año
+Mes|Feb,Mes,Feb,40,0.2,0.9247,-985.0,-24.625,2,7,0.2,0.2,-59.0,9.75,Peor en los dos años
+Mes|Jul,Mes,Jul,46,0.2391,1.2713,3786.2,82.3087,2,13,0.3043,0.1739,269.2696,-104.6522,Cambia según el año
+Mes|Jun,Mes,Jun,43,0.3023,1.2509,2992.35,69.5895,2,6,0.1905,0.4091,-31.8119,166.3818,Cambia según el año
+Mes|Mar,Mes,Mar,42,0.1429,0.8266,-2553.0,-60.7857,1,8,0.0952,0.1905,-176.8571,55.2857,Peor en los dos años
+Mes|May,Mes,May,43,0.2558,1.1071,1401.2,32.586,2,9,0.2273,0.2857,39.3273,25.5238,Peor en los dos años
+Mes|Nov,Mes,Nov,25,0.28,1.3584,2504.45,100.178,4,11,0.15,0.8,-122.5275,991.0,Cambia según el año
+Mes|Oct,Mes,Oct,45,0.3556,2.0464,12411.4,275.8089,2,9,0.3043,0.4091,197.413,357.7682,Mejor en los dos años
+Mes|Sep,Mes,Sep,44,0.25,0.8869,-1526.95,-34.7034,2,7,0.2273,0.2727,-19.9795,-49.4273,Peor en los dos años
+Horario en NY|10:12 NY (invierno),Horario en NY,10:12 NY (invierno),139,0.2446,1.1439,6124.25,44.0594,4,11,0.2045,0.3137,-46.8966,201.0029,Cambia según el año
+Horario en NY|11:12 NY (verano),Horario en NY,11:12 NY (verano),337,0.2671,1.274,27419.1,81.3623,4,16,0.2604,0.2738,95.0781,67.5649,Cambia según el año
+Volatilidad día anterior|Alta,Volatilidad día anterior,Alta,158,0.2278,0.9564,-2163.6,-13.6937,3,13,0.1605,0.2987,-160.2852,140.513,Cambia según el año
+Volatilidad día anterior|Baja,Volatilidad día anterior,Baja,159,0.3019,1.6319,28242.8,177.6277,3,11,0.3297,0.2647,262.0742,64.6184,Cambia según el año
+Volatilidad día anterior|Media,Volatilidad día anterior,Media,158,0.2532,1.1644,7873.15,49.8301,3,11,0.2262,0.2838,17.6744,86.3311,Peor en los dos años
+Noticias|FOMC,Noticias,FOMC,15,0.2667,0.8866,-510.0,-34.0,2,7,0.125,0.4286,-276.1875,242.7857,Cambia según el año
+Noticias|NFP/CPI 8:30,Noticias,NFP/CPI 8:30,42,0.2381,1.1915,2506.95,59.6893,3,13,0.3182,0.15,215.8841,-112.125,Cambia según el año
+Noticias|Sin noticia,Noticias,Sin noticia,419,0.2625,1.2523,31546.4,75.2897,4,14,0.2379,0.2917,41.4156,115.3388,Cambia según el año
+Lado|Compra,Lado,Compra,248,0.2863,1.3922,28015.2,112.9645,4,13,0.2593,0.3186,51.5315,186.358,Mejor en los dos años
+Lado|Venta,Lado,Venta,228,0.2325,1.0776,5528.15,24.2463,4,13,0.2213,0.2453,40.857,5.1283,Peor en los dos años
+Gap de apertura vs operación|A favor (>5 pts),Gap de apertura vs operación,A favor (>5 pts),188,0.2553,1.1499,8528.65,45.3652,5,13,0.1919,0.3258,-89.2424,195.0972,Cambia según el año
+Gap de apertura vs operación|En contra (>5 pts),Gap de apertura vs operación,En contra (>5 pts),217,0.2535,1.1885,12376.65,57.0353,4,15,0.2523,0.2547,91.8671,20.5604,Cambia según el año
+Gap de apertura vs operación|Pequeño (±5 pts),Gap de apertura vs operación,Pequeño (±5 pts),71,0.2958,1.6295,12638.05,178.0007,2,6,0.3191,0.25,225.0862,85.7917,Cambia según el año
+Movimiento 9:30 → entrada|A favor (>10 pts),Movimiento 9:30 → entrada,A favor (>10 pts),280,0.25,1.214,18232.1,65.1146,5,12,0.2199,0.2806,-8.7082,139.9996,Cambia según el año
+Movimiento 9:30 → entrada|En contra (>10 pts),Movimiento 9:30 → entrada,En contra (>10 pts),18,0.0556,0.094,-6299.5,-349.9722,1,14,0.1429,0.0,-257.2143,-409.0,Peor en los dos años
+Movimiento 9:30 → entrada|Lateral (±10 pts),Movimiento 9:30 → entrada,Lateral (±10 pts),178,0.2978,1.4279,21610.75,121.4087,3,12,0.2752,0.3333,137.3362,96.2478,Cambia según el año
+Día anterior vs operación|Mismo sentido,Día anterior vs operación,Mismo sentido,240,0.275,1.3293,23236.65,96.8194,4,13,0.2521,0.2975,65.4504,127.6698,Mejor en los dos años
+Día anterior vs operación|Sentido contrario,Día anterior vs operación,Sentido contrario,236,0.2458,1.143,10306.7,43.6725,4,17,0.2319,0.2653,30.092,62.7959,Peor en los dos años
+Distancia a la EMA 20 (3m)|Cerca de la EMA,Distancia a la EMA 20 (3m),Cerca de la EMA,159,0.2893,1.4209,19042.35,119.7632,6,11,0.2581,0.3333,113.0737,129.1894,Mejor en los dos años
+Distancia a la EMA 20 (3m)|Lejos de la EMA,Distancia a la EMA 20 (3m),Lejos de la EMA,159,0.2642,1.2304,11026.95,69.3519,3,10,0.2208,0.3049,-49.2201,180.6939,Cambia según el año
+Distancia a la EMA 20 (3m)|Media,Distancia a la EMA 20 (3m),Media,158,0.2278,1.0701,3474.05,21.9877,2,13,0.2414,0.2113,59.9471,-24.5261,Cambia según el año

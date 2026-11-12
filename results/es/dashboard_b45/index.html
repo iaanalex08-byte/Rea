@@ -65,6 +65,7 @@
       <div class="es-kpi"><span class="es-kpi-label">Esperanza por operación</span><span class="es-kpi-value" data-draw="b45-k-avg">—</span><span class="es-kpi-note">USD de media</span></div>
       <div class="es-kpi"><span class="es-kpi-label">Ganancia media</span><span class="es-kpi-value" data-draw="b45-k-avgwin">—</span><span class="es-kpi-note">USD en operaciones ganadoras</span></div>
       <div class="es-kpi"><span class="es-kpi-label">Pérdida media</span><span class="es-kpi-value" data-draw="b45-k-avgloss">—</span><span class="es-kpi-note">USD en operaciones perdedoras</span></div>
+      <div class="es-kpi"><span class="es-kpi-label">Mejor racha</span><span class="es-kpi-value" data-draw="b45-k-best">—</span><span class="es-kpi-note">ganancias seguidas</span></div>
       <div class="es-kpi"><span class="es-kpi-label">Peor racha</span><span class="es-kpi-value" data-draw="b45-k-streak">—</span><span class="es-kpi-note">pérdidas seguidas</span></div>
       <div class="es-kpi"><span class="es-kpi-label">Drawdown máximo</span><span class="es-kpi-value" data-draw="b45-k-dd">—</span><span class="es-kpi-note">USD en el orden histórico</span></div>
       <div class="es-kpi"><span class="es-kpi-label">¿Ventaja estadística?</span><span class="es-kpi-value" data-draw="b45-k-t">—</span><span class="es-kpi-note">estadístico t; hace falta más de 2</span></div>
@@ -329,21 +330,22 @@
   dash.calc('b45_resumen', {
     inputs: ['b45_operaciones'],
     title: 'Métricas de B · CDMX · SL 45 / TP 30 / 60',
-    description: 'Acierto, factor de beneficio, neto, medias, peor racha, drawdown y estadístico t de la configuración.',
+    description: 'Acierto, factor de beneficio, neto, medias, mejor y peor racha, drawdown y estadístico t de la configuración.',
     fn: (operaciones) => {
       const usd = operaciones.map((o) => Number(o.usd));
       const n = usd.length;
-      let eq = 0, peak = 0, maxdd = 0, run = 0, worst = 0, gw = 0, gl = 0;
+      let eq = 0, peak = 0, maxdd = 0, run = 0, worst = 0, runW = 0, best = 0, gw = 0, gl = 0;
       for (const v of usd) {
         eq += v; peak = Math.max(peak, eq); maxdd = Math.max(maxdd, peak - eq);
         run = v < 0 ? run + 1 : 0; worst = Math.max(worst, run);
+        runW = v > 0 ? runW + 1 : 0; best = Math.max(best, runW);
         if (v > 0) gw += v; else gl -= v;
       }
       const avg = eq / n;
       const sd = Math.sqrt(usd.reduce((s, v) => s + (v - avg) ** 2, 0) / (n - 1));
       const wins = usd.filter((v) => v > 0), losses = usd.filter((v) => v < 0);
       return [{
-        n, winrate: wins.length / n, pf: gw / gl, net: eq, avg, maxdd, worst_streak: worst,
+        n, winrate: wins.length / n, pf: gw / gl, net: eq, avg, maxdd, worst_streak: worst, best_streak: best,
         t: (avg / sd) * Math.sqrt(n),
         avg_win: wins.reduce((a, b) => a + b, 0) / wins.length,
         avg_loss: losses.reduce((a, b) => a + b, 0) / losses.length,
@@ -417,6 +419,7 @@
     kpi('b45-k-avgwin', 'avg_win', money, () => 'es-good');
     kpi('b45-k-avgloss', 'avg_loss', money, () => 'es-bad');
     kpi('b45-k-streak', 'worst_streak', n0);
+    kpi('b45-k-best', 'best_streak', n0, () => 'es-good');
     kpi('b45-k-dd', 'maxdd', money, () => 'es-bad');
     kpi('b45-k-t', 't', (v) => ES.loc.format('.2f')(v), (v) => (v >= 2 ? 'es-good' : 'es-warn'));
 
