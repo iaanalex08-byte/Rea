@@ -132,6 +132,7 @@ input[type=range]{width:100%;accent-color:#fff;height:16px;margin:0}
 .hint{position:absolute;right:12px;bottom:10px;font:500 9px/1 var(--mono);letter-spacing:.12em;color:var(--ink-3);pointer-events:none}
 .tip{position:absolute;z-index:3;pointer-events:none;min-width:150px;background:rgba(12,13,14,.92);border:1px solid var(--line-2);border-radius:8px;padding:8px 10px;font:400 11px/1.5 var(--mono);color:var(--ink-2);backdrop-filter:blur(6px);display:grid;grid-template-columns:auto auto;column-gap:12px}
 .tip[hidden]{display:none}
+.gl-err{position:absolute;inset:auto 16px 40%;margin:0;text-align:center;color:var(--ink-2);font-size:13px}
 .kpi{display:flex;flex-direction:column}
 .spark{margin-top:auto;padding-top:12px;height:52px}
 .spark svg{width:100%;height:40px;display:block;overflow:visible}
@@ -836,10 +837,14 @@ function axes(g,{x0=-5.4,x1=5.4,y1,z0,z1,yT=[],xT=[],zT=[],yTitle,zTitle}){
 }
 const xTicks = [0,11,22,33,44].map(i=>({x:X(i),label:'t'+(i+1)}));
 
+/* one shared WebGL renderer for every chart: each chart draws into its own 2D canvas */
+const GLS={r:null,w:0,h:0,dpr:Math.min(devicePixelRatio||1,2),fail:false};
+function sharedGL(){ if(GLS.r||GLS.fail) return GLS.r; try{ const cv=document.createElement('canvas'); GLS.r=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true,preserveDrawingBuffer:true}); GLS.r.setPixelRatio(GLS.dpr); GLS.r.setScissorTest(true); GLS.r.setClearColor(0x000000,0); }catch(e){ GLS.fail=true; document.querySelectorAll('.gl').forEach(b=>{ const m=document.createElement('p'); m.className='gl-err'; m.textContent='Tu navegador no pudo iniciar los gráficos 3D (WebGL). Activa la aceleración por hardware en la configuración del navegador y recarga la página.'; b.appendChild(m); }); } return GLS.r; }
+function sharedSize(w,h){ if(w<=GLS.w&&h<=GLS.h) return; GLS.w=Math.max(GLS.w,w); GLS.h=Math.max(GLS.h,h); GLS.r.setSize(GLS.w,GLS.h,false); }
 class Chart3D{
   constructor(el,{yaw=.55,pitch=.38,dist=15,target=[0,1.7,0]}={}){
     this.el=el; this.box=el.querySelector('.gl'); this.cv=this.box.querySelector('canvas'); this.tip=this.box.querySelector('.tip');
-    this.r=new THREE.WebGLRenderer({canvas:this.cv,antialias:true,alpha:true}); this.r.setPixelRatio(Math.min(devicePixelRatio,2));
+    this.r=sharedGL(); this.ctx=this.cv.getContext('2d');
     this.scene=new THREE.Scene(); this.cam=new THREE.PerspectiveCamera(34,1,.1,200);
     this.root=new THREE.Group(); this.scene.add(this.root);
     this.scene.add(new THREE.AmbientLight(0xffffff,.55));
@@ -857,14 +862,15 @@ class Chart3D{
     c.addEventListener('pointerleave',()=>{ if(!this.drag){ this.ptr=null; this.tip.hidden=true; } });
     c.addEventListener('dblclick',()=>{ this.yaw=this.base=this.home.yaw; this.pitch=this.home.pitch; this.t0=performance.now(); });
   }
-  resize(){ const w=this.box.clientWidth, h=this.box.clientHeight; if(!w||!h) return; this.r.setSize(w,h,false); this.cam.aspect=w/h; this.cam.updateProjectionMatrix(); this.w=w; this.h=h; this.cam.zoom = w<420 ? .78 : 1; this.cam.updateProjectionMatrix(); }
+  resize(){ const w=this.box.clientWidth, h=this.box.clientHeight; if(!w||!h) return; this.cv.width=Math.round(w*GLS.dpr); this.cv.height=Math.round(h*GLS.dpr); if(this.r) sharedSize(w,h); this.cam.aspect=w/h; this.cam.updateProjectionMatrix(); this.w=w; this.h=h; this.cam.zoom = w<420 ? .78 : 1; this.cam.updateProjectionMatrix(); }
   clear(){ this.hover=[]; this.root.traverse(o=>{ if(o.geometry) o.geometry.dispose(); if(o.material){ const ms=Array.isArray(o.material)?o.material:[o.material]; ms.forEach(m=>{ if(m.map) m.map.dispose(); m.dispose(); }); } }); while(this.root.children.length) this.root.remove(this.root.children[0]); }
   frame(t){
     if(!this.vis) return;
     if(!this.drag && !RM && !this.paused) this.yaw = this.base + .2*Math.sin((t-this.t0)/4200);
     const {yaw,pitch,dist,target}=this;
     this.cam.position.set(target.x+dist*Math.sin(yaw)*Math.cos(pitch), target.y+dist*Math.sin(pitch), target.z+dist*Math.cos(yaw)*Math.cos(pitch));
-    this.cam.lookAt(target); this.r.render(this.scene,this.cam);
+    this.cam.lookAt(target); if(!this.r||!this.w) return; const r=this.r; r.setViewport(0,0,this.w,this.h); r.setScissor(0,0,this.w,this.h); r.clear(); r.render(this.scene,this.cam);
+    const dw=this.cv.width, dh=this.cv.height, sh=r.domElement.height; this.ctx.clearRect(0,0,dw,dh); this.ctx.drawImage(r.domElement,0,sh-dh,dw,dh,0,0,dw,dh);
     if(this.ptr && !this.drag) this.pick(); else if(this.drag) this.tip.hidden=true;
   }
   pick(){
