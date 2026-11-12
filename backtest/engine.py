@@ -34,17 +34,18 @@ def ema3(df1, length=20, tf=3):
     return e
 
 
-def run(df1, exec_tf=1, ema_len=20, ema_tf=3, sl=45, tp1=30, tp2=60, side_mode='ema', stop_first=True):
+def run(df1, exec_tf=1, ema_len=20, ema_tf=3, sl=45, tp1=30, tp2=60, side_mode='ema', stop_first=True, entry_tz='America/Mexico_City', eh=9, em=12):
     """exec_tf: candle size used to simulate fills (1 or 3 minutes)."""
     ex = resample(df1, exec_tf)
     ema = ema3(df1, ema_len, ema_tf)
     mx = ex.index.tz_convert('America/Mexico_City')
     ny = ex.index.tz_convert('America/New_York')
-    ex = ex.assign(mxd=mx.date, mxh=mx.hour, mxm=mx.minute, nyh=ny.hour, nym=ny.minute)
+    et = ex.index.tz_convert(entry_tz)
+    ex = ex.assign(mxd=mx.date, mxh=et.hour, mxm=et.minute, nyh=ny.hour, nym=ny.minute)
     O, H, L, C = ex.o.values, ex.h.values, ex.l.values, ex.c.values
     idx = ex.index
     out = []
-    starts = np.where((ex.mxh.values == 9) & (ex.mxm.values == 12))[0]
+    starts = np.where((ex.mxh.values == eh) & (ex.mxm.values == em))[0]
     for s in starts:
         t0 = idx[s]
         if t0.weekday() >= 5:
