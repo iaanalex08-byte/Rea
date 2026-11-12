@@ -297,6 +297,8 @@ tr.gfirst td{border-top:1px solid var(--line-2)}
 .mc-kpis b{font:500 15px/1 var(--mono);font-variant-numeric:tabular-nums}
 .mc-bar{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .tabs,.mc-act{display:flex;gap:6px;flex-wrap:wrap}
+#pjLeg{font-size:12px;gap:8px 16px}
+.pj-t td,.pj-t th{white-space:nowrap}
 .mc-gl{height:clamp(340px,40vw,520px);border-radius:10px;background:#0A0B0C;border:1px solid var(--line)}
 .sel-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .sel-row select{max-width:100%}
@@ -322,7 +324,7 @@ tr.gfirst td{border-top:1px solid var(--line-2)}
       Standard &amp; <em>Pool's</em> 500
     </a>
     <nav class="nav-links" aria-label="Secciones">
-      <a href="#es2026">Backtest ES</a><a href="#eSens">Superficie 3D</a><a href="#dash">Simulador</a><a href="#modelado">Modelado</a><a href="#lab">Lab</a>
+      <a href="#es2026">Backtest ES</a><a href="#bProj">Proyección 3 años</a><a href="#eSens">Superficie 3D</a><a href="#dash">Simulador</a><a href="#modelado">Modelado</a><a href="#lab">Lab</a>
     </nav>
     <a class="btn btn-l" href="#es2026">Abrir Modelo B</a>
   </div>
@@ -501,6 +503,24 @@ tr.gfirst td{border-top:1px solid var(--line-2)}
       <div class="gl mc-gl"><canvas aria-label="Simulación Monte Carlo 3D"></canvas><div class="tip" hidden></div><span class="hint">ARRASTRA PARA GIRAR · DOBLE CLIC PARA CENTRAR</span></div>
     </article>
 
+
+    <article class="box mc" id="bProj">
+      <div class="mc-head">
+        <div><p class="eyebrow">Proyección a 3 años (Monte Carlo)</p><p class="mc-desc" id="pjDesc">—</p></div>
+        <div class="mc-ctl">
+          <div class="seg" role="group" aria-label="Método de la proyección"><span class="seg-l">Método</span><button type="button" data-pm="d" aria-pressed="true">Días sueltos</button><button type="button" data-pm="b5">Bloques de 5 días</button></div>
+          <button type="button" class="btn btn-l" id="pjSeed">Nueva semilla</button>
+        </div>
+      </div>
+      <div class="tbl-wrap"><table class="pj-t"><thead><tr><th>Escenario</th><th>Costo por operación</th><th>Prob. de ganar</th><th>Neto P5</th><th>Neto mediana</th><th>Neto P95</th><th>Drawdown mediana</th><th>Drawdown P95</th></tr></thead><tbody id="pjT"></tbody></table></div>
+      <div class="gl mc-gl" id="pjGl"><canvas aria-label="Proyección 3D a 3 años por escenario de costos"></canvas><div class="tip" hidden></div><span class="hint">ARRASTRA PARA GIRAR · DOBLE CLIC PARA CENTRAR</span></div>
+      <div class="legend" id="pjLeg"></div>
+      <div class="box" style="background:transparent">
+        <h3 class="tt">Por año</h3>
+        <p class="src" style="margin:0 0 10px">2026 llega hasta el 6 de noviembre. Ganadas = TP1 + TP2; parcial = TP1 + break-even o TP1 + cierre; perdidas = stop o cierre en negativo.</p>
+        <div class="tbl-wrap"><table><thead><tr><th>Año</th><th>Ops</th><th>Ganadas</th><th>Parcial + BE</th><th>Perdidas</th><th>Acierto TP2</th><th>Win rate</th><th>PF</th><th>Neto</th></tr></thead><tbody id="pjY"></tbody></table></div>
+      </div>
+    </article>
     <div class="grid-charts">
       <article class="box p3 span2" id="eDaily">
         <header><h3>ES 2026 diario en 3D<small>Velas diarias del futuro y P&amp;L del Modelo B por día al fondo</small></h3>
@@ -1042,7 +1062,7 @@ function riskCalc(T){
 
 let pendR=0;
 function bRun(){ applyCosts(); const {F,T}=filt(); const S=stats(T); RISK=riskCalc(T); bLast={F,T,S}; bDOM(F,T,S);
-  if(bCh){ buildBDaily(bCh.d,F); buildBEq(bCh.e,S,T); buildBMon(bCh.m,S); buildBGrp(bCh.g,T,S); buildBTraj(bCh.t,T,S); buildBSurf(bCh.s); buildBMfe(bCh.x,T); buildRidge(bCh.r); } mcRun(); }
+  if(bCh){ buildBDaily(bCh.d,F); buildBEq(bCh.e,S,T); buildBMon(bCh.m,S); buildBGrp(bCh.g,T,S); buildBTraj(bCh.t,T,S); buildBSurf(bCh.s); buildBMfe(bCh.x,T); buildRidge(bCh.r); setTimeout(()=>{ mcRun(); pjRun(); },30); } }
 
 function costText(){ const c=costPerTrade(); return `Costo por operación (2 contratos): <b>${usdA(c,2)}</b> · stop completo <b>${usd(-1125-c,0)}</b> · TP1 + BE <b>${usd(375-c,0)}</b> · TP1 + TP2 <b>${usd(1125-c,0)}</b>`; }
 
@@ -1324,10 +1344,54 @@ pressGroup('#bMC [data-t]','aria-selected',b=>{ MC.tab=b.dataset.t; if(bCh){ con
 $('#mcSeed').addEventListener('click',()=>{ MC.seed=1+Math.floor(Math.random()*9999); mcRun(); });
 $('#mcStop').addEventListener('click',()=>{ if(!bCh) return; const c=bCh.mc; c.paused=!c.paused; if(!c.paused){ c.base=c.yaw; c.t0=performance.now(); } $('#mcStop').textContent=c.paused?'Girar':'Detener'; });
 $('#mcCenter').addEventListener('click',()=>{ if(!bCh) return; const c=bCh.mc; c.yaw=c.base=c.home.yaw; c.pitch=c.home.pitch; c.t0=performance.now(); });
+
+/* ---- 3-year projection ---- */
+const PJ={m:'d',seed:11,res:null,days:756};
+function pjScen(){ const base={nm:'Costos de tu tablero',d:'1 tick + $4.50 / contrato',c:BASE_COST,col:C.blue};
+  const sc=[{nm:'Sin costos',d:'$0',c:0,col:C.up},base];
+  if(!isBaseCost()) sc.push({nm:'Costos actuales',d:`${COST.slip} tick + ${usdA(COST.comm,2)} / contrato`,c:costPerTrade(),col:0xffffff});
+  sc.push({nm:'Costos dobles',d:'2 ticks + $9.00 / contrato',c:2*BASE_COST,col:C.down}); return sc; }
+function pjCompute(){
+  const {T}=bLast; const g=T.map(t=>t.gross), n=g.length, H=PJ.days, N=10000; if(n<5) return null;
+  const step=7, idx=[]; for(let d=step-1;d<H;d+=step) idx.push(d); if(idx[idx.length-1]!==H-1) idx.push(H-1);
+  return pjScen().map(sc=>{ const r=rng(PJ.seed*131+(PJ.m==='d'?0:7)); const K=idx.length, M=new Float32Array(N*K), fin=new Float32Array(N), dd=new Float32Array(N), y1=new Float32Array(N), y2=new Float32Array(N);
+    for(let s=0;s<N;s++){ let eq=0,pk=0,mdd=0,d=0,ki=0; while(d<H){ const take=PJ.m==='b5'?5:1; const st=PJ.m==='b5'?(r()*Math.max(1,n-4))|0:(r()*n)|0; for(let k=0;k<take&&d<H;k++,d++){ eq+=g[Math.min(n-1,st+k)]-sc.c; if(eq>pk)pk=eq; if(eq-pk<mdd)mdd=eq-pk; if(d===251) y1[s]=eq; if(d===503) y2[s]=eq; if(d===idx[ki]){ M[s*K+ki]=eq; ki++; } } } fin[s]=eq; dd[s]=-mdd; }
+    const col=new Float32Array(N); const Q=idx.map((d,ki)=>{ for(let s=0;s<N;s++) col[s]=M[s*K+ki]; col.sort(); const q=p=>col[Math.floor(p*(N-1))]; return {d,p05:q(.05),p25:q(.25),p50:q(.5),p75:q(.75),p95:q(.95)}; });
+    const qs=a=>{ const so=Float32Array.from(a).sort(); return p=>so[Math.floor(p*(N-1))]; }; const qf=qs(fin), qd=qs(dd), q1=qs(y1), q2=qs(y2); let win=0; for(let s=0;s<N;s++) if(fin[s]>0) win++;
+    const sample=[]; for(let k=0;k<40;k++){ const s=(k*2477)%N; const row=[]; for(let ki=0;ki<K;ki++) row.push(M[s*K+ki]); sample.push(row); }
+    return {...sc,Q,pwin:win/N,p05:qf(.05),p50:qf(.5),p95:qf(.95),dd50:qd(.5),dd95:qd(.95),y1:q1(.5),y2:q2(.5),sample}; });
+}
+function pjRun(){ if(!bLast) return; const {T}=bLast; $('#pjDesc').textContent=`10,000 trayectorias de 3 años (756 días hábiles, una operación al día a las 9:12 CDMX) que remuestrean ${PJ.m==='d'?'días sueltos':'bloques de 5 días seguidos'} de las ${T.length} operaciones filtradas. P5 y P95 marcan el rango probable; el drawdown es la peor caída de cada trayectoria (semilla ${PJ.seed}).`;
+  PJ.res=pjCompute(); const R=PJ.res; const cls=v=>v>=0?'pos':'neg';
+  $('#pjT').innerHTML=R?R.map(x=>`<tr${x.nm==='Costos de tu tablero'?' class="cur"':''}><td>${x.nm}</td><td>${x.d} (${usdA(x.c,2)})</td><td>${(x.pwin*100).toFixed(1)}%</td><td class="${cls(x.p05)}">${usd(x.p05)}</td><td class="${cls(x.p50)}">${usd(x.p50)}</td><td class="${cls(x.p95)}">${usd(x.p95)}</td><td class="neg">${usdA(-x.dd50)}</td><td class="neg">${usdA(-x.dd95)}</td></tr>`).join(''):'<tr><td colspan="8">Muy pocas operaciones para proyectar.</td></tr>';
+  $('#pjLeg').innerHTML=R?R.map(x=>`<span><i style="background:#${x.col.toString(16).padStart(6,'0')}"></i>${x.nm}: mediana año 1 ${usd(x.y1)} · año 2 ${usd(x.y2)} · año 3 ${usd(x.p50)}</span>`).join(''):'';
+  // por año
+  const ys=[...new Set(T.map(t=>t.year))].sort();
+  $('#pjY').innerHTML=ys.map(y=>{ const A=T.filter(t=>t.year===y), a=agg(A); const won=A.filter(t=>t.out==='TP1 + TP2').length, part=A.filter(t=>(t.out==='TP1 + BE'||t.out==='TP1 + cierre')||(t.out==='Cierre 15:59'&&t.usd>0)).length, lost=A.length-won-part;
+    return `<tr><td>${y}</td><td>${a.n}</td><td>${won}</td><td>${part}</td><td>${lost}</td><td>${(won/a.n*100).toFixed(1)}%</td><td>${(a.wr*100).toFixed(1)}%</td><td class="${a.pf>=1?'pos':'neg'}">${a.pf.toFixed(3)}</td><td class="${cls(a.net)}">${usd(a.net)}</td></tr>`; }).join('');
+  if(bCh&&bCh.pj) buildProj(bCh.pj); }
+function buildProj(ch){
+  ch.clear(); const R=PJ.res; if(!R) return; const g=ch.root, H=PJ.days; const XD=d=>-5+d/(H-1)*10; const S=R.length; const ZS=i=>S>1?-2.2+i*(4.4/(S-1)):0;
+  const lo=Math.min(0,...R.map(x=>Math.min(...x.Q.map(q=>q.p05)))), hi=Math.max(0,...R.map(x=>Math.max(...x.Q.map(q=>q.p95)))); const Y=lin(lo,hi,.2,4);
+  axes(g,{y1:4.3,z0:-2.7,z1:2.7,xT:[0,251,503,755].map((d,i)=>({x:XD(d),label:i?'año '+i:'hoy'})),yT:ticks(lo,hi,4).filter(v=>v>=lo&&v<=hi).map(v=>({y:Y(v),label:usdk(v)})),zT:R.map((x,i)=>({z:ZS(i),label:x.nm})),yTitle:'P&L USD'});
+  g.add(line([V(-5.4,Y(0),-2.7),V(5.4,Y(0),-2.7),V(5.4,Y(0),2.7)],{color:C.down,opacity:.6}));
+  [251,503].forEach(d=>g.add(line([V(XD(d),0,-2.7),V(XD(d),4.3,-2.7)],{opacity:.15})));
+  R.forEach((x,i)=>{ const z=ZS(i);
+    [['p05','p95',.16],['p25','p75',.3]].forEach(([a,b,op])=>{ const pos=[],idx=[]; x.Q.forEach(q=>{ pos.push(XD(q.d),Y(q[a]),z, XD(q.d),Y(q[b]),z); }); for(let k=0;k<x.Q.length-1;k++){ const o=k*2; idx.push(o,o+1,o+2,o+1,o+3,o+2); }
+      const geo=new THREE.BufferGeometry(); geo.setAttribute('position',new THREE.Float32BufferAttribute(pos,3)); geo.setIndex(idx); g.add(new THREE.Mesh(geo,new THREE.MeshBasicMaterial({color:x.col,transparent:true,opacity:op,side:THREE.DoubleSide,depthWrite:false}))); });
+    const sp=[]; x.sample.forEach(row=>{ for(let k=0;k<row.length-1;k++) sp.push(XD(x.Q[k].d),Y(clamp(row[k],lo,hi)),z,XD(x.Q[k+1].d),Y(clamp(row[k+1],lo,hi)),z); });
+    const sg=new THREE.BufferGeometry(); sg.setAttribute('position',new THREE.Float32BufferAttribute(sp,3)); g.add(new THREE.LineSegments(sg,new THREE.LineBasicMaterial({color:x.col,transparent:true,opacity:.12})));
+    g.add(tube(x.Q.map(q=>V(XD(q.d),Y(q.p50),z)),x.col,.03,.6));
+    g.add(at(sprite(usd(x.p50),{align:'left',color:'#fff',px:26}),XD(H-1)+.15,Y(x.p50),z));
+    x.Q.filter((_,k)=>k%3===0||k===x.Q.length-1).forEach(q=>ch.hover.push({p:V(XD(q.d),Y(q.p50),z),html:tipHTML(`${x.nm} · día ${q.d+1} (año ${((q.d+1)/252).toFixed(1)})`,[['P95',usd(q.p95)],['P75',usd(q.p75)],['Mediana',usd(q.p50)],['P25',usd(q.p25)],['P5',usd(q.p05)]])}));
+  });
+}
+pressGroup('#bProj [data-pm]','aria-pressed',b=>{ PJ.m=b.dataset.pm; pjRun(); });
+$('#pjSeed').addEventListener('click',()=>{ PJ.seed=1+Math.floor(Math.random()*9999); pjRun(); });
 function startBCharts(){
   if(window.THREE) bCh={ d:new Chart3D($('#eDaily'),{yaw:.4,pitch:.3,dist:12,target:[0,1.9,0]}), e:new Chart3D($('#eEq'),{yaw:.5,pitch:.32,dist:15.5,target:[0,1.8,0]}), m:new Chart3D($('#eMon'),{yaw:.5,pitch:.36,dist:15.2,target:[0,1.5,0]}),
     g:new Chart3D($('#eGrp'),{yaw:.35,pitch:.3,dist:14.5,target:[0,1.7,0]}), t:new Chart3D($('#eTraj'),{yaw:.7,pitch:.38,dist:15,target:[0,1.6,0]}), s:new Chart3D($('#eSens'),{yaw:.65,pitch:.42,dist:14,target:[0,1.4,0]}),
-    x:new Chart3D($('#eMfe'),{yaw:.5,pitch:.35,dist:12.5,target:[0,1.7,0]}), r:new Chart3D($('#eRidge'),{yaw:.55,pitch:.42,dist:14,target:[0,1.1,0]}), mc:new Chart3D($('#bMC'),{yaw:.12,pitch:.14,dist:12.5,target:[0,1.9,0]}) };
+    x:new Chart3D($('#eMfe'),{yaw:.5,pitch:.35,dist:12.5,target:[0,1.7,0]}), r:new Chart3D($('#eRidge'),{yaw:.55,pitch:.42,dist:14,target:[0,1.1,0]}), mc:new Chart3D($('#bMC'),{yaw:.12,pitch:.14,dist:12.5,target:[0,1.9,0]}), pj:new Chart3D($('#bProj'),{yaw:.32,pitch:.28,dist:14.5,target:[0,1.6,0]}) };
   bRun();
   if(bCh){ const loop=t=>{ Object.values(bCh).forEach(c=>c.frame(t)); requestAnimationFrame(loop); }; requestAnimationFrame(loop); }
 }
