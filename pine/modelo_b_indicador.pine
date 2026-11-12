@@ -13,6 +13,8 @@ int    hEnt  = input.int(9,  "Hora de entrada (CDMX)",   minval = 0, maxval = 23
 int    mEnt  = input.int(12, "Minuto de entrada (CDMX)", minval = 0, maxval = 59, group = gEnt)
 string tfEma = input.timeframe("3", "Marco de la EMA", group = gEnt)
 int    lenEma = input.int(20, "Periodo de la EMA", minval = 1, group = gEnt)
+int    preMin = input.int(5, "Aviso previo (minutos antes de la entrada)", minval = 1, maxval = 60, group = gEnt)
+bool   showPre = input.bool(true, "Mostrar flecha de aviso previo", group = gEnt)
 
 string gBr  = "Bracket (ticks)"
 int    slT  = input.int(45, "Stop loss",          minval = 1, group = gBr)
@@ -41,7 +43,9 @@ float tickValue = syminfo.mintick * syminfo.pointvalue   // ES: 0.25 × 50 = 12.
 
 // EMA del marco superior sin repintar: valor de la última vela de 3 min ya cerrada
 float emaHtf = request.security(syminfo.tickerid, tfEma, ta.ema(close, lenEma)[1], lookahead = barmerge.lookahead_on)
-plot(showEma ? emaHtf : na, "EMA 20 (3 min)", color = color.new(#E9A23B, 0), linewidth = 2)
+// La EMA cambia de color según el precio esté arriba (zona de compra) o abajo (zona de venta)
+color emaCol = close > emaHtf ? cUp : cDn
+plot(showEma ? emaHtf : na, "EMA 20 (3 min)", color = emaCol, linewidth = 2)
 
 // Horarios del día de la vela
 int yMx  = year(time, TZ_MX)
@@ -56,6 +60,9 @@ int dayKey = yMx * 10000 + moMx * 100 + dMx
 
 bool isEntryBar = timeframe.isintraday and time <= tEntry and tEntry < time_close
 bool isCloseBar = time <= tClose and tClose < time_close
+int  tPre = tEntry - preMin * 60000
+// vela que cierra en (o contiene) el minuto del aviso: con velas de 1 min es la de 9:06, que cierra a las 9:07
+bool isPreBar = timeframe.isintraday and time < tPre and tPre <= time_close
 
 // ───────────── Estado de la operación ─────────────
 var int   dir      = 0        // 1 compra, -1 venta, 0 sin operación
@@ -70,6 +77,8 @@ var float r2       = 0.0
 var string why1    = ""
 var string why2    = ""
 var int   lastDay  = -1
+var int   preDay   = -1
+var int   preDir   = 0
 var int   entBar   = na
 var line  lnEnt    = na
 var line  lnSl     = na
@@ -96,10 +105,24 @@ bool evTp2   = false
 bool evSl    = false
 bool evBe    = false
 bool evCl    = false
+bool evPreL  = false
+bool evPreS  = false
 
 endLine(line l) =>
     if not na(l)
         line.set_x2(l, bar_index)
+
+// Aviso previo: dirección que tendría la entrada si fuera ahora (5 min antes de las 9:12)
+if isPreBar and barstate.isconfirmed and dayKey != preDay and not na(emaHtf)
+    preDay := dayKey
+    preDir := close > emaHtf ? 1 : -1
+    evPreL := preDir == 1
+    evPreS := preDir == -1
+    if showPre
+        string hhmm = str.tostring(hour(tPre, TZ_MX)) + ":" + (minute(tPre, TZ_MX) < 10 ? "0" : "") + str.tostring(minute(tPre, TZ_MX))
+        label.new(bar_index, preDir == 1 ? low : high, (preDir == 1 ? "▲ PREVIO COMPRA" : "▼ PREVIO VENTA") + "\n" + hhmm + " CDMX · se confirma a las 9:12",
+             yloc = preDir == 1 ? yloc.belowbar : yloc.abovebar, style = preDir == 1 ? label.style_arrowup : label.style_arrowdown,
+             color = preDir == 1 ? cUp : cDn, textcolor = preDir == 1 ? cUp : cDn, size = size.normal)
 
 // Entrada
 if isEntryBar and dayKey != lastDay and dir == 0 and not na(emaHtf)
@@ -123,7 +146,8 @@ if isEntryBar and dayKey != lastDay and dir == 0 and not na(emaHtf)
     lnSl  := line.new(bar_index, sl,  bar_index, sl,  color = cDn, width = 1, style = line.style_dashed)
     lnTp1 := line.new(bar_index, tp1, bar_index, tp1, color = color.new(cUp, 30), width = 1, style = line.style_dashed)
     lnTp2 := line.new(bar_index, tp2, bar_index, tp2, color = cUp, width = 1, style = line.style_dashed)
-    label.new(bar_index, dir == 1 ? low : high, (dir == 1 ? "COMPRA" : "VENTA") + " 9:12 CDMX\n" + str.tostring(ent, format.mintick),
+    string conf = preDay == dayKey ? (preDir == dir ? "\nconfirma el previo" : "\ncambió respecto al previo") : ""
+    label.new(bar_index, dir == 1 ? low : high, (dir == 1 ? "COMPRA" : "VENTA") + " 9:12 CDMX\n" + str.tostring(ent, format.mintick) + conf,
          style = dir == 1 ? label.style_label_up : label.style_label_down, color = dir == 1 ? cUp : cDn, textcolor = color.white, size = size.small)
 
 // Gestión de la operación (incluye la vela de entrada)
@@ -202,7 +226,7 @@ if dir != 0
         dir := 0
 
 // ───────────── Tabla ─────────────
-var table tb = table.new(position.top_right, 2, 10, bgcolor = color.new(#0F1112, 10), border_color = color.new(color.white, 85), border_width = 1)
+var table tb = table.new(position.top_right, 2, 11, bgcolor = color.new(#0F1112, 10), border_color = color.new(color.white, 85), border_width = 1)
 if showTable and barstate.islast
     float net = gp - gl
     float pf  = gl > 0 ? gp / gl : na
@@ -227,6 +251,8 @@ if showTable and barstate.islast
     table.cell(tb, 1, 8, na(lastUsd) ? "—" : lastOut + " · " + str.tostring(lastUsd, "#,##0.00"), text_color = color.white, text_size = size.small)
     table.cell(tb, 0, 9, "Costos", text_color = color.gray, text_size = size.small)
     table.cell(tb, 1, 9, str.tostring(comm, "0.00") + " USD + " + str.tostring(slip) + " tick / contrato", text_color = color.gray, text_size = size.small)
+    table.cell(tb, 0, 10, "Aviso previo de hoy", text_color = color.gray, text_size = size.small)
+    table.cell(tb, 1, 10, preDay == dayKey ? (preDir == 1 ? "▲ COMPRA" : "▼ VENTA") : "Pendiente", text_color = preDay == dayKey ? (preDir == 1 ? cUp : cDn) : color.gray, text_size = size.small)
 
 // ───────────── Alertas ─────────────
 alertcondition(evLong,  "Modelo B · Compra",       "Modelo B: COMPRA a las 9:12 CDMX en {{ticker}} cerca de {{open}}")
@@ -236,3 +262,5 @@ alertcondition(evTp2,   "Modelo B · TP2",          "Modelo B: TP2 tocado en {{t
 alertcondition(evSl,    "Modelo B · Stop",         "Modelo B: stop tocado en {{ticker}}")
 alertcondition(evBe,    "Modelo B · Break-even",   "Modelo B: segundo contrato cerrado en break-even en {{ticker}}")
 alertcondition(evCl,    "Modelo B · Cierre 15:59", "Modelo B: cierre forzado 15:59 NY en {{ticker}}")
+alertcondition(evPreL,  "Modelo B · Previo compra", "Modelo B: a 5 minutos de las 9:12 CDMX el precio está ARRIBA de la EMA 20 en {{ticker}} (previo COMPRA)")
+alertcondition(evPreS,  "Modelo B · Previo venta",  "Modelo B: a 5 minutos de las 9:12 CDMX el precio está ABAJO de la EMA 20 en {{ticker}} (previo VENTA)")
