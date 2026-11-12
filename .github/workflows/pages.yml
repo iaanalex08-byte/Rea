@@ -25,7 +25,7 @@ jobs:
       - name: Preparar sitio
         run: |
           mkdir -p _site
-          cp index.html data-modelo-b.json .nojekyll _site/
+          cp index.html three.min.js data-modelo-b.json .nojekyll _site/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
