@@ -1,0 +1,5 @@
+paso,filtros,n26,avg26,wr26,pf26,net26
+Sin filtro,—,219,98.6395,0.2831,1.3382,21602.05
+Quitar 1 peor de 2025,Volatilidad día anterior: Alta,142,75.9335,0.2746,1.2581,10782.55
+Quitar 2 peores de 2025,Volatilidad día anterior: Alta · Día de la semana: Lun,113,56.8257,0.2655,1.1911,6421.3
+Quitar 3 peores de 2025,Volatilidad día anterior: Alta · Día de la semana: Lun · Semana del mes: Semana 3,84,59.0881,0.2619,1.1957,4963.4

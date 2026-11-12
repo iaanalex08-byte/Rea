@@ -1,0 +1,953 @@
+config,date,side,usd,win,outcome,mins,news,horario_ny,vol,weekday,wom,month_name,year
+SL 15 · TP 55/110,2025-01-02,Compra,-409.0,0,Stop (−2),2,Sin noticia,10:12 NY (invierno),,Jue,Semana 1,Ene,2025
+SL 15 · TP 55/110,2025-01-03,Compra,-409.0,0,Stop (−2),1,Sin noticia,10:12 NY (invierno),Alta,Vie,Semana 1,Ene,2025
+SL 15 · TP 55/110,2025-01-06,Compra,653.5,1,TP1 + BE,141,Sin noticia,10:12 NY (invierno),Media,Lun,Semana 1,Ene,2025
+SL 15 · TP 55/110,2025-01-07,Venta,-409.0,0,Stop (−2),1,Sin noticia,10:12 NY (invierno),Media,Mar,Semana 1,Ene,2025
+SL 15 · TP 55/110,2025-01-08,Venta,653.5,1,TP1 + BE,24,Sin noticia,10:12 NY (invierno),Alta,Mié,Semana 2,Ene,2025
+SL 15 · TP 55/110,2025-01-10,Venta,-409.0,0,Stop (−2),6,NFP/CPI 8:30,10:12 NY (invierno),Media,Vie,Semana 2,Ene,2025
+SL 15 · TP 55/110,2025-01-13,Compra,-409.0,0,Stop (−2),4,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 2,Ene,2025
+SL 15 · TP 55/110,2025-01-14,Compra,-409.0,0,Stop (−2),2,Sin noticia,10:12 NY (invierno),Media,Mar,Semana 2,Ene,2025
+SL 15 · TP 55/110,2025-01-15,Compra,-409.0,0,Stop (−2),22,NFP/CPI 8:30,10:12 NY (invierno),Media,Mié,Semana 3,Ene,2025
+SL 15 · TP 55/110,2025-01-16,Venta,-409.0,0,Stop (−2),6,Sin noticia,10:12 NY (invierno),Media,Jue,Semana 3,Ene,2025
+SL 15 · TP 55/110,2025-01-17,Compra,-409.0,0,Stop (−2),10,Sin noticia,10:12 NY (invierno),Baja,Vie,Semana 3,Ene,2025
+SL 15 · TP 55/110,2025-01-20,Compra,-409.0,0,Stop (−2),5,Sin noticia,10:12 NY (invierno),Baja,Lun,Semana 3,Ene,2025
+SL 15 · TP 55/110,2025-01-21,Venta,-409.0,0,Stop (−2),5,Sin noticia,10:12 NY (invierno),Baja,Mar,Semana 3,Ene,2025
+SL 15 · TP 55/110,2025-01-22,Compra,-409.0,0,Stop (−2),51,Sin noticia,10:12 NY (invierno),Baja,Mié,Semana 4,Ene,2025
+SL 15 · TP 55/110,2025-01-23,Compra,2028.5,1,TP1 + TP2,343,Sin noticia,10:12 NY (invierno),Baja,Jue,Semana 4,Ene,2025
+SL 15 · TP 55/110,2025-01-24,Venta,-409.0,0,Stop (−2),85,Sin noticia,10:12 NY (invierno),Baja,Vie,Semana 4,Ene,2025
+SL 15 · TP 55/110,2025-01-27,Compra,-409.0,0,Stop (−2),1,Sin noticia,10:12 NY (invierno),Baja,Lun,Semana 4,Ene,2025
+SL 15 · TP 55/110,2025-01-28,Compra,2028.5,1,TP1 + TP2,47,Sin noticia,10:12 NY (invierno),Media,Mar,Semana 4,Ene,2025
+SL 15 · TP 55/110,2025-01-29,Venta,-409.0,0,Stop (−2),12,FOMC,10:12 NY (invierno),Alta,Mié,Semana 5,Ene,2025
+SL 15 · TP 55/110,2025-01-30,Venta,653.5,1,TP1 + BE,29,Sin noticia,10:12 NY (invierno),Media,Jue,Semana 5,Ene,2025
+SL 15 · TP 55/110,2025-01-31,Compra,-409.0,0,Stop (−2),2,Sin noticia,10:12 NY (invierno),Media,Vie,Semana 5,Ene,2025
+SL 15 · TP 55/110,2025-02-03,Venta,-409.0,0,Stop (−2),2,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 1,Feb,2025
+SL 15 · TP 55/110,2025-02-04,Compra,-409.0,0,Stop (−2),19,Sin noticia,10:12 NY (invierno),Alta,Mar,Semana 1,Feb,2025
+SL 15 · TP 55/110,2025-02-05,Venta,-409.0,0,Stop (−2),2,Sin noticia,10:12 NY (invierno),Media,Mié,Semana 1,Feb,2025
+SL 15 · TP 55/110,2025-02-06,Compra,-409.0,0,Stop (−2),13,Sin noticia,10:12 NY (invierno),Media,Jue,Semana 1,Feb,2025
+SL 15 · TP 55/110,2025-02-07,Venta,-409.0,0,Stop (−2),13,NFP/CPI 8:30,10:12 NY (invierno),Baja,Vie,Semana 1,Feb,2025
+SL 15 · TP 55/110,2025-02-10,Compra,-409.0,0,Stop (−2),70,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 2,Feb,2025
+SL 15 · TP 55/110,2025-02-11,Compra,653.5,1,TP1 + BE,117,Sin noticia,10:12 NY (invierno),Baja,Mar,Semana 2,Feb,2025
+SL 15 · TP 55/110,2025-02-12,Venta,-409.0,0,Stop (−2),4,NFP/CPI 8:30,10:12 NY (invierno),Baja,Mié,Semana 2,Feb,2025
+SL 15 · TP 55/110,2025-02-13,Compra,-409.0,0,Stop (−2),2,Sin noticia,10:12 NY (invierno),Media,Jue,Semana 2,Feb,2025
+SL 15 · TP 55/110,2025-02-14,Compra,-409.0,0,Stop (−2),4,Sin noticia,10:12 NY (invierno),Media,Vie,Semana 2,Feb,2025
+SL 15 · TP 55/110,2025-02-17,Venta,-409.0,0,Stop (−2),51,Sin noticia,10:12 NY (invierno),Baja,Lun,Semana 3,Feb,2025
+SL 15 · TP 55/110,2025-02-18,Venta,-409.0,0,Stop (−2),2,Sin noticia,10:12 NY (invierno),Baja,Mar,Semana 3,Feb,2025
+SL 15 · TP 55/110,2025-02-19,Venta,-409.0,0,Stop (−2),5,Sin noticia,10:12 NY (invierno),Baja,Mié,Semana 3,Feb,2025
+SL 15 · TP 55/110,2025-02-20,Venta,-409.0,0,Stop (−2),2,Sin noticia,10:12 NY (invierno),Baja,Jue,Semana 3,Feb,2025
+SL 15 · TP 55/110,2025-02-21,Venta,2028.5,1,TP1 + TP2,128,Sin noticia,10:12 NY (invierno),Baja,Vie,Semana 3,Feb,2025
+SL 15 · TP 55/110,2025-02-24,Venta,-409.0,0,Stop (−2),1,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 4,Feb,2025
+SL 15 · TP 55/110,2025-02-25,Venta,2028.5,1,TP1 + TP2,18,Sin noticia,10:12 NY (invierno),Media,Mar,Semana 4,Feb,2025
+SL 15 · TP 55/110,2025-02-26,Compra,653.5,1,TP1 + BE,108,Sin noticia,10:12 NY (invierno),Alta,Mié,Semana 4,Feb,2025
+SL 15 · TP 55/110,2025-02-27,Venta,-409.0,0,Stop (−2),1,Sin noticia,10:12 NY (invierno),Alta,Jue,Semana 4,Feb,2025
+SL 15 · TP 55/110,2025-02-28,Compra,-409.0,0,Stop (−2),1,Sin noticia,10:12 NY (invierno),Alta,Vie,Semana 4,Feb,2025
+SL 15 · TP 55/110,2025-03-03,Venta,-409.0,0,Stop (−2),10,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 1,Mar,2025
+SL 15 · TP 55/110,2025-03-04,Venta,-409.0,0,Stop (−2),1,Sin noticia,10:12 NY (invierno),Alta,Mar,Semana 1,Mar,2025
+SL 15 · TP 55/110,2025-03-05,Compra,-409.0,0,Stop (−2),3,Sin noticia,10:12 NY (invierno),Alta,Mié,Semana 1,Mar,2025
+SL 15 · TP 55/110,2025-03-06,Compra,-409.0,0,Stop (−2),15,Sin noticia,10:12 NY (invierno),Alta,Jue,Semana 1,Mar,2025
+SL 15 · TP 55/110,2025-03-07,Compra,-409.0,0,Stop (−2),1,NFP/CPI 8:30,10:12 NY (invierno),Alta,Vie,Semana 1,Mar,2025
+SL 15 · TP 55/110,2025-03-10,Venta,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 2,Mar,2025
+SL 15 · TP 55/110,2025-03-11,Compra,-409.0,0,Stop (−2),12,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 2,Mar,2025
+SL 15 · TP 55/110,2025-03-12,Venta,-409.0,0,Stop (−2),6,NFP/CPI 8:30,11:12 NY (verano),Alta,Mié,Semana 2,Mar,2025
+SL 15 · TP 55/110,2025-03-13,Venta,2028.5,1,TP1 + TP2,30,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 2,Mar,2025
+SL 15 · TP 55/110,2025-03-14,Compra,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 2,Mar,2025
+SL 15 · TP 55/110,2025-03-17,Venta,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 3,Mar,2025
+SL 15 · TP 55/110,2025-03-18,Venta,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 3,Mar,2025
+SL 15 · TP 55/110,2025-03-19,Compra,-409.0,0,Stop (−2),5,FOMC,11:12 NY (verano),Media,Mié,Semana 3,Mar,2025
+SL 15 · TP 55/110,2025-03-20,Compra,-409.0,0,Stop (−2),5,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 3,Mar,2025
+SL 15 · TP 55/110,2025-03-21,Compra,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 3,Mar,2025
+SL 15 · TP 55/110,2025-03-24,Compra,-409.0,0,Stop (−2),27,Sin noticia,11:12 NY (verano),Media,Lun,Semana 4,Mar,2025
+SL 15 · TP 55/110,2025-03-25,Compra,-409.0,0,Stop (−2),10,Sin noticia,11:12 NY (verano),Media,Mar,Semana 4,Mar,2025
+SL 15 · TP 55/110,2025-03-26,Venta,2028.5,1,TP1 + TP2,41,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 4,Mar,2025
+SL 15 · TP 55/110,2025-03-27,Compra,-409.0,0,Stop (−2),5,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 4,Mar,2025
+SL 15 · TP 55/110,2025-03-28,Venta,-409.0,0,Stop (−2),7,Sin noticia,11:12 NY (verano),Media,Vie,Semana 4,Mar,2025
+SL 15 · TP 55/110,2025-03-31,Compra,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 5,Mar,2025
+SL 15 · TP 55/110,2025-04-01,Venta,-409.0,0,Stop (−2),12,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 1,Abr,2025
+SL 15 · TP 55/110,2025-04-02,Compra,2028.5,1,TP1 + TP2,21,Sin noticia,11:12 NY (verano),Alta,Mié,Semana 1,Abr,2025
+SL 15 · TP 55/110,2025-04-03,Venta,-409.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 1,Abr,2025
+SL 15 · TP 55/110,2025-04-04,Venta,653.5,1,TP1 + BE,8,NFP/CPI 8:30,11:12 NY (verano),Alta,Vie,Semana 1,Abr,2025
+SL 15 · TP 55/110,2025-04-07,Compra,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 1,Abr,2025
+SL 15 · TP 55/110,2025-04-08,Compra,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 2,Abr,2025
+SL 15 · TP 55/110,2025-04-09,Compra,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Alta,Mié,Semana 2,Abr,2025
+SL 15 · TP 55/110,2025-04-10,Venta,-409.0,0,Stop (−2),2,NFP/CPI 8:30,11:12 NY (verano),Alta,Jue,Semana 2,Abr,2025
+SL 15 · TP 55/110,2025-04-11,Venta,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 2,Abr,2025
+SL 15 · TP 55/110,2025-04-14,Venta,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 2,Abr,2025
+SL 15 · TP 55/110,2025-04-15,Compra,-409.0,0,Stop (−2),3,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 3,Abr,2025
+SL 15 · TP 55/110,2025-04-16,Venta,-409.0,0,Stop (−2),14,Sin noticia,11:12 NY (verano),Media,Mié,Semana 3,Abr,2025
+SL 15 · TP 55/110,2025-04-17,Venta,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 3,Abr,2025
+SL 15 · TP 55/110,2025-04-21,Venta,653.5,1,TP1 + BE,29,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 3,Abr,2025
+SL 15 · TP 55/110,2025-04-22,Compra,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 4,Abr,2025
+SL 15 · TP 55/110,2025-04-23,Compra,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Alta,Mié,Semana 4,Abr,2025
+SL 15 · TP 55/110,2025-04-24,Compra,2028.5,1,TP1 + TP2,19,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 4,Abr,2025
+SL 15 · TP 55/110,2025-04-25,Compra,-409.0,0,Stop (−2),3,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 4,Abr,2025
+SL 15 · TP 55/110,2025-04-28,Venta,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 4,Abr,2025
+SL 15 · TP 55/110,2025-04-29,Compra,-409.0,0,Stop (−2),5,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 5,Abr,2025
+SL 15 · TP 55/110,2025-04-30,Venta,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Alta,Mié,Semana 5,Abr,2025
+SL 15 · TP 55/110,2025-05-01,Venta,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 1,May,2025
+SL 15 · TP 55/110,2025-05-02,Compra,-409.0,0,Stop (−2),1,NFP/CPI 8:30,11:12 NY (verano),Media,Vie,Semana 1,May,2025
+SL 15 · TP 55/110,2025-05-05,Compra,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 1,May,2025
+SL 15 · TP 55/110,2025-05-06,Compra,2028.5,1,TP1 + TP2,72,Sin noticia,11:12 NY (verano),Media,Mar,Semana 1,May,2025
+SL 15 · TP 55/110,2025-05-07,Compra,-409.0,0,Stop (−2),5,FOMC,11:12 NY (verano),Media,Mié,Semana 1,May,2025
+SL 15 · TP 55/110,2025-05-08,Venta,-409.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Media,Jue,Semana 2,May,2025
+SL 15 · TP 55/110,2025-05-09,Venta,2028.5,1,TP1 + TP2,16,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 2,May,2025
+SL 15 · TP 55/110,2025-05-12,Venta,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Media,Lun,Semana 2,May,2025
+SL 15 · TP 55/110,2025-05-13,Compra,653.5,1,TP1 + BE,33,NFP/CPI 8:30,11:12 NY (verano),Media,Mar,Semana 2,May,2025
+SL 15 · TP 55/110,2025-05-14,Venta,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Media,Mié,Semana 2,May,2025
+SL 15 · TP 55/110,2025-05-15,Venta,-409.0,0,Stop (−2),3,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 3,May,2025
+SL 15 · TP 55/110,2025-05-16,Venta,-409.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Media,Vie,Semana 3,May,2025
+SL 15 · TP 55/110,2025-05-19,Compra,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Media,Lun,Semana 3,May,2025
+SL 15 · TP 55/110,2025-05-20,Venta,-409.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 3,May,2025
+SL 15 · TP 55/110,2025-05-21,Compra,-409.0,0,Stop (−2),15,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 3,May,2025
+SL 15 · TP 55/110,2025-05-22,Compra,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 4,May,2025
+SL 15 · TP 55/110,2025-05-23,Compra,-409.0,0,Stop (−2),9,Sin noticia,11:12 NY (verano),Media,Vie,Semana 4,May,2025
+SL 15 · TP 55/110,2025-05-26,Venta,-409.0,0,Stop (−2),103,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 4,May,2025
+SL 15 · TP 55/110,2025-05-27,Compra,2028.5,1,TP1 + TP2,145,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 4,May,2025
+SL 15 · TP 55/110,2025-05-28,Venta,1079.2,1,TP1 + cierre,288,Sin noticia,11:12 NY (verano),Media,Mié,Semana 4,May,2025
+SL 15 · TP 55/110,2025-05-29,Venta,-409.0,0,Stop (−2),3,Sin noticia,11:12 NY (verano),Media,Jue,Semana 5,May,2025
+SL 15 · TP 55/110,2025-05-30,Compra,-409.0,0,Stop (−2),65,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 5,May,2025
+SL 15 · TP 55/110,2025-06-02,Venta,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Media,Lun,Semana 1,Jun,2025
+SL 15 · TP 55/110,2025-06-03,Compra,2028.5,1,TP1 + TP2,91,Sin noticia,11:12 NY (verano),Media,Mar,Semana 1,Jun,2025
+SL 15 · TP 55/110,2025-06-04,Venta,-409.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Media,Mié,Semana 1,Jun,2025
+SL 15 · TP 55/110,2025-06-05,Venta,-409.0,0,Stop (−2),10,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 1,Jun,2025
+SL 15 · TP 55/110,2025-06-06,Compra,-409.0,0,Stop (−2),18,NFP/CPI 8:30,11:12 NY (verano),Media,Vie,Semana 1,Jun,2025
+SL 15 · TP 55/110,2025-06-09,Compra,-409.0,0,Stop (−2),39,Sin noticia,11:12 NY (verano),Media,Lun,Semana 2,Jun,2025
+SL 15 · TP 55/110,2025-06-10,Compra,-409.0,0,Stop (−2),81,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 2,Jun,2025
+SL 15 · TP 55/110,2025-06-11,Compra,-409.0,0,Stop (−2),59,NFP/CPI 8:30,11:12 NY (verano),Baja,Mié,Semana 2,Jun,2025
+SL 15 · TP 55/110,2025-06-12,Compra,1574.45,1,TP1 + cierre,288,Sin noticia,11:12 NY (verano),Media,Jue,Semana 2,Jun,2025
+SL 15 · TP 55/110,2025-06-13,Venta,-409.0,0,Stop (−2),3,Sin noticia,11:12 NY (verano),Media,Vie,Semana 2,Jun,2025
+SL 15 · TP 55/110,2025-06-16,Compra,-409.0,0,Stop (−2),105,Sin noticia,11:12 NY (verano),Media,Lun,Semana 3,Jun,2025
+SL 15 · TP 55/110,2025-06-17,Compra,-409.0,0,Stop (−2),24,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 3,Jun,2025
+SL 15 · TP 55/110,2025-06-18,Compra,653.5,1,TP1 + BE,108,FOMC,11:12 NY (verano),Media,Mié,Semana 3,Jun,2025
+SL 15 · TP 55/110,2025-06-19,Venta,-409.0,0,Stop (−2),44,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 3,Jun,2025
+SL 15 · TP 55/110,2025-06-20,Venta,-409.0,0,Stop (−2),3,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 3,Jun,2025
+SL 15 · TP 55/110,2025-06-23,Compra,-409.0,0,Stop (−2),45,Sin noticia,11:12 NY (verano),Media,Lun,Semana 4,Jun,2025
+SL 15 · TP 55/110,2025-06-24,Venta,-409.0,0,Stop (−2),7,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 4,Jun,2025
+SL 15 · TP 55/110,2025-06-25,Venta,-409.0,0,Stop (−2),33,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 4,Jun,2025
+SL 15 · TP 55/110,2025-06-26,Compra,2028.5,1,TP1 + TP2,244,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 4,Jun,2025
+SL 15 · TP 55/110,2025-06-27,Compra,-409.0,0,Stop (−2),5,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 4,Jun,2025
+SL 15 · TP 55/110,2025-06-30,Compra,-409.0,0,Stop (−2),7,Sin noticia,11:12 NY (verano),Media,Lun,Semana 5,Jun,2025
+SL 15 · TP 55/110,2025-07-01,Compra,-409.0,0,Stop (−2),26,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 1,Jul,2025
+SL 15 · TP 55/110,2025-07-02,Compra,1586.75,1,TP1 + cierre,288,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 1,Jul,2025
+SL 15 · TP 55/110,2025-07-03,Compra,-409.0,0,Stop (−2),4,NFP/CPI 8:30,11:12 NY (verano),Baja,Jue,Semana 1,Jul,2025
+SL 15 · TP 55/110,2025-07-04,Venta,-409.0,0,Stop (−2),18,Sin noticia,11:12 NY (verano),Media,Vie,Semana 1,Jul,2025
+SL 15 · TP 55/110,2025-07-07,Venta,2028.5,1,TP1 + TP2,129,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 1,Jul,2025
+SL 15 · TP 55/110,2025-07-08,Venta,-409.0,0,Stop (−2),5,Sin noticia,11:12 NY (verano),Media,Mar,Semana 2,Jul,2025
+SL 15 · TP 55/110,2025-07-09,Compra,-409.0,0,Stop (−2),16,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 2,Jul,2025
+SL 15 · TP 55/110,2025-07-10,Compra,2028.5,1,TP1 + TP2,201,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 2,Jul,2025
+SL 15 · TP 55/110,2025-07-11,Compra,-409.0,0,Stop (−2),63,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 2,Jul,2025
+SL 15 · TP 55/110,2025-07-14,Compra,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 2,Jul,2025
+SL 15 · TP 55/110,2025-07-15,Venta,2028.5,1,TP1 + TP2,165,NFP/CPI 8:30,11:12 NY (verano),Baja,Mar,Semana 3,Jul,2025
+SL 15 · TP 55/110,2025-07-16,Venta,-409.0,0,Stop (−2),11,Sin noticia,11:12 NY (verano),Media,Mié,Semana 3,Jul,2025
+SL 15 · TP 55/110,2025-07-17,Compra,-409.0,0,Stop (−2),9,Sin noticia,11:12 NY (verano),Media,Jue,Semana 3,Jul,2025
+SL 15 · TP 55/110,2025-07-18,Venta,1167.35,1,TP1 + cierre,288,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 3,Jul,2025
+SL 15 · TP 55/110,2025-07-21,Compra,-50.0,0,Cierre 15:59,288,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 3,Jul,2025
+SL 15 · TP 55/110,2025-07-22,Venta,-409.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 4,Jul,2025
+SL 15 · TP 55/110,2025-07-23,Venta,-409.0,0,Stop (−2),19,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 4,Jul,2025
+SL 15 · TP 55/110,2025-07-24,Compra,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 4,Jul,2025
+SL 15 · TP 55/110,2025-07-25,Compra,1510.1,1,TP1 + cierre,288,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 4,Jul,2025
+SL 15 · TP 55/110,2025-07-28,Compra,-409.0,0,Stop (−2),45,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 4,Jul,2025
+SL 15 · TP 55/110,2025-07-29,Venta,2028.5,1,TP1 + TP2,90,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 5,Jul,2025
+SL 15 · TP 55/110,2025-07-30,Venta,-409.0,0,Stop (−2),4,FOMC,11:12 NY (verano),Baja,Mié,Semana 5,Jul,2025
+SL 15 · TP 55/110,2025-07-31,Venta,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Media,Jue,Semana 5,Jul,2025
+SL 15 · TP 55/110,2025-08-01,Venta,-409.0,0,Stop (−2),1,NFP/CPI 8:30,11:12 NY (verano),Alta,Vie,Semana 1,Ago,2025
+SL 15 · TP 55/110,2025-08-04,Compra,1234.1,1,TP1 + cierre,288,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 1,Ago,2025
+SL 15 · TP 55/110,2025-08-05,Venta,2028.5,1,TP1 + TP2,32,Sin noticia,11:12 NY (verano),Media,Mar,Semana 1,Ago,2025
+SL 15 · TP 55/110,2025-08-06,Compra,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Media,Mié,Semana 1,Ago,2025
+SL 15 · TP 55/110,2025-08-07,Venta,2028.5,1,TP1 + TP2,77,Sin noticia,11:12 NY (verano),Media,Jue,Semana 1,Ago,2025
+SL 15 · TP 55/110,2025-08-08,Compra,-409.0,0,Stop (−2),3,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 2,Ago,2025
+SL 15 · TP 55/110,2025-08-11,Compra,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 2,Ago,2025
+SL 15 · TP 55/110,2025-08-12,Compra,2028.5,1,TP1 + TP2,68,NFP/CPI 8:30,11:12 NY (verano),Baja,Mar,Semana 2,Ago,2025
+SL 15 · TP 55/110,2025-08-13,Venta,1150.2,1,TP1 + cierre,288,Sin noticia,11:12 NY (verano),Media,Mié,Semana 2,Ago,2025
+SL 15 · TP 55/110,2025-08-14,Compra,653.5,1,TP1 + BE,74,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 2,Ago,2025
+SL 15 · TP 55/110,2025-08-15,Venta,653.5,1,TP1 + BE,200,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 3,Ago,2025
+SL 15 · TP 55/110,2025-08-18,Compra,-409.0,0,Stop (−2),19,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 3,Ago,2025
+SL 15 · TP 55/110,2025-08-19,Compra,-409.0,0,Stop (−2),5,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 3,Ago,2025
+SL 15 · TP 55/110,2025-08-20,Venta,-409.0,0,Stop (−2),9,Sin noticia,11:12 NY (verano),Media,Mié,Semana 3,Ago,2025
+SL 15 · TP 55/110,2025-08-21,Compra,-409.0,0,Stop (−2),27,Sin noticia,11:12 NY (verano),Media,Jue,Semana 3,Ago,2025
+SL 15 · TP 55/110,2025-08-22,Compra,653.5,1,TP1 + BE,10,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 4,Ago,2025
+SL 15 · TP 55/110,2025-08-25,Compra,-156.2,0,Cierre 15:59,288,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 4,Ago,2025
+SL 15 · TP 55/110,2025-08-26,Compra,1321.5,1,TP1 + cierre,288,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 4,Ago,2025
+SL 15 · TP 55/110,2025-08-27,Compra,1329.3,1,TP1 + cierre,288,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 4,Ago,2025
+SL 15 · TP 55/110,2025-08-28,Venta,-409.0,0,Stop (−2),31,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 4,Ago,2025
+SL 15 · TP 55/110,2025-08-29,Venta,-409.0,0,Stop (−2),3,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 5,Ago,2025
+SL 15 · TP 55/110,2025-09-01,Compra,339.5,1,Cierre 15:59,163,Sin noticia,11:12 NY (verano),Media,Lun,Semana 1,Sep,2025
+SL 15 · TP 55/110,2025-09-02,Compra,-409.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 1,Sep,2025
+SL 15 · TP 55/110,2025-09-03,Venta,-409.0,0,Stop (−2),9,Sin noticia,11:12 NY (verano),Media,Mié,Semana 1,Sep,2025
+SL 15 · TP 55/110,2025-09-04,Venta,-409.0,0,Stop (−2),12,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 1,Sep,2025
+SL 15 · TP 55/110,2025-09-05,Venta,2028.5,1,TP1 + TP2,13,NFP/CPI 8:30,11:12 NY (verano),Baja,Vie,Semana 1,Sep,2025
+SL 15 · TP 55/110,2025-09-08,Compra,-409.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 2,Sep,2025
+SL 15 · TP 55/110,2025-09-09,Compra,-409.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 2,Sep,2025
+SL 15 · TP 55/110,2025-09-10,Compra,-409.0,0,Stop (−2),22,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 2,Sep,2025
+SL 15 · TP 55/110,2025-09-11,Compra,1463.45,1,TP1 + cierre,288,NFP/CPI 8:30,11:12 NY (verano),Baja,Jue,Semana 2,Sep,2025
+SL 15 · TP 55/110,2025-09-12,Compra,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Media,Vie,Semana 2,Sep,2025
+SL 15 · TP 55/110,2025-09-15,Compra,-409.0,0,Stop (−2),188,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 3,Sep,2025
+SL 15 · TP 55/110,2025-09-16,Venta,-409.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 3,Sep,2025
+SL 15 · TP 55/110,2025-09-17,Venta,-409.0,0,Stop (−2),229,FOMC,11:12 NY (verano),Baja,Mié,Semana 3,Sep,2025
+SL 15 · TP 55/110,2025-09-18,Compra,653.5,1,TP1 + BE,34,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 3,Sep,2025
+SL 15 · TP 55/110,2025-09-19,Compra,-409.0,0,Stop (−2),8,Sin noticia,11:12 NY (verano),Media,Vie,Semana 3,Sep,2025
+SL 15 · TP 55/110,2025-09-22,Compra,2028.5,1,TP1 + TP2,148,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 4,Sep,2025
+SL 15 · TP 55/110,2025-09-23,Compra,-409.0,0,Stop (−2),10,Sin noticia,11:12 NY (verano),Media,Mar,Semana 4,Sep,2025
+SL 15 · TP 55/110,2025-09-24,Venta,-409.0,0,Stop (−2),6,Sin noticia,11:12 NY (verano),Media,Mié,Semana 4,Sep,2025
+SL 15 · TP 55/110,2025-09-25,Compra,-409.0,0,Stop (−2),56,Sin noticia,11:12 NY (verano),Media,Jue,Semana 4,Sep,2025
+SL 15 · TP 55/110,2025-09-26,Venta,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Media,Vie,Semana 4,Sep,2025
+SL 15 · TP 55/110,2025-09-29,Compra,-409.0,0,Stop (−2),5,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 5,Sep,2025
+SL 15 · TP 55/110,2025-09-30,Venta,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 5,Sep,2025
+SL 15 · TP 55/110,2025-10-01,Compra,2028.5,1,TP1 + TP2,174,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 1,Oct,2025
+SL 15 · TP 55/110,2025-10-02,Venta,-409.0,0,Stop (−2),17,Sin noticia,11:12 NY (verano),Media,Jue,Semana 1,Oct,2025
+SL 15 · TP 55/110,2025-10-03,Compra,653.5,1,TP1 + BE,173,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 1,Oct,2025
+SL 15 · TP 55/110,2025-10-06,Venta,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 1,Oct,2025
+SL 15 · TP 55/110,2025-10-07,Venta,2028.5,1,TP1 + TP2,55,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 1,Oct,2025
+SL 15 · TP 55/110,2025-10-08,Compra,-409.0,0,Stop (−2),11,Sin noticia,11:12 NY (verano),Media,Mié,Semana 2,Oct,2025
+SL 15 · TP 55/110,2025-10-09,Venta,1663.5,1,TP1 + cierre,288,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 2,Oct,2025
+SL 15 · TP 55/110,2025-10-10,Compra,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Media,Vie,Semana 2,Oct,2025
+SL 15 · TP 55/110,2025-10-13,Compra,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 2,Oct,2025
+SL 15 · TP 55/110,2025-10-14,Compra,2028.5,1,TP1 + TP2,25,Sin noticia,11:12 NY (verano),Media,Mar,Semana 2,Oct,2025
+SL 15 · TP 55/110,2025-10-15,Compra,-409.0,0,Stop (−2),7,Sin noticia,11:12 NY (verano),Alta,Mié,Semana 3,Oct,2025
+SL 15 · TP 55/110,2025-10-16,Venta,-409.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 3,Oct,2025
+SL 15 · TP 55/110,2025-10-17,Compra,653.5,1,TP1 + BE,9,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 3,Oct,2025
+SL 15 · TP 55/110,2025-10-20,Compra,-409.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Media,Lun,Semana 3,Oct,2025
+SL 15 · TP 55/110,2025-10-21,Venta,-409.0,0,Stop (−2),6,Sin noticia,11:12 NY (verano),Media,Mar,Semana 3,Oct,2025
+SL 15 · TP 55/110,2025-10-22,Venta,2028.5,1,TP1 + TP2,35,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 4,Oct,2025
+SL 15 · TP 55/110,2025-10-23,Venta,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 4,Oct,2025
+SL 15 · TP 55/110,2025-10-24,Compra,-409.0,0,Stop (−2),9,NFP/CPI 8:30,11:12 NY (verano),Media,Vie,Semana 4,Oct,2025
+SL 15 · TP 55/110,2025-10-27,Venta,-409.0,0,Stop (−2),14,Sin noticia,11:12 NY (verano),Media,Lun,Semana 4,Oct,2025
+SL 15 · TP 55/110,2025-10-28,Venta,-409.0,0,Stop (−2),77,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 4,Oct,2025
+SL 15 · TP 55/110,2025-10-29,Venta,-409.0,0,Stop (−2),12,FOMC,11:12 NY (verano),Baja,Mié,Semana 5,Oct,2025
+SL 15 · TP 55/110,2025-10-30,Compra,-409.0,0,Stop (−2),5,Sin noticia,11:12 NY (verano),Media,Jue,Semana 5,Oct,2025
+SL 15 · TP 55/110,2025-10-31,Venta,-409.0,0,Stop (−2),5,Sin noticia,11:12 NY (verano),Media,Vie,Semana 5,Oct,2025
+SL 15 · TP 55/110,2025-11-03,Venta,-409.0,0,Stop (−2),1,Sin noticia,10:12 NY (invierno),Media,Lun,Semana 1,Nov,2025
+SL 15 · TP 55/110,2025-11-04,Compra,653.5,1,TP1 + BE,40,Sin noticia,10:12 NY (invierno),Media,Mar,Semana 1,Nov,2025
+SL 15 · TP 55/110,2025-11-05,Compra,-409.0,0,Stop (−2),3,Sin noticia,10:12 NY (invierno),Media,Mié,Semana 1,Nov,2025
+SL 15 · TP 55/110,2025-11-06,Venta,-409.0,0,Stop (−2),7,Sin noticia,10:12 NY (invierno),Media,Jue,Semana 1,Nov,2025
+SL 15 · TP 55/110,2025-11-07,Compra,-409.0,0,Stop (−2),12,Sin noticia,10:12 NY (invierno),Alta,Vie,Semana 1,Nov,2025
+SL 15 · TP 55/110,2025-11-10,Compra,-409.0,0,Stop (−2),3,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 2,Nov,2025
+SL 15 · TP 55/110,2025-11-11,Venta,-409.0,0,Stop (−2),68,Sin noticia,10:12 NY (invierno),Alta,Mar,Semana 2,Nov,2025
+SL 15 · TP 55/110,2025-11-12,Venta,2028.5,1,TP1 + TP2,61,Sin noticia,10:12 NY (invierno),Media,Mié,Semana 2,Nov,2025
+SL 15 · TP 55/110,2025-11-13,Compra,-409.0,0,Stop (−2),11,Sin noticia,10:12 NY (invierno),Baja,Jue,Semana 2,Nov,2025
+SL 15 · TP 55/110,2025-11-14,Compra,-409.0,0,Stop (−2),1,Sin noticia,10:12 NY (invierno),Alta,Vie,Semana 2,Nov,2025
+SL 15 · TP 55/110,2025-11-17,Venta,-409.0,0,Stop (−2),5,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 3,Nov,2025
+SL 15 · TP 55/110,2025-11-18,Venta,-409.0,0,Stop (−2),2,Sin noticia,10:12 NY (invierno),Alta,Mar,Semana 3,Nov,2025
+SL 15 · TP 55/110,2025-11-19,Compra,-409.0,0,Stop (−2),12,Sin noticia,10:12 NY (invierno),Alta,Mié,Semana 3,Nov,2025
+SL 15 · TP 55/110,2025-11-20,Venta,-409.0,0,Stop (−2),7,NFP/CPI 8:30,10:12 NY (invierno),Alta,Jue,Semana 3,Nov,2025
+SL 15 · TP 55/110,2025-11-21,Venta,-409.0,0,Stop (−2),4,Sin noticia,10:12 NY (invierno),Alta,Vie,Semana 3,Nov,2025
+SL 15 · TP 55/110,2025-11-24,Compra,-409.0,0,Stop (−2),1,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 4,Nov,2025
+SL 15 · TP 55/110,2025-11-25,Venta,-409.0,0,Stop (−2),1,Sin noticia,10:12 NY (invierno),Alta,Mar,Semana 4,Nov,2025
+SL 15 · TP 55/110,2025-11-26,Venta,-409.0,0,Stop (−2),9,Sin noticia,10:12 NY (invierno),Alta,Mié,Semana 4,Nov,2025
+SL 15 · TP 55/110,2025-11-27,Venta,-35.2,0,Cierre 15:59,163,Sin noticia,10:12 NY (invierno),Media,Jue,Semana 4,Nov,2025
+SL 15 · TP 55/110,2025-11-28,Compra,1446.65,1,TP1 + cierre,182,Sin noticia,10:12 NY (invierno),Baja,Vie,Semana 4,Nov,2025
+SL 15 · TP 55/110,2025-12-01,Compra,-409.0,0,Stop (−2),4,Sin noticia,10:12 NY (invierno),Baja,Lun,Semana 1,Dic,2025
+SL 15 · TP 55/110,2025-12-02,Compra,-409.0,0,Stop (−2),17,Sin noticia,10:12 NY (invierno),Baja,Mar,Semana 1,Dic,2025
+SL 15 · TP 55/110,2025-12-03,Compra,-409.0,0,Stop (−2),1,Sin noticia,10:12 NY (invierno),Baja,Mié,Semana 1,Dic,2025
+SL 15 · TP 55/110,2025-12-04,Venta,-409.0,0,Stop (−2),6,Sin noticia,10:12 NY (invierno),Media,Jue,Semana 1,Dic,2025
+SL 15 · TP 55/110,2025-12-05,Compra,-409.0,0,Stop (−2),34,Sin noticia,10:12 NY (invierno),Baja,Vie,Semana 1,Dic,2025
+SL 15 · TP 55/110,2025-12-08,Venta,2028.5,1,TP1 + TP2,135,Sin noticia,10:12 NY (invierno),Baja,Lun,Semana 2,Dic,2025
+SL 15 · TP 55/110,2025-12-09,Compra,-409.0,0,Stop (−2),16,Sin noticia,10:12 NY (invierno),Media,Mar,Semana 2,Dic,2025
+SL 15 · TP 55/110,2025-12-10,Compra,-409.0,0,Stop (−2),17,FOMC,10:12 NY (invierno),Baja,Mié,Semana 2,Dic,2025
+SL 15 · TP 55/110,2025-12-11,Compra,653.5,1,TP1 + BE,38,Sin noticia,10:12 NY (invierno),Alta,Jue,Semana 2,Dic,2025
+SL 15 · TP 55/110,2025-12-12,Venta,2028.5,1,TP1 + TP2,19,Sin noticia,10:12 NY (invierno),Media,Vie,Semana 2,Dic,2025
+SL 15 · TP 55/110,2025-12-15,Venta,653.5,1,TP1 + BE,23,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 3,Dic,2025
+SL 15 · TP 55/110,2025-12-16,Venta,2028.5,1,TP1 + TP2,14,NFP/CPI 8:30,10:12 NY (invierno),Media,Mar,Semana 3,Dic,2025
+SL 15 · TP 55/110,2025-12-17,Venta,-409.0,0,Stop (−2),2,Sin noticia,10:12 NY (invierno),Media,Mié,Semana 3,Dic,2025
+SL 15 · TP 55/110,2025-12-18,Venta,-409.0,0,Stop (−2),11,NFP/CPI 8:30,10:12 NY (invierno),Alta,Jue,Semana 3,Dic,2025
+SL 15 · TP 55/110,2025-12-19,Compra,-409.0,0,Stop (−2),11,Sin noticia,10:12 NY (invierno),Media,Vie,Semana 3,Dic,2025
+SL 15 · TP 55/110,2025-12-22,Venta,-409.0,0,Stop (−2),6,Sin noticia,10:12 NY (invierno),Media,Lun,Semana 4,Dic,2025
+SL 15 · TP 55/110,2025-12-23,Venta,-409.0,0,Stop (−2),4,Sin noticia,10:12 NY (invierno),Baja,Mar,Semana 4,Dic,2025
+SL 15 · TP 55/110,2025-12-24,Compra,1226.65,1,TP1 + cierre,182,Sin noticia,10:12 NY (invierno),Baja,Mié,Semana 4,Dic,2025
+SL 15 · TP 55/110,2025-12-26,Venta,-409.0,0,Stop (−2),9,Sin noticia,10:12 NY (invierno),Baja,Vie,Semana 4,Dic,2025
+SL 15 · TP 55/110,2025-12-29,Venta,-409.0,0,Stop (−2),4,Sin noticia,10:12 NY (invierno),Baja,Lun,Semana 5,Dic,2025
+SL 15 · TP 55/110,2025-12-30,Venta,-409.0,0,Stop (−2),47,Sin noticia,10:12 NY (invierno),Baja,Mar,Semana 5,Dic,2025
+SL 15 · TP 55/110,2025-12-31,Venta,-409.0,0,Stop (−2),209,Sin noticia,10:12 NY (invierno),Baja,Mié,Semana 5,Dic,2025
+SL 15 · TP 55/110,2026-01-02,Venta,2028.5,1,TP1 + TP2,11,Sin noticia,10:12 NY (invierno),Media,Vie,Semana 1,Ene,2026
+SL 15 · TP 55/110,2026-01-05,Compra,653.5,1,TP1 + BE,270,Sin noticia,10:12 NY (invierno),Media,Lun,Semana 1,Ene,2026
+SL 15 · TP 55/110,2026-01-06,Compra,-409.0,0,Stop (−2),29,Sin noticia,10:12 NY (invierno),Baja,Mar,Semana 1,Ene,2026
+SL 15 · TP 55/110,2026-01-07,Venta,-409.0,0,Stop (−2),24,Sin noticia,10:12 NY (invierno),Baja,Mié,Semana 1,Ene,2026
+SL 15 · TP 55/110,2026-01-08,Compra,-409.0,0,Stop (−2),25,Sin noticia,10:12 NY (invierno),Baja,Jue,Semana 2,Ene,2026
+SL 15 · TP 55/110,2026-01-09,Venta,-409.0,0,Stop (−2),1,NFP/CPI 8:30,10:12 NY (invierno),Baja,Vie,Semana 2,Ene,2026
+SL 15 · TP 55/110,2026-01-12,Compra,2028.5,1,TP1 + TP2,260,Sin noticia,10:12 NY (invierno),Media,Lun,Semana 2,Ene,2026
+SL 15 · TP 55/110,2026-01-13,Venta,-409.0,0,Stop (−2),44,NFP/CPI 8:30,10:12 NY (invierno),Media,Mar,Semana 2,Ene,2026
+SL 15 · TP 55/110,2026-01-14,Venta,-409.0,0,Stop (−2),1,Sin noticia,10:12 NY (invierno),Baja,Mié,Semana 2,Ene,2026
+SL 15 · TP 55/110,2026-01-15,Compra,-409.0,0,Stop (−2),35,Sin noticia,10:12 NY (invierno),Media,Jue,Semana 3,Ene,2026
+SL 15 · TP 55/110,2026-01-16,Venta,653.5,1,TP1 + BE,70,Sin noticia,10:12 NY (invierno),Baja,Vie,Semana 3,Ene,2026
+SL 15 · TP 55/110,2026-01-19,Compra,-409.0,0,Stop (−2),11,Sin noticia,10:12 NY (invierno),Baja,Lun,Semana 3,Ene,2026
+SL 15 · TP 55/110,2026-01-20,Venta,-409.0,0,Stop (−2),1,Sin noticia,10:12 NY (invierno),Baja,Mar,Semana 3,Ene,2026
+SL 15 · TP 55/110,2026-01-21,Compra,2028.5,1,TP1 + TP2,34,Sin noticia,10:12 NY (invierno),Alta,Mié,Semana 3,Ene,2026
+SL 15 · TP 55/110,2026-01-22,Venta,-409.0,0,Stop (−2),2,Sin noticia,10:12 NY (invierno),Alta,Jue,Semana 4,Ene,2026
+SL 15 · TP 55/110,2026-01-23,Compra,-409.0,0,Stop (−2),2,Sin noticia,10:12 NY (invierno),Baja,Vie,Semana 4,Ene,2026
+SL 15 · TP 55/110,2026-01-26,Compra,1013.65,1,TP1 + cierre,348,Sin noticia,10:12 NY (invierno),Baja,Lun,Semana 4,Ene,2026
+SL 15 · TP 55/110,2026-01-27,Compra,-409.0,0,Stop (−2),19,Sin noticia,10:12 NY (invierno),Baja,Mar,Semana 4,Ene,2026
+SL 15 · TP 55/110,2026-01-28,Venta,-409.0,0,Stop (−2),9,FOMC,10:12 NY (invierno),Baja,Mié,Semana 4,Ene,2026
+SL 15 · TP 55/110,2026-01-29,Venta,2028.5,1,TP1 + TP2,21,Sin noticia,10:12 NY (invierno),Baja,Jue,Semana 5,Ene,2026
+SL 15 · TP 55/110,2026-01-30,Compra,-409.0,0,Stop (−2),2,Sin noticia,10:12 NY (invierno),Alta,Vie,Semana 5,Ene,2026
+SL 15 · TP 55/110,2026-02-02,Compra,-409.0,0,Stop (−2),50,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 1,Feb,2026
+SL 15 · TP 55/110,2026-02-03,Venta,-409.0,0,Stop (−2),5,Sin noticia,10:12 NY (invierno),Alta,Mar,Semana 1,Feb,2026
+SL 15 · TP 55/110,2026-02-04,Venta,-409.0,0,Stop (−2),1,Sin noticia,10:12 NY (invierno),Alta,Mié,Semana 1,Feb,2026
+SL 15 · TP 55/110,2026-02-05,Venta,-409.0,0,Stop (−2),5,Sin noticia,10:12 NY (invierno),Alta,Jue,Semana 1,Feb,2026
+SL 15 · TP 55/110,2026-02-06,Compra,-409.0,0,Stop (−2),1,Sin noticia,10:12 NY (invierno),Alta,Vie,Semana 1,Feb,2026
+SL 15 · TP 55/110,2026-02-09,Compra,2028.5,1,TP1 + TP2,45,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 2,Feb,2026
+SL 15 · TP 55/110,2026-02-10,Compra,-409.0,0,Stop (−2),2,Sin noticia,10:12 NY (invierno),Alta,Mar,Semana 2,Feb,2026
+SL 15 · TP 55/110,2026-02-11,Venta,2028.5,1,TP1 + TP2,15,NFP/CPI 8:30,10:12 NY (invierno),Media,Mié,Semana 2,Feb,2026
+SL 15 · TP 55/110,2026-02-12,Venta,-409.0,0,Stop (−2),1,Sin noticia,10:12 NY (invierno),Alta,Jue,Semana 2,Feb,2026
+SL 15 · TP 55/110,2026-02-13,Compra,-409.0,0,Stop (−2),1,NFP/CPI 8:30,10:12 NY (invierno),Alta,Vie,Semana 2,Feb,2026
+SL 15 · TP 55/110,2026-02-16,Compra,-409.0,0,Stop (−2),4,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 3,Feb,2026
+SL 15 · TP 55/110,2026-02-17,Venta,-409.0,0,Stop (−2),1,Sin noticia,10:12 NY (invierno),Baja,Mar,Semana 3,Feb,2026
+SL 15 · TP 55/110,2026-02-18,Compra,653.5,1,TP1 + BE,211,Sin noticia,10:12 NY (invierno),Alta,Mié,Semana 3,Feb,2026
+SL 15 · TP 55/110,2026-02-19,Compra,-409.0,0,Stop (−2),1,Sin noticia,10:12 NY (invierno),Media,Jue,Semana 3,Feb,2026
+SL 15 · TP 55/110,2026-02-20,Compra,-409.0,0,Stop (−2),1,Sin noticia,10:12 NY (invierno),Baja,Vie,Semana 3,Feb,2026
+SL 15 · TP 55/110,2026-02-23,Venta,-409.0,0,Stop (−2),10,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 4,Feb,2026
+SL 15 · TP 55/110,2026-02-24,Compra,-409.0,0,Stop (−2),1,Sin noticia,10:12 NY (invierno),Alta,Mar,Semana 4,Feb,2026
+SL 15 · TP 55/110,2026-02-25,Venta,-409.0,0,Stop (−2),14,Sin noticia,10:12 NY (invierno),Alta,Mié,Semana 4,Feb,2026
+SL 15 · TP 55/110,2026-02-26,Venta,2028.5,1,TP1 + TP2,5,Sin noticia,10:12 NY (invierno),Baja,Jue,Semana 4,Feb,2026
+SL 15 · TP 55/110,2026-02-27,Compra,-409.0,0,Stop (−2),2,Sin noticia,10:12 NY (invierno),Alta,Vie,Semana 4,Feb,2026
+SL 15 · TP 55/110,2026-03-02,Compra,-409.0,0,Stop (−2),7,Sin noticia,10:12 NY (invierno),Media,Lun,Semana 1,Mar,2026
+SL 15 · TP 55/110,2026-03-03,Venta,-409.0,0,Stop (−2),1,Sin noticia,10:12 NY (invierno),Alta,Mar,Semana 1,Mar,2026
+SL 15 · TP 55/110,2026-03-04,Compra,2028.5,1,TP1 + TP2,15,Sin noticia,10:12 NY (invierno),Alta,Mié,Semana 1,Mar,2026
+SL 15 · TP 55/110,2026-03-05,Venta,-409.0,0,Stop (−2),1,Sin noticia,10:12 NY (invierno),Alta,Jue,Semana 1,Mar,2026
+SL 15 · TP 55/110,2026-03-06,Venta,-409.0,0,Stop (−2),1,NFP/CPI 8:30,10:12 NY (invierno),Alta,Vie,Semana 1,Mar,2026
+SL 15 · TP 55/110,2026-03-09,Compra,2028.5,1,TP1 + TP2,75,Sin noticia,11:12 NY (verano),Media,Lun,Semana 2,Mar,2026
+SL 15 · TP 55/110,2026-03-10,Compra,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 2,Mar,2026
+SL 15 · TP 55/110,2026-03-11,Venta,2028.5,1,TP1 + TP2,36,NFP/CPI 8:30,11:12 NY (verano),Alta,Mié,Semana 2,Mar,2026
+SL 15 · TP 55/110,2026-03-12,Venta,-409.0,0,Stop (−2),14,Sin noticia,11:12 NY (verano),Media,Jue,Semana 2,Mar,2026
+SL 15 · TP 55/110,2026-03-13,Venta,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Media,Vie,Semana 2,Mar,2026
+SL 15 · TP 55/110,2026-03-16,Venta,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 3,Mar,2026
+SL 15 · TP 55/110,2026-03-17,Venta,-409.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Media,Mar,Semana 3,Mar,2026
+SL 15 · TP 55/110,2026-03-18,Compra,-409.0,0,Stop (−2),3,FOMC,11:12 NY (verano),Baja,Mié,Semana 3,Mar,2026
+SL 15 · TP 55/110,2026-03-19,Compra,-409.0,0,Stop (−2),8,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 3,Mar,2026
+SL 15 · TP 55/110,2026-03-20,Compra,-409.0,0,Stop (−2),5,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 3,Mar,2026
+SL 15 · TP 55/110,2026-03-23,Compra,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 4,Mar,2026
+SL 15 · TP 55/110,2026-03-25,Venta,2028.5,1,TP1 + TP2,6,Sin noticia,11:12 NY (verano),Alta,Mié,Semana 4,Mar,2026
+SL 15 · TP 55/110,2026-03-26,Venta,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Media,Jue,Semana 4,Mar,2026
+SL 15 · TP 55/110,2026-03-27,Venta,-409.0,0,Stop (−2),12,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 4,Mar,2026
+SL 15 · TP 55/110,2026-03-30,Venta,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 5,Mar,2026
+SL 15 · TP 55/110,2026-03-31,Compra,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 5,Mar,2026
+SL 15 · TP 55/110,2026-04-01,Venta,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Alta,Mié,Semana 1,Abr,2026
+SL 15 · TP 55/110,2026-04-02,Compra,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Media,Jue,Semana 1,Abr,2026
+SL 15 · TP 55/110,2026-04-06,Compra,653.5,1,TP1 + BE,27,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 1,Abr,2026
+SL 15 · TP 55/110,2026-04-07,Venta,-409.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 1,Abr,2026
+SL 15 · TP 55/110,2026-04-08,Venta,2028.5,1,TP1 + TP2,45,Sin noticia,11:12 NY (verano),Alta,Mié,Semana 2,Abr,2026
+SL 15 · TP 55/110,2026-04-09,Venta,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Media,Jue,Semana 2,Abr,2026
+SL 15 · TP 55/110,2026-04-10,Venta,-409.0,0,Stop (−2),1,NFP/CPI 8:30,11:12 NY (verano),Alta,Vie,Semana 2,Abr,2026
+SL 15 · TP 55/110,2026-04-13,Compra,-409.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 2,Abr,2026
+SL 15 · TP 55/110,2026-04-14,Compra,2028.5,1,TP1 + TP2,100,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 2,Abr,2026
+SL 15 · TP 55/110,2026-04-15,Compra,2028.5,1,TP1 + TP2,231,Sin noticia,11:12 NY (verano),Media,Mié,Semana 3,Abr,2026
+SL 15 · TP 55/110,2026-04-16,Venta,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Media,Jue,Semana 3,Abr,2026
+SL 15 · TP 55/110,2026-04-17,Compra,2028.5,1,TP1 + TP2,139,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 3,Abr,2026
+SL 15 · TP 55/110,2026-04-20,Compra,-409.0,0,Stop (−2),23,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 3,Abr,2026
+SL 15 · TP 55/110,2026-04-21,Compra,-409.0,0,Stop (−2),9,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 3,Abr,2026
+SL 15 · TP 55/110,2026-04-22,Compra,-409.0,0,Stop (−2),53,Sin noticia,11:12 NY (verano),Alta,Mié,Semana 4,Abr,2026
+SL 15 · TP 55/110,2026-04-23,Compra,653.5,1,TP1 + BE,171,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 4,Abr,2026
+SL 15 · TP 55/110,2026-04-24,Venta,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 4,Abr,2026
+SL 15 · TP 55/110,2026-04-27,Compra,-409.0,0,Stop (−2),5,Sin noticia,11:12 NY (verano),Media,Lun,Semana 4,Abr,2026
+SL 15 · TP 55/110,2026-04-28,Compra,-409.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 4,Abr,2026
+SL 15 · TP 55/110,2026-04-29,Venta,-409.0,0,Stop (−2),2,FOMC,11:12 NY (verano),Baja,Mié,Semana 5,Abr,2026
+SL 15 · TP 55/110,2026-04-30,Venta,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 5,Abr,2026
+SL 15 · TP 55/110,2026-05-01,Compra,-409.0,0,Stop (−2),20,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 1,May,2026
+SL 15 · TP 55/110,2026-05-04,Compra,653.5,1,TP1 + BE,49,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 1,May,2026
+SL 15 · TP 55/110,2026-05-05,Compra,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Media,Mar,Semana 1,May,2026
+SL 15 · TP 55/110,2026-05-06,Compra,-409.0,0,Stop (−2),7,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 1,May,2026
+SL 15 · TP 55/110,2026-05-07,Compra,-409.0,0,Stop (−2),5,Sin noticia,11:12 NY (verano),Media,Jue,Semana 1,May,2026
+SL 15 · TP 55/110,2026-05-08,Compra,-409.0,0,Stop (−2),67,NFP/CPI 8:30,11:12 NY (verano),Media,Vie,Semana 2,May,2026
+SL 15 · TP 55/110,2026-05-11,Compra,-409.0,0,Stop (−2),19,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 2,May,2026
+SL 15 · TP 55/110,2026-05-12,Venta,-409.0,0,Stop (−2),2,NFP/CPI 8:30,11:12 NY (verano),Media,Mar,Semana 2,May,2026
+SL 15 · TP 55/110,2026-05-13,Venta,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Media,Mié,Semana 2,May,2026
+SL 15 · TP 55/110,2026-05-14,Compra,2028.5,1,TP1 + TP2,63,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 2,May,2026
+SL 15 · TP 55/110,2026-05-15,Compra,653.5,1,TP1 + BE,93,Sin noticia,11:12 NY (verano),Media,Vie,Semana 3,May,2026
+SL 15 · TP 55/110,2026-05-18,Compra,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Media,Lun,Semana 3,May,2026
+SL 15 · TP 55/110,2026-05-19,Venta,653.5,1,TP1 + BE,60,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 3,May,2026
+SL 15 · TP 55/110,2026-05-20,Venta,-409.0,0,Stop (−2),3,Sin noticia,11:12 NY (verano),Media,Mié,Semana 3,May,2026
+SL 15 · TP 55/110,2026-05-21,Compra,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 3,May,2026
+SL 15 · TP 55/110,2026-05-22,Venta,653.5,1,TP1 + BE,25,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 4,May,2026
+SL 15 · TP 55/110,2026-05-25,Venta,-409.0,0,Stop (−2),60,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 4,May,2026
+SL 15 · TP 55/110,2026-05-26,Compra,-409.0,0,Stop (−2),51,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 4,May,2026
+SL 15 · TP 55/110,2026-05-27,Venta,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 4,May,2026
+SL 15 · TP 55/110,2026-05-28,Compra,2028.5,1,TP1 + TP2,2,Sin noticia,11:12 NY (verano),Media,Jue,Semana 4,May,2026
+SL 15 · TP 55/110,2026-05-29,Compra,-409.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Media,Vie,Semana 5,May,2026
+SL 15 · TP 55/110,2026-06-01,Venta,-409.0,0,Stop (−2),3,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 1,Jun,2026
+SL 15 · TP 55/110,2026-06-02,Compra,-409.0,0,Stop (−2),15,Sin noticia,11:12 NY (verano),Media,Mar,Semana 1,Jun,2026
+SL 15 · TP 55/110,2026-06-03,Venta,2028.5,1,TP1 + TP2,134,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 1,Jun,2026
+SL 15 · TP 55/110,2026-06-04,Compra,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Media,Jue,Semana 1,Jun,2026
+SL 15 · TP 55/110,2026-06-05,Venta,-409.0,0,Stop (−2),2,NFP/CPI 8:30,11:12 NY (verano),Media,Vie,Semana 1,Jun,2026
+SL 15 · TP 55/110,2026-06-08,Venta,653.5,1,TP1 + BE,13,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 2,Jun,2026
+SL 15 · TP 55/110,2026-06-09,Venta,2028.5,1,TP1 + TP2,6,Sin noticia,11:12 NY (verano),Media,Mar,Semana 2,Jun,2026
+SL 15 · TP 55/110,2026-06-10,Compra,-409.0,0,Stop (−2),2,NFP/CPI 8:30,11:12 NY (verano),Alta,Mié,Semana 2,Jun,2026
+SL 15 · TP 55/110,2026-06-11,Venta,653.5,1,TP1 + BE,12,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 2,Jun,2026
+SL 15 · TP 55/110,2026-06-12,Compra,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 2,Jun,2026
+SL 15 · TP 55/110,2026-06-15,Compra,-409.0,0,Stop (−2),3,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 3,Jun,2026
+SL 15 · TP 55/110,2026-06-16,Compra,-409.0,0,Stop (−2),5,Sin noticia,11:12 NY (verano),Media,Mar,Semana 3,Jun,2026
+SL 15 · TP 55/110,2026-06-17,Compra,653.5,1,TP1 + BE,22,FOMC,11:12 NY (verano),Baja,Mié,Semana 3,Jun,2026
+SL 15 · TP 55/110,2026-06-18,Venta,-409.0,0,Stop (−2),5,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 3,Jun,2026
+SL 15 · TP 55/110,2026-06-19,Compra,-63.1,0,Cierre 15:59,167,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 3,Jun,2026
+SL 15 · TP 55/110,2026-06-22,Compra,-409.0,0,Stop (−2),3,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 4,Jun,2026
+SL 15 · TP 55/110,2026-06-23,Compra,653.5,1,TP1 + BE,17,Sin noticia,11:12 NY (verano),Media,Mar,Semana 4,Jun,2026
+SL 15 · TP 55/110,2026-06-24,Venta,653.5,1,TP1 + BE,10,Sin noticia,11:12 NY (verano),Alta,Mié,Semana 4,Jun,2026
+SL 15 · TP 55/110,2026-06-25,Compra,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 4,Jun,2026
+SL 15 · TP 55/110,2026-06-26,Compra,653.5,1,TP1 + BE,25,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 4,Jun,2026
+SL 15 · TP 55/110,2026-06-29,Venta,653.5,1,TP1 + BE,11,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 5,Jun,2026
+SL 15 · TP 55/110,2026-06-30,Compra,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 5,Jun,2026
+SL 15 · TP 55/110,2026-07-01,Compra,-409.0,0,Stop (−2),19,Sin noticia,11:12 NY (verano),Alta,Mié,Semana 1,Jul,2026
+SL 15 · TP 55/110,2026-07-02,Compra,-409.0,0,Stop (−2),7,NFP/CPI 8:30,11:12 NY (verano),Alta,Jue,Semana 1,Jul,2026
+SL 15 · TP 55/110,2026-07-03,Venta,-409.0,0,Stop (−2),6,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 1,Jul,2026
+SL 15 · TP 55/110,2026-07-06,Compra,2028.5,1,TP1 + TP2,280,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 1,Jul,2026
+SL 15 · TP 55/110,2026-07-07,Venta,653.5,1,TP1 + BE,114,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 1,Jul,2026
+SL 15 · TP 55/110,2026-07-08,Venta,-409.0,0,Stop (−2),10,Sin noticia,11:12 NY (verano),Media,Mié,Semana 2,Jul,2026
+SL 15 · TP 55/110,2026-07-09,Venta,653.5,1,TP1 + BE,16,Sin noticia,11:12 NY (verano),Media,Jue,Semana 2,Jul,2026
+SL 15 · TP 55/110,2026-07-10,Compra,-409.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Media,Vie,Semana 2,Jul,2026
+SL 15 · TP 55/110,2026-07-13,Compra,-409.0,0,Stop (−2),5,Sin noticia,11:12 NY (verano),Media,Lun,Semana 2,Jul,2026
+SL 15 · TP 55/110,2026-07-14,Venta,-409.0,0,Stop (−2),1,NFP/CPI 8:30,11:12 NY (verano),Media,Mar,Semana 2,Jul,2026
+SL 15 · TP 55/110,2026-07-15,Compra,-409.0,0,Stop (−2),12,Sin noticia,11:12 NY (verano),Media,Mié,Semana 3,Jul,2026
+SL 15 · TP 55/110,2026-07-16,Compra,-409.0,0,Stop (−2),65,Sin noticia,11:12 NY (verano),Media,Jue,Semana 3,Jul,2026
+SL 15 · TP 55/110,2026-07-17,Compra,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Media,Vie,Semana 3,Jul,2026
+SL 15 · TP 55/110,2026-07-20,Venta,-409.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Media,Lun,Semana 3,Jul,2026
+SL 15 · TP 55/110,2026-07-21,Venta,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Media,Mar,Semana 3,Jul,2026
+SL 15 · TP 55/110,2026-07-22,Compra,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Media,Mié,Semana 4,Jul,2026
+SL 15 · TP 55/110,2026-07-23,Venta,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Media,Jue,Semana 4,Jul,2026
+SL 15 · TP 55/110,2026-07-24,Compra,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 4,Jul,2026
+SL 15 · TP 55/110,2026-07-27,Venta,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Media,Lun,Semana 4,Jul,2026
+SL 15 · TP 55/110,2026-07-28,Venta,-409.0,0,Stop (−2),19,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 4,Jul,2026
+SL 15 · TP 55/110,2026-07-29,Venta,2028.5,1,TP1 + TP2,29,FOMC,11:12 NY (verano),Media,Mié,Semana 5,Jul,2026
+SL 15 · TP 55/110,2026-07-30,Compra,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 5,Jul,2026
+SL 15 · TP 55/110,2026-07-31,Venta,-409.0,0,Stop (−2),7,Sin noticia,11:12 NY (verano),Media,Vie,Semana 5,Jul,2026
+SL 15 · TP 55/110,2026-08-03,Compra,2028.5,1,TP1 + TP2,141,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 1,Ago,2026
+SL 15 · TP 55/110,2026-08-04,Compra,2028.5,1,TP1 + TP2,65,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 1,Ago,2026
+SL 15 · TP 55/110,2026-08-05,Compra,-409.0,0,Stop (−2),9,Sin noticia,11:12 NY (verano),Alta,Mié,Semana 1,Ago,2026
+SL 15 · TP 55/110,2026-08-06,Compra,-409.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Media,Jue,Semana 1,Ago,2026
+SL 15 · TP 55/110,2026-08-07,Venta,-409.0,0,Stop (−2),5,NFP/CPI 8:30,11:12 NY (verano),Baja,Vie,Semana 1,Ago,2026
+SL 15 · TP 55/110,2026-08-10,Compra,-409.0,0,Stop (−2),48,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 2,Ago,2026
+SL 15 · TP 55/110,2026-08-11,Compra,-409.0,0,Stop (−2),27,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 2,Ago,2026
+SL 15 · TP 55/110,2026-08-12,Venta,-409.0,0,Stop (−2),7,NFP/CPI 8:30,11:12 NY (verano),Media,Mié,Semana 2,Ago,2026
+SL 15 · TP 55/110,2026-08-13,Compra,-409.0,0,Stop (−2),6,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 2,Ago,2026
+SL 15 · TP 55/110,2026-08-14,Compra,-409.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Media,Vie,Semana 2,Ago,2026
+SL 15 · TP 55/110,2026-08-17,Venta,-409.0,0,Stop (−2),69,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 3,Ago,2026
+SL 15 · TP 55/110,2026-08-18,Venta,-409.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 3,Ago,2026
+SL 15 · TP 55/110,2026-08-19,Venta,-409.0,0,Stop (−2),5,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 3,Ago,2026
+SL 15 · TP 55/110,2026-08-20,Venta,-409.0,0,Stop (−2),12,Sin noticia,11:12 NY (verano),Media,Jue,Semana 3,Ago,2026
+SL 15 · TP 55/110,2026-08-21,Compra,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 3,Ago,2026
+SL 15 · TP 55/110,2026-08-24,Venta,-409.0,0,Stop (−2),9,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 4,Ago,2026
+SL 15 · TP 55/110,2026-08-25,Venta,-409.0,0,Stop (−2),8,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 4,Ago,2026
+SL 15 · TP 55/110,2026-08-26,Compra,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 4,Ago,2026
+SL 15 · TP 55/110,2026-08-27,Compra,2028.5,1,TP1 + TP2,148,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 4,Ago,2026
+SL 15 · TP 55/110,2026-08-28,Venta,-409.0,0,Stop (−2),6,Sin noticia,11:12 NY (verano),Media,Vie,Semana 4,Ago,2026
+SL 15 · TP 55/110,2026-08-31,Venta,-409.0,0,Stop (−2),7,Sin noticia,11:12 NY (verano),Media,Lun,Semana 5,Ago,2026
+SL 15 · TP 55/110,2026-09-01,Compra,653.5,1,TP1 + BE,129,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 1,Sep,2026
+SL 15 · TP 55/110,2026-09-02,Compra,1041.5,1,TP1 + cierre,288,Sin noticia,11:12 NY (verano),Media,Mié,Semana 1,Sep,2026
+SL 15 · TP 55/110,2026-09-03,Venta,-409.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Media,Jue,Semana 1,Sep,2026
+SL 15 · TP 55/110,2026-09-04,Venta,-409.0,0,Stop (−2),3,NFP/CPI 8:30,11:12 NY (verano),Alta,Vie,Semana 1,Sep,2026
+SL 15 · TP 55/110,2026-09-07,Venta,78.1,1,Cierre 15:59,166,Sin noticia,11:12 NY (verano),Media,Lun,Semana 1,Sep,2026
+SL 15 · TP 55/110,2026-09-08,Venta,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 2,Sep,2026
+SL 15 · TP 55/110,2026-09-09,Venta,-409.0,0,Stop (−2),49,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 2,Sep,2026
+SL 15 · TP 55/110,2026-09-10,Venta,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 2,Sep,2026
+SL 15 · TP 55/110,2026-09-11,Venta,-409.0,0,Stop (−2),8,NFP/CPI 8:30,11:12 NY (verano),Baja,Vie,Semana 2,Sep,2026
+SL 15 · TP 55/110,2026-09-14,Compra,-409.0,0,Stop (−2),5,Sin noticia,11:12 NY (verano),Media,Lun,Semana 2,Sep,2026
+SL 15 · TP 55/110,2026-09-15,Venta,1001.5,1,TP1 + cierre,288,Sin noticia,11:12 NY (verano),Media,Mar,Semana 3,Sep,2026
+SL 15 · TP 55/110,2026-09-16,Venta,-409.0,0,Stop (−2),48,FOMC,11:12 NY (verano),Media,Mié,Semana 3,Sep,2026
+SL 15 · TP 55/110,2026-09-17,Venta,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 3,Sep,2026
+SL 15 · TP 55/110,2026-09-18,Venta,653.5,1,TP1 + BE,213,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 3,Sep,2026
+SL 15 · TP 55/110,2026-09-21,Compra,2028.5,1,TP1 + TP2,86,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 3,Sep,2026
+SL 15 · TP 55/110,2026-09-22,Compra,-409.0,0,Stop (−2),6,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 4,Sep,2026
+SL 15 · TP 55/110,2026-09-23,Venta,-409.0,0,Stop (−2),42,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 4,Sep,2026
+SL 15 · TP 55/110,2026-09-24,Compra,-409.0,0,Stop (−2),32,Sin noticia,11:12 NY (verano),Media,Jue,Semana 4,Sep,2026
+SL 15 · TP 55/110,2026-09-25,Venta,-409.0,0,Stop (−2),24,Sin noticia,11:12 NY (verano),Media,Vie,Semana 4,Sep,2026
+SL 15 · TP 55/110,2026-09-28,Venta,-409.0,0,Stop (−2),11,Sin noticia,11:12 NY (verano),Media,Lun,Semana 4,Sep,2026
+SL 15 · TP 55/110,2026-09-29,Venta,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Media,Mar,Semana 5,Sep,2026
+SL 15 · TP 55/110,2026-09-30,Compra,-409.0,0,Stop (−2),17,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 5,Sep,2026
+SL 15 · TP 55/110,2026-10-01,Venta,-409.0,0,Stop (−2),1,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 1,Oct,2026
+SL 15 · TP 55/110,2026-10-02,Venta,-409.0,0,Stop (−2),1,NFP/CPI 8:30,11:12 NY (verano),Alta,Vie,Semana 1,Oct,2026
+SL 15 · TP 55/110,2026-10-05,Compra,2028.5,1,TP1 + TP2,213,Sin noticia,11:12 NY (verano),Media,Lun,Semana 1,Oct,2026
+SL 15 · TP 55/110,2026-10-06,Compra,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 1,Oct,2026
+SL 15 · TP 55/110,2026-10-07,Venta,-409.0,0,Stop (−2),7,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 1,Oct,2026
+SL 15 · TP 55/110,2026-10-08,Compra,-409.0,0,Stop (−2),40,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 2,Oct,2026
+SL 15 · TP 55/110,2026-10-09,Venta,-409.0,0,Stop (−2),5,Sin noticia,11:12 NY (verano),Media,Vie,Semana 2,Oct,2026
+SL 15 · TP 55/110,2026-10-12,Venta,-409.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 2,Oct,2026
+SL 15 · TP 55/110,2026-10-13,Venta,653.5,1,TP1 + BE,139,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 2,Oct,2026
+SL 15 · TP 55/110,2026-10-14,Venta,-409.0,0,Stop (−2),4,NFP/CPI 8:30,11:12 NY (verano),Baja,Mié,Semana 2,Oct,2026
+SL 15 · TP 55/110,2026-10-15,Compra,-409.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 3,Oct,2026
+SL 15 · TP 55/110,2026-10-16,Venta,-409.0,0,Stop (−2),3,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 3,Oct,2026
+SL 15 · TP 55/110,2026-10-19,Compra,2028.5,1,TP1 + TP2,72,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 3,Oct,2026
+SL 15 · TP 55/110,2026-10-20,Compra,2028.5,1,TP1 + TP2,17,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 3,Oct,2026
+SL 15 · TP 55/110,2026-10-21,Venta,-409.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Alta,Mié,Semana 3,Oct,2026
+SL 15 · TP 55/110,2026-10-22,Venta,2028.5,1,TP1 + TP2,17,Sin noticia,11:12 NY (verano),Media,Jue,Semana 4,Oct,2026
+SL 15 · TP 55/110,2026-10-23,Venta,653.5,1,TP1 + BE,20,Sin noticia,11:12 NY (verano),Media,Vie,Semana 4,Oct,2026
+SL 15 · TP 55/110,2026-10-26,Compra,-409.0,0,Stop (−2),19,Sin noticia,11:12 NY (verano),Media,Lun,Semana 4,Oct,2026
+SL 15 · TP 55/110,2026-10-27,Compra,1084.9,1,TP1 + cierre,288,Sin noticia,11:12 NY (verano),Media,Mar,Semana 4,Oct,2026
+SL 15 · TP 55/110,2026-10-28,Compra,653.5,1,TP1 + BE,134,FOMC,11:12 NY (verano),Media,Mié,Semana 4,Oct,2026
+SL 15 · TP 55/110,2026-10-29,Compra,-409.0,0,Stop (−2),34,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 5,Oct,2026
+SL 15 · TP 55/110,2026-10-30,Venta,2028.5,1,TP1 + TP2,95,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 5,Oct,2026
+SL 15 · TP 55/110,2026-11-02,Compra,2028.5,1,TP1 + TP2,16,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 1,Nov,2026
+SL 15 · TP 55/110,2026-11-03,Compra,2028.5,1,TP1 + TP2,179,Sin noticia,10:12 NY (invierno),Alta,Mar,Semana 1,Nov,2026
+SL 15 · TP 55/110,2026-11-04,Compra,653.5,1,TP1 + BE,10,Sin noticia,10:12 NY (invierno),Media,Mié,Semana 1,Nov,2026
+SL 15 · TP 55/110,2026-11-05,Venta,-409.0,0,Stop (−2),1,Sin noticia,10:12 NY (invierno),Media,Jue,Semana 1,Nov,2026
+SL 15 · TP 55/110,2026-11-06,Compra,653.5,1,TP1 + BE,17,NFP/CPI 8:30,10:12 NY (invierno),Alta,Vie,Semana 1,Nov,2026
+SL 45 · TP 30/60,2025-01-02,Compra,-1159.0,0,Stop (−2),8,Sin noticia,10:12 NY (invierno),,Jue,Semana 1,Ene,2025
+SL 45 · TP 30/60,2025-01-03,Compra,-1159.0,0,Stop (−2),6,Sin noticia,10:12 NY (invierno),Alta,Vie,Semana 1,Ene,2025
+SL 45 · TP 30/60,2025-01-06,Compra,341.0,1,TP1 + BE,141,Sin noticia,10:12 NY (invierno),Media,Lun,Semana 1,Ene,2025
+SL 45 · TP 30/60,2025-01-07,Venta,341.0,1,TP1 + BE,8,Sin noticia,10:12 NY (invierno),Media,Mar,Semana 1,Ene,2025
+SL 45 · TP 30/60,2025-01-08,Venta,341.0,1,TP1 + BE,24,Sin noticia,10:12 NY (invierno),Alta,Mié,Semana 2,Ene,2025
+SL 45 · TP 30/60,2025-01-10,Venta,-1159.0,0,Stop (−2),8,NFP/CPI 8:30,10:12 NY (invierno),Media,Vie,Semana 2,Ene,2025
+SL 45 · TP 30/60,2025-01-13,Compra,341.0,1,TP1 + BE,11,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 2,Ene,2025
+SL 45 · TP 30/60,2025-01-14,Compra,-1159.0,0,Stop (−2),17,Sin noticia,10:12 NY (invierno),Media,Mar,Semana 2,Ene,2025
+SL 45 · TP 30/60,2025-01-15,Compra,-1159.0,0,Stop (−2),38,NFP/CPI 8:30,10:12 NY (invierno),Media,Mié,Semana 3,Ene,2025
+SL 45 · TP 30/60,2025-01-16,Venta,-1159.0,0,Stop (−2),48,Sin noticia,10:12 NY (invierno),Media,Jue,Semana 3,Ene,2025
+SL 45 · TP 30/60,2025-01-17,Compra,1091.0,1,TP1 + TP2,73,Sin noticia,10:12 NY (invierno),Baja,Vie,Semana 3,Ene,2025
+SL 45 · TP 30/60,2025-01-20,Compra,-1159.0,0,Stop (−2),20,Sin noticia,10:12 NY (invierno),Baja,Lun,Semana 3,Ene,2025
+SL 45 · TP 30/60,2025-01-21,Venta,-1159.0,0,Stop (−2),18,Sin noticia,10:12 NY (invierno),Baja,Mar,Semana 3,Ene,2025
+SL 45 · TP 30/60,2025-01-22,Compra,341.0,1,TP1 + BE,259,Sin noticia,10:12 NY (invierno),Baja,Mié,Semana 4,Ene,2025
+SL 45 · TP 30/60,2025-01-23,Compra,1091.0,1,TP1 + TP2,72,Sin noticia,10:12 NY (invierno),Baja,Jue,Semana 4,Ene,2025
+SL 45 · TP 30/60,2025-01-24,Venta,1091.0,1,TP1 + TP2,181,Sin noticia,10:12 NY (invierno),Baja,Vie,Semana 4,Ene,2025
+SL 45 · TP 30/60,2025-01-27,Compra,-1159.0,0,Stop (−2),8,Sin noticia,10:12 NY (invierno),Baja,Lun,Semana 4,Ene,2025
+SL 45 · TP 30/60,2025-01-28,Compra,1091.0,1,TP1 + TP2,12,Sin noticia,10:12 NY (invierno),Media,Mar,Semana 4,Ene,2025
+SL 45 · TP 30/60,2025-01-29,Venta,341.0,1,TP1 + BE,134,FOMC,10:12 NY (invierno),Alta,Mié,Semana 5,Ene,2025
+SL 45 · TP 30/60,2025-01-30,Venta,1091.0,1,TP1 + TP2,19,Sin noticia,10:12 NY (invierno),Media,Jue,Semana 5,Ene,2025
+SL 45 · TP 30/60,2025-01-31,Compra,341.0,1,TP1 + BE,88,Sin noticia,10:12 NY (invierno),Media,Vie,Semana 5,Ene,2025
+SL 45 · TP 30/60,2025-02-03,Venta,-1159.0,0,Stop (−2),11,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 1,Feb,2025
+SL 45 · TP 30/60,2025-02-04,Compra,341.0,1,TP1 + BE,126,Sin noticia,10:12 NY (invierno),Alta,Mar,Semana 1,Feb,2025
+SL 45 · TP 30/60,2025-02-05,Venta,-1159.0,0,Stop (−2),14,Sin noticia,10:12 NY (invierno),Media,Mié,Semana 1,Feb,2025
+SL 45 · TP 30/60,2025-02-06,Compra,-1159.0,0,Stop (−2),28,Sin noticia,10:12 NY (invierno),Media,Jue,Semana 1,Feb,2025
+SL 45 · TP 30/60,2025-02-07,Venta,341.0,1,TP1 + BE,8,NFP/CPI 8:30,10:12 NY (invierno),Baja,Vie,Semana 1,Feb,2025
+SL 45 · TP 30/60,2025-02-10,Compra,341.0,1,TP1 + BE,64,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 2,Feb,2025
+SL 45 · TP 30/60,2025-02-11,Compra,1091.0,1,TP1 + TP2,34,Sin noticia,10:12 NY (invierno),Baja,Mar,Semana 2,Feb,2025
+SL 45 · TP 30/60,2025-02-12,Venta,-1159.0,0,Stop (−2),7,NFP/CPI 8:30,10:12 NY (invierno),Baja,Mié,Semana 2,Feb,2025
+SL 45 · TP 30/60,2025-02-13,Compra,1091.0,1,TP1 + TP2,28,Sin noticia,10:12 NY (invierno),Media,Jue,Semana 2,Feb,2025
+SL 45 · TP 30/60,2025-02-14,Compra,-1159.0,0,Stop (−2),69,Sin noticia,10:12 NY (invierno),Media,Vie,Semana 2,Feb,2025
+SL 45 · TP 30/60,2025-02-17,Venta,-647.0,0,Cierre 15:59,160,Sin noticia,10:12 NY (invierno),Baja,Lun,Semana 3,Feb,2025
+SL 45 · TP 30/60,2025-02-18,Venta,1091.0,1,TP1 + TP2,249,Sin noticia,10:12 NY (invierno),Baja,Mar,Semana 3,Feb,2025
+SL 45 · TP 30/60,2025-02-19,Venta,-1159.0,0,Stop (−2),20,Sin noticia,10:12 NY (invierno),Baja,Mié,Semana 3,Feb,2025
+SL 45 · TP 30/60,2025-02-20,Venta,-1159.0,0,Stop (−2),6,Sin noticia,10:12 NY (invierno),Baja,Jue,Semana 3,Feb,2025
+SL 45 · TP 30/60,2025-02-21,Venta,1091.0,1,TP1 + TP2,16,Sin noticia,10:12 NY (invierno),Baja,Vie,Semana 3,Feb,2025
+SL 45 · TP 30/60,2025-02-24,Venta,-1159.0,0,Stop (−2),5,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 4,Feb,2025
+SL 45 · TP 30/60,2025-02-25,Venta,1091.0,1,TP1 + TP2,8,Sin noticia,10:12 NY (invierno),Media,Mar,Semana 4,Feb,2025
+SL 45 · TP 30/60,2025-02-26,Compra,341.0,1,TP1 + BE,18,Sin noticia,10:12 NY (invierno),Alta,Mié,Semana 4,Feb,2025
+SL 45 · TP 30/60,2025-02-27,Venta,-1159.0,0,Stop (−2),2,Sin noticia,10:12 NY (invierno),Alta,Jue,Semana 4,Feb,2025
+SL 45 · TP 30/60,2025-02-28,Compra,341.0,1,TP1 + BE,5,Sin noticia,10:12 NY (invierno),Alta,Vie,Semana 4,Feb,2025
+SL 45 · TP 30/60,2025-03-03,Venta,341.0,1,TP1 + BE,10,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 1,Mar,2025
+SL 45 · TP 30/60,2025-03-04,Venta,1091.0,1,TP1 + TP2,7,Sin noticia,10:12 NY (invierno),Alta,Mar,Semana 1,Mar,2025
+SL 45 · TP 30/60,2025-03-05,Compra,341.0,1,TP1 + BE,3,Sin noticia,10:12 NY (invierno),Alta,Mié,Semana 1,Mar,2025
+SL 45 · TP 30/60,2025-03-06,Compra,341.0,1,TP1 + BE,15,Sin noticia,10:12 NY (invierno),Alta,Jue,Semana 1,Mar,2025
+SL 45 · TP 30/60,2025-03-07,Compra,-1159.0,0,Stop (−2),2,NFP/CPI 8:30,10:12 NY (invierno),Alta,Vie,Semana 1,Mar,2025
+SL 45 · TP 30/60,2025-03-10,Venta,-1159.0,0,Stop (−2),21,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 2,Mar,2025
+SL 45 · TP 30/60,2025-03-11,Compra,341.0,1,TP1 + BE,11,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 2,Mar,2025
+SL 45 · TP 30/60,2025-03-12,Venta,-1159.0,0,Stop (−2),13,NFP/CPI 8:30,11:12 NY (verano),Alta,Mié,Semana 2,Mar,2025
+SL 45 · TP 30/60,2025-03-13,Venta,1091.0,1,TP1 + TP2,24,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 2,Mar,2025
+SL 45 · TP 30/60,2025-03-14,Compra,1091.0,1,TP1 + TP2,29,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 2,Mar,2025
+SL 45 · TP 30/60,2025-03-17,Venta,341.0,1,TP1 + BE,41,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 3,Mar,2025
+SL 45 · TP 30/60,2025-03-18,Venta,341.0,1,TP1 + BE,50,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 3,Mar,2025
+SL 45 · TP 30/60,2025-03-19,Compra,1091.0,1,TP1 + TP2,42,FOMC,11:12 NY (verano),Media,Mié,Semana 3,Mar,2025
+SL 45 · TP 30/60,2025-03-20,Compra,-1159.0,0,Stop (−2),20,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 3,Mar,2025
+SL 45 · TP 30/60,2025-03-21,Compra,-1159.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 3,Mar,2025
+SL 45 · TP 30/60,2025-03-24,Compra,-1159.0,0,Stop (−2),121,Sin noticia,11:12 NY (verano),Media,Lun,Semana 4,Mar,2025
+SL 45 · TP 30/60,2025-03-25,Compra,-1159.0,0,Stop (−2),42,Sin noticia,11:12 NY (verano),Media,Mar,Semana 4,Mar,2025
+SL 45 · TP 30/60,2025-03-26,Venta,1091.0,1,TP1 + TP2,17,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 4,Mar,2025
+SL 45 · TP 30/60,2025-03-27,Compra,-1159.0,0,Stop (−2),19,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 4,Mar,2025
+SL 45 · TP 30/60,2025-03-28,Venta,341.0,1,TP1 + BE,55,Sin noticia,11:12 NY (verano),Media,Vie,Semana 4,Mar,2025
+SL 45 · TP 30/60,2025-03-31,Compra,-1159.0,0,Stop (−2),8,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 5,Mar,2025
+SL 45 · TP 30/60,2025-04-01,Venta,341.0,1,TP1 + BE,11,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 1,Abr,2025
+SL 45 · TP 30/60,2025-04-02,Compra,341.0,1,TP1 + BE,3,Sin noticia,11:12 NY (verano),Alta,Mié,Semana 1,Abr,2025
+SL 45 · TP 30/60,2025-04-03,Venta,341.0,1,TP1 + BE,14,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 1,Abr,2025
+SL 45 · TP 30/60,2025-04-04,Venta,1091.0,1,TP1 + TP2,5,NFP/CPI 8:30,11:12 NY (verano),Alta,Vie,Semana 1,Abr,2025
+SL 45 · TP 30/60,2025-04-07,Compra,1091.0,1,TP1 + TP2,1,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 1,Abr,2025
+SL 45 · TP 30/60,2025-04-08,Compra,1091.0,1,TP1 + TP2,6,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 2,Abr,2025
+SL 45 · TP 30/60,2025-04-09,Compra,-1159.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Alta,Mié,Semana 2,Abr,2025
+SL 45 · TP 30/60,2025-04-10,Venta,341.0,1,TP1 + BE,2,NFP/CPI 8:30,11:12 NY (verano),Alta,Jue,Semana 2,Abr,2025
+SL 45 · TP 30/60,2025-04-11,Venta,341.0,1,TP1 + BE,2,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 2,Abr,2025
+SL 45 · TP 30/60,2025-04-14,Venta,1091.0,1,TP1 + TP2,6,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 2,Abr,2025
+SL 45 · TP 30/60,2025-04-15,Compra,-1159.0,0,Stop (−2),3,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 3,Abr,2025
+SL 45 · TP 30/60,2025-04-16,Venta,341.0,1,TP1 + BE,13,Sin noticia,11:12 NY (verano),Media,Mié,Semana 3,Abr,2025
+SL 45 · TP 30/60,2025-04-17,Venta,1091.0,1,TP1 + TP2,7,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 3,Abr,2025
+SL 45 · TP 30/60,2025-04-21,Venta,1091.0,1,TP1 + TP2,6,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 3,Abr,2025
+SL 45 · TP 30/60,2025-04-22,Compra,-1159.0,0,Stop (−2),6,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 4,Abr,2025
+SL 45 · TP 30/60,2025-04-23,Compra,-1159.0,0,Stop (−2),3,Sin noticia,11:12 NY (verano),Alta,Mié,Semana 4,Abr,2025
+SL 45 · TP 30/60,2025-04-24,Compra,1091.0,1,TP1 + TP2,11,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 4,Abr,2025
+SL 45 · TP 30/60,2025-04-25,Compra,-1159.0,0,Stop (−2),9,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 4,Abr,2025
+SL 45 · TP 30/60,2025-04-28,Venta,-1159.0,0,Stop (−2),10,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 4,Abr,2025
+SL 45 · TP 30/60,2025-04-29,Compra,-1159.0,0,Stop (−2),10,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 5,Abr,2025
+SL 45 · TP 30/60,2025-04-30,Venta,-1159.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Alta,Mié,Semana 5,Abr,2025
+SL 45 · TP 30/60,2025-05-01,Venta,-1159.0,0,Stop (−2),6,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 1,May,2025
+SL 45 · TP 30/60,2025-05-02,Compra,341.0,1,TP1 + BE,9,NFP/CPI 8:30,11:12 NY (verano),Media,Vie,Semana 1,May,2025
+SL 45 · TP 30/60,2025-05-05,Compra,1091.0,1,TP1 + TP2,46,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 1,May,2025
+SL 45 · TP 30/60,2025-05-06,Compra,1091.0,1,TP1 + TP2,9,Sin noticia,11:12 NY (verano),Media,Mar,Semana 1,May,2025
+SL 45 · TP 30/60,2025-05-07,Compra,-1159.0,0,Stop (−2),41,FOMC,11:12 NY (verano),Media,Mié,Semana 1,May,2025
+SL 45 · TP 30/60,2025-05-08,Venta,-1159.0,0,Stop (−2),10,Sin noticia,11:12 NY (verano),Media,Jue,Semana 2,May,2025
+SL 45 · TP 30/60,2025-05-09,Venta,1091.0,1,TP1 + TP2,13,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 2,May,2025
+SL 45 · TP 30/60,2025-05-12,Venta,1091.0,1,TP1 + TP2,17,Sin noticia,11:12 NY (verano),Media,Lun,Semana 2,May,2025
+SL 45 · TP 30/60,2025-05-13,Compra,1091.0,1,TP1 + TP2,6,NFP/CPI 8:30,11:12 NY (verano),Media,Mar,Semana 2,May,2025
+SL 45 · TP 30/60,2025-05-14,Venta,-1159.0,0,Stop (−2),19,Sin noticia,11:12 NY (verano),Media,Mié,Semana 2,May,2025
+SL 45 · TP 30/60,2025-05-15,Venta,-1159.0,0,Stop (−2),52,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 3,May,2025
+SL 45 · TP 30/60,2025-05-16,Venta,-1159.0,0,Stop (−2),16,Sin noticia,11:12 NY (verano),Media,Vie,Semana 3,May,2025
+SL 45 · TP 30/60,2025-05-19,Compra,341.0,1,TP1 + BE,99,Sin noticia,11:12 NY (verano),Media,Lun,Semana 3,May,2025
+SL 45 · TP 30/60,2025-05-20,Venta,-1159.0,0,Stop (−2),28,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 3,May,2025
+SL 45 · TP 30/60,2025-05-21,Compra,-1159.0,0,Stop (−2),37,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 3,May,2025
+SL 45 · TP 30/60,2025-05-22,Compra,-1159.0,0,Stop (−2),11,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 4,May,2025
+SL 45 · TP 30/60,2025-05-23,Compra,341.0,1,TP1 + BE,8,Sin noticia,11:12 NY (verano),Media,Vie,Semana 4,May,2025
+SL 45 · TP 30/60,2025-05-26,Venta,341.0,1,TP1 + BE,82,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 4,May,2025
+SL 45 · TP 30/60,2025-05-27,Compra,1091.0,1,TP1 + TP2,37,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 4,May,2025
+SL 45 · TP 30/60,2025-05-28,Venta,1091.0,1,TP1 + TP2,85,Sin noticia,11:12 NY (verano),Media,Mié,Semana 4,May,2025
+SL 45 · TP 30/60,2025-05-29,Venta,-1159.0,0,Stop (−2),17,Sin noticia,11:12 NY (verano),Media,Jue,Semana 5,May,2025
+SL 45 · TP 30/60,2025-05-30,Compra,341.0,1,TP1 + BE,34,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 5,May,2025
+SL 45 · TP 30/60,2025-06-02,Venta,-1159.0,0,Stop (−2),8,Sin noticia,11:12 NY (verano),Media,Lun,Semana 1,Jun,2025
+SL 45 · TP 30/60,2025-06-03,Compra,1091.0,1,TP1 + TP2,42,Sin noticia,11:12 NY (verano),Media,Mar,Semana 1,Jun,2025
+SL 45 · TP 30/60,2025-06-04,Venta,-1159.0,0,Stop (−2),16,Sin noticia,11:12 NY (verano),Media,Mié,Semana 1,Jun,2025
+SL 45 · TP 30/60,2025-06-05,Venta,-1159.0,0,Stop (−2),14,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 1,Jun,2025
+SL 45 · TP 30/60,2025-06-06,Compra,341.0,1,TP1 + BE,64,NFP/CPI 8:30,11:12 NY (verano),Media,Vie,Semana 1,Jun,2025
+SL 45 · TP 30/60,2025-06-09,Compra,341.0,1,TP1 + BE,33,Sin noticia,11:12 NY (verano),Media,Lun,Semana 2,Jun,2025
+SL 45 · TP 30/60,2025-06-10,Compra,-1159.0,0,Stop (−2),81,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 2,Jun,2025
+SL 45 · TP 30/60,2025-06-11,Compra,341.0,1,TP1 + BE,58,NFP/CPI 8:30,11:12 NY (verano),Baja,Mié,Semana 2,Jun,2025
+SL 45 · TP 30/60,2025-06-12,Compra,1091.0,1,TP1 + TP2,26,Sin noticia,11:12 NY (verano),Media,Jue,Semana 2,Jun,2025
+SL 45 · TP 30/60,2025-06-13,Venta,341.0,1,TP1 + BE,12,Sin noticia,11:12 NY (verano),Media,Vie,Semana 2,Jun,2025
+SL 45 · TP 30/60,2025-06-16,Compra,341.0,1,TP1 + BE,76,Sin noticia,11:12 NY (verano),Media,Lun,Semana 3,Jun,2025
+SL 45 · TP 30/60,2025-06-17,Compra,-1159.0,0,Stop (−2),158,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 3,Jun,2025
+SL 45 · TP 30/60,2025-06-18,Compra,1091.0,1,TP1 + TP2,23,FOMC,11:12 NY (verano),Media,Mié,Semana 3,Jun,2025
+SL 45 · TP 30/60,2025-06-19,Venta,341.0,1,TP1 + BE,94,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 3,Jun,2025
+SL 45 · TP 30/60,2025-06-20,Venta,1091.0,1,TP1 + TP2,14,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 3,Jun,2025
+SL 45 · TP 30/60,2025-06-23,Compra,341.0,1,TP1 + BE,37,Sin noticia,11:12 NY (verano),Media,Lun,Semana 4,Jun,2025
+SL 45 · TP 30/60,2025-06-24,Venta,-1159.0,0,Stop (−2),31,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 4,Jun,2025
+SL 45 · TP 30/60,2025-06-25,Venta,1091.0,1,TP1 + TP2,209,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 4,Jun,2025
+SL 45 · TP 30/60,2025-06-26,Compra,1091.0,1,TP1 + TP2,53,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 4,Jun,2025
+SL 45 · TP 30/60,2025-06-27,Compra,341.0,1,TP1 + BE,192,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 4,Jun,2025
+SL 45 · TP 30/60,2025-06-30,Compra,-1159.0,0,Stop (−2),226,Sin noticia,11:12 NY (verano),Media,Lun,Semana 5,Jun,2025
+SL 45 · TP 30/60,2025-07-01,Compra,341.0,1,TP1 + BE,11,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 1,Jul,2025
+SL 45 · TP 30/60,2025-07-02,Compra,1091.0,1,TP1 + TP2,96,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 1,Jul,2025
+SL 45 · TP 30/60,2025-07-03,Compra,341.0,1,TP1 + BE,162,NFP/CPI 8:30,11:12 NY (verano),Baja,Jue,Semana 1,Jul,2025
+SL 45 · TP 30/60,2025-07-04,Venta,191.2,1,Cierre 15:59,167,Sin noticia,11:12 NY (verano),Media,Vie,Semana 1,Jul,2025
+SL 45 · TP 30/60,2025-07-07,Venta,1091.0,1,TP1 + TP2,95,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 1,Jul,2025
+SL 45 · TP 30/60,2025-07-08,Venta,-1159.0,0,Stop (−2),26,Sin noticia,11:12 NY (verano),Media,Mar,Semana 2,Jul,2025
+SL 45 · TP 30/60,2025-07-09,Compra,-1159.0,0,Stop (−2),19,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 2,Jul,2025
+SL 45 · TP 30/60,2025-07-10,Compra,1091.0,1,TP1 + TP2,42,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 2,Jul,2025
+SL 45 · TP 30/60,2025-07-11,Compra,341.0,1,TP1 + BE,42,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 2,Jul,2025
+SL 45 · TP 30/60,2025-07-14,Compra,341.0,1,TP1 + BE,17,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 2,Jul,2025
+SL 45 · TP 30/60,2025-07-15,Venta,1091.0,1,TP1 + TP2,40,NFP/CPI 8:30,11:12 NY (verano),Baja,Mar,Semana 3,Jul,2025
+SL 45 · TP 30/60,2025-07-16,Venta,341.0,1,TP1 + BE,49,Sin noticia,11:12 NY (verano),Media,Mié,Semana 3,Jul,2025
+SL 45 · TP 30/60,2025-07-17,Compra,1091.0,1,TP1 + TP2,112,Sin noticia,11:12 NY (verano),Media,Jue,Semana 3,Jul,2025
+SL 45 · TP 30/60,2025-07-18,Venta,1091.0,1,TP1 + TP2,135,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 3,Jul,2025
+SL 45 · TP 30/60,2025-07-21,Compra,341.0,1,TP1 + BE,276,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 3,Jul,2025
+SL 45 · TP 30/60,2025-07-22,Venta,-1159.0,0,Stop (−2),26,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 4,Jul,2025
+SL 45 · TP 30/60,2025-07-23,Venta,-1159.0,0,Stop (−2),103,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 4,Jul,2025
+SL 45 · TP 30/60,2025-07-24,Compra,341.0,1,TP1 + BE,123,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 4,Jul,2025
+SL 45 · TP 30/60,2025-07-25,Compra,1091.0,1,TP1 + TP2,140,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 4,Jul,2025
+SL 45 · TP 30/60,2025-07-28,Compra,-1159.0,0,Stop (−2),69,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 4,Jul,2025
+SL 45 · TP 30/60,2025-07-29,Venta,1091.0,1,TP1 + TP2,57,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 5,Jul,2025
+SL 45 · TP 30/60,2025-07-30,Venta,-1159.0,0,Stop (−2),12,FOMC,11:12 NY (verano),Baja,Mié,Semana 5,Jul,2025
+SL 45 · TP 30/60,2025-07-31,Venta,1091.0,1,TP1 + TP2,40,Sin noticia,11:12 NY (verano),Media,Jue,Semana 5,Jul,2025
+SL 45 · TP 30/60,2025-08-01,Venta,-1159.0,0,Stop (−2),6,NFP/CPI 8:30,11:12 NY (verano),Alta,Vie,Semana 1,Ago,2025
+SL 45 · TP 30/60,2025-08-04,Compra,341.0,1,TP1 + BE,32,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 1,Ago,2025
+SL 45 · TP 30/60,2025-08-05,Venta,1091.0,1,TP1 + TP2,16,Sin noticia,11:12 NY (verano),Media,Mar,Semana 1,Ago,2025
+SL 45 · TP 30/60,2025-08-06,Compra,-1159.0,0,Stop (−2),6,Sin noticia,11:12 NY (verano),Media,Mié,Semana 1,Ago,2025
+SL 45 · TP 30/60,2025-08-07,Venta,1091.0,1,TP1 + TP2,37,Sin noticia,11:12 NY (verano),Media,Jue,Semana 1,Ago,2025
+SL 45 · TP 30/60,2025-08-08,Compra,-1159.0,0,Stop (−2),87,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 2,Ago,2025
+SL 45 · TP 30/60,2025-08-11,Compra,-1159.0,0,Stop (−2),36,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 2,Ago,2025
+SL 45 · TP 30/60,2025-08-12,Compra,1091.0,1,TP1 + TP2,38,NFP/CPI 8:30,11:12 NY (verano),Baja,Mar,Semana 2,Ago,2025
+SL 45 · TP 30/60,2025-08-13,Venta,1091.0,1,TP1 + TP2,54,Sin noticia,11:12 NY (verano),Media,Mié,Semana 2,Ago,2025
+SL 45 · TP 30/60,2025-08-14,Compra,1091.0,1,TP1 + TP2,36,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 2,Ago,2025
+SL 45 · TP 30/60,2025-08-15,Venta,1091.0,1,TP1 + TP2,91,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 3,Ago,2025
+SL 45 · TP 30/60,2025-08-18,Compra,341.0,1,TP1 + BE,18,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 3,Ago,2025
+SL 45 · TP 30/60,2025-08-19,Compra,-1159.0,0,Stop (−2),17,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 3,Ago,2025
+SL 45 · TP 30/60,2025-08-20,Venta,341.0,1,TP1 + BE,8,Sin noticia,11:12 NY (verano),Media,Mié,Semana 3,Ago,2025
+SL 45 · TP 30/60,2025-08-21,Compra,341.0,1,TP1 + BE,23,Sin noticia,11:12 NY (verano),Media,Jue,Semana 3,Ago,2025
+SL 45 · TP 30/60,2025-08-22,Compra,1091.0,1,TP1 + TP2,4,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 4,Ago,2025
+SL 45 · TP 30/60,2025-08-25,Compra,341.0,1,TP1 + BE,209,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 4,Ago,2025
+SL 45 · TP 30/60,2025-08-26,Compra,341.0,1,TP1 + BE,223,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 4,Ago,2025
+SL 45 · TP 30/60,2025-08-27,Compra,341.0,1,TP1 + BE,135,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 4,Ago,2025
+SL 45 · TP 30/60,2025-08-28,Venta,-1159.0,0,Stop (−2),65,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 4,Ago,2025
+SL 45 · TP 30/60,2025-08-29,Venta,-1159.0,0,Stop (−2),29,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 5,Ago,2025
+SL 45 · TP 30/60,2025-09-01,Compra,339.5,1,Cierre 15:59,163,Sin noticia,11:12 NY (verano),Media,Lun,Semana 1,Sep,2025
+SL 45 · TP 30/60,2025-09-02,Compra,-1159.0,0,Stop (−2),35,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 1,Sep,2025
+SL 45 · TP 30/60,2025-09-03,Venta,341.0,1,TP1 + BE,7,Sin noticia,11:12 NY (verano),Media,Mié,Semana 1,Sep,2025
+SL 45 · TP 30/60,2025-09-04,Venta,-1159.0,0,Stop (−2),20,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 1,Sep,2025
+SL 45 · TP 30/60,2025-09-05,Venta,1091.0,1,TP1 + TP2,7,NFP/CPI 8:30,11:12 NY (verano),Baja,Vie,Semana 1,Sep,2025
+SL 45 · TP 30/60,2025-09-08,Compra,341.0,1,TP1 + BE,97,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 2,Sep,2025
+SL 45 · TP 30/60,2025-09-09,Compra,-1159.0,0,Stop (−2),16,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 2,Sep,2025
+SL 45 · TP 30/60,2025-09-10,Compra,-1159.0,0,Stop (−2),58,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 2,Sep,2025
+SL 45 · TP 30/60,2025-09-11,Compra,1091.0,1,TP1 + TP2,67,NFP/CPI 8:30,11:12 NY (verano),Baja,Jue,Semana 2,Sep,2025
+SL 45 · TP 30/60,2025-09-12,Compra,800.4,1,TP1 + cierre,288,Sin noticia,11:12 NY (verano),Media,Vie,Semana 2,Sep,2025
+SL 45 · TP 30/60,2025-09-15,Compra,341.0,1,TP1 + BE,167,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 3,Sep,2025
+SL 45 · TP 30/60,2025-09-16,Venta,-842.6,0,Cierre 15:59,288,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 3,Sep,2025
+SL 45 · TP 30/60,2025-09-17,Venta,341.0,1,TP1 + BE,228,FOMC,11:12 NY (verano),Baja,Mié,Semana 3,Sep,2025
+SL 45 · TP 30/60,2025-09-18,Compra,341.0,1,TP1 + BE,34,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 3,Sep,2025
+SL 45 · TP 30/60,2025-09-19,Compra,-1159.0,0,Stop (−2),36,Sin noticia,11:12 NY (verano),Media,Vie,Semana 3,Sep,2025
+SL 45 · TP 30/60,2025-09-22,Compra,1091.0,1,TP1 + TP2,40,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 4,Sep,2025
+SL 45 · TP 30/60,2025-09-23,Compra,-1159.0,0,Stop (−2),86,Sin noticia,11:12 NY (verano),Media,Mar,Semana 4,Sep,2025
+SL 45 · TP 30/60,2025-09-24,Venta,1091.0,1,TP1 + TP2,96,Sin noticia,11:12 NY (verano),Media,Mié,Semana 4,Sep,2025
+SL 45 · TP 30/60,2025-09-25,Compra,341.0,1,TP1 + BE,51,Sin noticia,11:12 NY (verano),Media,Jue,Semana 4,Sep,2025
+SL 45 · TP 30/60,2025-09-26,Venta,1091.0,1,TP1 + TP2,15,Sin noticia,11:12 NY (verano),Media,Vie,Semana 4,Sep,2025
+SL 45 · TP 30/60,2025-09-29,Compra,-1159.0,0,Stop (−2),64,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 5,Sep,2025
+SL 45 · TP 30/60,2025-09-30,Venta,-1159.0,0,Stop (−2),44,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 5,Sep,2025
+SL 45 · TP 30/60,2025-10-01,Compra,1091.0,1,TP1 + TP2,25,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 1,Oct,2025
+SL 45 · TP 30/60,2025-10-02,Venta,1091.0,1,TP1 + TP2,53,Sin noticia,11:12 NY (verano),Media,Jue,Semana 1,Oct,2025
+SL 45 · TP 30/60,2025-10-03,Compra,1091.0,1,TP1 + TP2,27,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 1,Oct,2025
+SL 45 · TP 30/60,2025-10-06,Venta,-1159.0,0,Stop (−2),49,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 1,Oct,2025
+SL 45 · TP 30/60,2025-10-07,Venta,1091.0,1,TP1 + TP2,26,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 1,Oct,2025
+SL 45 · TP 30/60,2025-10-08,Compra,530.7,1,TP1 + cierre,288,Sin noticia,11:12 NY (verano),Media,Mié,Semana 2,Oct,2025
+SL 45 · TP 30/60,2025-10-09,Venta,1091.0,1,TP1 + TP2,24,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 2,Oct,2025
+SL 45 · TP 30/60,2025-10-10,Compra,-1159.0,0,Stop (−2),6,Sin noticia,11:12 NY (verano),Media,Vie,Semana 2,Oct,2025
+SL 45 · TP 30/60,2025-10-13,Compra,-1159.0,0,Stop (−2),9,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 2,Oct,2025
+SL 45 · TP 30/60,2025-10-14,Compra,1091.0,1,TP1 + TP2,9,Sin noticia,11:12 NY (verano),Media,Mar,Semana 2,Oct,2025
+SL 45 · TP 30/60,2025-10-15,Compra,-1159.0,0,Stop (−2),54,Sin noticia,11:12 NY (verano),Alta,Mié,Semana 3,Oct,2025
+SL 45 · TP 30/60,2025-10-16,Venta,-1159.0,0,Stop (−2),5,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 3,Oct,2025
+SL 45 · TP 30/60,2025-10-17,Compra,1091.0,1,TP1 + TP2,4,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 3,Oct,2025
+SL 45 · TP 30/60,2025-10-20,Compra,1091.0,1,TP1 + TP2,35,Sin noticia,11:12 NY (verano),Media,Lun,Semana 3,Oct,2025
+SL 45 · TP 30/60,2025-10-21,Venta,-1159.0,0,Stop (−2),11,Sin noticia,11:12 NY (verano),Media,Mar,Semana 3,Oct,2025
+SL 45 · TP 30/60,2025-10-22,Venta,1091.0,1,TP1 + TP2,17,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 4,Oct,2025
+SL 45 · TP 30/60,2025-10-23,Venta,341.0,1,TP1 + BE,11,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 4,Oct,2025
+SL 45 · TP 30/60,2025-10-24,Compra,-1159.0,0,Stop (−2),19,NFP/CPI 8:30,11:12 NY (verano),Media,Vie,Semana 4,Oct,2025
+SL 45 · TP 30/60,2025-10-27,Venta,-1159.0,0,Stop (−2),150,Sin noticia,11:12 NY (verano),Media,Lun,Semana 4,Oct,2025
+SL 45 · TP 30/60,2025-10-28,Venta,341.0,1,TP1 + BE,50,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 4,Oct,2025
+SL 45 · TP 30/60,2025-10-29,Venta,341.0,1,TP1 + BE,177,FOMC,11:12 NY (verano),Baja,Mié,Semana 5,Oct,2025
+SL 45 · TP 30/60,2025-10-30,Compra,-1159.0,0,Stop (−2),25,Sin noticia,11:12 NY (verano),Media,Jue,Semana 5,Oct,2025
+SL 45 · TP 30/60,2025-10-31,Venta,1091.0,1,TP1 + TP2,33,Sin noticia,11:12 NY (verano),Media,Vie,Semana 5,Oct,2025
+SL 45 · TP 30/60,2025-11-03,Venta,1091.0,1,TP1 + TP2,15,Sin noticia,10:12 NY (invierno),Media,Lun,Semana 1,Nov,2025
+SL 45 · TP 30/60,2025-11-04,Compra,341.0,1,TP1 + BE,40,Sin noticia,10:12 NY (invierno),Media,Mar,Semana 1,Nov,2025
+SL 45 · TP 30/60,2025-11-05,Compra,341.0,1,TP1 + BE,19,Sin noticia,10:12 NY (invierno),Media,Mié,Semana 1,Nov,2025
+SL 45 · TP 30/60,2025-11-06,Venta,341.0,1,TP1 + BE,6,Sin noticia,10:12 NY (invierno),Media,Jue,Semana 1,Nov,2025
+SL 45 · TP 30/60,2025-11-07,Compra,341.0,1,TP1 + BE,7,Sin noticia,10:12 NY (invierno),Alta,Vie,Semana 1,Nov,2025
+SL 45 · TP 30/60,2025-11-10,Compra,-1159.0,0,Stop (−2),32,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 2,Nov,2025
+SL 45 · TP 30/60,2025-11-11,Venta,341.0,1,TP1 + BE,14,Sin noticia,10:12 NY (invierno),Alta,Mar,Semana 2,Nov,2025
+SL 45 · TP 30/60,2025-11-12,Venta,1091.0,1,TP1 + TP2,25,Sin noticia,10:12 NY (invierno),Media,Mié,Semana 2,Nov,2025
+SL 45 · TP 30/60,2025-11-13,Compra,341.0,1,TP1 + BE,9,Sin noticia,10:12 NY (invierno),Baja,Jue,Semana 2,Nov,2025
+SL 45 · TP 30/60,2025-11-14,Compra,341.0,1,TP1 + BE,14,Sin noticia,10:12 NY (invierno),Alta,Vie,Semana 2,Nov,2025
+SL 45 · TP 30/60,2025-11-17,Venta,341.0,1,TP1 + BE,13,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 3,Nov,2025
+SL 45 · TP 30/60,2025-11-18,Venta,-1159.0,0,Stop (−2),2,Sin noticia,10:12 NY (invierno),Alta,Mar,Semana 3,Nov,2025
+SL 45 · TP 30/60,2025-11-19,Compra,-1159.0,0,Stop (−2),28,Sin noticia,10:12 NY (invierno),Alta,Mié,Semana 3,Nov,2025
+SL 45 · TP 30/60,2025-11-20,Venta,-1159.0,0,Stop (−2),12,NFP/CPI 8:30,10:12 NY (invierno),Alta,Jue,Semana 3,Nov,2025
+SL 45 · TP 30/60,2025-11-21,Venta,341.0,1,TP1 + BE,7,Sin noticia,10:12 NY (invierno),Alta,Vie,Semana 3,Nov,2025
+SL 45 · TP 30/60,2025-11-24,Compra,341.0,1,TP1 + BE,14,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 4,Nov,2025
+SL 45 · TP 30/60,2025-11-25,Venta,341.0,1,TP1 + BE,14,Sin noticia,10:12 NY (invierno),Alta,Mar,Semana 4,Nov,2025
+SL 45 · TP 30/60,2025-11-26,Venta,-1159.0,0,Stop (−2),23,Sin noticia,10:12 NY (invierno),Alta,Mié,Semana 4,Nov,2025
+SL 45 · TP 30/60,2025-11-27,Venta,-35.2,0,Cierre 15:59,163,Sin noticia,10:12 NY (invierno),Media,Jue,Semana 4,Nov,2025
+SL 45 · TP 30/60,2025-11-28,Compra,1091.0,1,TP1 + TP2,65,Sin noticia,10:12 NY (invierno),Baja,Vie,Semana 4,Nov,2025
+SL 45 · TP 30/60,2025-12-01,Compra,-1159.0,0,Stop (−2),14,Sin noticia,10:12 NY (invierno),Baja,Lun,Semana 1,Dic,2025
+SL 45 · TP 30/60,2025-12-02,Compra,-1159.0,0,Stop (−2),18,Sin noticia,10:12 NY (invierno),Baja,Mar,Semana 1,Dic,2025
+SL 45 · TP 30/60,2025-12-03,Compra,1091.0,1,TP1 + TP2,24,Sin noticia,10:12 NY (invierno),Baja,Mié,Semana 1,Dic,2025
+SL 45 · TP 30/60,2025-12-04,Venta,341.0,1,TP1 + BE,17,Sin noticia,10:12 NY (invierno),Media,Jue,Semana 1,Dic,2025
+SL 45 · TP 30/60,2025-12-05,Compra,-1159.0,0,Stop (−2),45,Sin noticia,10:12 NY (invierno),Baja,Vie,Semana 1,Dic,2025
+SL 45 · TP 30/60,2025-12-08,Venta,1091.0,1,TP1 + TP2,49,Sin noticia,10:12 NY (invierno),Baja,Lun,Semana 2,Dic,2025
+SL 45 · TP 30/60,2025-12-09,Compra,341.0,1,TP1 + BE,145,Sin noticia,10:12 NY (invierno),Media,Mar,Semana 2,Dic,2025
+SL 45 · TP 30/60,2025-12-10,Compra,-1159.0,0,Stop (−2),25,FOMC,10:12 NY (invierno),Baja,Mié,Semana 2,Dic,2025
+SL 45 · TP 30/60,2025-12-11,Compra,1091.0,1,TP1 + TP2,13,Sin noticia,10:12 NY (invierno),Alta,Jue,Semana 2,Dic,2025
+SL 45 · TP 30/60,2025-12-12,Venta,1091.0,1,TP1 + TP2,13,Sin noticia,10:12 NY (invierno),Media,Vie,Semana 2,Dic,2025
+SL 45 · TP 30/60,2025-12-15,Venta,341.0,1,TP1 + BE,10,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 3,Dic,2025
+SL 45 · TP 30/60,2025-12-16,Venta,1091.0,1,TP1 + TP2,6,NFP/CPI 8:30,10:12 NY (invierno),Media,Mar,Semana 3,Dic,2025
+SL 45 · TP 30/60,2025-12-17,Venta,1091.0,1,TP1 + TP2,25,Sin noticia,10:12 NY (invierno),Media,Mié,Semana 3,Dic,2025
+SL 45 · TP 30/60,2025-12-18,Venta,341.0,1,TP1 + BE,10,NFP/CPI 8:30,10:12 NY (invierno),Alta,Jue,Semana 3,Dic,2025
+SL 45 · TP 30/60,2025-12-19,Compra,341.0,1,TP1 + BE,97,Sin noticia,10:12 NY (invierno),Media,Vie,Semana 3,Dic,2025
+SL 45 · TP 30/60,2025-12-22,Venta,-1159.0,0,Stop (−2),56,Sin noticia,10:12 NY (invierno),Media,Lun,Semana 4,Dic,2025
+SL 45 · TP 30/60,2025-12-23,Venta,-1159.0,0,Stop (−2),23,Sin noticia,10:12 NY (invierno),Baja,Mar,Semana 4,Dic,2025
+SL 45 · TP 30/60,2025-12-24,Compra,1091.0,1,TP1 + TP2,86,Sin noticia,10:12 NY (invierno),Baja,Mié,Semana 4,Dic,2025
+SL 45 · TP 30/60,2025-12-26,Venta,-473.1,0,Cierre 15:59,348,Sin noticia,10:12 NY (invierno),Baja,Vie,Semana 4,Dic,2025
+SL 45 · TP 30/60,2025-12-29,Venta,-1159.0,0,Stop (−2),15,Sin noticia,10:12 NY (invierno),Baja,Lun,Semana 5,Dic,2025
+SL 45 · TP 30/60,2025-12-30,Venta,-1159.0,0,Stop (−2),70,Sin noticia,10:12 NY (invierno),Baja,Mar,Semana 5,Dic,2025
+SL 45 · TP 30/60,2025-12-31,Venta,341.0,1,TP1 + BE,105,Sin noticia,10:12 NY (invierno),Baja,Mié,Semana 5,Dic,2025
+SL 45 · TP 30/60,2026-01-02,Venta,1091.0,1,TP1 + TP2,6,Sin noticia,10:12 NY (invierno),Media,Vie,Semana 1,Ene,2026
+SL 45 · TP 30/60,2026-01-05,Compra,1091.0,1,TP1 + TP2,96,Sin noticia,10:12 NY (invierno),Media,Lun,Semana 1,Ene,2026
+SL 45 · TP 30/60,2026-01-06,Compra,-1159.0,0,Stop (−2),42,Sin noticia,10:12 NY (invierno),Baja,Mar,Semana 1,Ene,2026
+SL 45 · TP 30/60,2026-01-07,Venta,341.0,1,TP1 + BE,29,Sin noticia,10:12 NY (invierno),Baja,Mié,Semana 1,Ene,2026
+SL 45 · TP 30/60,2026-01-08,Compra,341.0,1,TP1 + BE,179,Sin noticia,10:12 NY (invierno),Baja,Jue,Semana 2,Ene,2026
+SL 45 · TP 30/60,2026-01-09,Venta,-1159.0,0,Stop (−2),2,NFP/CPI 8:30,10:12 NY (invierno),Baja,Vie,Semana 2,Ene,2026
+SL 45 · TP 30/60,2026-01-12,Compra,1091.0,1,TP1 + TP2,65,Sin noticia,10:12 NY (invierno),Media,Lun,Semana 2,Ene,2026
+SL 45 · TP 30/60,2026-01-13,Venta,341.0,1,TP1 + BE,24,NFP/CPI 8:30,10:12 NY (invierno),Media,Mar,Semana 2,Ene,2026
+SL 45 · TP 30/60,2026-01-14,Venta,-1159.0,0,Stop (−2),2,Sin noticia,10:12 NY (invierno),Baja,Mié,Semana 2,Ene,2026
+SL 45 · TP 30/60,2026-01-15,Compra,341.0,1,TP1 + BE,14,Sin noticia,10:12 NY (invierno),Media,Jue,Semana 3,Ene,2026
+SL 45 · TP 30/60,2026-01-16,Venta,1091.0,1,TP1 + TP2,22,Sin noticia,10:12 NY (invierno),Baja,Vie,Semana 3,Ene,2026
+SL 45 · TP 30/60,2026-01-19,Compra,341.0,1,TP1 + BE,78,Sin noticia,10:12 NY (invierno),Baja,Lun,Semana 3,Ene,2026
+SL 45 · TP 30/60,2026-01-20,Venta,-1159.0,0,Stop (−2),10,Sin noticia,10:12 NY (invierno),Baja,Mar,Semana 3,Ene,2026
+SL 45 · TP 30/60,2026-01-21,Compra,341.0,1,TP1 + BE,11,Sin noticia,10:12 NY (invierno),Alta,Mié,Semana 3,Ene,2026
+SL 45 · TP 30/60,2026-01-22,Venta,-1159.0,0,Stop (−2),11,Sin noticia,10:12 NY (invierno),Alta,Jue,Semana 4,Ene,2026
+SL 45 · TP 30/60,2026-01-23,Compra,1091.0,1,TP1 + TP2,44,Sin noticia,10:12 NY (invierno),Baja,Vie,Semana 4,Ene,2026
+SL 45 · TP 30/60,2026-01-26,Compra,1091.0,1,TP1 + TP2,113,Sin noticia,10:12 NY (invierno),Baja,Lun,Semana 4,Ene,2026
+SL 45 · TP 30/60,2026-01-27,Compra,341.0,1,TP1 + BE,170,Sin noticia,10:12 NY (invierno),Baja,Mar,Semana 4,Ene,2026
+SL 45 · TP 30/60,2026-01-28,Venta,1091.0,1,TP1 + TP2,91,FOMC,10:12 NY (invierno),Baja,Mié,Semana 4,Ene,2026
+SL 45 · TP 30/60,2026-01-29,Venta,1091.0,1,TP1 + TP2,3,Sin noticia,10:12 NY (invierno),Baja,Jue,Semana 5,Ene,2026
+SL 45 · TP 30/60,2026-01-30,Compra,-1159.0,0,Stop (−2),12,Sin noticia,10:12 NY (invierno),Alta,Vie,Semana 5,Ene,2026
+SL 45 · TP 30/60,2026-02-02,Compra,341.0,1,TP1 + BE,17,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 1,Feb,2026
+SL 45 · TP 30/60,2026-02-03,Venta,1091.0,1,TP1 + TP2,14,Sin noticia,10:12 NY (invierno),Alta,Mar,Semana 1,Feb,2026
+SL 45 · TP 30/60,2026-02-04,Venta,341.0,1,TP1 + BE,9,Sin noticia,10:12 NY (invierno),Alta,Mié,Semana 1,Feb,2026
+SL 45 · TP 30/60,2026-02-05,Venta,341.0,1,TP1 + BE,5,Sin noticia,10:12 NY (invierno),Alta,Jue,Semana 1,Feb,2026
+SL 45 · TP 30/60,2026-02-06,Compra,-1159.0,0,Stop (−2),2,Sin noticia,10:12 NY (invierno),Alta,Vie,Semana 1,Feb,2026
+SL 45 · TP 30/60,2026-02-09,Compra,1091.0,1,TP1 + TP2,20,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 2,Feb,2026
+SL 45 · TP 30/60,2026-02-10,Compra,-1159.0,0,Stop (−2),2,Sin noticia,10:12 NY (invierno),Alta,Mar,Semana 2,Feb,2026
+SL 45 · TP 30/60,2026-02-11,Venta,1091.0,1,TP1 + TP2,9,NFP/CPI 8:30,10:12 NY (invierno),Media,Mié,Semana 2,Feb,2026
+SL 45 · TP 30/60,2026-02-12,Venta,-1159.0,0,Stop (−2),4,Sin noticia,10:12 NY (invierno),Alta,Jue,Semana 2,Feb,2026
+SL 45 · TP 30/60,2026-02-13,Compra,-1159.0,0,Stop (−2),3,NFP/CPI 8:30,10:12 NY (invierno),Alta,Vie,Semana 2,Feb,2026
+SL 45 · TP 30/60,2026-02-16,Compra,-1159.0,0,Stop (−2),18,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 3,Feb,2026
+SL 45 · TP 30/60,2026-02-17,Venta,-1159.0,0,Stop (−2),5,Sin noticia,10:12 NY (invierno),Baja,Mar,Semana 3,Feb,2026
+SL 45 · TP 30/60,2026-02-18,Compra,1091.0,1,TP1 + TP2,44,Sin noticia,10:12 NY (invierno),Alta,Mié,Semana 3,Feb,2026
+SL 45 · TP 30/60,2026-02-19,Compra,341.0,1,TP1 + BE,7,Sin noticia,10:12 NY (invierno),Media,Jue,Semana 3,Feb,2026
+SL 45 · TP 30/60,2026-02-20,Compra,-1159.0,0,Stop (−2),2,Sin noticia,10:12 NY (invierno),Baja,Vie,Semana 3,Feb,2026
+SL 45 · TP 30/60,2026-02-23,Venta,1091.0,1,TP1 + TP2,25,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 4,Feb,2026
+SL 45 · TP 30/60,2026-02-24,Compra,1091.0,1,TP1 + TP2,15,Sin noticia,10:12 NY (invierno),Alta,Mar,Semana 4,Feb,2026
+SL 45 · TP 30/60,2026-02-25,Venta,-1159.0,0,Stop (−2),79,Sin noticia,10:12 NY (invierno),Alta,Mié,Semana 4,Feb,2026
+SL 45 · TP 30/60,2026-02-26,Venta,1091.0,1,TP1 + TP2,3,Sin noticia,10:12 NY (invierno),Baja,Jue,Semana 4,Feb,2026
+SL 45 · TP 30/60,2026-02-27,Compra,-1159.0,0,Stop (−2),5,Sin noticia,10:12 NY (invierno),Alta,Vie,Semana 4,Feb,2026
+SL 45 · TP 30/60,2026-03-02,Compra,-1159.0,0,Stop (−2),11,Sin noticia,10:12 NY (invierno),Media,Lun,Semana 1,Mar,2026
+SL 45 · TP 30/60,2026-03-03,Venta,1091.0,1,TP1 + TP2,7,Sin noticia,10:12 NY (invierno),Alta,Mar,Semana 1,Mar,2026
+SL 45 · TP 30/60,2026-03-04,Compra,1091.0,1,TP1 + TP2,9,Sin noticia,10:12 NY (invierno),Alta,Mié,Semana 1,Mar,2026
+SL 45 · TP 30/60,2026-03-05,Venta,-1159.0,0,Stop (−2),3,Sin noticia,10:12 NY (invierno),Alta,Jue,Semana 1,Mar,2026
+SL 45 · TP 30/60,2026-03-06,Venta,-1159.0,0,Stop (−2),2,NFP/CPI 8:30,10:12 NY (invierno),Alta,Vie,Semana 1,Mar,2026
+SL 45 · TP 30/60,2026-03-09,Compra,1091.0,1,TP1 + TP2,15,Sin noticia,11:12 NY (verano),Media,Lun,Semana 2,Mar,2026
+SL 45 · TP 30/60,2026-03-10,Compra,341.0,1,TP1 + BE,20,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 2,Mar,2026
+SL 45 · TP 30/60,2026-03-11,Venta,1091.0,1,TP1 + TP2,6,NFP/CPI 8:30,11:12 NY (verano),Alta,Mié,Semana 2,Mar,2026
+SL 45 · TP 30/60,2026-03-12,Venta,-1159.0,0,Stop (−2),16,Sin noticia,11:12 NY (verano),Media,Jue,Semana 2,Mar,2026
+SL 45 · TP 30/60,2026-03-13,Venta,1091.0,1,TP1 + TP2,14,Sin noticia,11:12 NY (verano),Media,Vie,Semana 2,Mar,2026
+SL 45 · TP 30/60,2026-03-16,Venta,-1159.0,0,Stop (−2),11,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 3,Mar,2026
+SL 45 · TP 30/60,2026-03-17,Venta,1091.0,1,TP1 + TP2,52,Sin noticia,11:12 NY (verano),Media,Mar,Semana 3,Mar,2026
+SL 45 · TP 30/60,2026-03-18,Compra,-1159.0,0,Stop (−2),9,FOMC,11:12 NY (verano),Baja,Mié,Semana 3,Mar,2026
+SL 45 · TP 30/60,2026-03-19,Compra,341.0,1,TP1 + BE,6,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 3,Mar,2026
+SL 45 · TP 30/60,2026-03-20,Compra,341.0,1,TP1 + BE,13,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 3,Mar,2026
+SL 45 · TP 30/60,2026-03-23,Compra,-1159.0,0,Stop (−2),9,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 4,Mar,2026
+SL 45 · TP 30/60,2026-03-25,Venta,1091.0,1,TP1 + TP2,5,Sin noticia,11:12 NY (verano),Alta,Mié,Semana 4,Mar,2026
+SL 45 · TP 30/60,2026-03-26,Venta,1091.0,1,TP1 + TP2,20,Sin noticia,11:12 NY (verano),Media,Jue,Semana 4,Mar,2026
+SL 45 · TP 30/60,2026-03-27,Venta,341.0,1,TP1 + BE,12,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 4,Mar,2026
+SL 45 · TP 30/60,2026-03-30,Venta,341.0,1,TP1 + BE,9,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 5,Mar,2026
+SL 45 · TP 30/60,2026-03-31,Compra,341.0,1,TP1 + BE,25,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 5,Mar,2026
+SL 45 · TP 30/60,2026-04-01,Venta,-1159.0,0,Stop (−2),11,Sin noticia,11:12 NY (verano),Alta,Mié,Semana 1,Abr,2026
+SL 45 · TP 30/60,2026-04-02,Compra,341.0,1,TP1 + BE,14,Sin noticia,11:12 NY (verano),Media,Jue,Semana 1,Abr,2026
+SL 45 · TP 30/60,2026-04-06,Compra,1091.0,1,TP1 + TP2,10,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 1,Abr,2026
+SL 45 · TP 30/60,2026-04-07,Venta,-1159.0,0,Stop (−2),9,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 1,Abr,2026
+SL 45 · TP 30/60,2026-04-08,Venta,1091.0,1,TP1 + TP2,24,Sin noticia,11:12 NY (verano),Alta,Mié,Semana 2,Abr,2026
+SL 45 · TP 30/60,2026-04-09,Venta,341.0,1,TP1 + BE,39,Sin noticia,11:12 NY (verano),Media,Jue,Semana 2,Abr,2026
+SL 45 · TP 30/60,2026-04-10,Venta,-1159.0,0,Stop (−2),14,NFP/CPI 8:30,11:12 NY (verano),Alta,Vie,Semana 2,Abr,2026
+SL 45 · TP 30/60,2026-04-13,Compra,341.0,1,TP1 + BE,111,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 2,Abr,2026
+SL 45 · TP 30/60,2026-04-14,Compra,1091.0,1,TP1 + TP2,69,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 2,Abr,2026
+SL 45 · TP 30/60,2026-04-15,Compra,1091.0,1,TP1 + TP2,19,Sin noticia,11:12 NY (verano),Media,Mié,Semana 3,Abr,2026
+SL 45 · TP 30/60,2026-04-16,Venta,341.0,1,TP1 + BE,34,Sin noticia,11:12 NY (verano),Media,Jue,Semana 3,Abr,2026
+SL 45 · TP 30/60,2026-04-17,Compra,1091.0,1,TP1 + TP2,29,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 3,Abr,2026
+SL 45 · TP 30/60,2026-04-20,Compra,341.0,1,TP1 + BE,18,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 3,Abr,2026
+SL 45 · TP 30/60,2026-04-21,Compra,-1159.0,0,Stop (−2),23,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 3,Abr,2026
+SL 45 · TP 30/60,2026-04-22,Compra,341.0,1,TP1 + BE,22,Sin noticia,11:12 NY (verano),Alta,Mié,Semana 4,Abr,2026
+SL 45 · TP 30/60,2026-04-23,Compra,1091.0,1,TP1 + TP2,44,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 4,Abr,2026
+SL 45 · TP 30/60,2026-04-24,Venta,-1159.0,0,Stop (−2),35,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 4,Abr,2026
+SL 45 · TP 30/60,2026-04-27,Compra,-1159.0,0,Stop (−2),67,Sin noticia,11:12 NY (verano),Media,Lun,Semana 4,Abr,2026
+SL 45 · TP 30/60,2026-04-28,Compra,-1159.0,0,Stop (−2),24,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 4,Abr,2026
+SL 45 · TP 30/60,2026-04-29,Venta,-1159.0,0,Stop (−2),23,FOMC,11:12 NY (verano),Baja,Mié,Semana 5,Abr,2026
+SL 45 · TP 30/60,2026-04-30,Venta,-1159.0,0,Stop (−2),11,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 5,Abr,2026
+SL 45 · TP 30/60,2026-05-01,Compra,-1159.0,0,Stop (−2),25,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 1,May,2026
+SL 45 · TP 30/60,2026-05-04,Compra,341.0,1,TP1 + BE,49,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 1,May,2026
+SL 45 · TP 30/60,2026-05-05,Compra,-1159.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Media,Mar,Semana 1,May,2026
+SL 45 · TP 30/60,2026-05-06,Compra,1091.0,1,TP1 + TP2,30,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 1,May,2026
+SL 45 · TP 30/60,2026-05-07,Compra,341.0,1,TP1 + BE,75,Sin noticia,11:12 NY (verano),Media,Jue,Semana 1,May,2026
+SL 45 · TP 30/60,2026-05-08,Compra,341.0,1,TP1 + BE,19,NFP/CPI 8:30,11:12 NY (verano),Media,Vie,Semana 2,May,2026
+SL 45 · TP 30/60,2026-05-11,Compra,341.0,1,TP1 + BE,17,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 2,May,2026
+SL 45 · TP 30/60,2026-05-12,Venta,1091.0,1,TP1 + TP2,20,NFP/CPI 8:30,11:12 NY (verano),Media,Mar,Semana 2,May,2026
+SL 45 · TP 30/60,2026-05-13,Venta,-1159.0,0,Stop (−2),11,Sin noticia,11:12 NY (verano),Media,Mié,Semana 2,May,2026
+SL 45 · TP 30/60,2026-05-14,Compra,1091.0,1,TP1 + TP2,29,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 2,May,2026
+SL 45 · TP 30/60,2026-05-15,Compra,1091.0,1,TP1 + TP2,5,Sin noticia,11:12 NY (verano),Media,Vie,Semana 3,May,2026
+SL 45 · TP 30/60,2026-05-18,Compra,-1159.0,0,Stop (−2),19,Sin noticia,11:12 NY (verano),Media,Lun,Semana 3,May,2026
+SL 45 · TP 30/60,2026-05-19,Venta,1091.0,1,TP1 + TP2,9,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 3,May,2026
+SL 45 · TP 30/60,2026-05-20,Venta,-1159.0,0,Stop (−2),3,Sin noticia,11:12 NY (verano),Media,Mié,Semana 3,May,2026
+SL 45 · TP 30/60,2026-05-21,Compra,-1159.0,0,Stop (−2),4,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 3,May,2026
+SL 45 · TP 30/60,2026-05-22,Venta,1091.0,1,TP1 + TP2,12,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 4,May,2026
+SL 45 · TP 30/60,2026-05-25,Venta,341.0,1,TP1 + BE,59,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 4,May,2026
+SL 45 · TP 30/60,2026-05-26,Compra,341.0,1,TP1 + BE,46,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 4,May,2026
+SL 45 · TP 30/60,2026-05-27,Venta,341.0,1,TP1 + BE,23,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 4,May,2026
+SL 45 · TP 30/60,2026-05-28,Compra,1091.0,1,TP1 + TP2,1,Sin noticia,11:12 NY (verano),Media,Jue,Semana 4,May,2026
+SL 45 · TP 30/60,2026-05-29,Compra,-1159.0,0,Stop (−2),13,Sin noticia,11:12 NY (verano),Media,Vie,Semana 5,May,2026
+SL 45 · TP 30/60,2026-06-01,Venta,-1159.0,0,Stop (−2),79,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 1,Jun,2026
+SL 45 · TP 30/60,2026-06-02,Compra,1091.0,1,TP1 + TP2,47,Sin noticia,11:12 NY (verano),Media,Mar,Semana 1,Jun,2026
+SL 45 · TP 30/60,2026-06-03,Venta,1091.0,1,TP1 + TP2,86,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 1,Jun,2026
+SL 45 · TP 30/60,2026-06-04,Compra,341.0,1,TP1 + BE,25,Sin noticia,11:12 NY (verano),Media,Jue,Semana 1,Jun,2026
+SL 45 · TP 30/60,2026-06-05,Venta,-1159.0,0,Stop (−2),8,NFP/CPI 8:30,11:12 NY (verano),Media,Vie,Semana 1,Jun,2026
+SL 45 · TP 30/60,2026-06-08,Venta,1091.0,1,TP1 + TP2,6,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 2,Jun,2026
+SL 45 · TP 30/60,2026-06-09,Venta,1091.0,1,TP1 + TP2,4,Sin noticia,11:12 NY (verano),Media,Mar,Semana 2,Jun,2026
+SL 45 · TP 30/60,2026-06-10,Compra,-1159.0,0,Stop (−2),4,NFP/CPI 8:30,11:12 NY (verano),Alta,Mié,Semana 2,Jun,2026
+SL 45 · TP 30/60,2026-06-11,Venta,1091.0,1,TP1 + TP2,5,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 2,Jun,2026
+SL 45 · TP 30/60,2026-06-12,Compra,-1159.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 2,Jun,2026
+SL 45 · TP 30/60,2026-06-15,Compra,1091.0,1,TP1 + TP2,49,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 3,Jun,2026
+SL 45 · TP 30/60,2026-06-16,Compra,-1159.0,0,Stop (−2),8,Sin noticia,11:12 NY (verano),Media,Mar,Semana 3,Jun,2026
+SL 45 · TP 30/60,2026-06-17,Compra,341.0,1,TP1 + BE,22,FOMC,11:12 NY (verano),Baja,Mié,Semana 3,Jun,2026
+SL 45 · TP 30/60,2026-06-18,Venta,341.0,1,TP1 + BE,5,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 3,Jun,2026
+SL 45 · TP 30/60,2026-06-19,Compra,341.0,1,TP1 + BE,163,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 3,Jun,2026
+SL 45 · TP 30/60,2026-06-22,Compra,-1159.0,0,Stop (−2),6,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 4,Jun,2026
+SL 45 · TP 30/60,2026-06-23,Compra,341.0,1,TP1 + BE,17,Sin noticia,11:12 NY (verano),Media,Mar,Semana 4,Jun,2026
+SL 45 · TP 30/60,2026-06-24,Venta,341.0,1,TP1 + BE,10,Sin noticia,11:12 NY (verano),Alta,Mié,Semana 4,Jun,2026
+SL 45 · TP 30/60,2026-06-25,Compra,-1159.0,0,Stop (−2),2,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 4,Jun,2026
+SL 45 · TP 30/60,2026-06-26,Compra,341.0,1,TP1 + BE,6,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 4,Jun,2026
+SL 45 · TP 30/60,2026-06-29,Venta,1091.0,1,TP1 + TP2,3,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 5,Jun,2026
+SL 45 · TP 30/60,2026-06-30,Compra,1091.0,1,TP1 + TP2,20,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 5,Jun,2026
+SL 45 · TP 30/60,2026-07-01,Compra,1091.0,1,TP1 + TP2,64,Sin noticia,11:12 NY (verano),Alta,Mié,Semana 1,Jul,2026
+SL 45 · TP 30/60,2026-07-02,Compra,-1159.0,0,Stop (−2),14,NFP/CPI 8:30,11:12 NY (verano),Alta,Jue,Semana 1,Jul,2026
+SL 45 · TP 30/60,2026-07-03,Venta,-682.8,0,Cierre 15:59,167,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 1,Jul,2026
+SL 45 · TP 30/60,2026-07-06,Compra,1091.0,1,TP1 + TP2,50,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 1,Jul,2026
+SL 45 · TP 30/60,2026-07-07,Venta,1091.0,1,TP1 + TP2,14,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 1,Jul,2026
+SL 45 · TP 30/60,2026-07-08,Venta,341.0,1,TP1 + BE,7,Sin noticia,11:12 NY (verano),Media,Mié,Semana 2,Jul,2026
+SL 45 · TP 30/60,2026-07-09,Venta,1091.0,1,TP1 + TP2,5,Sin noticia,11:12 NY (verano),Media,Jue,Semana 2,Jul,2026
+SL 45 · TP 30/60,2026-07-10,Compra,-1159.0,0,Stop (−2),21,Sin noticia,11:12 NY (verano),Media,Vie,Semana 2,Jul,2026
+SL 45 · TP 30/60,2026-07-13,Compra,-1159.0,0,Stop (−2),5,Sin noticia,11:12 NY (verano),Media,Lun,Semana 2,Jul,2026
+SL 45 · TP 30/60,2026-07-14,Venta,341.0,1,TP1 + BE,8,NFP/CPI 8:30,11:12 NY (verano),Media,Mar,Semana 2,Jul,2026
+SL 45 · TP 30/60,2026-07-15,Compra,-1159.0,0,Stop (−2),13,Sin noticia,11:12 NY (verano),Media,Mié,Semana 3,Jul,2026
+SL 45 · TP 30/60,2026-07-16,Compra,341.0,1,TP1 + BE,56,Sin noticia,11:12 NY (verano),Media,Jue,Semana 3,Jul,2026
+SL 45 · TP 30/60,2026-07-17,Compra,-1159.0,0,Stop (−2),35,Sin noticia,11:12 NY (verano),Media,Vie,Semana 3,Jul,2026
+SL 45 · TP 30/60,2026-07-20,Venta,341.0,1,TP1 + BE,57,Sin noticia,11:12 NY (verano),Media,Lun,Semana 3,Jul,2026
+SL 45 · TP 30/60,2026-07-21,Venta,-1159.0,0,Stop (−2),14,Sin noticia,11:12 NY (verano),Media,Mar,Semana 3,Jul,2026
+SL 45 · TP 30/60,2026-07-22,Compra,-1159.0,0,Stop (−2),12,Sin noticia,11:12 NY (verano),Media,Mié,Semana 4,Jul,2026
+SL 45 · TP 30/60,2026-07-23,Venta,341.0,1,TP1 + BE,20,Sin noticia,11:12 NY (verano),Media,Jue,Semana 4,Jul,2026
+SL 45 · TP 30/60,2026-07-24,Compra,-1159.0,0,Stop (−2),8,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 4,Jul,2026
+SL 45 · TP 30/60,2026-07-27,Venta,1091.0,1,TP1 + TP2,16,Sin noticia,11:12 NY (verano),Media,Lun,Semana 4,Jul,2026
+SL 45 · TP 30/60,2026-07-28,Venta,341.0,1,TP1 + BE,12,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 4,Jul,2026
+SL 45 · TP 30/60,2026-07-29,Venta,1091.0,1,TP1 + TP2,2,FOMC,11:12 NY (verano),Media,Mié,Semana 5,Jul,2026
+SL 45 · TP 30/60,2026-07-30,Compra,341.0,1,TP1 + BE,33,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 5,Jul,2026
+SL 45 · TP 30/60,2026-07-31,Venta,341.0,1,TP1 + BE,6,Sin noticia,11:12 NY (verano),Media,Vie,Semana 5,Jul,2026
+SL 45 · TP 30/60,2026-08-03,Compra,1091.0,1,TP1 + TP2,45,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 1,Ago,2026
+SL 45 · TP 30/60,2026-08-04,Compra,341.0,1,TP1 + BE,11,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 1,Ago,2026
+SL 45 · TP 30/60,2026-08-05,Compra,-1159.0,0,Stop (−2),12,Sin noticia,11:12 NY (verano),Alta,Mié,Semana 1,Ago,2026
+SL 45 · TP 30/60,2026-08-06,Compra,-1159.0,0,Stop (−2),15,Sin noticia,11:12 NY (verano),Media,Jue,Semana 1,Ago,2026
+SL 45 · TP 30/60,2026-08-07,Venta,-1159.0,0,Stop (−2),7,NFP/CPI 8:30,11:12 NY (verano),Baja,Vie,Semana 1,Ago,2026
+SL 45 · TP 30/60,2026-08-10,Compra,341.0,1,TP1 + BE,42,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 2,Ago,2026
+SL 45 · TP 30/60,2026-08-11,Compra,-1159.0,0,Stop (−2),60,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 2,Ago,2026
+SL 45 · TP 30/60,2026-08-12,Venta,341.0,1,TP1 + BE,21,NFP/CPI 8:30,11:12 NY (verano),Media,Mié,Semana 2,Ago,2026
+SL 45 · TP 30/60,2026-08-13,Compra,341.0,1,TP1 + BE,34,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 2,Ago,2026
+SL 45 · TP 30/60,2026-08-14,Compra,-1159.0,0,Stop (−2),10,Sin noticia,11:12 NY (verano),Media,Vie,Semana 2,Ago,2026
+SL 45 · TP 30/60,2026-08-17,Venta,1091.0,1,TP1 + TP2,192,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 3,Ago,2026
+SL 45 · TP 30/60,2026-08-18,Venta,-1159.0,0,Stop (−2),15,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 3,Ago,2026
+SL 45 · TP 30/60,2026-08-19,Venta,-1159.0,0,Stop (−2),20,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 3,Ago,2026
+SL 45 · TP 30/60,2026-08-20,Venta,341.0,1,TP1 + BE,9,Sin noticia,11:12 NY (verano),Media,Jue,Semana 3,Ago,2026
+SL 45 · TP 30/60,2026-08-21,Compra,1091.0,1,TP1 + TP2,85,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 3,Ago,2026
+SL 45 · TP 30/60,2026-08-24,Venta,-1159.0,0,Stop (−2),25,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 4,Ago,2026
+SL 45 · TP 30/60,2026-08-25,Venta,1091.0,1,TP1 + TP2,19,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 4,Ago,2026
+SL 45 · TP 30/60,2026-08-26,Compra,-1159.0,0,Stop (−2),13,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 4,Ago,2026
+SL 45 · TP 30/60,2026-08-27,Compra,1091.0,1,TP1 + TP2,38,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 4,Ago,2026
+SL 45 · TP 30/60,2026-08-28,Venta,341.0,1,TP1 + BE,5,Sin noticia,11:12 NY (verano),Media,Vie,Semana 4,Ago,2026
+SL 45 · TP 30/60,2026-08-31,Venta,341.0,1,TP1 + BE,25,Sin noticia,11:12 NY (verano),Media,Lun,Semana 5,Ago,2026
+SL 45 · TP 30/60,2026-09-01,Compra,1091.0,1,TP1 + TP2,19,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 1,Sep,2026
+SL 45 · TP 30/60,2026-09-02,Compra,1091.0,1,TP1 + TP2,15,Sin noticia,11:12 NY (verano),Media,Mié,Semana 1,Sep,2026
+SL 45 · TP 30/60,2026-09-03,Venta,-1159.0,0,Stop (−2),48,Sin noticia,11:12 NY (verano),Media,Jue,Semana 1,Sep,2026
+SL 45 · TP 30/60,2026-09-04,Venta,1091.0,1,TP1 + TP2,43,NFP/CPI 8:30,11:12 NY (verano),Alta,Vie,Semana 1,Sep,2026
+SL 45 · TP 30/60,2026-09-07,Venta,78.1,1,Cierre 15:59,166,Sin noticia,11:12 NY (verano),Media,Lun,Semana 1,Sep,2026
+SL 45 · TP 30/60,2026-09-08,Venta,-1159.0,0,Stop (−2),13,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 2,Sep,2026
+SL 45 · TP 30/60,2026-09-09,Venta,341.0,1,TP1 + BE,17,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 2,Sep,2026
+SL 45 · TP 30/60,2026-09-10,Venta,-1159.0,0,Stop (−2),11,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 2,Sep,2026
+SL 45 · TP 30/60,2026-09-11,Venta,1091.0,1,TP1 + TP2,36,NFP/CPI 8:30,11:12 NY (verano),Baja,Vie,Semana 2,Sep,2026
+SL 45 · TP 30/60,2026-09-14,Compra,-1159.0,0,Stop (−2),9,Sin noticia,11:12 NY (verano),Media,Lun,Semana 2,Sep,2026
+SL 45 · TP 30/60,2026-09-15,Venta,1091.0,1,TP1 + TP2,40,Sin noticia,11:12 NY (verano),Media,Mar,Semana 3,Sep,2026
+SL 45 · TP 30/60,2026-09-16,Venta,341.0,1,TP1 + BE,30,FOMC,11:12 NY (verano),Media,Mié,Semana 3,Sep,2026
+SL 45 · TP 30/60,2026-09-17,Venta,-1159.0,0,Stop (−2),9,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 3,Sep,2026
+SL 45 · TP 30/60,2026-09-18,Venta,341.0,1,TP1 + BE,40,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 3,Sep,2026
+SL 45 · TP 30/60,2026-09-21,Compra,1091.0,1,TP1 + TP2,11,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 3,Sep,2026
+SL 45 · TP 30/60,2026-09-22,Compra,-1159.0,0,Stop (−2),30,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 4,Sep,2026
+SL 45 · TP 30/60,2026-09-23,Venta,341.0,1,TP1 + BE,24,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 4,Sep,2026
+SL 45 · TP 30/60,2026-09-24,Compra,-1159.0,0,Stop (−2),44,Sin noticia,11:12 NY (verano),Media,Jue,Semana 4,Sep,2026
+SL 45 · TP 30/60,2026-09-25,Venta,341.0,1,TP1 + BE,13,Sin noticia,11:12 NY (verano),Media,Vie,Semana 4,Sep,2026
+SL 45 · TP 30/60,2026-09-28,Venta,1091.0,1,TP1 + TP2,32,Sin noticia,11:12 NY (verano),Media,Lun,Semana 4,Sep,2026
+SL 45 · TP 30/60,2026-09-29,Venta,1091.0,1,TP1 + TP2,69,Sin noticia,11:12 NY (verano),Media,Mar,Semana 5,Sep,2026
+SL 45 · TP 30/60,2026-09-30,Compra,341.0,1,TP1 + BE,14,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 5,Sep,2026
+SL 45 · TP 30/60,2026-10-01,Venta,341.0,1,TP1 + BE,15,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 1,Oct,2026
+SL 45 · TP 30/60,2026-10-02,Venta,-1159.0,0,Stop (−2),7,NFP/CPI 8:30,11:12 NY (verano),Alta,Vie,Semana 1,Oct,2026
+SL 45 · TP 30/60,2026-10-05,Compra,341.0,1,TP1 + BE,22,Sin noticia,11:12 NY (verano),Media,Lun,Semana 1,Oct,2026
+SL 45 · TP 30/60,2026-10-06,Compra,-1159.0,0,Stop (−2),12,Sin noticia,11:12 NY (verano),Alta,Mar,Semana 1,Oct,2026
+SL 45 · TP 30/60,2026-10-07,Venta,-1159.0,0,Stop (−2),84,Sin noticia,11:12 NY (verano),Baja,Mié,Semana 1,Oct,2026
+SL 45 · TP 30/60,2026-10-08,Compra,341.0,1,TP1 + BE,37,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 2,Oct,2026
+SL 45 · TP 30/60,2026-10-09,Venta,-1159.0,0,Stop (−2),40,Sin noticia,11:12 NY (verano),Media,Vie,Semana 2,Oct,2026
+SL 45 · TP 30/60,2026-10-12,Venta,-1159.0,0,Stop (−2),99,Sin noticia,11:12 NY (verano),Baja,Lun,Semana 2,Oct,2026
+SL 45 · TP 30/60,2026-10-13,Venta,1091.0,1,TP1 + TP2,78,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 2,Oct,2026
+SL 45 · TP 30/60,2026-10-14,Venta,341.0,1,TP1 + BE,35,NFP/CPI 8:30,11:12 NY (verano),Baja,Mié,Semana 2,Oct,2026
+SL 45 · TP 30/60,2026-10-15,Compra,1091.0,1,TP1 + TP2,32,Sin noticia,11:12 NY (verano),Alta,Jue,Semana 3,Oct,2026
+SL 45 · TP 30/60,2026-10-16,Venta,-1159.0,0,Stop (−2),27,Sin noticia,11:12 NY (verano),Alta,Vie,Semana 3,Oct,2026
+SL 45 · TP 30/60,2026-10-19,Compra,1091.0,1,TP1 + TP2,4,Sin noticia,11:12 NY (verano),Alta,Lun,Semana 3,Oct,2026
+SL 45 · TP 30/60,2026-10-20,Compra,1091.0,1,TP1 + TP2,11,Sin noticia,11:12 NY (verano),Baja,Mar,Semana 3,Oct,2026
+SL 45 · TP 30/60,2026-10-21,Venta,-1159.0,0,Stop (−2),20,Sin noticia,11:12 NY (verano),Alta,Mié,Semana 3,Oct,2026
+SL 45 · TP 30/60,2026-10-22,Venta,1091.0,1,TP1 + TP2,12,Sin noticia,11:12 NY (verano),Media,Jue,Semana 4,Oct,2026
+SL 45 · TP 30/60,2026-10-23,Venta,1091.0,1,TP1 + TP2,16,Sin noticia,11:12 NY (verano),Media,Vie,Semana 4,Oct,2026
+SL 45 · TP 30/60,2026-10-26,Compra,-1159.0,0,Stop (−2),39,Sin noticia,11:12 NY (verano),Media,Lun,Semana 4,Oct,2026
+SL 45 · TP 30/60,2026-10-27,Compra,1091.0,1,TP1 + TP2,33,Sin noticia,11:12 NY (verano),Media,Mar,Semana 4,Oct,2026
+SL 45 · TP 30/60,2026-10-28,Compra,1091.0,1,TP1 + TP2,103,FOMC,11:12 NY (verano),Media,Mié,Semana 4,Oct,2026
+SL 45 · TP 30/60,2026-10-29,Compra,341.0,1,TP1 + BE,34,Sin noticia,11:12 NY (verano),Baja,Jue,Semana 5,Oct,2026
+SL 45 · TP 30/60,2026-10-30,Venta,1091.0,1,TP1 + TP2,30,Sin noticia,11:12 NY (verano),Baja,Vie,Semana 5,Oct,2026
+SL 45 · TP 30/60,2026-11-02,Compra,1091.0,1,TP1 + TP2,8,Sin noticia,10:12 NY (invierno),Alta,Lun,Semana 1,Nov,2026
+SL 45 · TP 30/60,2026-11-03,Compra,341.0,1,TP1 + BE,12,Sin noticia,10:12 NY (invierno),Alta,Mar,Semana 1,Nov,2026
+SL 45 · TP 30/60,2026-11-04,Compra,341.0,1,TP1 + BE,10,Sin noticia,10:12 NY (invierno),Media,Mié,Semana 1,Nov,2026
+SL 45 · TP 30/60,2026-11-05,Venta,-1159.0,0,Stop (−2),5,Sin noticia,10:12 NY (invierno),Media,Jue,Semana 1,Nov,2026
+SL 45 · TP 30/60,2026-11-06,Compra,1091.0,1,TP1 + TP2,1,NFP/CPI 8:30,10:12 NY (invierno),Alta,Vie,Semana 1,Nov,2026

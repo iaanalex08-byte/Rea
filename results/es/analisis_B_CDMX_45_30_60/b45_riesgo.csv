@@ -1,0 +1,8 @@
+metrica,etiqueta,valor
+ci_low,Esperanza: límite inferior IC 95%,-62.54
+ci_high,Esperanza: límite superior IC 95%,109.07
+p_le_0,Probabilidad de esperanza ≤ 0,0.2983
+dd_p50,Drawdown mediano (reordenando),18744.3
+dd_p95,Drawdown percentil 95,29358.03
+streak_p95,Peor racha percentil 95,8.0
+p_loss_100,Probabilidad de perder en 100 operaciones,0.395
