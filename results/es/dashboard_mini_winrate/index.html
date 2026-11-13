@@ -1,0 +1,209 @@
+<meta name="dash-one-writer">
+<style>
+  .mn { display: grid; gap: var(--cds-gap-xl); font-family: var(--font-anthropic-sans); color: var(--color-fg); }
+  .mn h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+  .mn h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; text-wrap: balance; }
+  .mn p { margin: 0; max-width: 72ch; line-height: 1.5; }
+  .mn-muted { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+  .mn-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--cds-gap-md); }
+  .mn-kpi { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-xs); align-content: start; }
+  .mn-kpi-label { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); letter-spacing: .02em; }
+  .mn-kpi-value { font-family: var(--font-anthropic-serif); font-size: 1.9rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .mn-good { color: var(--color-ok); } .mn-bad { color: var(--color-bad); } .mn-warn { color: var(--color-warn); }
+  .mn-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--cds-gap-md); }
+  .mn-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-sm); min-width: 0; }
+  .mn-chart { position: relative; min-height: 300px; min-width: 0; }
+  .mn-chart svg { display: block; overflow: visible; }
+  .mn-chart text { fill: var(--cds-text-secondary); font-size: var(--cds-font-size-caption); font-family: var(--font-anthropic-sans); }
+  .mn-chart .ax path, .mn-chart .ax line { stroke: var(--cds-chart-axis); }
+  .mn-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); box-shadow: var(--cds-shadow-popover); border-radius: var(--cds-radius); padding: var(--cds-pad-sm) var(--cds-pad-md); font-size: var(--cds-font-size-caption); line-height: 1.45; max-width: 280px; z-index: 5; font-variant-numeric: tabular-nums; }
+  .mn-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .mn-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .mn-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; background: var(--color-fg-muted); }
+  .mn-wrap { overflow-x: auto; min-width: 0; }
+  .mn table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+  .mn th { text-align: right; font-weight: var(--cds-font-weight-medium); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .mn td { text-align: right; padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .mn th:first-child, .mn td:first-child { text-align: left; white-space: normal; min-width: 220px; }
+  .mn tr.mn-sel td { background: color-mix(in srgb, var(--color-fg) 6%, transparent); font-weight: var(--cds-font-weight-medium); }
+  [data-dash-source-state=refreshing] { opacity: .5; }
+</style>
+
+<div class="mn">
+  <header id="encabezado" class="mn-card" style="background: transparent; border: 0; padding: 0;">
+    <h1>¿Se puede llegar al 91% de operaciones que tocan TP1?</h1>
+    <p data-draw="frase">—</p>
+    <p class="mn-muted">Modelo B del ES, entrada 9:12 hora de Ciudad de México, tendencia por EMA 20 de 3 minutos, 2 contratos con break-even tras TP1. Backtest de enero 2025 a noviembre 2026.</p>
+  </header>
+
+  <section class="mn-kpis" id="indicadores">
+    <div class="mn-kpi"><span class="mn-kpi-label">Tu configuración llega a TP1</span><span class="mn-kpi-value" data-draw="k-tuya">—</span><span class="mn-muted">SL 60 · TP 15/30</span></div>
+    <div class="mn-kpi"><span class="mn-kpi-label">Alteraciones probadas</span><span class="mn-kpi-value" data-draw="k-total">—</span><span class="mn-muted">SL/TP, retroceso, ATR y filtros</span></div>
+    <div class="mn-kpi"><span class="mn-kpi-label">Con 91% en 2025 y en 2026</span><span class="mn-kpi-value" data-draw="k-91">—</span><span class="mn-muted">el objetivo pedido</span></div>
+    <div class="mn-kpi"><span class="mn-kpi-label">De esas, ganan dinero</span><span class="mn-kpi-value" data-draw="k-91gana">—</span><span class="mn-muted">factor de beneficio mayor que 1</span></div>
+  </section>
+
+  <div class="mn-legend" id="leyenda">
+    <span><i class="mn-dot" data-sw="0"></i>Referencia (SL/TP a mercado)</span>
+    <span><i class="mn-dot" data-sw="1"></i>Entrada en retroceso</span>
+    <span><i class="mn-dot" data-sw="2"></i>Objetivo según volatilidad</span>
+    <span><i class="mn-dot" data-sw="3"></i>Filtros de días</span>
+  </div>
+
+  <div class="mn-grid">
+    <section class="mn-card" id="acierto-vs-factor">
+      <h2>Más acierto, menos ganancia</h2>
+      <p class="mn-muted">Cada punto es una alteración. Arriba a la derecha (más de 91% y factor mayor que 1) es lo que buscamos.</p>
+      <div class="mn-chart" data-draw="g1" data-source="alteraciones"></div>
+    </section>
+    <section class="mn-card" id="2025-vs-2026">
+      <h2>¿Se repite al año siguiente?</h2>
+      <p class="mn-muted">% que llega a TP1 en 2025 frente a 2026. El recuadro marca 91% en los dos años.</p>
+      <div class="mn-chart" data-draw="g2" data-source="alteraciones"></div>
+    </section>
+  </div>
+
+  <section class="mn-card" id="claves">
+    <h2>Las alteraciones clave</h2>
+    <div class="mn-wrap">
+      <table data-source="alteraciones" data-row-key="alteracion" aria-label="Alteraciones clave">
+        <thead><tr><th data-field="alteracion">Alteración</th><th data-field="tp1_rate">Llegan a TP1</th><th data-field="tp1_25">2025</th><th data-field="tp1_26">2026</th><th data-field="pf">Factor</th><th data-field="net">Neto USD</th></tr></thead>
+        <tbody data-draw="tabla"></tbody>
+      </table>
+    </div>
+    <p class="mn-muted">Los filtros mostrados son los tres mejores en 2025, elegidos sin mirar 2026; así se ve si el patrón se repite.</p>
+  </section>
+</div>
+
+<script>
+  window.MN = (() => {
+    const loc = d3.formatLocale({ decimal: '.', thousands: ',', grouping: [3], currency: ['$', ''] });
+    const money = (v) => (v < 0 ? '−' : '') + '$' + loc.format(',.0f')(Math.abs(v));
+    const pct = (v) => loc.format('.0%')(v);
+    const pf = (v) => loc.format('.2f')(v);
+    const TIPOS = ['Referencia', 'Entrada en retroceso', 'Objetivo según volatilidad', 'Filtros (SL 60 · TP 15/30)'];
+    const mark = (tag, src, field, where, text) => { const e = document.createElement(tag); e.dataset.source = src; e.dataset.field = field; if (where) e.dataset.where = where; e.textContent = text; return e; };
+    return { money, pct, pf, TIPOS, mark, loc };
+  })();
+
+  dash.calc('resumen', {
+    inputs: ['alteraciones'],
+    title: 'Resumen de la búsqueda',
+    description: 'Cuántas alteraciones se probaron, cuántas llegan a TP1 al menos el 91% en 2025 y en 2026, y cuántas de esas ganan.',
+    fn: (alteraciones) => {
+      const num = (v) => Number(v);
+      const ok = alteraciones.filter((r) => num(r.tp1_25) >= 0.91 && num(r.tp1_26) >= 0.91);
+      const tuya = alteraciones.find((r) => r.alteracion === 'Entrada 9:12 a mercado · SL 60 · TP 15/30');
+      return [{ total: alteraciones.length, ok91: ok.length, ok91_gana: ok.filter((r) => num(r.pf) > 1).length,
+        tuya_tp1: tuya ? num(tuya.tp1_rate) : null }];
+    },
+  });
+
+  (() => {
+    const { pct, mark } = MN;
+    const one = () => { const d = dash.data('resumen'); return d.status === 'ok' && d.data && d.data[0] ? d.data[0] : null; };
+    const k = (name, field, fmt, cls) => dash.draw(name, (el) => {
+      const r = one();
+      if (!r) { el.replaceChildren('—'); return; }
+      el.replaceChildren(mark('span', 'resumen', field, null, fmt(r[field])));
+      el.className = 'mn-kpi-value ' + (cls ? cls(r[field]) : '');
+    });
+    k('k-tuya', 'tuya_tp1', pct, (v) => (v >= 0.91 ? 'mn-good' : 'mn-warn'));
+    k('k-total', 'total', (v) => String(v));
+    k('k-91', 'ok91', (v) => String(v), (v) => (v > 0 ? 'mn-warn' : 'mn-bad'));
+    k('k-91gana', 'ok91_gana', (v) => String(v), (v) => (v > 0 ? 'mn-good' : 'mn-bad'));
+
+    dash.draw('frase', (el) => {
+      const r = one();
+      if (!r) { el.replaceChildren('—'); return; }
+      el.replaceChildren('De ', mark('b', 'resumen', 'total', null, String(r.total)), ' alteraciones, ',
+        mark('b', 'resumen', 'ok91', null, String(r.ok91)), ' llegan a TP1 al menos el 91% de las veces en 2025 y en 2026, y ',
+        mark('b', 'resumen', 'ok91_gana', null, String(r.ok91_gana)),
+        r.ok91_gana === 1 ? ' de ellas gana dinero.' : ' de ellas ganan dinero.',
+        ' Un TP1 pequeño frente al stop sube el acierto pero hace perder, y los filtros que dan más de 91% en un año no se repiten al siguiente.');
+    });
+
+    for (const sw of document.querySelectorAll('[data-sw]')) sw.style.background = dash.colors[Number(sw.dataset.sw)] || 'var(--color-fg-muted)';
+  })();
+
+  (() => {
+    const { money, pct, pf, TIPOS } = MN;
+    const color = (t) => dash.colors[TIPOS.indexOf(t)] || 'var(--color-fg-muted)';
+    const scatter = (el, rows, xf, yf, xlab, ylab, xfmt, yfmt, refs) => {
+      const W = el.clientWidth || 360, H = 300, mb = 38, mt = 10, mr = 10;
+      el.replaceChildren();
+      const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img')
+        .attr('aria-label', `${ylab} frente a ${xlab} de cada alteración`);
+      const x = d3.scaleLinear().domain(d3.extent(rows, xf)).nice();
+      const y = d3.scaleLinear().domain(d3.extent(rows, yf)).nice();
+      const probe = svg.append('text').text(yfmt(y.domain()[1]));
+      const ml = Math.ceil(probe.node().getComputedTextLength() || 40) + 26; probe.remove();
+      x.range([ml, W - mr]); y.range([H - mb, mt]);
+      svg.append('g').attr('class', 'ax').attr('transform', `translate(0,${H - mb})`).call(d3.axisBottom(x).ticks(Math.max(3, Math.floor((W - ml) / 70))).tickFormat(xfmt).tickSizeOuter(0));
+      svg.append('g').attr('class', 'ax').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(y).ticks(5).tickFormat(yfmt).tickSizeOuter(0));
+      svg.append('text').attr('x', (ml + W - mr) / 2).attr('y', H - 4).attr('text-anchor', 'middle').text(xlab);
+      svg.append('text').attr('transform', `translate(10,${(H - mb + mt) / 2}) rotate(-90)`).attr('text-anchor', 'middle').text(ylab);
+      refs(svg, x, y, ml, W - mr, mt, H - mb);
+      const tip = el.querySelector(':scope > .mn-tip') || Object.assign(el.appendChild(document.createElement('div')), { className: 'mn-tip' });
+      tip.hidden = true;
+      svg.append('g').selectAll('circle').data(rows).join('circle')
+        .attr('cx', (r) => x(xf(r))).attr('cy', (r) => y(yf(r)))
+        .attr('r', (r) => (r.alteracion === 'Entrada 9:12 a mercado · SL 60 · TP 15/30' ? 6 : 3.2))
+        .style('fill', (r) => color(r.tipo)).attr('opacity', (r) => (r.tipo.startsWith('Filtros') ? 0.45 : 0.9))
+        .style('stroke', (r) => (r.alteracion === 'Entrada 9:12 a mercado · SL 60 · TP 15/30' ? 'var(--color-fg)' : 'none'))
+        .on('pointermove', (ev, r) => {
+          tip.replaceChildren(...[[r.alteracion], [`Llegan a TP1: ${pct(+r.tp1_rate)} (2025 ${pct(+r.tp1_25)} · 2026 ${pct(+r.tp1_26)})`], [`Factor ${pf(+r.pf)} · Neto ${money(+r.net)} · ${r.n} ops`]]
+            .map(([t]) => { const d = document.createElement('div'); d.textContent = t; return d; }));
+          tip.hidden = false;
+          const b = el.getBoundingClientRect(); const px = ev.clientX - b.left, py = ev.clientY - b.top;
+          tip.style.left = Math.min(px + 12, Math.max(0, W - tip.offsetWidth)) + 'px'; tip.style.top = Math.max(0, py - tip.offsetHeight - 10) + 'px';
+        })
+        .on('pointerleave', () => { tip.hidden = true; });
+    };
+    const rowsOk = () => { const d = dash.data('alteraciones'); return d.status === 'ok' ? d.data.filter((r) => r.pf !== null && r.pf !== '' && Number.isFinite(+r.pf)) : null; };
+
+    dash.draw('g1', (el) => {
+      const rows = rowsOk(); if (!rows) { el.replaceChildren('—'); return; }
+      scatter(el, rows, (r) => +r.tp1_rate, (r) => +r.pf, '% que llega a TP1', 'Factor de beneficio', pct, pf, (svg, x, y, x0, x1, y0, y1) => {
+        svg.append('line').attr('x1', x(0.91)).attr('x2', x(0.91)).attr('y1', y0).attr('y2', y1).style('stroke', 'var(--color-warn)').attr('stroke-dasharray', '4 3');
+        svg.append('text').attr('x', x(0.91) + 4).attr('y', y0 + 10).text('91%');
+        svg.append('line').attr('x1', x0).attr('x2', x1).attr('y1', y(1)).attr('y2', y(1)).style('stroke', 'var(--cds-chart-reference)');
+        svg.append('text').attr('x', x1).attr('y', y(1) - 4).attr('text-anchor', 'end').text('factor 1 = ni gana ni pierde');
+      });
+    });
+
+    dash.draw('g2', (el) => {
+      const rows = rowsOk(); if (!rows) { el.replaceChildren('—'); return; }
+      const valid = rows.filter((r) => Number.isFinite(+r.tp1_25) && Number.isFinite(+r.tp1_26));
+      scatter(el, valid, (r) => +r.tp1_25, (r) => +r.tp1_26, '% a TP1 en 2025', '% a TP1 en 2026', pct, pct, (svg, x, y, x0, x1, y0, y1) => {
+        svg.append('rect').attr('x', x(0.91)).attr('y', y0).attr('width', Math.max(0, x1 - x(0.91))).attr('height', Math.max(0, y(0.91) - y0))
+          .style('fill', 'var(--color-ok)').attr('opacity', 0.12).style('stroke', 'var(--color-ok)');
+        svg.append('text').attr('x', x(0.91) + 4).attr('y', y0 + 12).text('91% en ambos');
+        const lo = Math.max(x.domain()[0], y.domain()[0]), hi = Math.min(x.domain()[1], y.domain()[1]);
+        svg.append('line').attr('x1', x(lo)).attr('y1', y(lo)).attr('x2', x(hi)).attr('y2', y(hi)).style('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '2 3');
+      });
+    });
+
+    dash.draw('tabla', (tb) => {
+      const d = dash.data('alteraciones');
+      if (d.status !== 'ok') { tb.replaceChildren(); return; }
+      const R = d.data;
+      const by = (t) => R.filter((r) => r.tipo === t);
+      const pick = [
+        ...by('Referencia'),
+        ...by('Objetivo según volatilidad').sort((a, b) => +b.tp1_rate - +a.tp1_rate).slice(0, 2),
+        ...by('Entrada en retroceso').sort((a, b) => +b.tp1_rate - +a.tp1_rate).slice(0, 1),
+        ...by('Filtros (SL 60 · TP 15/30)').sort((a, b) => +b.tp1_25 - +a.tp1_25).slice(0, 3),
+      ];
+      tb.replaceChildren(...pick.map((r) => {
+        const tr = document.createElement('tr'); tr.dataset.key = encodeURIComponent(r.alteracion);
+        if (r.alteracion === 'Entrada 9:12 a mercado · SL 60 · TP 15/30') tr.className = 'mn-sel';
+        const c = (v, ok) => (ok ? 'mn-good' : 'mn-bad');
+        [[r.alteracion], [pct(+r.tp1_rate), +r.tp1_rate >= 0.91 ? 'mn-good' : ''], [pct(+r.tp1_25), +r.tp1_25 >= 0.91 ? 'mn-good' : ''], [pct(+r.tp1_26), +r.tp1_26 >= 0.91 ? 'mn-good' : 'mn-bad'],
+          [pf(+r.pf), c(0, +r.pf >= 1)], [money(+r.net), c(0, +r.net >= 0)]]
+          .forEach(([t, cls]) => { const td = document.createElement('td'); td.textContent = t; if (cls) td.className = cls; tr.append(td); });
+        return tr;
+      }));
+    });
+  })();
+</script>

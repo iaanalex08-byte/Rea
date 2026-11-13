@@ -1,0 +1,516 @@
+alteracion,tipo,n,tp1_rate,tp1_25,tp1_26,pf,net,avg25,avg26,pct_dias
+Entrada 9:12 a mercado · SL 60 · TP 15/30,Referencia,476,0.8046,0.8171,0.79,1.0127,1748.85,29.4154,-26.5338,
+Entrada 9:12 a mercado · SL 60 · TP 10/20,Referencia,476,0.8592,0.8833,0.8311,0.9652,-3459.4,33.6008,-55.2274,
+Entrada 9:12 a mercado · SL 60 · TP 8/16,Referencia,476,0.8803,0.9066,0.8493,0.8828,-10045.8,19.6459,-68.926,
+Entrada 9:12 a mercado · SL 45 · TP 10/20,Referencia,476,0.813,0.8327,0.79,0.9064,-9459.4,4.4179,-48.3781,
+Entrada 9:12 a mercado · SL 45 · TP 8/16,Referencia,476,0.8403,0.8638,0.8128,0.8359,-14295.8,-2.3385,-62.5333,
+Entrada 9:12 a mercado · SL 80 · TP 10/20,Referencia,476,0.8866,0.8949,0.8767,0.9612,-4005.9,8.9521,-28.7973,
+"Limitada 4 ticks a favor, válida 10 min · SL 45 · TP 10/20",Entrada en retroceso,398,0.7688,0.7936,0.7389,0.6948,-32181.2,-47.6486,-121.0767,0.8361
+"Limitada 4 ticks a favor, válida 10 min · SL 45 · TP 15/30",Entrada en retroceso,398,0.7211,0.7431,0.6944,0.8335,-21033.15,-15.1461,-98.5072,0.8361
+"Limitada 4 ticks a favor, válida 10 min · SL 60 · TP 10/20",Entrada en retroceso,398,0.8191,0.844,0.7889,0.7196,-30431.2,-33.3138,-128.7156,0.8361
+"Limitada 4 ticks a favor, válida 10 min · SL 60 · TP 15/30",Entrada en retroceso,398,0.7789,0.8028,0.75,0.8615,-18220.65,6.3562,-108.9239,0.8361
+"Limitada 4 ticks a favor, válida 20 min · SL 45 · TP 10/20",Entrada en retroceso,423,0.7707,0.7922,0.7448,0.7064,-32656.2,-47.4216,-113.0302,0.8887
+"Limitada 4 ticks a favor, válida 20 min · SL 45 · TP 15/30",Entrada en retroceso,423,0.7234,0.7446,0.6979,0.8287,-22820.65,-16.2071,-99.3583,0.8887
+"Limitada 4 ticks a favor, válida 20 min · SL 60 · TP 10/20",Entrada en retroceso,423,0.8203,0.8398,0.7969,0.7304,-30906.2,-38.7636,-114.3323,0.8887
+"Limitada 4 ticks a favor, válida 20 min · SL 60 · TP 15/30",Entrada en retroceso,423,0.7825,0.8009,0.7604,0.8628,-18883.15,-0.7851,-97.4052,0.8887
+"Limitada 4 ticks a favor, válida 40 min · SL 45 · TP 10/20",Entrada en retroceso,431,0.768,0.7949,0.736,0.6933,-35178.2,-44.5786,-125.6183,0.9055
+"Limitada 4 ticks a favor, válida 40 min · SL 45 · TP 15/30",Entrada en retroceso,431,0.7216,0.7479,0.6904,0.8188,-24780.15,-12.4288,-111.0244,0.9055
+"Limitada 4 ticks a favor, válida 40 min · SL 60 · TP 10/20",Entrada en retroceso,431,0.8167,0.8419,0.7868,0.7102,-34553.2,-36.0316,-132.598,0.9055
+"Limitada 4 ticks a favor, válida 40 min · SL 60 · TP 15/30",Entrada en retroceso,431,0.7796,0.8034,0.7513,0.8456,-21967.65,2.7955,-114.8315,0.9055
+"Limitada 8 ticks a favor, válida 10 min · SL 45 · TP 10/20",Entrada en retroceso,330,0.7485,0.7684,0.7255,0.6043,-37793.8,-88.3785,-144.7765,0.6933
+"Limitada 8 ticks a favor, válida 10 min · SL 45 · TP 15/30",Entrada en retroceso,330,0.6939,0.7232,0.6601,0.7112,-33606.3,-63.661,-146.002,0.6933
+"Limitada 8 ticks a favor, válida 10 min · SL 60 · TP 10/20",Entrada en retroceso,330,0.7939,0.8079,0.7778,0.6013,-41168.8,-102.5028,-150.4954,0.6933
+"Limitada 8 ticks a favor, válida 10 min · SL 60 · TP 15/30",Entrada en retroceso,330,0.7545,0.7797,0.7255,0.7333,-32856.3,-55.1864,-150.9039,0.6933
+"Limitada 8 ticks a favor, válida 20 min · SL 45 · TP 10/20",Entrada en retroceso,373,0.7587,0.7772,0.7368,0.6462,-36668.2,-72.5515,-128.7298,0.7836
+"Limitada 8 ticks a favor, válida 20 min · SL 45 · TP 15/30",Entrada en retroceso,373,0.7051,0.7327,0.6725,0.7399,-32980.7,-49.6554,-134.2123,0.7836
+"Limitada 8 ticks a favor, válida 20 min · SL 60 · TP 10/20",Entrada en retroceso,373,0.8016,0.8119,0.7895,0.6373,-40793.2,-92.3535,-129.4608,0.7836
+"Limitada 8 ticks a favor, válida 20 min · SL 60 · TP 15/30",Entrada en retroceso,373,0.7641,0.7871,0.7368,0.7594,-32230.7,-43.1579,-137.5018,0.7836
+"Limitada 8 ticks a favor, válida 40 min · SL 45 · TP 10/20",Entrada en retroceso,391,0.7621,0.7799,0.7418,0.661,-36068.2,-66.0593,-122.3176,0.8214
+"Limitada 8 ticks a favor, válida 40 min · SL 45 · TP 15/30",Entrada en retroceso,391,0.7059,0.7368,0.6703,0.7493,-33068.2,-40.3416,-135.367,0.8214
+"Limitada 8 ticks a favor, válida 40 min · SL 60 · TP 10/20",Entrada en retroceso,391,0.8056,0.8134,0.7967,0.6586,-39068.2,-85.1981,-116.8231,0.8214
+"Limitada 8 ticks a favor, válida 40 min · SL 60 · TP 15/30",Entrada en retroceso,391,0.7647,0.7895,0.7363,0.7688,-32130.7,-34.0617,-137.4275,0.8214
+"Limitada 12 ticks a favor, válida 10 min · SL 45 · TP 10/20",Entrada en retroceso,286,0.7762,0.8105,0.7368,0.6908,-22697.8,-33.183,-132.4872,0.6008
+"Limitada 12 ticks a favor, válida 10 min · SL 45 · TP 15/30",Entrada en retroceso,286,0.6993,0.7255,0.6692,0.7389,-25822.8,-45.0294,-142.3556,0.6008
+"Limitada 12 ticks a favor, válida 10 min · SL 60 · TP 10/20",Entrada en retroceso,286,0.8252,0.8431,0.8045,0.7178,-21322.8,-46.2549,-107.1113,0.6008
+"Limitada 12 ticks a favor, válida 10 min · SL 60 · TP 15/30",Entrada en retroceso,286,0.7517,0.7712,0.7293,0.7364,-27920.3,-57.1026,-144.2376,0.6008
+"Limitada 12 ticks a favor, válida 20 min · SL 45 · TP 10/20",Entrada en retroceso,334,0.7814,0.8122,0.7451,0.7157,-23829.8,-29.1657,-121.2471,0.7017
+"Limitada 12 ticks a favor, válida 20 min · SL 45 · TP 15/30",Entrada en retroceso,334,0.7066,0.7293,0.6797,0.7589,-27192.2,-42.9083,-126.966,0.7017
+"Limitada 12 ticks a favor, válida 20 min · SL 60 · TP 10/20",Entrada en retroceso,334,0.8323,0.8508,0.8105,0.7587,-20454.8,-31.2376,-96.7373,0.7017
+"Limitada 12 ticks a favor, válida 20 min · SL 60 · TP 15/30",Entrada en retroceso,334,0.7605,0.779,0.7386,0.7695,-27602.2,-44.8265,-127.3765,0.7017
+"Limitada 12 ticks a favor, válida 40 min · SL 45 · TP 10/20",Entrada en retroceso,358,0.7905,0.8191,0.7588,0.7516,-21395.8,-22.0319,-101.4929,0.7521
+"Limitada 12 ticks a favor, válida 40 min · SL 45 · TP 15/30",Entrada en retroceso,358,0.7151,0.734,0.6941,0.7775,-26133.2,-40.5819,-108.8459,0.7521
+"Limitada 12 ticks a favor, válida 40 min · SL 60 · TP 10/20",Entrada en retroceso,358,0.8408,0.8564,0.8235,0.8042,-16895.8,-24.0266,-72.8165,0.7521
+"Limitada 12 ticks a favor, válida 40 min · SL 60 · TP 15/30",Entrada en retroceso,358,0.7682,0.7819,0.7529,0.788,-26355.7,-44.4234,-105.9065,0.7521
+"Limitada 16 ticks a favor, válida 10 min · SL 45 · TP 10/20",Entrada en retroceso,247,0.7935,0.8168,0.7672,0.7797,-13023.0,-15.8702,-94.3448,0.5189
+"Limitada 16 ticks a favor, válida 10 min · SL 45 · TP 15/30",Entrada en retroceso,247,0.7247,0.7634,0.681,0.8241,-13709.3,6.0763,-125.0457,0.5189
+"Limitada 16 ticks a favor, válida 10 min · SL 60 · TP 10/20",Entrada en retroceso,247,0.8259,0.8321,0.819,0.7211,-18398.0,-57.855,-93.2672,0.5189
+"Limitada 16 ticks a favor, válida 10 min · SL 60 · TP 15/30",Entrada en retroceso,247,0.7611,0.7786,0.7414,0.7519,-22146.8,-54.0382,-129.8948,0.5189
+"Limitada 16 ticks a favor, válida 20 min · SL 45 · TP 10/20",Entrada en retroceso,301,0.7907,0.8098,0.7681,0.7588,-17609.0,-28.6319,-93.7826,0.6324
+"Limitada 16 ticks a favor, válida 20 min · SL 45 · TP 15/30",Entrada en retroceso,301,0.7276,0.7669,0.6812,0.823,-16670.3,1.6595,-122.7594,0.6324
+"Limitada 16 ticks a favor, válida 20 min · SL 60 · TP 10/20",Entrada en retroceso,301,0.8306,0.8344,0.8261,0.7414,-20234.0,-55.4724,-81.1014,0.6324
+"Limitada 16 ticks a favor, válida 20 min · SL 60 · TP 15/30",Entrada en retroceso,301,0.7674,0.7914,0.7391,0.7687,-24545.3,-39.7515,-130.9116,0.6324
+"Limitada 16 ticks a favor, válida 40 min · SL 45 · TP 10/20",Entrada en retroceso,331,0.7915,0.8136,0.7662,0.7671,-18629.0,-21.9944,-95.6883,0.6954
+"Limitada 16 ticks a favor, válida 40 min · SL 45 · TP 15/30",Entrada en retroceso,331,0.7251,0.7684,0.6753,0.8147,-19377.8,4.1356,-130.5831,0.6954
+"Limitada 16 ticks a favor, válida 40 min · SL 60 · TP 10/20",Entrada en retroceso,331,0.8338,0.8362,0.8312,0.7629,-20004.0,-50.9492,-71.3377,0.6954
+"Limitada 16 ticks a favor, válida 40 min · SL 60 · TP 15/30",Entrada en retroceso,331,0.7644,0.791,0.7338,0.7587,-28565.3,-40.3559,-139.1058,0.6954
+"Limitada 20 ticks a favor, válida 10 min · SL 45 · TP 10/20",Entrada en retroceso,214,0.8131,0.8131,0.8131,0.8862,-5276.0,-16.4766,-32.8318,0.4496
+"Limitada 20 ticks a favor, válida 10 min · SL 45 · TP 15/30",Entrada en retroceso,214,0.7336,0.757,0.7103,0.8303,-11213.5,-21.7336,-83.0654,0.4496
+"Limitada 20 ticks a favor, válida 10 min · SL 60 · TP 10/20",Entrada en retroceso,214,0.8411,0.8224,0.8598,0.803,-10276.0,-69.0467,-26.9907,0.4496
+"Limitada 20 ticks a favor, válida 10 min · SL 60 · TP 15/30",Entrada en retroceso,214,0.785,0.7757,0.7944,0.8348,-11487.8,-77.8084,-29.5542,0.4496
+"Limitada 20 ticks a favor, válida 20 min · SL 45 · TP 10/20",Entrada en retroceso,270,0.8148,0.8028,0.8281,0.8847,-6680.0,-35.7606,-12.5156,0.5672
+"Limitada 20 ticks a favor, válida 20 min · SL 45 · TP 15/30",Entrada en retroceso,270,0.7259,0.7324,0.7188,0.8143,-15930.0,-52.4859,-66.2266,0.5672
+"Limitada 20 ticks a favor, válida 20 min · SL 60 · TP 10/20",Entrada en retroceso,270,0.8444,0.8169,0.875,0.8148,-11930.0,-83.2958,-0.7969,0.5672
+"Limitada 20 ticks a favor, válida 20 min · SL 60 · TP 15/30",Entrada en retroceso,270,0.7778,0.7606,0.7969,0.8116,-17141.8,-100.0211,-22.9594,0.5672
+"Limitada 20 ticks a favor, válida 40 min · SL 45 · TP 10/20",Entrada en retroceso,311,0.8199,0.816,0.8243,0.9222,-4972.8,-17.8957,-13.8905,0.6534
+"Limitada 20 ticks a favor, válida 40 min · SL 45 · TP 15/30",Entrada en retroceso,311,0.7299,0.7423,0.7162,0.8362,-15785.3,-39.7515,-62.877,0.6534
+"Limitada 20 ticks a favor, válida 40 min · SL 60 · TP 10/20",Entrada en retroceso,311,0.8457,0.8282,0.8649,0.8326,-12097.8,-63.908,-11.3568,0.6534
+"Limitada 20 ticks a favor, válida 40 min · SL 60 · TP 15/30",Entrada en retroceso,311,0.7781,0.7669,0.7905,0.823,-18309.6,-90.365,-24.1899,0.6534
+TP1 = 3% del rango medio · SL = 25% del rango medio,Objetivo según volatilidad,466,0.8691,0.8947,0.8402,0.7945,-19756.3,8.0478,-99.2881,
+TP1 = 3% del rango medio · SL = 35% del rango medio,Objetivo según volatilidad,466,0.9099,0.919,0.8995,0.9472,-4460.0,20.2494,-43.2037,
+TP1 = 3% del rango medio · SL = 50% del rango medio,Objetivo según volatilidad,466,0.9249,0.9312,0.9178,0.8971,-9309.3,5.9543,-49.2237,
+TP1 = 5% del rango medio · SL = 25% del rango medio,Objetivo según volatilidad,466,0.8069,0.83,0.7808,0.8095,-27893.7,-9.9174,-116.1831,
+TP1 = 5% del rango medio · SL = 35% del rango medio,Objetivo según volatilidad,466,0.8541,0.8543,0.8539,0.8743,-17958.7,-15.3223,-64.7219,
+TP1 = 5% del rango medio · SL = 50% del rango medio,Objetivo según volatilidad,466,0.8755,0.8785,0.8721,0.8436,-23724.8,-31.2656,-73.0694,
+TP1 = 8% del rango medio · SL = 25% del rango medio,Objetivo según volatilidad,466,0.7575,0.7692,0.7443,0.9922,-1471.5,27.1158,-37.3018,
+TP1 = 8% del rango medio · SL = 35% del rango medio,Objetivo según volatilidad,466,0.8112,0.8057,0.8174,1.0416,7997.4,18.6251,15.5114,
+TP1 = 8% del rango medio · SL = 50% del rango medio,Objetivo según volatilidad,466,0.8369,0.834,0.8402,1.0288,5782.9,-4.5595,31.5484,
+TP1 = 10% del rango medio · SL = 25% del rango medio,Objetivo según volatilidad,466,0.7167,0.7247,0.7078,0.9939,-1352.95,22.0551,-31.0527,
+TP1 = 10% del rango medio · SL = 35% del rango medio,Objetivo según volatilidad,466,0.7725,0.7652,0.7808,1.0272,6203.45,8.8073,18.3929,
+TP1 = 10% del rango medio · SL = 50% del rango medio,Objetivo según volatilidad,466,0.8026,0.7935,0.8128,0.9965,-849.05,-46.9684,49.0966,
+Sin viernes,Filtros (SL 60 · TP 15/30),381,0.8189,0.8155,0.8229,1.0794,8214.95,13.0755,31.5509,0.8004
+Sin días de noticia,Filtros (SL 60 · TP 15/30),419,0.8043,0.815,0.7917,1.015,1811.85,28.7104,-24.5073,0.8803
+Sin volatilidad alta el día anterior,Filtros (SL 60 · TP 15/30),317,0.8233,0.8286,0.8169,1.1638,13428.65,58.0586,23.0169,0.666
+Solo volatilidad baja el día anterior,Filtros (SL 60 · TP 15/30),159,0.8239,0.8571,0.7794,1.0984,4139.9,91.1319,-61.075,0.334
+Solo horario de verano (11:12 NY),Filtros (SL 60 · TP 15/30),337,0.819,0.8343,0.8036,1.0962,8776.55,58.3044,-6.4101,0.708
+Última vela de 3 min a favor,Filtros (SL 60 · TP 15/30),296,0.8108,0.8366,0.7832,1.041,3420.55,59.3788,-39.6112,0.6218
+Las 3 últimas velas de 3 min a favor,Filtros (SL 60 · TP 15/30),87,0.7816,0.75,0.8286,0.9498,-1386.4,-76.5442,74.1114,0.1828
+Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),344,0.8052,0.8045,0.8061,0.9991,-88.35,-4.9567,4.8418,0.7227
+Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),421,0.8005,0.8009,0.8,0.9838,-2006.15,0.0271,-10.5916,0.8845
+Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),186,0.8118,0.8396,0.775,1.0871,4262.45,82.6061,-56.1725,0.3908
+Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),144,0.8125,0.8485,0.7821,1.0402,1666.5,56.9091,-26.7885,0.3025
+Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),280,0.8071,0.8227,0.7914,0.9873,-1048.6,27.1702,-35.105,0.5882
+Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),178,0.7921,0.7982,0.7826,1.0007,34.45,7.1491,-10.7942,0.3739
+Solo compras,Filtros (SL 60 · TP 15/30),248,0.7823,0.7852,0.7788,0.914,-7120.25,-15.95,-43.9558,0.521
+Solo ventas,Filtros (SL 60 · TP 15/30),228,0.8289,0.8525,0.8019,1.1611,8869.1,79.6148,-7.9613,0.479
+Sin viernes + Sin días de noticia,Filtros (SL 60 · TP 15/30),344,0.8081,0.8054,0.8113,1.0048,472.95,-2.8646,6.3075,0.7227
+Sin viernes + Sin volatilidad alta el día anterior,Filtros (SL 60 · TP 15/30),257,0.8249,0.8214,0.8291,1.1415,9430.95,31.2504,43.2128,0.5399
+Sin viernes + Solo volatilidad baja el día anterior,Filtros (SL 60 · TP 15/30),131,0.8015,0.8243,0.7719,0.9094,-3533.1,10.9257,-76.1684,0.2752
+Sin viernes + Solo horario de verano (11:12 NY),Filtros (SL 60 · TP 15/30),271,0.8266,0.8382,0.8148,1.1067,7694.15,44.579,12.0844,0.5693
+Sin viernes + Última vela de 3 min a favor,Filtros (SL 60 · TP 15/30),237,0.8228,0.8211,0.8246,1.0646,4162.65,-0.4695,37.0211,0.4979
+Sin viernes + Las 3 últimas velas de 3 min a favor,Filtros (SL 60 · TP 15/30),68,0.7794,0.7143,0.8846,0.8358,-3778.1,-203.6429,183.65,0.1429
+Sin viernes + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),278,0.8201,0.7986,0.8433,1.0903,6843.15,-17.4288,69.7978,0.584
+Sin viernes + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),338,0.8195,0.8,0.8431,1.0794,7239.45,-14.0132,64.2608,0.7101
+Sin viernes + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),149,0.8456,0.8523,0.8361,1.3232,10631.55,86.8528,48.9918,0.313
+Sin viernes + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),110,0.8364,0.8367,0.8361,1.2177,6010.0,23.398,79.7295,0.2311
+Sin viernes + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),220,0.8182,0.8148,0.8214,1.0467,2866.4,4.1944,21.5482,0.4622
+Sin viernes + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),149,0.8121,0.8043,0.8246,1.0633,2569.05,-1.9614,48.2368,0.313
+Sin viernes + Solo compras,Filtros (SL 60 · TP 15/30),198,0.803,0.7925,0.8152,1.0254,1517.25,-7.4741,25.1033,0.416
+Sin viernes + Solo ventas,Filtros (SL 60 · TP 15/30),183,0.8361,0.84,0.8313,1.1535,6697.7,34.858,38.6976,0.3845
+Sin días de noticia + Sin volatilidad alta el día anterior,Filtros (SL 60 · TP 15/30),277,0.8159,0.8235,0.8065,1.1056,7851.15,50.4624,1.0516,0.5819
+Sin días de noticia + Solo volatilidad baja el día anterior,Filtros (SL 60 · TP 15/30),139,0.8273,0.8608,0.7833,1.1342,4819.9,95.8987,-45.935,0.292
+Sin días de noticia + Solo horario de verano (11:12 NY),Filtros (SL 60 · TP 15/30),297,0.8114,0.8255,0.7973,1.0383,3199.05,40.493,-19.1514,0.6239
+Sin días de noticia + Última vela de 3 min a favor,Filtros (SL 60 · TP 15/30),260,0.8115,0.837,0.784,1.0458,3332.05,59.3293,-37.4192,0.5462
+Sin días de noticia + Las 3 últimas velas de 3 min a favor,Filtros (SL 60 · TP 15/30),77,0.7792,0.7333,0.8438,0.9421,-1421.4,-108.1622,107.6844,0.1618
+Sin días de noticia + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),304,0.8026,0.8013,0.8041,0.9708,-2665.85,-13.8958,-3.3655,0.6387
+Sin días de noticia + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),373,0.7989,0.799,0.7988,0.9745,-2811.65,-0.9841,-15.4491,0.7836
+Sin días de noticia + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),163,0.8221,0.8478,0.7887,1.2262,8981.95,114.6168,-22.0113,0.3424
+Sin días de noticia + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),124,0.8065,0.8393,0.7794,0.9772,-841.0,29.6161,-36.7574,0.2605
+Sin días de noticia + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),248,0.8024,0.8211,0.784,0.9282,-5398.1,16.3049,-59.2288,0.521
+Sin días de noticia + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),155,0.7935,0.7938,0.7931,1.0692,3066.45,16.1057,25.9345,0.3256
+Sin días de noticia + Solo compras,Filtros (SL 60 · TP 15/30),226,0.7832,0.7851,0.781,0.9127,-6559.75,-18.5103,-41.1429,0.4748
+Sin días de noticia + Solo ventas,Filtros (SL 60 · TP 15/30),193,0.829,0.8491,0.8046,1.1826,8371.6,82.6132,-4.4299,0.4055
+Sin volatilidad alta el día anterior + Solo volatilidad baja el día anterior,Filtros (SL 60 · TP 15/30),159,0.8239,0.8571,0.7794,1.0984,4139.9,91.1319,-61.075,0.334
+Sin volatilidad alta el día anterior + Solo horario de verano (11:12 NY),Filtros (SL 60 · TP 15/30),235,0.8426,0.8655,0.819,1.2946,16268.35,115.9954,21.2491,0.4937
+Sin volatilidad alta el día anterior + Última vela de 3 min a favor,Filtros (SL 60 · TP 15/30),192,0.8385,0.835,0.8427,1.2753,12667.85,68.3005,63.291,0.4034
+Sin volatilidad alta el día anterior + Las 3 últimas velas de 3 min a favor,Filtros (SL 60 · TP 15/30),59,0.8305,0.75,0.9565,1.3895,5378.1,-43.3694,301.713,0.1239
+Sin volatilidad alta el día anterior + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),231,0.8052,0.8211,0.787,1.0193,1316.15,40.2785,-33.6861,0.4853
+Sin volatilidad alta el día anterior + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),282,0.8156,0.8176,0.813,1.1062,8056.15,42.5582,10.4829,0.5924
+Sin volatilidad alta el día anterior + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),139,0.8201,0.8235,0.8148,1.1618,5571.75,56.2676,14.6111,0.292
+Sin volatilidad alta el día anterior + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),70,0.8857,0.931,0.8537,1.9367,11495.0,244.0172,107.7683,0.1471
+Sin volatilidad alta el día anterior + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),167,0.8443,0.8916,0.7976,1.3004,11980.9,164.7952,-20.2036,0.3508
+Sin volatilidad alta el día anterior + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),142,0.7887,0.7667,0.8269,0.9785,-905.25,-42.4972,56.1442,0.2983
+Sin volatilidad alta el día anterior + Solo compras,Filtros (SL 60 · TP 15/30),161,0.795,0.8152,0.7681,1.0067,337.75,43.4375,-53.0217,0.3382
+Sin volatilidad alta el día anterior + Solo ventas,Filtros (SL 60 · TP 15/30),156,0.8526,0.8434,0.863,1.4174,13090.9,74.2651,94.889,0.3277
+Solo volatilidad baja el día anterior + Solo horario de verano (11:12 NY),Filtros (SL 60 · TP 15/30),114,0.8684,0.9194,0.8077,1.5175,11907.9,204.9113,-15.3192,0.2395
+Solo volatilidad baja el día anterior + Última vela de 3 min a favor,Filtros (SL 60 · TP 15/30),95,0.8526,0.8621,0.8378,1.3052,6553.9,88.8448,37.8622,0.1996
+Solo volatilidad baja el día anterior + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),120,0.8,0.8209,0.7736,0.9799,-721.6,49.2015,-75.8132,0.2521
+Solo volatilidad baja el día anterior + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),141,0.8227,0.8415,0.7966,1.1018,3814.4,70.5671,-33.4254,0.2962
+Solo volatilidad baja el día anterior + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),81,0.8889,0.8909,0.8846,1.9295,12008.0,142.3545,160.7115,0.1702
+Solo volatilidad baja el día anterior + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),70,0.8,0.8529,0.75,0.9693,-658.6,103.8676,-116.3917,0.1471
+Solo volatilidad baja el día anterior + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),83,0.8313,0.8545,0.7857,1.1519,3127.5,80.9909,-47.3929,0.1744
+Solo volatilidad baja el día anterior + Solo compras,Filtros (SL 60 · TP 15/30),82,0.8415,0.8776,0.7879,1.4149,8274.5,168.8061,0.0909,0.1723
+Solo volatilidad baja el día anterior + Solo ventas,Filtros (SL 60 · TP 15/30),77,0.8052,0.8333,0.7714,0.8131,-4134.6,0.5119,-118.7457,0.1618
+Solo horario de verano (11:12 NY) + Última vela de 3 min a favor,Filtros (SL 60 · TP 15/30),214,0.8131,0.8283,0.8,1.0862,5083.55,61.0702,-8.3687,0.4496
+Solo horario de verano (11:12 NY) + Las 3 últimas velas de 3 min a favor,Filtros (SL 60 · TP 15/30),62,0.8387,0.8,0.8889,1.5044,6963.6,47.4343,196.4222,0.1303
+Solo horario de verano (11:12 NY) + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),236,0.8136,0.8174,0.8099,1.0427,2884.15,19.7978,5.0198,0.4958
+Solo horario de verano (11:12 NY) + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),293,0.8157,0.8224,0.8085,1.0554,4460.05,31.6214,-2.4567,0.6155
+Solo horario de verano (11:12 NY) + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),141,0.844,0.8933,0.7879,1.3119,9781.65,163.9927,-38.1485,0.2962
+Solo horario de verano (11:12 NY) + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),93,0.828,0.8333,0.8235,1.1844,4525.5,41.8929,54.2353,0.1954
+Solo horario de verano (11:12 NY) + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),196,0.8112,0.8172,0.8058,1.0087,494.9,22.4516,-15.467,0.4118
+Solo horario de verano (11:12 NY) + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),126,0.8254,0.8451,0.8,1.2265,7104.15,82.7176,22.3855,0.2647
+Solo horario de verano (11:12 NY) + Solo compras,Filtros (SL 60 · TP 15/30),178,0.7865,0.7957,0.7765,0.9251,-4365.25,4.2984,-56.0588,0.3739
+Solo horario de verano (11:12 NY) + Solo ventas,Filtros (SL 60 · TP 15/30),159,0.8553,0.8816,0.8313,1.3995,13141.8,124.3908,44.4349,0.334
+Última vela de 3 min a favor + Las 3 últimas velas de 3 min a favor,Filtros (SL 60 · TP 15/30),87,0.7816,0.75,0.8286,0.9498,-1386.4,-76.5442,74.1114,0.1828
+Última vela de 3 min a favor + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),216,0.8148,0.8257,0.8037,1.052,3189.15,26.1995,3.1159,0.4538
+Última vela de 3 min a favor + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),261,0.8084,0.8235,0.792,1.0242,1798.05,35.2055,-23.9192,0.5483
+Última vela de 3 min a favor + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),102,0.8235,0.8793,0.75,1.2396,6045.15,170.3009,-87.0977,0.2143
+Última vela de 3 min a favor + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),104,0.8269,0.8864,0.7833,1.0892,2464.0,115.1477,-43.375,0.2185
+Última vela de 3 min a favor + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),167,0.8024,0.8395,0.7674,0.9441,-2831.6,49.3333,-79.3907,0.3508
+Última vela de 3 min a favor + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),119,0.8235,0.8235,0.8235,1.221,6592.15,49.264,63.5725,0.25
+Última vela de 3 min a favor + Solo compras,Filtros (SL 60 · TP 15/30),151,0.7815,0.7792,0.7838,0.9023,-4947.25,-16.9643,-49.2027,0.3172
+Última vela de 3 min a favor + Solo ventas,Filtros (SL 60 · TP 15/30),145,0.8414,0.8947,0.7826,1.2544,8367.8,136.7263,-29.3246,0.3046
+Las 3 últimas velas de 3 min a favor + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),63,0.8095,0.7436,0.9167,1.0892,1641.9,-115.7308,256.475,0.1324
+Las 3 últimas velas de 3 min a favor + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),74,0.7838,0.7234,0.8889,0.959,-944.4,-124.9532,182.5333,0.1555
+Las 3 últimas velas de 3 min a favor + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),40,0.875,0.9,0.85,1.6294,4827.5,134.75,106.625,0.084
+Las 3 últimas velas de 3 min a favor + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),49,0.8367,0.8148,0.8636,1.2643,3242.9,21.5556,120.95,0.1029
+Las 3 últimas velas de 3 min a favor + Solo compras,Filtros (SL 60 · TP 15/30),46,0.7391,0.7241,0.7647,0.7317,-4939.0,-118.0517,-89.1471,0.0966
+Las 3 últimas velas de 3 min a favor + Solo ventas,Filtros (SL 60 · TP 15/30),41,0.8293,0.7826,0.8889,1.386,3552.6,-24.2087,228.3,0.0861
+Las 4 tendencias de acuerdo + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),344,0.8052,0.8045,0.8061,0.9991,-88.35,-4.9567,4.8418,0.7227
+Las 4 tendencias de acuerdo + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),106,0.8208,0.8276,0.8125,1.0763,2157.25,42.7026,-6.6562,0.2227
+Las 4 tendencias de acuerdo + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),129,0.8217,0.85,0.7971,1.1308,4614.0,62.875,12.1957,0.271
+Las 4 tendencias de acuerdo + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),247,0.8178,0.8347,0.8016,1.0554,3823.4,41.9298,-9.9214,0.5189
+Las 4 tendencias de acuerdo + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),95,0.7684,0.7414,0.8108,0.8488,-4968.75,-102.7716,26.8108,0.1996
+Las 4 tendencias de acuerdo + Solo compras,Filtros (SL 60 · TP 15/30),188,0.7713,0.76,0.7841,0.8747,-8267.75,-58.3825,-27.608,0.395
+Las 4 tendencias de acuerdo + Solo ventas,Filtros (SL 60 · TP 15/30),156,0.8462,0.8608,0.8312,1.2277,8179.4,62.6709,41.9273,0.3277
+Al menos 3 tendencias de acuerdo + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),148,0.8108,0.8182,0.8,1.1013,3866.95,53.1903,-13.5633,0.3109
+Al menos 3 tendencias de acuerdo + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),142,0.8099,0.8438,0.7821,1.0238,984.5,48.0312,-26.7885,0.2983
+Al menos 3 tendencias de acuerdo + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),277,0.8087,0.8214,0.7956,0.993,-571.6,23.5893,-28.2781,0.5819
+Al menos 3 tendencias de acuerdo + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),139,0.777,0.764,0.8,0.9135,-3702.05,-44.6994,5.524,0.292
+Al menos 3 tendencias de acuerdo + Solo compras,Filtros (SL 60 · TP 15/30),223,0.7848,0.7724,0.8,0.9276,-5332.75,-37.0549,-7.75,0.4685
+Al menos 3 tendencias de acuerdo + Solo ventas,Filtros (SL 60 · TP 15/30),198,0.8182,0.8333,0.8,1.0659,3326.6,42.2593,-13.7489,0.416
+Cerca de la EMA 20 (< 20 ticks) + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),51,0.8431,0.9565,0.75,1.149,1828.5,275.7826,-161.2321,0.1071
+Cerca de la EMA 20 (< 20 ticks) + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),121,0.7851,0.7922,0.7727,0.9707,-1027.55,-0.1006,-23.1773,0.2542
+Cerca de la EMA 20 (< 20 ticks) + Solo compras,Filtros (SL 60 · TP 15/30),84,0.7976,0.8125,0.7778,1.0199,518.25,28.4844,-23.5833,0.1765
+Cerca de la EMA 20 (< 20 ticks) + Solo ventas,Filtros (SL 60 · TP 15/30),102,0.8235,0.8621,0.7727,1.1639,3744.2,127.3966,-82.8364,0.2143
+Lejos de la EMA 20 (> 40 ticks) + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),134,0.806,0.8361,0.7808,0.9986,-56.0,30.5492,-26.2945,0.2815
+Lejos de la EMA 20 (> 40 ticks) + Solo compras,Filtros (SL 60 · TP 15/30),76,0.8158,0.8529,0.7857,1.0718,1541.0,81.8088,-29.5357,0.1597
+Lejos de la EMA 20 (> 40 ticks) + Solo ventas,Filtros (SL 60 · TP 15/30),68,0.8088,0.8438,0.7778,1.0063,125.5,30.4531,-23.5833,0.1429
+Mañana a favor (> 10 pts desde 9:30) + Solo compras,Filtros (SL 60 · TP 15/30),148,0.7703,0.7763,0.7639,0.846,-8032.0,-31.5329,-78.2708,0.3109
+Mañana a favor (> 10 pts desde 9:30) + Solo ventas,Filtros (SL 60 · TP 15/30),132,0.8485,0.8769,0.8209,1.2276,6983.4,95.8077,11.2821,0.2773
+Mañana lateral (±10 pts) + Solo compras,Filtros (SL 60 · TP 15/30),93,0.7957,0.7857,0.8108,1.0137,399.75,-17.2723,36.9459,0.1954
+Mañana lateral (±10 pts) + Solo ventas,Filtros (SL 60 · TP 15/30),85,0.7882,0.8113,0.75,0.984,-365.3,32.9528,-65.9937,0.1786
+Sin viernes + Sin días de noticia + Sin volatilidad alta el día anterior,Filtros (SL 60 · TP 15/30),228,0.8158,0.8145,0.8173,1.0651,4041.95,18.5004,16.8067,0.479
+Sin viernes + Sin días de noticia + Solo volatilidad baja el día anterior,Filtros (SL 60 · TP 15/30),116,0.8017,0.8281,0.7692,0.9121,-3023.1,17.9453,-80.2231,0.2437
+Sin viernes + Sin días de noticia + Solo horario de verano (11:12 NY),Filtros (SL 60 · TP 15/30),244,0.8115,0.8197,0.8033,0.9892,-762.85,7.4898,-13.7426,0.5126
+Sin viernes + Sin días de noticia + Última vela de 3 min a favor,Filtros (SL 60 · TP 15/30),212,0.816,0.8182,0.8137,1.0148,887.65,-5.0295,14.1265,0.4454
+Sin viernes + Sin días de noticia + Las 3 últimas velas de 3 min a favor,Filtros (SL 60 · TP 15/30),61,0.7869,0.7105,0.913,0.8883,-2227.6,-206.6974,244.6478,0.1282
+Sin viernes + Sin días de noticia + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),253,0.8103,0.7907,0.8306,1.0104,755.65,-34.3973,41.8782,0.5315
+Sin viernes + Sin días de noticia + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),308,0.8084,0.7904,0.8298,1.0001,9.45,-29.8231,35.3894,0.6471
+Sin viernes + Sin días de noticia + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),132,0.8409,0.8553,0.8214,1.3192,9522.05,105.9349,26.2679,0.2773
+Sin viernes + Sin días de noticia + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),99,0.8182,0.8182,0.8182,1.0479,1321.5,-16.9545,37.5909,0.208
+Sin viernes + Sin días de noticia + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),202,0.802,0.7959,0.8077,0.91,-5521.6,-41.6531,-13.8423,0.4244
+Sin viernes + Sin días de noticia + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),130,0.8077,0.8025,0.8163,1.0894,3215.05,13.9636,42.5306,0.2731
+Sin viernes + Sin días de noticia + Solo compras,Filtros (SL 60 · TP 15/30),183,0.7978,0.7812,0.8161,0.9862,-785.25,-34.0078,28.5,0.3845
+Sin viernes + Sin días de noticia + Solo ventas,Filtros (SL 60 · TP 15/30),161,0.8199,0.8315,0.8056,1.0299,1258.2,30.7281,-20.5083,0.3382
+Sin viernes + Sin volatilidad alta el día anterior + Solo volatilidad baja el día anterior,Filtros (SL 60 · TP 15/30),131,0.8015,0.8243,0.7719,0.9094,-3533.1,10.9257,-76.1684,0.2752
+Sin viernes + Sin volatilidad alta el día anterior + Solo horario de verano (11:12 NY),Filtros (SL 60 · TP 15/30),192,0.849,0.875,0.8229,1.2966,13192.65,108.5703,28.8531,0.4034
+Sin viernes + Sin volatilidad alta el día anterior + Última vela de 3 min a favor,Filtros (SL 60 · TP 15/30),160,0.8375,0.8214,0.8553,1.1935,7718.15,10.6339,89.8013,0.3361
+Sin viernes + Sin volatilidad alta el día anterior + Las 3 últimas velas de 3 min a favor,Filtros (SL 60 · TP 15/30),47,0.8085,0.7143,0.9474,1.0361,498.4,-181.3214,293.4421,0.0987
+Sin viernes + Sin volatilidad alta el día anterior + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),185,0.8108,0.8144,0.8068,1.0474,2505.15,29.2603,-3.7852,0.3887
+Sin viernes + Sin volatilidad alta el día anterior + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),228,0.8202,0.811,0.8317,1.1071,6479.45,17.2602,42.4495,0.479
+Sin viernes + Sin volatilidad alta el día anterior + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),113,0.8407,0.831,0.8571,1.299,7543.05,52.4092,91.0,0.2374
+Sin viernes + Sin volatilidad alta el día anterior + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),52,0.8846,0.8947,0.8788,1.9487,8732.0,173.2368,164.8636,0.1092
+Sin viernes + Sin volatilidad alta el día anterior + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),133,0.8346,0.875,0.7971,1.2004,6761.9,130.0625,-22.6391,0.2794
+Sin viernes + Sin volatilidad alta el día anterior + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),118,0.8051,0.7703,0.8636,1.0303,998.05,-57.5128,119.4091,0.2479
+Sin viernes + Sin volatilidad alta el día anterior + Solo compras,Filtros (SL 60 · TP 15/30),132,0.8106,0.8243,0.7931,1.0981,3761.25,57.2061,-8.1379,0.2773
+Sin viernes + Sin volatilidad alta el día anterior + Solo ventas,Filtros (SL 60 · TP 15/30),125,0.84,0.8182,0.8644,1.2004,5669.7,2.1485,93.6932,0.2626
+Sin viernes + Solo volatilidad baja el día anterior + Solo horario de verano (11:12 NY),Filtros (SL 60 · TP 15/30),97,0.8454,0.9038,0.7778,1.2085,4798.4,149.8942,-66.58,0.2038
+Sin viernes + Solo volatilidad baja el día anterior + Última vela de 3 min a favor,Filtros (SL 60 · TP 15/30),79,0.8228,0.8261,0.8182,1.0162,347.9,-1.3913,12.4818,0.166
+Sin viernes + Solo volatilidad baja el día anterior + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),99,0.7778,0.7778,0.7778,0.8229,-5820.1,-45.3519,-74.9133,0.208
+Sin viernes + Solo volatilidad baja el día anterior + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),117,0.8034,0.806,0.8,0.9275,-2494.6,-15.1642,-29.572,0.2458
+Sin viernes + Solo volatilidad baja el día anterior + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),68,0.8676,0.875,0.85,1.5138,6637.5,101.6667,87.875,0.1429
+Sin viernes + Solo volatilidad baja el día anterior + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),57,0.7719,0.8077,0.7419,0.8011,-3966.6,2.0577,-129.6806,0.1197
+Sin viernes + Solo volatilidad baja el día anterior + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),70,0.8143,0.8261,0.7917,0.9708,-555.5,9.7391,-41.8125,0.1471
+Sin viernes + Solo volatilidad baja el día anterior + Solo compras,Filtros (SL 60 · TP 15/30),69,0.8261,0.8537,0.7857,1.2291,4216.5,107.7683,-7.2143,0.145
+Sin viernes + Solo volatilidad baja el día anterior + Solo ventas,Filtros (SL 60 · TP 15/30),62,0.7742,0.7879,0.7586,0.6236,-7749.6,-109.3939,-142.7448,0.1303
+Sin viernes + Solo horario de verano (11:12 NY) + Última vela de 3 min a favor,Filtros (SL 60 · TP 15/30),171,0.8246,0.8205,0.828,1.0985,4531.65,2.0481,47.0097,0.3592
+Sin viernes + Solo horario de verano (11:12 NY) + Las 3 últimas velas de 3 min a favor,Filtros (SL 60 · TP 15/30),46,0.8261,0.76,0.9048,1.1656,2032.4,-116.5,235.4714,0.0966
+Sin viernes + Solo horario de verano (11:12 NY) + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),193,0.8187,0.8172,0.82,1.067,3596.15,16.3952,20.714,0.4055
+Sin viernes + Solo horario de verano (11:12 NY) + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),237,0.827,0.8279,0.8261,1.0871,5475.15,21.3217,24.9904,0.4979
+Sin viernes + Solo horario de verano (11:12 NY) + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),111,0.8919,0.9194,0.8571,1.8339,15350.25,183.7298,80.7959,0.2332
+Sin viernes + Solo horario de verano (11:12 NY) + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),71,0.8169,0.8333,0.8049,1.0858,1711.0,22.25,25.4512,0.1492
+Sin viernes + Solo horario de verano (11:12 NY) + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),156,0.8013,0.8056,0.7976,0.9365,-3020.1,-7.9583,-29.1321,0.3277
+Sin viernes + Solo horario de verano (11:12 NY) + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),105,0.8571,0.8644,0.8478,1.3908,8991.75,80.3941,92.3587,0.2206
+Sin viernes + Solo horario de verano (11:12 NY) + Solo compras,Filtros (SL 60 · TP 15/30),146,0.7877,0.8,0.7746,0.9271,-3464.75,8.49,-57.7676,0.3067
+Sin viernes + Solo horario de verano (11:12 NY) + Solo ventas,Filtros (SL 60 · TP 15/30),125,0.872,0.8852,0.8594,1.4546,11158.9,88.9508,89.5766,0.2626
+Sin viernes + Última vela de 3 min a favor + Las 3 últimas velas de 3 min a favor,Filtros (SL 60 · TP 15/30),68,0.7794,0.7143,0.8846,0.8358,-3778.1,-203.6429,183.65,0.1429
+Sin viernes + Última vela de 3 min a favor + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),178,0.8202,0.8022,0.8391,1.0607,2981.15,-34.0082,69.8379,0.3739
+Sin viernes + Última vela de 3 min a favor + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),209,0.823,0.8073,0.84,1.0538,3052.15,-28.8463,61.964,0.4391
+Sin viernes + Última vela de 3 min a favor + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),80,0.8625,0.875,0.8438,1.461,7779.25,110.5156,77.3281,0.1681
+Sin viernes + Última vela de 3 min a favor + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),79,0.8481,0.8788,0.8261,1.231,4251.5,73.9545,39.3696,0.166
+Sin viernes + Última vela de 3 min a favor + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),131,0.8168,0.8254,0.8088,1.0022,79.9,-4.2381,5.1015,0.2752
+Sin viernes + Última vela de 3 min a favor + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),100,0.83,0.807,0.8605,1.1428,3724.25,-17.5658,109.8953,0.2101
+Sin viernes + Última vela de 3 min a favor + Solo compras,Filtros (SL 60 · TP 15/30),120,0.7917,0.7541,0.8305,0.9425,-2205.75,-80.1189,45.4492,0.2521
+Sin viernes + Última vela de 3 min a favor + Solo ventas,Filtros (SL 60 · TP 15/30),117,0.8547,0.8871,0.8182,1.2442,6368.4,77.8952,27.98,0.2458
+Sin viernes + Las 3 últimas velas de 3 min a favor + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),50,0.8,0.697,1.0,0.9525,-728.6,-232.8636,409.1706,0.105
+Sin viernes + Las 3 últimas velas de 3 min a favor + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),55,0.7818,0.6757,1.0,0.8188,-3336.1,-282.3108,394.9667,0.1155
+Sin viernes + Las 4 tendencias de acuerdo + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),278,0.8201,0.7986,0.8433,1.0903,6843.15,-17.4288,69.7978,0.584
+Sin viernes + Las 4 tendencias de acuerdo + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),84,0.8571,0.8298,0.8919,1.4119,7217.75,48.6862,133.2297,0.1765
+Sin viernes + Las 4 tendencias de acuerdo + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),100,0.84,0.8222,0.8545,1.2587,6350.0,-4.8333,119.4091,0.2101
+Sin viernes + Las 4 tendencias de acuerdo + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),198,0.8283,0.8229,0.8333,1.1268,6614.4,18.7344,47.2147,0.416
+Sin viernes + Las 4 tendencias de acuerdo + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),78,0.7949,0.75,0.8667,0.965,-828.25,-89.7552,116.0,0.1639
+Sin viernes + Las 4 tendencias de acuerdo + Solo compras,Filtros (SL 60 · TP 15/30),152,0.7961,0.7595,0.8356,1.0096,456.25,-55.3703,66.1712,0.3193
+Sin viernes + Las 4 tendencias de acuerdo + Solo ventas,Filtros (SL 60 · TP 15/30),126,0.8492,0.8462,0.8525,1.226,6386.9,28.6846,74.1377,0.2647
+Sin viernes + Al menos 3 tendencias de acuerdo + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),119,0.8571,0.8356,0.8913,1.476,11276.55,65.4527,141.2717,0.25
+Sin viernes + Al menos 3 tendencias de acuerdo + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),108,0.8333,0.8298,0.8361,1.193,5328.0,9.883,79.7295,0.2269
+Sin viernes + Al menos 3 tendencias de acuerdo + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),218,0.8211,0.8148,0.8273,1.0647,3871.9,4.1944,31.0809,0.458
+Sin viernes + Al menos 3 tendencias de acuerdo + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),115,0.8087,0.7733,0.875,1.0351,1100.05,-49.6993,120.6875,0.2416
+Sin viernes + Al menos 3 tendencias de acuerdo + Solo compras,Filtros (SL 60 · TP 15/30),179,0.8156,0.7812,0.8554,1.1131,5725.75,-22.2891,94.7651,0.3761
+Sin viernes + Al menos 3 tendencias de acuerdo + Solo ventas,Filtros (SL 60 · TP 15/30),159,0.8239,0.8202,0.8286,1.0373,1513.7,-5.0865,28.0914,0.334
+Sin viernes + Cerca de la EMA 20 (< 20 ticks) + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),103,0.8155,0.803,0.8378,1.0774,2070.55,-9.2265,72.4189,0.2164
+Sin viernes + Cerca de la EMA 20 (< 20 ticks) + Solo compras,Filtros (SL 60 · TP 15/30),67,0.8358,0.8421,0.8276,1.2983,5033.75,79.4671,69.4483,0.1408
+Sin viernes + Cerca de la EMA 20 (< 20 ticks) + Solo ventas,Filtros (SL 60 · TP 15/30),82,0.8537,0.86,0.8438,1.3494,5597.8,92.466,30.4531,0.1723
+Sin viernes + Lejos de la EMA 20 (> 40 ticks) + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),105,0.8286,0.8261,0.8305,1.1491,4117.5,-1.3913,70.8729,0.2206
+Sin viernes + Lejos de la EMA 20 (> 40 ticks) + Solo compras,Filtros (SL 60 · TP 15/30),56,0.8571,0.84,0.871,1.4866,5971.0,63.5,141.4032,0.1176
+Sin viernes + Lejos de la EMA 20 (> 40 ticks) + Solo ventas,Filtros (SL 60 · TP 15/30),54,0.8148,0.8333,0.8,1.0025,39.0,-18.375,16.0,0.1134
+Sin viernes + Mañana a favor (> 10 pts desde 9:30) + Solo compras,Filtros (SL 60 · TP 15/30),113,0.7965,0.7679,0.8246,0.9761,-842.0,-50.7411,35.0789,0.2374
+Sin viernes + Mañana a favor (> 10 pts desde 9:30) + Solo ventas,Filtros (SL 60 · TP 15/30),107,0.8411,0.8654,0.8182,1.1422,3708.4,63.3558,7.5255,0.2248
+Sin viernes + Mañana lateral (±10 pts) + Solo compras,Filtros (SL 60 · TP 15/30),82,0.8171,0.8125,0.8235,1.1396,3211.25,28.4844,54.2353,0.1723
+Sin viernes + Mañana lateral (±10 pts) + Solo ventas,Filtros (SL 60 · TP 15/30),67,0.806,0.7955,0.8261,0.9634,-642.2,-35.175,39.3696,0.1408
+Sin días de noticia + Sin volatilidad alta el día anterior + Solo volatilidad baja el día anterior,Filtros (SL 60 · TP 15/30),139,0.8273,0.8608,0.7833,1.1342,4819.9,95.8987,-45.935,0.292
+Sin días de noticia + Sin volatilidad alta el día anterior + Solo horario de verano (11:12 NY),Filtros (SL 60 · TP 15/30),205,0.8293,0.8544,0.8039,1.1661,8663.35,93.7859,-9.7706,0.4307
+Sin días de noticia + Sin volatilidad alta el día anterior + Última vela de 3 min a favor,Filtros (SL 60 · TP 15/30),168,0.8393,0.8427,0.8354,1.2817,11233.85,82.286,49.4987,0.3529
+Sin días de noticia + Sin volatilidad alta el día anterior + Las 3 últimas velas de 3 min a favor,Filtros (SL 60 · TP 15/30),51,0.8431,0.7419,1.0,1.5611,6025.1,-56.9774,389.57,0.1071
+Sin días de noticia + Sin volatilidad alta el día anterior + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),203,0.798,0.819,0.7755,0.958,-2606.85,33.369,-62.3531,0.4265
+Sin días de noticia + Sin volatilidad alta el día anterior + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),248,0.8065,0.8116,0.8,1.0407,2837.15,35.1866,-18.3509,0.521
+Sin días de noticia + Sin volatilidad alta el día anterior + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),123,0.813,0.8267,0.7917,1.1472,4615.75,73.3033,-18.375,0.2584
+Sin días de noticia + Sin volatilidad alta el día anterior + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),58,0.8793,0.913,0.8571,1.7767,8340.5,202.413,105.2857,0.1218
+Sin días de noticia + Sin volatilidad alta el día anterior + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),147,0.8299,0.8857,0.7792,1.1199,4598.4,142.7857,-70.0857,0.3088
+Sin días de noticia + Sin volatilidad alta el día anterior + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),123,0.7886,0.7654,0.8333,1.0293,1053.25,-31.8673,86.5357,0.2584
+Sin días de noticia + Sin volatilidad alta el día anterior + Solo compras,Filtros (SL 60 · TP 15/30),144,0.7917,0.8101,0.7692,0.9792,-959.25,30.0728,-51.3077,0.3025
+Sin días de noticia + Sin volatilidad alta el día anterior + Solo ventas,Filtros (SL 60 · TP 15/30),133,0.8421,0.8378,0.8475,1.3114,8810.4,72.2297,58.7356,0.2794
+Sin días de noticia + Solo volatilidad baja el día anterior + Solo horario de verano (11:12 NY),Filtros (SL 60 · TP 15/30),99,0.8586,0.9057,0.8043,1.4036,8667.9,178.2642,-16.9587,0.208
+Sin días de noticia + Solo volatilidad baja el día anterior + Última vela de 3 min a favor,Filtros (SL 60 · TP 15/30),82,0.8659,0.8776,0.8485,1.459,7745.9,115.2347,63.6182,0.1723
+Sin días de noticia + Solo volatilidad baja el día anterior + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),106,0.8019,0.8246,0.7755,0.9862,-433.1,50.6404,-67.7469,0.2227
+Sin días de noticia + Solo volatilidad baja el día anterior + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),124,0.8226,0.8429,0.7963,1.1108,3642.4,72.4214,-26.4278,0.2605
+Sin días de noticia + Solo volatilidad baja el día anterior + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),70,0.9,0.9149,0.8696,2.276,12569.5,196.3085,145.3478,0.1471
+Sin días de noticia + Solo volatilidad baja el día anterior + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),64,0.7812,0.8276,0.7429,0.8217,-3829.6,30.6552,-134.8171,0.1345
+Sin días de noticia + Solo volatilidad baja el día anterior + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),70,0.8571,0.875,0.8182,1.4935,7132.0,132.9167,34.1818,0.1471
+Sin días de noticia + Solo volatilidad baja el día anterior + Solo compras,Filtros (SL 60 · TP 15/30),75,0.8533,0.8864,0.8065,1.5156,8700.0,174.8068,32.5323,0.1576
+Sin días de noticia + Solo volatilidad baja el día anterior + Solo ventas,Filtros (SL 60 · TP 15/30),64,0.7969,0.8286,0.7586,0.7964,-3880.1,-3.3,-129.8138,0.1345
+Sin días de noticia + Solo horario de verano (11:12 NY) + Última vela de 3 min a favor,Filtros (SL 60 · TP 15/30),190,0.8105,0.8182,0.8039,1.0691,3649.55,38.8631,2.251,0.3992
+Sin días de noticia + Solo horario de verano (11:12 NY) + Las 3 últimas velas de 3 min a favor,Filtros (SL 60 · TP 15/30),55,0.8364,0.7667,0.92,1.4646,5701.6,-20.2433,252.356,0.1155
+Sin días de noticia + Solo horario de verano (11:12 NY) + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),209,0.799,0.8061,0.7928,0.9281,-4635.35,-11.0485,-32.0054,0.4391
+Sin días de noticia + Solo horario de verano (11:12 NY) + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),259,0.8031,0.8106,0.7953,0.9628,-2821.45,7.4731,-29.9835,0.5441
+Sin días de noticia + Solo horario de verano (11:12 NY) + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),126,0.8413,0.8824,0.7931,1.3306,9354.15,154.0434,-19.3241,0.2647
+Sin días de noticia + Solo horario de verano (11:12 NY) + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),81,0.8148,0.8286,0.8043,1.0596,1371.0,14.2143,18.9891,0.1702
+Sin días de noticia + Solo horario de verano (11:12 NY) + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),173,0.7977,0.8101,0.7872,0.8876,-6035.6,-5.519,-59.5702,0.3634
+Sin días de noticia + Solo horario de verano (11:12 NY) + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),111,0.8198,0.8308,0.8043,1.236,6676.65,70.4146,45.6457,0.2332
+Sin días de noticia + Solo horario de verano (11:12 NY) + Solo compras,Filtros (SL 60 · TP 15/30),161,0.7764,0.7805,0.7722,0.8601,-7724.75,-31.7226,-64.8544,0.3382
+Sin días de noticia + Solo horario de verano (11:12 NY) + Solo ventas,Filtros (SL 60 · TP 15/30),136,0.8529,0.8806,0.8261,1.3861,10923.8,128.8761,33.1754,0.2857
+Sin días de noticia + Última vela de 3 min a favor + Las 3 últimas velas de 3 min a favor,Filtros (SL 60 · TP 15/30),77,0.7792,0.7333,0.8438,0.9421,-1421.4,-108.1622,107.6844,0.1618
+Sin días de noticia + Última vela de 3 min a favor + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),190,0.8105,0.8298,0.7917,1.0059,323.15,27.8271,-23.8813,0.3992
+Sin días de noticia + Última vela de 3 min a favor + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),231,0.8052,0.825,0.7838,1.0001,5.55,36.6204,-39.5396,0.4853
+Sin días de noticia + Última vela de 3 min a favor + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),89,0.8427,0.898,0.775,1.5264,10049.65,226.9582,-26.7825,0.187
+Sin días de noticia + Última vela de 3 min a favor + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),89,0.809,0.8684,0.7647,0.9127,-2276.0,59.75,-89.1471,0.187
+Sin días de noticia + Última vela de 3 min a favor + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),148,0.7905,0.8333,0.75,0.8397,-7623.1,23.2917,-122.3697,0.3109
+Sin días de noticia + Última vela de 3 min a favor + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),103,0.835,0.8305,0.8409,1.412,9761.15,77.8551,117.4477,0.2164
+Sin días de noticia + Última vela de 3 min a favor + Solo compras,Filtros (SL 60 · TP 15/30),138,0.7899,0.7857,0.7941,0.9451,-2442.75,-7.225,-28.4853,0.2899
+Sin días de noticia + Última vela de 3 min a favor + Solo ventas,Filtros (SL 60 · TP 15/30),122,0.8361,0.8923,0.7719,1.2041,5774.8,131.0031,-48.0772,0.2563
+Sin días de noticia + Las 3 últimas velas de 3 min a favor + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),57,0.807,0.7353,0.913,1.0538,908.4,-149.8088,260.9522,0.1197
+Sin días de noticia + Las 3 últimas velas de 3 min a favor + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),67,0.7761,0.7073,0.8846,0.9147,-1831.4,-161.1293,183.65,0.1408
+Sin días de noticia + Las 3 últimas velas de 3 min a favor + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),46,0.8261,0.7917,0.8636,1.1351,1657.4,-41.8125,120.95,0.0966
+Sin días de noticia + Las 3 últimas velas de 3 min a favor + Solo compras,Filtros (SL 60 · TP 15/30),42,0.7619,0.7308,0.8125,0.8091,-2928.0,-113.3269,1.1562,0.0882
+Sin días de noticia + Las 4 tendencias de acuerdo + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),304,0.8026,0.8013,0.8041,0.9708,-2665.85,-13.8958,-3.3655,0.6387
+Sin días de noticia + Las 4 tendencias de acuerdo + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),96,0.8333,0.84,0.8261,1.2086,4934.75,77.475,23.0652,0.2017
+Sin días de noticia + Las 4 tendencias de acuerdo + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),110,0.8182,0.84,0.8,1.0737,2260.0,33.5,9.75,0.2311
+Sin días de noticia + Las 4 tendencias de acuerdo + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),217,0.8111,0.8269,0.7965,0.9756,-1531.6,16.4808,-28.7221,0.4559
+Sin días de noticia + Las 4 tendencias de acuerdo + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),85,0.7765,0.75,0.8182,0.9225,-2191.25,-74.649,51.2273,0.1786
+Sin días de noticia + Las 4 tendencias de acuerdo + Solo compras,Filtros (SL 60 · TP 15/30),171,0.7661,0.75,0.7831,0.838,-9939.75,-83.0142,-31.741,0.3592
+Sin días de noticia + Las 4 tendencias de acuerdo + Solo ventas,Filtros (SL 60 · TP 15/30),133,0.8496,0.8676,0.8308,1.2441,7273.9,75.5515,32.8677,0.2794
+Sin días de noticia + Al menos 3 tendencias de acuerdo + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),132,0.8258,0.8312,0.8182,1.2859,8723.45,94.8669,25.7945,0.2773
+Sin días de noticia + Al menos 3 tendencias de acuerdo + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),122,0.8033,0.8333,0.7794,0.9586,-1523.0,18.0833,-36.7574,0.2563
+Sin días de noticia + Al menos 3 tendencias de acuerdo + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),245,0.8041,0.8197,0.7886,0.9332,-4921.1,12.1066,-52.0171,0.5147
+Sin días de noticia + Al menos 3 tendencias de acuerdo + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),123,0.7805,0.7625,0.814,0.9957,-158.05,-29.4969,51.2023,0.2584
+Sin días de noticia + Al menos 3 tendencias de acuerdo + Solo compras,Filtros (SL 60 · TP 15/30),203,0.7833,0.7706,0.7979,0.9144,-5777.75,-42.6078,-12.0585,0.4265
+Sin días de noticia + Al menos 3 tendencias de acuerdo + Solo ventas,Filtros (SL 60 · TP 15/30),170,0.8176,0.8316,0.8,1.0693,2966.1,46.7737,-19.6987,0.3571
+Sin días de noticia + Cerca de la EMA 20 (< 20 ticks) + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),45,0.8667,1.0,0.7692,1.3431,3157.5,350.8684,-134.9615,0.0945
+Sin días de noticia + Cerca de la EMA 20 (< 20 ticks) + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),106,0.783,0.791,0.7692,1.0322,982.45,21.75,-12.1744,0.2227
+Sin días de noticia + Cerca de la EMA 20 (< 20 ticks) + Solo compras,Filtros (SL 60 · TP 15/30),77,0.8052,0.8372,0.7647,1.0736,1693.75,74.9942,-45.0294,0.1618
+Sin días de noticia + Cerca de la EMA 20 (< 20 ticks) + Solo ventas,Filtros (SL 60 · TP 15/30),86,0.8372,0.8571,0.8108,1.4363,7288.2,149.3878,-0.8595,0.1807
+Sin días de noticia + Lejos de la EMA 20 (> 40 ticks) + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),117,0.7949,0.8269,0.7692,0.9072,-3415.5,5.6635,-57.0769,0.2458
+Sin días de noticia + Lejos de la EMA 20 (> 40 ticks) + Solo compras,Filtros (SL 60 · TP 15/30),69,0.8116,0.8387,0.7895,1.0328,654.0,50.6774,-24.1316,0.145
+Sin días de noticia + Lejos de la EMA 20 (> 40 ticks) + Solo ventas,Filtros (SL 60 · TP 15/30),55,0.8,0.84,0.7667,0.9114,-1495.0,3.5,-52.75,0.1155
+Sin días de noticia + Mañana a favor (> 10 pts desde 9:30) + Solo compras,Filtros (SL 60 · TP 15/30),131,0.7634,0.7656,0.7612,0.7959,-9704.0,-60.3672,-87.1716,0.2752
+Sin días de noticia + Mañana a favor (> 10 pts desde 9:30) + Solo ventas,Filtros (SL 60 · TP 15/30),117,0.8462,0.8814,0.8103,1.1559,4305.9,99.4746,-26.95,0.2458
+Sin días de noticia + Mañana lateral (±10 pts) + Solo compras,Filtros (SL 60 · TP 15/30),88,0.8068,0.7963,0.8235,1.1009,2632.25,7.6528,65.2647,0.1849
+Sin días de noticia + Mañana lateral (±10 pts) + Solo ventas,Filtros (SL 60 · TP 15/30),67,0.7761,0.7907,0.75,1.0238,434.2,26.7209,-29.7833,0.1408
+Sin volatilidad alta el día anterior + Solo volatilidad baja el día anterior + Solo horario de verano (11:12 NY),Filtros (SL 60 · TP 15/30),114,0.8684,0.9194,0.8077,1.5175,11907.9,204.9113,-15.3192,0.2395
+Sin volatilidad alta el día anterior + Solo volatilidad baja el día anterior + Última vela de 3 min a favor,Filtros (SL 60 · TP 15/30),95,0.8526,0.8621,0.8378,1.3052,6553.9,88.8448,37.8622,0.1996
+Sin volatilidad alta el día anterior + Solo volatilidad baja el día anterior + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),120,0.8,0.8209,0.7736,0.9799,-721.6,49.2015,-75.8132,0.2521
+Sin volatilidad alta el día anterior + Solo volatilidad baja el día anterior + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),141,0.8227,0.8415,0.7966,1.1018,3814.4,70.5671,-33.4254,0.2962
+Sin volatilidad alta el día anterior + Solo volatilidad baja el día anterior + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),81,0.8889,0.8909,0.8846,1.9295,12008.0,142.3545,160.7115,0.1702
+Sin volatilidad alta el día anterior + Solo volatilidad baja el día anterior + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),70,0.8,0.8529,0.75,0.9693,-658.6,103.8676,-116.3917,0.1471
+Sin volatilidad alta el día anterior + Solo volatilidad baja el día anterior + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),83,0.8313,0.8545,0.7857,1.1519,3127.5,80.9909,-47.3929,0.1744
+Sin volatilidad alta el día anterior + Solo volatilidad baja el día anterior + Solo compras,Filtros (SL 60 · TP 15/30),82,0.8415,0.8776,0.7879,1.4149,8274.5,168.8061,0.0909,0.1723
+Sin volatilidad alta el día anterior + Solo volatilidad baja el día anterior + Solo ventas,Filtros (SL 60 · TP 15/30),77,0.8052,0.8333,0.7714,0.8131,-4134.6,0.5119,-118.7457,0.1618
+Sin volatilidad alta el día anterior + Solo horario de verano (11:12 NY) + Última vela de 3 min a favor,Filtros (SL 60 · TP 15/30),144,0.8403,0.8406,0.84,1.3015,10174.85,86.1007,56.452,0.3025
+Sin volatilidad alta el día anterior + Solo horario de verano (11:12 NY) + Las 3 últimas velas de 3 min a favor,Filtros (SL 60 · TP 15/30),45,0.8889,0.84,0.95,2.5958,9791.6,147.508,305.195,0.0945
+Sin volatilidad alta el día anterior + Solo horario de verano (11:12 NY) + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),165,0.8182,0.85,0.7882,1.0866,3985.65,90.2094,-38.0129,0.3466
+Sin volatilidad alta el día anterior + Solo horario de verano (11:12 NY) + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),205,0.839,0.8611,0.8144,1.2529,12413.35,110.4394,5.0093,0.4307
+Sin volatilidad alta el día anterior + Solo horario de verano (11:12 NY) + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),110,0.8545,0.8906,0.8043,1.3769,8671.95,151.1477,-21.7717,0.2311
+Sin volatilidad alta el día anterior + Solo horario de verano (11:12 NY) + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),46,0.913,0.9375,0.9,2.6397,10061.0,258.9688,197.25,0.0966
+Sin volatilidad alta el día anterior + Solo horario de verano (11:12 NY) + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),127,0.8425,0.8947,0.8,1.2882,8840.9,179.8158,-20.1229,0.2668
+Sin volatilidad alta el día anterior + Solo horario de verano (11:12 NY) + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),100,0.83,0.8333,0.825,1.2067,5074.45,54.1158,45.6875,0.2101
+Sin volatilidad alta el día anterior + Solo horario de verano (11:12 NY) + Solo compras,Filtros (SL 60 · TP 15/30),122,0.7869,0.8333,0.7321,0.9571,-1711.25,79.625,-124.4018,0.2563
+Sin volatilidad alta el día anterior + Solo horario de verano (11:12 NY) + Solo ventas,Filtros (SL 60 · TP 15/30),113,0.9027,0.9057,0.9,2.1721,17979.6,161.2868,157.19,0.2374
+Sin volatilidad alta el día anterior + Última vela de 3 min a favor + Las 3 últimas velas de 3 min a favor,Filtros (SL 60 · TP 15/30),59,0.8305,0.75,0.9565,1.3895,5378.1,-43.3694,301.713,0.1239
+Sin volatilidad alta el día anterior + Última vela de 3 min a favor + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),139,0.8201,0.8333,0.806,1.0928,3557.15,51.9271,-2.7104,0.292
+Sin volatilidad alta el día anterior + Última vela de 3 min a favor + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),171,0.8304,0.828,0.8333,1.2024,8694.35,61.1554,38.55,0.3592
+Sin volatilidad alta el día anterior + Última vela de 3 min a favor + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),76,0.8421,0.8511,0.8276,1.4269,7202.95,134.3394,30.6552,0.1597
+Sin volatilidad alta el día anterior + Última vela de 3 min a favor + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),48,0.9167,0.9444,0.9,2.5064,9243.0,226.4167,172.25,0.1008
+Sin volatilidad alta el día anterior + Última vela de 3 min a favor + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),96,0.8438,0.8889,0.8039,1.2508,5769.9,149.3333,-18.6294,0.2017
+Sin volatilidad alta el día anterior + Última vela de 3 min a favor + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),93,0.828,0.7895,0.8889,1.2635,6062.45,2.8325,163.9167,0.1954
+Sin volatilidad alta el día anterior + Última vela de 3 min a favor + Solo compras,Filtros (SL 60 · TP 15/30),91,0.8022,0.8077,0.7949,1.0509,1405.25,48.9183,-29.1923,0.1912
+Sin volatilidad alta el día anterior + Última vela de 3 min a favor + Solo ventas,Filtros (SL 60 · TP 15/30),101,0.8713,0.8627,0.88,1.6118,11262.6,88.0627,135.428,0.2122
+Sin volatilidad alta el día anterior + Las 3 últimas velas de 3 min a favor + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),42,0.8571,0.7778,1.0,1.5615,5168.4,-27.0556,393.26,0.0882
+Sin volatilidad alta el día anterior + Las 3 últimas velas de 3 min a favor + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),50,0.82,0.7273,1.0,1.2798,3434.1,-83.9939,365.0529,0.105
+Sin volatilidad alta el día anterior + Las 4 tendencias de acuerdo + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),231,0.8052,0.8211,0.787,1.0193,1316.15,40.2785,-33.6861,0.4853
+Sin volatilidad alta el día anterior + Las 4 tendencias de acuerdo + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),84,0.7857,0.8039,0.7576,0.8772,-3282.25,5.4363,-107.8636,0.1765
+Sin volatilidad alta el día anterior + Las 4 tendencias de acuerdo + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),62,0.871,0.9231,0.8333,1.7449,9142.0,240.0385,80.5833,0.1303
+Sin volatilidad alta el día anterior + Las 4 tendencias de acuerdo + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),151,0.8477,0.9041,0.7949,1.3391,11962.4,186.8904,-21.5462,0.3172
+Sin volatilidad alta el día anterior + Las 4 tendencias de acuerdo + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),79,0.7215,0.7,0.7586,0.6599,-11174.75,-173.775,-85.7241,0.166
+Sin volatilidad alta el día anterior + Las 4 tendencias de acuerdo + Solo compras,Filtros (SL 60 · TP 15/30),123,0.7724,0.7887,0.75,0.9201,-3432.75,16.1655,-88.0865,0.2584
+Sin volatilidad alta el día anterior + Las 4 tendencias de acuerdo + Solo ventas,Filtros (SL 60 · TP 15/30),108,0.8426,0.8654,0.8214,1.1885,4748.9,73.2019,16.8286,0.2269
+Sin volatilidad alta el día anterior + Al menos 3 tendencias de acuerdo + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),116,0.8103,0.8133,0.8049,1.1124,3353.75,50.8033,-11.1341,0.2437
+Sin volatilidad alta el día anterior + Al menos 3 tendencias de acuerdo + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),69,0.8841,0.9286,0.8537,1.9242,11341.5,247.25,107.7683,0.145
+Sin volatilidad alta el día anterior + Al menos 3 tendencias de acuerdo + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),165,0.8485,0.8902,0.8072,1.3386,12986.4,160.3598,-1.9651,0.3466
+Sin volatilidad alta el día anterior + Al menos 3 tendencias de acuerdo + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),114,0.7632,0.7368,0.8158,0.8362,-6140.75,-86.0033,10.4079,0.2395
+Sin volatilidad alta el día anterior + Al menos 3 tendencias de acuerdo + Solo compras,Filtros (SL 60 · TP 15/30),144,0.7986,0.8072,0.7869,1.0332,1478.25,38.2801,-27.8525,0.3025
+Sin volatilidad alta el día anterior + Al menos 3 tendencias de acuerdo + Solo ventas,Filtros (SL 60 · TP 15/30),138,0.8333,0.8289,0.8387,1.2097,6577.9,47.2303,48.2,0.2899
+Sin volatilidad alta el día anterior + Cerca de la EMA 20 (< 20 ticks) + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),95,0.8,0.7656,0.871,1.0869,2192.75,-34.2305,141.4032,0.1996
+Sin volatilidad alta el día anterior + Cerca de la EMA 20 (< 20 ticks) + Solo compras,Filtros (SL 60 · TP 15/30),69,0.7826,0.814,0.7308,0.9713,-659.25,27.0291,-70.0577,0.145
+Sin volatilidad alta el día anterior + Cerca de la EMA 20 (< 20 ticks) + Solo ventas,Filtros (SL 60 · TP 15/30),70,0.8571,0.8333,0.8929,1.5456,6231.0,86.2024,93.2321,0.1471
+Sin volatilidad alta el día anterior + Lejos de la EMA 20 (> 40 ticks) + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),64,0.8906,0.9231,0.8684,2.072,11511.5,240.0385,138.6974,0.1345
+Sin volatilidad alta el día anterior + Lejos de la EMA 20 (> 40 ticks) + Solo ventas,Filtros (SL 60 · TP 15/30),41,0.8537,0.875,0.84,1.4801,4418.5,130.0625,93.5,0.0861
+Sin volatilidad alta el día anterior + Mañana a favor (> 10 pts desde 9:30) + Solo compras,Filtros (SL 60 · TP 15/30),81,0.8148,0.878,0.75,1.1411,3246.0,176.3659,-99.625,0.1702
+Sin volatilidad alta el día anterior + Mañana a favor (> 10 pts desde 9:30) + Solo ventas,Filtros (SL 60 · TP 15/30),86,0.8721,0.9048,0.8409,1.5177,8734.9,153.5,51.9977,0.1807
+Sin volatilidad alta el día anterior + Mañana lateral (±10 pts) + Solo compras,Filtros (SL 60 · TP 15/30),78,0.7692,0.76,0.7857,0.87,-3590.25,-67.765,-7.2143,0.1639
+Sin volatilidad alta el día anterior + Mañana lateral (±10 pts) + Solo ventas,Filtros (SL 60 · TP 15/30),64,0.8125,0.775,0.875,1.1853,2685.0,-10.9125,130.0625,0.1345
+Solo volatilidad baja el día anterior + Solo horario de verano (11:12 NY) + Última vela de 3 min a favor,Filtros (SL 60 · TP 15/30),69,0.8696,0.8718,0.8667,1.5523,7625.4,119.8462,98.38,0.145
+Solo volatilidad baja el día anterior + Solo horario de verano (11:12 NY) + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),82,0.8537,0.8837,0.8205,1.3902,7183.4,166.5814,0.5231,0.1723
+Solo volatilidad baja el día anterior + Solo horario de verano (11:12 NY) + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),99,0.8788,0.9107,0.8372,1.6746,12417.9,197.0268,32.1953,0.208
+Solo volatilidad baja el día anterior + Solo horario de verano (11:12 NY) + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),60,0.9667,1.0,0.9,6.3243,16335.0,322.25,172.25,0.1261
+Solo volatilidad baja el día anterior + Solo horario de verano (11:12 NY) + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),52,0.8269,0.875,0.7857,1.1732,2390.9,176.9375,-66.2714,0.1092
+Solo volatilidad baja el día anterior + Solo horario de verano (11:12 NY) + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),56,0.8929,0.9444,0.8,1.8525,7846.0,226.4167,-15.25,0.1176
+Solo volatilidad baja el día anterior + Solo horario de verano (11:12 NY) + Solo compras,Filtros (SL 60 · TP 15/30),61,0.8525,0.9143,0.7692,1.556,7676.0,244.5714,-34.0,0.1282
+Solo volatilidad baja el día anterior + Solo horario de verano (11:12 NY) + Solo ventas,Filtros (SL 60 · TP 15/30),53,0.8868,0.9259,0.8462,1.4598,4231.9,153.5,3.3615,0.1113
+Solo volatilidad baja el día anterior + Última vela de 3 min a favor + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),72,0.8333,0.8372,0.8276,1.1642,3023.4,53.2093,25.3586,0.1513
+Solo volatilidad baja el día anterior + Última vela de 3 min a favor + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),87,0.8506,0.8491,0.8529,1.3141,6263.4,75.6698,66.2618,0.1828
+Solo volatilidad baja el día anterior + Última vela de 3 min a favor + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),44,0.9318,0.9091,1.0,3.3232,10691.5,181.9091,426.2273,0.0924
+Solo volatilidad baja el día anterior + Última vela de 3 min a favor + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),53,0.8491,0.8571,0.8333,1.2657,3260.5,73.1429,38.9167,0.1113
+Solo volatilidad baja el día anterior + Última vela de 3 min a favor + Solo compras,Filtros (SL 60 · TP 15/30),45,0.8667,0.8621,0.875,1.7097,6532.5,153.5,130.0625,0.0945
+Solo volatilidad baja el día anterior + Última vela de 3 min a favor + Solo ventas,Filtros (SL 60 · TP 15/30),50,0.84,0.8621,0.8095,1.0017,21.4,24.1897,-32.3857,0.105
+Solo volatilidad baja el día anterior + Las 4 tendencias de acuerdo + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),120,0.8,0.8209,0.7736,0.9799,-721.6,49.2015,-75.8132,0.2521
+Solo volatilidad baja el día anterior + Las 4 tendencias de acuerdo + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),52,0.8846,0.8611,0.9375,2.0213,8494.0,131.2639,235.5312,0.1092
+Solo volatilidad baja el día anterior + Las 4 tendencias de acuerdo + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),66,0.803,0.8387,0.7714,0.9832,-335.1,74.871,-75.8886,0.1387
+Solo volatilidad baja el día anterior + Las 4 tendencias de acuerdo + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),54,0.7963,0.8056,0.7778,0.9758,-386.5,27.0972,-75.6667,0.1134
+Solo volatilidad baja el día anterior + Las 4 tendencias de acuerdo + Solo compras,Filtros (SL 60 · TP 15/30),62,0.8387,0.8421,0.8333,1.4737,7267.0,143.6316,75.375,0.1303
+Solo volatilidad baja el día anterior + Las 4 tendencias de acuerdo + Solo ventas,Filtros (SL 60 · TP 15/30),58,0.7586,0.7931,0.7241,0.612,-7988.6,-74.5345,-200.9345,0.1218
+Solo volatilidad baja el día anterior + Al menos 3 tendencias de acuerdo + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),69,0.8986,0.8776,0.95,2.2223,12041.0,133.3367,275.375,0.145
+Solo volatilidad baja el día anterior + Al menos 3 tendencias de acuerdo + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),69,0.8116,0.8529,0.7714,1.0439,875.4,103.8676,-75.8886,0.145
+Solo volatilidad baja el día anterior + Al menos 3 tendencias de acuerdo + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),70,0.8286,0.8298,0.8261,1.1288,2257.0,44.7128,6.7609,0.1471
+Solo volatilidad baja el día anterior + Al menos 3 tendencias de acuerdo + Solo compras,Filtros (SL 60 · TP 15/30),71,0.8592,0.8636,0.8519,1.6616,10148.5,162.0227,111.8333,0.1492
+Solo volatilidad baja el día anterior + Al menos 3 tendencias de acuerdo + Solo ventas,Filtros (SL 60 · TP 15/30),70,0.7857,0.8158,0.75,0.7137,-6334.1,-35.3289,-155.9875,0.1471
+Solo volatilidad baja el día anterior + Cerca de la EMA 20 (< 20 ticks) + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),57,0.8772,0.8571,0.9333,1.7689,7574.0,76.4048,291.0,0.1197
+Solo volatilidad baja el día anterior + Cerca de la EMA 20 (< 20 ticks) + Solo compras,Filtros (SL 60 · TP 15/30),43,0.907,0.9333,0.8462,2.6868,10350.5,266.0,182.3462,0.0903
+Solo volatilidad baja el día anterior + Mañana lateral (±10 pts) + Solo compras,Filtros (SL 60 · TP 15/30),49,0.8367,0.871,0.7778,1.3073,3771.5,141.4032,-34.0,0.1029
+Solo horario de verano (11:12 NY) + Última vela de 3 min a favor + Las 3 últimas velas de 3 min a favor,Filtros (SL 60 · TP 15/30),62,0.8387,0.8,0.8889,1.5044,6963.6,47.4343,196.4222,0.1303
+Solo horario de verano (11:12 NY) + Última vela de 3 min a favor + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),151,0.8079,0.8088,0.8072,1.0286,1274.15,10.1066,7.0711,0.3172
+Solo horario de verano (11:12 NY) + Última vela de 3 min a favor + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),186,0.8118,0.8182,0.8061,1.0774,3973.05,43.1244,1.8173,0.3908
+Solo horario de verano (11:12 NY) + Última vela de 3 min a favor + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),78,0.8333,0.9231,0.7436,1.3588,6298.65,265.0244,-103.5205,0.1639
+Solo horario de verano (11:12 NY) + Última vela de 3 min a favor + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),74,0.8514,0.871,0.8372,1.3954,6671.5,117.2097,70.6512,0.1555
+Solo horario de verano (11:12 NY) + Última vela de 3 min a favor + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),121,0.7934,0.7963,0.791,0.9278,-2767.6,-9.6944,-33.494,0.2542
+Solo horario de verano (11:12 NY) + Última vela de 3 min a favor + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),84,0.8452,0.8571,0.8333,1.4967,8719.65,127.594,80.0167,0.1765
+Solo horario de verano (11:12 NY) + Última vela de 3 min a favor + Solo compras,Filtros (SL 60 · TP 15/30),113,0.7876,0.7736,0.8,0.9262,-2717.75,-19.8632,-27.75,0.2374
+Solo horario de verano (11:12 NY) + Última vela de 3 min a favor + Solo ventas,Filtros (SL 60 · TP 15/30),101,0.8416,0.8913,0.8,1.3521,7801.3,154.3196,12.7745,0.2122
+Solo horario de verano (11:12 NY) + Las 3 últimas velas de 3 min a favor + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),45,0.8444,0.7778,0.9444,1.4369,4691.4,-40.9444,322.05,0.0945
+Solo horario de verano (11:12 NY) + Las 3 últimas velas de 3 min a favor + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),52,0.8462,0.7812,0.95,1.6103,6553.6,14.0531,305.195,0.1092
+Solo horario de verano (11:12 NY) + Las 4 tendencias de acuerdo + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),236,0.8136,0.8174,0.8099,1.0427,2884.15,19.7978,5.0198,0.4958
+Solo horario de verano (11:12 NY) + Las 4 tendencias de acuerdo + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),81,0.8642,0.9048,0.8205,1.4034,6807.75,166.875,-5.1538,0.1702
+Solo horario de verano (11:12 NY) + Las 4 tendencias de acuerdo + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),82,0.8293,0.8421,0.8182,1.2369,5087.0,64.6842,59.75,0.1723
+Solo horario de verano (11:12 NY) + Las 4 tendencias de acuerdo + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),174,0.8161,0.8293,0.8043,1.0444,2180.4,39.1707,-11.213,0.3655
+Solo horario de verano (11:12 NY) + Las 4 tendencias de acuerdo + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),61,0.8033,0.7879,0.8214,1.0095,175.25,-28.3409,39.6607,0.1282
+Solo horario de verano (11:12 NY) + Las 4 tendencias de acuerdo + Solo compras,Filtros (SL 60 · TP 15/30),134,0.7761,0.7857,0.7656,0.9051,-4369.25,-1.8679,-66.2266,0.2815
+Solo horario de verano (11:12 NY) + Las 4 tendencias de acuerdo + Solo ventas,Filtros (SL 60 · TP 15/30),102,0.8627,0.8667,0.8596,1.3377,7253.4,53.5,85.0158,0.2143
+Solo horario de verano (11:12 NY) + Al menos 3 tendencias de acuerdo + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),113,0.8496,0.8923,0.7917,1.3502,8296.15,156.9531,-39.7042,0.2374
+Solo horario de verano (11:12 NY) + Al menos 3 tendencias de acuerdo + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),91,0.8242,0.825,0.8235,1.1566,3843.5,26.9375,54.2353,0.1912
+Solo horario de verano (11:12 NY) + Al menos 3 tendencias de acuerdo + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),193,0.8135,0.8152,0.8119,1.0176,971.9,16.9511,-5.8178,0.4055
+Solo horario de verano (11:12 NY) + Al menos 3 tendencias de acuerdo + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),97,0.8144,0.8305,0.7895,1.0903,2277.65,52.4314,-21.4684,0.2038
+Solo horario de verano (11:12 NY) + Al menos 3 tendencias de acuerdo + Solo compras,Filtros (SL 60 · TP 15/30),157,0.7898,0.7857,0.7945,0.9427,-2901.25,-9.4554,-28.863,0.3298
+Solo horario de verano (11:12 NY) + Al menos 3 tendencias de acuerdo + Solo ventas,Filtros (SL 60 · TP 15/30),136,0.8456,0.8676,0.8235,1.2468,7361.3,82.3632,25.8912,0.2857
+Solo horario de verano (11:12 NY) + Cerca de la EMA 20 (< 20 ticks) + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),43,0.8837,1.0,0.7826,1.5917,4538.0,341.0,-99.2174,0.0903
+Solo horario de verano (11:12 NY) + Cerca de la EMA 20 (< 20 ticks) + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),87,0.8161,0.8431,0.7778,1.152,3367.65,80.6951,-20.7722,0.1828
+Solo horario de verano (11:12 NY) + Cerca de la EMA 20 (< 20 ticks) + Solo compras,Filtros (SL 60 · TP 15/30),63,0.8095,0.8529,0.7586,1.0466,857.25,87.3015,-72.7931,0.1324
+Solo horario de verano (11:12 NY) + Cerca de la EMA 20 (< 20 ticks) + Solo ventas,Filtros (SL 60 · TP 15/30),78,0.8718,0.9268,0.8108,1.6889,8924.4,227.5902,-10.9946,0.1639
+Solo horario de verano (11:12 NY) + Lejos de la EMA 20 (> 40 ticks) + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),84,0.8095,0.8108,0.8085,1.0517,1269.0,-3.5946,29.8298,0.1765
+Solo horario de verano (11:12 NY) + Lejos de la EMA 20 (> 40 ticks) + Solo compras,Filtros (SL 60 · TP 15/30),53,0.8491,0.84,0.8571,1.449,5510.5,93.5,113.3214,0.1113
+Solo horario de verano (11:12 NY) + Lejos de la EMA 20 (> 40 ticks) + Solo ventas,Filtros (SL 60 · TP 15/30),40,0.8,0.8235,0.7826,0.9197,-985.0,-34.0,-17.6957,0.084
+Solo horario de verano (11:12 NY) + Mañana a favor (> 10 pts desde 9:30) + Solo compras,Filtros (SL 60 · TP 15/30),104,0.7692,0.7736,0.7647,0.853,-5411.0,-23.3868,-81.7941,0.2185
+Solo horario de verano (11:12 NY) + Mañana a favor (> 10 pts desde 9:30) + Solo ventas,Filtros (SL 60 · TP 15/30),92,0.8587,0.875,0.8462,1.2962,5905.9,83.1875,49.5846,0.1933
+Solo horario de verano (11:12 NY) + Mañana lateral (±10 pts) + Solo compras,Filtros (SL 60 · TP 15/30),68,0.8088,0.8158,0.8,1.0533,1062.25,25.1908,3.5,0.1429
+Solo horario de verano (11:12 NY) + Mañana lateral (±10 pts) + Solo ventas,Filtros (SL 60 · TP 15/30),58,0.8448,0.8788,0.8,1.529,6041.9,148.9606,45.048,0.1218
+Última vela de 3 min a favor + Las 3 últimas velas de 3 min a favor + Las 4 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),63,0.8095,0.7436,0.9167,1.0892,1641.9,-115.7308,256.475,0.1324
+Última vela de 3 min a favor + Las 3 últimas velas de 3 min a favor + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),74,0.7838,0.7234,0.8889,0.959,-944.4,-124.9532,182.5333,0.1555
+Última vela de 3 min a favor + Las 3 últimas velas de 3 min a favor + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),40,0.875,0.9,0.85,1.6294,4827.5,134.75,106.625,0.084
+Última vela de 3 min a favor + Las 3 últimas velas de 3 min a favor + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),49,0.8367,0.8148,0.8636,1.2643,3242.9,21.5556,120.95,0.1029
+Última vela de 3 min a favor + Las 3 últimas velas de 3 min a favor + Solo compras,Filtros (SL 60 · TP 15/30),46,0.7391,0.7241,0.7647,0.7317,-4939.0,-118.0517,-89.1471,0.0966
+Última vela de 3 min a favor + Las 3 últimas velas de 3 min a favor + Solo ventas,Filtros (SL 60 · TP 15/30),41,0.8293,0.7826,0.8889,1.386,3552.6,-24.2087,228.3,0.0861
+Última vela de 3 min a favor + Las 4 tendencias de acuerdo + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),216,0.8148,0.8257,0.8037,1.052,3189.15,26.1995,3.1159,0.4538
+Última vela de 3 min a favor + Las 4 tendencias de acuerdo + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),58,0.8448,0.8788,0.8,1.3189,4402.25,136.4318,-4.0,0.1218
+Última vela de 3 min a favor + Las 4 tendencias de acuerdo + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),91,0.8352,0.8974,0.7885,1.1915,4406.0,143.8846,-23.1827,0.1912
+Última vela de 3 min a favor + Las 4 tendencias de acuerdo + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),151,0.8079,0.8451,0.775,0.9823,-787.6,55.7887,-59.3575,0.3172
+Última vela de 3 min a favor + Las 4 tendencias de acuerdo + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),65,0.8308,0.7895,0.8889,1.2357,3976.75,-29.0855,188.2222,0.1366
+Última vela de 3 min a favor + Las 4 tendencias de acuerdo + Solo compras,Filtros (SL 60 · TP 15/30),117,0.7692,0.7586,0.7797,0.8813,-4916.25,-43.7112,-40.3559,0.2458
+Última vela de 3 min a favor + Las 4 tendencias de acuerdo + Solo ventas,Filtros (SL 60 · TP 15/30),99,0.8687,0.902,0.8333,1.4064,8105.4,105.7059,56.55,0.208
+Última vela de 3 min a favor + Al menos 3 tendencias de acuerdo + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),80,0.825,0.8723,0.7576,1.2969,5668.15,170.2436,-70.7061,0.1681
+Última vela de 3 min a favor + Al menos 3 tendencias de acuerdo + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),102,0.8235,0.881,0.7833,1.0645,1782.0,104.3929,-43.375,0.2143
+Última vela de 3 min a favor + Al menos 3 tendencias de acuerdo + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),167,0.8024,0.8395,0.7674,0.9441,-2831.6,49.3333,-79.3907,0.3508
+Última vela de 3 min a favor + Al menos 3 tendencias de acuerdo + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),93,0.8172,0.8,0.8421,1.1731,4101.15,14.3991,87.0842,0.1954
+Última vela de 3 min a favor + Al menos 3 tendencias de acuerdo + Solo compras,Filtros (SL 60 · TP 15/30),137,0.781,0.7681,0.7941,0.9069,-4283.75,-34.0109,-28.4853,0.2878
+Última vela de 3 min a favor + Al menos 3 tendencias de acuerdo + Solo ventas,Filtros (SL 60 · TP 15/30),124,0.8387,0.8806,0.7895,1.2149,6081.8,106.4881,-18.4719,0.2605
+Última vela de 3 min a favor + Cerca de la EMA 20 (< 20 ticks) + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),76,0.8289,0.8409,0.8125,1.3413,5991.65,98.942,51.1938,0.1597
+Última vela de 3 min a favor + Cerca de la EMA 20 (< 20 ticks) + Solo compras,Filtros (SL 60 · TP 15/30),44,0.8409,0.8333,0.85,1.4892,5253.25,130.0312,106.625,0.0924
+Última vela de 3 min a favor + Cerca de la EMA 20 (< 20 ticks) + Solo ventas,Filtros (SL 60 · TP 15/30),58,0.8103,0.9118,0.6667,1.0547,791.9,198.7265,-248.5333,0.1218
+Última vela de 3 min a favor + Lejos de la EMA 20 (> 40 ticks) + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),95,0.8105,0.8718,0.7679,0.9713,-792.5,81.3846,-70.8304,0.1996
+Última vela de 3 min a favor + Lejos de la EMA 20 (> 40 ticks) + Solo compras,Filtros (SL 60 · TP 15/30),57,0.807,0.875,0.7576,0.9518,-813.0,114.4375,-107.8636,0.1197
+Última vela de 3 min a favor + Lejos de la EMA 20 (> 40 ticks) + Solo ventas,Filtros (SL 60 · TP 15/30),47,0.8511,0.9,0.8148,1.3052,3277.0,116.0,35.4444,0.0987
+Última vela de 3 min a favor + Mañana a favor (> 10 pts desde 9:30) + Solo compras,Filtros (SL 60 · TP 15/30),87,0.7356,0.7619,0.7111,0.6823,-11208.0,-60.7857,-192.3333,0.1828
+Última vela de 3 min a favor + Mañana a favor (> 10 pts desde 9:30) + Solo ventas,Filtros (SL 60 · TP 15/30),80,0.875,0.9231,0.8293,1.546,8376.4,167.9231,44.5707,0.1681
+Última vela de 3 min a favor + Mañana lateral (±10 pts) + Solo compras,Filtros (SL 60 · TP 15/30),59,0.8475,0.7879,0.9231,1.4658,6430.75,5.75,240.0385,0.1239
+Última vela de 3 min a favor + Mañana lateral (±10 pts) + Solo ventas,Filtros (SL 60 · TP 15/30),60,0.8,0.8571,0.72,1.0101,161.4,90.2914,-119.952,0.1261
+Las 3 últimas velas de 3 min a favor + Las 4 tendencias de acuerdo + Al menos 3 tendencias de acuerdo,Filtros (SL 60 · TP 15/30),63,0.8095,0.7436,0.9167,1.0892,1641.9,-115.7308,256.475,0.1324
+Las 3 últimas velas de 3 min a favor + Las 4 tendencias de acuerdo + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),43,0.8372,0.7917,0.8947,1.3035,3259.4,-26.1875,204.6263,0.0903
+Las 3 últimas velas de 3 min a favor + Al menos 3 tendencias de acuerdo + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),49,0.8367,0.8148,0.8636,1.2643,3242.9,21.5556,120.95,0.1029
+Las 3 últimas velas de 3 min a favor + Al menos 3 tendencias de acuerdo + Solo compras,Filtros (SL 60 · TP 15/30),40,0.75,0.68,0.8667,0.7647,-3610.0,-206.5,103.5,0.084
+Las 4 tendencias de acuerdo + Al menos 3 tendencias de acuerdo + Cerca de la EMA 20 (< 20 ticks),Filtros (SL 60 · TP 15/30),106,0.8208,0.8276,0.8125,1.0763,2157.25,42.7026,-6.6562,0.2227
+Las 4 tendencias de acuerdo + Al menos 3 tendencias de acuerdo + Lejos de la EMA 20 (> 40 ticks),Filtros (SL 60 · TP 15/30),129,0.8217,0.85,0.7971,1.1308,4614.0,62.875,12.1957,0.271
+Las 4 tendencias de acuerdo + Al menos 3 tendencias de acuerdo + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),247,0.8178,0.8347,0.8016,1.0554,3823.4,41.9298,-9.9214,0.5189
+Las 4 tendencias de acuerdo + Al menos 3 tendencias de acuerdo + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),95,0.7684,0.7414,0.8108,0.8488,-4968.75,-102.7716,26.8108,0.1996
+Las 4 tendencias de acuerdo + Al menos 3 tendencias de acuerdo + Solo compras,Filtros (SL 60 · TP 15/30),188,0.7713,0.76,0.7841,0.8747,-8267.75,-58.3825,-27.608,0.395
+Las 4 tendencias de acuerdo + Al menos 3 tendencias de acuerdo + Solo ventas,Filtros (SL 60 · TP 15/30),156,0.8462,0.8608,0.8312,1.2277,8179.4,62.6709,41.9273,0.3277
+Las 4 tendencias de acuerdo + Cerca de la EMA 20 (< 20 ticks) + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),42,0.8571,1.0,0.75,1.2115,1947.0,341.0,-174.625,0.0882
+Las 4 tendencias de acuerdo + Cerca de la EMA 20 (< 20 ticks) + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),62,0.7903,0.75,0.8636,0.9556,-846.75,-91.5313,127.9318,0.1303
+Las 4 tendencias de acuerdo + Cerca de la EMA 20 (< 20 ticks) + Solo compras,Filtros (SL 60 · TP 15/30),58,0.7931,0.8,0.7826,1.0049,89.75,24.9071,-34.0,0.1218
+Las 4 tendencias de acuerdo + Cerca de la EMA 20 (< 20 ticks) + Solo ventas,Filtros (SL 60 · TP 15/30),48,0.8542,0.8696,0.84,1.2099,2067.5,69.7826,18.5,0.1008
+Las 4 tendencias de acuerdo + Lejos de la EMA 20 (> 40 ticks) + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),125,0.824,0.8448,0.806,1.1352,4562.5,46.819,27.5672,0.2626
+Las 4 tendencias de acuerdo + Lejos de la EMA 20 (> 40 ticks) + Solo compras,Filtros (SL 60 · TP 15/30),66,0.8182,0.8621,0.7838,1.1226,2256.0,101.7759,-18.7973,0.1387
+Las 4 tendencias de acuerdo + Lejos de la EMA 20 (> 40 ticks) + Solo ventas,Filtros (SL 60 · TP 15/30),63,0.8254,0.8387,0.8125,1.1397,2358.0,26.4839,48.0312,0.1324
+Las 4 tendencias de acuerdo + Mañana a favor (> 10 pts desde 9:30) + Solo compras,Filtros (SL 60 · TP 15/30),125,0.776,0.7833,0.7692,0.8792,-5187.5,-24.625,-57.0769,0.2626
+Las 4 tendencias de acuerdo + Mañana a favor (> 10 pts desde 9:30) + Solo ventas,Filtros (SL 60 · TP 15/30),122,0.8607,0.8852,0.8361,1.3455,9010.9,107.3934,40.3262,0.2563
+Las 4 tendencias de acuerdo + Mañana lateral (±10 pts) + Solo compras,Filtros (SL 60 · TP 15/30),63,0.7619,0.725,0.8261,0.8661,-3080.25,-109.0188,55.6739,0.1324
+Al menos 3 tendencias de acuerdo + Cerca de la EMA 20 (< 20 ticks) + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),49,0.8571,0.9565,0.7692,1.2639,2834.0,275.7826,-134.9615,0.1029
+Al menos 3 tendencias de acuerdo + Cerca de la EMA 20 (< 20 ticks) + Mañana lateral (±10 pts),Filtros (SL 60 · TP 15/30),94,0.7766,0.7619,0.8065,0.955,-1234.55,-37.2103,35.7968,0.1975
+Al menos 3 tendencias de acuerdo + Cerca de la EMA 20 (< 20 ticks) + Solo compras,Filtros (SL 60 · TP 15/30),69,0.8116,0.8095,0.8148,1.1174,2340.75,32.9464,35.4444,0.145
+Al menos 3 tendencias de acuerdo + Cerca de la EMA 20 (< 20 ticks) + Solo ventas,Filtros (SL 60 · TP 15/30),79,0.8101,0.8261,0.7879,1.0837,1526.2,71.6739,-53.6606,0.166
+Al menos 3 tendencias de acuerdo + Lejos de la EMA 20 (> 40 ticks) + Mañana a favor (> 10 pts desde 9:30),Filtros (SL 60 · TP 15/30),134,0.806,0.8361,0.7808,0.9986,-56.0,30.5492,-26.2945,0.2815
+Al menos 3 tendencias de acuerdo + Lejos de la EMA 20 (> 40 ticks) + Solo compras,Filtros (SL 60 · TP 15/30),74,0.8108,0.8438,0.7857,1.04,859.0,65.6094,-29.5357,0.1555
+Al menos 3 tendencias de acuerdo + Lejos de la EMA 20 (> 40 ticks) + Solo ventas,Filtros (SL 60 · TP 15/30),68,0.8088,0.8438,0.7778,1.0063,125.5,30.4531,-23.5833,0.1429
+Al menos 3 tendencias de acuerdo + Mañana a favor (> 10 pts desde 9:30) + Solo compras,Filtros (SL 60 · TP 15/30),146,0.774,0.7733,0.7746,0.8612,-7026.5,-39.0,-57.7676,0.3067
+Al menos 3 tendencias de acuerdo + Mañana a favor (> 10 pts desde 9:30) + Solo ventas,Filtros (SL 60 · TP 15/30),131,0.8473,0.8769,0.8182,1.2104,6454.9,95.8077,3.4455,0.2752
+Al menos 3 tendencias de acuerdo + Mañana lateral (±10 pts) + Solo compras,Filtros (SL 60 · TP 15/30),76,0.8026,0.766,0.8621,1.0669,1540.25,-38.0053,114.7069,0.1597
+Al menos 3 tendencias de acuerdo + Mañana lateral (±10 pts) + Solo ventas,Filtros (SL 60 · TP 15/30),63,0.746,0.7619,0.7143,0.7349,-5242.3,-52.1905,-145.2524,0.1324
+Cerca de la EMA 20 (< 20 ticks) + Mañana lateral (±10 pts) + Solo compras,Filtros (SL 60 · TP 15/30),59,0.7966,0.7778,0.8261,1.0336,618.25,-39.2292,88.2826,0.1239
+Cerca de la EMA 20 (< 20 ticks) + Mañana lateral (±10 pts) + Solo ventas,Filtros (SL 60 · TP 15/30),62,0.7742,0.8049,0.7143,0.9015,-1645.8,34.2561,-145.2524,0.1303
+Lejos de la EMA 20 (> 40 ticks) + Mañana a favor (> 10 pts desde 9:30) + Solo compras,Filtros (SL 60 · TP 15/30),71,0.8028,0.8387,0.775,0.9836,-351.5,50.6774,-48.0625,0.1492
+Lejos de la EMA 20 (> 40 ticks) + Mañana a favor (> 10 pts desde 9:30) + Solo ventas,Filtros (SL 60 · TP 15/30),63,0.8095,0.8333,0.7879,1.0161,295.5,9.75,0.0909,0.1324
