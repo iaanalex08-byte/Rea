@@ -22,10 +22,21 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: gym/package-lock.json
+      - name: Compilar app Gym
+        working-directory: gym
+        run: |
+          npm ci
+          npm run build
       - name: Preparar sitio
         run: |
           mkdir -p _site
           cp index.html three.min.js data-modelo-b.json .nojekyll _site/
+          cp -r gym/dist _site/gym
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
