@@ -10,15 +10,19 @@ import pandas as pd
 import es_analysis_config as A
 
 
-def run(sl, tp1, tp2, time="9:12"):
-    name = f"B_CDMX_{sl}_{tp1}_{tp2}" + ("" if time == "9:12" else "_" + time.replace(":", ""))
-    A.CFG = dict(A.CFG, name=name, sl=sl, tp1=tp1, tp2=tp2, time=time)
+def run(sl, tp1, tp2, time="9:12", atr=None):
+    if atr:
+        name = f"B_CDMX_ATR_tp{round(atr[0] * 100)}_sl{round(atr[1] * 100)}"
+        A.CFG = {k: v for k, v in dict(A.CFG, name=name, time=time, atr=atr).items() if k not in ("sl", "tp1", "tp2")}
+    else:
+        name = f"B_CDMX_{sl}_{tp1}_{tp2}" + ("" if time == "9:12" else "_" + time.replace(":", ""))
+        A.CFG = {k: v for k, v in dict(A.CFG, name=name, sl=sl, tp1=tp1, tp2=tp2, time=time).items() if k != "atr"}
     A.OUT = os.path.join(A.ROOT, "results", "es", "analisis_" + name)
     t, out = A.main()
     t = t.copy()
     t["date"] = pd.to_datetime(t.date).dt.strftime("%Y-%m-%d")
     t["win"] = t.win.astype(int)
-    cols = ["date", "entry_ny", "side", "usd", "win", "outcome", "news", "horario_ny", "vol", "weekday", "wom",
+    cols = (["sl_ticks", "tp1_ticks", "tp2_ticks"] if atr else []) + ["date", "entry_ny", "side", "usd", "win", "outcome", "news", "horario_ny", "vol", "weekday", "wom",
             "year", "mins", "mins_tp1", "mfe60", "mae60"]
     t[cols].round({"mfe60": 1, "mae60": 1}).to_csv(os.path.join(A.OUT, "cfg_operaciones.csv"), index=False)
     pd.DataFrame(out["sensitivity"]).round(4).to_csv(os.path.join(A.OUT, "cfg_sensibilidad.csv"), index=False)
@@ -36,8 +40,11 @@ def run(sl, tp1, tp2, time="9:12"):
 
 
 if __name__ == "__main__":
-    sl, tp1, tp2 = map(int, sys.argv[1:4])
-    t, out = run(sl, tp1, tp2)
+    if sys.argv[1] == "atr":                       # python es_run_config.py atr 0.03 0.5
+        t, out = run(None, None, None, atr=(float(sys.argv[2]), float(sys.argv[3])))
+    else:
+        sl, tp1, tp2 = map(int, sys.argv[1:4])
+        t, out = run(sl, tp1, tp2)
     import json
     print(json.dumps({k: out[k] for k in ["stats", "bootstrap", "montecarlo", "timing", "excursion"]}, indent=1))
     for k in ["outcome", "side", "year", "horario_ny", "vol", "news", "weekday", "wom"]:

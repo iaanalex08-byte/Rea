@@ -93,6 +93,19 @@ def main():
     rth = df.between_time("09:30", "15:59")
     rng = (rth["h"].groupby(rth.index.normalize()).max() - rth["l"].groupby(rth.index.normalize()).min())
     prev_rng = rng.shift(1)
+    atr = rng.rolling(10).mean().shift(1)   # rango medio de las 10 sesiones previas (puntos)
+
+    def levels(d, tp_f=None, sl_f=None):
+        """SL, TP1 y TP2 en ticks: fijos, o en % del rango medio si CFG tiene 'atr'."""
+        if "atr" not in CFG:
+            return CFG["sl"], CFG["tp1"], CFG["tp2"]
+        tp_f = CFG["atr"][0] if tp_f is None else tp_f
+        sl_f = CFG["atr"][1] if sl_f is None else sl_f
+        a = atr.get(pd.Timestamp(d), np.nan)
+        if np.isnan(a):
+            return None
+        tp1 = max(4, round(a * tp_f / TICK))
+        return max(20, round(a * sl_f / TICK)), tp1, 2 * tp1
 
     rows = []
     for d, t0, g in paths:
@@ -103,9 +116,13 @@ def main():
         side = int(ref) if CFG["trend"] in SIGN_TRENDS else (1 if e > ref else -1)
         if side == 0:
             continue
-        det = trade_detail(e, side, g, CFG["sl"], CFG["tp1"], CFG["tp2"])
+        lv = levels(d)
+        if lv is None:
+            continue
+        det = trade_detail(e, side, g, *lv)
         usd = det["ticks"] * TICK_USD - CFG["contracts"] * COST_T * TICK_USD
         rows.append(dict(date=pd.Timestamp(d), entry_ny=t0.strftime("%H:%M"), side="Compra" if side > 0 else "Venta",
+                         sl_ticks=lv[0], tp1_ticks=lv[1], tp2_ticks=lv[2],
                          entry=round(e, 2), usd=round(usd, 2), news=cat.get(d, "Sin noticia"),
                          prev_range=prev_rng.get(pd.Timestamp(d), np.nan), **det))
     t = pd.DataFrame(rows)
@@ -156,8 +173,23 @@ def main():
                             stops_reached_20=float((t.loc[t.outcome == "Stop (−2)", "mfe_trade"] >= 20).mean()))
     # sensibilidad alrededor de la configuración
     sens = []
-    b_sl, b_tp = CFG["sl"], CFG["tp1"]
-    sl_grid = sorted({max(5, b_sl - 15), max(5, b_sl - 5), b_sl, b_sl + 5, b_sl + 15})
+    if "atr" in CFG:
+        for slf in (0.35, 0.5, 0.65, 0.8):
+            for tpf in (0.02, 0.03, 0.04, 0.05):
+                u = []
+                for d, t0, g in paths:
+                    e = g["o"].iloc[0]
+                    ref = tr.get(t0, np.nan)
+                    lv = levels(d, tpf, slf)
+                    if np.isnan(ref) or lv is None:
+                        continue
+                    det = trade_detail(e, 1 if e > ref else -1, g, *lv)
+                    u.append(det["ticks"] * TICK_USD - 2 * COST_T * TICK_USD)
+                s = stats(u)
+                sens.append(dict(sl=round(slf * 100), tp1=round(tpf * 100), tp2=round(2 * tpf * 100),
+                                 pf=s["pf"], net=s["net"], winrate=s["winrate"], t=s["t"]))
+    b_sl, b_tp = CFG.get("sl", 0), CFG.get("tp1", 0)
+    sl_grid = [] if "atr" in CFG else sorted({max(5, b_sl - 15), max(5, b_sl - 5), b_sl, b_sl + 5, b_sl + 15})
     tp_grid = [(max(5, b_tp - 10), 2 * max(5, b_tp - 10)), (b_tp, 2 * b_tp), (b_tp + 10, 2 * (b_tp + 10))]
     for sl in sl_grid:
         for tp1_, tp2_ in tp_grid:
