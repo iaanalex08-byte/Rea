@@ -1,0 +1,784 @@
+<meta name="dash-one-writer">
+<style>
+  .es { display: grid; gap: var(--cds-gap-xl); font-family: var(--font-anthropic-sans); color: var(--color-fg); }
+  .es h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+  .es h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; text-wrap: balance; }
+  .es p { margin: 0; max-width: 72ch; line-height: 1.5; }
+  .es-head { display: grid; gap: var(--cds-gap-md); }
+  .es-lead { font-size: var(--cds-font-size-body); }
+  .es-muted { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+  .es-controls { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); align-items: end; }
+  .es-controls label { display: grid; gap: var(--cds-gap-xs); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); letter-spacing: .02em; }
+  .es-sec { display: grid; gap: var(--cds-gap-md); min-width: 0; }
+  .es-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--cds-gap-md); }
+  .es-kpi { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-xs); align-content: start; }
+  .es-kpi-label { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); letter-spacing: .02em; }
+  .es-kpi-value { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: 1.9rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .es-kpi-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .es-good { color: var(--color-ok); }
+  .es-bad { color: var(--color-bad); }
+  .es-warn { color: var(--color-warn); }
+  .es-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-sm); min-width: 0; }
+  .es-grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--cds-gap-md); }
+  .es-chart { position: relative; min-height: 260px; min-width: 0; }
+  .es-chart-3d { min-height: 380px; touch-action: none; cursor: grab; }
+  .es-chart-3d:active { cursor: grabbing; }
+  .es-chart-sm { min-height: 200px; }
+  .es-chart svg { display: block; overflow: visible; }
+  .es-chart svg:focus-visible { outline: 2px solid var(--color-fg-muted); outline-offset: 4px; }
+  .es-chart text { fill: var(--cds-text-secondary); font-size: var(--cds-font-size-caption); font-family: var(--font-anthropic-sans); }
+  .es-chart .es-axis path, .es-chart .es-axis line { stroke: var(--cds-chart-axis); }
+  .es-chart .es-grid line { stroke: var(--cds-chart-grid); }
+  .es-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); box-shadow: var(--cds-shadow-popover); border-radius: var(--cds-radius); padding: var(--cds-pad-sm) var(--cds-pad-md); font-size: var(--cds-font-size-caption); line-height: 1.45; white-space: nowrap; z-index: 5; font-variant-numeric: tabular-nums; }
+  .es-tip b { font-weight: var(--cds-font-weight-medium); }
+  .es-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .es-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .es-sw { width: 14px; height: 3px; border-radius: 2px; background: var(--color-fg-muted); display: inline-block; }
+  .es-sw-ok, .es-sw-bad { height: 10px; width: 10px; border-radius: 2px; }
+  .es-sw-ok { background: var(--color-ok); }
+  .es-sw-bad { background: var(--color-bad); }
+  .es-tablewrap { overflow-x: auto; min-width: 0; }
+  .es table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; font-size: var(--cds-font-size-body); }
+  .es th { text-align: right; font-weight: var(--cds-font-weight-medium); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .es td { text-align: right; padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .es th:first-child, .es td:first-child, .es th.es-l, .es td.es-l { text-align: left; }
+  .es tr.es-sel td { background: color-mix(in srgb, var(--color-fg) 6%, transparent); font-weight: var(--cds-font-weight-medium); }
+  .es-pill { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: var(--cds-font-size-caption); border: 1px solid currentColor; }
+  .es details { border-top: 1px solid var(--color-border-line); padding-top: var(--cds-pad-md); }
+  .es summary { cursor: pointer; font-weight: var(--cds-font-weight-medium); }
+  .es details ul { margin: var(--cds-gap-sm) 0 0; padding-left: 1.2em; display: grid; gap: var(--cds-gap-xs); max-width: 80ch; line-height: 1.5; }
+  .es-scroll { max-height: 460px; overflow: auto; }
+  .es td.es-wrap { white-space: normal; min-width: 220px; }
+  .es-pill.es-muted { color: var(--color-fg-muted); }
+  .mn-cal-controls { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); align-items: end; }
+  .mn-cal-controls label { display: grid; gap: var(--cds-gap-xs); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .mn-cal-wrap { overflow-x: auto; min-width: 0; }
+  .mn-cal { position: relative; display: grid; gap: 6px; width: max-content; padding-top: 4px; }
+  .mn-cal-row { display: flex; gap: 6px; align-items: center; }
+  .mn-cal-mes { width: 34px; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .mn-cal-d { width: 30px; height: 30px; border-radius: 6px; border: 0; font: inherit; font-size: 12px; font-weight: var(--cds-font-weight-medium); font-variant-numeric: tabular-nums; cursor: pointer; color: var(--color-bg); padding: 0; }
+  .mn-cal-d:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+  .mn-c-win { background: var(--color-ok); }
+  .mn-c-loss { background: var(--color-bad); }
+  .mn-c-close { background: var(--color-warn); }
+  .mn-c-none { background: var(--color-panel); color: var(--color-fg); border: 1px solid var(--color-border-line); }
+  .mn-sq { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+  .mn-cal .mn-tip { white-space: nowrap; }
+  .mn-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .mn-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .mn-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); box-shadow: var(--cds-shadow-popover); border-radius: var(--cds-radius); padding: var(--cds-pad-sm) var(--cds-pad-md); font-size: var(--cds-font-size-caption); line-height: 1.45; z-index: 5; font-variant-numeric: tabular-nums; }
+  .mn-muted { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+  [data-dash-source-state=refreshing] { opacity: .5; }
+</style>
+
+<div class="es">
+  <header class="es-head" id="encabezado">
+    <h1>Rascacielos y modelo B, sumados</h1>
+    <p class="es-lead" data-draw="frase-resumen">—</p>
+    <p class="es-muted">Futuro ES operando las dos estrategias a la vez, cada una con 2 contratos y la misma gestión: SL 45 ticks, TP1 30 y TP2 60, con el stop a break-even al tocar TP1. <b>Rascacielos</b>: entra a las 9:30 de Nueva York a favor del cruce de las EMA 20 y 50 de 15 minutos. <b>Modelo B</b>: entra a las 9:12 de Ciudad de México a favor de la EMA 20 de 3 minutos. Backtest del 2 de enero de 2025 al 6 de noviembre de 2026, con 1 tick de deslizamiento y 4,50 USD de comisión por contrato.</p>
+    <div class="es-legend">
+      <span><i class="es-sw" data-sw="0"></i>Suma de las dos</span>
+      <span><i class="es-sw" data-sw="1"></i>Rascacielos + gestión B (9:30 NY)</span>
+      <span><i class="es-sw" data-sw="2"></i>Modelo B (9:12 CDMX)</span>
+    </div>
+  </header>
+
+  <section class="es-sec" id="kpis-suma">
+    <h2>Las dos sumadas</h2>
+    <div class="es-kpis">
+      <div class="es-kpi"><span class="es-kpi-label">Resultado neto</span><span class="es-kpi-value" data-draw="k-net">—</span><span class="es-kpi-note">USD, 4 contratos en total</span></div>
+      <div class="es-kpi"><span class="es-kpi-label">Factor de beneficio</span><span class="es-kpi-value" data-draw="k-pf">—</span><span class="es-kpi-note">ganancias ÷ pérdidas por día</span></div>
+      <div class="es-kpi"><span class="es-kpi-label">Días en positivo</span><span class="es-kpi-value" data-draw="k-wr">—</span><span class="es-kpi-note">suma del día mayor que cero</span></div>
+      <div class="es-kpi"><span class="es-kpi-label">Mejor racha</span><span class="es-kpi-value" data-draw="k-best">—</span><span class="es-kpi-note">días positivos seguidos</span></div>
+      <div class="es-kpi"><span class="es-kpi-label">Peor racha</span><span class="es-kpi-value" data-draw="k-worst">—</span><span class="es-kpi-note">días negativos seguidos</span></div>
+      <div class="es-kpi"><span class="es-kpi-label">Drawdown máximo</span><span class="es-kpi-value" data-draw="k-dd">—</span><span class="es-kpi-note">USD desde el máximo</span></div>
+    </div>
+  </section>
+
+  <section class="es-sec" id="por-anio">
+    <h2>Por año</h2>
+    <div class="es-tablewrap">
+      <table data-source="comp_anual" data-row-key="clave" aria-label="Resultado por año">
+        <thead><tr><th data-field="config">Estrategia</th><th data-field="year">Año</th><th data-field="n">Días</th><th data-field="winrate">Positivos</th><th data-field="pf">Factor</th><th data-field="net">Neto USD</th></tr></thead>
+        <tbody data-draw="tabla-anual"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="es-sec" id="comparativa">
+    <h2>Comparación completa</h2>
+    <div class="es-tablewrap">
+      <table data-source="comp_resumen" data-row-key="config" aria-label="Comparación de las dos configuraciones">
+        <thead><tr>
+          <th data-field="config">Configuración</th><th data-field="winrate">Positivos</th><th data-field="pf">Factor</th><th data-field="net">Neto USD</th>
+          <th data-field="avg">Por día</th><th data-field="avg_win">Ganancia media</th><th data-field="avg_loss">Pérdida media</th>
+          <th data-field="best_streak">Mejor racha</th><th data-field="worst_streak">Peor racha</th><th data-field="maxdd">Drawdown</th><th data-field="t">t</th>
+        </tr></thead>
+        <tbody data-draw="tabla-resumen"></tbody>
+      </table>
+    </div>
+    <p class="es-muted">El estadístico t mide si la ganancia se distingue del azar: por debajo de 2 no se distingue.</p>
+  </section>
+
+  <section class="es-sec" id="curva">
+    <h2>Curva de capital</h2>
+    <p class="es-muted">USD acumulados de cada estrategia y de la suma. Debajo, el drawdown de cada una.</p>
+    <div class="es-chart" data-draw="curva" data-source="comp_curva"></div>
+  </section>
+
+  <div class="es-grid2">
+    <section class="es-card" id="rachas">
+      <h2>Rachas: cuántas veces se dio cada largo (en días)</h2>
+      <div class="es-controls">
+        <label for="sel-racha">Tipo de racha
+          <select class="dash-select" id="sel-racha" aria-label="Tipo de racha">
+            <option value="ganadora">Días positivos seguidos</option>
+            <option value="perdedora">Días negativos seguidos</option>
+          </select>
+        </label>
+      </div>
+      <div class="es-chart es-chart-sm" data-draw="rachas" data-source="comp_rachas"></div>
+    </section>
+    <section class="es-card" id="desenlaces">
+      <h2>Cómo termina cada operación</h2>
+      <div class="es-chart es-chart-sm" data-draw="desenlaces" data-source="comp_grupos"></div>
+      <p class="es-muted" data-draw="frase-desenlace">—</p>
+    </section>
+  </div>
+
+  <section class="es-card" id="calendario">
+    <h2>Calendario de días hábiles</h2>
+    <p class="mn-muted">Abre con la suma de las dos estrategias: verde si el día terminó en positivo, rojo si terminó en negativo. Cambia a cada estrategia en el selector.</p>
+    <div class="mn-cal-controls">
+      <label for="sel-cal-cfg">Estrategia
+        <select class="dash-select" id="sel-cal-cfg" aria-label="Configuración del calendario" data-draw="cal-opciones" data-source="calendario"></select>
+      </label>
+      <label for="sel-cal-year">Año
+        <select class="dash-select" id="sel-cal-year" aria-label="Año del calendario">
+          <option value="2025">2025</option>
+          <option value="2026">2026</option>
+        </select>
+      </label>
+    </div>
+    <div class="mn-legend">
+      <span><i class="mn-sq mn-c-win"></i>Ganó (TP)</span>
+      <span><i class="mn-sq mn-c-loss"></i>Perdió (SL)</span>
+      <span><i class="mn-sq mn-c-close"></i>Cerró a las 15:59</span>
+      <span><i class="mn-sq mn-c-none"></i>Sin operación</span>
+    </div>
+    <div class="mn-cal-wrap">
+      <div class="mn-cal" data-draw="calendario" data-source="calendario"></div>
+    </div>
+    <p data-draw="cal-frase">—</p>
+    <p class="mn-muted">Cada cuadro es un día hábil; el número es el día del mes. Pasa el mouse o toca un cuadro para ver el detalle. "Ganó" incluye los días que tocaron TP1 y luego salieron en break-even.</p>
+  </section>
+
+  <section class="es-sec" id="dias">
+    <h2>Días y condiciones con más acierto</h2>
+    <p data-draw="frase-dias">—</p>
+    <div class="es-controls">
+      <label for="sel-dim">Agrupar por
+        <select class="dash-select" id="sel-dim" aria-label="Agrupar por">
+          <option value="Día de la semana">Día de la semana</option>
+          <option value="Semana del mes">Semana del mes</option>
+          <option value="Mes">Mes</option>
+          <option value="Noticias">Noticias</option>
+          <option value="Lado">Compra o venta</option>
+        </select>
+      </label>
+    </div>
+    <div class="es-card">
+      <div class="es-chart" data-draw="dias" data-source="comp_grupos"></div>
+      <p class="es-muted">Barra = % de días positivos; el número de la derecha es el resultado medio por día. Pasa el cursor para ver el detalle.</p>
+    </div>
+  </section>
+
+
+
+
+  <details id="supuestos">
+    <summary>Cómo se hizo y qué supuestos tiene</summary>
+    <ul>
+      <li>Datos: velas de 1 minuto del índice S&amp;P 500 (SPXUSD, HistData.com) para el ES, y del Nasdaq 100 (NSXUSD) para la dirección del Rascacielos en 2025.</li>
+      <li>Rascacielos: en 2026 se usa la dirección de tu dashboard "Rascacielos 2026 día por día". En 2025 se reconstruye con el cruce de EMA 20 y 50 de 15 minutos, que coincide con tu dashboard el 93% de los días de 2026.</li>
+      <li>La suma es el resultado de ambas estrategias el mismo día. Un día "positivo" es aquel en que la suma es mayor que cero.</li>
+      <li>Lo que siga abierto a las 15:59 de Nueva York se cierra a mercado. Si una vela de 1 minuto toca a la vez el stop y el objetivo, se cuenta como stop.</li>
+      <li>Noticias: lista aproximada de días de NFP, CPI y FOMC.</li>
+    </ul>
+  </details>
+</div>
+
+<script>
+  // ---------- constantes y utilidades compartidas
+  window.ES = (() => {
+    const BASE = { A: { sl: 60, tp1: 60, tp2: 120, hora: '9:00' }, B: { sl: 30, tp1: 30, tp2: 60, hora: '9:12' } };
+    const ZONA = { NY: 'Nueva York', CDMX: 'Ciudad de México' };
+    const MODELO = { A: 'A · 9:00', B: 'B · 9:12', AB: 'A + B' };
+    const loc = d3.formatLocale({ decimal: '.', thousands: ',', grouping: [3], currency: ['$', ''] });
+    const n0 = loc.format(',.0f');
+    const money = (v) => (v < 0 ? '−' : '') + '$' + n0(Math.abs(v));
+    const pct = (v) => loc.format('.0%')(v);
+    const pf = (v) => loc.format('.2f')(v);
+    const params = () => {
+      const p = dash.params();
+      return { zone: p.zone || 'NY', model: p.model || 'A', metric: p.metric || 'avg' };
+    };
+    const enc = (s) => encodeURIComponent(String(s));
+    const mark = (tag, source, field, where, text, cls) => {
+      const e = document.createElement(tag);
+      e.dataset.source = source; e.dataset.field = field;
+      if (where) e.dataset.where = where;
+      e.textContent = text;
+      if (cls) e.className = cls;
+      return e;
+    };
+    const resolveColor = (el, cssVar, fallback) => {
+      try {
+        const probe = document.createElement('i');
+        probe.style.color = `var(${cssVar})`;
+        el.appendChild(probe);
+        const c = getComputedStyle(probe).color;
+        probe.remove();
+        const cv = document.createElement('canvas'); cv.width = cv.height = 1;
+        const ctx = cv.getContext('2d'); ctx.fillStyle = fallback; ctx.fillStyle = c; ctx.fillRect(0, 0, 1, 1);
+        const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
+        return `rgb(${r},${g},${b})`;
+      } catch (e) { return fallback; }
+    };
+    const tip = (parent) => {
+      let t = parent.querySelector(':scope > .es-tip');
+      if (!t) { t = document.createElement('div'); t.className = 'es-tip'; t.hidden = true; parent.appendChild(t); }
+      return t;
+    };
+    const placeTip = (t, parent, x, y) => {
+      const w = parent.clientWidth;
+      t.hidden = false;
+      const tw = t.offsetWidth, th = t.offsetHeight;
+      let left = x + 14; if (left + tw > w) left = Math.max(0, x - tw - 14);
+      let top = y - th - 10; if (top < 0) top = y + 14;
+      t.style.left = left + 'px'; t.style.top = top + 'px';
+    };
+    const tipLines = (t, lines) => {
+      t.replaceChildren(...lines.map(([k, v]) => {
+        const d = document.createElement('div');
+        if (k) { const b = document.createElement('b'); b.textContent = k + ' '; d.append(b); }
+        d.append(document.createTextNode(v));
+        return d;
+      }));
+    };
+    const reduced = () => window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    return { BASE, ZONA, MODELO, money, pct, pf, n0, params, enc, mark, resolveColor, tip, placeTip, tipLines, reduced, loc };
+  })();
+
+  // ---------- cálculos a partir de las operaciones
+  dash.calc('resumen', {
+    inputs: ['operaciones'],
+    title: 'Métricas por zona horaria y modelo',
+    description: 'Tasa de acierto, factor de beneficio, neto, drawdown, peor racha y estadístico t de cada modelo y de A + B.',
+    fn: (operaciones) => {
+      const out = [];
+      for (const zone of ['NY', 'CDMX']) {
+        for (const model of ['A', 'B', 'AB']) {
+          const ops = operaciones
+            .filter((o) => o.zone === zone && (model === 'AB' || o.model === model))
+            .sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : a.model < b.model ? -1 : 1));
+          const usd = ops.map((o) => Number(o.usd));
+          const n = usd.length;
+          let eq = 0, peak = 0, maxdd = 0, run = 0, worst = 0, gw = 0, gl = 0;
+          for (const v of usd) {
+            eq += v; peak = Math.max(peak, eq); maxdd = Math.max(maxdd, peak - eq);
+            run = v < 0 ? run + 1 : 0; worst = Math.max(worst, run);
+            if (v > 0) gw += v; else gl -= v;
+          }
+          const avg = eq / n;
+          const sd = Math.sqrt(usd.reduce((s, v) => s + (v - avg) ** 2, 0) / (n - 1));
+          out.push({
+            clave: `${zone}-${model}`, zone, model, n,
+            winrate: ops.filter((o) => Number(o.usd) > 0).length / n,
+            pf: gw / gl, net: eq, avg, maxdd, worst_streak: worst, t: (avg / sd) * Math.sqrt(n),
+          });
+        }
+      }
+      return out;
+    },
+  });
+
+  dash.calc('curva', {
+    inputs: ['operaciones'],
+    title: 'Curva de capital',
+    description: 'USD acumulados día a día y drawdown, por zona horaria y modelo (A, B y A + B).',
+    fn: (operaciones) => {
+      const out = [];
+      for (const zone of ['NY', 'CDMX']) {
+        for (const model of ['A', 'B', 'AB']) {
+          const porDia = d3.rollup(
+            operaciones.filter((o) => o.zone === zone && (model === 'AB' || o.model === model)),
+            (v) => d3.sum(v, (o) => Number(o.usd)), (o) => o.date);
+          let eq = 0, peak = 0;
+          for (const date of [...porDia.keys()].sort()) {
+            eq += porDia.get(date); peak = Math.max(peak, eq);
+            out.push({ zone, model, date, eq, dd: eq - peak });
+          }
+        }
+      }
+      return out;
+    },
+  });
+
+  dash.calc('patrones', {
+    inputs: ['operaciones'],
+    title: 'Patrones por día, semana del mes, noticias y mes',
+    description: 'Operaciones, tasa de acierto y neto agrupados por día de la semana, semana del mes, tipo de noticia y mes.',
+    fn: (operaciones) => {
+      const dias = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+      const dims = {
+        dia: (o) => dias[new Date(o.date + 'T12:00:00Z').getUTCDay()],
+        semana: (o) => 'Semana ' + (Math.floor((Number(o.date.slice(8, 10)) - 1) / 7) + 1),
+        noticia: (o) => o.news,
+        mes: (o) => o.date.slice(0, 7),
+      };
+      const out = [];
+      for (const zone of ['NY', 'CDMX']) {
+        for (const model of ['A', 'B', 'AB']) {
+          const ops = operaciones.filter((o) => o.zone === zone && (model === 'AB' || o.model === model));
+          for (const [dim, key] of Object.entries(dims)) {
+            for (const [k, v] of d3.group(ops, key)) {
+              const usd = v.map((o) => Number(o.usd));
+              out.push({
+                clave: `${zone}|${model}|${dim}|${k}`, zone, model, dim, k, n: v.length,
+                winrate: usd.filter((x) => x > 0).length / v.length, net: d3.sum(usd), avg: d3.mean(usd),
+              });
+            }
+          }
+        }
+      }
+      return out;
+    },
+  });
+</script>
+
+<script>
+  // ---------- cálculos
+  dash.calc('comp_resumen', {
+    inputs: ['ops'],
+    title: 'Métricas de cada configuración',
+    description: 'Acierto, factor de beneficio, neto, medias, mejor y peor racha, drawdown y estadístico t.',
+    fn: (operaciones) => {
+      const out = [];
+      for (const [config, v] of d3.group(operaciones, (o) => o.config)) {
+        const usd = [...v].sort((a, b) => (a.date < b.date ? -1 : 1)).map((o) => Number(o.usd));
+        const n = usd.length;
+        let eq = 0, peak = 0, maxdd = 0, rl = 0, worst = 0, rw = 0, best = 0, gw = 0, gl = 0;
+        for (const x of usd) {
+          eq += x; peak = Math.max(peak, eq); maxdd = Math.max(maxdd, peak - eq);
+          rl = x < 0 ? rl + 1 : 0; worst = Math.max(worst, rl);
+          rw = x > 0 ? rw + 1 : 0; best = Math.max(best, rw);
+          if (x > 0) gw += x; else gl -= x;
+        }
+        const avg = eq / n;
+        const sd = Math.sqrt(usd.reduce((s, x) => s + (x - avg) ** 2, 0) / (n - 1));
+        const wins = usd.filter((x) => x > 0), losses = usd.filter((x) => x < 0);
+        out.push({ config, n, winrate: wins.length / n, pf: gw / gl, net: eq, avg, maxdd, best_streak: best, worst_streak: worst,
+          t: (avg / sd) * Math.sqrt(n), avg_win: d3.mean(wins), avg_loss: d3.mean(losses) });
+      }
+      return out.sort((a, b) => (b.config === 'Suma de las dos') - (a.config === 'Suma de las dos') || (a.config < b.config ? -1 : 1));
+    },
+  });
+
+  dash.calc('comp_anual', {
+    inputs: ['ops'],
+    title: 'Resultado por año',
+    description: 'Días, % de días positivos, factor y neto de cada estrategia y de la suma en 2025 y 2026.',
+    fn: (operaciones) => {
+      const out = [];
+      for (const [k, v] of d3.group(operaciones, (o) => `${o.config}|${o.year}`)) {
+        const usd = v.map((o) => Number(o.usd));
+        const gw = d3.sum(usd.filter((x) => x > 0)), gl = -d3.sum(usd.filter((x) => x < 0));
+        out.push({ clave: k, config: v[0].config, year: String(v[0].year), n: usd.length, winrate: usd.filter((x) => x > 0).length / usd.length, pf: gw / gl, net: d3.sum(usd) });
+      }
+      return out.sort((a, b) => (a.config < b.config ? -1 : a.config > b.config ? 1 : a.year < b.year ? -1 : 1));
+    },
+  });
+
+  dash.calc('comp_curva', {
+    inputs: ['ops'],
+    title: 'Curva de capital',
+    description: 'USD acumulados y drawdown de cada configuración, operación a operación.',
+    fn: (operaciones) => {
+      const out = [];
+      for (const [config, v] of d3.group(operaciones, (o) => o.config)) {
+        let eq = 0, peak = 0;
+        for (const o of [...v].sort((a, b) => (a.date < b.date ? -1 : 1))) {
+          eq += Number(o.usd); peak = Math.max(peak, eq);
+          out.push({ config, date: o.date, eq, dd: eq - peak });
+        }
+      }
+      return out;
+    },
+  });
+
+  dash.calc('comp_grupos', {
+    inputs: ['ops'],
+    title: 'Resultados por grupo',
+    description: 'Días, % positivos, media y neto de cada estrategia y de la suma por desenlace, día, semana del mes, mes, noticias y lado.',
+    fn: (operaciones) => {
+      const dims = { 'Desenlace': 'outcome', 'Día de la semana': 'weekday', 'Semana del mes': 'wom', 'Mes': 'month_name', 'Noticias': 'news', 'Lado': 'side' };
+      const out = [];
+      for (const [config, v] of d3.group(operaciones, (o) => o.config)) {
+        for (const [dim, col] of Object.entries(dims)) {
+          for (const [k, g] of d3.group(v.filter((o) => o[col] !== null && o[col] !== ''), (o) => o[col])) {
+            const usd = g.map((o) => Number(o.usd));
+            out.push({ clave: `${config}|${dim}|${k}`, config, dim, k, n: g.length,
+              winrate: usd.filter((x) => x > 0).length / g.length, avg: d3.mean(usd), net: d3.sum(usd) });
+          }
+        }
+      }
+      return out;
+    },
+  });
+
+  dash.calc('comp_rachas', {
+    inputs: ['ops'],
+    title: 'Rachas',
+    description: 'Cuántas veces se dio cada largo de racha ganadora y perdedora en cada configuración.',
+    fn: (operaciones) => {
+      const out = [];
+      for (const [config, v] of d3.group(operaciones, (o) => o.config)) {
+        const usd = [...v].sort((a, b) => (a.date < b.date ? -1 : 1)).map((o) => Number(o.usd));
+        const cuenta = { ganadora: new Map(), perdedora: new Map() };
+        let tipo = null, largo = 0;
+        const cierra = () => { if (tipo) cuenta[tipo].set(largo, (cuenta[tipo].get(largo) || 0) + 1); };
+        for (const x of usd) {
+          const t = x > 0 ? 'ganadora' : 'perdedora';
+          if (t === tipo) largo += 1; else { cierra(); tipo = t; largo = 1; }
+        }
+        cierra();
+        for (const t of ['ganadora', 'perdedora']) {
+          for (const [l, veces] of cuenta[t]) out.push({ clave: `${config}|${t}|${l}`, config, tipo: t, largo: l, veces });
+        }
+      }
+      return out;
+    },
+  });
+</script>
+
+<script>
+  // ---------- controles
+  (() => {
+    const sels = [['sel-racha', 'racha', 'ganadora'], ['sel-dim', 'dim', 'Día de la semana']];
+    for (const [id, name] of sels) {
+      for (const el of document.querySelectorAll('#' + id)) el.addEventListener('change', () => dash.setParams({ [name]: el.value }));
+    }
+    dash.onData(() => {
+      const p = dash.params();
+      for (const [id, name, def] of sels) {
+        for (const el of document.querySelectorAll('#' + id)) if (document.activeElement !== el) el.value = p[name] ?? def;
+      }
+      for (const sw of document.querySelectorAll('[data-sw]')) sw.style.background = dash.colors[Number(sw.dataset.sw)] || 'var(--color-fg-muted)';
+    });
+  })();
+</script>
+
+<script>
+  // ---------- resumen, rachas y tabla
+  (() => {
+    const { money, pct, pf, n0, mark, enc } = ES;
+    const SUM = 'Suma de las dos', RAS = 'Rascacielos + gestión B (9:30 NY)', MB = 'Modelo B (9:12 CDMX)';
+    const row = (c) => { const d = dash.data('comp_resumen'); return d.status === 'ok' && d.data ? d.data.find((r) => r.config === c) : null; };
+    const w = (c) => 'config=' + enc(c);
+    const kpi = (name, field, fmt, cls) => dash.draw(name, (el) => {
+      const r = row(SUM);
+      if (!r) { el.replaceChildren('—'); return; }
+      el.replaceChildren(mark('span', 'comp_resumen', field, w(SUM), fmt(r[field])));
+      el.className = 'es-kpi-value ' + (cls ? cls(r[field]) : '');
+    });
+    kpi('k-net', 'net', money, (v) => (v >= 0 ? 'es-good' : 'es-bad'));
+    kpi('k-pf', 'pf', pf, (v) => (v >= 1 ? 'es-good' : 'es-bad'));
+    kpi('k-wr', 'winrate', pct);
+    kpi('k-best', 'best_streak', n0, () => 'es-good');
+    kpi('k-worst', 'worst_streak', n0, () => 'es-bad');
+    kpi('k-dd', 'maxdd', money, () => 'es-bad');
+
+    dash.draw('frase-resumen', (el) => {
+      const s = row(SUM), a = row(RAS), b = row(MB);
+      const an = dash.data('comp_anual');
+      if (!s || !a || !b || an.status !== 'ok' || !an.data) { el.replaceChildren('—'); return; }
+      const y = (c, yr) => an.data.find((r) => r.config === c && r.year === yr);
+      const s25 = y(SUM, '2025'), s26 = y(SUM, '2026');
+      const m = (r, f, txt) => mark('b', 'comp_resumen', f, w(r.config), txt);
+      const ma = (r, txt) => mark('b', 'comp_anual', 'net', 'clave=' + enc(r.clave), txt);
+      el.replaceChildren('Sumadas dejan ', m(s, 'net', money(s.net)), ' (el Rascacielos ', m(a, 'net', money(a.net)), ' y el modelo B ', m(b, 'net', money(b.net)),
+        '), con factor ', m(s, 'pf', pf(s.pf)), '. Pero todo viene de 2026: ', ...(s25 && s26 ? [ma(s25, money(s25.net)), ' en 2025 y ', ma(s26, money(s26.net)), ' en 2026. '] : []),
+        'El drawdown de la suma llega a ', m(s, 'maxdd', money(s.maxdd)), ' y la peor racha a ', m(s, 'worst_streak', n0(s.worst_streak)), ' días negativos seguidos.');
+    });
+
+    dash.draw('tabla-anual', (tb) => {
+      const d = dash.data('comp_anual');
+      if (d.status !== 'ok' || !d.data) { tb.replaceChildren(); return; }
+      tb.replaceChildren(...d.data.map((r) => {
+        const tr = document.createElement('tr'); tr.dataset.key = enc(r.clave);
+        if (r.config === SUM) tr.className = 'es-sel';
+        [[r.config, 'es-l'], [r.year], [n0(r.n)], [pct(r.winrate)], [pf(r.pf), r.pf >= 1 ? 'es-good' : 'es-bad'], [money(r.net), r.net >= 0 ? 'es-good' : 'es-bad']]
+          .forEach(([txt, cls]) => { const td = document.createElement('td'); td.textContent = txt; if (cls) td.className = cls; tr.append(td); });
+        return tr;
+      }));
+    });
+
+    dash.draw('tabla-resumen', (tb) => {
+      const d = dash.data('comp_resumen');
+      if (d.status !== 'ok' || !d.data) { tb.replaceChildren(); return; }
+      tb.replaceChildren(...d.data.map((r) => {
+        const tr = document.createElement('tr'); tr.dataset.key = enc(r.config);
+        [[r.config], [pct(r.winrate)], [pf(r.pf), r.pf >= 1 ? 'es-good' : 'es-bad'], [money(r.net), r.net >= 0 ? 'es-good' : 'es-bad'], [money(r.avg)],
+          [money(r.avg_win), 'es-good'], [money(r.avg_loss), 'es-bad'], [n0(r.best_streak)], [n0(r.worst_streak)], [money(r.maxdd)], [ES.loc.format('.2f')(r.t)]]
+          .forEach(([txt, cls], i) => { const td = document.createElement('td'); td.textContent = txt; if (cls) td.className = cls; if (i === 0) td.classList.add('es-l'); tr.append(td); });
+        return tr;
+      }));
+    });
+  })();
+</script>
+
+<script>
+  // ---------- gráficos
+  (() => {
+    const { money, pct, n0, tip, placeTip, tipLines, mark, enc } = ES;
+    const CONFIGS = ['Suma de las dos', 'Rascacielos + gestión B (9:30 NY)', 'Modelo B (9:12 CDMX)'];
+    const col = (c) => dash.colors[CONFIGS.indexOf(c)];
+
+    dash.draw('curva', (el) => {
+      const d = dash.data('comp_curva');
+      if (d.status !== 'ok' || !d.data || !d.data.length) { el.replaceChildren('—'); return; }
+      const parse = d3.utcParse('%Y-%m-%d');
+      const series = CONFIGS.map((c) => ({ c, rows: d.data.filter((r) => r.config === c).map((r) => ({ d: parse(r.date), eq: r.eq, dd: r.dd })) }));
+      const all = series.flatMap((s) => s.rows);
+      const W = el.clientWidth || 600, H1 = 260, H2 = 90, gap = 18;
+      el.replaceChildren();
+      const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H1 + gap + H2 + 24}`)
+        .attr('role', 'img').attr('aria-label', 'Curva de capital y drawdown del Rascacielos, el modelo B y su suma');
+      const y = d3.scaleLinear().domain(d3.extent([0, ...all.map((r) => r.eq)])).nice();
+      const yd = d3.scaleLinear().domain([d3.min(all, (r) => r.dd) || -1, 0]).nice();
+      const probe = svg.append('text').text(money(y.domain()[1]).length > money(y.domain()[0]).length ? money(y.domain()[1]) : money(y.domain()[0]));
+      const ml = Math.ceil(probe.node().getComputedTextLength() || 50) + 10; probe.remove();
+      const mr = 70;
+      const x = d3.scaleUtc().domain(d3.extent(all, (r) => r.d)).range([ml, W - mr]);
+      y.range([H1, 8]); yd.range([H1 + gap + H2, H1 + gap]);
+      svg.append('g').attr('class', 'es-grid').selectAll('line').data(y.ticks(5)).join('line').attr('x1', ml).attr('x2', W - mr).attr('y1', y).attr('y2', y);
+      svg.append('g').attr('class', 'es-axis').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(y).ticks(5).tickFormat(money).tickSize(0)).call((g) => g.select('.domain').remove());
+      svg.append('line').attr('x1', ml).attr('x2', W - mr).attr('y1', y(0)).attr('y2', y(0)).style('stroke', 'var(--cds-chart-reference)');
+      for (const s of series) {
+        svg.append('path').datum(s.rows).attr('fill', 'none').style('stroke', col(s.c)).attr('stroke-width', 2)
+          .attr('d', d3.line().x((r) => x(r.d)).y((r) => y(r.eq)));
+        svg.append('path').datum(s.rows).attr('fill', 'none').style('stroke', col(s.c)).attr('stroke-width', 1.2).attr('opacity', 0.9)
+          .attr('d', d3.line().x((r) => x(r.d)).y((r) => yd(r.dd)));
+      }
+      const ends = series.map((s) => ({ s, v: s.rows.at(-1).eq, y: y(s.rows.at(-1).eq) })).sort((a, b) => a.y - b.y);
+      for (let i = 1; i < ends.length; i++) ends[i].y = Math.max(ends[i].y, ends[i - 1].y + 14);
+      svg.append('g').selectAll('text').data(ends).join('text').attr('x', W - mr + 6).attr('y', (e) => e.y + 4).style('fill', (e) => col(e.s.c)).text((e) => money(e.v));
+      svg.append('text').attr('x', ml + 4).attr('y', H1 + gap + 12).text('Drawdown');
+      svg.append('g').attr('class', 'es-axis').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(yd).ticks(2).tickFormat(money).tickSize(0)).call((g) => g.select('.domain').remove());
+      svg.append('g').attr('class', 'es-axis').attr('transform', `translate(0,${H1 + gap + H2})`)
+        .call(d3.axisBottom(x).ticks(Math.max(2, Math.floor((W - ml - mr) / 90))).tickFormat(d3.utcFormat('%b %Y')).tickSizeOuter(0));
+      const t = tip(el);
+      const guide = svg.append('line').attr('y1', 8).attr('y2', H1 + gap + H2).style('stroke', 'var(--cds-chart-reference)').attr('opacity', 0);
+      const bis = d3.bisector((r) => r.d).right;
+      svg.append('rect').attr('x', ml).attr('y', 0).attr('width', W - ml - mr).attr('height', H1 + gap + H2).attr('fill', 'transparent')
+        .on('pointermove', (ev) => {
+          const [mx] = d3.pointer(ev); const dt = x.invert(mx);
+          guide.attr('x1', mx).attr('x2', mx).attr('opacity', 1);
+          const lines = [[d3.utcFormat('%d %b %Y')(dt), '']];
+          for (const s of series) { const i = bis(s.rows, dt) - 1; if (i >= 0) lines.push([s.c, `${money(s.rows[i].eq)} (DD ${money(s.rows[i].dd)})`]); }
+          tipLines(t, lines);
+          const box = el.getBoundingClientRect(); placeTip(t, el, ev.clientX - box.left, ev.clientY - box.top);
+        })
+        .on('pointerleave', () => { t.hidden = true; guide.attr('opacity', 0); });
+    });
+
+    // barras agrupadas horizontales: una barra por configuración en cada grupo
+    const grouped = (el, groups, valueOf, labelOf, fmtTip, domainMax, ariaLabel, refValue) => {
+      const W = el.clientWidth || 300, bar = 12, rowH = 2 * bar + 14;
+      const H = groups.length * rowH + 20;
+      el.replaceChildren();
+      const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', ariaLabel);
+      const probe = svg.append('text').text(groups.reduce((a, g) => (String(g.k).length > a.length ? String(g.k) : a), ''));
+      const ml = Math.ceil(probe.node().getComputedTextLength() || 60) + 10; probe.remove();
+      const mr = 92;
+      const x = d3.scaleLinear().domain([0, domainMax]).range([ml, W - mr]);
+      const t = tip(el);
+      groups.forEach((g, i) => {
+        const y0 = i * rowH + 4;
+        svg.append('text').attr('x', ml - 8).attr('y', y0 + bar + 4).attr('text-anchor', 'end').text(g.k);
+        g.items.forEach((it, j) => {
+          if (!it) return;
+          const yy = y0 + j * (bar + 2);
+          svg.append('rect').attr('x', ml).attr('y', yy).attr('height', bar).attr('rx', 2).attr('width', Math.max(1, x(valueOf(it)) - ml))
+            .style('fill', col(it.config)).attr('opacity', 0.9)
+            .on('pointermove', (ev) => { tipLines(t, fmtTip(it)); const box = el.getBoundingClientRect(); placeTip(t, el, ev.clientX - box.left, ev.clientY - box.top); })
+            .on('pointerleave', () => { t.hidden = true; });
+          svg.append('text').attr('x', x(valueOf(it)) + 4).attr('y', yy + bar - 2).text(labelOf(it));
+        });
+      });
+      if (refValue !== undefined) {
+        svg.append('line').attr('x1', x(refValue)).attr('x2', x(refValue)).attr('y1', 0).attr('y2', groups.length * rowH).style('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '3 3');
+      }
+      return svg;
+    };
+
+    dash.draw('rachas', (el) => {
+      const d = dash.data('comp_rachas');
+      if (d.status !== 'ok' || !d.data) { el.replaceChildren('—'); return; }
+      const tipo = dash.params().racha || 'ganadora';
+      const rs = d.data.filter((r) => r.tipo === tipo);
+      const largos = [...new Set(rs.map((r) => r.largo))].sort((a, b) => a - b);
+      const groups = largos.map((l) => ({ k: `${l} seguida${l > 1 ? 's' : ''}`, items: CONFIGS.map((c) => rs.find((r) => r.config === c && r.largo === l) || null) }));
+      grouped(el, groups, (it) => it.veces, (it) => `${n0(it.veces)} veces`,
+        (it) => [[it.config, ''], ['Largo', `${it.largo} ${tipo === 'ganadora' ? 'ganancias' : 'pérdidas'} seguidas`], ['Veces', n0(it.veces)]],
+        d3.max(rs, (r) => r.veces) || 1, `Frecuencia de rachas ${tipo}s por largo`);
+    });
+
+    dash.draw('desenlaces', (el) => {
+      const d = dash.data('comp_grupos');
+      if (d.status !== 'ok' || !d.data) { el.replaceChildren('—'); return; }
+      const rs = d.data.filter((r) => r.dim === 'Desenlace');
+      const order = ['TP1 + TP2', 'TP1 + BE', 'TP1 + cierre', 'Cierre 15:59', 'Stop (−2)'];
+      const tot = d3.rollup(rs, (v) => d3.sum(v, (r) => r.n), (r) => r.config);
+      const groups = order.filter((k) => rs.some((r) => r.k === k)).map((k) => ({ k, items: CONFIGS.map((c) => rs.find((r) => r.config === c && r.k === k) || null) }));
+      grouped(el, groups, (it) => it.n / tot.get(it.config), (it) => pct(it.n / tot.get(it.config)),
+        (it) => [[it.config, ''], [it.k, ''], ['Operaciones', n0(it.n)], ['Por operación', money(it.avg)], ['Neto', money(it.net)]], 1, 'Reparto de desenlaces por configuración');
+    });
+
+    dash.draw('frase-desenlace', (el) => {
+      const d = dash.data('comp_grupos');
+      if (d.status !== 'ok' || !d.data) { el.replaceChildren('—'); return; }
+      const f = (c, k) => d.data.find((r) => r.config === c && r.dim === 'Desenlace' && r.k === k);
+      const a = f(CONFIGS[1], 'Stop (−2)'), b = f(CONFIGS[2], 'Stop (−2)');
+      if (!a || !b) { el.replaceChildren('—'); return; }
+      const m = (r, fld, txt) => mark('b', 'comp_grupos', fld, 'clave=' + enc(r.clave), txt);
+      el.replaceChildren('El Rascacielos toca el stop en ', m(a, 'n', n0(a.n)), ' operaciones y el modelo B en ', m(b, 'n', n0(b.n)),
+        '. Con la misma gestión, cada stop cuesta lo mismo; la diferencia está en cuántas veces llega a TP2. La suma no tiene desenlace propio.');
+    });
+
+    dash.draw('dias', (el) => {
+      const d = dash.data('comp_grupos');
+      if (d.status !== 'ok' || !d.data) { el.replaceChildren('—'); return; }
+      const dim = dash.params().dim || 'Día de la semana';
+      const ORDER = {
+        'Día de la semana': ['Lun', 'Mar', 'Mié', 'Jue', 'Vie'], 'Semana del mes': ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4', 'Semana 5'],
+        'Mes': ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'], 'Horario en NY': ['10:12 NY (invierno)', '11:12 NY (verano)'],
+        'Volatilidad día anterior': ['Baja', 'Media', 'Alta'], 'Noticias': ['Sin noticia', 'NFP/CPI 8:30', 'FOMC'], 'Lado': ['Compra', 'Venta'],
+      };
+      const rs = d.data.filter((r) => r.dim === dim);
+      const groups = (ORDER[dim] || [...new Set(rs.map((r) => r.k))]).filter((k) => rs.some((r) => r.k === k))
+        .map((k) => ({ k, items: CONFIGS.map((c) => rs.find((r) => r.config === c && r.k === k) || null) }));
+      grouped(el, groups, (it) => it.winrate, (it) => `${pct(it.winrate)} · ${money(it.avg)}`,
+        (it) => [[it.config, ''], [it.k, ''], ['Operaciones', n0(it.n)], ['Acierto', pct(it.winrate)], ['Por operación', money(it.avg)], ['Neto', money(it.net)]],
+        1, `Acierto por ${dim.toLowerCase()} de cada configuración`);
+    });
+
+    dash.draw('frase-dias', (el) => {
+      const d = dash.data('comp_grupos');
+      if (d.status !== 'ok' || !d.data) { el.replaceChildren('—'); return; }
+      const dias = (c) => d.data.filter((r) => r.config === c && r.dim === 'Día de la semana');
+      const top = (c) => dias(c).reduce((a, r) => (r.net > a.net ? r : a), dias(c)[0]);
+      const low = (c) => dias(c).reduce((a, r) => (r.net < a.net ? r : a), dias(c)[0]);
+      const a = top(CONFIGS[0]), b = low(CONFIGS[0]);
+      if (!a || !b) { el.replaceChildren('—'); return; }
+      const m = (r) => mark('b', 'comp_grupos', 'net', 'clave=' + enc(r.clave), money(r.net));
+      el.replaceChildren(`Sumadas, el mejor día es el ${a.k} (`, m(a), `) y el peor el ${b.k} (`, m(b), '). Con unas 95 operaciones por día, la diferencia entre días todavía puede ser suerte.');
+    });
+  })();
+</script>
+<script>
+  // ---------- calendario de días hábiles
+  dash.calc('cal_resumen', {
+    inputs: ['calendario'],
+    title: 'Resumen del calendario',
+    description: 'Días ganados, perdidos y cerrados al final, neto y rachas de la configuración y el año elegidos.',
+    fn: (calendario) => {
+      const p = dash.params();
+      const cfg = p.cal_cfg || 'Suma de las dos';
+      const year = String(p.cal_year || '2025');
+      const dias = calendario.filter((r) => r.config === cfg && r.date.startsWith(year)).sort((a, b) => (a.date < b.date ? -1 : 1));
+      let rw = 0, rl = 0, best = 0, worst = 0;
+      for (const r of dias) {
+        const g = r.resultado === 'Ganó (TP)';
+        rw = g ? rw + 1 : 0; rl = g ? 0 : rl + 1;
+        best = Math.max(best, rw); worst = Math.max(worst, rl);
+      }
+      const count = (k) => dias.filter((r) => r.resultado === k).length;
+      return [{ config: cfg, year, dias: dias.length, ganados: count('Ganó (TP)'), perdidos: count('Perdió (SL)'),
+        cerrados: count('Cerró a las 15:59'), neto: d3.sum(dias, (r) => Number(r.usd)), mejor_racha: best, peor_racha: worst }];
+    },
+  });
+
+  (() => {
+    const DEF = 'Suma de las dos';
+    const MESES = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+    const CLS = { 'Ganó (TP)': 'mn-c-win', 'Perdió (SL)': 'mn-c-loss', 'Cerró a las 15:59': 'mn-c-close' };
+    const p = () => ({ cfg: dash.params().cal_cfg || DEF, year: String(dash.params().cal_year || '2025') });
+
+    for (const el of document.querySelectorAll('#sel-cal-cfg')) el.addEventListener('change', () => dash.setParams({ cal_cfg: el.value }));
+    for (const el of document.querySelectorAll('#sel-cal-year')) el.addEventListener('change', () => dash.setParams({ cal_year: el.value }));
+    dash.onData(() => {
+      for (const el of document.querySelectorAll('#sel-cal-year')) if (document.activeElement !== el) el.value = p().year;
+    });
+
+    dash.draw('cal-opciones', (sel) => {
+      const d = dash.data('calendario');
+      const cfgs = d.status === 'ok' ? [...new Set(d.data.map((r) => r.config))].sort((a, b) => (a === DEF ? -1 : b === DEF ? 1 : a < b ? -1 : 1)) : [];
+      sel.replaceChildren(...cfgs.map((c) => new Option(c, c)));
+      sel.value = p().cfg;
+    });
+
+    dash.draw('calendario', (el) => {
+      const d = dash.data('calendario');
+      if (d.status !== 'ok') { el.replaceChildren('—'); return; }
+      const { cfg, year } = p();
+      const byDate = new Map(d.data.filter((r) => r.config === cfg).map((r) => [r.date, r]));
+      const all = [...byDate.keys()].sort();
+      const last = all[all.length - 1] || `${year}-12-31`;
+      const tip = document.createElement('div'); tip.className = 'mn-tip'; tip.hidden = true;
+      const rows = [];
+      for (let m = 0; m < 12; m++) {
+        const first = new Date(Date.UTC(+year, m, 1));
+        if (first.toISOString().slice(0, 10) > last) break;
+        const row = document.createElement('div'); row.className = 'mn-cal-row';
+        const lab = document.createElement('span'); lab.className = 'mn-cal-mes'; lab.textContent = MESES[m]; row.append(lab);
+        for (let day = new Date(first); day.getUTCMonth() === m; day.setUTCDate(day.getUTCDate() + 1)) {
+          const wd = day.getUTCDay();
+          if (wd === 0 || wd === 6) continue;
+          const iso = day.toISOString().slice(0, 10);
+          if (iso > last) break;
+          const r = byDate.get(iso);
+          const c = document.createElement('button'); c.type = 'button';
+          c.className = 'mn-cal-d ' + (r ? CLS[r.resultado] : 'mn-c-none');
+          c.textContent = String(day.getUTCDate());
+          c.setAttribute('aria-label', r ? `${iso}: ${r.resultado}, ${r.desenlace}, ${r.usd} USD` : `${iso}: sin operación`);
+          const show = (ev) => {
+            const lines = r ? [iso, `${r.resultado} · ${r.desenlace}`, `${r.lado} · ${ES_money(Number(r.usd))}`] : [iso, 'Sin operación (festivo o sin datos)'];
+            tip.replaceChildren(...lines.map((t) => { const x = document.createElement('div'); x.textContent = t; return x; }));
+            tip.hidden = false;
+            const b = el.getBoundingClientRect(), cb = c.getBoundingClientRect();
+            tip.style.left = Math.max(0, Math.min(cb.left - b.left + el.scrollLeft, el.scrollWidth - tip.offsetWidth)) + 'px';
+            tip.style.top = (cb.top - b.top - tip.offsetHeight - 6) + 'px';
+          };
+          c.addEventListener('pointerenter', show); c.addEventListener('focus', show); c.addEventListener('click', show);
+          c.addEventListener('pointerleave', () => { tip.hidden = true; }); c.addEventListener('blur', () => { tip.hidden = true; });
+          row.append(c);
+        }
+        rows.push(row);
+      }
+      el.replaceChildren(...rows, tip);
+    });
+    const ES_money = (v) => (v < 0 ? '−' : '+') + '$' + d3.format(',.0f')(Math.abs(v));
+
+    dash.draw('cal-frase', (el) => {
+      const d = dash.data('cal_resumen');
+      const r = d.status === 'ok' && d.data && d.data[0];
+      if (!r || !r.dias) { el.replaceChildren('—'); return; }
+      const m = (f, t) => ES.mark('b', 'cal_resumen', f, null, t);
+      el.replaceChildren(`En ${r.year}: `, m('ganados', String(r.ganados)), ' días ganados, ', m('perdidos', String(r.perdidos)), ' perdidos y ',
+        m('cerrados', String(r.cerrados)), ' cerrados al final del día. Neto ', m('neto', ES.money(r.neto)), '. Mejor racha ',
+        m('mejor_racha', String(r.mejor_racha)), ' días ganando; peor racha ', m('peor_racha', String(r.peor_racha)), ' días sin ganar.');
+    });
+  })();
+</script>

@@ -1,0 +1,1430 @@
+config,date,side,usd,outcome,news,win,weekday,wom,month_name,year
+Rascacielos + gestión B (9:30 NY),2025-01-02,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 1,Ene,2025
+Rascacielos + gestión B (9:30 NY),2025-01-03,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 1,Ene,2025
+Rascacielos + gestión B (9:30 NY),2025-01-06,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 1,Ene,2025
+Rascacielos + gestión B (9:30 NY),2025-01-07,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 1,Ene,2025
+Rascacielos + gestión B (9:30 NY),2025-01-08,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 2,Ene,2025
+Rascacielos + gestión B (9:30 NY),2025-01-10,Venta,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Vie,Semana 2,Ene,2025
+Rascacielos + gestión B (9:30 NY),2025-01-13,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 2,Ene,2025
+Rascacielos + gestión B (9:30 NY),2025-01-14,Compra,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 2,Ene,2025
+Rascacielos + gestión B (9:30 NY),2025-01-15,Compra,-1159.0,Stop (−2),NFP/CPI 8:30,0,Mié,Semana 3,Ene,2025
+Rascacielos + gestión B (9:30 NY),2025-01-16,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 3,Ene,2025
+Rascacielos + gestión B (9:30 NY),2025-01-17,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 3,Ene,2025
+Rascacielos + gestión B (9:30 NY),2025-01-20,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 3,Ene,2025
+Rascacielos + gestión B (9:30 NY),2025-01-21,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 3,Ene,2025
+Rascacielos + gestión B (9:30 NY),2025-01-22,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 4,Ene,2025
+Rascacielos + gestión B (9:30 NY),2025-01-23,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 4,Ene,2025
+Rascacielos + gestión B (9:30 NY),2025-01-24,Compra,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 4,Ene,2025
+Rascacielos + gestión B (9:30 NY),2025-01-27,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 4,Ene,2025
+Rascacielos + gestión B (9:30 NY),2025-01-28,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 4,Ene,2025
+Rascacielos + gestión B (9:30 NY),2025-01-29,Compra,-1159.0,Stop (−2),FOMC,0,Mié,Semana 5,Ene,2025
+Rascacielos + gestión B (9:30 NY),2025-01-30,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 5,Ene,2025
+Rascacielos + gestión B (9:30 NY),2025-01-31,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 5,Ene,2025
+Rascacielos + gestión B (9:30 NY),2025-02-03,Venta,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 1,Feb,2025
+Rascacielos + gestión B (9:30 NY),2025-02-04,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 1,Feb,2025
+Rascacielos + gestión B (9:30 NY),2025-02-05,Venta,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 1,Feb,2025
+Rascacielos + gestión B (9:30 NY),2025-02-06,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 1,Feb,2025
+Rascacielos + gestión B (9:30 NY),2025-02-07,Compra,341.0,TP1 + BE,NFP/CPI 8:30,1,Vie,Semana 1,Feb,2025
+Rascacielos + gestión B (9:30 NY),2025-02-10,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 2,Feb,2025
+Rascacielos + gestión B (9:30 NY),2025-02-11,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 2,Feb,2025
+Rascacielos + gestión B (9:30 NY),2025-02-12,Venta,-1159.0,Stop (−2),NFP/CPI 8:30,0,Mié,Semana 2,Feb,2025
+Rascacielos + gestión B (9:30 NY),2025-02-13,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 2,Feb,2025
+Rascacielos + gestión B (9:30 NY),2025-02-14,Compra,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 2,Feb,2025
+Rascacielos + gestión B (9:30 NY),2025-02-17,Compra,142.5,Cierre 15:59,Sin noticia,1,Lun,Semana 3,Feb,2025
+Rascacielos + gestión B (9:30 NY),2025-02-18,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 3,Feb,2025
+Rascacielos + gestión B (9:30 NY),2025-02-19,Venta,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 3,Feb,2025
+Rascacielos + gestión B (9:30 NY),2025-02-20,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 3,Feb,2025
+Rascacielos + gestión B (9:30 NY),2025-02-21,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 3,Feb,2025
+Rascacielos + gestión B (9:30 NY),2025-02-24,Venta,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 4,Feb,2025
+Rascacielos + gestión B (9:30 NY),2025-02-25,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 4,Feb,2025
+Rascacielos + gestión B (9:30 NY),2025-02-26,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 4,Feb,2025
+Rascacielos + gestión B (9:30 NY),2025-02-27,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 4,Feb,2025
+Rascacielos + gestión B (9:30 NY),2025-02-28,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 4,Feb,2025
+Rascacielos + gestión B (9:30 NY),2025-03-03,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 1,Mar,2025
+Rascacielos + gestión B (9:30 NY),2025-03-04,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 1,Mar,2025
+Rascacielos + gestión B (9:30 NY),2025-03-05,Venta,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 1,Mar,2025
+Rascacielos + gestión B (9:30 NY),2025-03-06,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 1,Mar,2025
+Rascacielos + gestión B (9:30 NY),2025-03-07,Venta,-1159.0,Stop (−2),NFP/CPI 8:30,0,Vie,Semana 1,Mar,2025
+Rascacielos + gestión B (9:30 NY),2025-03-10,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 2,Mar,2025
+Rascacielos + gestión B (9:30 NY),2025-03-11,Venta,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 2,Mar,2025
+Rascacielos + gestión B (9:30 NY),2025-03-12,Compra,341.0,TP1 + BE,NFP/CPI 8:30,1,Mié,Semana 2,Mar,2025
+Rascacielos + gestión B (9:30 NY),2025-03-13,Venta,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 2,Mar,2025
+Rascacielos + gestión B (9:30 NY),2025-03-14,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 2,Mar,2025
+Rascacielos + gestión B (9:30 NY),2025-03-17,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 3,Mar,2025
+Rascacielos + gestión B (9:30 NY),2025-03-18,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 3,Mar,2025
+Rascacielos + gestión B (9:30 NY),2025-03-19,Compra,-1159.0,Stop (−2),FOMC,0,Mié,Semana 3,Mar,2025
+Rascacielos + gestión B (9:30 NY),2025-03-20,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 3,Mar,2025
+Rascacielos + gestión B (9:30 NY),2025-03-21,Venta,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 3,Mar,2025
+Rascacielos + gestión B (9:30 NY),2025-03-24,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 4,Mar,2025
+Rascacielos + gestión B (9:30 NY),2025-03-25,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 4,Mar,2025
+Rascacielos + gestión B (9:30 NY),2025-03-26,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 4,Mar,2025
+Rascacielos + gestión B (9:30 NY),2025-03-27,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 4,Mar,2025
+Rascacielos + gestión B (9:30 NY),2025-03-28,Venta,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 4,Mar,2025
+Rascacielos + gestión B (9:30 NY),2025-03-31,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 5,Mar,2025
+Rascacielos + gestión B (9:30 NY),2025-04-01,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 1,Abr,2025
+Rascacielos + gestión B (9:30 NY),2025-04-02,Venta,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 1,Abr,2025
+Rascacielos + gestión B (9:30 NY),2025-04-03,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 1,Abr,2025
+Rascacielos + gestión B (9:30 NY),2025-04-04,Venta,-1159.0,Stop (−2),NFP/CPI 8:30,0,Vie,Semana 1,Abr,2025
+Rascacielos + gestión B (9:30 NY),2025-04-07,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 1,Abr,2025
+Rascacielos + gestión B (9:30 NY),2025-04-08,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 2,Abr,2025
+Rascacielos + gestión B (9:30 NY),2025-04-09,Venta,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 2,Abr,2025
+Rascacielos + gestión B (9:30 NY),2025-04-10,Compra,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Jue,Semana 2,Abr,2025
+Rascacielos + gestión B (9:30 NY),2025-04-11,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 2,Abr,2025
+Rascacielos + gestión B (9:30 NY),2025-04-14,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 2,Abr,2025
+Rascacielos + gestión B (9:30 NY),2025-04-15,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 3,Abr,2025
+Rascacielos + gestión B (9:30 NY),2025-04-16,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 3,Abr,2025
+Rascacielos + gestión B (9:30 NY),2025-04-17,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 3,Abr,2025
+Rascacielos + gestión B (9:30 NY),2025-04-21,Venta,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 3,Abr,2025
+Rascacielos + gestión B (9:30 NY),2025-04-22,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 4,Abr,2025
+Rascacielos + gestión B (9:30 NY),2025-04-23,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 4,Abr,2025
+Rascacielos + gestión B (9:30 NY),2025-04-24,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 4,Abr,2025
+Rascacielos + gestión B (9:30 NY),2025-04-25,Venta,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 4,Abr,2025
+Rascacielos + gestión B (9:30 NY),2025-04-28,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 4,Abr,2025
+Rascacielos + gestión B (9:30 NY),2025-04-29,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 5,Abr,2025
+Rascacielos + gestión B (9:30 NY),2025-04-30,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 5,Abr,2025
+Rascacielos + gestión B (9:30 NY),2025-05-01,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 1,May,2025
+Rascacielos + gestión B (9:30 NY),2025-05-02,Venta,-1159.0,Stop (−2),NFP/CPI 8:30,0,Vie,Semana 1,May,2025
+Rascacielos + gestión B (9:30 NY),2025-05-05,Venta,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 1,May,2025
+Rascacielos + gestión B (9:30 NY),2025-05-06,Venta,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 1,May,2025
+Rascacielos + gestión B (9:30 NY),2025-05-07,Venta,341.0,TP1 + BE,FOMC,1,Mié,Semana 1,May,2025
+Rascacielos + gestión B (9:30 NY),2025-05-08,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 2,May,2025
+Rascacielos + gestión B (9:30 NY),2025-05-09,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 2,May,2025
+Rascacielos + gestión B (9:30 NY),2025-05-12,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 2,May,2025
+Rascacielos + gestión B (9:30 NY),2025-05-13,Compra,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Mar,Semana 2,May,2025
+Rascacielos + gestión B (9:30 NY),2025-05-14,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 2,May,2025
+Rascacielos + gestión B (9:30 NY),2025-05-15,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 3,May,2025
+Rascacielos + gestión B (9:30 NY),2025-05-16,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 3,May,2025
+Rascacielos + gestión B (9:30 NY),2025-05-19,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 3,May,2025
+Rascacielos + gestión B (9:30 NY),2025-05-20,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 3,May,2025
+Rascacielos + gestión B (9:30 NY),2025-05-21,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 3,May,2025
+Rascacielos + gestión B (9:30 NY),2025-05-22,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 4,May,2025
+Rascacielos + gestión B (9:30 NY),2025-05-23,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 4,May,2025
+Rascacielos + gestión B (9:30 NY),2025-05-26,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 4,May,2025
+Rascacielos + gestión B (9:30 NY),2025-05-27,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 4,May,2025
+Rascacielos + gestión B (9:30 NY),2025-05-28,Compra,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 4,May,2025
+Rascacielos + gestión B (9:30 NY),2025-05-29,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 5,May,2025
+Rascacielos + gestión B (9:30 NY),2025-05-30,Venta,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 5,May,2025
+Rascacielos + gestión B (9:30 NY),2025-06-02,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 1,Jun,2025
+Rascacielos + gestión B (9:30 NY),2025-06-03,Compra,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 1,Jun,2025
+Rascacielos + gestión B (9:30 NY),2025-06-04,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 1,Jun,2025
+Rascacielos + gestión B (9:30 NY),2025-06-05,Compra,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 1,Jun,2025
+Rascacielos + gestión B (9:30 NY),2025-06-06,Compra,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Vie,Semana 1,Jun,2025
+Rascacielos + gestión B (9:30 NY),2025-06-09,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 2,Jun,2025
+Rascacielos + gestión B (9:30 NY),2025-06-10,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 2,Jun,2025
+Rascacielos + gestión B (9:30 NY),2025-06-11,Compra,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Mié,Semana 2,Jun,2025
+Rascacielos + gestión B (9:30 NY),2025-06-12,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 2,Jun,2025
+Rascacielos + gestión B (9:30 NY),2025-06-13,Venta,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 2,Jun,2025
+Rascacielos + gestión B (9:30 NY),2025-06-16,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 3,Jun,2025
+Rascacielos + gestión B (9:30 NY),2025-06-17,Venta,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 3,Jun,2025
+Rascacielos + gestión B (9:30 NY),2025-06-18,Compra,-1159.0,Stop (−2),FOMC,0,Mié,Semana 3,Jun,2025
+Rascacielos + gestión B (9:30 NY),2025-06-19,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 3,Jun,2025
+Rascacielos + gestión B (9:30 NY),2025-06-20,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 3,Jun,2025
+Rascacielos + gestión B (9:30 NY),2025-06-23,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 4,Jun,2025
+Rascacielos + gestión B (9:30 NY),2025-06-24,Compra,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 4,Jun,2025
+Rascacielos + gestión B (9:30 NY),2025-06-25,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 4,Jun,2025
+Rascacielos + gestión B (9:30 NY),2025-06-26,Compra,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 4,Jun,2025
+Rascacielos + gestión B (9:30 NY),2025-06-27,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 4,Jun,2025
+Rascacielos + gestión B (9:30 NY),2025-06-30,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 5,Jun,2025
+Rascacielos + gestión B (9:30 NY),2025-07-01,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 1,Jul,2025
+Rascacielos + gestión B (9:30 NY),2025-07-02,Venta,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 1,Jul,2025
+Rascacielos + gestión B (9:30 NY),2025-07-03,Compra,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Jue,Semana 1,Jul,2025
+Rascacielos + gestión B (9:30 NY),2025-07-04,Venta,113.9,Cierre 15:59,Sin noticia,1,Vie,Semana 1,Jul,2025
+Rascacielos + gestión B (9:30 NY),2025-07-07,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 1,Jul,2025
+Rascacielos + gestión B (9:30 NY),2025-07-08,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 2,Jul,2025
+Rascacielos + gestión B (9:30 NY),2025-07-09,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 2,Jul,2025
+Rascacielos + gestión B (9:30 NY),2025-07-10,Compra,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 2,Jul,2025
+Rascacielos + gestión B (9:30 NY),2025-07-11,Venta,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 2,Jul,2025
+Rascacielos + gestión B (9:30 NY),2025-07-14,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 2,Jul,2025
+Rascacielos + gestión B (9:30 NY),2025-07-15,Compra,341.0,TP1 + BE,NFP/CPI 8:30,1,Mar,Semana 3,Jul,2025
+Rascacielos + gestión B (9:30 NY),2025-07-16,Venta,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 3,Jul,2025
+Rascacielos + gestión B (9:30 NY),2025-07-17,Compra,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 3,Jul,2025
+Rascacielos + gestión B (9:30 NY),2025-07-18,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 3,Jul,2025
+Rascacielos + gestión B (9:30 NY),2025-07-21,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 3,Jul,2025
+Rascacielos + gestión B (9:30 NY),2025-07-22,Venta,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 4,Jul,2025
+Rascacielos + gestión B (9:30 NY),2025-07-23,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 4,Jul,2025
+Rascacielos + gestión B (9:30 NY),2025-07-24,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 4,Jul,2025
+Rascacielos + gestión B (9:30 NY),2025-07-25,Venta,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 4,Jul,2025
+Rascacielos + gestión B (9:30 NY),2025-07-28,Venta,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 4,Jul,2025
+Rascacielos + gestión B (9:30 NY),2025-07-29,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 5,Jul,2025
+Rascacielos + gestión B (9:30 NY),2025-07-30,Venta,341.0,TP1 + BE,FOMC,1,Mié,Semana 5,Jul,2025
+Rascacielos + gestión B (9:30 NY),2025-07-31,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 5,Jul,2025
+Rascacielos + gestión B (9:30 NY),2025-08-01,Venta,341.0,TP1 + BE,NFP/CPI 8:30,1,Vie,Semana 1,Ago,2025
+Rascacielos + gestión B (9:30 NY),2025-08-04,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 1,Ago,2025
+Rascacielos + gestión B (9:30 NY),2025-08-05,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 1,Ago,2025
+Rascacielos + gestión B (9:30 NY),2025-08-06,Venta,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 1,Ago,2025
+Rascacielos + gestión B (9:30 NY),2025-08-07,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 1,Ago,2025
+Rascacielos + gestión B (9:30 NY),2025-08-08,Compra,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 2,Ago,2025
+Rascacielos + gestión B (9:30 NY),2025-08-11,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 2,Ago,2025
+Rascacielos + gestión B (9:30 NY),2025-08-12,Venta,-1159.0,Stop (−2),NFP/CPI 8:30,0,Mar,Semana 2,Ago,2025
+Rascacielos + gestión B (9:30 NY),2025-08-13,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 2,Ago,2025
+Rascacielos + gestión B (9:30 NY),2025-08-14,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 2,Ago,2025
+Rascacielos + gestión B (9:30 NY),2025-08-15,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 3,Ago,2025
+Rascacielos + gestión B (9:30 NY),2025-08-18,Venta,-524.9,Cierre 15:59,Sin noticia,0,Lun,Semana 3,Ago,2025
+Rascacielos + gestión B (9:30 NY),2025-08-19,Venta,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 3,Ago,2025
+Rascacielos + gestión B (9:30 NY),2025-08-20,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 3,Ago,2025
+Rascacielos + gestión B (9:30 NY),2025-08-21,Venta,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 3,Ago,2025
+Rascacielos + gestión B (9:30 NY),2025-08-22,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 4,Ago,2025
+Rascacielos + gestión B (9:30 NY),2025-08-25,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 4,Ago,2025
+Rascacielos + gestión B (9:30 NY),2025-08-26,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 4,Ago,2025
+Rascacielos + gestión B (9:30 NY),2025-08-27,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 4,Ago,2025
+Rascacielos + gestión B (9:30 NY),2025-08-28,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 4,Ago,2025
+Rascacielos + gestión B (9:30 NY),2025-08-29,Venta,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 5,Ago,2025
+Rascacielos + gestión B (9:30 NY),2025-09-01,Venta,-959.3,Cierre 15:59,Sin noticia,0,Lun,Semana 1,Sep,2025
+Rascacielos + gestión B (9:30 NY),2025-09-02,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 1,Sep,2025
+Rascacielos + gestión B (9:30 NY),2025-09-03,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 1,Sep,2025
+Rascacielos + gestión B (9:30 NY),2025-09-04,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 1,Sep,2025
+Rascacielos + gestión B (9:30 NY),2025-09-05,Compra,-1159.0,Stop (−2),NFP/CPI 8:30,0,Vie,Semana 1,Sep,2025
+Rascacielos + gestión B (9:30 NY),2025-09-08,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 2,Sep,2025
+Rascacielos + gestión B (9:30 NY),2025-09-09,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 2,Sep,2025
+Rascacielos + gestión B (9:30 NY),2025-09-10,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 2,Sep,2025
+Rascacielos + gestión B (9:30 NY),2025-09-11,Compra,-1159.0,Stop (−2),NFP/CPI 8:30,0,Jue,Semana 2,Sep,2025
+Rascacielos + gestión B (9:30 NY),2025-09-12,Compra,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 2,Sep,2025
+Rascacielos + gestión B (9:30 NY),2025-09-15,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 3,Sep,2025
+Rascacielos + gestión B (9:30 NY),2025-09-16,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 3,Sep,2025
+Rascacielos + gestión B (9:30 NY),2025-09-17,Venta,1091.0,TP1 + TP2,FOMC,1,Mié,Semana 3,Sep,2025
+Rascacielos + gestión B (9:30 NY),2025-09-18,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 3,Sep,2025
+Rascacielos + gestión B (9:30 NY),2025-09-19,Compra,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 3,Sep,2025
+Rascacielos + gestión B (9:30 NY),2025-09-22,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 4,Sep,2025
+Rascacielos + gestión B (9:30 NY),2025-09-23,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 4,Sep,2025
+Rascacielos + gestión B (9:30 NY),2025-09-24,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 4,Sep,2025
+Rascacielos + gestión B (9:30 NY),2025-09-25,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 4,Sep,2025
+Rascacielos + gestión B (9:30 NY),2025-09-26,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 4,Sep,2025
+Rascacielos + gestión B (9:30 NY),2025-09-29,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 5,Sep,2025
+Rascacielos + gestión B (9:30 NY),2025-09-30,Venta,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 5,Sep,2025
+Rascacielos + gestión B (9:30 NY),2025-10-01,Venta,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 1,Oct,2025
+Rascacielos + gestión B (9:30 NY),2025-10-02,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 1,Oct,2025
+Rascacielos + gestión B (9:30 NY),2025-10-03,Compra,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 1,Oct,2025
+Rascacielos + gestión B (9:30 NY),2025-10-06,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 1,Oct,2025
+Rascacielos + gestión B (9:30 NY),2025-10-07,Compra,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 1,Oct,2025
+Rascacielos + gestión B (9:30 NY),2025-10-08,Venta,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 2,Oct,2025
+Rascacielos + gestión B (9:30 NY),2025-10-09,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 2,Oct,2025
+Rascacielos + gestión B (9:30 NY),2025-10-10,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 2,Oct,2025
+Rascacielos + gestión B (9:30 NY),2025-10-13,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 2,Oct,2025
+Rascacielos + gestión B (9:30 NY),2025-10-14,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 2,Oct,2025
+Rascacielos + gestión B (9:30 NY),2025-10-15,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 3,Oct,2025
+Rascacielos + gestión B (9:30 NY),2025-10-16,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 3,Oct,2025
+Rascacielos + gestión B (9:30 NY),2025-10-17,Venta,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 3,Oct,2025
+Rascacielos + gestión B (9:30 NY),2025-10-20,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 3,Oct,2025
+Rascacielos + gestión B (9:30 NY),2025-10-21,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 3,Oct,2025
+Rascacielos + gestión B (9:30 NY),2025-10-22,Venta,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 4,Oct,2025
+Rascacielos + gestión B (9:30 NY),2025-10-23,Venta,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 4,Oct,2025
+Rascacielos + gestión B (9:30 NY),2025-10-24,Compra,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Vie,Semana 4,Oct,2025
+Rascacielos + gestión B (9:30 NY),2025-10-27,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 4,Oct,2025
+Rascacielos + gestión B (9:30 NY),2025-10-28,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 4,Oct,2025
+Rascacielos + gestión B (9:30 NY),2025-10-29,Compra,341.0,TP1 + BE,FOMC,1,Mié,Semana 5,Oct,2025
+Rascacielos + gestión B (9:30 NY),2025-10-30,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 5,Oct,2025
+Rascacielos + gestión B (9:30 NY),2025-10-31,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 5,Oct,2025
+Rascacielos + gestión B (9:30 NY),2025-11-03,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 1,Nov,2025
+Rascacielos + gestión B (9:30 NY),2025-11-04,Venta,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 1,Nov,2025
+Rascacielos + gestión B (9:30 NY),2025-11-05,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 1,Nov,2025
+Rascacielos + gestión B (9:30 NY),2025-11-06,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 1,Nov,2025
+Rascacielos + gestión B (9:30 NY),2025-11-07,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 1,Nov,2025
+Rascacielos + gestión B (9:30 NY),2025-11-10,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 2,Nov,2025
+Rascacielos + gestión B (9:30 NY),2025-11-11,Venta,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 2,Nov,2025
+Rascacielos + gestión B (9:30 NY),2025-11-12,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 2,Nov,2025
+Rascacielos + gestión B (9:30 NY),2025-11-13,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 2,Nov,2025
+Rascacielos + gestión B (9:30 NY),2025-11-14,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 2,Nov,2025
+Rascacielos + gestión B (9:30 NY),2025-11-17,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 3,Nov,2025
+Rascacielos + gestión B (9:30 NY),2025-11-18,Venta,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 3,Nov,2025
+Rascacielos + gestión B (9:30 NY),2025-11-19,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 3,Nov,2025
+Rascacielos + gestión B (9:30 NY),2025-11-20,Compra,341.0,TP1 + BE,NFP/CPI 8:30,1,Jue,Semana 3,Nov,2025
+Rascacielos + gestión B (9:30 NY),2025-11-21,Venta,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 3,Nov,2025
+Rascacielos + gestión B (9:30 NY),2025-11-24,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 4,Nov,2025
+Rascacielos + gestión B (9:30 NY),2025-11-25,Compra,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 4,Nov,2025
+Rascacielos + gestión B (9:30 NY),2025-11-26,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 4,Nov,2025
+Rascacielos + gestión B (9:30 NY),2025-11-27,Venta,146.6,Cierre 15:59,Sin noticia,1,Jue,Semana 4,Nov,2025
+Rascacielos + gestión B (9:30 NY),2025-11-28,Compra,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 4,Nov,2025
+Rascacielos + gestión B (9:30 NY),2025-12-01,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 1,Dic,2025
+Rascacielos + gestión B (9:30 NY),2025-12-02,Compra,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 1,Dic,2025
+Rascacielos + gestión B (9:30 NY),2025-12-03,Venta,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 1,Dic,2025
+Rascacielos + gestión B (9:30 NY),2025-12-04,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 1,Dic,2025
+Rascacielos + gestión B (9:30 NY),2025-12-05,Venta,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 1,Dic,2025
+Rascacielos + gestión B (9:30 NY),2025-12-08,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 2,Dic,2025
+Rascacielos + gestión B (9:30 NY),2025-12-09,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 2,Dic,2025
+Rascacielos + gestión B (9:30 NY),2025-12-10,Venta,341.0,TP1 + BE,FOMC,1,Mié,Semana 2,Dic,2025
+Rascacielos + gestión B (9:30 NY),2025-12-11,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 2,Dic,2025
+Rascacielos + gestión B (9:30 NY),2025-12-12,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 2,Dic,2025
+Rascacielos + gestión B (9:30 NY),2025-12-15,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 3,Dic,2025
+Rascacielos + gestión B (9:30 NY),2025-12-16,Compra,341.0,TP1 + BE,NFP/CPI 8:30,1,Mar,Semana 3,Dic,2025
+Rascacielos + gestión B (9:30 NY),2025-12-17,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 3,Dic,2025
+Rascacielos + gestión B (9:30 NY),2025-12-18,Compra,341.0,TP1 + BE,NFP/CPI 8:30,1,Jue,Semana 3,Dic,2025
+Rascacielos + gestión B (9:30 NY),2025-12-19,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 3,Dic,2025
+Rascacielos + gestión B (9:30 NY),2025-12-22,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 4,Dic,2025
+Rascacielos + gestión B (9:30 NY),2025-12-23,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 4,Dic,2025
+Rascacielos + gestión B (9:30 NY),2025-12-24,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 4,Dic,2025
+Rascacielos + gestión B (9:30 NY),2025-12-26,Compra,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 4,Dic,2025
+Rascacielos + gestión B (9:30 NY),2025-12-29,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 5,Dic,2025
+Rascacielos + gestión B (9:30 NY),2025-12-30,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 5,Dic,2025
+Rascacielos + gestión B (9:30 NY),2025-12-31,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 5,Dic,2025
+Rascacielos + gestión B (9:30 NY),2026-01-02,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 1,Ene,2026
+Rascacielos + gestión B (9:30 NY),2026-01-05,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 1,Ene,2026
+Rascacielos + gestión B (9:30 NY),2026-01-06,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 1,Ene,2026
+Rascacielos + gestión B (9:30 NY),2026-01-07,Compra,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 1,Ene,2026
+Rascacielos + gestión B (9:30 NY),2026-01-08,Venta,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 2,Ene,2026
+Rascacielos + gestión B (9:30 NY),2026-01-09,Compra,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Vie,Semana 2,Ene,2026
+Rascacielos + gestión B (9:30 NY),2026-01-12,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 2,Ene,2026
+Rascacielos + gestión B (9:30 NY),2026-01-13,Compra,-1159.0,Stop (−2),NFP/CPI 8:30,0,Mar,Semana 2,Ene,2026
+Rascacielos + gestión B (9:30 NY),2026-01-14,Venta,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 2,Ene,2026
+Rascacielos + gestión B (9:30 NY),2026-01-15,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 3,Ene,2026
+Rascacielos + gestión B (9:30 NY),2026-01-16,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 3,Ene,2026
+Rascacielos + gestión B (9:30 NY),2026-01-19,Venta,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 3,Ene,2026
+Rascacielos + gestión B (9:30 NY),2026-01-20,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 3,Ene,2026
+Rascacielos + gestión B (9:30 NY),2026-01-21,Venta,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 3,Ene,2026
+Rascacielos + gestión B (9:30 NY),2026-01-22,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 4,Ene,2026
+Rascacielos + gestión B (9:30 NY),2026-01-23,Venta,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 4,Ene,2026
+Rascacielos + gestión B (9:30 NY),2026-01-26,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 4,Ene,2026
+Rascacielos + gestión B (9:30 NY),2026-01-27,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 4,Ene,2026
+Rascacielos + gestión B (9:30 NY),2026-01-28,Compra,341.0,TP1 + BE,FOMC,1,Mié,Semana 4,Ene,2026
+Rascacielos + gestión B (9:30 NY),2026-01-29,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 5,Ene,2026
+Rascacielos + gestión B (9:30 NY),2026-01-30,Venta,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 5,Ene,2026
+Rascacielos + gestión B (9:30 NY),2026-02-02,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 1,Feb,2026
+Rascacielos + gestión B (9:30 NY),2026-02-03,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 1,Feb,2026
+Rascacielos + gestión B (9:30 NY),2026-02-04,Venta,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 1,Feb,2026
+Rascacielos + gestión B (9:30 NY),2026-02-05,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 1,Feb,2026
+Rascacielos + gestión B (9:30 NY),2026-02-06,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 1,Feb,2026
+Rascacielos + gestión B (9:30 NY),2026-02-09,Venta,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 2,Feb,2026
+Rascacielos + gestión B (9:30 NY),2026-02-10,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 2,Feb,2026
+Rascacielos + gestión B (9:30 NY),2026-02-11,Compra,-1159.0,Stop (−2),NFP/CPI 8:30,0,Mié,Semana 2,Feb,2026
+Rascacielos + gestión B (9:30 NY),2026-02-12,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 2,Feb,2026
+Rascacielos + gestión B (9:30 NY),2026-02-13,Venta,341.0,TP1 + BE,NFP/CPI 8:30,1,Vie,Semana 2,Feb,2026
+Rascacielos + gestión B (9:30 NY),2026-02-16,Venta,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 3,Feb,2026
+Rascacielos + gestión B (9:30 NY),2026-02-17,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 3,Feb,2026
+Rascacielos + gestión B (9:30 NY),2026-02-18,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 3,Feb,2026
+Rascacielos + gestión B (9:30 NY),2026-02-19,Venta,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 3,Feb,2026
+Rascacielos + gestión B (9:30 NY),2026-02-20,Venta,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 3,Feb,2026
+Rascacielos + gestión B (9:30 NY),2026-02-23,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 4,Feb,2026
+Rascacielos + gestión B (9:30 NY),2026-02-24,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 4,Feb,2026
+Rascacielos + gestión B (9:30 NY),2026-02-25,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 4,Feb,2026
+Rascacielos + gestión B (9:30 NY),2026-02-26,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 4,Feb,2026
+Rascacielos + gestión B (9:30 NY),2026-02-27,Venta,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 4,Feb,2026
+Rascacielos + gestión B (9:30 NY),2026-03-02,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 1,Mar,2026
+Rascacielos + gestión B (9:30 NY),2026-03-03,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 1,Mar,2026
+Rascacielos + gestión B (9:30 NY),2026-03-04,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 1,Mar,2026
+Rascacielos + gestión B (9:30 NY),2026-03-05,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 1,Mar,2026
+Rascacielos + gestión B (9:30 NY),2026-03-06,Venta,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Vie,Semana 1,Mar,2026
+Rascacielos + gestión B (9:30 NY),2026-03-09,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 2,Mar,2026
+Rascacielos + gestión B (9:30 NY),2026-03-10,Compra,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 2,Mar,2026
+Rascacielos + gestión B (9:30 NY),2026-03-11,Venta,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Mié,Semana 2,Mar,2026
+Rascacielos + gestión B (9:30 NY),2026-03-12,Venta,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 2,Mar,2026
+Rascacielos + gestión B (9:30 NY),2026-03-13,Compra,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 2,Mar,2026
+Rascacielos + gestión B (9:30 NY),2026-03-16,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 3,Mar,2026
+Rascacielos + gestión B (9:30 NY),2026-03-17,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 3,Mar,2026
+Rascacielos + gestión B (9:30 NY),2026-03-18,Venta,-1159.0,Stop (−2),FOMC,0,Mié,Semana 3,Mar,2026
+Rascacielos + gestión B (9:30 NY),2026-03-19,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 3,Mar,2026
+Rascacielos + gestión B (9:30 NY),2026-03-20,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 3,Mar,2026
+Rascacielos + gestión B (9:30 NY),2026-03-23,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 4,Mar,2026
+Rascacielos + gestión B (9:30 NY),2026-03-24,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 4,Mar,2026
+Rascacielos + gestión B (9:30 NY),2026-03-25,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 4,Mar,2026
+Rascacielos + gestión B (9:30 NY),2026-03-26,Venta,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 4,Mar,2026
+Rascacielos + gestión B (9:30 NY),2026-03-27,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 4,Mar,2026
+Rascacielos + gestión B (9:30 NY),2026-03-30,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 5,Mar,2026
+Rascacielos + gestión B (9:30 NY),2026-03-31,Compra,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 5,Mar,2026
+Rascacielos + gestión B (9:30 NY),2026-04-01,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 1,Abr,2026
+Rascacielos + gestión B (9:30 NY),2026-04-02,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 1,Abr,2026
+Rascacielos + gestión B (9:30 NY),2026-04-06,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 1,Abr,2026
+Rascacielos + gestión B (9:30 NY),2026-04-07,Venta,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 1,Abr,2026
+Rascacielos + gestión B (9:30 NY),2026-04-08,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 2,Abr,2026
+Rascacielos + gestión B (9:30 NY),2026-04-09,Compra,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 2,Abr,2026
+Rascacielos + gestión B (9:30 NY),2026-04-10,Compra,341.0,TP1 + BE,NFP/CPI 8:30,1,Vie,Semana 2,Abr,2026
+Rascacielos + gestión B (9:30 NY),2026-04-13,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 2,Abr,2026
+Rascacielos + gestión B (9:30 NY),2026-04-14,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 2,Abr,2026
+Rascacielos + gestión B (9:30 NY),2026-04-15,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 3,Abr,2026
+Rascacielos + gestión B (9:30 NY),2026-04-16,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 3,Abr,2026
+Rascacielos + gestión B (9:30 NY),2026-04-17,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 3,Abr,2026
+Rascacielos + gestión B (9:30 NY),2026-04-20,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 3,Abr,2026
+Rascacielos + gestión B (9:30 NY),2026-04-21,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 3,Abr,2026
+Rascacielos + gestión B (9:30 NY),2026-04-22,Compra,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 4,Abr,2026
+Rascacielos + gestión B (9:30 NY),2026-04-23,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 4,Abr,2026
+Rascacielos + gestión B (9:30 NY),2026-04-24,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 4,Abr,2026
+Rascacielos + gestión B (9:30 NY),2026-04-27,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 4,Abr,2026
+Rascacielos + gestión B (9:30 NY),2026-04-28,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 4,Abr,2026
+Rascacielos + gestión B (9:30 NY),2026-04-29,Venta,341.0,TP1 + BE,FOMC,1,Mié,Semana 5,Abr,2026
+Rascacielos + gestión B (9:30 NY),2026-04-30,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 5,Abr,2026
+Rascacielos + gestión B (9:30 NY),2026-05-01,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 1,May,2026
+Rascacielos + gestión B (9:30 NY),2026-05-04,Venta,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 1,May,2026
+Rascacielos + gestión B (9:30 NY),2026-05-05,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 1,May,2026
+Rascacielos + gestión B (9:30 NY),2026-05-06,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 1,May,2026
+Rascacielos + gestión B (9:30 NY),2026-05-07,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 1,May,2026
+Rascacielos + gestión B (9:30 NY),2026-05-08,Compra,341.0,TP1 + BE,NFP/CPI 8:30,1,Vie,Semana 2,May,2026
+Rascacielos + gestión B (9:30 NY),2026-05-11,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 2,May,2026
+Rascacielos + gestión B (9:30 NY),2026-05-12,Venta,341.0,TP1 + BE,NFP/CPI 8:30,1,Mar,Semana 2,May,2026
+Rascacielos + gestión B (9:30 NY),2026-05-13,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 2,May,2026
+Rascacielos + gestión B (9:30 NY),2026-05-14,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 2,May,2026
+Rascacielos + gestión B (9:30 NY),2026-05-15,Venta,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 3,May,2026
+Rascacielos + gestión B (9:30 NY),2026-05-18,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 3,May,2026
+Rascacielos + gestión B (9:30 NY),2026-05-19,Venta,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 3,May,2026
+Rascacielos + gestión B (9:30 NY),2026-05-20,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 3,May,2026
+Rascacielos + gestión B (9:30 NY),2026-05-21,Venta,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 3,May,2026
+Rascacielos + gestión B (9:30 NY),2026-05-22,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 4,May,2026
+Rascacielos + gestión B (9:30 NY),2026-05-25,Compra,-275.5,Cierre 15:59,Sin noticia,0,Lun,Semana 4,May,2026
+Rascacielos + gestión B (9:30 NY),2026-05-26,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 4,May,2026
+Rascacielos + gestión B (9:30 NY),2026-05-27,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 4,May,2026
+Rascacielos + gestión B (9:30 NY),2026-05-28,Compra,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 4,May,2026
+Rascacielos + gestión B (9:30 NY),2026-05-29,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 5,May,2026
+Rascacielos + gestión B (9:30 NY),2026-06-01,Venta,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 1,Jun,2026
+Rascacielos + gestión B (9:30 NY),2026-06-02,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 1,Jun,2026
+Rascacielos + gestión B (9:30 NY),2026-06-03,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 1,Jun,2026
+Rascacielos + gestión B (9:30 NY),2026-06-04,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 1,Jun,2026
+Rascacielos + gestión B (9:30 NY),2026-06-05,Venta,341.0,TP1 + BE,NFP/CPI 8:30,1,Vie,Semana 1,Jun,2026
+Rascacielos + gestión B (9:30 NY),2026-06-08,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 2,Jun,2026
+Rascacielos + gestión B (9:30 NY),2026-06-09,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 2,Jun,2026
+Rascacielos + gestión B (9:30 NY),2026-06-10,Venta,-1159.0,Stop (−2),NFP/CPI 8:30,0,Mié,Semana 2,Jun,2026
+Rascacielos + gestión B (9:30 NY),2026-06-11,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 2,Jun,2026
+Rascacielos + gestión B (9:30 NY),2026-06-12,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 2,Jun,2026
+Rascacielos + gestión B (9:30 NY),2026-06-15,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 3,Jun,2026
+Rascacielos + gestión B (9:30 NY),2026-06-16,Compra,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 3,Jun,2026
+Rascacielos + gestión B (9:30 NY),2026-06-17,Venta,341.0,TP1 + BE,FOMC,1,Mié,Semana 3,Jun,2026
+Rascacielos + gestión B (9:30 NY),2026-06-18,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 3,Jun,2026
+Rascacielos + gestión B (9:30 NY),2026-06-19,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 3,Jun,2026
+Rascacielos + gestión B (9:30 NY),2026-06-22,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 4,Jun,2026
+Rascacielos + gestión B (9:30 NY),2026-06-23,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 4,Jun,2026
+Rascacielos + gestión B (9:30 NY),2026-06-24,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 4,Jun,2026
+Rascacielos + gestión B (9:30 NY),2026-06-25,Compra,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 4,Jun,2026
+Rascacielos + gestión B (9:30 NY),2026-06-26,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 4,Jun,2026
+Rascacielos + gestión B (9:30 NY),2026-06-29,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 5,Jun,2026
+Rascacielos + gestión B (9:30 NY),2026-06-30,Compra,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 5,Jun,2026
+Rascacielos + gestión B (9:30 NY),2026-07-01,Venta,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 1,Jul,2026
+Rascacielos + gestión B (9:30 NY),2026-07-02,Compra,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Jue,Semana 1,Jul,2026
+Rascacielos + gestión B (9:30 NY),2026-07-03,Compra,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 1,Jul,2026
+Rascacielos + gestión B (9:30 NY),2026-07-06,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 1,Jul,2026
+Rascacielos + gestión B (9:30 NY),2026-07-07,Venta,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 1,Jul,2026
+Rascacielos + gestión B (9:30 NY),2026-07-08,Venta,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 2,Jul,2026
+Rascacielos + gestión B (9:30 NY),2026-07-09,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 2,Jul,2026
+Rascacielos + gestión B (9:30 NY),2026-07-10,Venta,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 2,Jul,2026
+Rascacielos + gestión B (9:30 NY),2026-07-13,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 2,Jul,2026
+Rascacielos + gestión B (9:30 NY),2026-07-14,Compra,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Mar,Semana 2,Jul,2026
+Rascacielos + gestión B (9:30 NY),2026-07-15,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 3,Jul,2026
+Rascacielos + gestión B (9:30 NY),2026-07-16,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 3,Jul,2026
+Rascacielos + gestión B (9:30 NY),2026-07-17,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 3,Jul,2026
+Rascacielos + gestión B (9:30 NY),2026-07-20,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 3,Jul,2026
+Rascacielos + gestión B (9:30 NY),2026-07-21,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 3,Jul,2026
+Rascacielos + gestión B (9:30 NY),2026-07-22,Venta,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 4,Jul,2026
+Rascacielos + gestión B (9:30 NY),2026-07-23,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 4,Jul,2026
+Rascacielos + gestión B (9:30 NY),2026-07-24,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 4,Jul,2026
+Rascacielos + gestión B (9:30 NY),2026-07-27,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 4,Jul,2026
+Rascacielos + gestión B (9:30 NY),2026-07-28,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 4,Jul,2026
+Rascacielos + gestión B (9:30 NY),2026-07-29,Compra,341.0,TP1 + BE,FOMC,1,Mié,Semana 5,Jul,2026
+Rascacielos + gestión B (9:30 NY),2026-07-30,Compra,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 5,Jul,2026
+Rascacielos + gestión B (9:30 NY),2026-07-31,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 5,Jul,2026
+Rascacielos + gestión B (9:30 NY),2026-08-03,Venta,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 1,Ago,2026
+Rascacielos + gestión B (9:30 NY),2026-08-04,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 1,Ago,2026
+Rascacielos + gestión B (9:30 NY),2026-08-05,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 1,Ago,2026
+Rascacielos + gestión B (9:30 NY),2026-08-06,Venta,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 1,Ago,2026
+Rascacielos + gestión B (9:30 NY),2026-08-07,Compra,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Vie,Semana 1,Ago,2026
+Rascacielos + gestión B (9:30 NY),2026-08-10,Venta,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 2,Ago,2026
+Rascacielos + gestión B (9:30 NY),2026-08-11,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 2,Ago,2026
+Rascacielos + gestión B (9:30 NY),2026-08-12,Compra,-1159.0,Stop (−2),NFP/CPI 8:30,0,Mié,Semana 2,Ago,2026
+Rascacielos + gestión B (9:30 NY),2026-08-13,Compra,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 2,Ago,2026
+Rascacielos + gestión B (9:30 NY),2026-08-14,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 2,Ago,2026
+Rascacielos + gestión B (9:30 NY),2026-08-17,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 3,Ago,2026
+Rascacielos + gestión B (9:30 NY),2026-08-18,Venta,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 3,Ago,2026
+Rascacielos + gestión B (9:30 NY),2026-08-19,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 3,Ago,2026
+Rascacielos + gestión B (9:30 NY),2026-08-20,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 3,Ago,2026
+Rascacielos + gestión B (9:30 NY),2026-08-21,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 3,Ago,2026
+Rascacielos + gestión B (9:30 NY),2026-08-24,Venta,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 4,Ago,2026
+Rascacielos + gestión B (9:30 NY),2026-08-25,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 4,Ago,2026
+Rascacielos + gestión B (9:30 NY),2026-08-26,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 4,Ago,2026
+Rascacielos + gestión B (9:30 NY),2026-08-27,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 4,Ago,2026
+Rascacielos + gestión B (9:30 NY),2026-08-28,Compra,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 4,Ago,2026
+Rascacielos + gestión B (9:30 NY),2026-08-31,Venta,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 5,Ago,2026
+Rascacielos + gestión B (9:30 NY),2026-09-01,Venta,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 1,Sep,2026
+Rascacielos + gestión B (9:30 NY),2026-09-02,Venta,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 1,Sep,2026
+Rascacielos + gestión B (9:30 NY),2026-09-03,Compra,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 1,Sep,2026
+Rascacielos + gestión B (9:30 NY),2026-09-04,Compra,-1159.0,Stop (−2),NFP/CPI 8:30,0,Vie,Semana 1,Sep,2026
+Rascacielos + gestión B (9:30 NY),2026-09-07,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 1,Sep,2026
+Rascacielos + gestión B (9:30 NY),2026-09-08,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 2,Sep,2026
+Rascacielos + gestión B (9:30 NY),2026-09-09,Venta,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 2,Sep,2026
+Rascacielos + gestión B (9:30 NY),2026-09-10,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 2,Sep,2026
+Rascacielos + gestión B (9:30 NY),2026-09-11,Compra,-1159.0,Stop (−2),NFP/CPI 8:30,0,Vie,Semana 2,Sep,2026
+Rascacielos + gestión B (9:30 NY),2026-09-14,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 2,Sep,2026
+Rascacielos + gestión B (9:30 NY),2026-09-15,Compra,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 3,Sep,2026
+Rascacielos + gestión B (9:30 NY),2026-09-16,Compra,-1159.0,Stop (−2),FOMC,0,Mié,Semana 3,Sep,2026
+Rascacielos + gestión B (9:30 NY),2026-09-17,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 3,Sep,2026
+Rascacielos + gestión B (9:30 NY),2026-09-18,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 3,Sep,2026
+Rascacielos + gestión B (9:30 NY),2026-09-21,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 3,Sep,2026
+Rascacielos + gestión B (9:30 NY),2026-09-22,Compra,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 4,Sep,2026
+Rascacielos + gestión B (9:30 NY),2026-09-23,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 4,Sep,2026
+Rascacielos + gestión B (9:30 NY),2026-09-24,Venta,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 4,Sep,2026
+Rascacielos + gestión B (9:30 NY),2026-09-25,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 4,Sep,2026
+Rascacielos + gestión B (9:30 NY),2026-09-28,Venta,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 4,Sep,2026
+Rascacielos + gestión B (9:30 NY),2026-09-29,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 5,Sep,2026
+Rascacielos + gestión B (9:30 NY),2026-09-30,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 5,Sep,2026
+Rascacielos + gestión B (9:30 NY),2026-10-01,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 1,Oct,2026
+Rascacielos + gestión B (9:30 NY),2026-10-02,Compra,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Vie,Semana 1,Oct,2026
+Rascacielos + gestión B (9:30 NY),2026-10-05,Venta,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 1,Oct,2026
+Rascacielos + gestión B (9:30 NY),2026-10-06,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 1,Oct,2026
+Rascacielos + gestión B (9:30 NY),2026-10-07,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 1,Oct,2026
+Rascacielos + gestión B (9:30 NY),2026-10-08,Venta,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 2,Oct,2026
+Rascacielos + gestión B (9:30 NY),2026-10-09,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 2,Oct,2026
+Rascacielos + gestión B (9:30 NY),2026-10-12,Venta,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 2,Oct,2026
+Rascacielos + gestión B (9:30 NY),2026-10-13,Venta,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 2,Oct,2026
+Rascacielos + gestión B (9:30 NY),2026-10-15,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 3,Oct,2026
+Rascacielos + gestión B (9:30 NY),2026-10-16,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 3,Oct,2026
+Rascacielos + gestión B (9:30 NY),2026-10-19,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 3,Oct,2026
+Rascacielos + gestión B (9:30 NY),2026-10-20,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 3,Oct,2026
+Rascacielos + gestión B (9:30 NY),2026-10-21,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 3,Oct,2026
+Rascacielos + gestión B (9:30 NY),2026-10-22,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 4,Oct,2026
+Rascacielos + gestión B (9:30 NY),2026-10-23,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 4,Oct,2026
+Rascacielos + gestión B (9:30 NY),2026-10-26,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 4,Oct,2026
+Rascacielos + gestión B (9:30 NY),2026-10-27,Compra,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 4,Oct,2026
+Rascacielos + gestión B (9:30 NY),2026-10-28,Compra,-1159.0,Stop (−2),FOMC,0,Mié,Semana 4,Oct,2026
+Rascacielos + gestión B (9:30 NY),2026-10-29,Venta,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 5,Oct,2026
+Rascacielos + gestión B (9:30 NY),2026-10-30,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 5,Oct,2026
+Rascacielos + gestión B (9:30 NY),2026-11-02,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 1,Nov,2026
+Rascacielos + gestión B (9:30 NY),2026-11-03,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 1,Nov,2026
+Rascacielos + gestión B (9:30 NY),2026-11-04,Compra,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 1,Nov,2026
+Rascacielos + gestión B (9:30 NY),2026-11-05,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 1,Nov,2026
+Rascacielos + gestión B (9:30 NY),2026-11-06,Compra,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Vie,Semana 1,Nov,2026
+Modelo B (9:12 CDMX),2025-01-02,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 1,Ene,2025
+Modelo B (9:12 CDMX),2025-01-03,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 1,Ene,2025
+Modelo B (9:12 CDMX),2025-01-06,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 1,Ene,2025
+Modelo B (9:12 CDMX),2025-01-07,Venta,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 1,Ene,2025
+Modelo B (9:12 CDMX),2025-01-08,Venta,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 2,Ene,2025
+Modelo B (9:12 CDMX),2025-01-10,Venta,-1159.0,Stop (−2),NFP/CPI 8:30,0,Vie,Semana 2,Ene,2025
+Modelo B (9:12 CDMX),2025-01-13,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 2,Ene,2025
+Modelo B (9:12 CDMX),2025-01-14,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 2,Ene,2025
+Modelo B (9:12 CDMX),2025-01-15,Compra,-1159.0,Stop (−2),NFP/CPI 8:30,0,Mié,Semana 3,Ene,2025
+Modelo B (9:12 CDMX),2025-01-16,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 3,Ene,2025
+Modelo B (9:12 CDMX),2025-01-17,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 3,Ene,2025
+Modelo B (9:12 CDMX),2025-01-20,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 3,Ene,2025
+Modelo B (9:12 CDMX),2025-01-21,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 3,Ene,2025
+Modelo B (9:12 CDMX),2025-01-22,Compra,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 4,Ene,2025
+Modelo B (9:12 CDMX),2025-01-23,Compra,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 4,Ene,2025
+Modelo B (9:12 CDMX),2025-01-24,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 4,Ene,2025
+Modelo B (9:12 CDMX),2025-01-27,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 4,Ene,2025
+Modelo B (9:12 CDMX),2025-01-28,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 4,Ene,2025
+Modelo B (9:12 CDMX),2025-01-29,Venta,341.0,TP1 + BE,FOMC,1,Mié,Semana 5,Ene,2025
+Modelo B (9:12 CDMX),2025-01-30,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 5,Ene,2025
+Modelo B (9:12 CDMX),2025-01-31,Compra,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 5,Ene,2025
+Modelo B (9:12 CDMX),2025-02-03,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 1,Feb,2025
+Modelo B (9:12 CDMX),2025-02-04,Compra,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 1,Feb,2025
+Modelo B (9:12 CDMX),2025-02-05,Venta,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 1,Feb,2025
+Modelo B (9:12 CDMX),2025-02-06,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 1,Feb,2025
+Modelo B (9:12 CDMX),2025-02-07,Venta,341.0,TP1 + BE,NFP/CPI 8:30,1,Vie,Semana 1,Feb,2025
+Modelo B (9:12 CDMX),2025-02-10,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 2,Feb,2025
+Modelo B (9:12 CDMX),2025-02-11,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 2,Feb,2025
+Modelo B (9:12 CDMX),2025-02-12,Venta,-1159.0,Stop (−2),NFP/CPI 8:30,0,Mié,Semana 2,Feb,2025
+Modelo B (9:12 CDMX),2025-02-13,Compra,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 2,Feb,2025
+Modelo B (9:12 CDMX),2025-02-14,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 2,Feb,2025
+Modelo B (9:12 CDMX),2025-02-17,Venta,-647.0,Cierre 15:59,Sin noticia,0,Lun,Semana 3,Feb,2025
+Modelo B (9:12 CDMX),2025-02-18,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 3,Feb,2025
+Modelo B (9:12 CDMX),2025-02-19,Venta,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 3,Feb,2025
+Modelo B (9:12 CDMX),2025-02-20,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 3,Feb,2025
+Modelo B (9:12 CDMX),2025-02-21,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 3,Feb,2025
+Modelo B (9:12 CDMX),2025-02-24,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 4,Feb,2025
+Modelo B (9:12 CDMX),2025-02-25,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 4,Feb,2025
+Modelo B (9:12 CDMX),2025-02-26,Compra,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 4,Feb,2025
+Modelo B (9:12 CDMX),2025-02-27,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 4,Feb,2025
+Modelo B (9:12 CDMX),2025-02-28,Compra,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 4,Feb,2025
+Modelo B (9:12 CDMX),2025-03-03,Venta,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 1,Mar,2025
+Modelo B (9:12 CDMX),2025-03-04,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 1,Mar,2025
+Modelo B (9:12 CDMX),2025-03-05,Compra,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 1,Mar,2025
+Modelo B (9:12 CDMX),2025-03-06,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 1,Mar,2025
+Modelo B (9:12 CDMX),2025-03-07,Compra,-1159.0,Stop (−2),NFP/CPI 8:30,0,Vie,Semana 1,Mar,2025
+Modelo B (9:12 CDMX),2025-03-10,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 2,Mar,2025
+Modelo B (9:12 CDMX),2025-03-11,Compra,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 2,Mar,2025
+Modelo B (9:12 CDMX),2025-03-12,Venta,-1159.0,Stop (−2),NFP/CPI 8:30,0,Mié,Semana 2,Mar,2025
+Modelo B (9:12 CDMX),2025-03-13,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 2,Mar,2025
+Modelo B (9:12 CDMX),2025-03-14,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 2,Mar,2025
+Modelo B (9:12 CDMX),2025-03-17,Venta,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 3,Mar,2025
+Modelo B (9:12 CDMX),2025-03-18,Venta,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 3,Mar,2025
+Modelo B (9:12 CDMX),2025-03-19,Compra,1091.0,TP1 + TP2,FOMC,1,Mié,Semana 3,Mar,2025
+Modelo B (9:12 CDMX),2025-03-20,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 3,Mar,2025
+Modelo B (9:12 CDMX),2025-03-21,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 3,Mar,2025
+Modelo B (9:12 CDMX),2025-03-24,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 4,Mar,2025
+Modelo B (9:12 CDMX),2025-03-25,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 4,Mar,2025
+Modelo B (9:12 CDMX),2025-03-26,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 4,Mar,2025
+Modelo B (9:12 CDMX),2025-03-27,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 4,Mar,2025
+Modelo B (9:12 CDMX),2025-03-28,Venta,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 4,Mar,2025
+Modelo B (9:12 CDMX),2025-03-31,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 5,Mar,2025
+Modelo B (9:12 CDMX),2025-04-01,Venta,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 1,Abr,2025
+Modelo B (9:12 CDMX),2025-04-02,Compra,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 1,Abr,2025
+Modelo B (9:12 CDMX),2025-04-03,Venta,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 1,Abr,2025
+Modelo B (9:12 CDMX),2025-04-04,Venta,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Vie,Semana 1,Abr,2025
+Modelo B (9:12 CDMX),2025-04-07,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 1,Abr,2025
+Modelo B (9:12 CDMX),2025-04-08,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 2,Abr,2025
+Modelo B (9:12 CDMX),2025-04-09,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 2,Abr,2025
+Modelo B (9:12 CDMX),2025-04-10,Venta,341.0,TP1 + BE,NFP/CPI 8:30,1,Jue,Semana 2,Abr,2025
+Modelo B (9:12 CDMX),2025-04-11,Venta,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 2,Abr,2025
+Modelo B (9:12 CDMX),2025-04-14,Venta,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 2,Abr,2025
+Modelo B (9:12 CDMX),2025-04-15,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 3,Abr,2025
+Modelo B (9:12 CDMX),2025-04-16,Venta,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 3,Abr,2025
+Modelo B (9:12 CDMX),2025-04-17,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 3,Abr,2025
+Modelo B (9:12 CDMX),2025-04-21,Venta,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 3,Abr,2025
+Modelo B (9:12 CDMX),2025-04-22,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 4,Abr,2025
+Modelo B (9:12 CDMX),2025-04-23,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 4,Abr,2025
+Modelo B (9:12 CDMX),2025-04-24,Compra,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 4,Abr,2025
+Modelo B (9:12 CDMX),2025-04-25,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 4,Abr,2025
+Modelo B (9:12 CDMX),2025-04-28,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 4,Abr,2025
+Modelo B (9:12 CDMX),2025-04-29,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 5,Abr,2025
+Modelo B (9:12 CDMX),2025-04-30,Venta,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 5,Abr,2025
+Modelo B (9:12 CDMX),2025-05-01,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 1,May,2025
+Modelo B (9:12 CDMX),2025-05-02,Compra,341.0,TP1 + BE,NFP/CPI 8:30,1,Vie,Semana 1,May,2025
+Modelo B (9:12 CDMX),2025-05-05,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 1,May,2025
+Modelo B (9:12 CDMX),2025-05-06,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 1,May,2025
+Modelo B (9:12 CDMX),2025-05-07,Compra,-1159.0,Stop (−2),FOMC,0,Mié,Semana 1,May,2025
+Modelo B (9:12 CDMX),2025-05-08,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 2,May,2025
+Modelo B (9:12 CDMX),2025-05-09,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 2,May,2025
+Modelo B (9:12 CDMX),2025-05-12,Venta,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 2,May,2025
+Modelo B (9:12 CDMX),2025-05-13,Compra,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Mar,Semana 2,May,2025
+Modelo B (9:12 CDMX),2025-05-14,Venta,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 2,May,2025
+Modelo B (9:12 CDMX),2025-05-15,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 3,May,2025
+Modelo B (9:12 CDMX),2025-05-16,Venta,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 3,May,2025
+Modelo B (9:12 CDMX),2025-05-19,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 3,May,2025
+Modelo B (9:12 CDMX),2025-05-20,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 3,May,2025
+Modelo B (9:12 CDMX),2025-05-21,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 3,May,2025
+Modelo B (9:12 CDMX),2025-05-22,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 4,May,2025
+Modelo B (9:12 CDMX),2025-05-23,Compra,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 4,May,2025
+Modelo B (9:12 CDMX),2025-05-26,Venta,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 4,May,2025
+Modelo B (9:12 CDMX),2025-05-27,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 4,May,2025
+Modelo B (9:12 CDMX),2025-05-28,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 4,May,2025
+Modelo B (9:12 CDMX),2025-05-29,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 5,May,2025
+Modelo B (9:12 CDMX),2025-05-30,Compra,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 5,May,2025
+Modelo B (9:12 CDMX),2025-06-02,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 1,Jun,2025
+Modelo B (9:12 CDMX),2025-06-03,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 1,Jun,2025
+Modelo B (9:12 CDMX),2025-06-04,Venta,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 1,Jun,2025
+Modelo B (9:12 CDMX),2025-06-05,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 1,Jun,2025
+Modelo B (9:12 CDMX),2025-06-06,Compra,341.0,TP1 + BE,NFP/CPI 8:30,1,Vie,Semana 1,Jun,2025
+Modelo B (9:12 CDMX),2025-06-09,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 2,Jun,2025
+Modelo B (9:12 CDMX),2025-06-10,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 2,Jun,2025
+Modelo B (9:12 CDMX),2025-06-11,Compra,341.0,TP1 + BE,NFP/CPI 8:30,1,Mié,Semana 2,Jun,2025
+Modelo B (9:12 CDMX),2025-06-12,Compra,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 2,Jun,2025
+Modelo B (9:12 CDMX),2025-06-13,Venta,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 2,Jun,2025
+Modelo B (9:12 CDMX),2025-06-16,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 3,Jun,2025
+Modelo B (9:12 CDMX),2025-06-17,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 3,Jun,2025
+Modelo B (9:12 CDMX),2025-06-18,Compra,1091.0,TP1 + TP2,FOMC,1,Mié,Semana 3,Jun,2025
+Modelo B (9:12 CDMX),2025-06-19,Venta,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 3,Jun,2025
+Modelo B (9:12 CDMX),2025-06-20,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 3,Jun,2025
+Modelo B (9:12 CDMX),2025-06-23,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 4,Jun,2025
+Modelo B (9:12 CDMX),2025-06-24,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 4,Jun,2025
+Modelo B (9:12 CDMX),2025-06-25,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 4,Jun,2025
+Modelo B (9:12 CDMX),2025-06-26,Compra,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 4,Jun,2025
+Modelo B (9:12 CDMX),2025-06-27,Compra,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 4,Jun,2025
+Modelo B (9:12 CDMX),2025-06-30,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 5,Jun,2025
+Modelo B (9:12 CDMX),2025-07-01,Compra,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 1,Jul,2025
+Modelo B (9:12 CDMX),2025-07-02,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 1,Jul,2025
+Modelo B (9:12 CDMX),2025-07-03,Compra,341.0,TP1 + BE,NFP/CPI 8:30,1,Jue,Semana 1,Jul,2025
+Modelo B (9:12 CDMX),2025-07-04,Venta,191.2,Cierre 15:59,Sin noticia,1,Vie,Semana 1,Jul,2025
+Modelo B (9:12 CDMX),2025-07-07,Venta,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 1,Jul,2025
+Modelo B (9:12 CDMX),2025-07-08,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 2,Jul,2025
+Modelo B (9:12 CDMX),2025-07-09,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 2,Jul,2025
+Modelo B (9:12 CDMX),2025-07-10,Compra,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 2,Jul,2025
+Modelo B (9:12 CDMX),2025-07-11,Compra,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 2,Jul,2025
+Modelo B (9:12 CDMX),2025-07-14,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 2,Jul,2025
+Modelo B (9:12 CDMX),2025-07-15,Venta,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Mar,Semana 3,Jul,2025
+Modelo B (9:12 CDMX),2025-07-16,Venta,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 3,Jul,2025
+Modelo B (9:12 CDMX),2025-07-17,Compra,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 3,Jul,2025
+Modelo B (9:12 CDMX),2025-07-18,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 3,Jul,2025
+Modelo B (9:12 CDMX),2025-07-21,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 3,Jul,2025
+Modelo B (9:12 CDMX),2025-07-22,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 4,Jul,2025
+Modelo B (9:12 CDMX),2025-07-23,Venta,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 4,Jul,2025
+Modelo B (9:12 CDMX),2025-07-24,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 4,Jul,2025
+Modelo B (9:12 CDMX),2025-07-25,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 4,Jul,2025
+Modelo B (9:12 CDMX),2025-07-28,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 4,Jul,2025
+Modelo B (9:12 CDMX),2025-07-29,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 5,Jul,2025
+Modelo B (9:12 CDMX),2025-07-30,Venta,-1159.0,Stop (−2),FOMC,0,Mié,Semana 5,Jul,2025
+Modelo B (9:12 CDMX),2025-07-31,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 5,Jul,2025
+Modelo B (9:12 CDMX),2025-08-01,Venta,-1159.0,Stop (−2),NFP/CPI 8:30,0,Vie,Semana 1,Ago,2025
+Modelo B (9:12 CDMX),2025-08-04,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 1,Ago,2025
+Modelo B (9:12 CDMX),2025-08-05,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 1,Ago,2025
+Modelo B (9:12 CDMX),2025-08-06,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 1,Ago,2025
+Modelo B (9:12 CDMX),2025-08-07,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 1,Ago,2025
+Modelo B (9:12 CDMX),2025-08-08,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 2,Ago,2025
+Modelo B (9:12 CDMX),2025-08-11,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 2,Ago,2025
+Modelo B (9:12 CDMX),2025-08-12,Compra,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Mar,Semana 2,Ago,2025
+Modelo B (9:12 CDMX),2025-08-13,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 2,Ago,2025
+Modelo B (9:12 CDMX),2025-08-14,Compra,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 2,Ago,2025
+Modelo B (9:12 CDMX),2025-08-15,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 3,Ago,2025
+Modelo B (9:12 CDMX),2025-08-18,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 3,Ago,2025
+Modelo B (9:12 CDMX),2025-08-19,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 3,Ago,2025
+Modelo B (9:12 CDMX),2025-08-20,Venta,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 3,Ago,2025
+Modelo B (9:12 CDMX),2025-08-21,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 3,Ago,2025
+Modelo B (9:12 CDMX),2025-08-22,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 4,Ago,2025
+Modelo B (9:12 CDMX),2025-08-25,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 4,Ago,2025
+Modelo B (9:12 CDMX),2025-08-26,Compra,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 4,Ago,2025
+Modelo B (9:12 CDMX),2025-08-27,Compra,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 4,Ago,2025
+Modelo B (9:12 CDMX),2025-08-28,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 4,Ago,2025
+Modelo B (9:12 CDMX),2025-08-29,Venta,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 5,Ago,2025
+Modelo B (9:12 CDMX),2025-09-01,Compra,339.5,Cierre 15:59,Sin noticia,1,Lun,Semana 1,Sep,2025
+Modelo B (9:12 CDMX),2025-09-02,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 1,Sep,2025
+Modelo B (9:12 CDMX),2025-09-03,Venta,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 1,Sep,2025
+Modelo B (9:12 CDMX),2025-09-04,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 1,Sep,2025
+Modelo B (9:12 CDMX),2025-09-05,Venta,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Vie,Semana 1,Sep,2025
+Modelo B (9:12 CDMX),2025-09-08,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 2,Sep,2025
+Modelo B (9:12 CDMX),2025-09-09,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 2,Sep,2025
+Modelo B (9:12 CDMX),2025-09-10,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 2,Sep,2025
+Modelo B (9:12 CDMX),2025-09-11,Compra,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Jue,Semana 2,Sep,2025
+Modelo B (9:12 CDMX),2025-09-12,Compra,800.4,TP1 + cierre,Sin noticia,1,Vie,Semana 2,Sep,2025
+Modelo B (9:12 CDMX),2025-09-15,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 3,Sep,2025
+Modelo B (9:12 CDMX),2025-09-16,Venta,-842.6,Cierre 15:59,Sin noticia,0,Mar,Semana 3,Sep,2025
+Modelo B (9:12 CDMX),2025-09-17,Venta,341.0,TP1 + BE,FOMC,1,Mié,Semana 3,Sep,2025
+Modelo B (9:12 CDMX),2025-09-18,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 3,Sep,2025
+Modelo B (9:12 CDMX),2025-09-19,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 3,Sep,2025
+Modelo B (9:12 CDMX),2025-09-22,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 4,Sep,2025
+Modelo B (9:12 CDMX),2025-09-23,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 4,Sep,2025
+Modelo B (9:12 CDMX),2025-09-24,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 4,Sep,2025
+Modelo B (9:12 CDMX),2025-09-25,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 4,Sep,2025
+Modelo B (9:12 CDMX),2025-09-26,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 4,Sep,2025
+Modelo B (9:12 CDMX),2025-09-29,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 5,Sep,2025
+Modelo B (9:12 CDMX),2025-09-30,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 5,Sep,2025
+Modelo B (9:12 CDMX),2025-10-01,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 1,Oct,2025
+Modelo B (9:12 CDMX),2025-10-02,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 1,Oct,2025
+Modelo B (9:12 CDMX),2025-10-03,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 1,Oct,2025
+Modelo B (9:12 CDMX),2025-10-06,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 1,Oct,2025
+Modelo B (9:12 CDMX),2025-10-07,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 1,Oct,2025
+Modelo B (9:12 CDMX),2025-10-08,Compra,530.7,TP1 + cierre,Sin noticia,1,Mié,Semana 2,Oct,2025
+Modelo B (9:12 CDMX),2025-10-09,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 2,Oct,2025
+Modelo B (9:12 CDMX),2025-10-10,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 2,Oct,2025
+Modelo B (9:12 CDMX),2025-10-13,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 2,Oct,2025
+Modelo B (9:12 CDMX),2025-10-14,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 2,Oct,2025
+Modelo B (9:12 CDMX),2025-10-15,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 3,Oct,2025
+Modelo B (9:12 CDMX),2025-10-16,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 3,Oct,2025
+Modelo B (9:12 CDMX),2025-10-17,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 3,Oct,2025
+Modelo B (9:12 CDMX),2025-10-20,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 3,Oct,2025
+Modelo B (9:12 CDMX),2025-10-21,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 3,Oct,2025
+Modelo B (9:12 CDMX),2025-10-22,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 4,Oct,2025
+Modelo B (9:12 CDMX),2025-10-23,Venta,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 4,Oct,2025
+Modelo B (9:12 CDMX),2025-10-24,Compra,-1159.0,Stop (−2),NFP/CPI 8:30,0,Vie,Semana 4,Oct,2025
+Modelo B (9:12 CDMX),2025-10-27,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 4,Oct,2025
+Modelo B (9:12 CDMX),2025-10-28,Venta,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 4,Oct,2025
+Modelo B (9:12 CDMX),2025-10-29,Venta,341.0,TP1 + BE,FOMC,1,Mié,Semana 5,Oct,2025
+Modelo B (9:12 CDMX),2025-10-30,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 5,Oct,2025
+Modelo B (9:12 CDMX),2025-10-31,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 5,Oct,2025
+Modelo B (9:12 CDMX),2025-11-03,Venta,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 1,Nov,2025
+Modelo B (9:12 CDMX),2025-11-04,Compra,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 1,Nov,2025
+Modelo B (9:12 CDMX),2025-11-05,Compra,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 1,Nov,2025
+Modelo B (9:12 CDMX),2025-11-06,Venta,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 1,Nov,2025
+Modelo B (9:12 CDMX),2025-11-07,Compra,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 1,Nov,2025
+Modelo B (9:12 CDMX),2025-11-10,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 2,Nov,2025
+Modelo B (9:12 CDMX),2025-11-11,Venta,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 2,Nov,2025
+Modelo B (9:12 CDMX),2025-11-12,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 2,Nov,2025
+Modelo B (9:12 CDMX),2025-11-13,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 2,Nov,2025
+Modelo B (9:12 CDMX),2025-11-14,Compra,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 2,Nov,2025
+Modelo B (9:12 CDMX),2025-11-17,Venta,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 3,Nov,2025
+Modelo B (9:12 CDMX),2025-11-18,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 3,Nov,2025
+Modelo B (9:12 CDMX),2025-11-19,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 3,Nov,2025
+Modelo B (9:12 CDMX),2025-11-20,Venta,-1159.0,Stop (−2),NFP/CPI 8:30,0,Jue,Semana 3,Nov,2025
+Modelo B (9:12 CDMX),2025-11-21,Venta,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 3,Nov,2025
+Modelo B (9:12 CDMX),2025-11-24,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 4,Nov,2025
+Modelo B (9:12 CDMX),2025-11-25,Venta,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 4,Nov,2025
+Modelo B (9:12 CDMX),2025-11-26,Venta,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 4,Nov,2025
+Modelo B (9:12 CDMX),2025-11-27,Venta,-35.2,Cierre 15:59,Sin noticia,0,Jue,Semana 4,Nov,2025
+Modelo B (9:12 CDMX),2025-11-28,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 4,Nov,2025
+Modelo B (9:12 CDMX),2025-12-01,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 1,Dic,2025
+Modelo B (9:12 CDMX),2025-12-02,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 1,Dic,2025
+Modelo B (9:12 CDMX),2025-12-03,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 1,Dic,2025
+Modelo B (9:12 CDMX),2025-12-04,Venta,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 1,Dic,2025
+Modelo B (9:12 CDMX),2025-12-05,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 1,Dic,2025
+Modelo B (9:12 CDMX),2025-12-08,Venta,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 2,Dic,2025
+Modelo B (9:12 CDMX),2025-12-09,Compra,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 2,Dic,2025
+Modelo B (9:12 CDMX),2025-12-10,Compra,-1159.0,Stop (−2),FOMC,0,Mié,Semana 2,Dic,2025
+Modelo B (9:12 CDMX),2025-12-11,Compra,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 2,Dic,2025
+Modelo B (9:12 CDMX),2025-12-12,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 2,Dic,2025
+Modelo B (9:12 CDMX),2025-12-15,Venta,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 3,Dic,2025
+Modelo B (9:12 CDMX),2025-12-16,Venta,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Mar,Semana 3,Dic,2025
+Modelo B (9:12 CDMX),2025-12-17,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 3,Dic,2025
+Modelo B (9:12 CDMX),2025-12-18,Venta,341.0,TP1 + BE,NFP/CPI 8:30,1,Jue,Semana 3,Dic,2025
+Modelo B (9:12 CDMX),2025-12-19,Compra,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 3,Dic,2025
+Modelo B (9:12 CDMX),2025-12-22,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 4,Dic,2025
+Modelo B (9:12 CDMX),2025-12-23,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 4,Dic,2025
+Modelo B (9:12 CDMX),2025-12-24,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 4,Dic,2025
+Modelo B (9:12 CDMX),2025-12-26,Venta,-473.1,Cierre 15:59,Sin noticia,0,Vie,Semana 4,Dic,2025
+Modelo B (9:12 CDMX),2025-12-29,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 5,Dic,2025
+Modelo B (9:12 CDMX),2025-12-30,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 5,Dic,2025
+Modelo B (9:12 CDMX),2025-12-31,Venta,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 5,Dic,2025
+Modelo B (9:12 CDMX),2026-01-02,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 1,Ene,2026
+Modelo B (9:12 CDMX),2026-01-05,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 1,Ene,2026
+Modelo B (9:12 CDMX),2026-01-06,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 1,Ene,2026
+Modelo B (9:12 CDMX),2026-01-07,Venta,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 1,Ene,2026
+Modelo B (9:12 CDMX),2026-01-08,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 2,Ene,2026
+Modelo B (9:12 CDMX),2026-01-09,Venta,-1159.0,Stop (−2),NFP/CPI 8:30,0,Vie,Semana 2,Ene,2026
+Modelo B (9:12 CDMX),2026-01-12,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 2,Ene,2026
+Modelo B (9:12 CDMX),2026-01-13,Venta,341.0,TP1 + BE,NFP/CPI 8:30,1,Mar,Semana 2,Ene,2026
+Modelo B (9:12 CDMX),2026-01-14,Venta,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 2,Ene,2026
+Modelo B (9:12 CDMX),2026-01-15,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 3,Ene,2026
+Modelo B (9:12 CDMX),2026-01-16,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 3,Ene,2026
+Modelo B (9:12 CDMX),2026-01-19,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 3,Ene,2026
+Modelo B (9:12 CDMX),2026-01-20,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 3,Ene,2026
+Modelo B (9:12 CDMX),2026-01-21,Compra,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 3,Ene,2026
+Modelo B (9:12 CDMX),2026-01-22,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 4,Ene,2026
+Modelo B (9:12 CDMX),2026-01-23,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 4,Ene,2026
+Modelo B (9:12 CDMX),2026-01-26,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 4,Ene,2026
+Modelo B (9:12 CDMX),2026-01-27,Compra,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 4,Ene,2026
+Modelo B (9:12 CDMX),2026-01-28,Venta,1091.0,TP1 + TP2,FOMC,1,Mié,Semana 4,Ene,2026
+Modelo B (9:12 CDMX),2026-01-29,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 5,Ene,2026
+Modelo B (9:12 CDMX),2026-01-30,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 5,Ene,2026
+Modelo B (9:12 CDMX),2026-02-02,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 1,Feb,2026
+Modelo B (9:12 CDMX),2026-02-03,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 1,Feb,2026
+Modelo B (9:12 CDMX),2026-02-04,Venta,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 1,Feb,2026
+Modelo B (9:12 CDMX),2026-02-05,Venta,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 1,Feb,2026
+Modelo B (9:12 CDMX),2026-02-06,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 1,Feb,2026
+Modelo B (9:12 CDMX),2026-02-09,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 2,Feb,2026
+Modelo B (9:12 CDMX),2026-02-10,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 2,Feb,2026
+Modelo B (9:12 CDMX),2026-02-11,Venta,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Mié,Semana 2,Feb,2026
+Modelo B (9:12 CDMX),2026-02-12,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 2,Feb,2026
+Modelo B (9:12 CDMX),2026-02-13,Compra,-1159.0,Stop (−2),NFP/CPI 8:30,0,Vie,Semana 2,Feb,2026
+Modelo B (9:12 CDMX),2026-02-16,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 3,Feb,2026
+Modelo B (9:12 CDMX),2026-02-17,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 3,Feb,2026
+Modelo B (9:12 CDMX),2026-02-18,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 3,Feb,2026
+Modelo B (9:12 CDMX),2026-02-19,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 3,Feb,2026
+Modelo B (9:12 CDMX),2026-02-20,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 3,Feb,2026
+Modelo B (9:12 CDMX),2026-02-23,Venta,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 4,Feb,2026
+Modelo B (9:12 CDMX),2026-02-24,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 4,Feb,2026
+Modelo B (9:12 CDMX),2026-02-25,Venta,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 4,Feb,2026
+Modelo B (9:12 CDMX),2026-02-26,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 4,Feb,2026
+Modelo B (9:12 CDMX),2026-02-27,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 4,Feb,2026
+Modelo B (9:12 CDMX),2026-03-02,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 1,Mar,2026
+Modelo B (9:12 CDMX),2026-03-03,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 1,Mar,2026
+Modelo B (9:12 CDMX),2026-03-04,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 1,Mar,2026
+Modelo B (9:12 CDMX),2026-03-05,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 1,Mar,2026
+Modelo B (9:12 CDMX),2026-03-06,Venta,-1159.0,Stop (−2),NFP/CPI 8:30,0,Vie,Semana 1,Mar,2026
+Modelo B (9:12 CDMX),2026-03-09,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 2,Mar,2026
+Modelo B (9:12 CDMX),2026-03-10,Compra,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 2,Mar,2026
+Modelo B (9:12 CDMX),2026-03-11,Venta,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Mié,Semana 2,Mar,2026
+Modelo B (9:12 CDMX),2026-03-12,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 2,Mar,2026
+Modelo B (9:12 CDMX),2026-03-13,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 2,Mar,2026
+Modelo B (9:12 CDMX),2026-03-16,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 3,Mar,2026
+Modelo B (9:12 CDMX),2026-03-17,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 3,Mar,2026
+Modelo B (9:12 CDMX),2026-03-18,Compra,-1159.0,Stop (−2),FOMC,0,Mié,Semana 3,Mar,2026
+Modelo B (9:12 CDMX),2026-03-19,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 3,Mar,2026
+Modelo B (9:12 CDMX),2026-03-20,Compra,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 3,Mar,2026
+Modelo B (9:12 CDMX),2026-03-23,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 4,Mar,2026
+Modelo B (9:12 CDMX),2026-03-25,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 4,Mar,2026
+Modelo B (9:12 CDMX),2026-03-26,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 4,Mar,2026
+Modelo B (9:12 CDMX),2026-03-27,Venta,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 4,Mar,2026
+Modelo B (9:12 CDMX),2026-03-30,Venta,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 5,Mar,2026
+Modelo B (9:12 CDMX),2026-03-31,Compra,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 5,Mar,2026
+Modelo B (9:12 CDMX),2026-04-01,Venta,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 1,Abr,2026
+Modelo B (9:12 CDMX),2026-04-02,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 1,Abr,2026
+Modelo B (9:12 CDMX),2026-04-06,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 1,Abr,2026
+Modelo B (9:12 CDMX),2026-04-07,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 1,Abr,2026
+Modelo B (9:12 CDMX),2026-04-08,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 2,Abr,2026
+Modelo B (9:12 CDMX),2026-04-09,Venta,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 2,Abr,2026
+Modelo B (9:12 CDMX),2026-04-10,Venta,-1159.0,Stop (−2),NFP/CPI 8:30,0,Vie,Semana 2,Abr,2026
+Modelo B (9:12 CDMX),2026-04-13,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 2,Abr,2026
+Modelo B (9:12 CDMX),2026-04-14,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 2,Abr,2026
+Modelo B (9:12 CDMX),2026-04-15,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 3,Abr,2026
+Modelo B (9:12 CDMX),2026-04-16,Venta,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 3,Abr,2026
+Modelo B (9:12 CDMX),2026-04-17,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 3,Abr,2026
+Modelo B (9:12 CDMX),2026-04-20,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 3,Abr,2026
+Modelo B (9:12 CDMX),2026-04-21,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 3,Abr,2026
+Modelo B (9:12 CDMX),2026-04-22,Compra,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 4,Abr,2026
+Modelo B (9:12 CDMX),2026-04-23,Compra,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 4,Abr,2026
+Modelo B (9:12 CDMX),2026-04-24,Venta,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 4,Abr,2026
+Modelo B (9:12 CDMX),2026-04-27,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 4,Abr,2026
+Modelo B (9:12 CDMX),2026-04-28,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 4,Abr,2026
+Modelo B (9:12 CDMX),2026-04-29,Venta,-1159.0,Stop (−2),FOMC,0,Mié,Semana 5,Abr,2026
+Modelo B (9:12 CDMX),2026-04-30,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 5,Abr,2026
+Modelo B (9:12 CDMX),2026-05-01,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 1,May,2026
+Modelo B (9:12 CDMX),2026-05-04,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 1,May,2026
+Modelo B (9:12 CDMX),2026-05-05,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 1,May,2026
+Modelo B (9:12 CDMX),2026-05-06,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 1,May,2026
+Modelo B (9:12 CDMX),2026-05-07,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 1,May,2026
+Modelo B (9:12 CDMX),2026-05-08,Compra,341.0,TP1 + BE,NFP/CPI 8:30,1,Vie,Semana 2,May,2026
+Modelo B (9:12 CDMX),2026-05-11,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 2,May,2026
+Modelo B (9:12 CDMX),2026-05-12,Venta,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Mar,Semana 2,May,2026
+Modelo B (9:12 CDMX),2026-05-13,Venta,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 2,May,2026
+Modelo B (9:12 CDMX),2026-05-14,Compra,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 2,May,2026
+Modelo B (9:12 CDMX),2026-05-15,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 3,May,2026
+Modelo B (9:12 CDMX),2026-05-18,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 3,May,2026
+Modelo B (9:12 CDMX),2026-05-19,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 3,May,2026
+Modelo B (9:12 CDMX),2026-05-20,Venta,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 3,May,2026
+Modelo B (9:12 CDMX),2026-05-21,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 3,May,2026
+Modelo B (9:12 CDMX),2026-05-22,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 4,May,2026
+Modelo B (9:12 CDMX),2026-05-25,Venta,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 4,May,2026
+Modelo B (9:12 CDMX),2026-05-26,Compra,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 4,May,2026
+Modelo B (9:12 CDMX),2026-05-27,Venta,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 4,May,2026
+Modelo B (9:12 CDMX),2026-05-28,Compra,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 4,May,2026
+Modelo B (9:12 CDMX),2026-05-29,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 5,May,2026
+Modelo B (9:12 CDMX),2026-06-01,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 1,Jun,2026
+Modelo B (9:12 CDMX),2026-06-02,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 1,Jun,2026
+Modelo B (9:12 CDMX),2026-06-03,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 1,Jun,2026
+Modelo B (9:12 CDMX),2026-06-04,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 1,Jun,2026
+Modelo B (9:12 CDMX),2026-06-05,Venta,-1159.0,Stop (−2),NFP/CPI 8:30,0,Vie,Semana 1,Jun,2026
+Modelo B (9:12 CDMX),2026-06-08,Venta,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 2,Jun,2026
+Modelo B (9:12 CDMX),2026-06-09,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 2,Jun,2026
+Modelo B (9:12 CDMX),2026-06-10,Compra,-1159.0,Stop (−2),NFP/CPI 8:30,0,Mié,Semana 2,Jun,2026
+Modelo B (9:12 CDMX),2026-06-11,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 2,Jun,2026
+Modelo B (9:12 CDMX),2026-06-12,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 2,Jun,2026
+Modelo B (9:12 CDMX),2026-06-15,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 3,Jun,2026
+Modelo B (9:12 CDMX),2026-06-16,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 3,Jun,2026
+Modelo B (9:12 CDMX),2026-06-17,Compra,341.0,TP1 + BE,FOMC,1,Mié,Semana 3,Jun,2026
+Modelo B (9:12 CDMX),2026-06-18,Venta,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 3,Jun,2026
+Modelo B (9:12 CDMX),2026-06-19,Compra,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 3,Jun,2026
+Modelo B (9:12 CDMX),2026-06-22,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 4,Jun,2026
+Modelo B (9:12 CDMX),2026-06-23,Compra,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 4,Jun,2026
+Modelo B (9:12 CDMX),2026-06-24,Venta,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 4,Jun,2026
+Modelo B (9:12 CDMX),2026-06-25,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 4,Jun,2026
+Modelo B (9:12 CDMX),2026-06-26,Compra,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 4,Jun,2026
+Modelo B (9:12 CDMX),2026-06-29,Venta,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 5,Jun,2026
+Modelo B (9:12 CDMX),2026-06-30,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 5,Jun,2026
+Modelo B (9:12 CDMX),2026-07-01,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 1,Jul,2026
+Modelo B (9:12 CDMX),2026-07-02,Compra,-1159.0,Stop (−2),NFP/CPI 8:30,0,Jue,Semana 1,Jul,2026
+Modelo B (9:12 CDMX),2026-07-03,Venta,-682.8,Cierre 15:59,Sin noticia,0,Vie,Semana 1,Jul,2026
+Modelo B (9:12 CDMX),2026-07-06,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 1,Jul,2026
+Modelo B (9:12 CDMX),2026-07-07,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 1,Jul,2026
+Modelo B (9:12 CDMX),2026-07-08,Venta,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 2,Jul,2026
+Modelo B (9:12 CDMX),2026-07-09,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 2,Jul,2026
+Modelo B (9:12 CDMX),2026-07-10,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 2,Jul,2026
+Modelo B (9:12 CDMX),2026-07-13,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 2,Jul,2026
+Modelo B (9:12 CDMX),2026-07-14,Venta,341.0,TP1 + BE,NFP/CPI 8:30,1,Mar,Semana 2,Jul,2026
+Modelo B (9:12 CDMX),2026-07-15,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 3,Jul,2026
+Modelo B (9:12 CDMX),2026-07-16,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 3,Jul,2026
+Modelo B (9:12 CDMX),2026-07-17,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 3,Jul,2026
+Modelo B (9:12 CDMX),2026-07-20,Venta,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 3,Jul,2026
+Modelo B (9:12 CDMX),2026-07-21,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 3,Jul,2026
+Modelo B (9:12 CDMX),2026-07-22,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 4,Jul,2026
+Modelo B (9:12 CDMX),2026-07-23,Venta,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 4,Jul,2026
+Modelo B (9:12 CDMX),2026-07-24,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 4,Jul,2026
+Modelo B (9:12 CDMX),2026-07-27,Venta,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 4,Jul,2026
+Modelo B (9:12 CDMX),2026-07-28,Venta,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 4,Jul,2026
+Modelo B (9:12 CDMX),2026-07-29,Venta,1091.0,TP1 + TP2,FOMC,1,Mié,Semana 5,Jul,2026
+Modelo B (9:12 CDMX),2026-07-30,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 5,Jul,2026
+Modelo B (9:12 CDMX),2026-07-31,Venta,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 5,Jul,2026
+Modelo B (9:12 CDMX),2026-08-03,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 1,Ago,2026
+Modelo B (9:12 CDMX),2026-08-04,Compra,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 1,Ago,2026
+Modelo B (9:12 CDMX),2026-08-05,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 1,Ago,2026
+Modelo B (9:12 CDMX),2026-08-06,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 1,Ago,2026
+Modelo B (9:12 CDMX),2026-08-07,Venta,-1159.0,Stop (−2),NFP/CPI 8:30,0,Vie,Semana 1,Ago,2026
+Modelo B (9:12 CDMX),2026-08-10,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 2,Ago,2026
+Modelo B (9:12 CDMX),2026-08-11,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 2,Ago,2026
+Modelo B (9:12 CDMX),2026-08-12,Venta,341.0,TP1 + BE,NFP/CPI 8:30,1,Mié,Semana 2,Ago,2026
+Modelo B (9:12 CDMX),2026-08-13,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 2,Ago,2026
+Modelo B (9:12 CDMX),2026-08-14,Compra,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 2,Ago,2026
+Modelo B (9:12 CDMX),2026-08-17,Venta,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 3,Ago,2026
+Modelo B (9:12 CDMX),2026-08-18,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 3,Ago,2026
+Modelo B (9:12 CDMX),2026-08-19,Venta,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 3,Ago,2026
+Modelo B (9:12 CDMX),2026-08-20,Venta,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 3,Ago,2026
+Modelo B (9:12 CDMX),2026-08-21,Compra,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 3,Ago,2026
+Modelo B (9:12 CDMX),2026-08-24,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 4,Ago,2026
+Modelo B (9:12 CDMX),2026-08-25,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 4,Ago,2026
+Modelo B (9:12 CDMX),2026-08-26,Compra,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 4,Ago,2026
+Modelo B (9:12 CDMX),2026-08-27,Compra,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 4,Ago,2026
+Modelo B (9:12 CDMX),2026-08-28,Venta,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 4,Ago,2026
+Modelo B (9:12 CDMX),2026-08-31,Venta,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 5,Ago,2026
+Modelo B (9:12 CDMX),2026-09-01,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 1,Sep,2026
+Modelo B (9:12 CDMX),2026-09-02,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mié,Semana 1,Sep,2026
+Modelo B (9:12 CDMX),2026-09-03,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 1,Sep,2026
+Modelo B (9:12 CDMX),2026-09-04,Venta,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Vie,Semana 1,Sep,2026
+Modelo B (9:12 CDMX),2026-09-07,Venta,78.1,Cierre 15:59,Sin noticia,1,Lun,Semana 1,Sep,2026
+Modelo B (9:12 CDMX),2026-09-08,Venta,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 2,Sep,2026
+Modelo B (9:12 CDMX),2026-09-09,Venta,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 2,Sep,2026
+Modelo B (9:12 CDMX),2026-09-10,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 2,Sep,2026
+Modelo B (9:12 CDMX),2026-09-11,Venta,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Vie,Semana 2,Sep,2026
+Modelo B (9:12 CDMX),2026-09-14,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 2,Sep,2026
+Modelo B (9:12 CDMX),2026-09-15,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 3,Sep,2026
+Modelo B (9:12 CDMX),2026-09-16,Venta,341.0,TP1 + BE,FOMC,1,Mié,Semana 3,Sep,2026
+Modelo B (9:12 CDMX),2026-09-17,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 3,Sep,2026
+Modelo B (9:12 CDMX),2026-09-18,Venta,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 3,Sep,2026
+Modelo B (9:12 CDMX),2026-09-21,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 3,Sep,2026
+Modelo B (9:12 CDMX),2026-09-22,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 4,Sep,2026
+Modelo B (9:12 CDMX),2026-09-23,Venta,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 4,Sep,2026
+Modelo B (9:12 CDMX),2026-09-24,Compra,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 4,Sep,2026
+Modelo B (9:12 CDMX),2026-09-25,Venta,341.0,TP1 + BE,Sin noticia,1,Vie,Semana 4,Sep,2026
+Modelo B (9:12 CDMX),2026-09-28,Venta,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 4,Sep,2026
+Modelo B (9:12 CDMX),2026-09-29,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 5,Sep,2026
+Modelo B (9:12 CDMX),2026-09-30,Compra,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 5,Sep,2026
+Modelo B (9:12 CDMX),2026-10-01,Venta,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 1,Oct,2026
+Modelo B (9:12 CDMX),2026-10-02,Venta,-1159.0,Stop (−2),NFP/CPI 8:30,0,Vie,Semana 1,Oct,2026
+Modelo B (9:12 CDMX),2026-10-05,Compra,341.0,TP1 + BE,Sin noticia,1,Lun,Semana 1,Oct,2026
+Modelo B (9:12 CDMX),2026-10-06,Compra,-1159.0,Stop (−2),Sin noticia,0,Mar,Semana 1,Oct,2026
+Modelo B (9:12 CDMX),2026-10-07,Venta,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 1,Oct,2026
+Modelo B (9:12 CDMX),2026-10-08,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 2,Oct,2026
+Modelo B (9:12 CDMX),2026-10-09,Venta,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 2,Oct,2026
+Modelo B (9:12 CDMX),2026-10-12,Venta,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 2,Oct,2026
+Modelo B (9:12 CDMX),2026-10-13,Venta,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 2,Oct,2026
+Modelo B (9:12 CDMX),2026-10-14,Venta,341.0,TP1 + BE,NFP/CPI 8:30,1,Mié,Semana 2,Oct,2026
+Modelo B (9:12 CDMX),2026-10-15,Compra,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 3,Oct,2026
+Modelo B (9:12 CDMX),2026-10-16,Venta,-1159.0,Stop (−2),Sin noticia,0,Vie,Semana 3,Oct,2026
+Modelo B (9:12 CDMX),2026-10-19,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 3,Oct,2026
+Modelo B (9:12 CDMX),2026-10-20,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 3,Oct,2026
+Modelo B (9:12 CDMX),2026-10-21,Venta,-1159.0,Stop (−2),Sin noticia,0,Mié,Semana 3,Oct,2026
+Modelo B (9:12 CDMX),2026-10-22,Venta,1091.0,TP1 + TP2,Sin noticia,1,Jue,Semana 4,Oct,2026
+Modelo B (9:12 CDMX),2026-10-23,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 4,Oct,2026
+Modelo B (9:12 CDMX),2026-10-26,Compra,-1159.0,Stop (−2),Sin noticia,0,Lun,Semana 4,Oct,2026
+Modelo B (9:12 CDMX),2026-10-27,Compra,1091.0,TP1 + TP2,Sin noticia,1,Mar,Semana 4,Oct,2026
+Modelo B (9:12 CDMX),2026-10-28,Compra,1091.0,TP1 + TP2,FOMC,1,Mié,Semana 4,Oct,2026
+Modelo B (9:12 CDMX),2026-10-29,Compra,341.0,TP1 + BE,Sin noticia,1,Jue,Semana 5,Oct,2026
+Modelo B (9:12 CDMX),2026-10-30,Venta,1091.0,TP1 + TP2,Sin noticia,1,Vie,Semana 5,Oct,2026
+Modelo B (9:12 CDMX),2026-11-02,Compra,1091.0,TP1 + TP2,Sin noticia,1,Lun,Semana 1,Nov,2026
+Modelo B (9:12 CDMX),2026-11-03,Compra,341.0,TP1 + BE,Sin noticia,1,Mar,Semana 1,Nov,2026
+Modelo B (9:12 CDMX),2026-11-04,Compra,341.0,TP1 + BE,Sin noticia,1,Mié,Semana 1,Nov,2026
+Modelo B (9:12 CDMX),2026-11-05,Venta,-1159.0,Stop (−2),Sin noticia,0,Jue,Semana 1,Nov,2026
+Modelo B (9:12 CDMX),2026-11-06,Compra,1091.0,TP1 + TP2,NFP/CPI 8:30,1,Vie,Semana 1,Nov,2026
+Suma de las dos,2025-01-02,,-2318.0,,Sin noticia,0,Jue,Semana 1,Ene,2025
+Suma de las dos,2025-01-03,,-68.0,,Sin noticia,0,Vie,Semana 1,Ene,2025
+Suma de las dos,2025-01-06,,682.0,,Sin noticia,1,Lun,Semana 1,Ene,2025
+Suma de las dos,2025-01-07,,-818.0,,Sin noticia,0,Mar,Semana 1,Ene,2025
+Suma de las dos,2025-01-08,,1432.0,,Sin noticia,1,Mié,Semana 2,Ene,2025
+Suma de las dos,2025-01-10,,-68.0,,NFP/CPI 8:30,0,Vie,Semana 2,Ene,2025
+Suma de las dos,2025-01-13,,-818.0,,Sin noticia,0,Lun,Semana 2,Ene,2025
+Suma de las dos,2025-01-14,,-818.0,,Sin noticia,0,Mar,Semana 2,Ene,2025
+Suma de las dos,2025-01-15,,-2318.0,,NFP/CPI 8:30,0,Mié,Semana 3,Ene,2025
+Suma de las dos,2025-01-16,,-2318.0,,Sin noticia,0,Jue,Semana 3,Ene,2025
+Suma de las dos,2025-01-17,,-68.0,,Sin noticia,0,Vie,Semana 3,Ene,2025
+Suma de las dos,2025-01-20,,-818.0,,Sin noticia,0,Lun,Semana 3,Ene,2025
+Suma de las dos,2025-01-21,,-2318.0,,Sin noticia,0,Mar,Semana 3,Ene,2025
+Suma de las dos,2025-01-22,,1432.0,,Sin noticia,1,Mié,Semana 4,Ene,2025
+Suma de las dos,2025-01-23,,-68.0,,Sin noticia,0,Jue,Semana 4,Ene,2025
+Suma de las dos,2025-01-24,,1432.0,,Sin noticia,1,Vie,Semana 4,Ene,2025
+Suma de las dos,2025-01-27,,-2318.0,,Sin noticia,0,Lun,Semana 4,Ene,2025
+Suma de las dos,2025-01-28,,-68.0,,Sin noticia,0,Mar,Semana 4,Ene,2025
+Suma de las dos,2025-01-29,,-818.0,,FOMC,0,Mié,Semana 5,Ene,2025
+Suma de las dos,2025-01-30,,1432.0,,Sin noticia,1,Jue,Semana 5,Ene,2025
+Suma de las dos,2025-01-31,,1432.0,,Sin noticia,1,Vie,Semana 5,Ene,2025
+Suma de las dos,2025-02-03,,-818.0,,Sin noticia,0,Lun,Semana 1,Feb,2025
+Suma de las dos,2025-02-04,,1432.0,,Sin noticia,1,Mar,Semana 1,Feb,2025
+Suma de las dos,2025-02-05,,-818.0,,Sin noticia,0,Mié,Semana 1,Feb,2025
+Suma de las dos,2025-02-06,,-2318.0,,Sin noticia,0,Jue,Semana 1,Feb,2025
+Suma de las dos,2025-02-07,,682.0,,NFP/CPI 8:30,1,Vie,Semana 1,Feb,2025
+Suma de las dos,2025-02-10,,-818.0,,Sin noticia,0,Lun,Semana 2,Feb,2025
+Suma de las dos,2025-02-11,,-68.0,,Sin noticia,0,Mar,Semana 2,Feb,2025
+Suma de las dos,2025-02-12,,-2318.0,,NFP/CPI 8:30,0,Mié,Semana 2,Feb,2025
+Suma de las dos,2025-02-13,,-68.0,,Sin noticia,0,Jue,Semana 2,Feb,2025
+Suma de las dos,2025-02-14,,-818.0,,Sin noticia,0,Vie,Semana 2,Feb,2025
+Suma de las dos,2025-02-17,,-504.5,,Sin noticia,0,Lun,Semana 3,Feb,2025
+Suma de las dos,2025-02-18,,-68.0,,Sin noticia,0,Mar,Semana 3,Feb,2025
+Suma de las dos,2025-02-19,,-2318.0,,Sin noticia,0,Mié,Semana 3,Feb,2025
+Suma de las dos,2025-02-20,,-2318.0,,Sin noticia,0,Jue,Semana 3,Feb,2025
+Suma de las dos,2025-02-21,,-68.0,,Sin noticia,0,Vie,Semana 3,Feb,2025
+Suma de las dos,2025-02-24,,-68.0,,Sin noticia,0,Lun,Semana 4,Feb,2025
+Suma de las dos,2025-02-25,,2182.0,,Sin noticia,1,Mar,Semana 4,Feb,2025
+Suma de las dos,2025-02-26,,1432.0,,Sin noticia,1,Mié,Semana 4,Feb,2025
+Suma de las dos,2025-02-27,,-818.0,,Sin noticia,0,Jue,Semana 4,Feb,2025
+Suma de las dos,2025-02-28,,1432.0,,Sin noticia,1,Vie,Semana 4,Feb,2025
+Suma de las dos,2025-03-03,,682.0,,Sin noticia,1,Lun,Semana 1,Mar,2025
+Suma de las dos,2025-03-04,,2182.0,,Sin noticia,1,Mar,Semana 1,Mar,2025
+Suma de las dos,2025-03-05,,-818.0,,Sin noticia,0,Mié,Semana 1,Mar,2025
+Suma de las dos,2025-03-06,,1432.0,,Sin noticia,1,Jue,Semana 1,Mar,2025
+Suma de las dos,2025-03-07,,-2318.0,,NFP/CPI 8:30,0,Vie,Semana 1,Mar,2025
+Suma de las dos,2025-03-10,,-2318.0,,Sin noticia,0,Lun,Semana 2,Mar,2025
+Suma de las dos,2025-03-11,,682.0,,Sin noticia,1,Mar,Semana 2,Mar,2025
+Suma de las dos,2025-03-12,,-818.0,,NFP/CPI 8:30,0,Mié,Semana 2,Mar,2025
+Suma de las dos,2025-03-13,,1432.0,,Sin noticia,1,Jue,Semana 2,Mar,2025
+Suma de las dos,2025-03-14,,2182.0,,Sin noticia,1,Vie,Semana 2,Mar,2025
+Suma de las dos,2025-03-17,,1432.0,,Sin noticia,1,Lun,Semana 3,Mar,2025
+Suma de las dos,2025-03-18,,1432.0,,Sin noticia,1,Mar,Semana 3,Mar,2025
+Suma de las dos,2025-03-19,,-68.0,,FOMC,0,Mié,Semana 3,Mar,2025
+Suma de las dos,2025-03-20,,-2318.0,,Sin noticia,0,Jue,Semana 3,Mar,2025
+Suma de las dos,2025-03-21,,-818.0,,Sin noticia,0,Vie,Semana 3,Mar,2025
+Suma de las dos,2025-03-24,,-68.0,,Sin noticia,0,Lun,Semana 4,Mar,2025
+Suma de las dos,2025-03-25,,-2318.0,,Sin noticia,0,Mar,Semana 4,Mar,2025
+Suma de las dos,2025-03-26,,2182.0,,Sin noticia,1,Mié,Semana 4,Mar,2025
+Suma de las dos,2025-03-27,,-68.0,,Sin noticia,0,Jue,Semana 4,Mar,2025
+Suma de las dos,2025-03-28,,682.0,,Sin noticia,1,Vie,Semana 4,Mar,2025
+Suma de las dos,2025-03-31,,-2318.0,,Sin noticia,0,Lun,Semana 5,Mar,2025
+Suma de las dos,2025-04-01,,1432.0,,Sin noticia,1,Mar,Semana 1,Abr,2025
+Suma de las dos,2025-04-02,,-818.0,,Sin noticia,0,Mié,Semana 1,Abr,2025
+Suma de las dos,2025-04-03,,1432.0,,Sin noticia,1,Jue,Semana 1,Abr,2025
+Suma de las dos,2025-04-04,,-68.0,,NFP/CPI 8:30,0,Vie,Semana 1,Abr,2025
+Suma de las dos,2025-04-07,,-68.0,,Sin noticia,0,Lun,Semana 1,Abr,2025
+Suma de las dos,2025-04-08,,-68.0,,Sin noticia,0,Mar,Semana 2,Abr,2025
+Suma de las dos,2025-04-09,,-2318.0,,Sin noticia,0,Mié,Semana 2,Abr,2025
+Suma de las dos,2025-04-10,,1432.0,,NFP/CPI 8:30,1,Jue,Semana 2,Abr,2025
+Suma de las dos,2025-04-11,,1432.0,,Sin noticia,1,Vie,Semana 2,Abr,2025
+Suma de las dos,2025-04-14,,2182.0,,Sin noticia,1,Lun,Semana 2,Abr,2025
+Suma de las dos,2025-04-15,,-2318.0,,Sin noticia,0,Mar,Semana 3,Abr,2025
+Suma de las dos,2025-04-16,,1432.0,,Sin noticia,1,Mié,Semana 3,Abr,2025
+Suma de las dos,2025-04-17,,1432.0,,Sin noticia,1,Jue,Semana 3,Abr,2025
+Suma de las dos,2025-04-21,,2182.0,,Sin noticia,1,Lun,Semana 3,Abr,2025
+Suma de las dos,2025-04-22,,-68.0,,Sin noticia,0,Mar,Semana 4,Abr,2025
+Suma de las dos,2025-04-23,,-68.0,,Sin noticia,0,Mié,Semana 4,Abr,2025
+Suma de las dos,2025-04-24,,-68.0,,Sin noticia,0,Jue,Semana 4,Abr,2025
+Suma de las dos,2025-04-25,,-818.0,,Sin noticia,0,Vie,Semana 4,Abr,2025
+Suma de las dos,2025-04-28,,-68.0,,Sin noticia,0,Lun,Semana 4,Abr,2025
+Suma de las dos,2025-04-29,,-2318.0,,Sin noticia,0,Mar,Semana 5,Abr,2025
+Suma de las dos,2025-04-30,,-68.0,,Sin noticia,0,Mié,Semana 5,Abr,2025
+Suma de las dos,2025-05-01,,-2318.0,,Sin noticia,0,Jue,Semana 1,May,2025
+Suma de las dos,2025-05-02,,-818.0,,NFP/CPI 8:30,0,Vie,Semana 1,May,2025
+Suma de las dos,2025-05-05,,1432.0,,Sin noticia,1,Lun,Semana 1,May,2025
+Suma de las dos,2025-05-06,,1432.0,,Sin noticia,1,Mar,Semana 1,May,2025
+Suma de las dos,2025-05-07,,-818.0,,FOMC,0,Mié,Semana 1,May,2025
+Suma de las dos,2025-05-08,,-2318.0,,Sin noticia,0,Jue,Semana 2,May,2025
+Suma de las dos,2025-05-09,,2182.0,,Sin noticia,1,Vie,Semana 2,May,2025
+Suma de las dos,2025-05-12,,-68.0,,Sin noticia,0,Lun,Semana 2,May,2025
+Suma de las dos,2025-05-13,,2182.0,,NFP/CPI 8:30,1,Mar,Semana 2,May,2025
+Suma de las dos,2025-05-14,,-2318.0,,Sin noticia,0,Mié,Semana 2,May,2025
+Suma de las dos,2025-05-15,,-2318.0,,Sin noticia,0,Jue,Semana 3,May,2025
+Suma de las dos,2025-05-16,,-2318.0,,Sin noticia,0,Vie,Semana 3,May,2025
+Suma de las dos,2025-05-19,,-818.0,,Sin noticia,0,Lun,Semana 3,May,2025
+Suma de las dos,2025-05-20,,-2318.0,,Sin noticia,0,Mar,Semana 3,May,2025
+Suma de las dos,2025-05-21,,-68.0,,Sin noticia,0,Mié,Semana 3,May,2025
+Suma de las dos,2025-05-22,,-2318.0,,Sin noticia,0,Jue,Semana 4,May,2025
+Suma de las dos,2025-05-23,,1432.0,,Sin noticia,1,Vie,Semana 4,May,2025
+Suma de las dos,2025-05-26,,-818.0,,Sin noticia,0,Lun,Semana 4,May,2025
+Suma de las dos,2025-05-27,,-68.0,,Sin noticia,0,Mar,Semana 4,May,2025
+Suma de las dos,2025-05-28,,1432.0,,Sin noticia,1,Mié,Semana 4,May,2025
+Suma de las dos,2025-05-29,,-818.0,,Sin noticia,0,Jue,Semana 5,May,2025
+Suma de las dos,2025-05-30,,-818.0,,Sin noticia,0,Vie,Semana 5,May,2025
+Suma de las dos,2025-06-02,,-2318.0,,Sin noticia,0,Lun,Semana 1,Jun,2025
+Suma de las dos,2025-06-03,,1432.0,,Sin noticia,1,Mar,Semana 1,Jun,2025
+Suma de las dos,2025-06-04,,-68.0,,Sin noticia,0,Mié,Semana 1,Jun,2025
+Suma de las dos,2025-06-05,,-68.0,,Sin noticia,0,Jue,Semana 1,Jun,2025
+Suma de las dos,2025-06-06,,1432.0,,NFP/CPI 8:30,1,Vie,Semana 1,Jun,2025
+Suma de las dos,2025-06-09,,-818.0,,Sin noticia,0,Lun,Semana 2,Jun,2025
+Suma de las dos,2025-06-10,,-2318.0,,Sin noticia,0,Mar,Semana 2,Jun,2025
+Suma de las dos,2025-06-11,,1432.0,,NFP/CPI 8:30,1,Mié,Semana 2,Jun,2025
+Suma de las dos,2025-06-12,,-68.0,,Sin noticia,0,Jue,Semana 2,Jun,2025
+Suma de las dos,2025-06-13,,682.0,,Sin noticia,1,Vie,Semana 2,Jun,2025
+Suma de las dos,2025-06-16,,1432.0,,Sin noticia,1,Lun,Semana 3,Jun,2025
+Suma de las dos,2025-06-17,,-818.0,,Sin noticia,0,Mar,Semana 3,Jun,2025
+Suma de las dos,2025-06-18,,-68.0,,FOMC,0,Mié,Semana 3,Jun,2025
+Suma de las dos,2025-06-19,,1432.0,,Sin noticia,1,Jue,Semana 3,Jun,2025
+Suma de las dos,2025-06-20,,2182.0,,Sin noticia,1,Vie,Semana 3,Jun,2025
+Suma de las dos,2025-06-23,,682.0,,Sin noticia,1,Lun,Semana 4,Jun,2025
+Suma de las dos,2025-06-24,,-818.0,,Sin noticia,0,Mar,Semana 4,Jun,2025
+Suma de las dos,2025-06-25,,-68.0,,Sin noticia,0,Mié,Semana 4,Jun,2025
+Suma de las dos,2025-06-26,,2182.0,,Sin noticia,1,Jue,Semana 4,Jun,2025
+Suma de las dos,2025-06-27,,-818.0,,Sin noticia,0,Vie,Semana 4,Jun,2025
+Suma de las dos,2025-06-30,,-2318.0,,Sin noticia,0,Lun,Semana 5,Jun,2025
+Suma de las dos,2025-07-01,,-818.0,,Sin noticia,0,Mar,Semana 1,Jul,2025
+Suma de las dos,2025-07-02,,1432.0,,Sin noticia,1,Mié,Semana 1,Jul,2025
+Suma de las dos,2025-07-03,,1432.0,,NFP/CPI 8:30,1,Jue,Semana 1,Jul,2025
+Suma de las dos,2025-07-04,,305.1,,Sin noticia,1,Vie,Semana 1,Jul,2025
+Suma de las dos,2025-07-07,,-68.0,,Sin noticia,0,Lun,Semana 1,Jul,2025
+Suma de las dos,2025-07-08,,-2318.0,,Sin noticia,0,Mar,Semana 2,Jul,2025
+Suma de las dos,2025-07-09,,-68.0,,Sin noticia,0,Mié,Semana 2,Jul,2025
+Suma de las dos,2025-07-10,,2182.0,,Sin noticia,1,Jue,Semana 2,Jul,2025
+Suma de las dos,2025-07-11,,-818.0,,Sin noticia,0,Vie,Semana 2,Jul,2025
+Suma de las dos,2025-07-14,,682.0,,Sin noticia,1,Lun,Semana 2,Jul,2025
+Suma de las dos,2025-07-15,,1432.0,,NFP/CPI 8:30,1,Mar,Semana 3,Jul,2025
+Suma de las dos,2025-07-16,,-818.0,,Sin noticia,0,Mié,Semana 3,Jul,2025
+Suma de las dos,2025-07-17,,2182.0,,Sin noticia,1,Jue,Semana 3,Jul,2025
+Suma de las dos,2025-07-18,,-68.0,,Sin noticia,0,Vie,Semana 3,Jul,2025
+Suma de las dos,2025-07-21,,1432.0,,Sin noticia,1,Lun,Semana 3,Jul,2025
+Suma de las dos,2025-07-22,,-818.0,,Sin noticia,0,Mar,Semana 4,Jul,2025
+Suma de las dos,2025-07-23,,-2318.0,,Sin noticia,0,Mié,Semana 4,Jul,2025
+Suma de las dos,2025-07-24,,682.0,,Sin noticia,1,Jue,Semana 4,Jul,2025
+Suma de las dos,2025-07-25,,-68.0,,Sin noticia,0,Vie,Semana 4,Jul,2025
+Suma de las dos,2025-07-28,,-68.0,,Sin noticia,0,Lun,Semana 4,Jul,2025
+Suma de las dos,2025-07-29,,-68.0,,Sin noticia,0,Mar,Semana 5,Jul,2025
+Suma de las dos,2025-07-30,,-818.0,,FOMC,0,Mié,Semana 5,Jul,2025
+Suma de las dos,2025-07-31,,-68.0,,Sin noticia,0,Jue,Semana 5,Jul,2025
+Suma de las dos,2025-08-01,,-818.0,,NFP/CPI 8:30,0,Vie,Semana 1,Ago,2025
+Suma de las dos,2025-08-04,,1432.0,,Sin noticia,1,Lun,Semana 1,Ago,2025
+Suma de las dos,2025-08-05,,-68.0,,Sin noticia,0,Mar,Semana 1,Ago,2025
+Suma de las dos,2025-08-06,,-2318.0,,Sin noticia,0,Mié,Semana 1,Ago,2025
+Suma de las dos,2025-08-07,,1432.0,,Sin noticia,1,Jue,Semana 1,Ago,2025
+Suma de las dos,2025-08-08,,-818.0,,Sin noticia,0,Vie,Semana 2,Ago,2025
+Suma de las dos,2025-08-11,,-2318.0,,Sin noticia,0,Lun,Semana 2,Ago,2025
+Suma de las dos,2025-08-12,,-68.0,,NFP/CPI 8:30,0,Mar,Semana 2,Ago,2025
+Suma de las dos,2025-08-13,,2182.0,,Sin noticia,1,Mié,Semana 2,Ago,2025
+Suma de las dos,2025-08-14,,-68.0,,Sin noticia,0,Jue,Semana 2,Ago,2025
+Suma de las dos,2025-08-15,,2182.0,,Sin noticia,1,Vie,Semana 3,Ago,2025
+Suma de las dos,2025-08-18,,-183.9,,Sin noticia,0,Lun,Semana 3,Ago,2025
+Suma de las dos,2025-08-19,,-818.0,,Sin noticia,0,Mar,Semana 3,Ago,2025
+Suma de las dos,2025-08-20,,1432.0,,Sin noticia,1,Mié,Semana 3,Ago,2025
+Suma de las dos,2025-08-21,,682.0,,Sin noticia,1,Jue,Semana 3,Ago,2025
+Suma de las dos,2025-08-22,,2182.0,,Sin noticia,1,Vie,Semana 4,Ago,2025
+Suma de las dos,2025-08-25,,-818.0,,Sin noticia,0,Lun,Semana 4,Ago,2025
+Suma de las dos,2025-08-26,,-818.0,,Sin noticia,0,Mar,Semana 4,Ago,2025
+Suma de las dos,2025-08-27,,-818.0,,Sin noticia,0,Mié,Semana 4,Ago,2025
+Suma de las dos,2025-08-28,,-818.0,,Sin noticia,0,Jue,Semana 4,Ago,2025
+Suma de las dos,2025-08-29,,-2318.0,,Sin noticia,0,Vie,Semana 5,Ago,2025
+Suma de las dos,2025-09-01,,-619.8,,Sin noticia,0,Lun,Semana 1,Sep,2025
+Suma de las dos,2025-09-02,,-68.0,,Sin noticia,0,Mar,Semana 1,Sep,2025
+Suma de las dos,2025-09-03,,-818.0,,Sin noticia,0,Mié,Semana 1,Sep,2025
+Suma de las dos,2025-09-04,,-818.0,,Sin noticia,0,Jue,Semana 1,Sep,2025
+Suma de las dos,2025-09-05,,-68.0,,NFP/CPI 8:30,0,Vie,Semana 1,Sep,2025
+Suma de las dos,2025-09-08,,682.0,,Sin noticia,1,Lun,Semana 2,Sep,2025
+Suma de las dos,2025-09-09,,-2318.0,,Sin noticia,0,Mar,Semana 2,Sep,2025
+Suma de las dos,2025-09-10,,-68.0,,Sin noticia,0,Mié,Semana 2,Sep,2025
+Suma de las dos,2025-09-11,,-68.0,,NFP/CPI 8:30,0,Jue,Semana 2,Sep,2025
+Suma de las dos,2025-09-12,,1141.4,,Sin noticia,1,Vie,Semana 2,Sep,2025
+Suma de las dos,2025-09-15,,1432.0,,Sin noticia,1,Lun,Semana 3,Sep,2025
+Suma de las dos,2025-09-16,,-2001.6,,Sin noticia,0,Mar,Semana 3,Sep,2025
+Suma de las dos,2025-09-17,,1432.0,,FOMC,1,Mié,Semana 3,Sep,2025
+Suma de las dos,2025-09-18,,-818.0,,Sin noticia,0,Jue,Semana 3,Sep,2025
+Suma de las dos,2025-09-19,,-818.0,,Sin noticia,0,Vie,Semana 3,Sep,2025
+Suma de las dos,2025-09-22,,-68.0,,Sin noticia,0,Lun,Semana 4,Sep,2025
+Suma de las dos,2025-09-23,,-2318.0,,Sin noticia,0,Mar,Semana 4,Sep,2025
+Suma de las dos,2025-09-24,,-68.0,,Sin noticia,0,Mié,Semana 4,Sep,2025
+Suma de las dos,2025-09-25,,1432.0,,Sin noticia,1,Jue,Semana 4,Sep,2025
+Suma de las dos,2025-09-26,,2182.0,,Sin noticia,1,Vie,Semana 4,Sep,2025
+Suma de las dos,2025-09-29,,-2318.0,,Sin noticia,0,Lun,Semana 5,Sep,2025
+Suma de las dos,2025-09-30,,-818.0,,Sin noticia,0,Mar,Semana 5,Sep,2025
+Suma de las dos,2025-10-01,,-68.0,,Sin noticia,0,Mié,Semana 1,Oct,2025
+Suma de las dos,2025-10-02,,-68.0,,Sin noticia,0,Jue,Semana 1,Oct,2025
+Suma de las dos,2025-10-03,,1432.0,,Sin noticia,1,Vie,Semana 1,Oct,2025
+Suma de las dos,2025-10-06,,-2318.0,,Sin noticia,0,Lun,Semana 1,Oct,2025
+Suma de las dos,2025-10-07,,1432.0,,Sin noticia,1,Mar,Semana 1,Oct,2025
+Suma de las dos,2025-10-08,,-628.3,,Sin noticia,0,Mié,Semana 2,Oct,2025
+Suma de las dos,2025-10-09,,-68.0,,Sin noticia,0,Jue,Semana 2,Oct,2025
+Suma de las dos,2025-10-10,,-68.0,,Sin noticia,0,Vie,Semana 2,Oct,2025
+Suma de las dos,2025-10-13,,-2318.0,,Sin noticia,0,Lun,Semana 2,Oct,2025
+Suma de las dos,2025-10-14,,2182.0,,Sin noticia,1,Mar,Semana 2,Oct,2025
+Suma de las dos,2025-10-15,,-68.0,,Sin noticia,0,Mié,Semana 3,Oct,2025
+Suma de las dos,2025-10-16,,-818.0,,Sin noticia,0,Jue,Semana 3,Oct,2025
+Suma de las dos,2025-10-17,,1432.0,,Sin noticia,1,Vie,Semana 3,Oct,2025
+Suma de las dos,2025-10-20,,2182.0,,Sin noticia,1,Lun,Semana 3,Oct,2025
+Suma de las dos,2025-10-21,,-2318.0,,Sin noticia,0,Mar,Semana 3,Oct,2025
+Suma de las dos,2025-10-22,,1432.0,,Sin noticia,1,Mié,Semana 4,Oct,2025
+Suma de las dos,2025-10-23,,682.0,,Sin noticia,1,Jue,Semana 4,Oct,2025
+Suma de las dos,2025-10-24,,-68.0,,NFP/CPI 8:30,0,Vie,Semana 4,Oct,2025
+Suma de las dos,2025-10-27,,-818.0,,Sin noticia,0,Lun,Semana 4,Oct,2025
+Suma de las dos,2025-10-28,,-818.0,,Sin noticia,0,Mar,Semana 4,Oct,2025
+Suma de las dos,2025-10-29,,682.0,,FOMC,1,Mié,Semana 5,Oct,2025
+Suma de las dos,2025-10-30,,-68.0,,Sin noticia,0,Jue,Semana 5,Oct,2025
+Suma de las dos,2025-10-31,,-68.0,,Sin noticia,0,Vie,Semana 5,Oct,2025
+Suma de las dos,2025-11-03,,-68.0,,Sin noticia,0,Lun,Semana 1,Nov,2025
+Suma de las dos,2025-11-04,,682.0,,Sin noticia,1,Mar,Semana 1,Nov,2025
+Suma de las dos,2025-11-05,,1432.0,,Sin noticia,1,Mié,Semana 1,Nov,2025
+Suma de las dos,2025-11-06,,682.0,,Sin noticia,1,Jue,Semana 1,Nov,2025
+Suma de las dos,2025-11-07,,1432.0,,Sin noticia,1,Vie,Semana 1,Nov,2025
+Suma de las dos,2025-11-10,,-68.0,,Sin noticia,0,Lun,Semana 2,Nov,2025
+Suma de las dos,2025-11-11,,682.0,,Sin noticia,1,Mar,Semana 2,Nov,2025
+Suma de las dos,2025-11-12,,-68.0,,Sin noticia,0,Mié,Semana 2,Nov,2025
+Suma de las dos,2025-11-13,,1432.0,,Sin noticia,1,Jue,Semana 2,Nov,2025
+Suma de las dos,2025-11-14,,1432.0,,Sin noticia,1,Vie,Semana 2,Nov,2025
+Suma de las dos,2025-11-17,,-818.0,,Sin noticia,0,Lun,Semana 3,Nov,2025
+Suma de las dos,2025-11-18,,-818.0,,Sin noticia,0,Mar,Semana 3,Nov,2025
+Suma de las dos,2025-11-19,,-68.0,,Sin noticia,0,Mié,Semana 3,Nov,2025
+Suma de las dos,2025-11-20,,-818.0,,NFP/CPI 8:30,0,Jue,Semana 3,Nov,2025
+Suma de las dos,2025-11-21,,-818.0,,Sin noticia,0,Vie,Semana 3,Nov,2025
+Suma de las dos,2025-11-24,,1432.0,,Sin noticia,1,Lun,Semana 4,Nov,2025
+Suma de las dos,2025-11-25,,682.0,,Sin noticia,1,Mar,Semana 4,Nov,2025
+Suma de las dos,2025-11-26,,-68.0,,Sin noticia,0,Mié,Semana 4,Nov,2025
+Suma de las dos,2025-11-27,,111.4,,Sin noticia,1,Jue,Semana 4,Nov,2025
+Suma de las dos,2025-11-28,,1432.0,,Sin noticia,1,Vie,Semana 4,Nov,2025
+Suma de las dos,2025-12-01,,-2318.0,,Sin noticia,0,Lun,Semana 1,Dic,2025
+Suma de las dos,2025-12-02,,-818.0,,Sin noticia,0,Mar,Semana 1,Dic,2025
+Suma de las dos,2025-12-03,,1432.0,,Sin noticia,1,Mié,Semana 1,Dic,2025
+Suma de las dos,2025-12-04,,-818.0,,Sin noticia,0,Jue,Semana 1,Dic,2025
+Suma de las dos,2025-12-05,,-2318.0,,Sin noticia,0,Vie,Semana 1,Dic,2025
+Suma de las dos,2025-12-08,,-68.0,,Sin noticia,0,Lun,Semana 2,Dic,2025
+Suma de las dos,2025-12-09,,-818.0,,Sin noticia,0,Mar,Semana 2,Dic,2025
+Suma de las dos,2025-12-10,,-818.0,,FOMC,0,Mié,Semana 2,Dic,2025
+Suma de las dos,2025-12-11,,-68.0,,Sin noticia,0,Jue,Semana 2,Dic,2025
+Suma de las dos,2025-12-12,,2182.0,,Sin noticia,1,Vie,Semana 2,Dic,2025
+Suma de las dos,2025-12-15,,-818.0,,Sin noticia,0,Lun,Semana 3,Dic,2025
+Suma de las dos,2025-12-16,,1432.0,,NFP/CPI 8:30,1,Mar,Semana 3,Dic,2025
+Suma de las dos,2025-12-17,,-68.0,,Sin noticia,0,Mié,Semana 3,Dic,2025
+Suma de las dos,2025-12-18,,682.0,,NFP/CPI 8:30,1,Jue,Semana 3,Dic,2025
+Suma de las dos,2025-12-19,,1432.0,,Sin noticia,1,Vie,Semana 3,Dic,2025
+Suma de las dos,2025-12-22,,-2318.0,,Sin noticia,0,Lun,Semana 4,Dic,2025
+Suma de las dos,2025-12-23,,-2318.0,,Sin noticia,0,Mar,Semana 4,Dic,2025
+Suma de las dos,2025-12-24,,2182.0,,Sin noticia,1,Mié,Semana 4,Dic,2025
+Suma de las dos,2025-12-26,,-132.1,,Sin noticia,0,Vie,Semana 4,Dic,2025
+Suma de las dos,2025-12-29,,-2318.0,,Sin noticia,0,Lun,Semana 5,Dic,2025
+Suma de las dos,2025-12-30,,-2318.0,,Sin noticia,0,Mar,Semana 5,Dic,2025
+Suma de las dos,2025-12-31,,-818.0,,Sin noticia,0,Mié,Semana 5,Dic,2025
+Suma de las dos,2026-01-02,,-68.0,,Sin noticia,0,Vie,Semana 1,Ene,2026
+Suma de las dos,2026-01-05,,1432.0,,Sin noticia,1,Lun,Semana 1,Ene,2026
+Suma de las dos,2026-01-06,,-68.0,,Sin noticia,0,Mar,Semana 1,Ene,2026
+Suma de las dos,2026-01-07,,682.0,,Sin noticia,1,Mié,Semana 1,Ene,2026
+Suma de las dos,2026-01-08,,682.0,,Sin noticia,1,Jue,Semana 2,Ene,2026
+Suma de las dos,2026-01-09,,-68.0,,NFP/CPI 8:30,0,Vie,Semana 2,Ene,2026
+Suma de las dos,2026-01-12,,-68.0,,Sin noticia,0,Lun,Semana 2,Ene,2026
+Suma de las dos,2026-01-13,,-818.0,,NFP/CPI 8:30,0,Mar,Semana 2,Ene,2026
+Suma de las dos,2026-01-14,,-818.0,,Sin noticia,0,Mié,Semana 2,Ene,2026
+Suma de las dos,2026-01-15,,-818.0,,Sin noticia,0,Jue,Semana 3,Ene,2026
+Suma de las dos,2026-01-16,,-68.0,,Sin noticia,0,Vie,Semana 3,Ene,2026
+Suma de las dos,2026-01-19,,682.0,,Sin noticia,1,Lun,Semana 3,Ene,2026
+Suma de las dos,2026-01-20,,-2318.0,,Sin noticia,0,Mar,Semana 3,Ene,2026
+Suma de las dos,2026-01-21,,-818.0,,Sin noticia,0,Mié,Semana 3,Ene,2026
+Suma de las dos,2026-01-22,,-818.0,,Sin noticia,0,Jue,Semana 4,Ene,2026
+Suma de las dos,2026-01-23,,1432.0,,Sin noticia,1,Vie,Semana 4,Ene,2026
+Suma de las dos,2026-01-26,,2182.0,,Sin noticia,1,Lun,Semana 4,Ene,2026
+Suma de las dos,2026-01-27,,1432.0,,Sin noticia,1,Mar,Semana 4,Ene,2026
+Suma de las dos,2026-01-28,,1432.0,,FOMC,1,Mié,Semana 4,Ene,2026
+Suma de las dos,2026-01-29,,2182.0,,Sin noticia,1,Jue,Semana 5,Ene,2026
+Suma de las dos,2026-01-30,,-2318.0,,Sin noticia,0,Vie,Semana 5,Ene,2026
+Suma de las dos,2026-02-02,,682.0,,Sin noticia,1,Lun,Semana 1,Feb,2026
+Suma de las dos,2026-02-03,,-68.0,,Sin noticia,0,Mar,Semana 1,Feb,2026
+Suma de las dos,2026-02-04,,682.0,,Sin noticia,1,Mié,Semana 1,Feb,2026
+Suma de las dos,2026-02-05,,1432.0,,Sin noticia,1,Jue,Semana 1,Feb,2026
+Suma de las dos,2026-02-06,,-68.0,,Sin noticia,0,Vie,Semana 1,Feb,2026
+Suma de las dos,2026-02-09,,1432.0,,Sin noticia,1,Lun,Semana 2,Feb,2026
+Suma de las dos,2026-02-10,,-2318.0,,Sin noticia,0,Mar,Semana 2,Feb,2026
+Suma de las dos,2026-02-11,,-68.0,,NFP/CPI 8:30,0,Mié,Semana 2,Feb,2026
+Suma de las dos,2026-02-12,,-818.0,,Sin noticia,0,Jue,Semana 2,Feb,2026
+Suma de las dos,2026-02-13,,-818.0,,NFP/CPI 8:30,0,Vie,Semana 2,Feb,2026
+Suma de las dos,2026-02-16,,-818.0,,Sin noticia,0,Lun,Semana 3,Feb,2026
+Suma de las dos,2026-02-17,,-2318.0,,Sin noticia,0,Mar,Semana 3,Feb,2026
+Suma de las dos,2026-02-18,,2182.0,,Sin noticia,1,Mié,Semana 3,Feb,2026
+Suma de las dos,2026-02-19,,682.0,,Sin noticia,1,Jue,Semana 3,Feb,2026
+Suma de las dos,2026-02-20,,-2318.0,,Sin noticia,0,Vie,Semana 3,Feb,2026
+Suma de las dos,2026-02-23,,2182.0,,Sin noticia,1,Lun,Semana 4,Feb,2026
+Suma de las dos,2026-02-24,,-68.0,,Sin noticia,0,Mar,Semana 4,Feb,2026
+Suma de las dos,2026-02-25,,-68.0,,Sin noticia,0,Mié,Semana 4,Feb,2026
+Suma de las dos,2026-02-26,,-68.0,,Sin noticia,0,Jue,Semana 4,Feb,2026
+Suma de las dos,2026-02-27,,-2318.0,,Sin noticia,0,Vie,Semana 4,Feb,2026
+Suma de las dos,2026-03-02,,-2318.0,,Sin noticia,0,Lun,Semana 1,Mar,2026
+Suma de las dos,2026-03-03,,-68.0,,Sin noticia,0,Mar,Semana 1,Mar,2026
+Suma de las dos,2026-03-04,,2182.0,,Sin noticia,1,Mié,Semana 1,Mar,2026
+Suma de las dos,2026-03-05,,-2318.0,,Sin noticia,0,Jue,Semana 1,Mar,2026
+Suma de las dos,2026-03-06,,-68.0,,NFP/CPI 8:30,0,Vie,Semana 1,Mar,2026
+Suma de las dos,2026-03-09,,1432.0,,Sin noticia,1,Lun,Semana 2,Mar,2026
+Suma de las dos,2026-03-10,,682.0,,Sin noticia,1,Mar,Semana 2,Mar,2026
+Suma de las dos,2026-03-11,,2182.0,,NFP/CPI 8:30,1,Mié,Semana 2,Mar,2026
+Suma de las dos,2026-03-12,,-818.0,,Sin noticia,0,Jue,Semana 2,Mar,2026
+Suma de las dos,2026-03-13,,1432.0,,Sin noticia,1,Vie,Semana 2,Mar,2026
+Suma de las dos,2026-03-16,,-68.0,,Sin noticia,0,Lun,Semana 3,Mar,2026
+Suma de las dos,2026-03-17,,2182.0,,Sin noticia,1,Mar,Semana 3,Mar,2026
+Suma de las dos,2026-03-18,,-2318.0,,FOMC,0,Mié,Semana 3,Mar,2026
+Suma de las dos,2026-03-19,,1432.0,,Sin noticia,1,Jue,Semana 3,Mar,2026
+Suma de las dos,2026-03-20,,1432.0,,Sin noticia,1,Vie,Semana 3,Mar,2026
+Suma de las dos,2026-03-23,,-2318.0,,Sin noticia,0,Lun,Semana 4,Mar,2026
+Suma de las dos,2026-03-24,,-1159.0,,Sin noticia,0,Mar,Semana 4,Mar,2026
+Suma de las dos,2026-03-25,,2182.0,,Sin noticia,1,Mié,Semana 4,Mar,2026
+Suma de las dos,2026-03-26,,1432.0,,Sin noticia,1,Jue,Semana 4,Mar,2026
+Suma de las dos,2026-03-27,,1432.0,,Sin noticia,1,Vie,Semana 4,Mar,2026
+Suma de las dos,2026-03-30,,682.0,,Sin noticia,1,Lun,Semana 5,Mar,2026
+Suma de las dos,2026-03-31,,682.0,,Sin noticia,1,Mar,Semana 5,Mar,2026
+Suma de las dos,2026-04-01,,-2318.0,,Sin noticia,0,Mié,Semana 1,Abr,2026
+Suma de las dos,2026-04-02,,-818.0,,Sin noticia,0,Jue,Semana 1,Abr,2026
+Suma de las dos,2026-04-06,,1432.0,,Sin noticia,1,Lun,Semana 1,Abr,2026
+Suma de las dos,2026-04-07,,-818.0,,Sin noticia,0,Mar,Semana 1,Abr,2026
+Suma de las dos,2026-04-08,,-68.0,,Sin noticia,0,Mié,Semana 2,Abr,2026
+Suma de las dos,2026-04-09,,1432.0,,Sin noticia,1,Jue,Semana 2,Abr,2026
+Suma de las dos,2026-04-10,,-818.0,,NFP/CPI 8:30,0,Vie,Semana 2,Abr,2026
+Suma de las dos,2026-04-13,,1432.0,,Sin noticia,1,Lun,Semana 2,Abr,2026
+Suma de las dos,2026-04-14,,2182.0,,Sin noticia,1,Mar,Semana 2,Abr,2026
+Suma de las dos,2026-04-15,,2182.0,,Sin noticia,1,Mié,Semana 3,Abr,2026
+Suma de las dos,2026-04-16,,-818.0,,Sin noticia,0,Jue,Semana 3,Abr,2026
+Suma de las dos,2026-04-17,,2182.0,,Sin noticia,1,Vie,Semana 3,Abr,2026
+Suma de las dos,2026-04-20,,1432.0,,Sin noticia,1,Lun,Semana 3,Abr,2026
+Suma de las dos,2026-04-21,,-2318.0,,Sin noticia,0,Mar,Semana 3,Abr,2026
+Suma de las dos,2026-04-22,,682.0,,Sin noticia,1,Mié,Semana 4,Abr,2026
+Suma de las dos,2026-04-23,,-68.0,,Sin noticia,0,Jue,Semana 4,Abr,2026
+Suma de las dos,2026-04-24,,-2318.0,,Sin noticia,0,Vie,Semana 4,Abr,2026
+Suma de las dos,2026-04-27,,-818.0,,Sin noticia,0,Lun,Semana 4,Abr,2026
+Suma de las dos,2026-04-28,,-2318.0,,Sin noticia,0,Mar,Semana 4,Abr,2026
+Suma de las dos,2026-04-29,,-818.0,,FOMC,0,Mié,Semana 5,Abr,2026
+Suma de las dos,2026-04-30,,-2318.0,,Sin noticia,0,Jue,Semana 5,Abr,2026
+Suma de las dos,2026-05-01,,-68.0,,Sin noticia,0,Vie,Semana 1,May,2026
+Suma de las dos,2026-05-04,,682.0,,Sin noticia,1,Lun,Semana 1,May,2026
+Suma de las dos,2026-05-05,,-68.0,,Sin noticia,0,Mar,Semana 1,May,2026
+Suma de las dos,2026-05-06,,-68.0,,Sin noticia,0,Mié,Semana 1,May,2026
+Suma de las dos,2026-05-07,,-818.0,,Sin noticia,0,Jue,Semana 1,May,2026
+Suma de las dos,2026-05-08,,682.0,,NFP/CPI 8:30,1,Vie,Semana 2,May,2026
+Suma de las dos,2026-05-11,,1432.0,,Sin noticia,1,Lun,Semana 2,May,2026
+Suma de las dos,2026-05-12,,1432.0,,NFP/CPI 8:30,1,Mar,Semana 2,May,2026
+Suma de las dos,2026-05-13,,-2318.0,,Sin noticia,0,Mié,Semana 2,May,2026
+Suma de las dos,2026-05-14,,2182.0,,Sin noticia,1,Jue,Semana 2,May,2026
+Suma de las dos,2026-05-15,,1432.0,,Sin noticia,1,Vie,Semana 3,May,2026
+Suma de las dos,2026-05-18,,-68.0,,Sin noticia,0,Lun,Semana 3,May,2026
+Suma de las dos,2026-05-19,,1432.0,,Sin noticia,1,Mar,Semana 3,May,2026
+Suma de las dos,2026-05-20,,-2318.0,,Sin noticia,0,Mié,Semana 3,May,2026
+Suma de las dos,2026-05-21,,-818.0,,Sin noticia,0,Jue,Semana 3,May,2026
+Suma de las dos,2026-05-22,,2182.0,,Sin noticia,1,Vie,Semana 4,May,2026
+Suma de las dos,2026-05-25,,65.5,,Sin noticia,1,Lun,Semana 4,May,2026
+Suma de las dos,2026-05-26,,-818.0,,Sin noticia,0,Mar,Semana 4,May,2026
+Suma de las dos,2026-05-27,,-818.0,,Sin noticia,0,Mié,Semana 4,May,2026
+Suma de las dos,2026-05-28,,2182.0,,Sin noticia,1,Jue,Semana 4,May,2026
+Suma de las dos,2026-05-29,,-68.0,,Sin noticia,0,Vie,Semana 5,May,2026
+Suma de las dos,2026-06-01,,-68.0,,Sin noticia,0,Lun,Semana 1,Jun,2026
+Suma de las dos,2026-06-02,,-68.0,,Sin noticia,0,Mar,Semana 1,Jun,2026
+Suma de las dos,2026-06-03,,-68.0,,Sin noticia,0,Mié,Semana 1,Jun,2026
+Suma de las dos,2026-06-04,,-818.0,,Sin noticia,0,Jue,Semana 1,Jun,2026
+Suma de las dos,2026-06-05,,-818.0,,NFP/CPI 8:30,0,Vie,Semana 1,Jun,2026
+Suma de las dos,2026-06-08,,1432.0,,Sin noticia,1,Lun,Semana 2,Jun,2026
+Suma de las dos,2026-06-09,,2182.0,,Sin noticia,1,Mar,Semana 2,Jun,2026
+Suma de las dos,2026-06-10,,-2318.0,,NFP/CPI 8:30,0,Mié,Semana 2,Jun,2026
+Suma de las dos,2026-06-11,,-68.0,,Sin noticia,0,Jue,Semana 2,Jun,2026
+Suma de las dos,2026-06-12,,-2318.0,,Sin noticia,0,Vie,Semana 2,Jun,2026
+Suma de las dos,2026-06-15,,2182.0,,Sin noticia,1,Lun,Semana 3,Jun,2026
+Suma de las dos,2026-06-16,,-818.0,,Sin noticia,0,Mar,Semana 3,Jun,2026
+Suma de las dos,2026-06-17,,682.0,,FOMC,1,Mié,Semana 3,Jun,2026
+Suma de las dos,2026-06-18,,682.0,,Sin noticia,1,Jue,Semana 3,Jun,2026
+Suma de las dos,2026-06-19,,1432.0,,Sin noticia,1,Vie,Semana 3,Jun,2026
+Suma de las dos,2026-06-22,,-68.0,,Sin noticia,0,Lun,Semana 4,Jun,2026
+Suma de las dos,2026-06-23,,1432.0,,Sin noticia,1,Mar,Semana 4,Jun,2026
+Suma de las dos,2026-06-24,,1432.0,,Sin noticia,1,Mié,Semana 4,Jun,2026
+Suma de las dos,2026-06-25,,-68.0,,Sin noticia,0,Jue,Semana 4,Jun,2026
+Suma de las dos,2026-06-26,,1432.0,,Sin noticia,1,Vie,Semana 4,Jun,2026
+Suma de las dos,2026-06-29,,-68.0,,Sin noticia,0,Lun,Semana 5,Jun,2026
+Suma de las dos,2026-06-30,,1432.0,,Sin noticia,1,Mar,Semana 5,Jun,2026
+Suma de las dos,2026-07-01,,1432.0,,Sin noticia,1,Mié,Semana 1,Jul,2026
+Suma de las dos,2026-07-02,,-68.0,,NFP/CPI 8:30,0,Jue,Semana 1,Jul,2026
+Suma de las dos,2026-07-03,,-341.8,,Sin noticia,0,Vie,Semana 1,Jul,2026
+Suma de las dos,2026-07-06,,1432.0,,Sin noticia,1,Lun,Semana 1,Jul,2026
+Suma de las dos,2026-07-07,,1432.0,,Sin noticia,1,Mar,Semana 1,Jul,2026
+Suma de las dos,2026-07-08,,682.0,,Sin noticia,1,Mié,Semana 2,Jul,2026
+Suma de las dos,2026-07-09,,-68.0,,Sin noticia,0,Jue,Semana 2,Jul,2026
+Suma de las dos,2026-07-10,,-2318.0,,Sin noticia,0,Vie,Semana 2,Jul,2026
+Suma de las dos,2026-07-13,,-2318.0,,Sin noticia,0,Lun,Semana 2,Jul,2026
+Suma de las dos,2026-07-14,,1432.0,,NFP/CPI 8:30,1,Mar,Semana 2,Jul,2026
+Suma de las dos,2026-07-15,,-68.0,,Sin noticia,0,Mié,Semana 3,Jul,2026
+Suma de las dos,2026-07-16,,-818.0,,Sin noticia,0,Jue,Semana 3,Jul,2026
+Suma de las dos,2026-07-17,,-68.0,,Sin noticia,0,Vie,Semana 3,Jul,2026
+Suma de las dos,2026-07-20,,1432.0,,Sin noticia,1,Lun,Semana 3,Jul,2026
+Suma de las dos,2026-07-21,,-68.0,,Sin noticia,0,Mar,Semana 3,Jul,2026
+Suma de las dos,2026-07-22,,-818.0,,Sin noticia,0,Mié,Semana 4,Jul,2026
+Suma de las dos,2026-07-23,,1432.0,,Sin noticia,1,Jue,Semana 4,Jul,2026
+Suma de las dos,2026-07-24,,-68.0,,Sin noticia,0,Vie,Semana 4,Jul,2026
+Suma de las dos,2026-07-27,,-68.0,,Sin noticia,0,Lun,Semana 4,Jul,2026
+Suma de las dos,2026-07-28,,1432.0,,Sin noticia,1,Mar,Semana 4,Jul,2026
+Suma de las dos,2026-07-29,,1432.0,,FOMC,1,Mié,Semana 5,Jul,2026
+Suma de las dos,2026-07-30,,1432.0,,Sin noticia,1,Jue,Semana 5,Jul,2026
+Suma de las dos,2026-07-31,,-818.0,,Sin noticia,0,Vie,Semana 5,Jul,2026
+Suma de las dos,2026-08-03,,2182.0,,Sin noticia,1,Lun,Semana 1,Ago,2026
+Suma de las dos,2026-08-04,,1432.0,,Sin noticia,1,Mar,Semana 1,Ago,2026
+Suma de las dos,2026-08-05,,-68.0,,Sin noticia,0,Mié,Semana 1,Ago,2026
+Suma de las dos,2026-08-06,,-818.0,,Sin noticia,0,Jue,Semana 1,Ago,2026
+Suma de las dos,2026-08-07,,-68.0,,NFP/CPI 8:30,0,Vie,Semana 1,Ago,2026
+Suma de las dos,2026-08-10,,682.0,,Sin noticia,1,Lun,Semana 2,Ago,2026
+Suma de las dos,2026-08-11,,-2318.0,,Sin noticia,0,Mar,Semana 2,Ago,2026
+Suma de las dos,2026-08-12,,-818.0,,NFP/CPI 8:30,0,Mié,Semana 2,Ago,2026
+Suma de las dos,2026-08-13,,1432.0,,Sin noticia,1,Jue,Semana 2,Ago,2026
+Suma de las dos,2026-08-14,,-2318.0,,Sin noticia,0,Vie,Semana 2,Ago,2026
+Suma de las dos,2026-08-17,,-68.0,,Sin noticia,0,Lun,Semana 3,Ago,2026
+Suma de las dos,2026-08-18,,-818.0,,Sin noticia,0,Mar,Semana 3,Ago,2026
+Suma de las dos,2026-08-19,,-68.0,,Sin noticia,0,Mié,Semana 3,Ago,2026
+Suma de las dos,2026-08-20,,-818.0,,Sin noticia,0,Jue,Semana 3,Ago,2026
+Suma de las dos,2026-08-21,,-68.0,,Sin noticia,0,Vie,Semana 3,Ago,2026
+Suma de las dos,2026-08-24,,-818.0,,Sin noticia,0,Lun,Semana 4,Ago,2026
+Suma de las dos,2026-08-25,,-68.0,,Sin noticia,0,Mar,Semana 4,Ago,2026
+Suma de las dos,2026-08-26,,-68.0,,Sin noticia,0,Mié,Semana 4,Ago,2026
+Suma de las dos,2026-08-27,,-68.0,,Sin noticia,0,Jue,Semana 4,Ago,2026
+Suma de las dos,2026-08-28,,682.0,,Sin noticia,1,Vie,Semana 4,Ago,2026
+Suma de las dos,2026-08-31,,1432.0,,Sin noticia,1,Lun,Semana 5,Ago,2026
+Suma de las dos,2026-09-01,,1432.0,,Sin noticia,1,Mar,Semana 1,Sep,2026
+Suma de las dos,2026-09-02,,1432.0,,Sin noticia,1,Mié,Semana 1,Sep,2026
+Suma de las dos,2026-09-03,,-68.0,,Sin noticia,0,Jue,Semana 1,Sep,2026
+Suma de las dos,2026-09-04,,-68.0,,NFP/CPI 8:30,0,Vie,Semana 1,Sep,2026
+Suma de las dos,2026-09-07,,-1080.9,,Sin noticia,0,Lun,Semana 1,Sep,2026
+Suma de las dos,2026-09-08,,-2318.0,,Sin noticia,0,Mar,Semana 2,Sep,2026
+Suma de las dos,2026-09-09,,-818.0,,Sin noticia,0,Mié,Semana 2,Sep,2026
+Suma de las dos,2026-09-10,,-68.0,,Sin noticia,0,Jue,Semana 2,Sep,2026
+Suma de las dos,2026-09-11,,-68.0,,NFP/CPI 8:30,0,Vie,Semana 2,Sep,2026
+Suma de las dos,2026-09-14,,-2318.0,,Sin noticia,0,Lun,Semana 2,Sep,2026
+Suma de las dos,2026-09-15,,1432.0,,Sin noticia,1,Mar,Semana 3,Sep,2026
+Suma de las dos,2026-09-16,,-818.0,,FOMC,0,Mié,Semana 3,Sep,2026
+Suma de las dos,2026-09-17,,-2318.0,,Sin noticia,0,Jue,Semana 3,Sep,2026
+Suma de las dos,2026-09-18,,1432.0,,Sin noticia,1,Vie,Semana 3,Sep,2026
+Suma de las dos,2026-09-21,,2182.0,,Sin noticia,1,Lun,Semana 3,Sep,2026
+Suma de las dos,2026-09-22,,-818.0,,Sin noticia,0,Mar,Semana 4,Sep,2026
+Suma de las dos,2026-09-23,,1432.0,,Sin noticia,1,Mié,Semana 4,Sep,2026
+Suma de las dos,2026-09-24,,-818.0,,Sin noticia,0,Jue,Semana 4,Sep,2026
+Suma de las dos,2026-09-25,,-818.0,,Sin noticia,0,Vie,Semana 4,Sep,2026
+Suma de las dos,2026-09-28,,1432.0,,Sin noticia,1,Lun,Semana 4,Sep,2026
+Suma de las dos,2026-09-29,,-68.0,,Sin noticia,0,Mar,Semana 5,Sep,2026
+Suma de las dos,2026-09-30,,1432.0,,Sin noticia,1,Mié,Semana 5,Sep,2026
+Suma de las dos,2026-10-01,,1432.0,,Sin noticia,1,Jue,Semana 1,Oct,2026
+Suma de las dos,2026-10-02,,-68.0,,NFP/CPI 8:30,0,Vie,Semana 1,Oct,2026
+Suma de las dos,2026-10-05,,682.0,,Sin noticia,1,Lun,Semana 1,Oct,2026
+Suma de las dos,2026-10-06,,-68.0,,Sin noticia,0,Mar,Semana 1,Oct,2026
+Suma de las dos,2026-10-07,,-68.0,,Sin noticia,0,Mié,Semana 1,Oct,2026
+Suma de las dos,2026-10-08,,682.0,,Sin noticia,1,Jue,Semana 2,Oct,2026
+Suma de las dos,2026-10-09,,-2318.0,,Sin noticia,0,Vie,Semana 2,Oct,2026
+Suma de las dos,2026-10-12,,-818.0,,Sin noticia,0,Lun,Semana 2,Oct,2026
+Suma de las dos,2026-10-13,,1432.0,,Sin noticia,1,Mar,Semana 2,Oct,2026
+Suma de las dos,2026-10-14,,341.0,,NFP/CPI 8:30,1,Mié,Semana 2,Oct,2026
+Suma de las dos,2026-10-15,,2182.0,,Sin noticia,1,Jue,Semana 3,Oct,2026
+Suma de las dos,2026-10-16,,-68.0,,Sin noticia,0,Vie,Semana 3,Oct,2026
+Suma de las dos,2026-10-19,,-68.0,,Sin noticia,0,Lun,Semana 3,Oct,2026
+Suma de las dos,2026-10-20,,-68.0,,Sin noticia,0,Mar,Semana 3,Oct,2026
+Suma de las dos,2026-10-21,,-2318.0,,Sin noticia,0,Mié,Semana 3,Oct,2026
+Suma de las dos,2026-10-22,,-68.0,,Sin noticia,0,Jue,Semana 4,Oct,2026
+Suma de las dos,2026-10-23,,2182.0,,Sin noticia,1,Vie,Semana 4,Oct,2026
+Suma de las dos,2026-10-26,,-818.0,,Sin noticia,0,Lun,Semana 4,Oct,2026
+Suma de las dos,2026-10-27,,1432.0,,Sin noticia,1,Mar,Semana 4,Oct,2026
+Suma de las dos,2026-10-28,,-68.0,,FOMC,0,Mié,Semana 4,Oct,2026
+Suma de las dos,2026-10-29,,682.0,,Sin noticia,1,Jue,Semana 5,Oct,2026
+Suma de las dos,2026-10-30,,2182.0,,Sin noticia,1,Vie,Semana 5,Oct,2026
+Suma de las dos,2026-11-02,,2182.0,,Sin noticia,1,Lun,Semana 1,Nov,2026
+Suma de las dos,2026-11-03,,1432.0,,Sin noticia,1,Mar,Semana 1,Nov,2026
+Suma de las dos,2026-11-04,,682.0,,Sin noticia,1,Mié,Semana 1,Nov,2026
+Suma de las dos,2026-11-05,,-68.0,,Sin noticia,0,Jue,Semana 1,Nov,2026
+Suma de las dos,2026-11-06,,2182.0,,NFP/CPI 8:30,1,Vie,Semana 1,Nov,2026
