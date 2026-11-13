@@ -1,0 +1,273 @@
+//@version=6
+strategy("POC Apertura CDMX [Estrategia]", overlay=true, max_boxes_count=500, max_lines_count=500, max_labels_count=500, default_qty_type=strategy.fixed, default_qty_value=1, initial_capital=100000, commission_type=strategy.commission.cash_per_contract, commission_value=0, slippage=0, calc_on_every_tick=false, process_orders_on_close=false)
+
+tz = "UTC-6"  // CDMX fija, sin horario de verano
+
+gH = "Perfil (hora CDMX)"
+profHour = input.int(9, "Hora inicio del perfil", minval=0, maxval=23, group=gH)
+profMin  = input.int(0, "Minuto inicio del perfil", minval=0, maxval=59, group=gH)
+profDur  = input.int(12, "Duración del perfil (min)", minval=1, maxval=120, group=gH)
+
+gW = "Ventana de entrada (hora CDMX)"
+useWin   = input.bool(true, "Limitar entradas a la ventana", group=gW)
+winSHour = input.int(9, "Hora inicio", minval=0, maxval=23, group=gW)
+winSMin  = input.int(12, "Minuto inicio", minval=0, maxval=59, group=gW)
+winEHour = input.int(13, "Hora fin", minval=0, maxval=23, group=gW)
+winEMin  = input.int(30, "Minuto fin", minval=0, maxval=59, group=gW)
+
+gP = "Perfil de volumen"
+autoRow = input.bool(true, "Tamaño de fila automático (20 filas)", group=gP)
+rowSize = input.float(5.0, "Tamaño de fila (puntos)", minval=0.01, group=gP)
+histW   = input.int(12, "Ancho del histograma (barras)", minval=1, group=gP)
+extBars = input.int(60, "Extender niveles (barras)", minval=1, group=gP)
+
+gB = "Ruptura"
+brkMode = input.string("Vela completa", "Tipo de ruptura", options=["Vela completa", "Solo cierre"], group=gB)
+showBrk = input.bool(true, "Marcar ruptura", group=gB)
+
+gS = "SL / TP"
+showSLTP = input.bool(true, "Mostrar SL / TP", group=gS)
+slPts    = input.float(13.0, "Stop Loss (puntos)", minval=0.01, group=gS)
+rr       = input.float(1.5, "Ratio R:R", minval=0.1, group=gS)
+
+gK = "Parciales"
+showPartial = input.bool(true, "Mostrar parcial", group=gK)
+partialR    = input.float(1.0, "Parcial en (múltiplo de R)", minval=0.1, step=0.1, group=gK)
+partPct     = input.float(50.0, "% de contratos a cerrar en parcial", minval=1, maxval=99, group=gK)
+cPartial    = input.color(color.orange, "Color del parcial", group=gK)
+
+gC = "Colores"
+showTrendBg = input.bool(false, "Sombrear tramo de tendencia", group=gC)
+cUp   = input.color(color.new(#089981, 0), "Compra", group=gC)
+cDown = input.color(color.new(#f23645, 0), "Venta", group=gC)
+
+gT = "Estadísticas"
+showStats  = input.bool(true, "Mostrar tabla de estadísticas", group=gT)
+showResLbl = input.bool(true, "Mostrar etiqueta GANADA / PERDIDA", group=gT)
+qty        = input.float(1.0, "Cantidad (contratos)", minval=0.01, group=gT)
+tblPos     = input.string("Arriba derecha", "Posición de la tabla", options=["Arriba derecha", "Arriba izquierda", "Abajo derecha", "Abajo izquierda"], group=gT)
+
+drawLvl(int x, float y, color c, string txt, string sty) =>
+    line.new(x, y, x + extBars, y, color=c, style=sty)
+    label.new(x + extBars, y, txt, style=label.style_label_left, color=c, textcolor=color.white, size=size.tiny)
+
+tmin   = hour(time, tz) * 60 + minute(time, tz)
+pStart = profHour * 60 + profMin
+pEnd   = pStart + profDur
+wStart = winSHour * 60 + winSMin
+wEnd   = winEHour * 60 + winEMin
+inWin  = not useWin or (tmin >= wStart and tmin < wEnd)
+newDay = barstate.isfirst or dayofmonth(time, tz) != dayofmonth(time[1], tz)
+
+var float trendOpen = na
+var float trendClose = na
+var float pHigh = na
+var float pLow = na
+var int startIdx = na
+var int sigBar = na
+var int brkBar = na
+var int entryBar = na
+var bool done = false
+var bool partDone = false
+var int stage = 0
+var float pocLvl = na
+var float slLvl = na
+var float tpLvl = na
+var float partLvl = na
+var int dirTrend = 0
+var array<float> bH = array.new_float()
+var array<float> bL = array.new_float()
+var array<float> bV = array.new_float()
+
+// ---- Estadísticas ----
+var bool resolved = false
+var int wins = 0
+var int losses = 0
+var int unres = 0
+var int partials = 0
+var int beCount = 0
+var float netPts = 0.0
+var float entryPx = na
+var int closedBefore = 0
+
+if newDay
+    // Operación abierta al cambiar de día: se cierra a mercado y cuenta como "sin resolver"
+    if strategy.position_size != 0
+        unres += 1
+        strategy.close_all(comment="Fin de día")
+    strategy.cancel("E")
+    trendOpen := open
+    trendClose := close
+    pHigh := na
+    pLow := na
+    startIdx := na
+    sigBar := na
+    brkBar := na
+    entryBar := na
+    pocLvl := na
+    slLvl := na
+    tpLvl := na
+    partLvl := na
+    dirTrend := 0
+    stage := 0
+    done := false
+    partDone := false
+    resolved := false
+    array.clear(bH)
+    array.clear(bL)
+    array.clear(bV)
+
+if tmin < pStart
+    trendClose := close
+
+if tmin >= pStart and tmin < pEnd
+    if na(startIdx)
+        startIdx := bar_index
+    pHigh := na(pHigh) ? high : math.max(pHigh, high)
+    pLow := na(pLow) ? low : math.min(pLow, low)
+    array.push(bH, high)
+    array.push(bL, low)
+    array.push(bV, volume)
+
+if not done and tmin >= pEnd and array.size(bV) > 0
+    done := true
+    rs = autoRow ? math.max(syminfo.mintick, (pHigh - pLow) / 20) : rowSize
+    nRows = math.max(1, int(math.ceil((pHigh - pLow) / rs)))
+    vols = array.new_float(nRows, 0.0)
+    for i = 0 to array.size(bV) - 1
+        rFrom = math.min(nRows - 1, int(math.floor((array.get(bL, i) - pLow) / rs)))
+        rTo = math.min(nRows - 1, int(math.floor((array.get(bH, i) - pLow) / rs)))
+        cnt = math.max(1, rTo - rFrom + 1)
+        for r = rFrom to rTo
+            array.set(vols, r, array.get(vols, r) + array.get(bV, i) / cnt)
+    maxV = array.max(vols)
+    pocRow = maxV > 0 ? array.indexof(vols, maxV) : int(nRows / 2)
+    poc = math.round_to_mintick(pLow + (pocRow + 0.5) * rs)
+    for r = 0 to nRows - 1
+        w = maxV > 0 ? math.max(1, int(math.round(array.get(vols, r) / maxV * histW))) : 1
+        box.new(startIdx, pLow + (r + 1) * rs, startIdx + w, pLow + r * rs, border_color=na, bgcolor=(r == pocRow) ? color.new(color.yellow, 35) : color.new(color.gray, 75))
+    isUp = trendClose > trendOpen
+    isDown = trendClose < trendOpen
+    line.new(startIdx, poc, bar_index + extBars, poc, color=color.yellow, width=2)
+    if isUp or isDown
+        dirTrend := isUp ? 1 : -1
+        pocLvl := poc
+        sigBar := bar_index
+        slLvl := math.round_to_mintick(isUp ? poc - slPts : poc + slPts)
+        tpLvl := math.round_to_mintick(isUp ? poc + slPts * rr : poc - slPts * rr)
+        partLvl := math.round_to_mintick(isUp ? poc + slPts * partialR : poc - slPts * partialR)
+        label.new(bar_index, poc, "POC " + str.tostring(poc, format.mintick), style=label.style_label_left, color=color.new(color.yellow, 20), textcolor=color.black, size=size.small)
+
+
+// ---- Ruptura ----
+brkSig = false
+if stage == 0 and dirTrend != 0 and not na(pocLvl) and bar_index > sigBar and barstate.isconfirmed
+    brokeDown = brkMode == "Vela completa" ? high < pocLvl : close < pocLvl
+    brokeUp = brkMode == "Vela completa" ? low > pocLvl : close > pocLvl
+    if (dirTrend == -1 and brokeDown) or (dirTrend == 1 and brokeUp)
+        stage := 1
+        brkBar := bar_index
+        brkSig := true
+
+// ---- Orden límite en el POC (retroceso) ----
+// Se coloca al cierre de la vela y se ejecuta en la siguiente si el precio toca el POC.
+// Solo se deja activa si la siguiente vela empieza dentro de la ventana de entrada.
+tminNext = hour(time_close, tz) * 60 + minute(time_close, tz)
+inWinNext = not useWin or (tminNext >= wStart and tminNext < wEnd)
+if stage == 1 and strategy.position_size == 0
+    if inWinNext
+        strategy.entry("E", dirTrend == 1 ? strategy.long : strategy.short, qty=qty, limit=pocLvl, comment=dirTrend == 1 ? "COMPRA" : "VENTA")
+    else
+        strategy.cancel("E")
+
+// ---- Detección del llenado ----
+buySig = false
+sellSig = false
+if stage == 1 and strategy.position_size != 0
+    stage := 2
+    entryBar := bar_index
+    entryPx := strategy.position_avg_price
+    closedBefore := strategy.closedtrades
+    buySig := dirTrend == 1
+    sellSig := dirTrend == -1
+    col = dirTrend == 1 ? cUp : cDown
+    line.new(bar_index, pocLvl, bar_index + extBars, pocLvl, color=col, width=2)
+    if showSLTP
+        box.new(bar_index, math.max(pocLvl, tpLvl), bar_index + extBars, math.min(pocLvl, tpLvl), border_color=na, bgcolor=color.new(#089981, 80))
+        box.new(bar_index, math.max(pocLvl, slLvl), bar_index + extBars, math.min(pocLvl, slLvl), border_color=na, bgcolor=color.new(#f23645, 80))
+        drawLvl(bar_index, tpLvl, #089981, "TP2 " + str.tostring(tpLvl, format.mintick), line.style_dashed)
+        drawLvl(bar_index, slLvl, #f23645, "SL " + str.tostring(slLvl, format.mintick), line.style_dashed)
+    if showPartial
+        drawLvl(bar_index, partLvl, cPartial, "TP1 " + str.tostring(partLvl, format.mintick), line.style_dotted)
+
+// ---- Salidas: TP1 (parcial) + TP2, SL; tras el parcial el SL pasa a BE ----
+partSig = false
+if stage == 2 and not resolved and strategy.position_size != 0
+    if not partDone and strategy.closedtrades > closedBefore
+        partDone := true
+        partSig := true
+        partials += 1
+        if showPartial
+            line.new(bar_index, entryPx, bar_index + extBars, entryPx, color=color.gray, style=line.style_dashed)
+    if not partDone
+        strategy.exit("TP1", from_entry="E", qty_percent=partPct, limit=partLvl, stop=slLvl, comment_profit="TP1", comment_loss="SL")
+        strategy.exit("TP2", from_entry="E", limit=tpLvl, stop=slLvl, comment_profit="TP2", comment_loss="SL")
+    else
+        strategy.exit("TP2", from_entry="E", limit=tpLvl, stop=entryPx, comment_profit="TP2", comment_loss="BE")
+
+// ---- Clasificación al cerrarse la posición ----
+winSig = false
+lossSig = false
+beSig = false
+if stage == 2 and not resolved and strategy.position_size == 0 and strategy.closedtrades > closedBefore
+    resolved := true
+    lastIdx = strategy.closedtrades - 1
+    d = dirTrend
+    movePts = (strategy.closedtrades.exit_price(lastIdx) - entryPx) * d
+    if movePts >= slPts * rr - syminfo.mintick / 2
+        wins += 1
+        winSig := true
+    else if movePts <= -(slPts - syminfo.mintick / 2)
+        losses += 1
+        lossSig := true
+    else
+        beCount += 1
+        beSig := true
+    if showResLbl
+        txt = winSig ? "✔ GANADA" : lossSig ? "✖ PERDIDA" : "◐ PARCIAL + BE"
+        label.new(bar_index, strategy.closedtrades.exit_price(lastIdx), txt, style=d == 1 ? (lossSig or beSig ? label.style_label_up : label.style_label_down) : (lossSig or beSig ? label.style_label_down : label.style_label_up), color=winSig ? cUp : lossSig ? cDown : cPartial, textcolor=color.white, size=size.small)
+
+plotshape(showBrk and brkSig and dirTrend == -1, "Ruptura bajista", shape.xcross, location.abovebar, color.new(cDown, 30), size=size.tiny, text="RUPT")
+plotshape(showBrk and brkSig and dirTrend == 1, "Ruptura alcista", shape.xcross, location.belowbar, color.new(cUp, 30), size=size.tiny, text="RUPT")
+plotshape(buySig, "Entrada compra", shape.triangleup, location.belowbar, cUp, size=size.small, text="BUY")
+plotshape(sellSig, "Entrada venta", shape.triangledown, location.abovebar, cDown, size=size.small, text="SELL")
+bgcolor(showTrendBg and tmin < pStart and not na(trendOpen) ? (close > trendOpen ? color.new(#089981, 94) : color.new(#f23645, 94)) : na)
+
+// ---- Tabla (el detalle en $ está en el Probador de Estrategias) ----
+tPos = switch tblPos
+    "Arriba derecha" => position.top_right
+    "Arriba izquierda" => position.top_left
+    "Abajo derecha" => position.bottom_right
+    => position.bottom_left
+
+var table stats = table.new(tPos, 2, 7, bgcolor=color.new(#1e222d, 0), border_width=1, border_color=color.new(color.gray, 60))
+
+if showStats and barstate.islast
+    closed = wins + losses + beCount
+    hitRate = closed > 0 ? wins / closed * 100 : 0.0
+    partRate = closed > 0 ? (wins + beCount) / closed * 100 : 0.0
+    netP = strategy.netprofit
+    table.cell(stats, 0, 0, "Ganadas (TP2)", text_color=color.white, text_halign=text.align_left)
+    table.cell(stats, 1, 0, str.tostring(wins), text_color=#089981)
+    table.cell(stats, 0, 1, "Parcial + BE", text_color=color.white, text_halign=text.align_left)
+    table.cell(stats, 1, 1, str.tostring(beCount), text_color=cPartial)
+    table.cell(stats, 0, 2, "Perdidas", text_color=color.white, text_halign=text.align_left)
+    table.cell(stats, 1, 2, str.tostring(losses), text_color=#f23645)
+    table.cell(stats, 0, 3, "Cerradas fin de día", text_color=color.white, text_halign=text.align_left)
+    table.cell(stats, 1, 3, str.tostring(unres), text_color=color.gray)
+    table.cell(stats, 0, 4, "% acierto (TP2)", text_color=color.white, text_halign=text.align_left)
+    table.cell(stats, 1, 4, str.tostring(hitRate, "#.0") + "%", text_color=hitRate >= 50 ? #089981 : #f23645)
+    table.cell(stats, 0, 5, "% llegó a TP1", text_color=color.white, text_halign=text.align_left)
+    table.cell(stats, 1, 5, str.tostring(partRate, "#.0") + "%", text_color=partRate >= 50 ? #089981 : #f23645)
+    table.cell(stats, 0, 6, "Beneficio neto ($)", text_color=color.white, text_halign=text.align_left)
+    table.cell(stats, 1, 6, str.tostring(netP, "#,###.##"), text_color=netP >= 0 ? #089981 : #f23645)

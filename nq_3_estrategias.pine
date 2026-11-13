@@ -1,0 +1,393 @@
+//@version=6
+indicator("NQ 3 estrategias: COMPRA / VENTA", overlay=true, max_lines_count=500, max_labels_count=500)
+
+// Plan final en un solo gráfico: MNQ1! en 3 minutos.
+//  A) 8:30 contra Londres (POC 8:30-8:42, SL 66.5, 1:1.25)
+//  B) 10:30 con tendencia (POC 10:30-10:42, SL 66.5, 1:1) sin días malos (quiebre de 5 min en contra o ES divergente)
+//  C) SMC en 5 min (barrida + MSS + FVG desde las 9:30 de NY, SL en la mecha, TP en el nuevo extremo si >= 1.5R)
+// Ajuste: la 8:30 no se opera si la noche (00:00-8:30) se movió menos de 40 pts.
+// Una sola posición a la vez. Solo muestra COMPRA / VENTA con entrada, SL y TP.
+tz = "UTC-6"
+
+gA = "Estrategias"
+onA  = input.bool(true, "A) 8:30 contra Londres", group=gA)
+onB  = input.bool(true, "B) 10:30 con tendencia", group=gA)
+onC  = input.bool(true, "C) SMC 5 min", group=gA)
+modeB = input.string("Evitar días malos", "Filtro de la 10:30", options=["Ninguno", "Evitar días malos", "Solo A+"], group=gA)
+esSym = input.symbol("CME_MINI:ES1!", "Símbolo del ES", group=gA)
+qA = input.int(1, "Contratos A", minval=1, group=gA)
+qB = input.int(1, "Contratos B", minval=1, group=gA)
+qC = input.int(1, "Contratos C", minval=1, group=gA)
+minNight = input.float(40, "8:30: movimiento mínimo de la noche (pts)", minval=0, group=gA)
+cUp   = input.color(color.new(#089981, 0), "Compra", group=gA)
+cDown = input.color(color.new(#f23645, 0), "Venta", group=gA)
+showRes = input.bool(true, "Mostrar resultado de cada operación", group=gA)
+
+// ---------- POC (A y B) ----------
+type Ses
+    string name
+    bool contra
+    int pStart
+    int pEnd
+    float sl
+    float rr
+    float trendClose = na
+    float pHigh = na
+    float pLow = na
+    int startIdx = na
+    int sigBar = na
+    int brkBar = na
+    int entryBar = na
+    bool done = false
+    bool resolved = false
+    int stage = 0
+    int dirTrend = 0
+    float poc = na
+    float slL = na
+    float tpL = na
+    bool pocFvg = false
+    bool pocOb = false
+    array<float> bH
+    array<float> bL
+    array<float> bV
+
+method reset(Ses s) =>
+    s.trendClose := close
+    s.pHigh := na
+    s.pLow := na
+    s.startIdx := na
+    s.sigBar := na
+    s.brkBar := na
+    s.entryBar := na
+    s.done := false
+    s.resolved := false
+    s.stage := 0
+    s.dirTrend := 0
+    s.poc := na
+    s.slL := na
+    s.tpL := na
+    s.pocFvg := false
+    s.pocOb := false
+    array.clear(s.bH)
+    array.clear(s.bL)
+    array.clear(s.bV)
+
+// Devuelve [entrada (1/-1/0), resultado en pts o na]
+method step(Ses s, float trendOpen, int lonDir, int tmin, bool blocked) =>
+    int ent = 0
+    float res = na
+    if tmin < s.pStart
+        s.trendClose := close
+    if tmin >= s.pStart and tmin < s.pEnd
+        if na(s.startIdx)
+            s.startIdx := bar_index
+        s.pHigh := na(s.pHigh) ? high : math.max(s.pHigh, high)
+        s.pLow := na(s.pLow) ? low : math.min(s.pLow, low)
+        array.push(s.bH, high)
+        array.push(s.bL, low)
+        array.push(s.bV, volume)
+    if not s.done and tmin >= s.pEnd and array.size(s.bV) > 0
+        s.done := true
+        rs = math.max(syminfo.mintick, (s.pHigh - s.pLow) / 20)
+        nRows = math.max(1, int(math.ceil((s.pHigh - s.pLow) / rs)))
+        vols = array.new_float(nRows, 0.0)
+        for i = 0 to array.size(s.bV) - 1
+            rFrom = math.min(nRows - 1, int(math.floor((array.get(s.bL, i) - s.pLow) / rs)))
+            rTo = math.min(nRows - 1, int(math.floor((array.get(s.bH, i) - s.pLow) / rs)))
+            cnt = math.max(1, rTo - rFrom + 1)
+            for r = rFrom to rTo
+                array.set(vols, r, array.get(vols, r) + array.get(s.bV, i) / cnt)
+        maxV = array.max(vols)
+        pocRow = maxV > 0 ? array.indexof(vols, maxV) : int(nRows / 2)
+        poc = math.round_to_mintick(s.pLow + (pocRow + 0.5) * rs)
+        dDay = s.contra ? lonDir : (s.trendClose > trendOpen ? 1 : s.trendClose < trendOpen ? -1 : 0)
+        if dDay != 0
+            s.dirTrend := dDay
+            s.poc := poc
+            s.sigBar := bar_index
+            s.slL := math.round_to_mintick(poc - dDay * s.sl)
+            s.tpL := math.round_to_mintick(poc + dDay * s.sl * s.rr)
+            line.new(bar_index, poc, bar_index + 40, poc, color=color.new(color.yellow, 40), style=line.style_dotted)
+    if s.stage == 0 and s.dirTrend != 0 and not na(s.poc) and bar_index > s.sigBar and barstate.isconfirmed
+        if (s.dirTrend == -1 and high < s.poc) or (s.dirTrend == 1 and low > s.poc)
+            s.stage := 1
+            s.brkBar := bar_index
+            nb = math.min(bar_index - s.sigBar, 40)
+            if nb >= 1
+                for k = 1 to nb
+                    if (close[k] - open[k]) * s.dirTrend < 0
+                        s.pocOb := s.poc >= low[k] - 2 and s.poc <= high[k] + 2
+                        break
+    if (s.stage == 0 or s.stage == 1) and s.dirTrend != 0 and not na(s.poc) and bar_index >= s.sigBar + 2
+        if s.dirTrend == 1 and low > high[2] and s.poc >= high[2] - 2 and s.poc <= low + 2
+            s.pocFvg := true
+        if s.dirTrend == -1 and high < low[2] and s.poc <= low[2] + 2 and s.poc >= high - 2
+            s.pocFvg := true
+    if s.stage == 1 and bar_index > s.brkBar and tmin >= s.pEnd and tmin < 810
+        if s.dirTrend == -1 ? high >= s.poc : low <= s.poc
+            if blocked
+                s.stage := 3
+            else
+                s.stage := 2
+                s.entryBar := bar_index
+                ent := s.dirTrend
+    if s.stage == 2 and not s.resolved and bar_index > s.entryBar
+        up = s.dirTrend == 1
+        if tmin >= 870
+            res := (open - s.poc) * s.dirTrend
+        else if up ? low <= s.slL : high >= s.slL
+            res := -s.sl
+        else if up ? high >= s.tpL : low <= s.tpL
+            res := s.sl * s.rr
+        if not na(res)
+            s.resolved := true
+    [ent, res]
+
+var Ses sA = Ses.new(name="8:30", contra=true, pStart=510, pEnd=522, sl=66.5, rr=1.25, bH=array.new_float(), bL=array.new_float(), bV=array.new_float())
+var Ses sB = Ses.new(name="10:30", contra=false, pStart=630, pEnd=642, sl=66.5, rr=1.0, bH=array.new_float(), bL=array.new_float(), bV=array.new_float())
+var float trendOpen = na
+var float lonClose = na
+var float esOpen00 = na
+
+// estructura de 5 min (último quiebre desde 7:30 CDMX) y ES
+f_struct() =>
+    var float h1 = na
+    var float h2 = na
+    var float l1 = na
+    var float l2 = na
+    var int evDir = 0
+    var int evType = 0
+    ph5 = ta.pivothigh(high, 2, 2)
+    pl5 = ta.pivotlow(low, 2, 2)
+    if not na(ph5)
+        h2 := h1
+        h1 := ph5
+    if not na(pl5)
+        l2 := l1
+        l1 := pl5
+    if dayofmonth(time, "UTC-6") != dayofmonth(time[1], "UTC-6")
+        evDir := 0
+        evType := 0
+    if not na(h2) and not na(l2) and hour(time, "UTC-6") * 60 + minute(time, "UTC-6") >= 450
+        tr5 = h1 > h2 and l1 > l2 ? 1 : h1 < h2 and l1 < l2 ? -1 : 0
+        if close > h1
+            evDir := 1
+            evType := tr5 == 1 ? 1 : 2
+        else if close < l1
+            evDir := -1
+            evType := tr5 == -1 ? 1 : 2
+    [evDir[1], evType[1]]
+[ev5Dir, ev5Type] = request.security(syminfo.tickerid, "5", f_struct(), lookahead=barmerge.lookahead_on)
+esClose = request.security(esSym, timeframe.period, close)
+esOpenS = request.security(esSym, timeframe.period, open)
+
+// ---------- SMC en 5 min (un lado por llamada) ----------
+f_smc(int d) =>
+    var float lsh = na
+    var float lsl = na
+    var int stage = 0
+    var int t0 = na
+    var float ext = na
+    var float struc = na
+    var int mssBar = na
+    var float edge = na
+    var float tgt = na
+    var bool traded = false
+    tmn = hour(time, "America/New_York") * 60 + minute(time, "America/New_York")
+    ph = ta.pivothigh(high, 2, 2)
+    pl = ta.pivotlow(low, 2, 2)
+    atrv = ta.sma(ta.tr(true), 14)
+    bd = close - open
+    if not na(ph)
+        lsh := ph
+    if not na(pl)
+        lsl := pl
+    if dayofmonth(time, "America/New_York") != dayofmonth(time[1], "America/New_York")
+        stage := 0
+        traded := false
+    int sig = 0
+    float eE = na
+    float eS = na
+    float eT = na
+    if not traded and not na(lsh) and not na(lsl)
+        if stage == 0
+            if tmn >= 180 and tmn < 690
+                lvl = d == -1 ? lsh : lsl
+                if d == -1 ? (high > lvl and close < lvl) : (low < lvl and close > lvl)
+                    stage := 1
+                    t0 := bar_index
+                    ext := d == -1 ? high : low
+                    struc := d == -1 ? lsl : lsh
+        else if stage == 1
+            ext := d == -1 ? math.max(ext, high) : math.min(ext, low)
+            if bar_index - t0 > 30
+                stage := 0
+            else if math.abs(bd) >= 0.6 * (high - low) and math.abs(bd) >= atrv and bd * d > 0 and (d == -1 ? close < struc : close > struc)
+                float poi = na
+                span = math.min(bar_index - t0 - 2, 60)
+                if span >= 0
+                    for k = 0 to span
+                        if na(poi)
+                            if d == -1 and high[k] < low[k + 2]
+                                poi := high[k]
+                            if d == 1 and low[k] > high[k + 2]
+                                poi := low[k]
+                if na(poi)
+                    stage := 0
+                else
+                    stage := 2
+                    mssBar := bar_index
+                    edge := poi
+                    tgt := d == -1 ? low : high
+        else if stage == 2
+            if bar_index - mssBar > 60 or tmn >= 690
+                stage := 0
+            else
+                if d == -1 ? low < tgt : high > tgt
+                    tgt := d == -1 ? low : high
+                if d == -1 ? high >= ext : low <= ext
+                    stage := 0
+                else if d == -1 ? high >= edge : low <= edge
+                    stp = d == -1 ? ext + 2 : ext - 2
+                    risk = math.abs(stp - edge)
+                    rr = risk > 0 ? math.abs(edge - tgt) / risk : 0.0
+                    if tmn >= 570 and risk >= 5 and risk <= 80 and rr >= 1.5
+                        sig := d
+                        eE := edge
+                        eS := stp
+                        eT := tgt
+                        traded := true
+                    stage := 0
+    [sig, eE, eS, eT]
+[cSs, cSe, cSsl, cStp] = request.security(syminfo.tickerid, "5", f_smc(-1))
+[cBs, cBe, cBsl, cBtp] = request.security(syminfo.tickerid, "5", f_smc(1))
+
+// ---------- Ejecución en el gráfico ----------
+tmin   = hour(time, tz) * 60 + minute(time, tz)
+newDay = barstate.isfirst or dayofmonth(time, tz) != dayofmonth(time[1], tz)
+var int cDir = 0
+var float cEnt = na
+var float cSl = na
+var float cTp = na
+var bool cDone = false
+var int cQty = 1
+var float nightClose = na
+var int wins = 0
+var int losses = 0
+var float net = 0.0
+
+if newDay
+    trendOpen := open
+    lonClose := na
+    nightClose := na
+    esOpen00 := esOpenS
+    sA.reset()
+    sB.reset()
+    cDone := false
+if tmin < 360
+    lonClose := close
+if tmin < 510
+    nightClose := close
+nightMove = na(nightClose) or na(trendOpen) ? 0.0 : nightClose - trendOpen
+smallNight = tmin >= 510 and math.abs(nightMove) < minNight
+lonDir = na(lonClose) or na(trendOpen) ? 0 : lonClose > trendOpen ? -1 : lonClose < trendOpen ? 1 : 0
+
+openA = sA.stage == 2 and not sA.resolved
+openB = sB.stage == 2 and not sB.resolved
+openC = cDir != 0
+
+showSig(string nm, int d, float e, float s, float t) =>
+    label.new(bar_index, e, (d == 1 ? "▲ COMPRA " : "▼ VENTA ") + nm + "\nEntrada " + str.tostring(e, format.mintick) + "\nSL " + str.tostring(s, format.mintick) + "   TP " + str.tostring(t, format.mintick), style=d == 1 ? label.style_label_up : label.style_label_down, color=d == 1 ? cUp : cDown, textcolor=color.white, size=size.normal)
+    line.new(bar_index, s, bar_index + 30, s, color=cDown, style=line.style_dashed)
+    line.new(bar_index, t, bar_index + 30, t, color=cUp, style=line.style_dashed)
+
+showRes_(string nm, float pts, float q) =>
+    if showRes
+        label.new(bar_index, close, nm + (pts > 0 ? " ✔ +" : " ✖ ") + str.tostring(pts, "#.##") + " pts", style=label.style_label_left, color=pts > 0 ? color.new(cUp, 30) : color.new(cDown, 30), textcolor=color.white, size=size.tiny)
+
+// A) 8:30
+int eA = 0
+float rA = na
+if onA
+    [e_, r_] = sA.step(trendOpen, lonDir, tmin, openB or openC or smallNight)
+    eA := e_
+    rA := r_
+// B) 10:30 con filtro
+badB = false
+if modeB != "Ninguno" and sB.dirTrend != 0
+    badB := ev5Dir == -sB.dirTrend or (not na(esOpen00) and math.sign(esClose - esOpen00) == -sB.dirTrend)
+aPlusB = (ev5Dir == sB.dirTrend and ev5Type == 2) or sB.pocFvg or sB.pocOb
+blockB = (sA.stage == 2 and not sA.resolved) or openC or badB or (modeB == "Solo A+" and not aPlusB)
+int eB = 0
+float rB = na
+if onB
+    [e2, r2] = sB.step(trendOpen, lonDir, tmin, blockB)
+    eB := e2
+    rB := r2
+
+if eA != 0
+    showSig("8:30", eA, sA.poc, sA.slL, sA.tpL)
+    alert("NQ 8:30: " + (eA == 1 ? "COMPRA" : "VENTA") + " límite " + str.tostring(sA.poc, format.mintick) + " · SL " + str.tostring(sA.slL, format.mintick) + " · TP " + str.tostring(sA.tpL, format.mintick) + " · " + str.tostring(qA) + " MNQ", alert.freq_once_per_bar)
+if eB != 0
+    showSig("10:30" + (aPlusB ? " A+" : ""), eB, sB.poc, sB.slL, sB.tpL)
+    alert("NQ 10:30: " + (eB == 1 ? "COMPRA" : "VENTA") + " límite " + str.tostring(sB.poc, format.mintick) + " · SL " + str.tostring(sB.slL, format.mintick) + " · TP " + str.tostring(sB.tpL, format.mintick) + " · " + str.tostring(qB) + " MNQ", alert.freq_once_per_bar)
+if not na(rA)
+    net += rA * 2 * qA - 1.24 * qA
+    wins += rA > 0 ? 1 : 0
+    losses += rA > 0 ? 0 : 1
+    showRes_("8:30", rA, qA)
+if not na(rB)
+    net += rB * 2 * qB - 1.24 * qB
+    wins += rB > 0 ? 1 : 0
+    losses += rB > 0 ? 0 : 1
+    showRes_("10:30", rB, qB)
+
+// C) SMC: nueva señal de 5 min y sin otra posición abierta
+newC = (cSs != 0 and (cSs != cSs[1] or cSe != cSe[1])) ? -1 : (cBs != 0 and (cBs != cBs[1] or cBe != cBe[1])) ? 1 : 0
+float rC = na
+if cDir != 0
+    tNY = hour(time, "America/New_York") * 60 + minute(time, "America/New_York")
+    if tNY >= 720
+        rC := (open - cEnt) * cDir
+    else if cDir == 1 ? low <= cSl : high >= cSl
+        rC := -math.abs(cEnt - cSl)
+    else if cDir == 1 ? high >= cTp : low <= cTp
+        rC := math.abs(cTp - cEnt)
+    if not na(rC)
+        net += rC * 2 * cQty - 1.24 * cQty
+        wins += rC > 0 ? 1 : 0
+        losses += rC > 0 ? 0 : 1
+        showRes_("SMC", rC, cQty)
+        cDir := 0
+if onC and newC != 0 and cDir == 0 and not cDone and not (sA.stage == 2 and not sA.resolved) and not (sB.stage == 2 and not sB.resolved)
+    cDir := newC
+    cEnt := newC == 1 ? cBe : cSe
+    cSl := newC == 1 ? cBsl : cSsl
+    cTp := newC == 1 ? cBtp : cStp
+    cDone := true
+    cQty := qC
+    showSig("SMC", cDir, cEnt, cSl, cTp)
+    alert("NQ SMC: " + (cDir == 1 ? "COMPRA" : "VENTA") + " límite " + str.tostring(cEnt, format.mintick) + " · SL " + str.tostring(cSl, format.mintick) + " · TP " + str.tostring(cTp, format.mintick) + " · " + str.tostring(cQty) + " MNQ", alert.freq_once_per_bar)
+
+plotshape(eA == 1 or eB == 1, "Compra POC", shape.triangleup, location.belowbar, cUp, size=size.small)
+plotshape(eA == -1 or eB == -1, "Venta POC", shape.triangledown, location.abovebar, cDown, size=size.small)
+
+// ---------- Tabla del día ----------
+var table tb = table.new(position.top_right, 2, 6, bgcolor=color.new(#1e222d, 0), border_width=1, border_color=color.new(color.gray, 60))
+dirTxt(int d) => d == 1 ? "COMPRA" : d == -1 ? "VENTA" : "—"
+estado(Ses s) => s.stage == 2 and not s.resolved ? "ABIERTA" : s.stage == 2 ? "Cerrada" : s.stage == 3 ? "Omitida" : s.stage == 1 ? "Ruptura: espera retroceso" : s.dirTrend != 0 ? "Espera ruptura" : "—"
+if barstate.islast
+    table.cell(tb, 0, 0, "8:30 contra Londres", text_color=color.white, text_halign=text.align_left)
+    table.cell(tb, 1, 0, dirTxt(sA.dirTrend != 0 ? sA.dirTrend : lonDir) + " · " + (smallNight and sA.stage < 2 ? "Noche < " + str.tostring(minNight, "#") + " pts: no operar" : estado(sA)), text_color=color.yellow)
+    table.cell(tb, 0, 1, "10:30 con tendencia", text_color=color.white, text_halign=text.align_left)
+    table.cell(tb, 1, 1, dirTxt(sB.dirTrend) + " · " + (badB and sB.stage < 2 ? "Día malo: no operar" : estado(sB)), text_color=color.yellow)
+    table.cell(tb, 0, 2, "SMC 5 min", text_color=color.white, text_halign=text.align_left)
+    table.cell(tb, 1, 2, cDir != 0 ? dirTxt(cDir) + " · ABIERTA ×" + str.tostring(cQty) : cDone ? "Hecha hoy" : "Esperando setup", text_color=color.yellow)
+    table.cell(tb, 0, 3, "Ganadas / perdidas", text_color=color.white, text_halign=text.align_left)
+    table.cell(tb, 1, 3, str.tostring(wins) + " / " + str.tostring(losses), text_color=color.white)
+    table.cell(tb, 0, 4, "Neto $ (en el gráfico)", text_color=color.white, text_halign=text.align_left)
+    table.cell(tb, 1, 4, str.tostring(net, "#,###.##"), text_color=net >= 0 ? cUp : cDown)
+    table.cell(tb, 0, 5, "Regla", text_color=color.white, text_halign=text.align_left)
+    table.cell(tb, 1, 5, "Una posición a la vez", text_color=color.gray)
+
+alertcondition(eA != 0 or eB != 0 or (newC != 0 and cDir != 0), "Entrada (cualquier estrategia)", "NQ: nueva entrada")

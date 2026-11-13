@@ -1,0 +1,465 @@
+<title>Bitácora POC NQ 10:30</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: cuaderno de operaciones — resumen arriba, registro a la izquierda, historial abajo */
+:root{
+  --bg:#f3f5f8; --panel:#ffffff; --ink:#18202c; --muted:#5c6779; --line:#d9dee7;
+  --accent:#2f5bd3; --accent-soft:#e3eafc;
+  --win:#0f8a66; --win-soft:#dcf2ea; --loss:#c8344a; --loss-soft:#f9e1e5; --warn:#b07408; --warn-soft:#f8ecd2;
+  --f-display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f141c; --panel:#171e29; --ink:#e4e9f1; --muted:#95a0b3; --line:#2a3445;
+  --accent:#7d9cf5; --accent-soft:#1e2a48;
+  --win:#35c597; --win-soft:#123328; --loss:#f06a7e; --loss-soft:#3a1820; --warn:#e3a93b; --warn-soft:#3a2c10; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f141c; --panel:#171e29; --ink:#e4e9f1; --muted:#95a0b3; --line:#2a3445;
+  --accent:#7d9cf5; --accent-soft:#1e2a48;
+  --win:#35c597; --win-soft:#123328; --loss:#f06a7e; --loss-soft:#3a1820; --warn:#e3a93b; --warn-soft:#3a2c10; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.45}
+.wrap{max-width:1180px;margin:0 auto;padding-block:20px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:20px}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px}
+h1{font-family:var(--f-display);font-weight:700;font-size:2.2rem;letter-spacing:.01em;margin:0;line-height:1;text-wrap:balance}
+.sub{color:var(--muted);margin:4px 0 0;font-size:.95rem}
+.rules{font-family:var(--f-mono);font-size:.78rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px}
+.rules span{border:1px solid var(--line);border-radius:4px;padding:2px 7px;background:var(--panel)}
+h2{font-family:var(--f-display);font-weight:600;font-size:1.25rem;letter-spacing:.03em;text-transform:uppercase;margin:0}
+.lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:600}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{font:inherit;font-size:.85rem;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:5px 13px;cursor:pointer}
+.tab[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--panel)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.kpi{display:flex;flex-direction:column;gap:4px;padding:14px 16px;background:var(--panel);border:1px solid var(--line);border-radius:8px}
+.kpi .v{font-family:var(--f-mono);font-variant-numeric:tabular-nums;font-size:1.45rem;font-weight:600}
+.kpi .n{font-size:.8rem;color:var(--muted)}
+.pos{color:var(--win)} .neg{color:var(--loss)}
+.chip{display:inline-block;font-size:.75rem;font-weight:600;border-radius:999px;padding:2px 9px}
+.chip.ok{background:var(--win-soft);color:var(--win)} .chip.bad{background:var(--loss-soft);color:var(--loss)} .chip.mid{background:var(--warn-soft);color:var(--warn)} .chip.info{background:var(--accent-soft);color:var(--accent)}
+.grid2{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:860px){.grid2{grid-template-columns:minmax(0,1fr)}}
+form{display:flex;flex-direction:column;gap:12px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.field{display:flex;flex-direction:column;gap:4px;min-width:0}
+input,select,textarea{font:inherit;font-size:.95rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:7px 9px;width:100%}
+input.num{font-family:var(--f-mono)}
+textarea{min-height:64px;resize:vertical}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.seg{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg label{flex:1;text-align:center;padding:7px 4px;cursor:pointer;font-size:.88rem;border-left:1px solid var(--line)}
+.seg label:first-child{border-left:0}
+.seg input{position:absolute;opacity:0;width:1px;height:1px}
+.seg input:checked+span{font-weight:700}
+.seg label:has(input:checked){background:var(--accent-soft);color:var(--accent)}
+.seg label:has(input[value="Compra"]:checked){background:var(--win-soft);color:var(--win)}
+.seg label:has(input[value="Venta"]:checked){background:var(--loss-soft);color:var(--loss)}
+.seg label:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:-2px}
+.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-family:var(--f-mono);font-size:.85rem;background:var(--bg);border:1px dashed var(--line);border-radius:6px;padding:9px 10px}
+.levels div{display:flex;flex-direction:column;gap:2px}
+.preview{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:10px 12px;border-radius:6px;background:var(--bg)}
+.btn{font:inherit;font-weight:600;border:0;border-radius:6px;padding:10px 14px;cursor:pointer;background:var(--accent);color:var(--panel)}
+.btn.ghost{background:transparent;color:var(--muted);border:1px solid var(--line);font-weight:400;padding:4px 9px;font-size:.8rem}
+.btn.danger{background:var(--loss);color:var(--panel);padding:4px 9px;font-size:.8rem}
+.toast{font-size:.85rem;color:var(--win);min-height:1.2em}
+.toast.err{color:var(--loss)}
+.side{display:flex;flex-direction:column;gap:20px;min-width:0}
+.cmp{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.bar{position:relative;height:12px;background:var(--bg);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.bar .band{position:absolute;top:0;bottom:0;background:var(--accent-soft)}
+.bar .exp{position:absolute;top:-2px;bottom:-2px;width:2px;background:var(--accent)}
+.bar .you{position:absolute;top:1px;width:10px;height:8px;border-radius:2px;margin-left:-5px}
+.meter{height:10px;background:var(--bg);border:1px solid var(--line);border-radius:5px;overflow:hidden}
+.meter i{display:block;height:100%}
+.chart{width:100%;height:220px;display:block}
+.chart text{font-family:var(--f-mono);font-size:10px;fill:var(--muted)}
+.lucid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.lucid>div{display:flex;flex-direction:column;gap:6px}
+.tblwrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.88rem;min-width:900px}
+th{text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:600;padding:8px;border-bottom:1px solid var(--line)}
+td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+td.r,th.r{text-align:right}
+td.note{max-width:260px;color:var(--muted)}
+.empty{padding:28px 12px;text-align:center;color:var(--muted)}
+.store{font-size:.8rem;color:var(--muted)}
+.hint{font-size:.8rem;color:var(--muted);margin:0}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Bitácora POC NQ 10:30</h1>
+      <p class="sub">Registro de las tres estrategias del NQ en demo y cuenta de fondeo, comparado contra el backtest 2024–2026.</p>
+    </div>
+    <div class="rules" aria-label="Reglas de la estrategia">
+      <span>8:30 contra Londres · SL 66.5 · 1:1.25</span><span>10:30 tendencia · SL 66.5 · 1:1</span><span>SMC 5 min · SL en la mecha · TP nuevo extremo</span>
+    </div>
+  </header>
+
+  <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between">
+    <div style="display:flex;flex-direction:column;gap:8px"><div class="tabs" role="group" aria-label="Filtrar por cuenta" id="tabs"></div><div class="tabs" role="group" aria-label="Filtrar por estrategia" id="tabsE"></div></div>
+    <span class="store" id="store">Conectando con el almacenamiento…</span>
+  </div>
+
+  <section class="kpis" id="kpis" aria-label="Resumen"></section>
+
+  <div class="grid2">
+    <section class="panel" aria-labelledby="h-form">
+      <form id="f" novalidate>
+        <h2 id="h-form">Registrar día</h2>
+        <div class="row">
+          <div class="field"><label class="lbl" for="fecha">Fecha</label><input id="fecha" type="date" required></div>
+          <div class="field"><label class="lbl" for="hora">Hora entrada (CDMX)</label><input id="hora" type="time" value="11:00"></div>
+        </div>
+        <div class="field"><label class="lbl" for="estr">Estrategia</label>
+          <select id="estr"><option value="e830">8:30 contra Londres</option><option value="e1030" selected>10:30 con tendencia</option><option value="smc">SMC: barrida + MSS + FVG</option></select></div>
+        <div class="row">
+          <div class="field"><label class="lbl" for="cuenta">Cuenta</label>
+            <select id="cuenta"><option>Demo</option><option>Evaluación</option><option>Fondeada</option></select></div>
+          <div class="field"><label class="lbl" for="qty">Contratos MNQ</label><input id="qty" class="num" type="number" min="1" step="1" value="2"></div>
+        </div>
+        <div class="field"><span class="lbl">Resultado</span>
+          <div class="seg" role="radiogroup" aria-label="Resultado">
+            <label><input type="radio" name="res" value="TP" checked><span>TP</span></label>
+            <label><input type="radio" name="res" value="SL"><span>SL</span></label>
+            <label><input type="radio" name="res" value="Manual"><span>Manual</span></label>
+            <label><input type="radio" name="res" value="Sin entrada"><span>Sin entrada</span></label>
+          </div>
+        </div>
+        <div id="tradeFields" style="display:flex;flex-direction:column;gap:12px">
+          <div class="field"><span class="lbl">Dirección</span>
+            <div class="seg" role="radiogroup" aria-label="Dirección">
+              <label><input type="radio" name="dir" value="Compra" checked><span>Compra</span></label>
+              <label><input type="radio" name="dir" value="Venta"><span>Venta</span></label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field"><label class="lbl" for="slp">SL (pts)</label><input id="slp" class="num" type="number" step="0.25" value="66.5"></div>
+            <div class="field"><label class="lbl" for="tpp">TP (pts)</label><input id="tpp" class="num" type="number" step="0.25" value="66.5"></div>
+          </div>
+          <div class="row">
+            <div class="field"><label class="lbl" for="poc">Entrada (POC o FVG)</label><input id="poc" class="num" type="number" step="0.25" placeholder="21450.25"></div>
+            <div class="field" id="salidaF"><label class="lbl" for="salida">Precio de salida</label><input id="salida" class="num" type="number" step="0.25" placeholder="solo manual"></div>
+          </div>
+          <div class="levels" aria-live="polite">
+            <div><span class="lbl">SL</span><span id="lvSL">—</span></div>
+            <div><span class="lbl">TP</span><span id="lvTP">—</span></div>
+            <div><span class="lbl">Riesgo</span><span id="lvR">—</span></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="field"><label class="lbl" for="reglas">¿Seguiste las reglas?</label>
+            <select id="reglas"><option value="si">Sí, al pie de la letra</option><option value="no">No (movi SL/TP, entré fuera de hora…)</option></select></div>
+          <div class="field"><label class="lbl" for="tend">Tendencia del día</label>
+            <select id="tend"><option>Alcista</option><option>Bajista</option><option>Plana</option></select></div>
+        </div>
+        <div class="field"><label class="lbl" for="notas">Notas</label><textarea id="notas" placeholder="Noticias, cómo te sentiste, qué hizo el precio después…"></textarea></div>
+        <div class="preview"><span class="lbl">Resultado neto</span><span class="num" id="pv" style="font-size:1.15rem;font-weight:600">—</span></div>
+        <button class="btn" type="submit" id="save">Guardar día</button>
+        <div class="toast" id="toast" role="status"></div>
+        <details>
+          <summary class="hint" style="cursor:pointer">Ajustes de cálculo</summary>
+          <div class="row" style="margin-top:10px">
+            <div class="field"><label class="lbl" for="comm">Comisión por contrato ($, ida y vuelta)</label><input id="comm" class="num" type="number" step="0.01" value="1.24"></div>
+            <div class="field"><label class="lbl" for="pv$">Valor del punto ($)</label><input id="pv$" class="num" type="number" step="0.5" value="2"></div>
+          </div>
+        </details>
+      </form>
+    </section>
+
+    <div class="side">
+      <section class="panel" aria-labelledby="h-cmp" style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap"><h2 id="h-cmp">Real vs backtest</h2><span id="cmpChip"></span></div>
+        <div class="cmp" id="cmp"></div>
+        <p class="hint">La franja azul es el rango normal (95 %) de ganadas esperado con 57 % de acierto para el número de operaciones que llevas. Con menos de 20 operaciones la muestra todavía es chica.</p>
+      </section>
+      <section class="panel" aria-labelledby="h-eq" style="display:flex;flex-direction:column;gap:10px">
+        <h2 id="h-eq">Curva de capital</h2>
+        <svg class="chart" id="chart" viewBox="0 0 640 220" preserveAspectRatio="none" role="img" aria-label="Curva de capital acumulada"></svg>
+      </section>
+      <section class="panel" aria-labelledby="h-lu" style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap"><h2 id="h-lu">Lucid 25K Flex</h2><span class="hint">Calculado con la cuenta seleccionada arriba</span></div>
+        <div class="lucid" id="lucid"></div>
+      </section>
+    </div>
+  </div>
+
+  <section class="panel" aria-labelledby="h-hist" style="display:flex;flex-direction:column;gap:12px">
+    <h2 id="h-hist">Historial</h2>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Fecha</th><th>Estrategia</th><th>Cuenta</th><th>Dir.</th><th class="r">Entrada</th><th>Resultado</th><th class="r">Pts</th><th class="r">R</th><th class="r">Neto $</th><th>Reglas</th><th>Notas</th><th></th></tr></thead>
+      <tbody id="tb"><tr><td colspan="12" class="empty">Aún no hay días registrados. Usa el formulario para guardar tu primer día de demo; también registra los días sin entrada para contar la frecuencia real.</td></tr></tbody>
+    </table></div>
+  </section>
+</div>
+
+<script>
+const SL = 66.5;
+// Backtest NQ 2024–2026 por estrategia: acierto, días con entrada, R por operación, SL y TP por defecto
+const ESTR = {
+  e830: {name: "8:30 contra Londres", wr: 0.515, freq: 0.61, rop: 0.15, sl: 66.5, tp: 83.25},
+  e1030: {name: "10:30 con tendencia", wr: 0.57, freq: 0.63, rop: 0.14, sl: 66.5, tp: 66.5},
+  smc: {name: "SMC", wr: 0.438, freq: 0.35, rop: 0.25, sl: 31, tp: 58}
+};
+const estrOf = t => ESTR[t.estr] ? t.estr : "e1030";
+let BT = {wr: 0.57, freq: 0.63, rPerTrade: 0.14}, filterE = "Todas";
+const LUCID = {start: 25000, target: 1250, dd: 1000, lock: 100, dll: 600, cons: 0.40, minDay: 100};
+const $ = s => document.querySelector(s);
+const fmt$ = v => (v < 0 ? "−$" : "$") + Math.abs(v).toLocaleString("es-MX", {minimumFractionDigits: 2, maximumFractionDigits: 2});
+const fmt = (v, d = 2) => (v < 0 ? "−" : "") + Math.abs(v).toFixed(d);
+let trades = [], filter = "Todas", store = null, pendingDelete = null;
+
+// ---------- almacenamiento: db compartida si está disponible, si no, navegador ----------
+const local = {
+  key: "bitacora_poc_nq",
+  read() { try { return JSON.parse(localStorage.getItem(this.key) || "[]"); } catch { return []; } },
+  write(a) { try { localStorage.setItem(this.key, JSON.stringify(a)); return true; } catch { return false; } }
+};
+function useLocal(msg) {
+  store = {
+    kind: "local",
+    async add(t) { const a = local.read(); t.id = "l" + Date.now(); a.push(t); if (!local.write(a)) throw new Error("El navegador no permite guardar datos aquí."); trades = a; render(); },
+    async del(id) { const a = local.read().filter(x => x.id !== id); local.write(a); trades = a; render(); }
+  };
+  trades = local.read();
+  $("#store").textContent = msg;
+  render();
+}
+(async () => {
+  render();
+  const db = window.claude?.use ? await window.claude.use("db") : null;
+  if (!db) { useLocal("Guardando solo en este navegador (inicia sesión en claude.ai para guardarlo en tu cuenta)."); return; }
+  const col = db.collection("trades");
+  store = {
+    kind: "db",
+    async add(t) { await col.add(t); },
+    async del(id) { await col.doc(id).delete(); }
+  };
+  col.onSnapshot(snap => {
+    trades = snap.docs.map(d => ({id: d.id, ...d.data()}));
+    $("#store").textContent = "Guardado en tu cuenta · " + trades.length + " registros";
+    render();
+  }, e => {
+    $("#store").textContent = "No se pudo leer el registro (" + (e.code || "error") + "). Recarga la página.";
+  });
+})();
+
+// ---------- cálculo ----------
+function calc(t) {
+  const pv = +t.ptValue || 2, q = +t.qty || 0, comm = +t.comm || 0;
+  if (t.res === "Sin entrada") return {pts: 0, r: 0, net: 0, traded: false};
+  const d = t.dir === "Compra" ? 1 : -1, e = ESTR[estrOf(t)];
+  const sl = +t.sl || e.sl, tp = +t.tp || e.tp;
+  let pts = t.res === "TP" ? tp : t.res === "SL" ? -sl : (t.salida != null && t.poc != null ? (t.salida - t.poc) * d : NaN);
+  return {pts, r: pts / sl, net: pts * pv * q - comm * q, traded: true};
+}
+function sorted(list) { return [...list].sort((a, b) => (a.fecha + (a.hora || "")).localeCompare(b.fecha + (b.hora || ""))); }
+
+// ---------- formulario ----------
+const today = new Date(Date.now() - 6 * 3600e3).toISOString().slice(0, 10);
+$("#fecha").value = today;
+function formData() {
+  const v = id => document.getElementById(id).value;
+  const res = document.querySelector('input[name="res"]:checked').value;
+  const num = id => v(id) === "" ? null : +v(id);
+  return {
+    fecha: v("fecha"), hora: v("hora"), cuenta: v("cuenta"), qty: +v("qty") || 0,
+    estr: v("estr"), sl: +v("slp") || null, tp: +v("tpp") || null,
+    res, dir: res === "Sin entrada" ? null : document.querySelector('input[name="dir"]:checked').value,
+    poc: res === "Sin entrada" ? null : num("poc"), salida: res === "Manual" ? num("salida") : null,
+    reglas: v("reglas"), tend: v("tend"), notas: v("notas").trim(),
+    comm: +v("comm") || 0, ptValue: +v("pv$") || 2
+  };
+}
+function updateForm() {
+  const t = formData();
+  $("#tradeFields").hidden = t.res === "Sin entrada";
+  $("#salidaF").style.visibility = t.res === "Manual" ? "visible" : "hidden";
+  if (t.poc != null) {
+    const d = t.dir === "Compra" ? 1 : -1;
+    $("#lvSL").textContent = (t.poc - d * (t.sl || 0)).toFixed(2);
+    $("#lvTP").textContent = (t.poc + d * (t.tp || 0)).toFixed(2);
+  } else { $("#lvSL").textContent = "—"; $("#lvTP").textContent = "—"; }
+  $("#lvR").textContent = fmt$((t.sl || 0) * t.ptValue * t.qty);
+  const c = calc(t), pv = $("#pv");
+  if (t.res === "Sin entrada") { pv.textContent = "Sin operación"; pv.className = "num"; }
+  else if (isNaN(c.pts)) { pv.textContent = "Falta precio de entrada y salida"; pv.className = "num"; }
+  else { pv.textContent = fmt$(c.net) + "  ·  " + fmt(c.r) + " R"; pv.className = "num " + (c.net >= 0 ? "pos" : "neg"); }
+}
+$("#f").addEventListener("input", updateForm);
+$("#estr").addEventListener("change", () => { const e = ESTR[$("#estr").value]; $("#slp").value = e.sl; $("#tpp").value = e.tp; updateForm(); });
+$("#f").addEventListener("submit", async e => {
+  e.preventDefault();
+  const t = formData(), toast = $("#toast");
+  toast.className = "toast";
+  if (!t.fecha) { toast.className = "toast err"; toast.textContent = "Pon la fecha del día."; return; }
+  if (t.res !== "Sin entrada" && t.poc == null) { toast.className = "toast err"; toast.textContent = "Escribe el precio de entrada."; return; }
+  if (t.res !== "Sin entrada" && !(t.sl > 0 && t.tp > 0)) { toast.className = "toast err"; toast.textContent = "Escribe el SL y el TP en puntos."; return; }
+  if (t.res === "Manual" && t.salida == null) { toast.className = "toast err"; toast.textContent = "En cierre manual escribe el precio de salida."; return; }
+  if (!store) { toast.className = "toast err"; toast.textContent = "El almacenamiento aún no responde. Espera un momento."; return; }
+  $("#save").disabled = true;
+  try {
+    t.creado = Date.now();
+    await store.add(t);
+    toast.textContent = "Guardado: " + t.fecha + " · " + t.res;
+    $("#notas").value = ""; $("#poc").value = ""; $("#salida").value = "";
+    updateForm();
+  } catch (err) {
+    toast.className = "toast err";
+    toast.textContent = "No se guardó: " + (err?.message || err?.code || "error desconocido") + ". Inténtalo de nuevo.";
+  } finally { $("#save").disabled = false; }
+});
+
+// ---------- render ----------
+const ACCTS = ["Todas", "Demo", "Evaluación", "Fondeada"];
+function renderTabs() {
+  $("#tabs").innerHTML = "";
+  ACCTS.forEach(a => {
+    const b = document.createElement("button");
+    b.className = "tab"; b.type = "button"; b.textContent = a;
+    b.setAttribute("aria-pressed", a === filter);
+    b.onclick = () => { filter = a; render(); };
+    $("#tabs").appendChild(b);
+  });
+  $("#tabsE").innerHTML = "";
+  [["Todas", "Todas las estrategias"], ...Object.entries(ESTR).map(([k, e]) => [k, e.name])].forEach(([k, label]) => {
+    const b = document.createElement("button");
+    b.className = "tab"; b.type = "button"; b.textContent = label;
+    b.setAttribute("aria-pressed", k === filterE);
+    b.onclick = () => { filterE = k; render(); };
+    $("#tabsE").appendChild(b);
+  });
+}
+function kpi(label, value, note, cls = "") {
+  return `<div class="kpi"><span class="lbl">${label}</span><span class="v ${cls}">${value}</span><span class="n">${note}</span></div>`;
+}
+function render() {
+  renderTabs();
+  const list = sorted(trades.filter(t => (filter === "Todas" || t.cuenta === filter) && (filterE === "Todas" || estrOf(t) === filterE)));
+  const rows = list.map(t => ({...t, ...calc(t)}));
+  const tr = rows.filter(r => r.traded && !isNaN(r.pts));
+  // referencia del backtest: la estrategia elegida o el promedio ponderado por lo que llevas
+  const mix = filterE !== "Todas" ? [filterE] : (rows.length ? rows.map(estrOf) : Object.keys(ESTR));
+  const avg = f => mix.reduce((s, k) => s + ESTR[k][f], 0) / mix.length;
+  BT = {wr: avg("wr"), freq: avg("freq"), rPerTrade: avg("rop")};
+  const w = tr.filter(r => r.pts > 0).length, l = tr.filter(r => r.pts < 0).length, n = tr.length;
+  const net = tr.reduce((s, r) => s + r.net, 0), R = tr.reduce((s, r) => s + r.r, 0);
+  const wr = n ? w / n : 0;
+  // rachas y drawdown
+  let streak = 0, sType = "", eq = 0, peak = 0, mdd = 0;
+  tr.forEach(r => {
+    const t = r.pts > 0 ? "G" : r.pts < 0 ? "P" : "";
+    if (t && t === sType) streak++; else if (t) { sType = t; streak = 1; }
+    eq += r.net; peak = Math.max(peak, eq); mdd = Math.min(mdd, eq - peak);
+  });
+  const days = rows.length, noEntry = rows.filter(r => !r.traded).length;
+  const broke = tr.filter(r => r.reglas === "no").length;
+  $("#kpis").innerHTML =
+    kpi("Neto", fmt$(net), n + " operaciones · " + days + " días", net >= 0 ? "pos" : "neg") +
+    kpi("% acierto", n ? (wr * 100).toFixed(1) + "%" : "—", "Backtest: " + (BT.wr * 100).toFixed(1) + "%", n ? (wr >= BT.wr ? "pos" : "neg") : "") +
+    kpi("Ganadas / perdidas", w + " / " + l, (n - w - l) ? (n - w - l) + " en cero" : "TP y SL completos") +
+    kpi("Total R", n ? fmt(R) + " R" : "—", n ? fmt(R / n) + " R por operación" : "Backtest: +" + BT.rPerTrade.toFixed(2) + " R/op", R >= 0 ? "pos" : "neg") +
+    kpi("Racha actual", streak ? streak + " " + (sType === "G" ? "ganadas" : "perdidas") : "—", "Caída máx. " + fmt$(mdd), sType === "G" ? "pos" : sType === "P" ? "neg" : "") +
+    kpi("Disciplina", n ? Math.round((1 - broke / n) * 100) + "%" : "—", broke ? broke + " operaciones fuera de reglas" : "Sin reglas rotas", broke ? "neg" : "pos");
+  renderCmp(n, w, wr, days, noEntry, R);
+  renderChart(tr);
+  renderLucid(tr);
+  renderTable(rows);
+}
+function renderCmp(n, w, wr, days, noEntry, R) {
+  const sd = Math.sqrt(n * BT.wr * (1 - BT.wr));
+  const lo = Math.max(0, (n * BT.wr - 1.96 * sd) / Math.max(n, 1)), hi = Math.min(1, (n * BT.wr + 1.96 * sd) / Math.max(n, 1));
+  const freq = days ? (days - noEntry) / days : 0;
+  const pct = x => (x * 100).toFixed(1) + "%";
+  const bar = (lo, hi, exp, you, ok) => `<div class="bar"><div class="band" style="left:${lo * 100}%;width:${(hi - lo) * 100}%"></div><div class="exp" style="left:${exp * 100}%"></div>${you == null ? "" : `<div class="you" style="left:${Math.min(99, Math.max(1, you * 100))}%;background:var(${ok ? "--win" : "--loss"})"></div>`}</div>`;
+  const inBand = n && wr >= lo && wr <= hi;
+  $("#cmp").innerHTML =
+    `<div style="display:flex;flex-direction:column;gap:6px"><span class="lbl">% acierto</span>${bar(n ? lo : .4, n ? hi : .74, BT.wr, n ? wr : null, wr >= lo)}<span class="num" style="font-size:.85rem">Tú ${n ? pct(wr) : "—"} · esperado ${pct(BT.wr)}${n ? " · normal " + pct(lo) + "–" + pct(hi) : ""}</span></div>` +
+    `<div style="display:flex;flex-direction:column;gap:6px"><span class="lbl">Días con entrada</span>${bar(Math.max(0, BT.freq - .1), Math.min(1, BT.freq + .1), BT.freq, days ? freq : null, freq >= BT.freq - .1)}<span class="num" style="font-size:.85rem">Tú ${days ? pct(freq) : "—"} · backtest ≈${pct(BT.freq)}</span></div>` +
+    `<div style="display:flex;flex-direction:column;gap:6px"><span class="lbl">R por operación</span>${bar(.25, .4, (BT.rPerTrade + .5) / 2, n ? Math.min(1, Math.max(0, (R / n + .5) / 2)) : null, n && R / n >= 0)}<span class="num" style="font-size:.85rem">Tú ${n ? fmt(R / n) : "—"} · backtest +${BT.rPerTrade.toFixed(2)}</span></div>`;
+  const chip = $("#cmpChip");
+  if (n < 10) { chip.className = "chip info"; chip.textContent = n ? "Muestra chica (" + n + ")" : "Sin operaciones"; }
+  else if (inBand) { chip.className = "chip ok"; chip.textContent = "Dentro de lo esperado"; }
+  else if (wr > hi) { chip.className = "chip ok"; chip.textContent = "Por encima del backtest"; }
+  else { chip.className = "chip bad"; chip.textContent = "Por debajo de lo normal: revisa la ejecución"; }
+}
+function renderChart(tr) {
+  const svg = $("#chart"), W = 640, H = 220, P = {l: 52, r: 12, t: 14, b: 22};
+  if (!tr.length) { svg.innerHTML = `<text x="${W / 2}" y="${H / 2}" text-anchor="middle">La curva aparece con tu primera operación</text>`; return; }
+  let e = 0; const pts = [0, ...tr.map(r => (e += r.net))];
+  const mn = Math.min(0, ...pts), mx = Math.max(0, ...pts), span = (mx - mn) || 1;
+  const x = i => P.l + i / (pts.length - 1 || 1) * (W - P.l - P.r);
+  const y = v => P.t + (mx - v) / span * (H - P.t - P.b);
+  const step = Math.pow(10, Math.floor(Math.log10(span / 3)));
+  const mult = [1, 2, 5, 10].find(m => span / (step * m) <= 5) * step;
+  let g = "";
+  for (let v = Math.ceil(mn / mult) * mult; v <= mx + 1e-9; v += mult)
+    g += `<line x1="${P.l}" x2="${W - P.r}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)" stroke-width="1"/><text x="${P.l - 6}" y="${y(v) + 3}" text-anchor="end">${v < 0 ? "−" : ""}$${Math.abs(v).toLocaleString("es-MX")}</text>`;
+  const line = pts.map((v, i) => `${x(i)},${y(v)}`).join(" ");
+  const last = pts[pts.length - 1], col = last >= 0 ? "var(--win)" : "var(--loss)";
+  svg.innerHTML = g +
+    `<line x1="${P.l}" x2="${W - P.r}" y1="${y(0)}" y2="${y(0)}" stroke="var(--muted)" stroke-width="1" stroke-dasharray="3 3"/>` +
+    `<polygon points="${x(0)},${y(0)} ${line} ${x(pts.length - 1)},${y(0)}" fill="${col}" fill-opacity="0.12"/>` +
+    `<polyline points="${line}" fill="none" stroke="${col}" stroke-width="2" vector-effect="non-scaling-stroke"/>` +
+    `<circle cx="${x(pts.length - 1)}" cy="${y(last)}" r="4" fill="${col}"/>` +
+    `<text x="${W - P.r}" y="${H - 6}" text-anchor="end">${tr.length} operaciones</text>`;
+}
+function renderLucid(tr) {
+  const byDay = {};
+  tr.forEach(r => byDay[r.fecha] = (byDay[r.fecha] || 0) + r.net);
+  const ds = Object.keys(byDay).sort();
+  let bal = 0, hwm = 0, blown = false, dllHits = 0;
+  ds.forEach(d => { bal += byDay[d]; if (byDay[d] <= -LUCID.dll) dllHits++; hwm = Math.max(hwm, bal); const floor = Math.min(hwm - LUCID.dd, LUCID.lock); if (bal <= floor) blown = true; });
+  const floor = Math.min(hwm - LUCID.dd, LUCID.lock), room = bal - floor;
+  const best = ds.length ? Math.max(...ds.map(d => byDay[d])) : 0;
+  const consOk = bal <= 0 || best <= LUCID.cons * bal;
+  const goodDays = ds.filter(d => byDay[d] >= LUCID.minDay).length;
+  const prog = Math.max(0, Math.min(1, bal / LUCID.target));
+  const meter = (p, c) => `<div class="meter"><i style="width:${p * 100}%;background:var(${c})"></i></div>`;
+  const st = blown ? `<span class="chip bad">Cuenta perdida</span>` : bal >= LUCID.target && consOk ? `<span class="chip ok">Objetivo cumplido</span>` : `<span class="chip info">En curso</span>`;
+  $("#lucid").innerHTML =
+    `<div><span class="lbl">Objetivo de evaluación ${st}</span>${meter(prog, "--accent")}<span class="num">${fmt$(bal)} de $1,250 · faltan ${fmt$(Math.max(0, LUCID.target - bal))}</span></div>` +
+    `<div><span class="lbl">Distancia al drawdown (EOD)</span>${meter(Math.max(0, Math.min(1, room / LUCID.dd)), room < 300 ? "--loss" : "--win")}<span class="num">${fmt$(room)} libres · piso en ${fmt$(LUCID.start + floor)}</span></div>` +
+    `<div><span class="lbl">Consistencia 40 %</span><span class="chip ${consOk ? "ok" : "mid"}" style="align-self:flex-start">${consOk ? "Cumple" : "Mejor día muy grande"}</span><span class="num">Mejor día ${fmt$(best)}${bal > 0 ? " · " + (best / bal * 100).toFixed(0) + "% del total" : ""}</span></div>` +
+    `<div><span class="lbl">Días ≥ $100 (fondeada pide 5)</span>${meter(Math.min(1, goodDays / 5), "--win")}<span class="num">${goodDays} de 5 · límite diario $600 tocado ${dllHits} vez${dllHits === 1 ? "" : "es"}</span></div>`;
+}
+function esc(s) { return String(s ?? "").replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c])); }
+function renderTable(rows) {
+  const tb = $("#tb");
+  if (!rows.length) { tb.innerHTML = `<tr><td colspan="12" class="empty">${trades.length ? "No hay días con estos filtros." : "Aún no hay días registrados. Usa el formulario para guardar tu primer día de demo; también registra los días sin entrada para contar la frecuencia real."}</td></tr>`; return; }
+  const chipRes = r => r.res === "TP" ? "ok" : r.res === "SL" ? "bad" : r.res === "Manual" ? "mid" : "info";
+  tb.innerHTML = rows.slice().reverse().map(r => `<tr>
+    <td class="num">${esc(r.fecha)}<br><span class="hint">${esc(r.hora || "")}</span></td>
+    <td>${esc(ESTR[estrOf(r)].name)}</td>
+    <td>${esc(r.cuenta)}</td>
+    <td class="${r.dir === "Compra" ? "pos" : r.dir === "Venta" ? "neg" : ""}">${esc(r.dir || "—")}</td>
+    <td class="r num">${r.poc != null ? (+r.poc).toFixed(2) : "—"}${r.res === "Manual" && r.salida != null ? `<br><span class="hint">→ ${(+r.salida).toFixed(2)}</span>` : ""}</td>
+    <td><span class="chip ${chipRes(r)}">${esc(r.res)}</span></td>
+    <td class="r num">${r.traded ? fmt(r.pts) : "—"}</td>
+    <td class="r num">${r.traded ? fmt(r.r) : "—"}</td>
+    <td class="r num ${r.net > 0 ? "pos" : r.net < 0 ? "neg" : ""}">${r.traded ? fmt$(r.net) : "—"}</td>
+    <td>${r.reglas === "no" ? '<span class="chip bad">No</span>' : '<span class="chip ok">Sí</span>'}</td>
+    <td class="note">${esc(r.notas)}</td>
+    <td class="r">${pendingDelete === r.id
+      ? `<button class="btn danger" type="button" data-del="${esc(r.id)}">Borrar</button> <button class="btn ghost" type="button" data-cancel="1">No</button>`
+      : `<button class="btn ghost" type="button" data-ask="${esc(r.id)}" aria-label="Borrar registro del ${esc(r.fecha)}">Borrar</button>`}</td>
+  </tr>`).join("");
+}
+$("#tb").addEventListener("click", async e => {
+  const b = e.target.closest("button"); if (!b) return;
+  if (b.dataset.ask) { pendingDelete = b.dataset.ask; render(); }
+  else if (b.dataset.cancel) { pendingDelete = null; render(); }
+  else if (b.dataset.del) {
+    try { await store.del(b.dataset.del); pendingDelete = null; render(); }
+    catch (err) { $("#store").textContent = "No se pudo borrar: " + (err?.message || err?.code || "error"); }
+  }
+});
+updateForm();
+</script>
