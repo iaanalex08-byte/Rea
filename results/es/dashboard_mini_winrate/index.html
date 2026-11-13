@@ -59,6 +59,7 @@
 
   <section class="mn-card" id="calendario">
     <h2>Calendario de días hábiles</h2>
+    <p class="mn-muted">Abre con la configuración que llega a TP1 el 92% de las veces (TP1 = 3% del rango medio, SL = 50%). Puedes cambiarla en el selector.</p>
     <div class="mn-cal-controls">
       <label for="sel-cal-cfg">Configuración
         <select class="dash-select" id="sel-cal-cfg" aria-label="Configuración del calendario" data-draw="cal-opciones" data-source="calendario"></select>
@@ -255,7 +256,7 @@
     description: 'Días ganados, perdidos y cerrados al final, neto y rachas de la configuración y el año elegidos.',
     fn: (calendario) => {
       const p = dash.params();
-      const cfg = p.cal_cfg || 'Modelo B · 9:12 CDMX · SL 60 · TP 15/30 (tu configuración)';
+      const cfg = p.cal_cfg || 'Modelo B · 9:12 CDMX · TP1 = 3% del rango medio · SL = 50%';
       const year = String(p.cal_year || '2025');
       const dias = calendario.filter((r) => r.config === cfg && r.date.startsWith(year)).sort((a, b) => (a.date < b.date ? -1 : 1));
       let rw = 0, rl = 0, best = 0, worst = 0;
@@ -271,7 +272,7 @@
   });
 
   (() => {
-    const DEF = 'Modelo B · 9:12 CDMX · SL 60 · TP 15/30 (tu configuración)';
+    const DEF = 'Modelo B · 9:12 CDMX · TP1 = 3% del rango medio · SL = 50%';
     const MESES = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
     const CLS = { 'Ganó (TP)': 'mn-c-win', 'Perdió (SL)': 'mn-c-loss', 'Cerró a las 15:59': 'mn-c-close' };
     const p = () => ({ cfg: dash.params().cal_cfg || DEF, year: String(dash.params().cal_year || '2025') });
