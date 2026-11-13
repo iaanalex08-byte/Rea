@@ -28,3 +28,7 @@ Para usarlos: en TradingView abre el Editor de Pine, pega el archivo, guarda y "
 ## Backtest en velas de 3 minutos
 
 En `backtest/`: `engine.py` es el motor del Modelo B y `run.py` lo corre en velas de 1 y 3 minutos y con otras formas de elegir la dirección. Usa las velas de 1 minuto SPXUSD de histdata.com (no se incluyen en el repositorio; `run.py` explica cómo descargarlas). Con velas de 1 minuto reproduce las 476 operaciones del tablero original. `operaciones_1min.csv` y `operaciones_3min.csv` tienen el detalle por día.
+
+## Backtest de los modelos de Fabio Valentini
+
+En `backtest/valentini/`: `engine.py` codifica el Modelo 1 (ruptura de balance y retesteo) y el Modelo 2 (reversión a la media desde una falsa salida), con perfil de volumen y una vela de agresión en lugar del big trade. `run.py` corre las variantes; `prep_es.py` baja las velas del ES con volumen de Yahoo (últimos 60 días). Para la muestra larga usa las velas de 1 minuto SPXUSD de histdata.com: `python3 run.py carpeta_histdata spx`. Los resultados están en `resumen_*.csv`, `operaciones_*.csv` y `sensibilidad_spx_5m.csv`.
