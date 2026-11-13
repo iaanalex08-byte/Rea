@@ -1,0 +1,477 @@
+date,year,side,fuente,outcome,tp1,mins,news,usd,weekday
+2025-01-02,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,4,False,-1159.0,Jue
+2025-01-03,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,10,False,1091.0,Vie
+2025-01-06,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,7,False,341.0,Lun
+2025-01-07,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,10,False,-1159.0,Mar
+2025-01-08,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,11,False,1091.0,Mié
+2025-01-10,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,2,True,1091.0,Vie
+2025-01-13,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,15,False,-1159.0,Lun
+2025-01-14,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,17,False,341.0,Mar
+2025-01-15,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,9,True,-1159.0,Mié
+2025-01-16,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,15,False,-1159.0,Jue
+2025-01-17,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,15,False,-1159.0,Vie
+2025-01-20,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,31,False,341.0,Lun
+2025-01-21,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,12,False,-1159.0,Mar
+2025-01-22,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,121,False,1091.0,Mié
+2025-01-23,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,83,False,-1159.0,Jue
+2025-01-24,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,34,False,341.0,Vie
+2025-01-27,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,1,False,-1159.0,Lun
+2025-01-28,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,3,False,-1159.0,Mar
+2025-01-29,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,13,True,-1159.0,Mié
+2025-01-30,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,13,False,341.0,Jue
+2025-01-31,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,43,False,1091.0,Vie
+2025-02-03,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,2,False,341.0,Lun
+2025-02-04,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,31,False,1091.0,Mar
+2025-02-05,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,31,False,341.0,Mié
+2025-02-06,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,62,False,-1159.0,Jue
+2025-02-07,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,31,True,341.0,Vie
+2025-02-10,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,9,False,-1159.0,Lun
+2025-02-11,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,31,False,-1159.0,Mar
+2025-02-12,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,10,True,-1159.0,Mié
+2025-02-13,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,9,False,-1159.0,Jue
+2025-02-14,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,72,False,341.0,Vie
+2025-02-17,2025,Compra,Reconstruida (EMA 20/50 15m),Cierre 15:59,False,202,False,142.5,Lun
+2025-02-18,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,31,False,-1159.0,Mar
+2025-02-19,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,102,False,-1159.0,Mié
+2025-02-20,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,16,False,-1159.0,Jue
+2025-02-21,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,8,False,-1159.0,Vie
+2025-02-24,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,20,False,1091.0,Lun
+2025-02-25,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,21,False,1091.0,Mar
+2025-02-26,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,23,False,1091.0,Mié
+2025-02-27,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,11,False,341.0,Jue
+2025-02-28,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,3,False,1091.0,Vie
+2025-03-03,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,7,False,341.0,Lun
+2025-03-04,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,3,False,1091.0,Mar
+2025-03-05,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,6,False,-1159.0,Mié
+2025-03-06,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,7,False,1091.0,Jue
+2025-03-07,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,2,True,-1159.0,Vie
+2025-03-10,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,2,False,-1159.0,Lun
+2025-03-11,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,7,False,341.0,Mar
+2025-03-12,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,8,True,341.0,Mié
+2025-03-13,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,6,False,341.0,Jue
+2025-03-14,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,8,False,1091.0,Vie
+2025-03-17,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,4,False,1091.0,Lun
+2025-03-18,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,8,False,1091.0,Mar
+2025-03-19,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,13,True,-1159.0,Mié
+2025-03-20,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,4,False,-1159.0,Jue
+2025-03-21,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,8,False,341.0,Vie
+2025-03-24,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,16,False,1091.0,Lun
+2025-03-25,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,21,False,-1159.0,Mar
+2025-03-26,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,28,False,1091.0,Mié
+2025-03-27,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,6,False,1091.0,Jue
+2025-03-28,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,7,False,341.0,Vie
+2025-03-31,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,31,False,-1159.0,Lun
+2025-04-01,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,36,False,1091.0,Mar
+2025-04-02,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,19,False,-1159.0,Mié
+2025-04-03,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,13,False,1091.0,Jue
+2025-04-04,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,1,True,-1159.0,Vie
+2025-04-07,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,1,False,-1159.0,Lun
+2025-04-08,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,11,False,-1159.0,Mar
+2025-04-09,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,1,False,-1159.0,Mié
+2025-04-10,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,1,True,1091.0,Jue
+2025-04-11,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,5,False,1091.0,Vie
+2025-04-14,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,33,False,1091.0,Lun
+2025-04-15,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,14,False,-1159.0,Mar
+2025-04-16,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,32,False,1091.0,Mié
+2025-04-17,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,13,False,341.0,Jue
+2025-04-21,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,68,False,1091.0,Lun
+2025-04-22,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,55,False,1091.0,Mar
+2025-04-23,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,29,False,1091.0,Mié
+2025-04-24,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,10,False,-1159.0,Jue
+2025-04-25,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,33,False,341.0,Vie
+2025-04-28,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,47,False,1091.0,Lun
+2025-04-29,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,16,False,-1159.0,Mar
+2025-04-30,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,3,False,1091.0,Mié
+2025-05-01,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,36,False,-1159.0,Jue
+2025-05-02,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,1,True,-1159.0,Vie
+2025-05-05,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,86,False,341.0,Lun
+2025-05-06,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,63,False,341.0,Mar
+2025-05-07,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,72,True,341.0,Mié
+2025-05-08,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,8,False,-1159.0,Jue
+2025-05-09,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,35,False,1091.0,Vie
+2025-05-12,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,9,False,-1159.0,Lun
+2025-05-13,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,1,True,1091.0,Mar
+2025-05-14,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,76,False,-1159.0,Mié
+2025-05-15,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,3,False,-1159.0,Jue
+2025-05-16,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,27,False,-1159.0,Vie
+2025-05-19,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,61,False,-1159.0,Lun
+2025-05-20,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,72,False,-1159.0,Mar
+2025-05-21,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,50,False,1091.0,Mié
+2025-05-22,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,7,False,-1159.0,Jue
+2025-05-23,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,50,False,1091.0,Vie
+2025-05-26,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,126,False,-1159.0,Lun
+2025-05-27,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,60,False,-1159.0,Mar
+2025-05-28,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,79,False,341.0,Mié
+2025-05-29,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,61,False,341.0,Jue
+2025-05-30,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,3,False,-1159.0,Vie
+2025-06-02,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,61,False,-1159.0,Lun
+2025-06-03,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,63,False,341.0,Mar
+2025-06-04,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,63,False,1091.0,Mié
+2025-06-05,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,21,False,1091.0,Jue
+2025-06-06,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,1,True,1091.0,Vie
+2025-06-09,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,63,False,-1159.0,Lun
+2025-06-10,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,135,False,-1159.0,Mar
+2025-06-11,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,1,True,1091.0,Mié
+2025-06-12,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,7,False,-1159.0,Jue
+2025-06-13,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,61,False,341.0,Vie
+2025-06-16,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,84,False,1091.0,Lun
+2025-06-17,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,61,False,341.0,Mar
+2025-06-18,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,65,True,-1159.0,Mié
+2025-06-19,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,69,False,1091.0,Jue
+2025-06-20,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,50,False,1091.0,Vie
+2025-06-23,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,62,False,341.0,Lun
+2025-06-24,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,87,False,341.0,Mar
+2025-06-25,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,183,False,-1159.0,Mié
+2025-06-26,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,168,False,1091.0,Jue
+2025-06-27,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,60,False,-1159.0,Vie
+2025-06-30,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,67,False,-1159.0,Lun
+2025-07-01,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,78,False,-1159.0,Mar
+2025-07-02,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,61,False,341.0,Mié
+2025-07-03,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,61,True,1091.0,Jue
+2025-07-04,2025,Venta,Reconstruida (EMA 20/50 15m),Cierre 15:59,False,269,False,113.9,Vie
+2025-07-07,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,54,False,-1159.0,Lun
+2025-07-08,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,94,False,-1159.0,Mar
+2025-07-09,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,63,False,1091.0,Mié
+2025-07-10,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,156,False,1091.0,Jue
+2025-07-11,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,61,False,-1159.0,Vie
+2025-07-14,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,73,False,341.0,Lun
+2025-07-15,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,70,True,341.0,Mar
+2025-07-16,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,7,False,-1159.0,Mié
+2025-07-17,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,33,False,1091.0,Jue
+2025-07-18,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,116,False,-1159.0,Vie
+2025-07-21,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,86,False,1091.0,Lun
+2025-07-22,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,70,False,341.0,Mar
+2025-07-23,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,82,False,-1159.0,Mié
+2025-07-24,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,87,False,341.0,Jue
+2025-07-25,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,224,False,-1159.0,Vie
+2025-07-28,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,170,False,1091.0,Lun
+2025-07-29,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,139,False,-1159.0,Mar
+2025-07-30,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,205,True,341.0,Mié
+2025-07-31,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,61,False,-1159.0,Jue
+2025-08-01,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,8,True,341.0,Vie
+2025-08-04,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,66,False,1091.0,Lun
+2025-08-05,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,91,False,-1159.0,Mar
+2025-08-06,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,95,False,-1159.0,Mié
+2025-08-07,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,59,False,341.0,Jue
+2025-08-08,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,65,False,341.0,Vie
+2025-08-11,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,65,False,-1159.0,Lun
+2025-08-12,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,1,True,-1159.0,Mar
+2025-08-13,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,78,False,1091.0,Mié
+2025-08-14,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,1,False,-1159.0,Jue
+2025-08-15,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,80,False,1091.0,Vie
+2025-08-18,2025,Venta,Reconstruida (EMA 20/50 15m),Cierre 15:59,False,390,False,-524.9,Lun
+2025-08-19,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,72,False,341.0,Mar
+2025-08-20,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,78,False,1091.0,Mié
+2025-08-21,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,79,False,341.0,Jue
+2025-08-22,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,72,False,1091.0,Vie
+2025-08-25,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,91,False,-1159.0,Lun
+2025-08-26,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,101,False,-1159.0,Mar
+2025-08-27,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,60,False,-1159.0,Mié
+2025-08-28,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,78,False,341.0,Jue
+2025-08-29,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,1,False,-1159.0,Vie
+2025-09-01,2025,Venta,Reconstruida (EMA 20/50 15m),Cierre 15:59,False,264,False,-959.3,Lun
+2025-09-02,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,25,False,1091.0,Mar
+2025-09-03,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,89,False,-1159.0,Mié
+2025-09-04,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,94,False,341.0,Jue
+2025-09-05,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,1,True,-1159.0,Vie
+2025-09-08,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,63,False,341.0,Lun
+2025-09-09,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,37,False,-1159.0,Mar
+2025-09-10,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,1,False,1091.0,Mié
+2025-09-11,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,1,True,-1159.0,Jue
+2025-09-12,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,181,False,341.0,Vie
+2025-09-15,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,91,False,1091.0,Lun
+2025-09-16,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,76,False,-1159.0,Mar
+2025-09-17,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,251,True,1091.0,Mié
+2025-09-18,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,24,False,-1159.0,Jue
+2025-09-19,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,61,False,341.0,Vie
+2025-09-22,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,62,False,-1159.0,Lun
+2025-09-23,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,210,False,-1159.0,Mar
+2025-09-24,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,80,False,-1159.0,Mié
+2025-09-25,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,63,False,1091.0,Jue
+2025-09-26,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,7,False,1091.0,Vie
+2025-09-29,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,71,False,-1159.0,Lun
+2025-09-30,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,136,False,341.0,Mar
+2025-10-01,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,65,False,-1159.0,Mié
+2025-10-02,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,72,False,-1159.0,Jue
+2025-10-03,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,92,False,341.0,Vie
+2025-10-06,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,70,False,-1159.0,Lun
+2025-10-07,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,93,False,341.0,Mar
+2025-10-08,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,92,False,-1159.0,Mié
+2025-10-09,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,82,False,-1159.0,Jue
+2025-10-10,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,69,False,1091.0,Vie
+2025-10-13,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,33,False,-1159.0,Lun
+2025-10-14,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,14,False,1091.0,Mar
+2025-10-15,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,91,False,1091.0,Mié
+2025-10-16,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,57,False,341.0,Jue
+2025-10-17,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,7,False,341.0,Vie
+2025-10-20,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,61,False,1091.0,Lun
+2025-10-21,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,79,False,-1159.0,Mar
+2025-10-22,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,75,False,341.0,Mié
+2025-10-23,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,18,False,341.0,Jue
+2025-10-24,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,1,True,1091.0,Vie
+2025-10-27,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,49,False,341.0,Lun
+2025-10-28,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,15,False,-1159.0,Mar
+2025-10-29,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,39,True,341.0,Mié
+2025-10-30,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,7,False,1091.0,Jue
+2025-10-31,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,12,False,-1159.0,Vie
+2025-11-03,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,5,False,-1159.0,Lun
+2025-11-04,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,12,False,341.0,Mar
+2025-11-05,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,21,False,1091.0,Mié
+2025-11-06,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,11,False,341.0,Jue
+2025-11-07,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,4,False,1091.0,Vie
+2025-11-10,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,10,False,1091.0,Lun
+2025-11-11,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,39,False,341.0,Mar
+2025-11-12,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,17,False,-1159.0,Mié
+2025-11-13,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,7,False,1091.0,Jue
+2025-11-14,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,3,False,1091.0,Vie
+2025-11-17,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,5,False,-1159.0,Lun
+2025-11-18,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,3,False,341.0,Mar
+2025-11-19,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,7,False,1091.0,Mié
+2025-11-20,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,12,True,341.0,Jue
+2025-11-21,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,1,False,-1159.0,Vie
+2025-11-24,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,3,False,1091.0,Lun
+2025-11-25,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,13,False,341.0,Mar
+2025-11-26,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,16,False,1091.0,Mié
+2025-11-27,2025,Venta,Reconstruida (EMA 20/50 15m),Cierre 15:59,False,205,False,146.6,Jue
+2025-11-28,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,12,False,341.0,Vie
+2025-12-01,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,8,False,-1159.0,Lun
+2025-12-02,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,19,False,341.0,Mar
+2025-12-03,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,25,False,341.0,Mié
+2025-12-04,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,5,False,-1159.0,Jue
+2025-12-05,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,21,False,-1159.0,Vie
+2025-12-08,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,13,False,-1159.0,Lun
+2025-12-09,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,22,False,-1159.0,Mar
+2025-12-10,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + BE,True,9,True,341.0,Mié
+2025-12-11,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,20,False,-1159.0,Jue
+2025-12-12,2025,Venta,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,35,False,1091.0,Vie
+2025-12-15,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,4,False,-1159.0,Lun
+2025-12-16,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,11,True,341.0,Mar
+2025-12-17,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,11,False,-1159.0,Mié
+2025-12-18,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,6,True,341.0,Jue
+2025-12-19,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,3,False,1091.0,Vie
+2025-12-22,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,67,False,-1159.0,Lun
+2025-12-23,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,1,False,-1159.0,Mar
+2025-12-24,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + TP2,True,76,False,1091.0,Mié
+2025-12-26,2025,Compra,Reconstruida (EMA 20/50 15m),TP1 + BE,True,22,False,341.0,Vie
+2025-12-29,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,7,False,-1159.0,Lun
+2025-12-30,2025,Venta,Reconstruida (EMA 20/50 15m),Stop (−2),False,27,False,-1159.0,Mar
+2025-12-31,2025,Compra,Reconstruida (EMA 20/50 15m),Stop (−2),False,8,False,-1159.0,Mié
+2026-01-02,2026,Compra,Dashboard Rascacielos,Stop (−2),False,4,False,-1159.0,Vie
+2026-01-05,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,7,False,341.0,Lun
+2026-01-06,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,20,False,1091.0,Mar
+2026-01-07,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,31,False,341.0,Mié
+2026-01-08,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,18,False,341.0,Jue
+2026-01-09,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,9,True,1091.0,Vie
+2026-01-12,2026,Venta,Dashboard Rascacielos,Stop (−2),False,2,False,-1159.0,Lun
+2026-01-13,2026,Compra,Dashboard Rascacielos,Stop (−2),False,22,True,-1159.0,Mar
+2026-01-14,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,4,False,341.0,Mié
+2026-01-15,2026,Compra,Dashboard Rascacielos,Stop (−2),False,22,False,-1159.0,Jue
+2026-01-16,2026,Compra,Dashboard Rascacielos,Stop (−2),False,27,False,-1159.0,Vie
+2026-01-19,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,26,False,341.0,Lun
+2026-01-20,2026,Venta,Dashboard Rascacielos,Stop (−2),False,1,False,-1159.0,Mar
+2026-01-21,2026,Venta,Dashboard Rascacielos,Stop (−2),False,18,False,-1159.0,Mié
+2026-01-22,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,13,False,341.0,Jue
+2026-01-23,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,12,False,341.0,Vie
+2026-01-26,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,8,False,1091.0,Lun
+2026-01-27,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,69,False,1091.0,Mar
+2026-01-28,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,19,True,341.0,Mié
+2026-01-29,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,12,False,1091.0,Jue
+2026-01-30,2026,Venta,Dashboard Rascacielos,Stop (−2),False,1,False,-1159.0,Vie
+2026-02-02,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,2,False,341.0,Lun
+2026-02-03,2026,Compra,Dashboard Rascacielos,Stop (−2),False,14,False,-1159.0,Mar
+2026-02-04,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,6,False,341.0,Mié
+2026-02-05,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,2,False,1091.0,Jue
+2026-02-06,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,3,False,1091.0,Vie
+2026-02-09,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,3,False,341.0,Lun
+2026-02-10,2026,Compra,Dashboard Rascacielos,Stop (−2),False,13,False,-1159.0,Mar
+2026-02-11,2026,Compra,Dashboard Rascacielos,Stop (−2),False,8,True,-1159.0,Mié
+2026-02-12,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,15,False,341.0,Jue
+2026-02-13,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,2,True,341.0,Vie
+2026-02-16,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,26,False,341.0,Lun
+2026-02-17,2026,Venta,Dashboard Rascacielos,Stop (−2),False,2,False,-1159.0,Mar
+2026-02-18,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,15,False,1091.0,Mié
+2026-02-19,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,10,False,341.0,Jue
+2026-02-20,2026,Venta,Dashboard Rascacielos,Stop (−2),False,4,False,-1159.0,Vie
+2026-02-23,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,3,False,1091.0,Lun
+2026-02-24,2026,Compra,Dashboard Rascacielos,Stop (−2),False,2,False,-1159.0,Mar
+2026-02-25,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,17,False,1091.0,Mié
+2026-02-26,2026,Compra,Dashboard Rascacielos,Stop (−2),False,2,False,-1159.0,Jue
+2026-02-27,2026,Venta,Dashboard Rascacielos,Stop (−2),False,10,False,-1159.0,Vie
+2026-03-02,2026,Venta,Dashboard Rascacielos,Stop (−2),False,2,False,-1159.0,Lun
+2026-03-03,2026,Venta,Dashboard Rascacielos,Stop (−2),False,1,False,-1159.0,Mar
+2026-03-04,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,1,False,1091.0,Mié
+2026-03-05,2026,Venta,Dashboard Rascacielos,Stop (−2),False,3,False,-1159.0,Jue
+2026-03-06,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,6,True,1091.0,Vie
+2026-03-09,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,4,False,341.0,Lun
+2026-03-10,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,4,False,341.0,Mar
+2026-03-11,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,22,True,1091.0,Mié
+2026-03-12,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,5,False,341.0,Jue
+2026-03-13,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,6,False,341.0,Vie
+2026-03-16,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,16,False,1091.0,Lun
+2026-03-17,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,5,False,1091.0,Mar
+2026-03-18,2026,Venta,Dashboard Rascacielos,Stop (−2),False,12,True,-1159.0,Mié
+2026-03-19,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,1,False,1091.0,Jue
+2026-03-20,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,4,False,1091.0,Vie
+2026-03-23,2026,Compra,Dashboard Rascacielos,Stop (−2),False,3,False,-1159.0,Lun
+2026-03-24,2026,Venta,Dashboard Rascacielos,Stop (−2),False,4,False,-1159.0,Mar
+2026-03-25,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,3,False,1091.0,Mié
+2026-03-26,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,14,False,341.0,Jue
+2026-03-27,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,3,False,1091.0,Vie
+2026-03-30,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,36,False,341.0,Lun
+2026-03-31,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,27,False,341.0,Mar
+2026-04-01,2026,Compra,Dashboard Rascacielos,Stop (−2),False,9,False,-1159.0,Mié
+2026-04-02,2026,Venta,Dashboard Rascacielos,Stop (−2),False,53,False,-1159.0,Jue
+2026-04-06,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,32,False,341.0,Lun
+2026-04-07,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,26,False,341.0,Mar
+2026-04-08,2026,Compra,Dashboard Rascacielos,Stop (−2),False,62,False,-1159.0,Mié
+2026-04-09,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,74,False,1091.0,Jue
+2026-04-10,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,6,True,341.0,Vie
+2026-04-13,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,50,False,1091.0,Lun
+2026-04-14,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,75,False,1091.0,Mar
+2026-04-15,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,65,False,1091.0,Mié
+2026-04-16,2026,Compra,Dashboard Rascacielos,Stop (−2),False,83,False,-1159.0,Jue
+2026-04-17,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,20,False,1091.0,Vie
+2026-04-20,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,39,False,1091.0,Lun
+2026-04-21,2026,Compra,Dashboard Rascacielos,Stop (−2),False,15,False,-1159.0,Mar
+2026-04-22,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,96,False,341.0,Mié
+2026-04-23,2026,Compra,Dashboard Rascacielos,Stop (−2),False,16,False,-1159.0,Jue
+2026-04-24,2026,Compra,Dashboard Rascacielos,Stop (−2),False,8,False,-1159.0,Vie
+2026-04-27,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,76,False,341.0,Lun
+2026-04-28,2026,Venta,Dashboard Rascacielos,Stop (−2),False,21,False,-1159.0,Mar
+2026-04-29,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,12,True,341.0,Mié
+2026-04-30,2026,Compra,Dashboard Rascacielos,Stop (−2),False,15,False,-1159.0,Jue
+2026-05-01,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,86,False,1091.0,Vie
+2026-05-04,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,41,False,341.0,Lun
+2026-05-05,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,99,False,1091.0,Mar
+2026-05-06,2026,Compra,Dashboard Rascacielos,Stop (−2),False,37,False,-1159.0,Mié
+2026-05-07,2026,Compra,Dashboard Rascacielos,Stop (−2),False,76,False,-1159.0,Jue
+2026-05-08,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,22,True,341.0,Vie
+2026-05-11,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,74,False,1091.0,Lun
+2026-05-12,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,5,True,341.0,Mar
+2026-05-13,2026,Compra,Dashboard Rascacielos,Stop (−2),False,4,False,-1159.0,Mié
+2026-05-14,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,58,False,1091.0,Jue
+2026-05-15,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,23,False,341.0,Vie
+2026-05-18,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,13,False,1091.0,Lun
+2026-05-19,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,46,False,341.0,Mar
+2026-05-20,2026,Compra,Dashboard Rascacielos,Stop (−2),False,33,False,-1159.0,Mié
+2026-05-21,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,34,False,341.0,Jue
+2026-05-22,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,40,False,1091.0,Vie
+2026-05-25,2026,Compra,Dashboard Rascacielos,Cierre 15:59,False,269,False,-275.5,Lun
+2026-05-26,2026,Compra,Dashboard Rascacielos,Stop (−2),False,61,False,-1159.0,Mar
+2026-05-27,2026,Compra,Dashboard Rascacielos,Stop (−2),False,18,False,-1159.0,Mié
+2026-05-28,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,31,False,1091.0,Jue
+2026-05-29,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,76,False,1091.0,Vie
+2026-06-01,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,42,False,1091.0,Lun
+2026-06-02,2026,Compra,Dashboard Rascacielos,Stop (−2),False,39,False,-1159.0,Mar
+2026-06-03,2026,Compra,Dashboard Rascacielos,Stop (−2),False,75,False,-1159.0,Mié
+2026-06-04,2026,Venta,Dashboard Rascacielos,Stop (−2),False,49,False,-1159.0,Jue
+2026-06-05,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,14,True,341.0,Vie
+2026-06-08,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,22,False,341.0,Lun
+2026-06-09,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,37,False,1091.0,Mar
+2026-06-10,2026,Venta,Dashboard Rascacielos,Stop (−2),False,1,True,-1159.0,Mié
+2026-06-11,2026,Compra,Dashboard Rascacielos,Stop (−2),False,4,False,-1159.0,Jue
+2026-06-12,2026,Compra,Dashboard Rascacielos,Stop (−2),False,15,False,-1159.0,Vie
+2026-06-15,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,61,False,1091.0,Lun
+2026-06-16,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,88,False,341.0,Mar
+2026-06-17,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,95,True,341.0,Mié
+2026-06-18,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,34,False,341.0,Jue
+2026-06-19,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,22,False,1091.0,Vie
+2026-06-22,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,62,False,1091.0,Lun
+2026-06-23,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,61,False,1091.0,Mar
+2026-06-24,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,25,False,1091.0,Mié
+2026-06-25,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,1,False,1091.0,Jue
+2026-06-26,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,32,False,1091.0,Vie
+2026-06-29,2026,Compra,Dashboard Rascacielos,Stop (−2),False,61,False,-1159.0,Lun
+2026-06-30,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,63,False,341.0,Mar
+2026-07-01,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,32,False,341.0,Mié
+2026-07-02,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,1,True,1091.0,Jue
+2026-07-03,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,79,False,341.0,Vie
+2026-07-06,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,67,False,341.0,Lun
+2026-07-07,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,61,False,341.0,Mar
+2026-07-08,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,61,False,341.0,Mié
+2026-07-09,2026,Compra,Dashboard Rascacielos,Stop (−2),False,62,False,-1159.0,Jue
+2026-07-10,2026,Venta,Dashboard Rascacielos,Stop (−2),False,63,False,-1159.0,Vie
+2026-07-13,2026,Venta,Dashboard Rascacielos,Stop (−2),False,61,False,-1159.0,Lun
+2026-07-14,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,1,True,1091.0,Mar
+2026-07-15,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,13,False,1091.0,Mié
+2026-07-16,2026,Venta,Dashboard Rascacielos,Stop (−2),False,61,False,-1159.0,Jue
+2026-07-17,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,38,False,1091.0,Vie
+2026-07-20,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,66,False,1091.0,Lun
+2026-07-21,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,61,False,1091.0,Mar
+2026-07-22,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,31,False,341.0,Mié
+2026-07-23,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,19,False,1091.0,Jue
+2026-07-24,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,27,False,1091.0,Vie
+2026-07-27,2026,Compra,Dashboard Rascacielos,Stop (−2),False,74,False,-1159.0,Lun
+2026-07-28,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,62,False,1091.0,Mar
+2026-07-29,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,34,True,341.0,Mié
+2026-07-30,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,60,False,1091.0,Jue
+2026-07-31,2026,Compra,Dashboard Rascacielos,Stop (−2),False,13,False,-1159.0,Vie
+2026-08-03,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,61,False,1091.0,Lun
+2026-08-04,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,63,False,1091.0,Mar
+2026-08-05,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,62,False,1091.0,Mié
+2026-08-06,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,61,False,341.0,Jue
+2026-08-07,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,1,True,1091.0,Vie
+2026-08-10,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,61,False,341.0,Lun
+2026-08-11,2026,Compra,Dashboard Rascacielos,Stop (−2),False,66,False,-1159.0,Mar
+2026-08-12,2026,Compra,Dashboard Rascacielos,Stop (−2),False,1,True,-1159.0,Mié
+2026-08-13,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,65,False,1091.0,Jue
+2026-08-14,2026,Compra,Dashboard Rascacielos,Stop (−2),False,112,False,-1159.0,Vie
+2026-08-17,2026,Compra,Dashboard Rascacielos,Stop (−2),False,65,False,-1159.0,Lun
+2026-08-18,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,62,False,341.0,Mar
+2026-08-19,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,8,False,1091.0,Mié
+2026-08-20,2026,Venta,Dashboard Rascacielos,Stop (−2),False,31,False,-1159.0,Jue
+2026-08-21,2026,Compra,Dashboard Rascacielos,Stop (−2),False,50,False,-1159.0,Vie
+2026-08-24,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,12,False,341.0,Lun
+2026-08-25,2026,Compra,Dashboard Rascacielos,Stop (−2),False,61,False,-1159.0,Mar
+2026-08-26,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,6,False,1091.0,Mié
+2026-08-27,2026,Compra,Dashboard Rascacielos,Stop (−2),False,15,False,-1159.0,Jue
+2026-08-28,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,80,False,341.0,Vie
+2026-08-31,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,78,False,1091.0,Lun
+2026-09-01,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,97,False,341.0,Mar
+2026-09-02,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,57,False,341.0,Mié
+2026-09-03,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,1,False,1091.0,Jue
+2026-09-04,2026,Compra,Dashboard Rascacielos,Stop (−2),False,1,True,-1159.0,Vie
+2026-09-07,2026,Venta,Dashboard Rascacielos,Stop (−2),False,62,False,-1159.0,Lun
+2026-09-08,2026,Venta,Dashboard Rascacielos,Stop (−2),False,61,False,-1159.0,Mar
+2026-09-09,2026,Venta,Dashboard Rascacielos,Stop (−2),False,32,False,-1159.0,Mié
+2026-09-10,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,5,False,1091.0,Jue
+2026-09-11,2026,Compra,Dashboard Rascacielos,Stop (−2),False,1,True,-1159.0,Vie
+2026-09-14,2026,Compra,Dashboard Rascacielos,Stop (−2),False,9,False,-1159.0,Lun
+2026-09-15,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,61,False,341.0,Mar
+2026-09-16,2026,Compra,Dashboard Rascacielos,Stop (−2),False,69,True,-1159.0,Mié
+2026-09-17,2026,Compra,Dashboard Rascacielos,Stop (−2),False,62,False,-1159.0,Jue
+2026-09-18,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,63,False,1091.0,Vie
+2026-09-21,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,107,False,1091.0,Lun
+2026-09-22,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,76,False,341.0,Mar
+2026-09-23,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,78,False,1091.0,Mié
+2026-09-24,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,13,False,341.0,Jue
+2026-09-25,2026,Compra,Dashboard Rascacielos,Stop (−2),False,51,False,-1159.0,Vie
+2026-09-28,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,63,False,341.0,Lun
+2026-09-29,2026,Compra,Dashboard Rascacielos,Stop (−2),False,63,False,-1159.0,Mar
+2026-09-30,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,1,False,1091.0,Mié
+2026-10-01,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,61,False,1091.0,Jue
+2026-10-02,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,1,True,1091.0,Vie
+2026-10-05,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,52,False,341.0,Lun
+2026-10-06,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,86,False,1091.0,Mar
+2026-10-07,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,78,False,1091.0,Mié
+2026-10-08,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,35,False,341.0,Jue
+2026-10-09,2026,Compra,Dashboard Rascacielos,Stop (−2),False,24,False,-1159.0,Vie
+2026-10-12,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,201,False,341.0,Lun
+2026-10-13,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,132,False,341.0,Mar
+2026-10-15,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,1,False,1091.0,Jue
+2026-10-16,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,69,False,1091.0,Vie
+2026-10-19,2026,Compra,Dashboard Rascacielos,Stop (−2),False,93,False,-1159.0,Lun
+2026-10-20,2026,Venta,Dashboard Rascacielos,Stop (−2),False,10,False,-1159.0,Mar
+2026-10-21,2026,Compra,Dashboard Rascacielos,Stop (−2),False,62,False,-1159.0,Mié
+2026-10-22,2026,Venta,Dashboard Rascacielos,Stop (−2),False,65,False,-1159.0,Jue
+2026-10-23,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,26,False,1091.0,Vie
+2026-10-26,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,2,False,341.0,Lun
+2026-10-27,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,14,False,341.0,Mar
+2026-10-28,2026,Compra,Dashboard Rascacielos,Stop (−2),False,16,True,-1159.0,Mié
+2026-10-29,2026,Venta,Dashboard Rascacielos,TP1 + BE,True,15,False,341.0,Jue
+2026-10-30,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,6,False,1091.0,Vie
+2026-11-02,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,42,False,1091.0,Lun
+2026-11-03,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,15,False,1091.0,Mar
+2026-11-04,2026,Compra,Dashboard Rascacielos,TP1 + BE,True,4,False,341.0,Mié
+2026-11-05,2026,Venta,Dashboard Rascacielos,TP1 + TP2,True,2,False,1091.0,Jue
+2026-11-06,2026,Compra,Dashboard Rascacielos,TP1 + TP2,True,4,True,1091.0,Vie
