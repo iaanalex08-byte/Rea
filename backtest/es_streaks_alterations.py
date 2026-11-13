@@ -83,3 +83,21 @@ for name, f in CASES:
 D = pd.DataFrame(drows)
 D.round(4).to_csv(os.path.join(ROOT, "results", "es", "alteraciones_winrate", "dias.csv"), index=False)
 print(D.round(3).to_string(index=False))
+
+
+# ---- calendario: una fila por día y configuración
+crows = []
+for name, f in CASES:
+    for d, e, s, g, a in B:
+        if "rango" in name and np.isnan(a):
+            continue
+        sl, tp1 = f(a)
+        x = trade_detail(e, s, g, sl, tp1, 2 * tp1)
+        res = ("Perdió (SL)" if x["outcome"] == "Stop (−2)" else
+               "Cerró a las 15:59" if x["outcome"] == "Cierre 15:59" else "Ganó (TP)")
+        crows.append(dict(config=name, date=d.strftime("%Y-%m-%d"), resultado=res, desenlace=x["outcome"],
+                          lado="Compra" if s > 0 else "Venta", sl=sl, tp1=tp1, tp2=2 * tp1,
+                          usd=round(x["ticks"] * TICK_USD - 2 * COST_T * TICK_USD, 2)))
+C = pd.DataFrame(crows)
+C.to_csv(os.path.join(ROOT, "results", "es", "alteraciones_winrate", "calendario.csv"), index=False)
+print(C.groupby(["config", "resultado"]).size().unstack(fill_value=0))

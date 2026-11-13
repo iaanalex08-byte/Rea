@@ -26,6 +26,20 @@
   .mn td { text-align: right; padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
   .mn th:first-child, .mn td:first-child { text-align: left; white-space: normal; min-width: 220px; }
   .mn tr.mn-sel td { background: color-mix(in srgb, var(--color-fg) 6%, transparent); font-weight: var(--cds-font-weight-medium); }
+  .mn-cal-controls { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); align-items: end; }
+  .mn-cal-controls label { display: grid; gap: var(--cds-gap-xs); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .mn-cal-wrap { overflow-x: auto; min-width: 0; }
+  .mn-cal { position: relative; display: grid; gap: 6px; width: max-content; padding-top: 4px; }
+  .mn-cal-row { display: flex; gap: 6px; align-items: center; }
+  .mn-cal-mes { width: 34px; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .mn-cal-d { width: 30px; height: 30px; border-radius: 6px; border: 0; font: inherit; font-size: 12px; font-weight: var(--cds-font-weight-medium); font-variant-numeric: tabular-nums; cursor: pointer; color: var(--color-bg); padding: 0; }
+  .mn-cal-d:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+  .mn-c-win { background: var(--color-ok); }
+  .mn-c-loss { background: var(--color-bad); }
+  .mn-c-close { background: var(--color-warn); }
+  .mn-c-none { background: var(--color-panel); color: var(--color-fg); border: 1px solid var(--color-border-line); }
+  .mn-sq { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+  .mn-cal .mn-tip { white-space: nowrap; }
   [data-dash-source-state=refreshing] { opacity: .5; }
 </style>
 
@@ -41,6 +55,32 @@
     <div class="mn-kpi"><span class="mn-kpi-label">Alteraciones probadas</span><span class="mn-kpi-value" data-draw="k-total">—</span><span class="mn-muted">SL/TP, retroceso, ATR y filtros</span></div>
     <div class="mn-kpi"><span class="mn-kpi-label">Con 91% en 2025 y en 2026</span><span class="mn-kpi-value" data-draw="k-91">—</span><span class="mn-muted">el objetivo pedido</span></div>
     <div class="mn-kpi"><span class="mn-kpi-label">De esas, ganan dinero</span><span class="mn-kpi-value" data-draw="k-91gana">—</span><span class="mn-muted">factor de beneficio mayor que 1</span></div>
+  </section>
+
+  <section class="mn-card" id="calendario">
+    <h2>Calendario de días hábiles</h2>
+    <div class="mn-cal-controls">
+      <label for="sel-cal-cfg">Configuración
+        <select class="dash-select" id="sel-cal-cfg" aria-label="Configuración del calendario" data-draw="cal-opciones" data-source="calendario"></select>
+      </label>
+      <label for="sel-cal-year">Año
+        <select class="dash-select" id="sel-cal-year" aria-label="Año del calendario">
+          <option value="2025">2025</option>
+          <option value="2026">2026</option>
+        </select>
+      </label>
+    </div>
+    <div class="mn-legend">
+      <span><i class="mn-sq mn-c-win"></i>Ganó (TP)</span>
+      <span><i class="mn-sq mn-c-loss"></i>Perdió (SL)</span>
+      <span><i class="mn-sq mn-c-close"></i>Cerró a las 15:59</span>
+      <span><i class="mn-sq mn-c-none"></i>Sin operación</span>
+    </div>
+    <div class="mn-cal-wrap">
+      <div class="mn-cal" data-draw="calendario" data-source="calendario"></div>
+    </div>
+    <p data-draw="cal-frase">—</p>
+    <p class="mn-muted">Cada cuadro es un día hábil; el número es el día del mes. Pasa el mouse o toca un cuadro para ver el detalle. "Ganó" incluye los días que tocaron TP1 y luego salieron en break-even.</p>
   </section>
 
   <div class="mn-legend" id="leyenda">
@@ -203,6 +243,102 @@
           .forEach(([t, cls]) => { const td = document.createElement('td'); td.textContent = t; if (cls) td.className = cls; tr.append(td); });
         return tr;
       }));
+    });
+  })();
+</script>
+
+<script>
+  // ---------- calendario de días hábiles
+  dash.calc('cal_resumen', {
+    inputs: ['calendario'],
+    title: 'Resumen del calendario',
+    description: 'Días ganados, perdidos y cerrados al final, neto y rachas de la configuración y el año elegidos.',
+    fn: (calendario) => {
+      const p = dash.params();
+      const cfg = p.cal_cfg || 'Modelo B · 9:12 CDMX · SL 60 · TP 15/30 (tu configuración)';
+      const year = String(p.cal_year || '2025');
+      const dias = calendario.filter((r) => r.config === cfg && r.date.startsWith(year)).sort((a, b) => (a.date < b.date ? -1 : 1));
+      let rw = 0, rl = 0, best = 0, worst = 0;
+      for (const r of dias) {
+        const g = r.resultado === 'Ganó (TP)';
+        rw = g ? rw + 1 : 0; rl = g ? 0 : rl + 1;
+        best = Math.max(best, rw); worst = Math.max(worst, rl);
+      }
+      const count = (k) => dias.filter((r) => r.resultado === k).length;
+      return [{ config: cfg, year, dias: dias.length, ganados: count('Ganó (TP)'), perdidos: count('Perdió (SL)'),
+        cerrados: count('Cerró a las 15:59'), neto: d3.sum(dias, (r) => Number(r.usd)), mejor_racha: best, peor_racha: worst }];
+    },
+  });
+
+  (() => {
+    const DEF = 'Modelo B · 9:12 CDMX · SL 60 · TP 15/30 (tu configuración)';
+    const MESES = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+    const CLS = { 'Ganó (TP)': 'mn-c-win', 'Perdió (SL)': 'mn-c-loss', 'Cerró a las 15:59': 'mn-c-close' };
+    const p = () => ({ cfg: dash.params().cal_cfg || DEF, year: String(dash.params().cal_year || '2025') });
+
+    for (const el of document.querySelectorAll('#sel-cal-cfg')) el.addEventListener('change', () => dash.setParams({ cal_cfg: el.value }));
+    for (const el of document.querySelectorAll('#sel-cal-year')) el.addEventListener('change', () => dash.setParams({ cal_year: el.value }));
+    dash.onData(() => {
+      for (const el of document.querySelectorAll('#sel-cal-year')) if (document.activeElement !== el) el.value = p().year;
+    });
+
+    dash.draw('cal-opciones', (sel) => {
+      const d = dash.data('calendario');
+      const cfgs = d.status === 'ok' ? [...new Set(d.data.map((r) => r.config))].sort((a, b) => (a === DEF ? -1 : b === DEF ? 1 : a < b ? -1 : 1)) : [];
+      sel.replaceChildren(...cfgs.map((c) => new Option(c, c)));
+      sel.value = p().cfg;
+    });
+
+    dash.draw('calendario', (el) => {
+      const d = dash.data('calendario');
+      if (d.status !== 'ok') { el.replaceChildren('—'); return; }
+      const { cfg, year } = p();
+      const byDate = new Map(d.data.filter((r) => r.config === cfg).map((r) => [r.date, r]));
+      const all = [...byDate.keys()].sort();
+      const last = all[all.length - 1] || `${year}-12-31`;
+      const tip = document.createElement('div'); tip.className = 'mn-tip'; tip.hidden = true;
+      const rows = [];
+      for (let m = 0; m < 12; m++) {
+        const first = new Date(Date.UTC(+year, m, 1));
+        if (first.toISOString().slice(0, 10) > last) break;
+        const row = document.createElement('div'); row.className = 'mn-cal-row';
+        const lab = document.createElement('span'); lab.className = 'mn-cal-mes'; lab.textContent = MESES[m]; row.append(lab);
+        for (let day = new Date(first); day.getUTCMonth() === m; day.setUTCDate(day.getUTCDate() + 1)) {
+          const wd = day.getUTCDay();
+          if (wd === 0 || wd === 6) continue;
+          const iso = day.toISOString().slice(0, 10);
+          if (iso > last) break;
+          const r = byDate.get(iso);
+          const c = document.createElement('button'); c.type = 'button';
+          c.className = 'mn-cal-d ' + (r ? CLS[r.resultado] : 'mn-c-none');
+          c.textContent = String(day.getUTCDate());
+          c.setAttribute('aria-label', r ? `${iso}: ${r.resultado}, ${r.desenlace}, ${r.usd} USD` : `${iso}: sin operación`);
+          const show = (ev) => {
+            const lines = r ? [iso, `${r.resultado} · ${r.desenlace}`, `${r.lado} · ${ES_money(Number(r.usd))}`] : [iso, 'Sin operación (festivo o sin datos)'];
+            tip.replaceChildren(...lines.map((t) => { const x = document.createElement('div'); x.textContent = t; return x; }));
+            tip.hidden = false;
+            const b = el.getBoundingClientRect(), cb = c.getBoundingClientRect();
+            tip.style.left = Math.max(0, Math.min(cb.left - b.left + el.scrollLeft, el.scrollWidth - tip.offsetWidth)) + 'px';
+            tip.style.top = (cb.top - b.top - tip.offsetHeight - 6) + 'px';
+          };
+          c.addEventListener('pointerenter', show); c.addEventListener('focus', show); c.addEventListener('click', show);
+          c.addEventListener('pointerleave', () => { tip.hidden = true; }); c.addEventListener('blur', () => { tip.hidden = true; });
+          row.append(c);
+        }
+        rows.push(row);
+      }
+      el.replaceChildren(...rows, tip);
+    });
+    const ES_money = (v) => (v < 0 ? '−' : '+') + '$' + d3.format(',.0f')(Math.abs(v));
+
+    dash.draw('cal-frase', (el) => {
+      const d = dash.data('cal_resumen');
+      const r = d.status === 'ok' && d.data && d.data[0];
+      if (!r || !r.dias) { el.replaceChildren('—'); return; }
+      const m = (f, t) => MN.mark('b', 'cal_resumen', f, null, t);
+      el.replaceChildren(`En ${r.year}: `, m('ganados', String(r.ganados)), ' días ganados, ', m('perdidos', String(r.perdidos)), ' perdidos y ',
+        m('cerrados', String(r.cerrados)), ' cerrados al final del día. Neto ', m('neto', MN.money(r.neto)), '. Mejor racha ',
+        m('mejor_racha', String(r.mejor_racha)), ' días ganando; peor racha ', m('peor_racha', String(r.peor_racha)), ' días sin ganar.');
     });
   })();
 </script>
