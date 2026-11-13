@@ -718,7 +718,9 @@
         .attr('role', 'img').attr('aria-label', `Tasa de acierto y neto por ${dim}`);
       const probe = svg.append('text').text(rs.reduce((a, r) => (String(r.k).length > a.length ? String(r.k) : a), ''));
       const ml = Math.ceil(probe.node().getComputedTextLength() || 60) + 10; probe.remove();
-      const mr = 128;
+      const rlab = (r) => `${money(r.net)} · ${n0(r.n)} ops`;
+      const probeR = svg.append('text').text(rs.reduce((a, r) => (rlab(r).length > a.length ? rlab(r) : a), ''));
+      const mr = Math.ceil(probeR.node().getComputedTextLength() || 110) + 52; probeR.remove();
       const x = d3.scaleLinear().domain([0, 1]).range([ml, W - mr]);
       const t = tip(el);
       const gg = svg.append('g').selectAll('g').data(rs).join('g').attr('transform', (r, i) => `translate(0,${i * rowH + 4})`);
@@ -731,7 +733,7 @@
         })
         .on('pointerleave', () => { t.hidden = true; });
       gg.append('text').attr('x', (r) => x(r.winrate) + 6).attr('y', 15).text((r) => pct(r.winrate));
-      gg.append('text').attr('x', W - 4).attr('y', 15).attr('text-anchor', 'end').text((r) => `${money(r.net)} · ${n0(r.n)} ops`);
+      gg.append('text').attr('x', W - 4).attr('y', 15).attr('text-anchor', 'end').text(rlab);
       if (avgWr !== null) {
         svg.append('line').attr('x1', x(avgWr)).attr('x2', x(avgWr)).attr('y1', 0).attr('y2', rs.length * rowH + 2).style('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '3 3');
         svg.append('text').attr('x', x(avgWr)).attr('y', rs.length * rowH + 16).attr('text-anchor', 'middle').text('media ' + pct(avgWr));
