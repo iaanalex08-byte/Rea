@@ -117,9 +117,8 @@
       const r = one();
       if (!r) { el.replaceChildren('—'); return; }
       el.replaceChildren('De ', mark('b', 'resumen', 'total', null, String(r.total)), ' alteraciones, ',
-        mark('b', 'resumen', 'ok91', null, String(r.ok91)), ' llegan a TP1 al menos el 91% de las veces en 2025 y en 2026, y ',
-        mark('b', 'resumen', 'ok91_gana', null, String(r.ok91_gana)),
-        r.ok91_gana === 1 ? ' de ellas gana dinero.' : ' de ellas ganan dinero.',
+        mark('b', 'resumen', 'ok91', null, String(r.ok91)), r.ok91 === 1 ? ' llega' : ' llegan', ' a TP1 al menos el 91% de las veces en 2025 y en 2026. De esas, las que ganan dinero son ',
+        mark('b', 'resumen', 'ok91_gana', null, String(r.ok91_gana)), '.',
         ' Un TP1 pequeño frente al stop sube el acierto pero hace perder, y los filtros que dan más de 91% en un año no se repiten al siguiente.');
     });
 
