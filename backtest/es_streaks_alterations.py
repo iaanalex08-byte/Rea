@@ -59,3 +59,27 @@ R = pd.DataFrame(rows)
 R.round(4).to_csv(os.path.join(ROOT, "results", "es", "alteraciones_winrate", "rachas.csv"), index=False)
 pd.set_option("display.width", 220)
 print(R.round(3).to_string(index=False))
+
+
+# ---- tabla por día de la semana
+DIAS = ["Lun", "Mar", "Mié", "Jue", "Vie"]
+drows = []
+for name, f in CASES:
+    recs = []
+    for d, e, s, g, a in B:
+        if "rango" in name and np.isnan(a):
+            continue
+        sl, tp1 = f(a)
+        x = trade_detail(e, s, g, sl, tp1, 2 * tp1)
+        recs.append((d.weekday(), x["x1"] == "TP1", x["ticks"] * TICK_USD - 2 * COST_T * TICK_USD))
+    t = pd.DataFrame(recs, columns=["wd", "hit", "usd"])
+    for wd, g in t.groupby("wd"):
+        u = g.usd.to_numpy()
+        bw, ww = streaks(u > 0)
+        gl = -u[u < 0].sum()
+        drows.append(dict(alteracion=name, dia=DIAS[wd], n=len(u), tp1_rate=g.hit.mean(), winrate=(u > 0).mean(),
+                          mejor_racha=bw, peor_racha=ww, pf=u[u > 0].sum() / gl if gl else np.nan,
+                          net=u.sum(), avg=u.mean()))
+D = pd.DataFrame(drows)
+D.round(4).to_csv(os.path.join(ROOT, "results", "es", "alteraciones_winrate", "dias.csv"), index=False)
+print(D.round(3).to_string(index=False))
