@@ -156,8 +156,11 @@ def main():
                             stops_reached_20=float((t.loc[t.outcome == "Stop (−2)", "mfe_trade"] >= 20).mean()))
     # sensibilidad alrededor de la configuración
     sens = []
-    for sl in (30, 40, 45, 50, 60):
-        for tp1_, tp2_ in ((20, 40), (30, 60), (40, 80)):
+    b_sl, b_tp = CFG["sl"], CFG["tp1"]
+    sl_grid = sorted({max(5, b_sl - 15), max(5, b_sl - 5), b_sl, b_sl + 5, b_sl + 15})
+    tp_grid = [(max(5, b_tp - 10), 2 * max(5, b_tp - 10)), (b_tp, 2 * b_tp), (b_tp + 10, 2 * (b_tp + 10))]
+    for sl in sl_grid:
+        for tp1_, tp2_ in tp_grid:
             u = []
             for d, t0, g in paths:
                 e = g["o"].iloc[0]
