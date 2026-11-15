@@ -29,6 +29,9 @@ body{margin:0;background:#0a0b0c;overflow:hidden;
 
 .frame{position:fixed;inset:0;overflow:hidden;background:#0a0b0c}
 .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;background:#0a0b0c}
+.bg::-webkit-media-controls,.bg::-webkit-media-controls-start-playback-button,.bg::-webkit-media-controls-overlay-play-button{display:none!important;-webkit-appearance:none;opacity:0}
+.frame{background:radial-gradient(120% 90% at 50% 45%,#1b1e22 0%,#111316 45%,#0a0b0c 100%)}
+.bg.off{visibility:hidden}
 .tint{position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,
   rgba(0,0,0,.118) 0%,rgba(0,0,0,.092) 11%,rgba(0,0,0,.083) 20%,rgba(0,0,0,.079) 29%,
   rgba(0,0,0,.014) 37.5%,rgba(0,0,0,.016) 46%,rgba(0,0,0,.043) 55%,rgba(0,0,0,.058) 64%,
@@ -175,7 +178,8 @@ body{margin:0;background:#0a0b0c;overflow:hidden;
 </head>
 <body>
 <div class="frame">
-  <video class="bg" autoplay muted loop playsinline disablepictureinpicture
+  <video class="bg" autoplay muted loop playsinline disablepictureinpicture preload="auto"
+    poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
     aria-label="Aerial view of a container freight train crossing black coal terrain"
     src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261005_115944_095d91d4-030f-4e82-b42b-a388c0816d24.mp4"></video>
   <div class="tint"></div>
@@ -235,6 +239,12 @@ body{margin:0;background:#0a0b0c;overflow:hidden;
 <script>
 /* scale() needs a unitless number; mirror --s = min(100vh/800, 100vw/716) as a number */
 (function(){var r=document.documentElement;function f(){r.style.setProperty('--sn',Math.min(innerHeight/800,innerWidth/716))}f();addEventListener('resize',f)})();
+(function(){var v=document.querySelector('.bg');if(!v)return;v.muted=true;
+function go(){var p=v.play();if(p&&p.catch)p.catch(function(){})}
+v.addEventListener('playing',function(){v.classList.remove('off')});
+v.addEventListener('error',function(){v.classList.add('off')});
+if(v.readyState<2)v.classList.add('off');v.addEventListener('loadeddata',function(){v.classList.remove('off')});
+go();['touchstart','pointerdown','click'].forEach(function(e){addEventListener(e,go,{once:true,passive:true})});})();
 </script>
 </body>
 </html>
