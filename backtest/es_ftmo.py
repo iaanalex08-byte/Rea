@@ -49,7 +49,7 @@ def simular(A, contratos_es):
         res.append(dict(final="Pasa las 2 fases", dias=d1 + d2, dias_f1=d1, dias_f2=d2,
                         primer_retiro=pago if isinstance(pago, float) else np.nan,
                         dias_retiro=(d1 + d2 + k) if isinstance(pago, float) else np.nan,
-                        quema_fondeada=pago == "quema"))
+                        quema_fondeada=float(pago == "quema")))
     return pd.DataFrame(res)
 
 
@@ -67,7 +67,7 @@ for A in (100_000, 200_000):
                          dias_f1=ok.dias_f1.median() if len(ok) else np.nan, dias_f2=ok.dias_f2.median() if len(ok) else np.nan,
                          dias_hasta_primer_retiro=ok.dias_retiro.median() if len(ok) else np.nan,
                          primer_retiro_mediana=ok.primer_retiro.median() if len(ok) else np.nan,
-                         quema_fondeada=ok.quema_fondeada.mean() if len(ok) else np.nan))
+                         quema_fondeada=ok.quema_fondeada.astype(float).mean() if len(ok) else np.nan))
 R = pd.DataFrame(rows)
 R.round(3).to_csv(os.path.join(ROOT, "results/es/ftmo_modelo_b.csv"), index=False)
 pd.set_option("display.width", 250)

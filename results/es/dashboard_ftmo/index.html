@@ -1,0 +1,311 @@
+<meta name="dash-one-writer">
+<style>
+  .ft { display: grid; gap: var(--cds-gap-xl); font-family: var(--font-anthropic-sans); color: var(--color-fg); }
+  .ft h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+  .ft h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; text-wrap: balance; }
+  .ft p { margin: 0; max-width: 74ch; line-height: 1.5; }
+  .ft-muted { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+  .ft-head { display: grid; gap: var(--cds-gap-md); }
+  .ft-controls { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); align-items: end; }
+  .ft-controls label { display: grid; gap: var(--cds-gap-xs); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .ft-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--cds-gap-md); }
+  .ft-kpi { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-xs); align-content: start; }
+  .ft-kpi-label { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); letter-spacing: .02em; }
+  .ft-kpi-value { font-family: var(--font-anthropic-serif); font-size: 1.9rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .ft-good { color: var(--color-ok); } .ft-bad { color: var(--color-bad); } .ft-warn { color: var(--color-warn); }
+  .ft-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-sm); min-width: 0; }
+  .ft-chart { position: relative; min-height: 220px; min-width: 0; }
+  .ft-chart svg { display: block; overflow: visible; }
+  .ft-chart text { fill: var(--cds-text-secondary); font-size: var(--cds-font-size-caption); font-family: var(--font-anthropic-sans); }
+  .ft-chart .ax path, .ft-chart .ax line { stroke: var(--cds-chart-axis); }
+  .ft-chart .grid line { stroke: var(--cds-chart-grid); }
+  .ft-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); box-shadow: var(--cds-shadow-popover); border-radius: var(--cds-radius); padding: var(--cds-pad-sm) var(--cds-pad-md); font-size: var(--cds-font-size-caption); line-height: 1.45; white-space: nowrap; z-index: 5; font-variant-numeric: tabular-nums; }
+  .ft-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .ft-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .ft-sq { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+  .c-cobra { background: var(--color-ok); } .c-q1 { background: var(--color-bad); } .c-q2 { background: color-mix(in srgb, var(--color-bad) 60%, var(--color-panel)); }
+  .c-qf { background: var(--color-warn); } .c-pend { background: var(--cds-chart-grid); }
+  .ft-wrap { overflow-x: auto; min-width: 0; }
+  .ft table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+  .ft th { text-align: right; font-weight: var(--cds-font-weight-medium); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .ft td { text-align: right; padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .ft th:first-child, .ft td:first-child, .ft td.l, .ft th.l { text-align: left; }
+  .ft tr.sel td { background: color-mix(in srgb, var(--color-fg) 6%, transparent); font-weight: var(--cds-font-weight-medium); }
+  .ft details { border-top: 1px solid var(--color-border-line); padding-top: var(--cds-pad-md); }
+  .ft summary { cursor: pointer; font-weight: var(--cds-font-weight-medium); }
+  .ft details ul { margin: var(--cds-gap-sm) 0 0; padding-left: 1.2em; display: grid; gap: var(--cds-gap-xs); max-width: 80ch; line-height: 1.5; }
+  [data-dash-source-state=refreshing] { opacity: .5; }
+</style>
+
+<div class="ft">
+  <header class="ft-head" id="encabezado">
+    <h1>Modelo B en una cuenta FTMO de 100K</h1>
+    <p data-draw="frase">—</p>
+    <p class="ft-muted">Evaluación de 2 fases: fase 1 +10% (10 000 USD) y fase 2 +5% (5 000 USD), con pérdida diaria máxima del 5% (5 000 USD) y pérdida total máxima del 10% (10 000 USD), mínimo 4 días operados por fase. Ya fondeada, el primer retiro llega tras 10 días hábiles con ganancia y te quedas el 80%. Modelo B: entrada 9:12 CDMX a favor de la EMA 20 de 3 minutos, SL 45 · TP1 30 · TP2 60 ticks, break-even tras TP1.</p>
+    <div class="ft-controls">
+      <label for="sel-size">Tamaño de posición (equivalente en contratos ES)
+        <select class="dash-select" id="sel-size" aria-label="Tamaño de posición">
+          <option value="1 ES">1 ES · stop de unos 580 USD</option>
+          <option value="2 ES">2 ES · stop de unos 1 159 USD</option>
+          <option value="4 ES">4 ES · stop de unos 2 318 USD</option>
+          <option value="6 ES">6 ES · stop de unos 3 477 USD</option>
+        </select>
+      </label>
+    </div>
+  </header>
+
+  <section class="ft-kpis" id="indicadores">
+    <div class="ft-kpi"><span class="ft-kpi-label">Pasa y cobra el primer retiro</span><span class="ft-kpi-value" data-draw="k-cobra">—</span><span class="ft-muted">de los intentos que terminaron</span></div>
+    <div class="ft-kpi"><span class="ft-kpi-label">Intentos por retiro</span><span class="ft-kpi-value" data-draw="k-intentos">—</span><span class="ft-muted">cuotas que pagarías en promedio</span></div>
+    <div class="ft-kpi"><span class="ft-kpi-label">Días para pasar las 2 fases</span><span class="ft-kpi-value" data-draw="k-pasar">—</span><span class="ft-muted">días hábiles, mediana</span></div>
+    <div class="ft-kpi"><span class="ft-kpi-label">Días hasta el primer retiro</span><span class="ft-kpi-value" data-draw="k-retiro">—</span><span class="ft-muted">desde que empiezas la evaluación</span></div>
+    <div class="ft-kpi"><span class="ft-kpi-label">Primer retiro</span><span class="ft-kpi-value" data-draw="k-monto">—</span><span class="ft-muted">USD para ti (80%), mediana</span></div>
+    <div class="ft-kpi"><span class="ft-kpi-label">Se quema ya fondeada</span><span class="ft-kpi-value" data-draw="k-qf">—</span><span class="ft-muted">antes del primer retiro</span></div>
+  </section>
+
+  <section class="ft-card" id="desenlaces">
+    <h2>Cómo terminan los intentos según el tamaño</h2>
+    <p class="ft-muted">Se empieza la evaluación en cada día hábil de la historia (476 arranques por tamaño). Los intentos que se quedaron sin datos antes de terminar no cuentan en los porcentajes.</p>
+    <div class="ft-legend">
+      <span><i class="ft-sq c-cobra"></i>Pasa y cobra</span>
+      <span><i class="ft-sq c-q1"></i>Se quema en fase 1</span>
+      <span><i class="ft-sq c-q2"></i>Se quema en fase 2</span>
+      <span><i class="ft-sq c-qf"></i>Pasa, pero se quema fondeada</span>
+    </div>
+    <div class="ft-chart" data-draw="barras" data-source="ftmo_resumen"></div>
+  </section>
+
+  <section class="ft-card" id="recorrido">
+    <h2>Recorrido día a día si empiezas en…</h2>
+    <div class="ft-controls">
+      <label for="sel-inicio">Mes de arranque
+        <select class="dash-select" id="sel-inicio" aria-label="Mes de arranque" data-draw="opciones-inicio" data-source="recorridos"></select>
+      </label>
+    </div>
+    <p data-draw="frase-recorrido">—</p>
+    <div class="ft-chart" data-draw="curva" data-source="recorridos"></div>
+    <p class="ft-muted">Saldo de cada fase en USD. Las líneas punteadas marcan el objetivo de la fase y la pérdida máxima de 10 000 USD. Cada fase empieza de cero.</p>
+  </section>
+
+  <section class="ft-card" id="por-mes">
+    <h2>Resultado si empiezas al inicio de cada mes</h2>
+    <div class="ft-wrap">
+      <table data-source="ftmo_meses" data-row-key="clave" aria-label="Resultado por mes de arranque">
+        <thead><tr><th data-field="inicio">Arranque</th><th data-field="final" class="l">Resultado</th><th data-field="dias_f1">Días fase 1</th><th data-field="dias_f2">Días fase 2</th><th data-field="dias_retiro">Días al retiro</th><th data-field="primer_retiro">Primer retiro</th></tr></thead>
+        <tbody data-draw="tabla-meses"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <details id="supuestos">
+    <summary>Reglas usadas y supuestos</summary>
+    <ul>
+      <li>Reglas del FTMO de 2 fases tomadas de guías de terceros de 2026; no coinciden en todos los detalles (por ejemplo, si la pérdida máxima es fija o se mueve con el saldo). Confírmalas en ftmo.com.</li>
+      <li>FTMO opera CFDs, no futuros. El tamaño se expresa como equivalente en contratos ES (1 ES = 50 USD por punto). Costes y horarios del CFD pueden diferir del ES.</li>
+      <li>Datos: velas de 1 minuto del índice S&amp;P 500 (SPXUSD, HistData.com), de enero 2025 a noviembre 2026. Una operación por día hábil.</li>
+      <li>Pérdida máxima tomada como estática desde el saldo inicial de cada fase; la pérdida diaria se revisa con el resultado de la operación del día.</li>
+      <li>Casi toda la ganancia del modelo B es de 2026; los intentos que arrancan en 2025 lo tienen mucho más difícil.</li>
+    </ul>
+  </details>
+</div>
+
+<script>
+  window.FT = (() => {
+    const loc = d3.formatLocale({ decimal: '.', thousands: ',', grouping: [3], currency: ['$', ''] });
+    const money = (v) => (v < 0 ? '−' : '') + '$' + loc.format(',.0f')(Math.abs(v));
+    const pct = (v) => loc.format('.0%')(v);
+    const n0 = loc.format(',.0f');
+    const enc = encodeURIComponent;
+    const mark = (tag, src, field, where, text) => { const e = document.createElement(tag); e.dataset.source = src; e.dataset.field = field; if (where) e.dataset.where = where; e.textContent = text; return e; };
+    const size = () => dash.params().size || '4 ES';
+    const tip = (el) => { let t = el.querySelector(':scope > .ft-tip'); if (!t) { t = document.createElement('div'); t.className = 'ft-tip'; t.hidden = true; el.appendChild(t); } return t; };
+    const showTip = (t, el, ev, lines) => {
+      t.replaceChildren(...lines.map((x) => { const d = document.createElement('div'); d.textContent = x; return d; }));
+      t.hidden = false;
+      const b = el.getBoundingClientRect(); const x = ev.clientX - b.left, y = ev.clientY - b.top;
+      t.style.left = Math.max(0, Math.min(x + 12, el.clientWidth - t.offsetWidth)) + 'px'; t.style.top = Math.max(0, y - t.offsetHeight - 10) + 'px';
+    };
+    return { money, pct, n0, enc, mark, size, tip, showTip };
+  })();
+
+  dash.calc('ftmo_resumen', {
+    inputs: ['arranques'],
+    title: 'Resumen por tamaño',
+    description: 'Para cada tamaño: reparto de resultados de los intentos terminados, días medianos para pasar y para el primer retiro, monto mediano del primer retiro e intentos por retiro.',
+    fn: (arranques) => {
+      const out = [];
+      for (const [contratos, v] of d3.group(arranques, (r) => r.contratos)) {
+        const terminados = v.filter((r) => !r.final.startsWith('Sin terminar') && !r.final.startsWith('Pasa (sin llegar'));
+        const n = terminados.length;
+        const cuenta = (f) => terminados.filter((r) => r.final === f).length;
+        const cobran = v.filter((r) => r.final === 'Pasa y cobra el primer retiro');
+        const pasan = v.filter((r) => r.final.startsWith('Pasa'));
+        const cobra = n ? cuenta('Pasa y cobra el primer retiro') / n : 0;
+        out.push({
+          contratos, terminados: n, cobra, q1: n ? cuenta('Se quema en fase 1') / n : 0, q2: n ? cuenta('Se quema en fase 2') / n : 0,
+          qf: n ? cuenta('Pasa, pero se quema fondeada') / n : 0,
+          qf_de_pasan: pasan.length ? pasan.filter((r) => r.final === 'Pasa, pero se quema fondeada').length / pasan.length : null,
+          intentos: cobra > 0 ? 1 / cobra : null,
+          dias_pasar: pasan.length ? d3.median(pasan, (r) => Number(r.dias_f1) + Number(r.dias_f2)) : null,
+          dias_retiro: cobran.length ? d3.median(cobran, (r) => Number(r.dias_retiro)) : null,
+          primer_retiro: cobran.length ? d3.median(cobran, (r) => Number(r.primer_retiro)) : null,
+        });
+      }
+      return out.sort((a, b) => parseInt(a.contratos) - parseInt(b.contratos));
+    },
+  });
+
+  dash.calc('ftmo_meses', {
+    inputs: ['arranques', 'recorridos'],
+    title: 'Resultado por mes de arranque',
+    description: 'Resultado del intento que empieza el primer día hábil de cada mes, para cada tamaño.',
+    fn: (arranques, recorridos) => {
+      const inicios = new Set(recorridos.map((r) => r.inicio));
+      return arranques.filter((r) => inicios.has(r.inicio)).map((r) => ({
+        clave: `${r.contratos}|${r.inicio}`, contratos: r.contratos, inicio: r.inicio, final: r.final,
+        dias_f1: r.dias_f1 === null || r.dias_f1 === '' ? null : Number(r.dias_f1),
+        dias_f2: r.dias_f2 === null || r.dias_f2 === '' ? null : Number(r.dias_f2),
+        dias_retiro: r.dias_retiro === null || r.dias_retiro === '' ? null : Number(r.dias_retiro),
+        primer_retiro: r.primer_retiro === null || r.primer_retiro === '' ? null : Number(r.primer_retiro),
+      }));
+    },
+  });
+</script>
+
+<script>
+  (() => {
+    const { money, pct, n0, enc, mark, size, tip, showTip } = FT;
+    for (const el of document.querySelectorAll('#sel-size')) el.addEventListener('change', () => dash.setParams({ size: el.value }));
+    for (const el of document.querySelectorAll('#sel-inicio')) el.addEventListener('change', () => dash.setParams({ inicio: el.value }));
+    dash.onData(() => { for (const el of document.querySelectorAll('#sel-size')) if (document.activeElement !== el) el.value = size(); });
+
+    const row = () => { const d = dash.data('ftmo_resumen'); return d.status === 'ok' && d.data ? d.data.find((r) => r.contratos === size()) : null; };
+    const kpi = (name, field, fmt, cls) => dash.draw(name, (el) => {
+      const r = row();
+      if (!r || r[field] === null || r[field] === undefined) { el.replaceChildren('—'); el.className = 'ft-kpi-value'; return; }
+      el.replaceChildren(mark('span', 'ftmo_resumen', field, 'contratos=' + enc(r.contratos), fmt(r[field])));
+      el.className = 'ft-kpi-value ' + (cls ? cls(r[field]) : '');
+    });
+    kpi('k-cobra', 'cobra', pct, (v) => (v >= 0.5 ? 'ft-good' : v > 0 ? 'ft-warn' : 'ft-bad'));
+    kpi('k-intentos', 'intentos', (v) => d3.format('.1f')(v));
+    kpi('k-pasar', 'dias_pasar', (v) => n0(v));
+    kpi('k-retiro', 'dias_retiro', (v) => n0(v));
+    kpi('k-monto', 'primer_retiro', money, () => 'ft-good');
+    kpi('k-qf', 'qf_de_pasan', pct, (v) => (v > 0.3 ? 'ft-bad' : 'ft-warn'));
+
+    dash.draw('frase', (el) => {
+      const d = dash.data('ftmo_resumen');
+      if (d.status !== 'ok' || !d.data) { el.replaceChildren('—'); return; }
+      const r4 = d.data.find((r) => r.contratos === '4 ES'), r2 = d.data.find((r) => r.contratos === '2 ES');
+      if (!r4 || !r2) { el.replaceChildren('—'); return; }
+      const m = (r, f, t) => mark('b', 'ftmo_resumen', f, 'contratos=' + enc(r.contratos), t);
+      el.replaceChildren('Con 4 ES, el modelo B pasa la evaluación y cobra un primer retiro en el ', m(r4, 'cobra', pct(r4.cobra)),
+        ' de los intentos: unas ', m(r4, 'intentos', d3.format('.1f')(r4.intentos)), ' cuotas por cada retiro. Tarda unos ', m(r4, 'dias_pasar', n0(r4.dias_pasar)),
+        ' días hábiles en pasar las dos fases y ', m(r4, 'dias_retiro', n0(r4.dias_retiro)), ' en cobrar. Con 2 ES casi no se quema, pero tarda unos ',
+        m(r2, 'dias_pasar', n0(r2.dias_pasar)), ' días hábiles (un año) en pasar, porque el modelo gana poco frente al objetivo del 15%.');
+    });
+
+    dash.draw('barras', (el) => {
+      const d = dash.data('ftmo_resumen');
+      if (d.status !== 'ok' || !d.data) { el.replaceChildren('—'); return; }
+      const keys = [['cobra', 'Pasa y cobra', 'var(--color-ok)'], ['q1', 'Se quema en fase 1', 'var(--color-bad)'],
+        ['q2', 'Se quema en fase 2', 'color-mix(in srgb, var(--color-bad) 60%, var(--color-panel))'], ['qf', 'Pasa, pero se quema fondeada', 'var(--color-warn)']];
+      const rows = d.data;
+      const W = el.clientWidth || 600, rowH = 40, ml = 54, mr = 8, H = rows.length * rowH + 24;
+      el.replaceChildren();
+      const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Reparto de resultados de los intentos por tamaño de posición');
+      const x = d3.scaleLinear().domain([0, 1]).range([ml, W - mr]);
+      const t = tip(el);
+      rows.forEach((r, i) => {
+        const y = i * rowH + 4;
+        svg.append('text').attr('x', ml - 8).attr('y', y + 20).attr('text-anchor', 'end').style('font-weight', r.contratos === size() ? 700 : 400).text(r.contratos);
+        let acc = 0;
+        if (!r.terminados) { svg.append('text').attr('x', ml).attr('y', y + 20).text('Ningún intento terminó: nunca llega al objetivo en este periodo'); return; }
+        for (const [k, label, col] of keys) {
+          const v = r[k]; if (!v) continue;
+          svg.append('rect').attr('x', x(acc)).attr('y', y).attr('width', Math.max(0, x(acc + v) - x(acc) - 1)).attr('height', rowH - 12).style('fill', col)
+            .on('pointermove', (ev) => showTip(t, el, ev, [r.contratos, `${label}: ${pct(v)}`, `${r.terminados} intentos terminados`]))
+            .on('pointerleave', () => { t.hidden = true; });
+          if (x(acc + v) - x(acc) > 34) svg.append('text').attr('x', x(acc) + 5).attr('y', y + 18).style('fill', 'var(--color-bg)').style('font-weight', 600).style('pointer-events', 'none').text(pct(v));
+          acc += v;
+        }
+      });
+      svg.append('g').attr('class', 'ax').attr('transform', `translate(0,${rows.length * rowH})`).call(d3.axisBottom(x).ticks(5).tickFormat(pct).tickSizeOuter(0));
+    });
+
+    dash.draw('opciones-inicio', (sel) => {
+      const d = dash.data('recorridos');
+      const ini = d.status === 'ok' ? [...new Set(d.data.filter((r) => r.contratos === size()).map((r) => r.inicio))].sort() : [];
+      sel.replaceChildren(...ini.map((v) => new Option(v, v)));
+      const cur = dash.params().inicio;
+      sel.value = ini.includes(cur) ? cur : (ini.find((v) => v.startsWith('2026-01')) || ini[0] || '');
+    });
+
+    const inicioSel = (d) => {
+      const ini = [...new Set(d.data.filter((r) => r.contratos === size()).map((r) => r.inicio))].sort();
+      const cur = dash.params().inicio;
+      return ini.includes(cur) ? cur : (ini.find((v) => v.startsWith('2026-01')) || ini[0]);
+    };
+
+    dash.draw('curva', (el) => {
+      const d = dash.data('recorridos');
+      if (d.status !== 'ok' || !d.data.length) { el.replaceChildren('—'); return; }
+      const ini = inicioSel(d);
+      const rows = d.data.filter((r) => r.contratos === size() && r.inicio === ini).map((r) => ({ ...r, dia: Number(r.dia), saldo: Number(r.saldo_fase), usd: Number(r.usd) }));
+      if (!rows.length) { el.replaceChildren('—'); return; }
+      const W = el.clientWidth || 600, H = 280, mb = 26;
+      el.replaceChildren();
+      const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', `Saldo por fase de la evaluación empezando el ${ini}`);
+      const y = d3.scaleLinear().domain([Math.min(-10000, d3.min(rows, (r) => r.saldo)), Math.max(10000, d3.max(rows, (r) => r.saldo))]).nice();
+      const probe = svg.append('text').text(FT.money(y.domain()[0]));
+      const ml = Math.ceil(probe.node().getComputedTextLength() || 50) + 10; probe.remove();
+      const x = d3.scaleLinear().domain([1, d3.max(rows, (r) => r.dia)]).range([ml, W - 10]);
+      y.range([H - mb, 8]);
+      svg.append('g').attr('class', 'grid').selectAll('line').data(y.ticks(5)).join('line').attr('x1', ml).attr('x2', W - 10).attr('y1', y).attr('y2', y);
+      svg.append('g').attr('class', 'ax').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(y).ticks(5).tickFormat(FT.money).tickSize(0)).call((g) => g.select('.domain').remove());
+      svg.append('g').attr('class', 'ax').attr('transform', `translate(0,${H - mb})`).call(d3.axisBottom(x).ticks(Math.max(2, Math.floor(W / 90))).tickFormat((v) => `día ${v}`).tickSizeOuter(0));
+      const ref = (v, txt, col) => { svg.append('line').attr('x1', ml).attr('x2', W - 10).attr('y1', y(v)).attr('y2', y(v)).style('stroke', col).attr('stroke-dasharray', '4 3'); svg.append('text').attr('x', W - 12).attr('y', y(v) - 4).attr('text-anchor', 'end').text(txt); };
+      ref(10000, 'objetivo fase 1: +10 000', 'var(--color-ok)');
+      ref(5000, 'objetivo fase 2: +5 000', 'var(--color-ok)');
+      ref(-10000, 'pérdida máxima: −10 000', 'var(--color-bad)');
+      const col = { 'Fase 1': dash.colors[0], 'Fase 2': dash.colors[1], 'Fondeada': dash.colors[2] };
+      for (const [fase, pts] of d3.group(rows, (r) => r.fase)) {
+        svg.append('path').datum(pts).attr('fill', 'none').style('stroke', col[fase]).attr('stroke-width', 2).attr('d', d3.line().x((r) => x(r.dia)).y((r) => y(r.saldo)));
+        const last = pts[pts.length - 1];
+        svg.append('text').attr('x', x(pts[0].dia) + 4).attr('y', y(pts[0].saldo) - 8).style('fill', col[fase]).style('font-weight', 600).text(fase);
+        svg.append('circle').attr('cx', x(last.dia)).attr('cy', y(last.saldo)).attr('r', 3).style('fill', col[fase]);
+      }
+      const t = tip(el); const bis = d3.bisector((r) => r.dia).center;
+      svg.append('rect').attr('x', ml).attr('y', 0).attr('width', W - 10 - ml).attr('height', H - mb).attr('fill', 'transparent')
+        .on('pointermove', (ev) => { const [mx] = d3.pointer(ev); const r = rows[bis(rows, x.invert(mx))]; showTip(t, el, ev, [`Día ${r.dia} · ${r.date}`, r.fase, `Operación: ${FT.money(r.usd)}`, `Saldo de la fase: ${FT.money(r.saldo)}`]); })
+        .on('pointerleave', () => { t.hidden = true; });
+    });
+
+    dash.draw('frase-recorrido', (el) => {
+      const d = dash.data('ftmo_meses'), rec = dash.data('recorridos');
+      if (d.status !== 'ok' || !d.data || rec.status !== 'ok') { el.replaceChildren('—'); return; }
+      const ini = inicioSel(rec);
+      const r = d.data.find((x) => x.contratos === size() && x.inicio === ini);
+      if (!r) { el.replaceChildren('—'); return; }
+      const w = 'clave=' + enc(r.clave);
+      const parts = [`Empezando el ${r.inicio} con ${r.contratos}: `, mark('b', 'ftmo_meses', 'final', w, r.final), '.'];
+      if (r.dias_f1 !== null) parts.push(' Fase 1 en ', mark('span', 'ftmo_meses', 'dias_f1', w, n0(r.dias_f1)), ' días hábiles');
+      if (r.dias_f2 !== null) parts.push(', fase 2 en ', mark('span', 'ftmo_meses', 'dias_f2', w, n0(r.dias_f2)), '.');
+      if (r.primer_retiro !== null) parts.push(' Primer retiro de ', mark('b', 'ftmo_meses', 'primer_retiro', w, money(r.primer_retiro)), ' en el día ', mark('span', 'ftmo_meses', 'dias_retiro', w, n0(r.dias_retiro)), '.');
+      el.replaceChildren(...parts);
+    });
+
+    dash.draw('tabla-meses', (tb) => {
+      const d = dash.data('ftmo_meses');
+      if (d.status !== 'ok' || !d.data) { tb.replaceChildren(); return; }
+      const rs = d.data.filter((r) => r.contratos === size()).sort((a, b) => (a.inicio < b.inicio ? -1 : 1));
+      const cls = (f) => (f.startsWith('Pasa y cobra') ? 'ft-good' : f.startsWith('Se quema') || f.includes('se quema') ? 'ft-bad' : 'ft-muted');
+      tb.replaceChildren(...rs.map((r) => {
+        const tr = document.createElement('tr'); tr.dataset.key = enc(r.clave);
+        [[r.inicio], [r.final, 'l ' + cls(r.final)], [r.dias_f1 ?? '—'], [r.dias_f2 ?? '—'], [r.dias_retiro ?? '—'], [r.primer_retiro !== null ? money(r.primer_retiro) : '—']]
+          .forEach(([txt, c]) => { const td = document.createElement('td'); td.textContent = String(txt); if (c) td.className = c; tr.append(td); });
+        return tr;
+      }));
+    });
+  })();
+</script>
