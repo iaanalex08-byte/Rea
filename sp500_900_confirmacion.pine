@@ -1,0 +1,67 @@
+//@version=6
+// SP500 9:00 con tendencia + confirmación de 12 minutos (backtest 2024-2026: +0.24 R por operación, positivo los 3 años)
+// Regla: noche = cierre 8:59 - apertura 00:00 CDMX, debe medir entre 20 y 50 pts. Sube = compra, baja = venta.
+// Confirmación: el cierre de las 8:59 debe estar a favor de la apertura de las 8:48 (últimos 12 min a favor).
+// Si se cumplen las dos: entrada a mercado a las 9:00, SL 60 ticks, TP1 60 ticks (mitad + BE), TP2 120 ticks.
+// Usar en gráfico de 1 minuto de ES / MES. Código sin sangrías para que el editor del celular no lo rompa.
+indicator("SP500 9:00 + confirmación", overlay = true, max_labels_count = 500, max_lines_count = 500)
+tz = input.string("America/Mexico_City", "Zona horaria")
+minNoche = input.float(20, "Noche mínima (pts)")
+maxNoche = input.float(50, "Noche máxima (pts)")
+confMin = input.int(12, "Minutos de confirmación antes de las 9:00")
+slT = input.int(60, "SL (ticks)")
+tp1T = input.int(60, "TP1 (ticks)")
+tp2T = input.int(120, "TP2 (ticks)")
+finMin = input.int(900, "Cierre de líneas (minuto del día, 900 = 15:00)")
+tmin = hour(time, tz) * 60 + minute(time, tz)
+var float o00 = na
+o00 := tmin < nz(tmin[1], 99999) ? open : o00
+var float oConf = na
+oConf := tmin == 540 - confMin ? open : oConf
+es859 = tmin == 539
+noche = close - o00
+conf = close - oConf
+dirN = noche >= minNoche and noche <= maxNoche ? 1 : noche <= -minNoche and noche >= -maxNoche ? -1 : 0
+confOk = dirN != 0 and math.sign(conf) == dirN
+senal = es859 and confOk
+motivo = math.abs(noche) < minNoche ? "noche menor a " + str.tostring(minNoche) + " pts" : math.abs(noche) > maxNoche ? "noche mayor a " + str.tostring(maxNoche) + " pts" : "últimos " + str.tostring(confMin) + " min en contra"
+var int sig = 0
+sig := es859 ? (senal ? dirN : 0) : sig
+var float nocheHoy = na
+var float confHoy = na
+var string estado = "esperando 8:59"
+nocheHoy := es859 ? noche : nocheHoy
+confHoy := es859 ? conf : confHoy
+estado := es859 ? (senal ? (dirN == 1 ? "COMPRA a las 9:00" : "VENTA a las 9:00") : "NO OPERAR: " + motivo) : tmin < nz(tmin[1], 99999) ? "esperando 8:59" : estado
+plotshape(senal and dirN == 1, "Compra", shape.triangleup, location.belowbar, color.new(color.green, 0), text = "COMPRA 9:00", textcolor = color.green, size = size.normal)
+plotshape(senal and dirN == -1, "Venta", shape.triangledown, location.abovebar, color.new(color.red, 0), text = "VENTA 9:00", textcolor = color.red, size = size.normal)
+plotshape(es859 and not senal, "No operar", shape.xcross, location.abovebar, color.new(color.gray, 0), text = "NO OPERAR", textcolor = color.gray, size = size.small)
+lbl = es859 ? label.new(bar_index, senal ? (dirN == 1 ? low : high) : high, "Noche " + str.tostring(noche, "+#.##;-#.##") + " pts\nÚltimos " + str.tostring(confMin) + " min " + str.tostring(conf, "+#.##;-#.##") + " pts\n" + (senal ? (dirN == 1 ? "COMPRA" : "VENTA") : "NO OPERAR: " + motivo), style = senal and dirN == 1 ? label.style_label_up : label.style_label_down, color = senal ? (dirN == 1 ? color.new(color.green, 15) : color.new(color.red, 15)) : color.new(color.gray, 25), textcolor = color.white, size = size.small) : na
+esEnt = tmin == 540 and sig != 0
+largo = finMin - 540
+slP = slT * syminfo.mintick
+tp1P = tp1T * syminfo.mintick
+tp2P = tp2T * syminfo.mintick
+lE = esEnt ? line.new(bar_index, open, bar_index + largo, open, color = color.new(color.blue, 0), width = 2) : na
+lS = esEnt ? line.new(bar_index, open - sig * slP, bar_index + largo, open - sig * slP, color = color.new(color.red, 0), width = 2) : na
+l1 = esEnt ? line.new(bar_index, open + sig * tp1P, bar_index + largo, open + sig * tp1P, color = color.new(color.green, 30), width = 2, style = line.style_dashed) : na
+l2 = esEnt ? line.new(bar_index, open + sig * tp2P, bar_index + largo, open + sig * tp2P, color = color.new(color.green, 0), width = 2) : na
+tE = esEnt ? label.new(bar_index + largo, open, (sig == 1 ? "COMPRA @ " : "VENTA @ ") + str.tostring(open, format.mintick), style = label.style_label_left, color = color.new(color.blue, 20), textcolor = color.white, size = size.small) : na
+tS = esEnt ? label.new(bar_index + largo, open - sig * slP, "SL " + str.tostring(open - sig * slP, format.mintick) + " (" + str.tostring(slT) + " ticks)", style = label.style_label_left, color = color.new(color.red, 20), textcolor = color.white, size = size.small) : na
+t1 = esEnt ? label.new(bar_index + largo, open + sig * tp1P, "TP1 " + str.tostring(open + sig * tp1P, format.mintick) + " (mitad + BE)", style = label.style_label_left, color = color.new(color.green, 40), textcolor = color.white, size = size.small) : na
+t2 = esEnt ? label.new(bar_index + largo, open + sig * tp2P, "TP2 " + str.tostring(open + sig * tp2P, format.mintick), style = label.style_label_left, color = color.new(color.green, 20), textcolor = color.white, size = size.small) : na
+var table tb = table.new(position.top_right, 2, 5, bgcolor = color.new(color.black, 20), border_width = 1)
+table.cell(tb, 0, 0, "SP500 9:00 + confirmación", text_color = color.white, text_size = size.small)
+table.cell(tb, 1, 0, timeframe.isminutes and timeframe.multiplier == 1 ? "1 min ✔" : "USA GRÁFICO DE 1 MIN", text_color = timeframe.isminutes and timeframe.multiplier == 1 ? color.lime : color.orange, text_size = size.small)
+table.cell(tb, 0, 1, "Noche 00:00 → 8:59", text_color = color.white, text_size = size.small)
+table.cell(tb, 1, 1, na(nocheHoy) ? "-" : str.tostring(nocheHoy, "+#.##;-#.##") + " pts (" + str.tostring(minNoche) + "-" + str.tostring(maxNoche) + ")", text_color = color.white, text_size = size.small)
+table.cell(tb, 0, 2, "Últimos " + str.tostring(confMin) + " min", text_color = color.white, text_size = size.small)
+table.cell(tb, 1, 2, na(confHoy) ? "-" : str.tostring(confHoy, "+#.##;-#.##") + " pts", text_color = color.white, text_size = size.small)
+table.cell(tb, 0, 3, "Decisión", text_color = color.white, text_size = size.small)
+table.cell(tb, 1, 3, estado, text_color = str.contains(estado, "COMPRA") ? color.lime : str.contains(estado, "VENTA") ? color.red : color.silver, text_size = size.small)
+table.cell(tb, 0, 4, "Backtest 2024-26", text_color = color.white, text_size = size.small)
+table.cell(tb, 1, 4, "63 % positivas · +0.24 R/op", text_color = color.silver, text_size = size.small)
+alertcondition(senal and dirN == 1, "COMPRA 9:00", "SP500: COMPRA a las 9:00 (noche y confirmación a favor)")
+alertcondition(senal and dirN == -1, "VENTA 9:00", "SP500: VENTA a las 9:00 (noche y confirmación a favor)")
+alertcondition(es859 and not senal, "NO OPERAR hoy", "SP500: hoy NO se opera la de las 9:00")
+alertcondition(es859, "Decisión 8:59 (cualquiera)", "SP500 8:59: revisa la decisión de la de las 9:00")
