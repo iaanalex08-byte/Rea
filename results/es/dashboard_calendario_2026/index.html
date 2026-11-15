@@ -1,0 +1,182 @@
+<meta name="dash-one-writer">
+<style>
+  .cl { display: grid; gap: var(--cds-gap-xl); font-family: var(--font-anthropic-sans); color: var(--color-fg); }
+  .cl h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+  .cl h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; }
+  .cl p { margin: 0; max-width: 74ch; line-height: 1.5; }
+  .cl-muted { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+  .cl-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-md); min-width: 0; }
+  .cl-controls { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); align-items: end; }
+  .cl-controls label { display: grid; gap: var(--cds-gap-xs); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .cl-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .cl-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .cl-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .cl-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: var(--cds-gap-sm); }
+  .cl-stat { display: grid; gap: 2px; }
+  .cl-stat-l { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .cl-stat-v { font-family: var(--font-anthropic-serif); font-size: 1.5rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .cl-good { color: var(--color-ok); } .cl-bad { color: var(--color-bad); }
+  .cl-wrap { overflow-x: auto; min-width: 0; }
+  .cl-cal { position: relative; display: grid; gap: 6px; width: max-content; padding-top: 4px; }
+  .cl-row { display: flex; gap: 6px; align-items: center; }
+  .cl-mes { width: 34px; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .cl-d { width: 30px; height: 30px; border-radius: 6px; border: 0; font: inherit; font-size: 12px; font-weight: var(--cds-font-weight-medium); font-variant-numeric: tabular-nums; cursor: pointer; color: var(--color-bg); padding: 0; }
+  .cl-d:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+  .c-win { background: var(--color-ok); } .c-loss { background: var(--color-bad); } .c-close { background: var(--color-warn); }
+  .c-none { background: var(--color-panel); color: var(--color-fg); border: 1px solid var(--color-border-line); }
+  .cl-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); box-shadow: var(--cds-shadow-popover); border-radius: var(--cds-radius); padding: var(--cds-pad-sm) var(--cds-pad-md); font-size: var(--cds-font-size-caption); line-height: 1.45; white-space: nowrap; z-index: 5; font-variant-numeric: tabular-nums; }
+  .cl table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+  .cl th { text-align: right; font-weight: var(--cds-font-weight-medium); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .cl td { text-align: right; padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .cl th:first-child, .cl td:first-child, .cl th.l, .cl td.l { text-align: left; }
+  [data-dash-source-state=refreshing] { opacity: .5; }
+</style>
+
+<div class="cl">
+  <header id="encabezado" class="cl-controls" style="justify-content: space-between;">
+    <div style="display: grid; gap: var(--cds-gap-sm);">
+      <h1>Modelo B · calendario de días hábiles</h1>
+      <p class="cl-muted">ES con 2 contratos, entrada 9:12 hora de Ciudad de México a favor de la EMA 20 de 3 minutos, stop a break-even al tocar TP1. Datos de 1 minuto del S&amp;P 500 hasta el 6 de noviembre de 2026.</p>
+    </div>
+    <label for="sel-year" class="cl-controls">Año
+      <select class="dash-select" id="sel-year" aria-label="Año">
+        <option value="2026">2026</option>
+        <option value="2025">2025</option>
+      </select>
+    </label>
+  </header>
+
+  <section class="cl-card" id="rachas">
+    <h2>Rachas ganadoras y perdedoras</h2>
+    <div class="cl-wrap">
+      <table data-source="rachas" data-row-key="clave" aria-label="Rachas por configuración">
+        <thead><tr><th data-field="config">Configuración</th><th data-field="periodo" class="l">Periodo</th><th data-field="ganados">Días ganados</th><th data-field="perdidos">Días perdidos</th>
+          <th data-field="mejor">Mejor racha</th><th data-field="mejor_desde" class="l">Fechas</th><th data-field="peor">Peor racha</th><th data-field="peor_desde" class="l">Fechas</th><th data-field="neto">Neto USD</th></tr></thead>
+        <tbody data-draw="tabla-rachas"></tbody>
+      </table>
+    </div>
+    <p class="cl-muted">Racha ganadora: días seguidos en ganancia. Racha perdedora: días seguidos sin ganancia (stop o cierre en negativo).</p>
+  </section>
+
+  <section class="cl-card" id="cal-45">
+    <h2>SL 45 · TP1 30 · TP2 60</h2>
+    <div class="cl-stats" data-draw="stats-45" data-source="rachas"></div>
+    <div class="cl-legend"><span><i class="cl-dot c-win"></i>Ganó (TP)</span><span><i class="cl-dot c-loss"></i>Perdió (SL)</span><span><i class="cl-dot c-close"></i>Cerró a las 15:59</span><span><i class="cl-dot c-none"></i>Sin operación</span></div>
+    <div class="cl-wrap"><div class="cl-cal" data-draw="calendario-45" data-source="calendario"></div></div>
+  </section>
+
+  <section class="cl-card" id="cal-15">
+    <h2>SL 15 · TP1 50 · TP2 100</h2>
+    <div class="cl-stats" data-draw="stats-15" data-source="rachas"></div>
+    <div class="cl-legend"><span><i class="cl-dot c-win"></i>Ganó (TP)</span><span><i class="cl-dot c-loss"></i>Perdió (SL)</span><span><i class="cl-dot c-close"></i>Cerró a las 15:59</span><span><i class="cl-dot c-none"></i>Sin operación</span></div>
+    <div class="cl-wrap"><div class="cl-cal" data-draw="calendario-15" data-source="calendario"></div></div>
+  </section>
+
+  <p class="cl-muted">Cada cuadro es un día hábil; el número es el día del mes. Pasa el mouse o toca un cuadro para ver el detalle. "Ganó" incluye los días que tocaron TP1 y luego salieron en break-even.</p>
+</div>
+
+<script>
+  dash.calc('rachas', {
+    inputs: ['calendario'],
+    title: 'Rachas por configuración',
+    description: 'Días ganados y perdidos, mejor y peor racha con sus fechas, y neto, para todo el periodo y para el año elegido.',
+    fn: (calendario) => {
+      const year = String(dash.params().year || '2026');
+      const out = [];
+      for (const [config, v] of d3.group(calendario, (r) => r.config)) {
+        for (const [periodo, filtro] of [['2025-2026', () => true], [year, (r) => r.date.startsWith(year)]]) {
+          const dias = v.filter(filtro).sort((a, b) => (a.date < b.date ? -1 : 1));
+          let a = 0, b = 0, mejor = 0, peor = 0, md = '', mh = '', pd = '', ph = '';
+          dias.forEach((r, i) => {
+            if (Number(r.usd) > 0) { a += 1; b = 0; if (a > mejor) { mejor = a; md = dias[i - a + 1].date; mh = r.date; } }
+            else { b += 1; a = 0; if (b > peor) { peor = b; pd = dias[i - b + 1].date; ph = r.date; } }
+          });
+          out.push({ clave: `${config}|${periodo}`, config, periodo, dias: dias.length,
+            ganados: dias.filter((r) => Number(r.usd) > 0).length, perdidos: dias.filter((r) => Number(r.usd) <= 0).length,
+            mejor, mejor_desde: `${md} → ${mh}`, peor, peor_desde: `${pd} → ${ph}`, neto: d3.sum(dias, (r) => Number(r.usd)) });
+        }
+      }
+      return out;
+    },
+  });
+
+  (() => {
+    const MESES = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+    const CLS = { 'Ganó (TP)': 'c-win', 'Perdió (SL)': 'c-loss', 'Cerró a las 15:59': 'c-close' };
+    const fmt = d3.format(',.0f');
+    const money = (v) => (v < 0 ? '−' : '') + '$' + fmt(Math.abs(v));
+    const year = () => String(dash.params().year || '2026');
+    for (const el of document.querySelectorAll('#sel-year')) el.addEventListener('change', () => dash.setParams({ year: el.value }));
+    dash.onData(() => { for (const el of document.querySelectorAll('#sel-year')) if (document.activeElement !== el) el.value = year(); });
+
+    const mark = (src, field, where, text, cls) => { const e = document.createElement('span'); e.dataset.source = src; e.dataset.field = field; e.dataset.where = where; e.textContent = text; if (cls) e.className = cls; return e; };
+
+    dash.draw('tabla-rachas', (tb) => {
+      const d = dash.data('rachas');
+      if (d.status !== 'ok' || !d.data) { tb.replaceChildren(); return; }
+      tb.replaceChildren(...d.data.map((r) => {
+        const tr = document.createElement('tr'); tr.dataset.key = encodeURIComponent(r.clave);
+        [[r.config], [r.periodo, 'l'], [fmt(r.ganados)], [fmt(r.perdidos)], [fmt(r.mejor), 'cl-good'], [r.mejor_desde, 'l'], [fmt(r.peor), 'cl-bad'], [r.peor_desde, 'l'], [money(r.neto), r.neto >= 0 ? 'cl-good' : 'cl-bad']]
+          .forEach(([t, c]) => { const td = document.createElement('td'); td.textContent = t; if (c) td.className = c; tr.append(td); });
+        return tr;
+      }));
+    });
+
+    const stats = (name, cfg) => dash.draw(name, (el) => {
+      const d = dash.data('rachas');
+      const r = d.status === 'ok' && d.data ? d.data.find((x) => x.config === cfg && x.periodo === year()) : null;
+      if (!r) { el.replaceChildren('—'); return; }
+      const w = 'clave=' + encodeURIComponent(r.clave);
+      const items = [['Días ganados', 'ganados', fmt(r.ganados), 'cl-good'], ['Días perdidos', 'perdidos', fmt(r.perdidos), 'cl-bad'],
+        ['Mejor racha', 'mejor', fmt(r.mejor), 'cl-good'], ['Peor racha', 'peor', fmt(r.peor), 'cl-bad'], ['Neto ' + r.periodo, 'neto', money(r.neto), r.neto >= 0 ? 'cl-good' : 'cl-bad']];
+      el.replaceChildren(...items.map(([l, f, v, c]) => {
+        const box = document.createElement('div'); box.className = 'cl-stat';
+        const lab = document.createElement('span'); lab.className = 'cl-stat-l'; lab.textContent = l;
+        box.append(lab, mark('rachas', f, w, v, 'cl-stat-v ' + c)); return box;
+      }));
+    });
+    stats('stats-45', 'SL 45 · TP 30/60');
+    stats('stats-15', 'SL 15 · TP 50/100');
+
+    const cal = (name, cfg) => dash.draw(name, (el) => {
+      const d = dash.data('calendario');
+      if (d.status !== 'ok') { el.replaceChildren('—'); return; }
+      const y = year();
+      const rows = d.data.filter((r) => r.config === cfg);
+      const byDate = new Map(rows.map((r) => [r.date, r]));
+      const last = rows.reduce((m, r) => (r.date > m ? r.date : m), '');
+      const tip = document.createElement('div'); tip.className = 'cl-tip'; tip.hidden = true;
+      const out = [];
+      for (let m = 0; m < 12; m++) {
+        const first = new Date(Date.UTC(+y, m, 1));
+        if (first.toISOString().slice(0, 10) > last) break;
+        const row = document.createElement('div'); row.className = 'cl-row';
+        const lab = document.createElement('span'); lab.className = 'cl-mes'; lab.textContent = MESES[m]; row.append(lab);
+        for (let day = new Date(first); day.getUTCMonth() === m; day.setUTCDate(day.getUTCDate() + 1)) {
+          const wd = day.getUTCDay(); if (wd === 0 || wd === 6) continue;
+          const iso = day.toISOString().slice(0, 10); if (iso > last) break;
+          const r = byDate.get(iso);
+          const c = document.createElement('button'); c.type = 'button';
+          c.className = 'cl-d ' + (r ? CLS[r.resultado] : 'c-none');
+          c.textContent = String(day.getUTCDate());
+          c.setAttribute('aria-label', r ? `${iso}: ${r.resultado}, ${r.usd} USD` : `${iso}: sin operación`);
+          const show = () => {
+            const lines = r ? [iso, `${r.resultado} · ${r.desenlace}`, `${r.lado} a las ${r.hora_ny} NY · ${r.mins} min`, money(Number(r.usd))] : [iso, 'Sin operación (festivo o sin datos)'];
+            tip.replaceChildren(...lines.map((t) => { const x = document.createElement('div'); x.textContent = t; return x; }));
+            tip.hidden = false;
+            const b = el.getBoundingClientRect(), cb = c.getBoundingClientRect();
+            tip.style.left = Math.max(0, Math.min(cb.left - b.left, el.scrollWidth - tip.offsetWidth)) + 'px';
+            tip.style.top = (cb.top - b.top - tip.offsetHeight - 6) + 'px';
+          };
+          c.addEventListener('pointerenter', show); c.addEventListener('focus', show); c.addEventListener('click', show);
+          c.addEventListener('pointerleave', () => { tip.hidden = true; }); c.addEventListener('blur', () => { tip.hidden = true; });
+          row.append(c);
+        }
+        out.push(row);
+      }
+      el.replaceChildren(...out, tip);
+    });
+    cal('calendario-45', 'SL 45 · TP 30/60');
+    cal('calendario-15', 'SL 15 · TP 50/100');
+  })();
+</script>

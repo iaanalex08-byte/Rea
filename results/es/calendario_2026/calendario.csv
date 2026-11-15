@@ -1,0 +1,953 @@
+config,date,resultado,desenlace,lado,hora_ny,mins,usd
+SL 45 · TP 30/60,2025-01-02,Perdió (SL),Stop (−2),Compra,10:12,8,-1159.0
+SL 15 · TP 50/100,2025-01-02,Perdió (SL),Stop (−2),Compra,10:12,2,-409.0
+SL 45 · TP 30/60,2025-01-03,Perdió (SL),Stop (−2),Compra,10:12,6,-1159.0
+SL 15 · TP 50/100,2025-01-03,Perdió (SL),Stop (−2),Compra,10:12,1,-409.0
+SL 45 · TP 30/60,2025-01-06,Ganó (TP),TP1 + BE,Compra,10:12,141,341.0
+SL 15 · TP 50/100,2025-01-06,Ganó (TP),TP1 + BE,Compra,10:12,141,591.0
+SL 45 · TP 30/60,2025-01-07,Ganó (TP),TP1 + BE,Venta,10:12,8,341.0
+SL 15 · TP 50/100,2025-01-07,Perdió (SL),Stop (−2),Venta,10:12,1,-409.0
+SL 45 · TP 30/60,2025-01-08,Ganó (TP),TP1 + BE,Venta,10:12,24,341.0
+SL 15 · TP 50/100,2025-01-08,Ganó (TP),TP1 + BE,Venta,10:12,24,591.0
+SL 45 · TP 30/60,2025-01-10,Perdió (SL),Stop (−2),Venta,10:12,8,-1159.0
+SL 15 · TP 50/100,2025-01-10,Perdió (SL),Stop (−2),Venta,10:12,6,-409.0
+SL 45 · TP 30/60,2025-01-13,Ganó (TP),TP1 + BE,Compra,10:12,11,341.0
+SL 15 · TP 50/100,2025-01-13,Perdió (SL),Stop (−2),Compra,10:12,4,-409.0
+SL 45 · TP 30/60,2025-01-14,Perdió (SL),Stop (−2),Compra,10:12,17,-1159.0
+SL 15 · TP 50/100,2025-01-14,Perdió (SL),Stop (−2),Compra,10:12,2,-409.0
+SL 45 · TP 30/60,2025-01-15,Perdió (SL),Stop (−2),Compra,10:12,38,-1159.0
+SL 15 · TP 50/100,2025-01-15,Perdió (SL),Stop (−2),Compra,10:12,22,-409.0
+SL 45 · TP 30/60,2025-01-16,Perdió (SL),Stop (−2),Venta,10:12,48,-1159.0
+SL 15 · TP 50/100,2025-01-16,Perdió (SL),Stop (−2),Venta,10:12,6,-409.0
+SL 45 · TP 30/60,2025-01-17,Ganó (TP),TP1 + TP2,Compra,10:12,73,1091.0
+SL 15 · TP 50/100,2025-01-17,Perdió (SL),Stop (−2),Compra,10:12,10,-409.0
+SL 45 · TP 30/60,2025-01-20,Perdió (SL),Stop (−2),Compra,10:12,20,-1159.0
+SL 15 · TP 50/100,2025-01-20,Perdió (SL),Stop (−2),Compra,10:12,5,-409.0
+SL 45 · TP 30/60,2025-01-21,Perdió (SL),Stop (−2),Venta,10:12,18,-1159.0
+SL 15 · TP 50/100,2025-01-21,Perdió (SL),Stop (−2),Venta,10:12,5,-409.0
+SL 45 · TP 30/60,2025-01-22,Ganó (TP),TP1 + BE,Compra,10:12,259,341.0
+SL 15 · TP 50/100,2025-01-22,Perdió (SL),Stop (−2),Compra,10:12,51,-409.0
+SL 45 · TP 30/60,2025-01-23,Ganó (TP),TP1 + TP2,Compra,10:12,72,1091.0
+SL 15 · TP 50/100,2025-01-23,Ganó (TP),TP1 + TP2,Compra,10:12,340,1841.0
+SL 45 · TP 30/60,2025-01-24,Ganó (TP),TP1 + TP2,Venta,10:12,181,1091.0
+SL 15 · TP 50/100,2025-01-24,Perdió (SL),Stop (−2),Venta,10:12,85,-409.0
+SL 45 · TP 30/60,2025-01-27,Perdió (SL),Stop (−2),Compra,10:12,8,-1159.0
+SL 15 · TP 50/100,2025-01-27,Perdió (SL),Stop (−2),Compra,10:12,1,-409.0
+SL 45 · TP 30/60,2025-01-28,Ganó (TP),TP1 + TP2,Compra,10:12,12,1091.0
+SL 15 · TP 50/100,2025-01-28,Ganó (TP),TP1 + TP2,Compra,10:12,17,1841.0
+SL 45 · TP 30/60,2025-01-29,Ganó (TP),TP1 + BE,Venta,10:12,134,341.0
+SL 15 · TP 50/100,2025-01-29,Perdió (SL),Stop (−2),Venta,10:12,12,-409.0
+SL 45 · TP 30/60,2025-01-30,Ganó (TP),TP1 + TP2,Venta,10:12,19,1091.0
+SL 15 · TP 50/100,2025-01-30,Ganó (TP),TP1 + BE,Venta,10:12,29,591.0
+SL 45 · TP 30/60,2025-01-31,Ganó (TP),TP1 + BE,Compra,10:12,88,341.0
+SL 15 · TP 50/100,2025-01-31,Perdió (SL),Stop (−2),Compra,10:12,2,-409.0
+SL 45 · TP 30/60,2025-02-03,Perdió (SL),Stop (−2),Venta,10:12,11,-1159.0
+SL 15 · TP 50/100,2025-02-03,Perdió (SL),Stop (−2),Venta,10:12,2,-409.0
+SL 45 · TP 30/60,2025-02-04,Ganó (TP),TP1 + BE,Compra,10:12,126,341.0
+SL 15 · TP 50/100,2025-02-04,Perdió (SL),Stop (−2),Compra,10:12,19,-409.0
+SL 45 · TP 30/60,2025-02-05,Perdió (SL),Stop (−2),Venta,10:12,14,-1159.0
+SL 15 · TP 50/100,2025-02-05,Perdió (SL),Stop (−2),Venta,10:12,2,-409.0
+SL 45 · TP 30/60,2025-02-06,Perdió (SL),Stop (−2),Compra,10:12,28,-1159.0
+SL 15 · TP 50/100,2025-02-06,Perdió (SL),Stop (−2),Compra,10:12,13,-409.0
+SL 45 · TP 30/60,2025-02-07,Ganó (TP),TP1 + BE,Venta,10:12,8,341.0
+SL 15 · TP 50/100,2025-02-07,Perdió (SL),Stop (−2),Venta,10:12,13,-409.0
+SL 45 · TP 30/60,2025-02-10,Ganó (TP),TP1 + BE,Compra,10:12,64,341.0
+SL 15 · TP 50/100,2025-02-10,Perdió (SL),Stop (−2),Compra,10:12,70,-409.0
+SL 45 · TP 30/60,2025-02-11,Ganó (TP),TP1 + TP2,Compra,10:12,34,1091.0
+SL 15 · TP 50/100,2025-02-11,Ganó (TP),TP1 + BE,Compra,10:12,117,591.0
+SL 45 · TP 30/60,2025-02-12,Perdió (SL),Stop (−2),Venta,10:12,7,-1159.0
+SL 15 · TP 50/100,2025-02-12,Perdió (SL),Stop (−2),Venta,10:12,4,-409.0
+SL 45 · TP 30/60,2025-02-13,Ganó (TP),TP1 + TP2,Compra,10:12,28,1091.0
+SL 15 · TP 50/100,2025-02-13,Perdió (SL),Stop (−2),Compra,10:12,2,-409.0
+SL 45 · TP 30/60,2025-02-14,Perdió (SL),Stop (−2),Compra,10:12,69,-1159.0
+SL 15 · TP 50/100,2025-02-14,Perdió (SL),Stop (−2),Compra,10:12,4,-409.0
+SL 45 · TP 30/60,2025-02-17,Cerró a las 15:59,Cierre 15:59,Venta,10:12,160,-647.0
+SL 15 · TP 50/100,2025-02-17,Perdió (SL),Stop (−2),Venta,10:12,51,-409.0
+SL 45 · TP 30/60,2025-02-18,Ganó (TP),TP1 + TP2,Venta,10:12,249,1091.0
+SL 15 · TP 50/100,2025-02-18,Perdió (SL),Stop (−2),Venta,10:12,2,-409.0
+SL 45 · TP 30/60,2025-02-19,Perdió (SL),Stop (−2),Venta,10:12,20,-1159.0
+SL 15 · TP 50/100,2025-02-19,Perdió (SL),Stop (−2),Venta,10:12,5,-409.0
+SL 45 · TP 30/60,2025-02-20,Perdió (SL),Stop (−2),Venta,10:12,6,-1159.0
+SL 15 · TP 50/100,2025-02-20,Perdió (SL),Stop (−2),Venta,10:12,2,-409.0
+SL 45 · TP 30/60,2025-02-21,Ganó (TP),TP1 + TP2,Venta,10:12,16,1091.0
+SL 15 · TP 50/100,2025-02-21,Ganó (TP),TP1 + TP2,Venta,10:12,33,1841.0
+SL 45 · TP 30/60,2025-02-24,Perdió (SL),Stop (−2),Venta,10:12,5,-1159.0
+SL 15 · TP 50/100,2025-02-24,Perdió (SL),Stop (−2),Venta,10:12,1,-409.0
+SL 45 · TP 30/60,2025-02-25,Ganó (TP),TP1 + TP2,Venta,10:12,8,1091.0
+SL 15 · TP 50/100,2025-02-25,Ganó (TP),TP1 + TP2,Venta,10:12,9,1841.0
+SL 45 · TP 30/60,2025-02-26,Ganó (TP),TP1 + BE,Compra,10:12,18,341.0
+SL 15 · TP 50/100,2025-02-26,Ganó (TP),TP1 + BE,Compra,10:12,18,591.0
+SL 45 · TP 30/60,2025-02-27,Perdió (SL),Stop (−2),Venta,10:12,2,-1159.0
+SL 15 · TP 50/100,2025-02-27,Perdió (SL),Stop (−2),Venta,10:12,1,-409.0
+SL 45 · TP 30/60,2025-02-28,Ganó (TP),TP1 + BE,Compra,10:12,5,341.0
+SL 15 · TP 50/100,2025-02-28,Perdió (SL),Stop (−2),Compra,10:12,1,-409.0
+SL 45 · TP 30/60,2025-03-03,Ganó (TP),TP1 + BE,Venta,10:12,10,341.0
+SL 15 · TP 50/100,2025-03-03,Ganó (TP),TP1 + BE,Venta,10:12,10,591.0
+SL 45 · TP 30/60,2025-03-04,Ganó (TP),TP1 + TP2,Venta,10:12,7,1091.0
+SL 15 · TP 50/100,2025-03-04,Perdió (SL),Stop (−2),Venta,10:12,1,-409.0
+SL 45 · TP 30/60,2025-03-05,Ganó (TP),TP1 + BE,Compra,10:12,3,341.0
+SL 15 · TP 50/100,2025-03-05,Perdió (SL),Stop (−2),Compra,10:12,3,-409.0
+SL 45 · TP 30/60,2025-03-06,Ganó (TP),TP1 + BE,Compra,10:12,15,341.0
+SL 15 · TP 50/100,2025-03-06,Perdió (SL),Stop (−2),Compra,10:12,15,-409.0
+SL 45 · TP 30/60,2025-03-07,Perdió (SL),Stop (−2),Compra,10:12,2,-1159.0
+SL 15 · TP 50/100,2025-03-07,Perdió (SL),Stop (−2),Compra,10:12,1,-409.0
+SL 45 · TP 30/60,2025-03-10,Perdió (SL),Stop (−2),Venta,11:12,21,-1159.0
+SL 15 · TP 50/100,2025-03-10,Perdió (SL),Stop (−2),Venta,11:12,1,-409.0
+SL 45 · TP 30/60,2025-03-11,Ganó (TP),TP1 + BE,Compra,11:12,11,341.0
+SL 15 · TP 50/100,2025-03-11,Perdió (SL),Stop (−2),Compra,11:12,12,-409.0
+SL 45 · TP 30/60,2025-03-12,Perdió (SL),Stop (−2),Venta,11:12,13,-1159.0
+SL 15 · TP 50/100,2025-03-12,Perdió (SL),Stop (−2),Venta,11:12,6,-409.0
+SL 45 · TP 30/60,2025-03-13,Ganó (TP),TP1 + TP2,Venta,11:12,24,1091.0
+SL 15 · TP 50/100,2025-03-13,Ganó (TP),TP1 + TP2,Venta,11:12,27,1841.0
+SL 45 · TP 30/60,2025-03-14,Ganó (TP),TP1 + TP2,Compra,11:12,29,1091.0
+SL 15 · TP 50/100,2025-03-14,Perdió (SL),Stop (−2),Compra,11:12,2,-409.0
+SL 45 · TP 30/60,2025-03-17,Ganó (TP),TP1 + BE,Venta,11:12,41,341.0
+SL 15 · TP 50/100,2025-03-17,Perdió (SL),Stop (−2),Venta,11:12,2,-409.0
+SL 45 · TP 30/60,2025-03-18,Ganó (TP),TP1 + BE,Venta,11:12,50,341.0
+SL 15 · TP 50/100,2025-03-18,Perdió (SL),Stop (−2),Venta,11:12,2,-409.0
+SL 45 · TP 30/60,2025-03-19,Ganó (TP),TP1 + TP2,Compra,11:12,42,1091.0
+SL 15 · TP 50/100,2025-03-19,Perdió (SL),Stop (−2),Compra,11:12,5,-409.0
+SL 45 · TP 30/60,2025-03-20,Perdió (SL),Stop (−2),Compra,11:12,20,-1159.0
+SL 15 · TP 50/100,2025-03-20,Perdió (SL),Stop (−2),Compra,11:12,5,-409.0
+SL 45 · TP 30/60,2025-03-21,Perdió (SL),Stop (−2),Compra,11:12,4,-1159.0
+SL 15 · TP 50/100,2025-03-21,Perdió (SL),Stop (−2),Compra,11:12,2,-409.0
+SL 45 · TP 30/60,2025-03-24,Perdió (SL),Stop (−2),Compra,11:12,121,-1159.0
+SL 15 · TP 50/100,2025-03-24,Perdió (SL),Stop (−2),Compra,11:12,27,-409.0
+SL 45 · TP 30/60,2025-03-25,Perdió (SL),Stop (−2),Compra,11:12,42,-1159.0
+SL 15 · TP 50/100,2025-03-25,Perdió (SL),Stop (−2),Compra,11:12,10,-409.0
+SL 45 · TP 30/60,2025-03-26,Ganó (TP),TP1 + TP2,Venta,11:12,17,1091.0
+SL 15 · TP 50/100,2025-03-26,Ganó (TP),TP1 + TP2,Venta,11:12,41,1841.0
+SL 45 · TP 30/60,2025-03-27,Perdió (SL),Stop (−2),Compra,11:12,19,-1159.0
+SL 15 · TP 50/100,2025-03-27,Perdió (SL),Stop (−2),Compra,11:12,5,-409.0
+SL 45 · TP 30/60,2025-03-28,Ganó (TP),TP1 + BE,Venta,11:12,55,341.0
+SL 15 · TP 50/100,2025-03-28,Perdió (SL),Stop (−2),Venta,11:12,7,-409.0
+SL 45 · TP 30/60,2025-03-31,Perdió (SL),Stop (−2),Compra,11:12,8,-1159.0
+SL 15 · TP 50/100,2025-03-31,Perdió (SL),Stop (−2),Compra,11:12,2,-409.0
+SL 45 · TP 30/60,2025-04-01,Ganó (TP),TP1 + BE,Venta,11:12,11,341.0
+SL 15 · TP 50/100,2025-04-01,Perdió (SL),Stop (−2),Venta,11:12,12,-409.0
+SL 45 · TP 30/60,2025-04-02,Ganó (TP),TP1 + BE,Compra,11:12,3,341.0
+SL 15 · TP 50/100,2025-04-02,Ganó (TP),TP1 + TP2,Compra,11:12,21,1841.0
+SL 45 · TP 30/60,2025-04-03,Ganó (TP),TP1 + BE,Venta,11:12,14,341.0
+SL 15 · TP 50/100,2025-04-03,Perdió (SL),Stop (−2),Venta,11:12,4,-409.0
+SL 45 · TP 30/60,2025-04-04,Ganó (TP),TP1 + TP2,Venta,11:12,5,1091.0
+SL 15 · TP 50/100,2025-04-04,Ganó (TP),TP1 + BE,Venta,11:12,8,591.0
+SL 45 · TP 30/60,2025-04-07,Ganó (TP),TP1 + TP2,Compra,11:12,1,1091.0
+SL 15 · TP 50/100,2025-04-07,Perdió (SL),Stop (−2),Compra,11:12,1,-409.0
+SL 45 · TP 30/60,2025-04-08,Ganó (TP),TP1 + TP2,Compra,11:12,6,1091.0
+SL 15 · TP 50/100,2025-04-08,Perdió (SL),Stop (−2),Compra,11:12,1,-409.0
+SL 45 · TP 30/60,2025-04-09,Perdió (SL),Stop (−2),Compra,11:12,2,-1159.0
+SL 15 · TP 50/100,2025-04-09,Perdió (SL),Stop (−2),Compra,11:12,1,-409.0
+SL 45 · TP 30/60,2025-04-10,Ganó (TP),TP1 + BE,Venta,11:12,2,341.0
+SL 15 · TP 50/100,2025-04-10,Perdió (SL),Stop (−2),Venta,11:12,2,-409.0
+SL 45 · TP 30/60,2025-04-11,Ganó (TP),TP1 + BE,Venta,11:12,2,341.0
+SL 15 · TP 50/100,2025-04-11,Perdió (SL),Stop (−2),Venta,11:12,2,-409.0
+SL 45 · TP 30/60,2025-04-14,Ganó (TP),TP1 + TP2,Venta,11:12,6,1091.0
+SL 15 · TP 50/100,2025-04-14,Perdió (SL),Stop (−2),Venta,11:12,1,-409.0
+SL 45 · TP 30/60,2025-04-15,Perdió (SL),Stop (−2),Compra,11:12,3,-1159.0
+SL 15 · TP 50/100,2025-04-15,Perdió (SL),Stop (−2),Compra,11:12,3,-409.0
+SL 45 · TP 30/60,2025-04-16,Ganó (TP),TP1 + BE,Venta,11:12,13,341.0
+SL 15 · TP 50/100,2025-04-16,Ganó (TP),TP1 + BE,Venta,11:12,13,591.0
+SL 45 · TP 30/60,2025-04-17,Ganó (TP),TP1 + TP2,Venta,11:12,7,1091.0
+SL 15 · TP 50/100,2025-04-17,Perdió (SL),Stop (−2),Venta,11:12,1,-409.0
+SL 45 · TP 30/60,2025-04-21,Ganó (TP),TP1 + TP2,Venta,11:12,6,1091.0
+SL 15 · TP 50/100,2025-04-21,Ganó (TP),TP1 + BE,Venta,11:12,29,591.0
+SL 45 · TP 30/60,2025-04-22,Perdió (SL),Stop (−2),Compra,11:12,6,-1159.0
+SL 15 · TP 50/100,2025-04-22,Perdió (SL),Stop (−2),Compra,11:12,1,-409.0
+SL 45 · TP 30/60,2025-04-23,Perdió (SL),Stop (−2),Compra,11:12,3,-1159.0
+SL 15 · TP 50/100,2025-04-23,Perdió (SL),Stop (−2),Compra,11:12,2,-409.0
+SL 45 · TP 30/60,2025-04-24,Ganó (TP),TP1 + TP2,Compra,11:12,11,1091.0
+SL 15 · TP 50/100,2025-04-24,Ganó (TP),TP1 + TP2,Compra,11:12,17,1841.0
+SL 45 · TP 30/60,2025-04-25,Perdió (SL),Stop (−2),Compra,11:12,9,-1159.0
+SL 15 · TP 50/100,2025-04-25,Perdió (SL),Stop (−2),Compra,11:12,3,-409.0
+SL 45 · TP 30/60,2025-04-28,Perdió (SL),Stop (−2),Venta,11:12,10,-1159.0
+SL 15 · TP 50/100,2025-04-28,Perdió (SL),Stop (−2),Venta,11:12,1,-409.0
+SL 45 · TP 30/60,2025-04-29,Perdió (SL),Stop (−2),Compra,11:12,10,-1159.0
+SL 15 · TP 50/100,2025-04-29,Perdió (SL),Stop (−2),Compra,11:12,5,-409.0
+SL 45 · TP 30/60,2025-04-30,Perdió (SL),Stop (−2),Venta,11:12,4,-1159.0
+SL 15 · TP 50/100,2025-04-30,Perdió (SL),Stop (−2),Venta,11:12,2,-409.0
+SL 45 · TP 30/60,2025-05-01,Perdió (SL),Stop (−2),Venta,11:12,6,-1159.0
+SL 15 · TP 50/100,2025-05-01,Perdió (SL),Stop (−2),Venta,11:12,2,-409.0
+SL 45 · TP 30/60,2025-05-02,Ganó (TP),TP1 + BE,Compra,11:12,9,341.0
+SL 15 · TP 50/100,2025-05-02,Perdió (SL),Stop (−2),Compra,11:12,1,-409.0
+SL 45 · TP 30/60,2025-05-05,Ganó (TP),TP1 + TP2,Compra,11:12,46,1091.0
+SL 15 · TP 50/100,2025-05-05,Perdió (SL),Stop (−2),Compra,11:12,2,-409.0
+SL 45 · TP 30/60,2025-05-06,Ganó (TP),TP1 + TP2,Compra,11:12,9,1091.0
+SL 15 · TP 50/100,2025-05-06,Ganó (TP),TP1 + TP2,Compra,11:12,71,1841.0
+SL 45 · TP 30/60,2025-05-07,Perdió (SL),Stop (−2),Compra,11:12,41,-1159.0
+SL 15 · TP 50/100,2025-05-07,Perdió (SL),Stop (−2),Compra,11:12,5,-409.0
+SL 45 · TP 30/60,2025-05-08,Perdió (SL),Stop (−2),Venta,11:12,10,-1159.0
+SL 15 · TP 50/100,2025-05-08,Perdió (SL),Stop (−2),Venta,11:12,4,-409.0
+SL 45 · TP 30/60,2025-05-09,Ganó (TP),TP1 + TP2,Venta,11:12,13,1091.0
+SL 15 · TP 50/100,2025-05-09,Ganó (TP),TP1 + TP2,Venta,11:12,16,1841.0
+SL 45 · TP 30/60,2025-05-12,Ganó (TP),TP1 + TP2,Venta,11:12,17,1091.0
+SL 15 · TP 50/100,2025-05-12,Perdió (SL),Stop (−2),Venta,11:12,2,-409.0
+SL 45 · TP 30/60,2025-05-13,Ganó (TP),TP1 + TP2,Compra,11:12,6,1091.0
+SL 15 · TP 50/100,2025-05-13,Ganó (TP),TP1 + BE,Compra,11:12,33,591.0
+SL 45 · TP 30/60,2025-05-14,Perdió (SL),Stop (−2),Venta,11:12,19,-1159.0
+SL 15 · TP 50/100,2025-05-14,Perdió (SL),Stop (−2),Venta,11:12,1,-409.0
+SL 45 · TP 30/60,2025-05-15,Perdió (SL),Stop (−2),Venta,11:12,52,-1159.0
+SL 15 · TP 50/100,2025-05-15,Perdió (SL),Stop (−2),Venta,11:12,3,-409.0
+SL 45 · TP 30/60,2025-05-16,Perdió (SL),Stop (−2),Venta,11:12,16,-1159.0
+SL 15 · TP 50/100,2025-05-16,Perdió (SL),Stop (−2),Venta,11:12,4,-409.0
+SL 45 · TP 30/60,2025-05-19,Ganó (TP),TP1 + BE,Compra,11:12,99,341.0
+SL 15 · TP 50/100,2025-05-19,Perdió (SL),Stop (−2),Compra,11:12,2,-409.0
+SL 45 · TP 30/60,2025-05-20,Perdió (SL),Stop (−2),Venta,11:12,28,-1159.0
+SL 15 · TP 50/100,2025-05-20,Perdió (SL),Stop (−2),Venta,11:12,4,-409.0
+SL 45 · TP 30/60,2025-05-21,Perdió (SL),Stop (−2),Compra,11:12,37,-1159.0
+SL 15 · TP 50/100,2025-05-21,Perdió (SL),Stop (−2),Compra,11:12,15,-409.0
+SL 45 · TP 30/60,2025-05-22,Perdió (SL),Stop (−2),Compra,11:12,11,-1159.0
+SL 15 · TP 50/100,2025-05-22,Perdió (SL),Stop (−2),Compra,11:12,2,-409.0
+SL 45 · TP 30/60,2025-05-23,Ganó (TP),TP1 + BE,Compra,11:12,8,341.0
+SL 15 · TP 50/100,2025-05-23,Perdió (SL),Stop (−2),Compra,11:12,9,-409.0
+SL 45 · TP 30/60,2025-05-26,Ganó (TP),TP1 + BE,Venta,11:12,82,341.0
+SL 15 · TP 50/100,2025-05-26,Perdió (SL),Stop (−2),Venta,11:12,103,-409.0
+SL 45 · TP 30/60,2025-05-27,Ganó (TP),TP1 + TP2,Compra,11:12,37,1091.0
+SL 15 · TP 50/100,2025-05-27,Ganó (TP),TP1 + TP2,Compra,11:12,113,1841.0
+SL 45 · TP 30/60,2025-05-28,Ganó (TP),TP1 + TP2,Venta,11:12,85,1091.0
+SL 15 · TP 50/100,2025-05-28,Ganó (TP),TP1 + TP2,Venta,11:12,281,1841.0
+SL 45 · TP 30/60,2025-05-29,Perdió (SL),Stop (−2),Venta,11:12,17,-1159.0
+SL 15 · TP 50/100,2025-05-29,Perdió (SL),Stop (−2),Venta,11:12,3,-409.0
+SL 45 · TP 30/60,2025-05-30,Ganó (TP),TP1 + BE,Compra,11:12,34,341.0
+SL 15 · TP 50/100,2025-05-30,Perdió (SL),Stop (−2),Compra,11:12,65,-409.0
+SL 45 · TP 30/60,2025-06-02,Perdió (SL),Stop (−2),Venta,11:12,8,-1159.0
+SL 15 · TP 50/100,2025-06-02,Perdió (SL),Stop (−2),Venta,11:12,1,-409.0
+SL 45 · TP 30/60,2025-06-03,Ganó (TP),TP1 + TP2,Compra,11:12,42,1091.0
+SL 15 · TP 50/100,2025-06-03,Ganó (TP),TP1 + TP2,Compra,11:12,73,1841.0
+SL 45 · TP 30/60,2025-06-04,Perdió (SL),Stop (−2),Venta,11:12,16,-1159.0
+SL 15 · TP 50/100,2025-06-04,Perdió (SL),Stop (−2),Venta,11:12,4,-409.0
+SL 45 · TP 30/60,2025-06-05,Perdió (SL),Stop (−2),Venta,11:12,14,-1159.0
+SL 15 · TP 50/100,2025-06-05,Perdió (SL),Stop (−2),Venta,11:12,10,-409.0
+SL 45 · TP 30/60,2025-06-06,Ganó (TP),TP1 + BE,Compra,11:12,64,341.0
+SL 15 · TP 50/100,2025-06-06,Perdió (SL),Stop (−2),Compra,11:12,18,-409.0
+SL 45 · TP 30/60,2025-06-09,Ganó (TP),TP1 + BE,Compra,11:12,33,341.0
+SL 15 · TP 50/100,2025-06-09,Perdió (SL),Stop (−2),Compra,11:12,39,-409.0
+SL 45 · TP 30/60,2025-06-10,Perdió (SL),Stop (−2),Compra,11:12,81,-1159.0
+SL 15 · TP 50/100,2025-06-10,Perdió (SL),Stop (−2),Compra,11:12,81,-409.0
+SL 45 · TP 30/60,2025-06-11,Ganó (TP),TP1 + BE,Compra,11:12,58,341.0
+SL 15 · TP 50/100,2025-06-11,Perdió (SL),Stop (−2),Compra,11:12,59,-409.0
+SL 45 · TP 30/60,2025-06-12,Ganó (TP),TP1 + TP2,Compra,11:12,26,1091.0
+SL 15 · TP 50/100,2025-06-12,Ganó (TP),TP1 + cierre,Compra,11:12,288,1511.95
+SL 45 · TP 30/60,2025-06-13,Ganó (TP),TP1 + BE,Venta,11:12,12,341.0
+SL 15 · TP 50/100,2025-06-13,Perdió (SL),Stop (−2),Venta,11:12,3,-409.0
+SL 45 · TP 30/60,2025-06-16,Ganó (TP),TP1 + BE,Compra,11:12,76,341.0
+SL 15 · TP 50/100,2025-06-16,Perdió (SL),Stop (−2),Compra,11:12,105,-409.0
+SL 45 · TP 30/60,2025-06-17,Perdió (SL),Stop (−2),Compra,11:12,158,-1159.0
+SL 15 · TP 50/100,2025-06-17,Perdió (SL),Stop (−2),Compra,11:12,24,-409.0
+SL 45 · TP 30/60,2025-06-18,Ganó (TP),TP1 + TP2,Compra,11:12,23,1091.0
+SL 15 · TP 50/100,2025-06-18,Ganó (TP),TP1 + BE,Compra,11:12,108,591.0
+SL 45 · TP 30/60,2025-06-19,Ganó (TP),TP1 + BE,Venta,11:12,94,341.0
+SL 15 · TP 50/100,2025-06-19,Perdió (SL),Stop (−2),Venta,11:12,44,-409.0
+SL 45 · TP 30/60,2025-06-20,Ganó (TP),TP1 + TP2,Venta,11:12,14,1091.0
+SL 15 · TP 50/100,2025-06-20,Perdió (SL),Stop (−2),Venta,11:12,3,-409.0
+SL 45 · TP 30/60,2025-06-23,Ganó (TP),TP1 + BE,Compra,11:12,37,341.0
+SL 15 · TP 50/100,2025-06-23,Perdió (SL),Stop (−2),Compra,11:12,45,-409.0
+SL 45 · TP 30/60,2025-06-24,Perdió (SL),Stop (−2),Venta,11:12,31,-1159.0
+SL 15 · TP 50/100,2025-06-24,Perdió (SL),Stop (−2),Venta,11:12,7,-409.0
+SL 45 · TP 30/60,2025-06-25,Ganó (TP),TP1 + TP2,Venta,11:12,209,1091.0
+SL 15 · TP 50/100,2025-06-25,Perdió (SL),Stop (−2),Venta,11:12,33,-409.0
+SL 45 · TP 30/60,2025-06-26,Ganó (TP),TP1 + TP2,Compra,11:12,53,1091.0
+SL 15 · TP 50/100,2025-06-26,Ganó (TP),TP1 + TP2,Compra,11:12,234,1841.0
+SL 45 · TP 30/60,2025-06-27,Ganó (TP),TP1 + BE,Compra,11:12,192,341.0
+SL 15 · TP 50/100,2025-06-27,Perdió (SL),Stop (−2),Compra,11:12,5,-409.0
+SL 45 · TP 30/60,2025-06-30,Perdió (SL),Stop (−2),Compra,11:12,226,-1159.0
+SL 15 · TP 50/100,2025-06-30,Perdió (SL),Stop (−2),Compra,11:12,7,-409.0
+SL 45 · TP 30/60,2025-07-01,Ganó (TP),TP1 + BE,Compra,11:12,11,341.0
+SL 15 · TP 50/100,2025-07-01,Perdió (SL),Stop (−2),Compra,11:12,26,-409.0
+SL 45 · TP 30/60,2025-07-02,Ganó (TP),TP1 + TP2,Compra,11:12,96,1091.0
+SL 15 · TP 50/100,2025-07-02,Ganó (TP),TP1 + cierre,Compra,11:12,288,1524.25
+SL 45 · TP 30/60,2025-07-03,Ganó (TP),TP1 + BE,Compra,11:12,162,341.0
+SL 15 · TP 50/100,2025-07-03,Perdió (SL),Stop (−2),Compra,11:12,4,-409.0
+SL 45 · TP 30/60,2025-07-04,Cerró a las 15:59,Cierre 15:59,Venta,11:12,167,191.2
+SL 15 · TP 50/100,2025-07-04,Perdió (SL),Stop (−2),Venta,11:12,18,-409.0
+SL 45 · TP 30/60,2025-07-07,Ganó (TP),TP1 + TP2,Venta,11:12,95,1091.0
+SL 15 · TP 50/100,2025-07-07,Ganó (TP),TP1 + TP2,Venta,11:12,129,1841.0
+SL 45 · TP 30/60,2025-07-08,Perdió (SL),Stop (−2),Venta,11:12,26,-1159.0
+SL 15 · TP 50/100,2025-07-08,Perdió (SL),Stop (−2),Venta,11:12,5,-409.0
+SL 45 · TP 30/60,2025-07-09,Perdió (SL),Stop (−2),Compra,11:12,19,-1159.0
+SL 15 · TP 50/100,2025-07-09,Perdió (SL),Stop (−2),Compra,11:12,16,-409.0
+SL 45 · TP 30/60,2025-07-10,Ganó (TP),TP1 + TP2,Compra,11:12,42,1091.0
+SL 15 · TP 50/100,2025-07-10,Ganó (TP),TP1 + TP2,Compra,11:12,189,1841.0
+SL 45 · TP 30/60,2025-07-11,Ganó (TP),TP1 + BE,Compra,11:12,42,341.0
+SL 15 · TP 50/100,2025-07-11,Perdió (SL),Stop (−2),Compra,11:12,63,-409.0
+SL 45 · TP 30/60,2025-07-14,Ganó (TP),TP1 + BE,Compra,11:12,17,341.0
+SL 15 · TP 50/100,2025-07-14,Perdió (SL),Stop (−2),Compra,11:12,1,-409.0
+SL 45 · TP 30/60,2025-07-15,Ganó (TP),TP1 + TP2,Venta,11:12,40,1091.0
+SL 15 · TP 50/100,2025-07-15,Ganó (TP),TP1 + TP2,Venta,11:12,165,1841.0
+SL 45 · TP 30/60,2025-07-16,Ganó (TP),TP1 + BE,Venta,11:12,49,341.0
+SL 15 · TP 50/100,2025-07-16,Perdió (SL),Stop (−2),Venta,11:12,11,-409.0
+SL 45 · TP 30/60,2025-07-17,Ganó (TP),TP1 + TP2,Compra,11:12,112,1091.0
+SL 15 · TP 50/100,2025-07-17,Perdió (SL),Stop (−2),Compra,11:12,9,-409.0
+SL 45 · TP 30/60,2025-07-18,Ganó (TP),TP1 + TP2,Venta,11:12,135,1091.0
+SL 15 · TP 50/100,2025-07-18,Ganó (TP),TP1 + cierre,Venta,11:12,288,1104.85
+SL 45 · TP 30/60,2025-07-21,Ganó (TP),TP1 + BE,Compra,11:12,276,341.0
+SL 15 · TP 50/100,2025-07-21,Cerró a las 15:59,Cierre 15:59,Compra,11:12,288,-50.0
+SL 45 · TP 30/60,2025-07-22,Perdió (SL),Stop (−2),Venta,11:12,26,-1159.0
+SL 15 · TP 50/100,2025-07-22,Perdió (SL),Stop (−2),Venta,11:12,4,-409.0
+SL 45 · TP 30/60,2025-07-23,Perdió (SL),Stop (−2),Venta,11:12,103,-1159.0
+SL 15 · TP 50/100,2025-07-23,Perdió (SL),Stop (−2),Venta,11:12,19,-409.0
+SL 45 · TP 30/60,2025-07-24,Ganó (TP),TP1 + BE,Compra,11:12,123,341.0
+SL 15 · TP 50/100,2025-07-24,Perdió (SL),Stop (−2),Compra,11:12,2,-409.0
+SL 45 · TP 30/60,2025-07-25,Ganó (TP),TP1 + TP2,Compra,11:12,140,1091.0
+SL 15 · TP 50/100,2025-07-25,Ganó (TP),TP1 + cierre,Compra,11:12,288,1447.6
+SL 45 · TP 30/60,2025-07-28,Perdió (SL),Stop (−2),Compra,11:12,69,-1159.0
+SL 15 · TP 50/100,2025-07-28,Perdió (SL),Stop (−2),Compra,11:12,45,-409.0
+SL 45 · TP 30/60,2025-07-29,Ganó (TP),TP1 + TP2,Venta,11:12,57,1091.0
+SL 15 · TP 50/100,2025-07-29,Ganó (TP),TP1 + TP2,Venta,11:12,78,1841.0
+SL 45 · TP 30/60,2025-07-30,Perdió (SL),Stop (−2),Venta,11:12,12,-1159.0
+SL 15 · TP 50/100,2025-07-30,Perdió (SL),Stop (−2),Venta,11:12,4,-409.0
+SL 45 · TP 30/60,2025-07-31,Ganó (TP),TP1 + TP2,Venta,11:12,40,1091.0
+SL 15 · TP 50/100,2025-07-31,Perdió (SL),Stop (−2),Venta,11:12,2,-409.0
+SL 45 · TP 30/60,2025-08-01,Perdió (SL),Stop (−2),Venta,11:12,6,-1159.0
+SL 15 · TP 50/100,2025-08-01,Perdió (SL),Stop (−2),Venta,11:12,1,-409.0
+SL 45 · TP 30/60,2025-08-04,Ganó (TP),TP1 + BE,Compra,11:12,32,341.0
+SL 15 · TP 50/100,2025-08-04,Ganó (TP),TP1 + cierre,Compra,11:12,288,1171.6
+SL 45 · TP 30/60,2025-08-05,Ganó (TP),TP1 + TP2,Venta,11:12,16,1091.0
+SL 15 · TP 50/100,2025-08-05,Ganó (TP),TP1 + TP2,Venta,11:12,31,1841.0
+SL 45 · TP 30/60,2025-08-06,Perdió (SL),Stop (−2),Compra,11:12,6,-1159.0
+SL 15 · TP 50/100,2025-08-06,Perdió (SL),Stop (−2),Compra,11:12,2,-409.0
+SL 45 · TP 30/60,2025-08-07,Ganó (TP),TP1 + TP2,Venta,11:12,37,1091.0
+SL 15 · TP 50/100,2025-08-07,Ganó (TP),TP1 + TP2,Venta,11:12,64,1841.0
+SL 45 · TP 30/60,2025-08-08,Perdió (SL),Stop (−2),Compra,11:12,87,-1159.0
+SL 15 · TP 50/100,2025-08-08,Perdió (SL),Stop (−2),Compra,11:12,3,-409.0
+SL 45 · TP 30/60,2025-08-11,Perdió (SL),Stop (−2),Compra,11:12,36,-1159.0
+SL 15 · TP 50/100,2025-08-11,Perdió (SL),Stop (−2),Compra,11:12,2,-409.0
+SL 45 · TP 30/60,2025-08-12,Ganó (TP),TP1 + TP2,Compra,11:12,38,1091.0
+SL 15 · TP 50/100,2025-08-12,Ganó (TP),TP1 + TP2,Compra,11:12,59,1841.0
+SL 45 · TP 30/60,2025-08-13,Ganó (TP),TP1 + TP2,Venta,11:12,54,1091.0
+SL 15 · TP 50/100,2025-08-13,Ganó (TP),TP1 + cierre,Venta,11:12,288,1087.7
+SL 45 · TP 30/60,2025-08-14,Ganó (TP),TP1 + TP2,Compra,11:12,36,1091.0
+SL 15 · TP 50/100,2025-08-14,Ganó (TP),TP1 + BE,Compra,11:12,74,591.0
+SL 45 · TP 30/60,2025-08-15,Ganó (TP),TP1 + TP2,Venta,11:12,91,1091.0
+SL 15 · TP 50/100,2025-08-15,Ganó (TP),TP1 + BE,Venta,11:12,200,591.0
+SL 45 · TP 30/60,2025-08-18,Ganó (TP),TP1 + BE,Compra,11:12,18,341.0
+SL 15 · TP 50/100,2025-08-18,Perdió (SL),Stop (−2),Compra,11:12,19,-409.0
+SL 45 · TP 30/60,2025-08-19,Perdió (SL),Stop (−2),Compra,11:12,17,-1159.0
+SL 15 · TP 50/100,2025-08-19,Perdió (SL),Stop (−2),Compra,11:12,5,-409.0
+SL 45 · TP 30/60,2025-08-20,Ganó (TP),TP1 + BE,Venta,11:12,8,341.0
+SL 15 · TP 50/100,2025-08-20,Perdió (SL),Stop (−2),Venta,11:12,9,-409.0
+SL 45 · TP 30/60,2025-08-21,Ganó (TP),TP1 + BE,Compra,11:12,23,341.0
+SL 15 · TP 50/100,2025-08-21,Perdió (SL),Stop (−2),Compra,11:12,27,-409.0
+SL 45 · TP 30/60,2025-08-22,Ganó (TP),TP1 + TP2,Compra,11:12,4,1091.0
+SL 15 · TP 50/100,2025-08-22,Ganó (TP),TP1 + BE,Compra,11:12,10,591.0
+SL 45 · TP 30/60,2025-08-25,Ganó (TP),TP1 + BE,Compra,11:12,209,341.0
+SL 15 · TP 50/100,2025-08-25,Cerró a las 15:59,Cierre 15:59,Compra,11:12,288,-156.2
+SL 45 · TP 30/60,2025-08-26,Ganó (TP),TP1 + BE,Compra,11:12,223,341.0
+SL 15 · TP 50/100,2025-08-26,Ganó (TP),TP1 + cierre,Compra,11:12,288,1259.0
+SL 45 · TP 30/60,2025-08-27,Ganó (TP),TP1 + BE,Compra,11:12,135,341.0
+SL 15 · TP 50/100,2025-08-27,Ganó (TP),TP1 + cierre,Compra,11:12,288,1266.8
+SL 45 · TP 30/60,2025-08-28,Perdió (SL),Stop (−2),Venta,11:12,65,-1159.0
+SL 15 · TP 50/100,2025-08-28,Perdió (SL),Stop (−2),Venta,11:12,31,-409.0
+SL 45 · TP 30/60,2025-08-29,Perdió (SL),Stop (−2),Venta,11:12,29,-1159.0
+SL 15 · TP 50/100,2025-08-29,Perdió (SL),Stop (−2),Venta,11:12,3,-409.0
+SL 45 · TP 30/60,2025-09-01,Cerró a las 15:59,Cierre 15:59,Compra,11:12,163,339.5
+SL 15 · TP 50/100,2025-09-01,Cerró a las 15:59,Cierre 15:59,Compra,11:12,163,339.5
+SL 45 · TP 30/60,2025-09-02,Perdió (SL),Stop (−2),Compra,11:12,35,-1159.0
+SL 15 · TP 50/100,2025-09-02,Perdió (SL),Stop (−2),Compra,11:12,4,-409.0
+SL 45 · TP 30/60,2025-09-03,Ganó (TP),TP1 + BE,Venta,11:12,7,341.0
+SL 15 · TP 50/100,2025-09-03,Perdió (SL),Stop (−2),Venta,11:12,9,-409.0
+SL 45 · TP 30/60,2025-09-04,Perdió (SL),Stop (−2),Venta,11:12,20,-1159.0
+SL 15 · TP 50/100,2025-09-04,Perdió (SL),Stop (−2),Venta,11:12,12,-409.0
+SL 45 · TP 30/60,2025-09-05,Ganó (TP),TP1 + TP2,Venta,11:12,7,1091.0
+SL 15 · TP 50/100,2025-09-05,Ganó (TP),TP1 + TP2,Venta,11:12,12,1841.0
+SL 45 · TP 30/60,2025-09-08,Ganó (TP),TP1 + BE,Compra,11:12,97,341.0
+SL 15 · TP 50/100,2025-09-08,Perdió (SL),Stop (−2),Compra,11:12,4,-409.0
+SL 45 · TP 30/60,2025-09-09,Perdió (SL),Stop (−2),Compra,11:12,16,-1159.0
+SL 15 · TP 50/100,2025-09-09,Perdió (SL),Stop (−2),Compra,11:12,4,-409.0
+SL 45 · TP 30/60,2025-09-10,Perdió (SL),Stop (−2),Compra,11:12,58,-1159.0
+SL 15 · TP 50/100,2025-09-10,Perdió (SL),Stop (−2),Compra,11:12,22,-409.0
+SL 45 · TP 30/60,2025-09-11,Ganó (TP),TP1 + TP2,Compra,11:12,67,1091.0
+SL 15 · TP 50/100,2025-09-11,Ganó (TP),TP1 + cierre,Compra,11:12,288,1400.95
+SL 45 · TP 30/60,2025-09-12,Ganó (TP),TP1 + cierre,Compra,11:12,288,800.4
+SL 15 · TP 50/100,2025-09-12,Perdió (SL),Stop (−2),Compra,11:12,2,-409.0
+SL 45 · TP 30/60,2025-09-15,Ganó (TP),TP1 + BE,Compra,11:12,167,341.0
+SL 15 · TP 50/100,2025-09-15,Perdió (SL),Stop (−2),Compra,11:12,188,-409.0
+SL 45 · TP 30/60,2025-09-16,Cerró a las 15:59,Cierre 15:59,Venta,11:12,288,-842.6
+SL 15 · TP 50/100,2025-09-16,Perdió (SL),Stop (−2),Venta,11:12,4,-409.0
+SL 45 · TP 30/60,2025-09-17,Ganó (TP),TP1 + BE,Venta,11:12,228,341.0
+SL 15 · TP 50/100,2025-09-17,Ganó (TP),TP1 + BE,Venta,11:12,228,591.0
+SL 45 · TP 30/60,2025-09-18,Ganó (TP),TP1 + BE,Compra,11:12,34,341.0
+SL 15 · TP 50/100,2025-09-18,Ganó (TP),TP1 + BE,Compra,11:12,34,591.0
+SL 45 · TP 30/60,2025-09-19,Perdió (SL),Stop (−2),Compra,11:12,36,-1159.0
+SL 15 · TP 50/100,2025-09-19,Perdió (SL),Stop (−2),Compra,11:12,8,-409.0
+SL 45 · TP 30/60,2025-09-22,Ganó (TP),TP1 + TP2,Compra,11:12,40,1091.0
+SL 15 · TP 50/100,2025-09-22,Ganó (TP),TP1 + TP2,Compra,11:12,138,1841.0
+SL 45 · TP 30/60,2025-09-23,Perdió (SL),Stop (−2),Compra,11:12,86,-1159.0
+SL 15 · TP 50/100,2025-09-23,Perdió (SL),Stop (−2),Compra,11:12,10,-409.0
+SL 45 · TP 30/60,2025-09-24,Ganó (TP),TP1 + TP2,Venta,11:12,96,1091.0
+SL 15 · TP 50/100,2025-09-24,Perdió (SL),Stop (−2),Venta,11:12,6,-409.0
+SL 45 · TP 30/60,2025-09-25,Ganó (TP),TP1 + BE,Compra,11:12,51,341.0
+SL 15 · TP 50/100,2025-09-25,Perdió (SL),Stop (−2),Compra,11:12,56,-409.0
+SL 45 · TP 30/60,2025-09-26,Ganó (TP),TP1 + TP2,Venta,11:12,15,1091.0
+SL 15 · TP 50/100,2025-09-26,Perdió (SL),Stop (−2),Venta,11:12,1,-409.0
+SL 45 · TP 30/60,2025-09-29,Perdió (SL),Stop (−2),Compra,11:12,64,-1159.0
+SL 15 · TP 50/100,2025-09-29,Perdió (SL),Stop (−2),Compra,11:12,5,-409.0
+SL 45 · TP 30/60,2025-09-30,Perdió (SL),Stop (−2),Venta,11:12,44,-1159.0
+SL 15 · TP 50/100,2025-09-30,Perdió (SL),Stop (−2),Venta,11:12,2,-409.0
+SL 45 · TP 30/60,2025-10-01,Ganó (TP),TP1 + TP2,Compra,11:12,25,1091.0
+SL 15 · TP 50/100,2025-10-01,Ganó (TP),TP1 + TP2,Compra,11:12,94,1841.0
+SL 45 · TP 30/60,2025-10-02,Ganó (TP),TP1 + TP2,Venta,11:12,53,1091.0
+SL 15 · TP 50/100,2025-10-02,Perdió (SL),Stop (−2),Venta,11:12,17,-409.0
+SL 45 · TP 30/60,2025-10-03,Ganó (TP),TP1 + TP2,Compra,11:12,27,1091.0
+SL 15 · TP 50/100,2025-10-03,Ganó (TP),TP1 + BE,Compra,11:12,173,591.0
+SL 45 · TP 30/60,2025-10-06,Perdió (SL),Stop (−2),Venta,11:12,49,-1159.0
+SL 15 · TP 50/100,2025-10-06,Perdió (SL),Stop (−2),Venta,11:12,1,-409.0
+SL 45 · TP 30/60,2025-10-07,Ganó (TP),TP1 + TP2,Venta,11:12,26,1091.0
+SL 15 · TP 50/100,2025-10-07,Ganó (TP),TP1 + TP2,Venta,11:12,55,1841.0
+SL 45 · TP 30/60,2025-10-08,Ganó (TP),TP1 + cierre,Compra,11:12,288,530.7
+SL 15 · TP 50/100,2025-10-08,Perdió (SL),Stop (−2),Compra,11:12,11,-409.0
+SL 45 · TP 30/60,2025-10-09,Ganó (TP),TP1 + TP2,Venta,11:12,24,1091.0
+SL 15 · TP 50/100,2025-10-09,Ganó (TP),TP1 + TP2,Venta,11:12,174,1841.0
+SL 45 · TP 30/60,2025-10-10,Perdió (SL),Stop (−2),Compra,11:12,6,-1159.0
+SL 15 · TP 50/100,2025-10-10,Perdió (SL),Stop (−2),Compra,11:12,2,-409.0
+SL 45 · TP 30/60,2025-10-13,Perdió (SL),Stop (−2),Compra,11:12,9,-1159.0
+SL 15 · TP 50/100,2025-10-13,Perdió (SL),Stop (−2),Compra,11:12,1,-409.0
+SL 45 · TP 30/60,2025-10-14,Ganó (TP),TP1 + TP2,Compra,11:12,9,1091.0
+SL 15 · TP 50/100,2025-10-14,Ganó (TP),TP1 + TP2,Compra,11:12,16,1841.0
+SL 45 · TP 30/60,2025-10-15,Perdió (SL),Stop (−2),Compra,11:12,54,-1159.0
+SL 15 · TP 50/100,2025-10-15,Perdió (SL),Stop (−2),Compra,11:12,7,-409.0
+SL 45 · TP 30/60,2025-10-16,Perdió (SL),Stop (−2),Venta,11:12,5,-1159.0
+SL 15 · TP 50/100,2025-10-16,Perdió (SL),Stop (−2),Venta,11:12,4,-409.0
+SL 45 · TP 30/60,2025-10-17,Ganó (TP),TP1 + TP2,Compra,11:12,4,1091.0
+SL 15 · TP 50/100,2025-10-17,Ganó (TP),TP1 + BE,Compra,11:12,9,591.0
+SL 45 · TP 30/60,2025-10-20,Ganó (TP),TP1 + TP2,Compra,11:12,35,1091.0
+SL 15 · TP 50/100,2025-10-20,Perdió (SL),Stop (−2),Compra,11:12,4,-409.0
+SL 45 · TP 30/60,2025-10-21,Perdió (SL),Stop (−2),Venta,11:12,11,-1159.0
+SL 15 · TP 50/100,2025-10-21,Perdió (SL),Stop (−2),Venta,11:12,6,-409.0
+SL 45 · TP 30/60,2025-10-22,Ganó (TP),TP1 + TP2,Venta,11:12,17,1091.0
+SL 15 · TP 50/100,2025-10-22,Ganó (TP),TP1 + TP2,Venta,11:12,32,1841.0
+SL 45 · TP 30/60,2025-10-23,Ganó (TP),TP1 + BE,Venta,11:12,11,341.0
+SL 15 · TP 50/100,2025-10-23,Perdió (SL),Stop (−2),Venta,11:12,1,-409.0
+SL 45 · TP 30/60,2025-10-24,Perdió (SL),Stop (−2),Compra,11:12,19,-1159.0
+SL 15 · TP 50/100,2025-10-24,Perdió (SL),Stop (−2),Compra,11:12,9,-409.0
+SL 45 · TP 30/60,2025-10-27,Perdió (SL),Stop (−2),Venta,11:12,150,-1159.0
+SL 15 · TP 50/100,2025-10-27,Perdió (SL),Stop (−2),Venta,11:12,14,-409.0
+SL 45 · TP 30/60,2025-10-28,Ganó (TP),TP1 + BE,Venta,11:12,50,341.0
+SL 15 · TP 50/100,2025-10-28,Perdió (SL),Stop (−2),Venta,11:12,77,-409.0
+SL 45 · TP 30/60,2025-10-29,Ganó (TP),TP1 + BE,Venta,11:12,177,341.0
+SL 15 · TP 50/100,2025-10-29,Perdió (SL),Stop (−2),Venta,11:12,12,-409.0
+SL 45 · TP 30/60,2025-10-30,Perdió (SL),Stop (−2),Compra,11:12,25,-1159.0
+SL 15 · TP 50/100,2025-10-30,Perdió (SL),Stop (−2),Compra,11:12,5,-409.0
+SL 45 · TP 30/60,2025-10-31,Ganó (TP),TP1 + TP2,Venta,11:12,33,1091.0
+SL 15 · TP 50/100,2025-10-31,Perdió (SL),Stop (−2),Venta,11:12,5,-409.0
+SL 45 · TP 30/60,2025-11-03,Ganó (TP),TP1 + TP2,Venta,10:12,15,1091.0
+SL 15 · TP 50/100,2025-11-03,Perdió (SL),Stop (−2),Venta,10:12,1,-409.0
+SL 45 · TP 30/60,2025-11-04,Ganó (TP),TP1 + BE,Compra,10:12,40,341.0
+SL 15 · TP 50/100,2025-11-04,Ganó (TP),TP1 + BE,Compra,10:12,40,591.0
+SL 45 · TP 30/60,2025-11-05,Ganó (TP),TP1 + BE,Compra,10:12,19,341.0
+SL 15 · TP 50/100,2025-11-05,Perdió (SL),Stop (−2),Compra,10:12,3,-409.0
+SL 45 · TP 30/60,2025-11-06,Ganó (TP),TP1 + BE,Venta,10:12,6,341.0
+SL 15 · TP 50/100,2025-11-06,Perdió (SL),Stop (−2),Venta,10:12,7,-409.0
+SL 45 · TP 30/60,2025-11-07,Ganó (TP),TP1 + BE,Compra,10:12,7,341.0
+SL 15 · TP 50/100,2025-11-07,Perdió (SL),Stop (−2),Compra,10:12,12,-409.0
+SL 45 · TP 30/60,2025-11-10,Perdió (SL),Stop (−2),Compra,10:12,32,-1159.0
+SL 15 · TP 50/100,2025-11-10,Perdió (SL),Stop (−2),Compra,10:12,3,-409.0
+SL 45 · TP 30/60,2025-11-11,Ganó (TP),TP1 + BE,Venta,10:12,14,341.0
+SL 15 · TP 50/100,2025-11-11,Perdió (SL),Stop (−2),Venta,10:12,68,-409.0
+SL 45 · TP 30/60,2025-11-12,Ganó (TP),TP1 + TP2,Venta,10:12,25,1091.0
+SL 15 · TP 50/100,2025-11-12,Ganó (TP),TP1 + TP2,Venta,10:12,59,1841.0
+SL 45 · TP 30/60,2025-11-13,Ganó (TP),TP1 + BE,Compra,10:12,9,341.0
+SL 15 · TP 50/100,2025-11-13,Perdió (SL),Stop (−2),Compra,10:12,11,-409.0
+SL 45 · TP 30/60,2025-11-14,Ganó (TP),TP1 + BE,Compra,10:12,14,341.0
+SL 15 · TP 50/100,2025-11-14,Perdió (SL),Stop (−2),Compra,10:12,1,-409.0
+SL 45 · TP 30/60,2025-11-17,Ganó (TP),TP1 + BE,Venta,10:12,13,341.0
+SL 15 · TP 50/100,2025-11-17,Perdió (SL),Stop (−2),Venta,10:12,5,-409.0
+SL 45 · TP 30/60,2025-11-18,Perdió (SL),Stop (−2),Venta,10:12,2,-1159.0
+SL 15 · TP 50/100,2025-11-18,Perdió (SL),Stop (−2),Venta,10:12,2,-409.0
+SL 45 · TP 30/60,2025-11-19,Perdió (SL),Stop (−2),Compra,10:12,28,-1159.0
+SL 15 · TP 50/100,2025-11-19,Perdió (SL),Stop (−2),Compra,10:12,12,-409.0
+SL 45 · TP 30/60,2025-11-20,Perdió (SL),Stop (−2),Venta,10:12,12,-1159.0
+SL 15 · TP 50/100,2025-11-20,Perdió (SL),Stop (−2),Venta,10:12,7,-409.0
+SL 45 · TP 30/60,2025-11-21,Ganó (TP),TP1 + BE,Venta,10:12,7,341.0
+SL 15 · TP 50/100,2025-11-21,Perdió (SL),Stop (−2),Venta,10:12,4,-409.0
+SL 45 · TP 30/60,2025-11-24,Ganó (TP),TP1 + BE,Compra,10:12,14,341.0
+SL 15 · TP 50/100,2025-11-24,Perdió (SL),Stop (−2),Compra,10:12,1,-409.0
+SL 45 · TP 30/60,2025-11-25,Ganó (TP),TP1 + BE,Venta,10:12,14,341.0
+SL 15 · TP 50/100,2025-11-25,Perdió (SL),Stop (−2),Venta,10:12,1,-409.0
+SL 45 · TP 30/60,2025-11-26,Perdió (SL),Stop (−2),Venta,10:12,23,-1159.0
+SL 15 · TP 50/100,2025-11-26,Perdió (SL),Stop (−2),Venta,10:12,9,-409.0
+SL 45 · TP 30/60,2025-11-27,Cerró a las 15:59,Cierre 15:59,Venta,10:12,163,-35.2
+SL 15 · TP 50/100,2025-11-27,Cerró a las 15:59,Cierre 15:59,Venta,10:12,163,-35.2
+SL 45 · TP 30/60,2025-11-28,Ganó (TP),TP1 + TP2,Compra,10:12,65,1091.0
+SL 15 · TP 50/100,2025-11-28,Ganó (TP),TP1 + cierre,Compra,10:12,182,1384.15
+SL 45 · TP 30/60,2025-12-01,Perdió (SL),Stop (−2),Compra,10:12,14,-1159.0
+SL 15 · TP 50/100,2025-12-01,Perdió (SL),Stop (−2),Compra,10:12,4,-409.0
+SL 45 · TP 30/60,2025-12-02,Perdió (SL),Stop (−2),Compra,10:12,18,-1159.0
+SL 15 · TP 50/100,2025-12-02,Perdió (SL),Stop (−2),Compra,10:12,17,-409.0
+SL 45 · TP 30/60,2025-12-03,Ganó (TP),TP1 + TP2,Compra,10:12,24,1091.0
+SL 15 · TP 50/100,2025-12-03,Perdió (SL),Stop (−2),Compra,10:12,1,-409.0
+SL 45 · TP 30/60,2025-12-04,Ganó (TP),TP1 + BE,Venta,10:12,17,341.0
+SL 15 · TP 50/100,2025-12-04,Perdió (SL),Stop (−2),Venta,10:12,6,-409.0
+SL 45 · TP 30/60,2025-12-05,Perdió (SL),Stop (−2),Compra,10:12,45,-1159.0
+SL 15 · TP 50/100,2025-12-05,Perdió (SL),Stop (−2),Compra,10:12,34,-409.0
+SL 45 · TP 30/60,2025-12-08,Ganó (TP),TP1 + TP2,Venta,10:12,49,1091.0
+SL 15 · TP 50/100,2025-12-08,Ganó (TP),TP1 + TP2,Venta,10:12,112,1841.0
+SL 45 · TP 30/60,2025-12-09,Ganó (TP),TP1 + BE,Compra,10:12,145,341.0
+SL 15 · TP 50/100,2025-12-09,Perdió (SL),Stop (−2),Compra,10:12,16,-409.0
+SL 45 · TP 30/60,2025-12-10,Perdió (SL),Stop (−2),Compra,10:12,25,-1159.0
+SL 15 · TP 50/100,2025-12-10,Perdió (SL),Stop (−2),Compra,10:12,17,-409.0
+SL 45 · TP 30/60,2025-12-11,Ganó (TP),TP1 + TP2,Compra,10:12,13,1091.0
+SL 15 · TP 50/100,2025-12-11,Ganó (TP),TP1 + BE,Compra,10:12,38,591.0
+SL 45 · TP 30/60,2025-12-12,Ganó (TP),TP1 + TP2,Venta,10:12,13,1091.0
+SL 15 · TP 50/100,2025-12-12,Ganó (TP),TP1 + TP2,Venta,10:12,18,1841.0
+SL 45 · TP 30/60,2025-12-15,Ganó (TP),TP1 + BE,Venta,10:12,10,341.0
+SL 15 · TP 50/100,2025-12-15,Ganó (TP),TP1 + BE,Venta,10:12,23,591.0
+SL 45 · TP 30/60,2025-12-16,Ganó (TP),TP1 + TP2,Venta,10:12,6,1091.0
+SL 15 · TP 50/100,2025-12-16,Ganó (TP),TP1 + TP2,Venta,10:12,13,1841.0
+SL 45 · TP 30/60,2025-12-17,Ganó (TP),TP1 + TP2,Venta,10:12,25,1091.0
+SL 15 · TP 50/100,2025-12-17,Perdió (SL),Stop (−2),Venta,10:12,2,-409.0
+SL 45 · TP 30/60,2025-12-18,Ganó (TP),TP1 + BE,Venta,10:12,10,341.0
+SL 15 · TP 50/100,2025-12-18,Perdió (SL),Stop (−2),Venta,10:12,11,-409.0
+SL 45 · TP 30/60,2025-12-19,Ganó (TP),TP1 + BE,Compra,10:12,97,341.0
+SL 15 · TP 50/100,2025-12-19,Perdió (SL),Stop (−2),Compra,10:12,11,-409.0
+SL 45 · TP 30/60,2025-12-22,Perdió (SL),Stop (−2),Venta,10:12,56,-1159.0
+SL 15 · TP 50/100,2025-12-22,Perdió (SL),Stop (−2),Venta,10:12,6,-409.0
+SL 45 · TP 30/60,2025-12-23,Perdió (SL),Stop (−2),Venta,10:12,23,-1159.0
+SL 15 · TP 50/100,2025-12-23,Perdió (SL),Stop (−2),Venta,10:12,4,-409.0
+SL 45 · TP 30/60,2025-12-24,Ganó (TP),TP1 + TP2,Compra,10:12,86,1091.0
+SL 15 · TP 50/100,2025-12-24,Ganó (TP),TP1 + cierre,Compra,10:12,182,1164.15
+SL 45 · TP 30/60,2025-12-26,Cerró a las 15:59,Cierre 15:59,Venta,10:12,348,-473.1
+SL 15 · TP 50/100,2025-12-26,Perdió (SL),Stop (−2),Venta,10:12,9,-409.0
+SL 45 · TP 30/60,2025-12-29,Perdió (SL),Stop (−2),Venta,10:12,15,-1159.0
+SL 15 · TP 50/100,2025-12-29,Perdió (SL),Stop (−2),Venta,10:12,4,-409.0
+SL 45 · TP 30/60,2025-12-30,Perdió (SL),Stop (−2),Venta,10:12,70,-1159.0
+SL 15 · TP 50/100,2025-12-30,Perdió (SL),Stop (−2),Venta,10:12,47,-409.0
+SL 45 · TP 30/60,2025-12-31,Ganó (TP),TP1 + BE,Venta,10:12,105,341.0
+SL 15 · TP 50/100,2025-12-31,Perdió (SL),Stop (−2),Venta,10:12,209,-409.0
+SL 45 · TP 30/60,2026-01-02,Ganó (TP),TP1 + TP2,Venta,10:12,6,1091.0
+SL 15 · TP 50/100,2026-01-02,Ganó (TP),TP1 + TP2,Venta,10:12,11,1841.0
+SL 45 · TP 30/60,2026-01-05,Ganó (TP),TP1 + TP2,Compra,10:12,96,1091.0
+SL 15 · TP 50/100,2026-01-05,Ganó (TP),TP1 + BE,Compra,10:12,270,591.0
+SL 45 · TP 30/60,2026-01-06,Perdió (SL),Stop (−2),Compra,10:12,42,-1159.0
+SL 15 · TP 50/100,2026-01-06,Perdió (SL),Stop (−2),Compra,10:12,29,-409.0
+SL 45 · TP 30/60,2026-01-07,Ganó (TP),TP1 + BE,Venta,10:12,29,341.0
+SL 15 · TP 50/100,2026-01-07,Perdió (SL),Stop (−2),Venta,10:12,24,-409.0
+SL 45 · TP 30/60,2026-01-08,Ganó (TP),TP1 + BE,Compra,10:12,179,341.0
+SL 15 · TP 50/100,2026-01-08,Perdió (SL),Stop (−2),Compra,10:12,25,-409.0
+SL 45 · TP 30/60,2026-01-09,Perdió (SL),Stop (−2),Venta,10:12,2,-1159.0
+SL 15 · TP 50/100,2026-01-09,Perdió (SL),Stop (−2),Venta,10:12,1,-409.0
+SL 45 · TP 30/60,2026-01-12,Ganó (TP),TP1 + TP2,Compra,10:12,65,1091.0
+SL 15 · TP 50/100,2026-01-12,Ganó (TP),TP1 + TP2,Compra,10:12,260,1841.0
+SL 45 · TP 30/60,2026-01-13,Ganó (TP),TP1 + BE,Venta,10:12,24,341.0
+SL 15 · TP 50/100,2026-01-13,Ganó (TP),TP1 + BE,Venta,10:12,24,591.0
+SL 45 · TP 30/60,2026-01-14,Perdió (SL),Stop (−2),Venta,10:12,2,-1159.0
+SL 15 · TP 50/100,2026-01-14,Perdió (SL),Stop (−2),Venta,10:12,1,-409.0
+SL 45 · TP 30/60,2026-01-15,Ganó (TP),TP1 + BE,Compra,10:12,14,341.0
+SL 15 · TP 50/100,2026-01-15,Perdió (SL),Stop (−2),Compra,10:12,35,-409.0
+SL 45 · TP 30/60,2026-01-16,Ganó (TP),TP1 + TP2,Venta,10:12,22,1091.0
+SL 15 · TP 50/100,2026-01-16,Ganó (TP),TP1 + TP2,Venta,10:12,30,1841.0
+SL 45 · TP 30/60,2026-01-19,Ganó (TP),TP1 + BE,Compra,10:12,78,341.0
+SL 15 · TP 50/100,2026-01-19,Perdió (SL),Stop (−2),Compra,10:12,11,-409.0
+SL 45 · TP 30/60,2026-01-20,Perdió (SL),Stop (−2),Venta,10:12,10,-1159.0
+SL 15 · TP 50/100,2026-01-20,Perdió (SL),Stop (−2),Venta,10:12,1,-409.0
+SL 45 · TP 30/60,2026-01-21,Ganó (TP),TP1 + BE,Compra,10:12,11,341.0
+SL 15 · TP 50/100,2026-01-21,Ganó (TP),TP1 + BE,Compra,10:12,11,591.0
+SL 45 · TP 30/60,2026-01-22,Perdió (SL),Stop (−2),Venta,10:12,11,-1159.0
+SL 15 · TP 50/100,2026-01-22,Perdió (SL),Stop (−2),Venta,10:12,2,-409.0
+SL 45 · TP 30/60,2026-01-23,Ganó (TP),TP1 + TP2,Compra,10:12,44,1091.0
+SL 15 · TP 50/100,2026-01-23,Perdió (SL),Stop (−2),Compra,10:12,2,-409.0
+SL 45 · TP 30/60,2026-01-26,Ganó (TP),TP1 + TP2,Compra,10:12,113,1091.0
+SL 15 · TP 50/100,2026-01-26,Ganó (TP),TP1 + cierre,Compra,10:12,348,951.15
+SL 45 · TP 30/60,2026-01-27,Ganó (TP),TP1 + BE,Compra,10:12,170,341.0
+SL 15 · TP 50/100,2026-01-27,Perdió (SL),Stop (−2),Compra,10:12,19,-409.0
+SL 45 · TP 30/60,2026-01-28,Ganó (TP),TP1 + TP2,Venta,10:12,91,1091.0
+SL 15 · TP 50/100,2026-01-28,Perdió (SL),Stop (−2),Venta,10:12,9,-409.0
+SL 45 · TP 30/60,2026-01-29,Ganó (TP),TP1 + TP2,Venta,10:12,3,1091.0
+SL 15 · TP 50/100,2026-01-29,Ganó (TP),TP1 + TP2,Venta,10:12,21,1841.0
+SL 45 · TP 30/60,2026-01-30,Perdió (SL),Stop (−2),Compra,10:12,12,-1159.0
+SL 15 · TP 50/100,2026-01-30,Perdió (SL),Stop (−2),Compra,10:12,2,-409.0
+SL 45 · TP 30/60,2026-02-02,Ganó (TP),TP1 + BE,Compra,10:12,17,341.0
+SL 15 · TP 50/100,2026-02-02,Perdió (SL),Stop (−2),Compra,10:12,50,-409.0
+SL 45 · TP 30/60,2026-02-03,Ganó (TP),TP1 + TP2,Venta,10:12,14,1091.0
+SL 15 · TP 50/100,2026-02-03,Perdió (SL),Stop (−2),Venta,10:12,5,-409.0
+SL 45 · TP 30/60,2026-02-04,Ganó (TP),TP1 + BE,Venta,10:12,9,341.0
+SL 15 · TP 50/100,2026-02-04,Perdió (SL),Stop (−2),Venta,10:12,1,-409.0
+SL 45 · TP 30/60,2026-02-05,Ganó (TP),TP1 + BE,Venta,10:12,5,341.0
+SL 15 · TP 50/100,2026-02-05,Perdió (SL),Stop (−2),Venta,10:12,5,-409.0
+SL 45 · TP 30/60,2026-02-06,Perdió (SL),Stop (−2),Compra,10:12,2,-1159.0
+SL 15 · TP 50/100,2026-02-06,Perdió (SL),Stop (−2),Compra,10:12,1,-409.0
+SL 45 · TP 30/60,2026-02-09,Ganó (TP),TP1 + TP2,Compra,10:12,20,1091.0
+SL 15 · TP 50/100,2026-02-09,Ganó (TP),TP1 + TP2,Compra,10:12,39,1841.0
+SL 45 · TP 30/60,2026-02-10,Perdió (SL),Stop (−2),Compra,10:12,2,-1159.0
+SL 15 · TP 50/100,2026-02-10,Perdió (SL),Stop (−2),Compra,10:12,2,-409.0
+SL 45 · TP 30/60,2026-02-11,Ganó (TP),TP1 + TP2,Venta,10:12,9,1091.0
+SL 15 · TP 50/100,2026-02-11,Ganó (TP),TP1 + TP2,Venta,10:12,13,1841.0
+SL 45 · TP 30/60,2026-02-12,Perdió (SL),Stop (−2),Venta,10:12,4,-1159.0
+SL 15 · TP 50/100,2026-02-12,Perdió (SL),Stop (−2),Venta,10:12,1,-409.0
+SL 45 · TP 30/60,2026-02-13,Perdió (SL),Stop (−2),Compra,10:12,3,-1159.0
+SL 15 · TP 50/100,2026-02-13,Perdió (SL),Stop (−2),Compra,10:12,1,-409.0
+SL 45 · TP 30/60,2026-02-16,Perdió (SL),Stop (−2),Compra,10:12,18,-1159.0
+SL 15 · TP 50/100,2026-02-16,Perdió (SL),Stop (−2),Compra,10:12,4,-409.0
+SL 45 · TP 30/60,2026-02-17,Perdió (SL),Stop (−2),Venta,10:12,5,-1159.0
+SL 15 · TP 50/100,2026-02-17,Perdió (SL),Stop (−2),Venta,10:12,1,-409.0
+SL 45 · TP 30/60,2026-02-18,Ganó (TP),TP1 + TP2,Compra,10:12,44,1091.0
+SL 15 · TP 50/100,2026-02-18,Ganó (TP),TP1 + BE,Compra,10:12,211,591.0
+SL 45 · TP 30/60,2026-02-19,Ganó (TP),TP1 + BE,Compra,10:12,7,341.0
+SL 15 · TP 50/100,2026-02-19,Perdió (SL),Stop (−2),Compra,10:12,1,-409.0
+SL 45 · TP 30/60,2026-02-20,Perdió (SL),Stop (−2),Compra,10:12,2,-1159.0
+SL 15 · TP 50/100,2026-02-20,Perdió (SL),Stop (−2),Compra,10:12,1,-409.0
+SL 45 · TP 30/60,2026-02-23,Ganó (TP),TP1 + TP2,Venta,10:12,25,1091.0
+SL 15 · TP 50/100,2026-02-23,Perdió (SL),Stop (−2),Venta,10:12,10,-409.0
+SL 45 · TP 30/60,2026-02-24,Ganó (TP),TP1 + TP2,Compra,10:12,15,1091.0
+SL 15 · TP 50/100,2026-02-24,Perdió (SL),Stop (−2),Compra,10:12,1,-409.0
+SL 45 · TP 30/60,2026-02-25,Perdió (SL),Stop (−2),Venta,10:12,79,-1159.0
+SL 15 · TP 50/100,2026-02-25,Perdió (SL),Stop (−2),Venta,10:12,14,-409.0
+SL 45 · TP 30/60,2026-02-26,Ganó (TP),TP1 + TP2,Venta,10:12,3,1091.0
+SL 15 · TP 50/100,2026-02-26,Ganó (TP),TP1 + TP2,Venta,10:12,4,1841.0
+SL 45 · TP 30/60,2026-02-27,Perdió (SL),Stop (−2),Compra,10:12,5,-1159.0
+SL 15 · TP 50/100,2026-02-27,Perdió (SL),Stop (−2),Compra,10:12,2,-409.0
+SL 45 · TP 30/60,2026-03-02,Perdió (SL),Stop (−2),Compra,10:12,11,-1159.0
+SL 15 · TP 50/100,2026-03-02,Perdió (SL),Stop (−2),Compra,10:12,7,-409.0
+SL 45 · TP 30/60,2026-03-03,Ganó (TP),TP1 + TP2,Venta,10:12,7,1091.0
+SL 15 · TP 50/100,2026-03-03,Perdió (SL),Stop (−2),Venta,10:12,1,-409.0
+SL 45 · TP 30/60,2026-03-04,Ganó (TP),TP1 + TP2,Compra,10:12,9,1091.0
+SL 15 · TP 50/100,2026-03-04,Ganó (TP),TP1 + TP2,Compra,10:12,15,1841.0
+SL 45 · TP 30/60,2026-03-05,Perdió (SL),Stop (−2),Venta,10:12,3,-1159.0
+SL 15 · TP 50/100,2026-03-05,Perdió (SL),Stop (−2),Venta,10:12,1,-409.0
+SL 45 · TP 30/60,2026-03-06,Perdió (SL),Stop (−2),Venta,10:12,2,-1159.0
+SL 15 · TP 50/100,2026-03-06,Perdió (SL),Stop (−2),Venta,10:12,1,-409.0
+SL 45 · TP 30/60,2026-03-09,Ganó (TP),TP1 + TP2,Compra,11:12,15,1091.0
+SL 15 · TP 50/100,2026-03-09,Ganó (TP),TP1 + TP2,Compra,11:12,75,1841.0
+SL 45 · TP 30/60,2026-03-10,Ganó (TP),TP1 + BE,Compra,11:12,20,341.0
+SL 15 · TP 50/100,2026-03-10,Perdió (SL),Stop (−2),Compra,11:12,2,-409.0
+SL 45 · TP 30/60,2026-03-11,Ganó (TP),TP1 + TP2,Venta,11:12,6,1091.0
+SL 15 · TP 50/100,2026-03-11,Ganó (TP),TP1 + TP2,Venta,11:12,20,1841.0
+SL 45 · TP 30/60,2026-03-12,Perdió (SL),Stop (−2),Venta,11:12,16,-1159.0
+SL 15 · TP 50/100,2026-03-12,Perdió (SL),Stop (−2),Venta,11:12,14,-409.0
+SL 45 · TP 30/60,2026-03-13,Ganó (TP),TP1 + TP2,Venta,11:12,14,1091.0
+SL 15 · TP 50/100,2026-03-13,Perdió (SL),Stop (−2),Venta,11:12,1,-409.0
+SL 45 · TP 30/60,2026-03-16,Perdió (SL),Stop (−2),Venta,11:12,11,-1159.0
+SL 15 · TP 50/100,2026-03-16,Perdió (SL),Stop (−2),Venta,11:12,2,-409.0
+SL 45 · TP 30/60,2026-03-17,Ganó (TP),TP1 + TP2,Venta,11:12,52,1091.0
+SL 15 · TP 50/100,2026-03-17,Perdió (SL),Stop (−2),Venta,11:12,4,-409.0
+SL 45 · TP 30/60,2026-03-18,Perdió (SL),Stop (−2),Compra,11:12,9,-1159.0
+SL 15 · TP 50/100,2026-03-18,Perdió (SL),Stop (−2),Compra,11:12,3,-409.0
+SL 45 · TP 30/60,2026-03-19,Ganó (TP),TP1 + BE,Compra,11:12,6,341.0
+SL 15 · TP 50/100,2026-03-19,Perdió (SL),Stop (−2),Compra,11:12,8,-409.0
+SL 45 · TP 30/60,2026-03-20,Ganó (TP),TP1 + BE,Compra,11:12,13,341.0
+SL 15 · TP 50/100,2026-03-20,Perdió (SL),Stop (−2),Compra,11:12,5,-409.0
+SL 45 · TP 30/60,2026-03-23,Perdió (SL),Stop (−2),Compra,11:12,9,-1159.0
+SL 15 · TP 50/100,2026-03-23,Perdió (SL),Stop (−2),Compra,11:12,2,-409.0
+SL 45 · TP 30/60,2026-03-25,Ganó (TP),TP1 + TP2,Venta,11:12,5,1091.0
+SL 15 · TP 50/100,2026-03-25,Ganó (TP),TP1 + TP2,Venta,11:12,6,1841.0
+SL 45 · TP 30/60,2026-03-26,Ganó (TP),TP1 + TP2,Venta,11:12,20,1091.0
+SL 15 · TP 50/100,2026-03-26,Perdió (SL),Stop (−2),Venta,11:12,1,-409.0
+SL 45 · TP 30/60,2026-03-27,Ganó (TP),TP1 + BE,Venta,11:12,12,341.0
+SL 15 · TP 50/100,2026-03-27,Perdió (SL),Stop (−2),Venta,11:12,12,-409.0
+SL 45 · TP 30/60,2026-03-30,Ganó (TP),TP1 + BE,Venta,11:12,9,341.0
+SL 15 · TP 50/100,2026-03-30,Perdió (SL),Stop (−2),Venta,11:12,1,-409.0
+SL 45 · TP 30/60,2026-03-31,Ganó (TP),TP1 + BE,Compra,11:12,25,341.0
+SL 15 · TP 50/100,2026-03-31,Perdió (SL),Stop (−2),Compra,11:12,1,-409.0
+SL 45 · TP 30/60,2026-04-01,Perdió (SL),Stop (−2),Venta,11:12,11,-1159.0
+SL 15 · TP 50/100,2026-04-01,Perdió (SL),Stop (−2),Venta,11:12,1,-409.0
+SL 45 · TP 30/60,2026-04-02,Ganó (TP),TP1 + BE,Compra,11:12,14,341.0
+SL 15 · TP 50/100,2026-04-02,Perdió (SL),Stop (−2),Compra,11:12,2,-409.0
+SL 45 · TP 30/60,2026-04-06,Ganó (TP),TP1 + TP2,Compra,11:12,10,1091.0
+SL 15 · TP 50/100,2026-04-06,Ganó (TP),TP1 + BE,Compra,11:12,27,591.0
+SL 45 · TP 30/60,2026-04-07,Perdió (SL),Stop (−2),Venta,11:12,9,-1159.0
+SL 15 · TP 50/100,2026-04-07,Perdió (SL),Stop (−2),Venta,11:12,4,-409.0
+SL 45 · TP 30/60,2026-04-08,Ganó (TP),TP1 + TP2,Venta,11:12,24,1091.0
+SL 15 · TP 50/100,2026-04-08,Ganó (TP),TP1 + TP2,Venta,11:12,44,1841.0
+SL 45 · TP 30/60,2026-04-09,Ganó (TP),TP1 + BE,Venta,11:12,39,341.0
+SL 15 · TP 50/100,2026-04-09,Perdió (SL),Stop (−2),Venta,11:12,1,-409.0
+SL 45 · TP 30/60,2026-04-10,Perdió (SL),Stop (−2),Venta,11:12,14,-1159.0
+SL 15 · TP 50/100,2026-04-10,Perdió (SL),Stop (−2),Venta,11:12,1,-409.0
+SL 45 · TP 30/60,2026-04-13,Ganó (TP),TP1 + BE,Compra,11:12,111,341.0
+SL 15 · TP 50/100,2026-04-13,Perdió (SL),Stop (−2),Compra,11:12,4,-409.0
+SL 45 · TP 30/60,2026-04-14,Ganó (TP),TP1 + TP2,Compra,11:12,69,1091.0
+SL 15 · TP 50/100,2026-04-14,Ganó (TP),TP1 + TP2,Compra,11:12,92,1841.0
+SL 45 · TP 30/60,2026-04-15,Ganó (TP),TP1 + TP2,Compra,11:12,19,1091.0
+SL 15 · TP 50/100,2026-04-15,Ganó (TP),TP1 + TP2,Compra,11:12,205,1841.0
+SL 45 · TP 30/60,2026-04-16,Ganó (TP),TP1 + BE,Venta,11:12,34,341.0
+SL 15 · TP 50/100,2026-04-16,Perdió (SL),Stop (−2),Venta,11:12,1,-409.0
+SL 45 · TP 30/60,2026-04-17,Ganó (TP),TP1 + TP2,Compra,11:12,29,1091.0
+SL 15 · TP 50/100,2026-04-17,Ganó (TP),TP1 + TP2,Compra,11:12,117,1841.0
+SL 45 · TP 30/60,2026-04-20,Ganó (TP),TP1 + BE,Compra,11:12,18,341.0
+SL 15 · TP 50/100,2026-04-20,Perdió (SL),Stop (−2),Compra,11:12,23,-409.0
+SL 45 · TP 30/60,2026-04-21,Perdió (SL),Stop (−2),Compra,11:12,23,-1159.0
+SL 15 · TP 50/100,2026-04-21,Perdió (SL),Stop (−2),Compra,11:12,9,-409.0
+SL 45 · TP 30/60,2026-04-22,Ganó (TP),TP1 + BE,Compra,11:12,22,341.0
+SL 15 · TP 50/100,2026-04-22,Perdió (SL),Stop (−2),Compra,11:12,53,-409.0
+SL 45 · TP 30/60,2026-04-23,Ganó (TP),TP1 + TP2,Compra,11:12,44,1091.0
+SL 15 · TP 50/100,2026-04-23,Ganó (TP),TP1 + BE,Compra,11:12,171,591.0
+SL 45 · TP 30/60,2026-04-24,Perdió (SL),Stop (−2),Venta,11:12,35,-1159.0
+SL 15 · TP 50/100,2026-04-24,Perdió (SL),Stop (−2),Venta,11:12,1,-409.0
+SL 45 · TP 30/60,2026-04-27,Perdió (SL),Stop (−2),Compra,11:12,67,-1159.0
+SL 15 · TP 50/100,2026-04-27,Perdió (SL),Stop (−2),Compra,11:12,5,-409.0
+SL 45 · TP 30/60,2026-04-28,Perdió (SL),Stop (−2),Compra,11:12,24,-1159.0
+SL 15 · TP 50/100,2026-04-28,Perdió (SL),Stop (−2),Compra,11:12,4,-409.0
+SL 45 · TP 30/60,2026-04-29,Perdió (SL),Stop (−2),Venta,11:12,23,-1159.0
+SL 15 · TP 50/100,2026-04-29,Perdió (SL),Stop (−2),Venta,11:12,2,-409.0
+SL 45 · TP 30/60,2026-04-30,Perdió (SL),Stop (−2),Venta,11:12,11,-1159.0
+SL 15 · TP 50/100,2026-04-30,Perdió (SL),Stop (−2),Venta,11:12,1,-409.0
+SL 45 · TP 30/60,2026-05-01,Perdió (SL),Stop (−2),Compra,11:12,25,-1159.0
+SL 15 · TP 50/100,2026-05-01,Perdió (SL),Stop (−2),Compra,11:12,20,-409.0
+SL 45 · TP 30/60,2026-05-04,Ganó (TP),TP1 + BE,Compra,11:12,49,341.0
+SL 15 · TP 50/100,2026-05-04,Ganó (TP),TP1 + BE,Compra,11:12,49,591.0
+SL 45 · TP 30/60,2026-05-05,Perdió (SL),Stop (−2),Compra,11:12,4,-1159.0
+SL 15 · TP 50/100,2026-05-05,Perdió (SL),Stop (−2),Compra,11:12,2,-409.0
+SL 45 · TP 30/60,2026-05-06,Ganó (TP),TP1 + TP2,Compra,11:12,30,1091.0
+SL 15 · TP 50/100,2026-05-06,Perdió (SL),Stop (−2),Compra,11:12,7,-409.0
+SL 45 · TP 30/60,2026-05-07,Ganó (TP),TP1 + BE,Compra,11:12,75,341.0
+SL 15 · TP 50/100,2026-05-07,Perdió (SL),Stop (−2),Compra,11:12,5,-409.0
+SL 45 · TP 30/60,2026-05-08,Ganó (TP),TP1 + BE,Compra,11:12,19,341.0
+SL 15 · TP 50/100,2026-05-08,Perdió (SL),Stop (−2),Compra,11:12,67,-409.0
+SL 45 · TP 30/60,2026-05-11,Ganó (TP),TP1 + BE,Compra,11:12,17,341.0
+SL 15 · TP 50/100,2026-05-11,Perdió (SL),Stop (−2),Compra,11:12,19,-409.0
+SL 45 · TP 30/60,2026-05-12,Ganó (TP),TP1 + TP2,Venta,11:12,20,1091.0
+SL 15 · TP 50/100,2026-05-12,Perdió (SL),Stop (−2),Venta,11:12,2,-409.0
+SL 45 · TP 30/60,2026-05-13,Perdió (SL),Stop (−2),Venta,11:12,11,-1159.0
+SL 15 · TP 50/100,2026-05-13,Perdió (SL),Stop (−2),Venta,11:12,2,-409.0
+SL 45 · TP 30/60,2026-05-14,Ganó (TP),TP1 + TP2,Compra,11:12,29,1091.0
+SL 15 · TP 50/100,2026-05-14,Ganó (TP),TP1 + TP2,Compra,11:12,51,1841.0
+SL 45 · TP 30/60,2026-05-15,Ganó (TP),TP1 + TP2,Compra,11:12,5,1091.0
+SL 15 · TP 50/100,2026-05-15,Ganó (TP),TP1 + TP2,Compra,11:12,10,1841.0
+SL 45 · TP 30/60,2026-05-18,Perdió (SL),Stop (−2),Compra,11:12,19,-1159.0
+SL 15 · TP 50/100,2026-05-18,Perdió (SL),Stop (−2),Compra,11:12,2,-409.0
+SL 45 · TP 30/60,2026-05-19,Ganó (TP),TP1 + TP2,Venta,11:12,9,1091.0
+SL 15 · TP 50/100,2026-05-19,Ganó (TP),TP1 + BE,Venta,11:12,60,591.0
+SL 45 · TP 30/60,2026-05-20,Perdió (SL),Stop (−2),Venta,11:12,3,-1159.0
+SL 15 · TP 50/100,2026-05-20,Perdió (SL),Stop (−2),Venta,11:12,3,-409.0
+SL 45 · TP 30/60,2026-05-21,Perdió (SL),Stop (−2),Compra,11:12,4,-1159.0
+SL 15 · TP 50/100,2026-05-21,Perdió (SL),Stop (−2),Compra,11:12,2,-409.0
+SL 45 · TP 30/60,2026-05-22,Ganó (TP),TP1 + TP2,Venta,11:12,12,1091.0
+SL 15 · TP 50/100,2026-05-22,Ganó (TP),TP1 + BE,Venta,11:12,25,591.0
+SL 45 · TP 30/60,2026-05-25,Ganó (TP),TP1 + BE,Venta,11:12,59,341.0
+SL 15 · TP 50/100,2026-05-25,Perdió (SL),Stop (−2),Venta,11:12,60,-409.0
+SL 45 · TP 30/60,2026-05-26,Ganó (TP),TP1 + BE,Compra,11:12,46,341.0
+SL 15 · TP 50/100,2026-05-26,Perdió (SL),Stop (−2),Compra,11:12,51,-409.0
+SL 45 · TP 30/60,2026-05-27,Ganó (TP),TP1 + BE,Venta,11:12,23,341.0
+SL 15 · TP 50/100,2026-05-27,Perdió (SL),Stop (−2),Venta,11:12,2,-409.0
+SL 45 · TP 30/60,2026-05-28,Ganó (TP),TP1 + TP2,Compra,11:12,1,1091.0
+SL 15 · TP 50/100,2026-05-28,Ganó (TP),TP1 + TP2,Compra,11:12,2,1841.0
+SL 45 · TP 30/60,2026-05-29,Perdió (SL),Stop (−2),Compra,11:12,13,-1159.0
+SL 15 · TP 50/100,2026-05-29,Perdió (SL),Stop (−2),Compra,11:12,4,-409.0
+SL 45 · TP 30/60,2026-06-01,Perdió (SL),Stop (−2),Venta,11:12,79,-1159.0
+SL 15 · TP 50/100,2026-06-01,Perdió (SL),Stop (−2),Venta,11:12,3,-409.0
+SL 45 · TP 30/60,2026-06-02,Ganó (TP),TP1 + TP2,Compra,11:12,47,1091.0
+SL 15 · TP 50/100,2026-06-02,Perdió (SL),Stop (−2),Compra,11:12,15,-409.0
+SL 45 · TP 30/60,2026-06-03,Ganó (TP),TP1 + TP2,Venta,11:12,86,1091.0
+SL 15 · TP 50/100,2026-06-03,Ganó (TP),TP1 + TP2,Venta,11:12,133,1841.0
+SL 45 · TP 30/60,2026-06-04,Ganó (TP),TP1 + BE,Compra,11:12,25,341.0
+SL 15 · TP 50/100,2026-06-04,Perdió (SL),Stop (−2),Compra,11:12,2,-409.0
+SL 45 · TP 30/60,2026-06-05,Perdió (SL),Stop (−2),Venta,11:12,8,-1159.0
+SL 15 · TP 50/100,2026-06-05,Perdió (SL),Stop (−2),Venta,11:12,2,-409.0
+SL 45 · TP 30/60,2026-06-08,Ganó (TP),TP1 + TP2,Venta,11:12,6,1091.0
+SL 15 · TP 50/100,2026-06-08,Ganó (TP),TP1 + BE,Venta,11:12,13,591.0
+SL 45 · TP 30/60,2026-06-09,Ganó (TP),TP1 + TP2,Venta,11:12,4,1091.0
+SL 15 · TP 50/100,2026-06-09,Ganó (TP),TP1 + TP2,Venta,11:12,6,1841.0
+SL 45 · TP 30/60,2026-06-10,Perdió (SL),Stop (−2),Compra,11:12,4,-1159.0
+SL 15 · TP 50/100,2026-06-10,Perdió (SL),Stop (−2),Compra,11:12,2,-409.0
+SL 45 · TP 30/60,2026-06-11,Ganó (TP),TP1 + TP2,Venta,11:12,5,1091.0
+SL 15 · TP 50/100,2026-06-11,Ganó (TP),TP1 + BE,Venta,11:12,12,591.0
+SL 45 · TP 30/60,2026-06-12,Perdió (SL),Stop (−2),Compra,11:12,2,-1159.0
+SL 15 · TP 50/100,2026-06-12,Perdió (SL),Stop (−2),Compra,11:12,1,-409.0
+SL 45 · TP 30/60,2026-06-15,Ganó (TP),TP1 + TP2,Compra,11:12,49,1091.0
+SL 15 · TP 50/100,2026-06-15,Perdió (SL),Stop (−2),Compra,11:12,3,-409.0
+SL 45 · TP 30/60,2026-06-16,Perdió (SL),Stop (−2),Compra,11:12,8,-1159.0
+SL 15 · TP 50/100,2026-06-16,Perdió (SL),Stop (−2),Compra,11:12,5,-409.0
+SL 45 · TP 30/60,2026-06-17,Ganó (TP),TP1 + BE,Compra,11:12,22,341.0
+SL 15 · TP 50/100,2026-06-17,Ganó (TP),TP1 + BE,Compra,11:12,22,591.0
+SL 45 · TP 30/60,2026-06-18,Ganó (TP),TP1 + BE,Venta,11:12,5,341.0
+SL 15 · TP 50/100,2026-06-18,Perdió (SL),Stop (−2),Venta,11:12,5,-409.0
+SL 45 · TP 30/60,2026-06-19,Ganó (TP),TP1 + BE,Compra,11:12,163,341.0
+SL 15 · TP 50/100,2026-06-19,Cerró a las 15:59,Cierre 15:59,Compra,11:12,167,-63.1
+SL 45 · TP 30/60,2026-06-22,Perdió (SL),Stop (−2),Compra,11:12,6,-1159.0
+SL 15 · TP 50/100,2026-06-22,Perdió (SL),Stop (−2),Compra,11:12,3,-409.0
+SL 45 · TP 30/60,2026-06-23,Ganó (TP),TP1 + BE,Compra,11:12,17,341.0
+SL 15 · TP 50/100,2026-06-23,Ganó (TP),TP1 + BE,Compra,11:12,17,591.0
+SL 45 · TP 30/60,2026-06-24,Ganó (TP),TP1 + BE,Venta,11:12,10,341.0
+SL 15 · TP 50/100,2026-06-24,Ganó (TP),TP1 + BE,Venta,11:12,10,591.0
+SL 45 · TP 30/60,2026-06-25,Perdió (SL),Stop (−2),Compra,11:12,2,-1159.0
+SL 15 · TP 50/100,2026-06-25,Perdió (SL),Stop (−2),Compra,11:12,1,-409.0
+SL 45 · TP 30/60,2026-06-26,Ganó (TP),TP1 + BE,Compra,11:12,6,341.0
+SL 15 · TP 50/100,2026-06-26,Ganó (TP),TP1 + BE,Compra,11:12,25,591.0
+SL 45 · TP 30/60,2026-06-29,Ganó (TP),TP1 + TP2,Venta,11:12,3,1091.0
+SL 15 · TP 50/100,2026-06-29,Ganó (TP),TP1 + BE,Venta,11:12,11,591.0
+SL 45 · TP 30/60,2026-06-30,Ganó (TP),TP1 + TP2,Compra,11:12,20,1091.0
+SL 15 · TP 50/100,2026-06-30,Perdió (SL),Stop (−2),Compra,11:12,1,-409.0
+SL 45 · TP 30/60,2026-07-01,Ganó (TP),TP1 + TP2,Compra,11:12,64,1091.0
+SL 15 · TP 50/100,2026-07-01,Perdió (SL),Stop (−2),Compra,11:12,19,-409.0
+SL 45 · TP 30/60,2026-07-02,Perdió (SL),Stop (−2),Compra,11:12,14,-1159.0
+SL 15 · TP 50/100,2026-07-02,Perdió (SL),Stop (−2),Compra,11:12,7,-409.0
+SL 45 · TP 30/60,2026-07-03,Cerró a las 15:59,Cierre 15:59,Venta,11:12,167,-682.8
+SL 15 · TP 50/100,2026-07-03,Perdió (SL),Stop (−2),Venta,11:12,6,-409.0
+SL 45 · TP 30/60,2026-07-06,Ganó (TP),TP1 + TP2,Compra,11:12,50,1091.0
+SL 15 · TP 50/100,2026-07-06,Ganó (TP),TP1 + TP2,Compra,11:12,175,1841.0
+SL 45 · TP 30/60,2026-07-07,Ganó (TP),TP1 + TP2,Venta,11:12,14,1091.0
+SL 15 · TP 50/100,2026-07-07,Ganó (TP),TP1 + TP2,Venta,11:12,31,1841.0
+SL 45 · TP 30/60,2026-07-08,Ganó (TP),TP1 + BE,Venta,11:12,7,341.0
+SL 15 · TP 50/100,2026-07-08,Perdió (SL),Stop (−2),Venta,11:12,10,-409.0
+SL 45 · TP 30/60,2026-07-09,Ganó (TP),TP1 + TP2,Venta,11:12,5,1091.0
+SL 15 · TP 50/100,2026-07-09,Ganó (TP),TP1 + BE,Venta,11:12,16,591.0
+SL 45 · TP 30/60,2026-07-10,Perdió (SL),Stop (−2),Compra,11:12,21,-1159.0
+SL 15 · TP 50/100,2026-07-10,Perdió (SL),Stop (−2),Compra,11:12,4,-409.0
+SL 45 · TP 30/60,2026-07-13,Perdió (SL),Stop (−2),Compra,11:12,5,-1159.0
+SL 15 · TP 50/100,2026-07-13,Perdió (SL),Stop (−2),Compra,11:12,5,-409.0
+SL 45 · TP 30/60,2026-07-14,Ganó (TP),TP1 + BE,Venta,11:12,8,341.0
+SL 15 · TP 50/100,2026-07-14,Perdió (SL),Stop (−2),Venta,11:12,1,-409.0
+SL 45 · TP 30/60,2026-07-15,Perdió (SL),Stop (−2),Compra,11:12,13,-1159.0
+SL 15 · TP 50/100,2026-07-15,Perdió (SL),Stop (−2),Compra,11:12,12,-409.0
+SL 45 · TP 30/60,2026-07-16,Ganó (TP),TP1 + BE,Compra,11:12,56,341.0
+SL 15 · TP 50/100,2026-07-16,Ganó (TP),TP1 + BE,Compra,11:12,56,591.0
+SL 45 · TP 30/60,2026-07-17,Perdió (SL),Stop (−2),Compra,11:12,35,-1159.0
+SL 15 · TP 50/100,2026-07-17,Perdió (SL),Stop (−2),Compra,11:12,1,-409.0
+SL 45 · TP 30/60,2026-07-20,Ganó (TP),TP1 + BE,Venta,11:12,57,341.0
+SL 15 · TP 50/100,2026-07-20,Perdió (SL),Stop (−2),Venta,11:12,4,-409.0
+SL 45 · TP 30/60,2026-07-21,Perdió (SL),Stop (−2),Venta,11:12,14,-1159.0
+SL 15 · TP 50/100,2026-07-21,Perdió (SL),Stop (−2),Venta,11:12,2,-409.0
+SL 45 · TP 30/60,2026-07-22,Perdió (SL),Stop (−2),Compra,11:12,12,-1159.0
+SL 15 · TP 50/100,2026-07-22,Perdió (SL),Stop (−2),Compra,11:12,2,-409.0
+SL 45 · TP 30/60,2026-07-23,Ganó (TP),TP1 + BE,Venta,11:12,20,341.0
+SL 15 · TP 50/100,2026-07-23,Perdió (SL),Stop (−2),Venta,11:12,1,-409.0
+SL 45 · TP 30/60,2026-07-24,Perdió (SL),Stop (−2),Compra,11:12,8,-1159.0
+SL 15 · TP 50/100,2026-07-24,Perdió (SL),Stop (−2),Compra,11:12,1,-409.0
+SL 45 · TP 30/60,2026-07-27,Ganó (TP),TP1 + TP2,Venta,11:12,16,1091.0
+SL 15 · TP 50/100,2026-07-27,Perdió (SL),Stop (−2),Venta,11:12,2,-409.0
+SL 45 · TP 30/60,2026-07-28,Ganó (TP),TP1 + BE,Venta,11:12,12,341.0
+SL 15 · TP 50/100,2026-07-28,Ganó (TP),TP1 + BE,Venta,11:12,12,591.0
+SL 45 · TP 30/60,2026-07-29,Ganó (TP),TP1 + TP2,Venta,11:12,2,1091.0
+SL 15 · TP 50/100,2026-07-29,Ganó (TP),TP1 + TP2,Venta,11:12,15,1841.0
+SL 45 · TP 30/60,2026-07-30,Ganó (TP),TP1 + BE,Compra,11:12,33,341.0
+SL 15 · TP 50/100,2026-07-30,Perdió (SL),Stop (−2),Compra,11:12,2,-409.0
+SL 45 · TP 30/60,2026-07-31,Ganó (TP),TP1 + BE,Venta,11:12,6,341.0
+SL 15 · TP 50/100,2026-07-31,Ganó (TP),TP1 + BE,Venta,11:12,6,591.0
+SL 45 · TP 30/60,2026-08-03,Ganó (TP),TP1 + TP2,Compra,11:12,45,1091.0
+SL 15 · TP 50/100,2026-08-03,Ganó (TP),TP1 + TP2,Compra,11:12,135,1841.0
+SL 45 · TP 30/60,2026-08-04,Ganó (TP),TP1 + BE,Compra,11:12,11,341.0
+SL 15 · TP 50/100,2026-08-04,Ganó (TP),TP1 + TP2,Compra,11:12,61,1841.0
+SL 45 · TP 30/60,2026-08-05,Perdió (SL),Stop (−2),Compra,11:12,12,-1159.0
+SL 15 · TP 50/100,2026-08-05,Perdió (SL),Stop (−2),Compra,11:12,9,-409.0
+SL 45 · TP 30/60,2026-08-06,Perdió (SL),Stop (−2),Compra,11:12,15,-1159.0
+SL 15 · TP 50/100,2026-08-06,Perdió (SL),Stop (−2),Compra,11:12,4,-409.0
+SL 45 · TP 30/60,2026-08-07,Perdió (SL),Stop (−2),Venta,11:12,7,-1159.0
+SL 15 · TP 50/100,2026-08-07,Perdió (SL),Stop (−2),Venta,11:12,5,-409.0
+SL 45 · TP 30/60,2026-08-10,Ganó (TP),TP1 + BE,Compra,11:12,42,341.0
+SL 15 · TP 50/100,2026-08-10,Perdió (SL),Stop (−2),Compra,11:12,48,-409.0
+SL 45 · TP 30/60,2026-08-11,Perdió (SL),Stop (−2),Compra,11:12,60,-1159.0
+SL 15 · TP 50/100,2026-08-11,Perdió (SL),Stop (−2),Compra,11:12,27,-409.0
+SL 45 · TP 30/60,2026-08-12,Ganó (TP),TP1 + BE,Venta,11:12,21,341.0
+SL 15 · TP 50/100,2026-08-12,Perdió (SL),Stop (−2),Venta,11:12,7,-409.0
+SL 45 · TP 30/60,2026-08-13,Ganó (TP),TP1 + BE,Compra,11:12,34,341.0
+SL 15 · TP 50/100,2026-08-13,Perdió (SL),Stop (−2),Compra,11:12,6,-409.0
+SL 45 · TP 30/60,2026-08-14,Perdió (SL),Stop (−2),Compra,11:12,10,-1159.0
+SL 15 · TP 50/100,2026-08-14,Perdió (SL),Stop (−2),Compra,11:12,4,-409.0
+SL 45 · TP 30/60,2026-08-17,Ganó (TP),TP1 + TP2,Venta,11:12,192,1091.0
+SL 15 · TP 50/100,2026-08-17,Perdió (SL),Stop (−2),Venta,11:12,69,-409.0
+SL 45 · TP 30/60,2026-08-18,Perdió (SL),Stop (−2),Venta,11:12,15,-1159.0
+SL 15 · TP 50/100,2026-08-18,Perdió (SL),Stop (−2),Venta,11:12,4,-409.0
+SL 45 · TP 30/60,2026-08-19,Perdió (SL),Stop (−2),Venta,11:12,20,-1159.0
+SL 15 · TP 50/100,2026-08-19,Perdió (SL),Stop (−2),Venta,11:12,5,-409.0
+SL 45 · TP 30/60,2026-08-20,Ganó (TP),TP1 + BE,Venta,11:12,9,341.0
+SL 15 · TP 50/100,2026-08-20,Perdió (SL),Stop (−2),Venta,11:12,12,-409.0
+SL 45 · TP 30/60,2026-08-21,Ganó (TP),TP1 + TP2,Compra,11:12,85,1091.0
+SL 15 · TP 50/100,2026-08-21,Perdió (SL),Stop (−2),Compra,11:12,2,-409.0
+SL 45 · TP 30/60,2026-08-24,Perdió (SL),Stop (−2),Venta,11:12,25,-1159.0
+SL 15 · TP 50/100,2026-08-24,Perdió (SL),Stop (−2),Venta,11:12,9,-409.0
+SL 45 · TP 30/60,2026-08-25,Ganó (TP),TP1 + TP2,Venta,11:12,19,1091.0
+SL 15 · TP 50/100,2026-08-25,Perdió (SL),Stop (−2),Venta,11:12,8,-409.0
+SL 45 · TP 30/60,2026-08-26,Perdió (SL),Stop (−2),Compra,11:12,13,-1159.0
+SL 15 · TP 50/100,2026-08-26,Perdió (SL),Stop (−2),Compra,11:12,2,-409.0
+SL 45 · TP 30/60,2026-08-27,Ganó (TP),TP1 + TP2,Compra,11:12,38,1091.0
+SL 15 · TP 50/100,2026-08-27,Ganó (TP),TP1 + TP2,Compra,11:12,146,1841.0
+SL 45 · TP 30/60,2026-08-28,Ganó (TP),TP1 + BE,Venta,11:12,5,341.0
+SL 15 · TP 50/100,2026-08-28,Perdió (SL),Stop (−2),Venta,11:12,6,-409.0
+SL 45 · TP 30/60,2026-08-31,Ganó (TP),TP1 + BE,Venta,11:12,25,341.0
+SL 15 · TP 50/100,2026-08-31,Perdió (SL),Stop (−2),Venta,11:12,7,-409.0
+SL 45 · TP 30/60,2026-09-01,Ganó (TP),TP1 + TP2,Compra,11:12,19,1091.0
+SL 15 · TP 50/100,2026-09-01,Ganó (TP),TP1 + BE,Compra,11:12,129,591.0
+SL 45 · TP 30/60,2026-09-02,Ganó (TP),TP1 + TP2,Compra,11:12,15,1091.0
+SL 15 · TP 50/100,2026-09-02,Ganó (TP),TP1 + TP2,Compra,11:12,79,1841.0
+SL 45 · TP 30/60,2026-09-03,Perdió (SL),Stop (−2),Venta,11:12,48,-1159.0
+SL 15 · TP 50/100,2026-09-03,Perdió (SL),Stop (−2),Venta,11:12,4,-409.0
+SL 45 · TP 30/60,2026-09-04,Ganó (TP),TP1 + TP2,Venta,11:12,43,1091.0
+SL 15 · TP 50/100,2026-09-04,Perdió (SL),Stop (−2),Venta,11:12,3,-409.0
+SL 45 · TP 30/60,2026-09-07,Cerró a las 15:59,Cierre 15:59,Venta,11:12,166,78.1
+SL 15 · TP 50/100,2026-09-07,Cerró a las 15:59,Cierre 15:59,Venta,11:12,166,78.1
+SL 45 · TP 30/60,2026-09-08,Perdió (SL),Stop (−2),Venta,11:12,13,-1159.0
+SL 15 · TP 50/100,2026-09-08,Perdió (SL),Stop (−2),Venta,11:12,1,-409.0
+SL 45 · TP 30/60,2026-09-09,Ganó (TP),TP1 + BE,Venta,11:12,17,341.0
+SL 15 · TP 50/100,2026-09-09,Ganó (TP),TP1 + BE,Venta,11:12,17,591.0
+SL 45 · TP 30/60,2026-09-10,Perdió (SL),Stop (−2),Venta,11:12,11,-1159.0
+SL 15 · TP 50/100,2026-09-10,Perdió (SL),Stop (−2),Venta,11:12,2,-409.0
+SL 45 · TP 30/60,2026-09-11,Ganó (TP),TP1 + TP2,Venta,11:12,36,1091.0
+SL 15 · TP 50/100,2026-09-11,Perdió (SL),Stop (−2),Venta,11:12,8,-409.0
+SL 45 · TP 30/60,2026-09-14,Perdió (SL),Stop (−2),Compra,11:12,9,-1159.0
+SL 15 · TP 50/100,2026-09-14,Perdió (SL),Stop (−2),Compra,11:12,5,-409.0
+SL 45 · TP 30/60,2026-09-15,Ganó (TP),TP1 + TP2,Venta,11:12,40,1091.0
+SL 15 · TP 50/100,2026-09-15,Ganó (TP),TP1 + cierre,Venta,11:12,288,939.0
+SL 45 · TP 30/60,2026-09-16,Ganó (TP),TP1 + BE,Venta,11:12,30,341.0
+SL 15 · TP 50/100,2026-09-16,Perdió (SL),Stop (−2),Venta,11:12,48,-409.0
+SL 45 · TP 30/60,2026-09-17,Perdió (SL),Stop (−2),Venta,11:12,9,-1159.0
+SL 15 · TP 50/100,2026-09-17,Perdió (SL),Stop (−2),Venta,11:12,2,-409.0
+SL 45 · TP 30/60,2026-09-18,Ganó (TP),TP1 + BE,Venta,11:12,40,341.0
+SL 15 · TP 50/100,2026-09-18,Ganó (TP),TP1 + BE,Venta,11:12,213,591.0
+SL 45 · TP 30/60,2026-09-21,Ganó (TP),TP1 + TP2,Compra,11:12,11,1091.0
+SL 15 · TP 50/100,2026-09-21,Ganó (TP),TP1 + TP2,Compra,11:12,65,1841.0
+SL 45 · TP 30/60,2026-09-22,Perdió (SL),Stop (−2),Compra,11:12,30,-1159.0
+SL 15 · TP 50/100,2026-09-22,Perdió (SL),Stop (−2),Compra,11:12,6,-409.0
+SL 45 · TP 30/60,2026-09-23,Ganó (TP),TP1 + BE,Venta,11:12,24,341.0
+SL 15 · TP 50/100,2026-09-23,Ganó (TP),TP1 + BE,Venta,11:12,24,591.0
+SL 45 · TP 30/60,2026-09-24,Perdió (SL),Stop (−2),Compra,11:12,44,-1159.0
+SL 15 · TP 50/100,2026-09-24,Perdió (SL),Stop (−2),Compra,11:12,32,-409.0
+SL 45 · TP 30/60,2026-09-25,Ganó (TP),TP1 + BE,Venta,11:12,13,341.0
+SL 15 · TP 50/100,2026-09-25,Ganó (TP),TP1 + BE,Venta,11:12,13,591.0
+SL 45 · TP 30/60,2026-09-28,Ganó (TP),TP1 + TP2,Venta,11:12,32,1091.0
+SL 15 · TP 50/100,2026-09-28,Perdió (SL),Stop (−2),Venta,11:12,11,-409.0
+SL 45 · TP 30/60,2026-09-29,Ganó (TP),TP1 + TP2,Venta,11:12,69,1091.0
+SL 15 · TP 50/100,2026-09-29,Perdió (SL),Stop (−2),Venta,11:12,2,-409.0
+SL 45 · TP 30/60,2026-09-30,Ganó (TP),TP1 + BE,Compra,11:12,14,341.0
+SL 15 · TP 50/100,2026-09-30,Perdió (SL),Stop (−2),Compra,11:12,17,-409.0
+SL 45 · TP 30/60,2026-10-01,Ganó (TP),TP1 + BE,Venta,11:12,15,341.0
+SL 15 · TP 50/100,2026-10-01,Perdió (SL),Stop (−2),Venta,11:12,1,-409.0
+SL 45 · TP 30/60,2026-10-02,Perdió (SL),Stop (−2),Venta,11:12,7,-1159.0
+SL 15 · TP 50/100,2026-10-02,Perdió (SL),Stop (−2),Venta,11:12,1,-409.0
+SL 45 · TP 30/60,2026-10-05,Ganó (TP),TP1 + BE,Compra,11:12,22,341.0
+SL 15 · TP 50/100,2026-10-05,Ganó (TP),TP1 + TP2,Compra,11:12,152,1841.0
+SL 45 · TP 30/60,2026-10-06,Perdió (SL),Stop (−2),Compra,11:12,12,-1159.0
+SL 15 · TP 50/100,2026-10-06,Perdió (SL),Stop (−2),Compra,11:12,2,-409.0
+SL 45 · TP 30/60,2026-10-07,Perdió (SL),Stop (−2),Venta,11:12,84,-1159.0
+SL 15 · TP 50/100,2026-10-07,Perdió (SL),Stop (−2),Venta,11:12,7,-409.0
+SL 45 · TP 30/60,2026-10-08,Ganó (TP),TP1 + BE,Compra,11:12,37,341.0
+SL 15 · TP 50/100,2026-10-08,Perdió (SL),Stop (−2),Compra,11:12,40,-409.0
+SL 45 · TP 30/60,2026-10-09,Perdió (SL),Stop (−2),Venta,11:12,40,-1159.0
+SL 15 · TP 50/100,2026-10-09,Perdió (SL),Stop (−2),Venta,11:12,5,-409.0
+SL 45 · TP 30/60,2026-10-12,Perdió (SL),Stop (−2),Venta,11:12,99,-1159.0
+SL 15 · TP 50/100,2026-10-12,Perdió (SL),Stop (−2),Venta,11:12,4,-409.0
+SL 45 · TP 30/60,2026-10-13,Ganó (TP),TP1 + TP2,Venta,11:12,78,1091.0
+SL 15 · TP 50/100,2026-10-13,Ganó (TP),TP1 + BE,Venta,11:12,139,591.0
+SL 45 · TP 30/60,2026-10-14,Ganó (TP),TP1 + BE,Venta,11:12,35,341.0
+SL 15 · TP 50/100,2026-10-14,Perdió (SL),Stop (−2),Venta,11:12,4,-409.0
+SL 45 · TP 30/60,2026-10-15,Ganó (TP),TP1 + TP2,Compra,11:12,32,1091.0
+SL 15 · TP 50/100,2026-10-15,Perdió (SL),Stop (−2),Compra,11:12,2,-409.0
+SL 45 · TP 30/60,2026-10-16,Perdió (SL),Stop (−2),Venta,11:12,27,-1159.0
+SL 15 · TP 50/100,2026-10-16,Perdió (SL),Stop (−2),Venta,11:12,3,-409.0
+SL 45 · TP 30/60,2026-10-19,Ganó (TP),TP1 + TP2,Compra,11:12,4,1091.0
+SL 15 · TP 50/100,2026-10-19,Ganó (TP),TP1 + TP2,Compra,11:12,67,1841.0
+SL 45 · TP 30/60,2026-10-20,Ganó (TP),TP1 + TP2,Compra,11:12,11,1091.0
+SL 15 · TP 50/100,2026-10-20,Ganó (TP),TP1 + TP2,Compra,11:12,17,1841.0
+SL 45 · TP 30/60,2026-10-21,Perdió (SL),Stop (−2),Venta,11:12,20,-1159.0
+SL 15 · TP 50/100,2026-10-21,Perdió (SL),Stop (−2),Venta,11:12,4,-409.0
+SL 45 · TP 30/60,2026-10-22,Ganó (TP),TP1 + TP2,Venta,11:12,12,1091.0
+SL 15 · TP 50/100,2026-10-22,Ganó (TP),TP1 + TP2,Venta,11:12,17,1841.0
+SL 45 · TP 30/60,2026-10-23,Ganó (TP),TP1 + TP2,Venta,11:12,16,1091.0
+SL 15 · TP 50/100,2026-10-23,Ganó (TP),TP1 + BE,Venta,11:12,20,591.0
+SL 45 · TP 30/60,2026-10-26,Perdió (SL),Stop (−2),Compra,11:12,39,-1159.0
+SL 15 · TP 50/100,2026-10-26,Perdió (SL),Stop (−2),Compra,11:12,19,-409.0
+SL 45 · TP 30/60,2026-10-27,Ganó (TP),TP1 + TP2,Compra,11:12,33,1091.0
+SL 15 · TP 50/100,2026-10-27,Ganó (TP),TP1 + cierre,Compra,11:12,288,1022.4
+SL 45 · TP 30/60,2026-10-28,Ganó (TP),TP1 + TP2,Compra,11:12,103,1091.0
+SL 15 · TP 50/100,2026-10-28,Ganó (TP),TP1 + BE,Compra,11:12,134,591.0
+SL 45 · TP 30/60,2026-10-29,Ganó (TP),TP1 + BE,Compra,11:12,34,341.0
+SL 15 · TP 50/100,2026-10-29,Perdió (SL),Stop (−2),Compra,11:12,34,-409.0
+SL 45 · TP 30/60,2026-10-30,Ganó (TP),TP1 + TP2,Venta,11:12,30,1091.0
+SL 15 · TP 50/100,2026-10-30,Ganó (TP),TP1 + TP2,Venta,11:12,95,1841.0
+SL 45 · TP 30/60,2026-11-02,Ganó (TP),TP1 + TP2,Compra,10:12,8,1091.0
+SL 15 · TP 50/100,2026-11-02,Ganó (TP),TP1 + TP2,Compra,10:12,13,1841.0
+SL 45 · TP 30/60,2026-11-03,Ganó (TP),TP1 + BE,Compra,10:12,12,341.0
+SL 15 · TP 50/100,2026-11-03,Ganó (TP),TP1 + TP2,Compra,10:12,63,1841.0
+SL 45 · TP 30/60,2026-11-04,Ganó (TP),TP1 + BE,Compra,10:12,10,341.0
+SL 15 · TP 50/100,2026-11-04,Ganó (TP),TP1 + BE,Compra,10:12,10,591.0
+SL 45 · TP 30/60,2026-11-05,Perdió (SL),Stop (−2),Venta,10:12,5,-1159.0
+SL 15 · TP 50/100,2026-11-05,Perdió (SL),Stop (−2),Venta,10:12,1,-409.0
+SL 45 · TP 30/60,2026-11-06,Ganó (TP),TP1 + TP2,Compra,10:12,1,1091.0
+SL 15 · TP 50/100,2026-11-06,Ganó (TP),TP1 + BE,Compra,10:12,17,591.0
