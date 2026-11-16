@@ -1,0 +1,372 @@
+<meta name="dash-one-writer">
+<style>
+  .m3 { display: grid; gap: var(--cds-gap-xl); font-family: var(--font-anthropic-sans); color: var(--color-fg); }
+  .m3 h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+  .m3 h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; text-wrap: balance; }
+  .m3 p { margin: 0; max-width: 74ch; line-height: 1.5; }
+  .m3-muted { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+  .m3-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-sm); min-width: 0; }
+  .m3-controls { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); align-items: end; }
+  .m3-controls label { display: grid; gap: var(--cds-gap-xs); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .m3-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--cds-gap-md); }
+  .m3-kpi { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md) var(--cds-pad-lg); display: grid; gap: 2px; }
+  .m3-kpi-l { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .m3-kpi-v { font-family: var(--font-anthropic-serif); font-size: 1.7rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .m3-good { color: var(--color-ok); } .m3-bad { color: var(--color-bad); }
+  .m3-chart { position: relative; min-height: 380px; min-width: 0; touch-action: none; cursor: grab; }
+  .m3-chart:active { cursor: grabbing; }
+  .m3-chart svg { display: block; overflow: visible; }
+  .m3-chart svg:focus-visible { outline: 2px solid var(--color-fg-muted); outline-offset: 4px; }
+  .m3-chart text { fill: var(--cds-text-secondary); font-size: var(--cds-font-size-caption); font-family: var(--font-anthropic-sans); }
+  .m3-chart .grid line { stroke: var(--cds-chart-grid); }
+  .m3-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); box-shadow: var(--cds-shadow-popover); border-radius: var(--cds-radius); padding: var(--cds-pad-sm) var(--cds-pad-md); font-size: var(--cds-font-size-caption); line-height: 1.45; white-space: nowrap; z-index: 5; font-variant-numeric: tabular-nums; }
+  .m3-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .m3-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .m3-sq { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+  .sq-ok { background: var(--color-ok); } .sq-bad { background: var(--color-bad); } .sq-warn { background: var(--color-warn); }
+  [data-dash-source-state=refreshing] { opacity: .5; }
+</style>
+
+<div class="m3">
+  <header id="encabezado" style="display: grid; gap: var(--cds-gap-sm);">
+    <h1>Modelo B en 3D · ES 2026</h1>
+    <p data-draw="frase">—</p>
+    <p class="m3-muted">Entrada 9:12 hora de Ciudad de México a favor de la EMA 20 de 3 minutos, 2 contratos ES, SL 45 · TP1 30 · TP2 60 ticks, break-even tras TP1. Solo operaciones de 2026 (hasta el 6 de noviembre). Arrastra cualquier gráfico para girarlo, o usa las flechas del teclado.</p>
+  </header>
+
+  <section class="m3-kpis" id="indicadores">
+    <div class="m3-kpi"><span class="m3-kpi-l">Días operados</span><span class="m3-kpi-v" data-draw="k-n">—</span></div>
+    <div class="m3-kpi"><span class="m3-kpi-l">Días ganados</span><span class="m3-kpi-v" data-draw="k-wr">—</span></div>
+    <div class="m3-kpi"><span class="m3-kpi-l">Neto 2026</span><span class="m3-kpi-v" data-draw="k-net">—</span></div>
+    <div class="m3-kpi"><span class="m3-kpi-l">Mejor día</span><span class="m3-kpi-v" data-draw="k-best">—</span></div>
+    <div class="m3-kpi"><span class="m3-kpi-l">Peor día</span><span class="m3-kpi-v" data-draw="k-worst">—</span></div>
+  </section>
+
+  <section class="m3-card" id="calendario-3d">
+    <h2>Calendario 3D: cada barra es un día de 2026</h2>
+    <p class="m3-muted">Semanas del año de frente, días de la semana de fondo. La altura es el resultado del día en USD; hacia arriba gana, hacia abajo pierde.</p>
+    <div class="m3-legend"><span><i class="m3-sq sq-ok"></i>Ganó (TP)</span><span><i class="m3-sq sq-bad"></i>Perdió (SL)</span><span><i class="m3-sq sq-warn"></i>Cerró a las 15:59</span></div>
+    <div class="m3-chart" data-draw="g-calendario" data-source="dias"></div>
+  </section>
+
+  <section class="m3-card" id="mes-dia">
+    <h2>Neto por mes y día de la semana</h2>
+    <p class="m3-muted">Cada barra suma el resultado de todos los lunes, martes, etc. de ese mes.</p>
+    <div class="m3-chart" data-draw="g-mesdia" data-source="mes_dia"></div>
+  </section>
+
+  <section class="m3-card" id="sl-tp">
+    <h2>Superficie: stop × objetivos (2026)</h2>
+    <p class="m3-muted">Cada punto es el backtest de 2026 con ese SL y ese TP1 (TP2 = 2 × TP1). Verde gana, rojo pierde.</p>
+    <div class="m3-controls"><label for="sel-m1">Altura y color
+      <select class="dash-select" id="sel-m1" aria-label="Métrica de la superficie SL por TP">
+        <option value="avg">Esperanza por operación (USD)</option>
+        <option value="pf">Factor de beneficio</option>
+        <option value="wr">Tasa de acierto (%)</option>
+      </select></label></div>
+    <div class="m3-chart" data-draw="g-sltp" data-source="sup_sl_tp"></div>
+    <p class="m3-muted" data-draw="frase-sltp">—</p>
+  </section>
+
+  <section class="m3-card" id="hora-sl">
+    <h2>Superficie: hora de entrada × stop (TP 30/60, 2026)</h2>
+    <p class="m3-muted">Hora en Ciudad de México, cada 6 minutos de 7:30 a 11:00. El TP1 y el TP2 se quedan en 30 y 60 ticks.</p>
+    <div class="m3-controls"><label for="sel-m2">Altura y color
+      <select class="dash-select" id="sel-m2" aria-label="Métrica de la superficie hora por SL">
+        <option value="avg">Esperanza por operación (USD)</option>
+        <option value="pf">Factor de beneficio</option>
+        <option value="wr">Tasa de acierto (%)</option>
+      </select></label></div>
+    <div class="m3-chart" data-draw="g-horasl" data-source="sup_hora_sl"></div>
+    <p class="m3-muted" data-draw="frase-horasl">—</p>
+  </section>
+
+  <p class="m3-muted">Datos: velas de 1 minuto del índice S&amp;P 500 (SPXUSD, HistData.com), con 1 tick de deslizamiento y 4,50 USD de comisión por contrato. Los picos de las superficies salen de probar muchas combinaciones sobre los mismos datos de 2026, así que conviene confirmarlos en otro periodo antes de usarlos.</p>
+</div>
+
+<script>
+  // ---------- motor 3D (SVG con d3): superficies y barras, girables
+  window.R3D = (() => {
+    const fmt0 = d3.format(',.0f');
+    const money = (v) => (v < 0 ? '−' : '') + '$' + fmt0(Math.abs(v));
+    const resolveColor = (el, cssVar, fallback) => {
+      try {
+        const p = document.createElement('i'); p.style.color = `var(${cssVar})`; el.appendChild(p);
+        const c = getComputedStyle(p).color; p.remove();
+        const cv = document.createElement('canvas'); cv.width = cv.height = 1;
+        const ctx = cv.getContext('2d'); ctx.fillStyle = fallback; ctx.fillStyle = c; ctx.fillRect(0, 0, 1, 1);
+        const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data; return `rgb(${r},${g},${b})`;
+      } catch (e) { return fallback; }
+    };
+    const mount = (el, yaw = -0.85, pitch = 0.62) => {
+      const st = { yaw, pitch, drag: null };
+      st.svg = d3.select(el).append('svg').attr('width', '100%').attr('tabindex', 0).attr('role', 'img');
+      st.tip = document.createElement('div'); st.tip.className = 'm3-tip'; st.tip.hidden = true; el.appendChild(st.tip);
+      el.addEventListener('pointerdown', (e) => { st.drag = { x: e.clientX, y: e.clientY }; el.setPointerCapture(e.pointerId); st.tip.hidden = true; });
+      el.addEventListener('pointermove', (e) => {
+        if (!st.drag) return;
+        st.yaw += (e.clientX - st.drag.x) * 0.01;
+        st.pitch = Math.max(0.12, Math.min(1.4, st.pitch + (e.clientY - st.drag.y) * 0.008));
+        st.drag = { x: e.clientX, y: e.clientY }; st.render && st.render();
+      });
+      const end = () => { st.drag = null; };
+      el.addEventListener('pointerup', end); el.addEventListener('pointercancel', end);
+      st.svg.on('keydown', (e) => {
+        const k = { ArrowLeft: [-0.12, 0], ArrowRight: [0.12, 0], ArrowUp: [0, -0.08], ArrowDown: [0, 0.08] }[e.key];
+        if (!k) return; e.preventDefault();
+        st.yaw += k[0]; st.pitch = Math.max(0.12, Math.min(1.4, st.pitch + k[1])); st.render && st.render();
+      });
+      return st;
+    };
+    const showTip = (st, el, ev, lines) => {
+      if (st.drag) return;
+      st.tip.replaceChildren(...lines.map((t) => { const d = document.createElement('div'); d.textContent = t; return d; }));
+      st.tip.hidden = false;
+      const b = el.getBoundingClientRect(); const x = ev.clientX - b.left, y = ev.clientY - b.top;
+      st.tip.style.left = Math.max(0, Math.min(x + 12, el.clientWidth - st.tip.offsetWidth)) + 'px';
+      st.tip.style.top = Math.max(0, y - st.tip.offsetHeight - 10) + 'px';
+    };
+    const frame = (st, el) => {
+      const W = el.clientWidth || 600, H = Math.round(Math.max(360, Math.min(560, W * 0.72)));
+      st.svg.attr('viewBox', `0 0 ${W} ${H}`);
+      const S = Math.min(W * 0.34, H * 0.5), cx = W / 2, cy = H * 0.52;
+      const ca = Math.cos(st.yaw), sa = Math.sin(st.yaw), cb = Math.cos(st.pitch), sb = Math.sin(st.pitch);
+      const P = (x, y, z) => { const X = x * ca - y * sa, Y = x * sa + y * ca; return { x: cx + X * S, y: cy + (Y * sb - z * cb) * S, d: -Y * cb - z * sb }; };
+      return { W, H, P };
+    };
+    // ejes del suelo y eje vertical
+    const axes = (svg, P, W, zb, Z, xs, ys, xlab, ylab, zticks, zN, zfmt, zlab, xpos, ypos) => {
+      const g = svg.append('g').attr('class', 'grid');
+      xs.forEach((_, i) => { const a = P(xpos(i), -1, zb), b = P(xpos(i), 1, zb); g.append('line').attr('x1', a.x).attr('y1', a.y).attr('x2', b.x).attr('y2', b.y); });
+      ys.forEach((_, j) => { const a = P(-1, ypos(j), zb), b = P(1, ypos(j), zb); g.append('line').attr('x1', a.x).attr('y1', a.y).attr('x2', b.x).attr('y2', b.y); });
+      const corners = [[-1, -1], [1, -1], [1, 1], [-1, 1]];
+      const [ax, ay] = corners[d3.minIndex(corners, ([x, y]) => P(x, y, zb).x)];
+      const z0 = P(ax, ay, -Z), z1 = P(ax, ay, Z);
+      svg.append('line').attr('x1', z0.x).attr('y1', z0.y).attr('x2', z1.x).attr('y2', z1.y).style('stroke', 'var(--cds-chart-axis)');
+      for (const v of zticks) { const q = P(ax, ay, zN(v)); svg.append('text').attr('x', q.x - 6).attr('y', q.y + 4).attr('text-anchor', 'end').text(zfmt(v)); }
+      svg.append('text').attr('x', z1.x).attr('y', z1.y - 10).attr('text-anchor', 'middle').text(zlab);
+      const yFront = P(0, -1, zb).d < P(0, 1, zb).d ? -1 : 1, xFront = P(-1, 0, zb).d < P(1, 0, zb).d ? -1 : 1;
+      const step = (n) => Math.max(1, Math.ceil(n / Math.max(3, Math.floor(W / 90))));
+      xs.forEach((v, i) => { if (i % step(xs.length)) return; const q = P(xpos(i), yFront * 1.12, zb); svg.append('text').attr('x', q.x).attr('y', q.y + 4).attr('text-anchor', 'middle').text(v); });
+      ys.forEach((v, j) => { if (j % step(ys.length)) return; const q = P(xFront * 1.12, ypos(j), zb); svg.append('text').attr('x', q.x).attr('y', q.y + 4).attr('text-anchor', 'middle').text(v); });
+      const lx = P(0, yFront * 1.32, zb), ly = P(xFront * 1.32, 0, zb);
+      svg.append('text').attr('x', lx.x).attr('y', lx.y + 6).attr('text-anchor', 'middle').style('font-weight', 600).text(xlab);
+      svg.append('text').attr('x', ly.x).attr('y', ly.y + 6).attr('text-anchor', 'middle').style('font-weight', 600).text(ylab);
+    };
+    // superficie: grid[i][j] valor en xs[i], ys[j]
+    const surface = (el, st, cfg) => {
+      const { xs, ys, grid, be, zfmt, zlab, xlab, ylab, info, marks } = cfg;
+      const vals = grid.flat().filter((v) => v !== null && Number.isFinite(v));
+      let zmin = d3.min(vals), zmax = d3.max(vals); if (zmin === zmax) { zmin -= 1; zmax += 1; }
+      const Z = 0.62, zN = (v) => ((v - zmin) / (zmax - zmin)) * 2 * Z - Z;
+      const cOk = resolveColor(el, '--color-ok', '#2f9e44'), cBad = resolveColor(el, '--color-bad', '#d6336c'), cMid = resolveColor(el, '--color-panel', '#eee');
+      const color = (v) => v >= be ? d3.interpolateRgb(cMid, cOk)(Math.min(1, 0.25 + 0.75 * (zmax > be ? (v - be) / (zmax - be) : 0)))
+        : d3.interpolateRgb(cMid, cBad)(Math.min(1, 0.25 + 0.75 * (be > zmin ? (be - v) / (be - zmin) : 0)));
+      const xpos = (i) => -1 + (2 * i) / (xs.length - 1), ypos = (j) => -1 + (2 * j) / (ys.length - 1);
+      st.render = () => {
+        const { W, P } = frame(st, el); const svg = st.svg; svg.selectAll('*').remove();
+        axes(svg, P, W, -Z, Z, xs, ys, xlab, ylab, d3.ticks(zmin, zmax, 4), zN, zfmt, zlab, xpos, ypos);
+        const quads = [];
+        for (let i = 0; i < xs.length - 1; i++) for (let j = 0; j < ys.length - 1; j++) {
+          const cs = [[i, j], [i + 1, j], [i + 1, j + 1], [i, j + 1]].map(([a, b]) => ({ a, b, v: grid[a][b] }));
+          if (cs.some((c) => c.v === null || !Number.isFinite(c.v))) continue;
+          cs.forEach((c) => { c.q = P(xpos(c.a), ypos(c.b), zN(c.v)); });
+          quads.push({ cs, d: d3.mean(cs, (c) => c.q.d), v: d3.mean(cs, (c) => c.v) });
+        }
+        quads.sort((a, b) => b.d - a.d);
+        svg.append('g').selectAll('path').data(quads).join('path')
+          .attr('d', (q) => 'M' + q.cs.map((c) => c.q.x + ',' + c.q.y).join('L') + 'Z')
+          .style('fill', (q) => color(q.v)).style('stroke', 'var(--color-bg)').attr('stroke-width', 0.6).attr('stroke-opacity', 0.7)
+          .on('pointermove', (ev, q) => { const [mx, my] = d3.pointer(ev, svg.node()); const c = q.cs[d3.minIndex(q.cs, (c) => (c.q.x - mx) ** 2 + (c.q.y - my) ** 2)]; showTip(st, el, ev, info(c.a, c.b)); })
+          .on('pointerleave', () => { st.tip.hidden = true; });
+        const gm = svg.append('g').style('pointer-events', 'none');
+        for (const m of marks || []) {
+          if (m.i < 0 || m.j < 0 || grid[m.i][m.j] === null) continue;
+          const q = P(xpos(m.i), ypos(m.j), zN(grid[m.i][m.j]));
+          gm.append('circle').attr('cx', q.x).attr('cy', q.y).attr('r', 5).style('fill', m.color).style('stroke', 'var(--color-bg)').attr('stroke-width', 2);
+          gm.append('text').attr('x', q.x + 8).attr('y', q.y - 8).style('fill', 'var(--color-fg)').style('font-weight', 600).text(m.name);
+        }
+      };
+      st.render();
+    };
+    // barras: cells [{i, j, v, fill, info}]
+    const bars = (el, st, cfg) => {
+      const { xs, ys, cells, zfmt, zlab, xlab, ylab, gap = 0.18 } = cfg;
+      const vs = cells.map((c) => c.v);
+      let zmin = Math.min(0, d3.min(vs)), zmax = Math.max(0, d3.max(vs)); if (zmin === zmax) zmax = 1;
+      const Z = 0.62, zN = (v) => ((v - zmin) / (zmax - zmin)) * 2 * Z - Z;
+      const cw = 2 / xs.length, ch = 2 / ys.length;
+      const xpos = (i) => -1 + cw * (i + 0.5), ypos = (j) => -1 + ch * (j + 0.5);
+      st.render = () => {
+        const { W, P } = frame(st, el); const svg = st.svg; svg.selectAll('*').remove();
+        const zb = zN(0);
+        axes(svg, P, W, zb, Z, xs, ys, xlab, ylab, d3.ticks(zmin, zmax, 4), zN, zfmt, zlab, xpos, ypos);
+        const faces = [];
+        for (const c of cells) {
+          const x0 = xpos(c.i) - cw * (0.5 - gap / 2), x1 = xpos(c.i) + cw * (0.5 - gap / 2);
+          const y0 = ypos(c.j) - ch * (0.5 - gap / 2), y1 = ypos(c.j) + ch * (0.5 - gap / 2);
+          const za = zb, zt = zN(c.v);
+          const top = [[x0, y0, zt], [x1, y0, zt], [x1, y1, zt], [x0, y1, zt]];
+          const sides = [
+            [[x0, y0, za], [x1, y0, za], [x1, y0, zt], [x0, y0, zt]], [[x1, y0, za], [x1, y1, za], [x1, y1, zt], [x1, y0, zt]],
+            [[x1, y1, za], [x0, y1, za], [x0, y1, zt], [x1, y1, zt]], [[x0, y1, za], [x0, y0, za], [x0, y0, zt], [x0, y1, zt]],
+          ];
+          for (const [k, f] of [[1, top], ...sides.map((s) => [0.72, s])]) {
+            const q = f.map(([a, b, z]) => P(a, b, z));
+            faces.push({ c, q, d: d3.mean(q, (p) => p.d), shade: k });
+          }
+        }
+        faces.sort((a, b) => b.d - a.d);
+        svg.append('g').selectAll('path').data(faces).join('path')
+          .attr('d', (f) => 'M' + f.q.map((p) => p.x + ',' + p.y).join('L') + 'Z')
+          .style('fill', (f) => f.c.fill).attr('fill-opacity', (f) => f.shade).style('stroke', 'var(--color-bg)').attr('stroke-width', 0.4)
+          .on('pointermove', (ev, f) => showTip(st, el, ev, f.c.info))
+          .on('pointerleave', () => { st.tip.hidden = true; });
+      };
+      st.render();
+    };
+    return { mount, surface, bars, money, fmt0 };
+  })();
+</script>
+
+<script>
+  // ---------- datos, controles y dibujos
+  dash.calc('resumen', {
+    inputs: ['dias'],
+    title: 'Resumen 2026',
+    description: 'Días operados, % de días ganados, neto, mejor y peor día del modelo B en 2026.',
+    fn: (dias) => {
+      const usd = dias.map((d) => Number(d.usd));
+      const best = dias[d3.maxIndex(usd)], worst = dias[d3.minIndex(usd)];
+      return [{ n: usd.length, wr: usd.filter((v) => v > 0).length / usd.length, net: d3.sum(usd), mejor: d3.max(usd), mejor_fecha: best.date, peor: d3.min(usd), peor_fecha: worst.date }];
+    },
+  });
+
+  dash.calc('mes_dia', {
+    inputs: ['dias'],
+    title: 'Neto por mes y día de la semana',
+    description: 'Suma del resultado en USD de cada día de la semana dentro de cada mes de 2026.',
+    fn: (dias) => {
+      const out = [];
+      for (const [k, v] of d3.group(dias, (d) => `${d.mes}|${d.dia}`)) {
+        out.push({ clave: k, mes: Number(v[0].mes), dia: Number(v[0].dia), n: v.length, net: d3.sum(v, (d) => Number(d.usd)), ganados: v.filter((d) => Number(d.usd) > 0).length });
+      }
+      return out;
+    },
+  });
+
+  (() => {
+    const { money, fmt0 } = R3D;
+    const MESES = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+    const DIAS = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie'];
+    const mark = (src, field, text, cls) => { const e = document.createElement('span'); e.dataset.source = src; e.dataset.field = field; e.textContent = text; if (cls) e.className = cls; return e; };
+    const one = () => { const d = dash.data('resumen'); return d.status === 'ok' && d.data ? d.data[0] : null; };
+
+    for (const [id, p] of [['sel-m1', 'm1'], ['sel-m2', 'm2']]) for (const el of document.querySelectorAll('#' + id)) el.addEventListener('change', () => dash.setParams({ [p]: el.value }));
+    dash.onData(() => {
+      for (const [id, p] of [['sel-m1', 'm1'], ['sel-m2', 'm2']]) for (const el of document.querySelectorAll('#' + id)) if (document.activeElement !== el) el.value = dash.params()[p] || 'avg';
+    });
+
+    const kpi = (name, field, f, cls) => dash.draw(name, (el) => {
+      const r = one(); if (!r) { el.replaceChildren('—'); return; }
+      el.replaceChildren(mark('resumen', field, f(r[field])));
+      el.className = 'm3-kpi-v ' + (cls ? cls(r[field]) : '');
+    });
+    kpi('k-n', 'n', fmt0);
+    kpi('k-wr', 'wr', d3.format('.0%'));
+    kpi('k-net', 'net', money, (v) => (v >= 0 ? 'm3-good' : 'm3-bad'));
+    kpi('k-best', 'mejor', money, () => 'm3-good');
+    kpi('k-worst', 'peor', money, () => 'm3-bad');
+
+    dash.draw('frase', (el) => {
+      const r = one(); if (!r) { el.replaceChildren('—'); return; }
+      el.replaceChildren('En 2026 el modelo B operó ', mark('resumen', 'n', fmt0(r.n)), ' días, ganó el ', mark('resumen', 'wr', d3.format('.0%')(r.wr)),
+        ' y dejó ', mark('resumen', 'net', money(r.net), r.net >= 0 ? 'm3-good' : 'm3-bad'), '. Un día bueno deja como máximo ', mark('resumen', 'mejor', money(r.mejor)), ' (TP1 + TP2) y uno malo cuesta ', mark('resumen', 'peor', money(r.peor)), ' (stop en los 2 contratos).');
+    });
+
+    const CLS = { 'Ganó (TP)': 'var(--color-ok)', 'Perdió (SL)': 'var(--color-bad)', 'Cerró a las 15:59': 'var(--color-warn)' };
+
+    dash.draw('g-calendario', {
+      mount: (el) => R3D.mount(el, -0.55, 0.7),
+      update: (el, st) => {
+        const d = dash.data('dias'); if (d.status !== 'ok') { st.svg.selectAll('*').remove(); return; }
+        const weeks = [...new Set(d.data.map((r) => Number(r.semana)))].sort((a, b) => a - b);
+        st.svg.attr('aria-label', 'Calendario 3D de 2026: resultado de cada día por semana y día de la semana');
+        R3D.bars(el, st, {
+          xs: weeks.map((w) => 'S' + w), ys: DIAS, xlab: 'Semana del año', ylab: 'Día', zlab: 'USD del día', zfmt: money, gap: 0.12,
+          cells: d.data.map((r) => ({ i: weeks.indexOf(Number(r.semana)), j: Number(r.dia), v: Number(r.usd), fill: CLS[r.resultado] || 'var(--color-fg-muted)',
+            info: [r.date, `${r.resultado} · ${r.desenlace}`, r.lado, money(Number(r.usd))] })),
+        });
+      },
+    });
+
+    dash.draw('g-mesdia', {
+      mount: (el) => R3D.mount(el, -0.7, 0.66),
+      update: (el, st) => {
+        const d = dash.data('mes_dia'); if (d.status !== 'ok' || !d.data) { st.svg.selectAll('*').remove(); return; }
+        const meses = [...new Set(d.data.map((r) => r.mes))].sort((a, b) => a - b);
+        st.svg.attr('aria-label', 'Barras 3D del neto por mes y día de la semana en 2026');
+        R3D.bars(el, st, {
+          xs: meses.map((m) => MESES[m - 1]), ys: DIAS, xlab: 'Mes', ylab: 'Día', zlab: 'Neto USD', zfmt: money,
+          cells: d.data.map((r) => ({ i: meses.indexOf(r.mes), j: r.dia, v: r.net, fill: r.net >= 0 ? 'var(--color-ok)' : 'var(--color-bad)',
+            info: [`${DIAS[r.dia]} de ${MESES[r.mes - 1]}`, `Neto ${money(r.net)}`, `${r.ganados} de ${r.n} días ganados`] })),
+        });
+      },
+    });
+
+    const metric = (p) => dash.params()[p] || 'avg';
+    const MET = { avg: ['USD por operación', money, 0, (r) => +r.avg], pf: ['Factor de beneficio', d3.format('.2f'), 1, (r) => +r.pf], wr: ['Acierto %', (v) => d3.format('.0f')(v) + '%', 50, (r) => +r.wr * 100] };
+
+    dash.draw('g-sltp', {
+      mount: (el) => R3D.mount(el),
+      update: (el, st) => {
+        const d = dash.data('sup_sl_tp'); if (d.status !== 'ok') { st.svg.selectAll('*').remove(); return; }
+        const [lab, f, be, get] = MET[metric('m1')];
+        const sls = [...new Set(d.data.map((r) => +r.sl))].sort((a, b) => a - b), tps = [...new Set(d.data.map((r) => +r.tp1))].sort((a, b) => a - b);
+        const map = new Map(d.data.map((r) => [`${+r.sl}|${+r.tp1}`, r]));
+        const grid = sls.map((s) => tps.map((t) => (map.has(`${s}|${t}`) ? get(map.get(`${s}|${t}`)) : null)));
+        const best = d.data.reduce((a, r) => (get(r) > get(a) ? r : a), d.data[0]);
+        st.svg.attr('aria-label', `Superficie 3D de ${lab} según SL y TP1 en 2026`);
+        R3D.surface(el, st, {
+          xs: sls, ys: tps, grid, be, zfmt: f, zlab: lab, xlab: 'Stop (ticks)', ylab: 'TP1 (ticks)',
+          info: (i, j) => { const r = map.get(`${sls[i]}|${tps[j]}`); return [`SL ${r.sl} · TP ${r.tp1}/${r.tp2}`, `Esperanza ${money(+r.avg)} / op`, `Factor ${d3.format('.2f')(+r.pf)}`, `Acierto ${d3.format('.0%')(+r.wr)}`, `Neto ${money(+r.net)}`]; },
+          marks: [{ i: sls.indexOf(45), j: tps.indexOf(30), name: 'Tu config', color: 'var(--color-fg)' }, { i: sls.indexOf(+best.sl), j: tps.indexOf(+best.tp1), name: 'Mejor', color: 'var(--color-ok)' }],
+        });
+      },
+    });
+
+    dash.draw('frase-sltp', (el) => {
+      const d = dash.data('sup_sl_tp'); if (d.status !== 'ok' || !d.data.length) { el.replaceChildren('—'); return; }
+      const mine = d.data.find((r) => +r.sl === 45 && +r.tp1 === 30), pos = d.data.filter((r) => +r.avg > 0).length;
+      const m = (r, f, t) => { const e = document.createElement('b'); e.dataset.source = 'sup_sl_tp'; e.dataset.field = f; e.dataset.where = `sl=${r.sl}&tp1=${r.tp1}`; e.textContent = t; return e; };
+      el.replaceChildren(`En 2026, ${pos} de ${d.data.length} combinaciones ganan. Tu SL 45 · TP 30/60 da `, m(mine, 'avg', money(+mine.avg)), ' por operación (factor ', m(mine, 'pf', d3.format('.2f')(+mine.pf)), ').');
+    });
+
+    dash.draw('g-horasl', {
+      mount: (el) => R3D.mount(el, -0.9, 0.6),
+      update: (el, st) => {
+        const d = dash.data('sup_hora_sl'); if (d.status !== 'ok') { st.svg.selectAll('*').remove(); return; }
+        const [lab, f, be, get] = MET[metric('m2')];
+        const horas = [...new Set(d.data.map((r) => +r.min))].sort((a, b) => a - b), sls = [...new Set(d.data.map((r) => +r.sl))].sort((a, b) => a - b);
+        const map = new Map(d.data.map((r) => [`${+r.min}|${+r.sl}`, r]));
+        const hl = (m) => `${Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')}`;
+        const grid = horas.map((h) => sls.map((s) => (map.has(`${h}|${s}`) ? get(map.get(`${h}|${s}`)) : null)));
+        const best = d.data.reduce((a, r) => (get(r) > get(a) ? r : a), d.data[0]);
+        st.svg.attr('aria-label', `Superficie 3D de ${lab} según hora de entrada y SL en 2026`);
+        R3D.surface(el, st, {
+          xs: horas.map(hl), ys: sls, grid, be, zfmt: f, zlab: lab, xlab: 'Hora CDMX', ylab: 'Stop (ticks)',
+          info: (i, j) => { const r = map.get(`${horas[i]}|${sls[j]}`); return [`${r.hora} CDMX · SL ${r.sl} · TP 30/60`, `Esperanza ${money(+r.avg)} / op`, `Factor ${d3.format('.2f')(+r.pf)}`, `Acierto ${d3.format('.0%')(+r.wr)}`, `Neto ${money(+r.net)}`]; },
+          marks: [{ i: horas.indexOf(552), j: sls.indexOf(45), name: 'Tu config', color: 'var(--color-fg)' }, { i: horas.indexOf(+best.min), j: sls.indexOf(+best.sl), name: 'Mejor', color: 'var(--color-ok)' }],
+        });
+      },
+    });
+
+    dash.draw('frase-horasl', (el) => {
+      const d = dash.data('sup_hora_sl'); if (d.status !== 'ok' || !d.data.length) { el.replaceChildren('—'); return; }
+      const best = d.data.reduce((a, r) => (+r.avg > +a.avg ? r : a), d.data[0]);
+      const pos = d.data.filter((r) => +r.avg > 0).length;
+      const b = document.createElement('b'); b.dataset.source = 'sup_hora_sl'; b.dataset.field = 'avg'; b.dataset.where = `hora=${encodeURIComponent(best.hora)}&sl=${best.sl}`; b.textContent = money(+best.avg);
+      el.replaceChildren(`${pos} de ${d.data.length} combinaciones de hora y stop ganan en 2026. La mejor es a las ${best.hora} CDMX con SL ${best.sl}: `, b, ' por operación. Que la mejor hora cambie de un año a otro es la razón para no elegirla solo con estos datos.');
+    });
+  })();
+</script>
