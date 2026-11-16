@@ -1,0 +1,1435 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ORBE — Trading con data y análisis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--accent:#089981;--ink:#f2f2f2;--mute:#8f8f8f;--sub:#a3a3a3;--line:#2a2a2a}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#000}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;overflow:hidden}
+a{color:#bdbdbd;text-decoration:none;transition:color .2s}
+a:hover{color:#fff}
+.hero{position:relative;width:100%;height:100vh;height:100svh;min-height:600px;overflow:hidden;background:#000}
+#orbe{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+/* nav */
+nav.top{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:28px clamp(20px,3vw,44px) 0}
+.brand{display:flex;align-items:center;gap:12px;color:#fff}
+.brand span{font-family:Montserrat,sans-serif;font-weight:400;font-size:21px;letter-spacing:.14em}
+.links{display:flex;align-items:center;gap:clamp(18px,2.4vw,36px);font-size:13.5px}
+.links a{position:relative;padding:12px 0}
+.links a.on{color:#fff}
+.links a.on::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:1px;background:var(--accent)}
+.pill{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border:1px solid #333;border-radius:999px;font-size:13.5px;font-weight:500;color:#fff}
+
+/* views */
+.view{position:absolute;z-index:4;transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.view.off{opacity:0;pointer-events:none}
+
+/* home */
+#home{left:clamp(20px,6vw,96px);top:50%;transform:translateY(-50%);max-width:520px}
+#home.off{transform:translate(-40px,-50%)}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+h1{margin:18px 0 0;font-weight:500;font-size:clamp(38px,4.4vw,70px);line-height:1.02;letter-spacing:-.035em}
+h1 span{color:var(--mute)}
+.lead{margin:22px 0 0;max-width:420px;font-size:clamp(14px,1.05vw,16px);line-height:1.55;color:var(--sub)}
+.cta{display:inline-flex;align-items:center;gap:12px;margin-top:38px;min-height:58px;padding:0 34px;border-radius:999px;background:var(--accent);color:#000;font-weight:600;font-size:16.5px;border:0;cursor:pointer;font-family:inherit;transition:transform .25s,box-shadow .25s}
+.cta:hover{color:#000;transform:translateY(-1px);box-shadow:0 0 36px rgba(8,153,129,.55)}
+.cta svg{transition:transform .25s}
+.cta:hover svg{transform:translateX(3px)}
+
+/* nosotros */
+#nosotros,#servicios{right:clamp(20px,6vw,96px);top:0;bottom:0;width:min(560px,48vw);overflow-y:auto;padding:clamp(110px,16vh,150px) 0 48px;scrollbar-width:none}
+#nosotros::-webkit-scrollbar,#servicios::-webkit-scrollbar{display:none}
+#servicios{left:clamp(20px,6vw,96px);width:auto;padding-top:clamp(300px,46vh,440px)}
+#servicios.off{transform:translateY(40px)}
+#nosotros.off{transform:translateX(40px)}
+#nosotros h2,#servicios h2{margin:16px 0 0;font-weight:500;font-size:clamp(34px,3.6vw,56px);line-height:1.04;letter-spacing:-.03em}
+#nosotros h2 span,#servicios h2 span{color:var(--mute)}
+#nosotros .intro,#servicios .intro{margin:20px 0 0;font-size:15.5px;line-height:1.6;color:var(--sub)}
+.pillars{display:grid;gap:0;margin-top:34px;border-top:1px solid var(--line)}
+.pillar{display:grid;grid-template-columns:56px 1fr;gap:16px;padding:22px 0;border-bottom:1px solid var(--line)}
+.pillar .n{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;color:var(--accent);padding-top:4px}
+.pillar h3{margin:0;font-size:17px;font-weight:600;letter-spacing:-.01em}
+.pillar p{margin:6px 0 0;font-size:14.5px;line-height:1.55;color:var(--sub)}
+.note{margin-top:22px;font-size:13.5px;line-height:1.55;color:#8a8a8a}
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.next{display:inline-flex;align-items:center;gap:12px;min-height:52px;padding:0 28px;border-radius:999px;background:var(--accent);color:#000;font:600 15px Inter,sans-serif;border:0;cursor:pointer;transition:transform .25s,box-shadow .25s}
+.next:hover{color:#000;transform:translateY(-1px);box-shadow:0 0 32px rgba(8,153,129,.5)}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:30px;align-items:start}
+.card{border:1px solid var(--line);border-radius:14px;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);transition:border-color .3s,background .3s,box-shadow .4s}
+.card:hover{border-color:#3a3a3a}
+.card.open{grid-column:1/-1;border-color:var(--accent);background:rgba(4,20,17,.72);box-shadow:0 0 50px rgba(8,153,129,.12)}
+.card-h{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;width:100%;padding:22px;border:0;background:transparent;color:inherit;font:inherit;text-align:left;cursor:pointer;border-radius:14px}
+.card-h:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.card .n{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;color:var(--accent)}
+.card h3{margin:14px 0 0;font-size:18px;font-weight:600}
+.card .short{margin:8px 0 0;font-size:14.5px;line-height:1.55;color:var(--sub)}
+.plus{flex:none;width:34px;height:34px;border-radius:50%;border:1px solid #3a3a3a;display:grid;place-items:center;color:#fff;transition:transform .4s cubic-bezier(.2,.7,.2,1),background .3s,border-color .3s}
+.card.open .plus{transform:rotate(45deg);background:var(--accent);border-color:var(--accent);color:#000}
+.card-b{display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s cubic-bezier(.2,.7,.2,1)}
+.card.open .card-b{grid-template-rows:1fr}
+.card-b>div{overflow:hidden}
+.card-in{padding:0 22px 24px;opacity:0;transform:translateY(-8px);transition:opacity .4s ease .12s,transform .5s cubic-bezier(.2,.7,.2,1) .12s}
+.card.open .card-in{opacity:1;transform:none}
+.perks{list-style:none;margin:4px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.perks li{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border:1px solid #1f3a35;border-radius:10px;background:rgba(8,153,129,.06);font-size:15px;line-height:1.45}
+.perks li svg{flex:none;margin-top:2px;color:var(--accent)}
+.join{display:inline-flex;align-items:center;gap:12px;margin-top:22px;min-height:56px;padding:0 34px;border-radius:999px;background:var(--accent);color:#000;font:700 15px Inter,sans-serif;letter-spacing:.08em;transition:transform .25s,box-shadow .25s}
+.join:hover{color:#000;transform:translateY(-1px);box-shadow:0 0 36px rgba(8,153,129,.55)}
+.cprice{display:flex;align-items:baseline;gap:8px;margin:2px 0 14px}
+.cprice b{font-size:28px;font-weight:600;letter-spacing:-.02em}
+.cprice span{font-size:13.5px;color:#8a8a8a}
+.ph-txt{margin:4px 0 0;font-size:14.5px;color:#8a8a8a}
+#servicios .head{max-width:620px}
+.back{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;border-radius:999px;border:1px solid #333;background:transparent;color:#fff;font:500 14px Inter,sans-serif;cursor:pointer;transition:border-color .2s,background .2s}
+.back:hover{border-color:var(--accent);background:rgba(8,153,129,.08)}
+
+/* stagger in */
+.view .st{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.view:not(.off) .st{opacity:1;transform:none}
+.view:not(.off) .st:nth-child(1){transition-delay:.15s}
+.view:not(.off) .st:nth-child(2){transition-delay:.25s}
+.view:not(.off) .st:nth-child(3){transition-delay:.35s}
+.view:not(.off) .st:nth-child(4){transition-delay:.45s}
+.view:not(.off) .st:nth-child(5){transition-delay:.55s}
+.view:not(.off) .st:nth-child(6){transition-delay:.65s}
+
+.hint{position:absolute;z-index:4;right:clamp(20px,3vw,44px);bottom:28px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;color:#8a8a8a;text-transform:uppercase;transition:opacity .5s}
+body.is-sub .hint{opacity:0}
+
+
+/* ---------- analítica ---------- */
+#analitica{left:clamp(20px,5vw,80px);right:clamp(20px,5vw,80px);top:0;bottom:0;overflow-y:auto;padding:clamp(100px,14vh,130px) 0 56px;scrollbar-width:none}
+#analitica::-webkit-scrollbar{display:none}
+#analitica.off{transform:translateY(40px)}
+#analitica h2{margin:14px 0 0;font-weight:500;font-size:clamp(32px,3.4vw,52px);line-height:1.04;letter-spacing:-.03em;max-width:720px}
+#analitica h2 span{color:var(--mute)}
+.sub{margin:12px 0 0;font-size:14px;color:#8a8a8a}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:28px}
+.grid2{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:14px;margin-top:14px}
+.panel{border:1px solid #242424;border-radius:14px;padding:20px 22px;background:rgba(14,14,14,.82);backdrop-filter:blur(8px)}
+.lbl{display:flex;align-items:center;gap:8px;font-size:13px;color:#b5b5b5}
+.lbl i{width:3px;height:14px;border-radius:2px;background:var(--accent)}
+.big{margin-top:10px;font-size:clamp(30px,2.6vw,40px);font-weight:500;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.pos{color:#3ec9a7}.neg{color:#ff7a66}
+.meter{position:relative;height:10px;border-radius:5px;background:#2a2a2a;margin-top:14px;overflow:hidden}
+.meter b{position:absolute;left:0;top:0;bottom:0;border-radius:4px;width:0;background:var(--accent);transition:width 1.2s cubic-bezier(.2,.7,.2,1) .3s}
+.meter u{position:absolute;top:-2px;bottom:-2px;width:2px;background:#fff;left:0;opacity:0;transition:left 1.2s cubic-bezier(.2,.7,.2,1) .3s,opacity .3s .3s}
+.mono{font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.6;color:#9a9a9a;margin-top:12px}
+.mono strong{color:#fff;font-weight:400}
+.ph{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.ph h3{margin:0;font-size:16px;font-weight:600}
+.seg{display:inline-flex;border:1px solid #333;border-radius:999px;padding:3px}
+.seg button{min-height:34px;padding:0 14px;border-radius:999px;border:0;background:transparent;color:#bdbdbd;font:500 13px Inter,sans-serif;cursor:pointer}
+.seg button.on{background:#fff;color:#000}
+.out{margin-top:16px;display:grid;gap:4px}
+.orow{display:grid;grid-template-columns:150px minmax(0,1fr) 128px;align-items:center;gap:14px;padding:8px 8px;border-radius:8px;cursor:pointer;background:transparent;border:0;color:inherit;font:inherit;text-align:left;width:100%}
+.orow:hover,.orow.sel{background:#1b1b1b}
+.orow .nm{font-size:13.5px;color:#d0d0d0;line-height:1.3}
+.orow .track{height:8px;border-radius:4px;background:#262626;position:relative}
+.orow .fill{position:absolute;left:0;top:0;bottom:0;border-radius:4px;width:0;transition:width .9s cubic-bezier(.2,.7,.2,1)}
+.orow .v{font-family:'JetBrains Mono',monospace;font-size:12.5px;text-align:right;color:#e6e6e6;white-space:nowrap}
+.detail{margin-top:12px;min-height:22px;font-size:13.5px;color:#a3a3a3}
+.detail strong{color:#fff;font-weight:600}
+.ic{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-top:10px;font-size:clamp(28px,2.6vw,40px);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.ic small{font-size:14px;color:#8a8a8a}
+#dens{display:block;width:100%;height:170px;margin-top:10px;touch-action:none;cursor:crosshair}
+.rng{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;margin-top:10px;font-size:13px;color:#b5b5b5}
+.rng input{width:100%;accent-color:#c9a227;min-height:32px}
+.rng output{font-family:'JetBrains Mono',monospace;color:#fff;min-width:52px;text-align:right}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{min-height:36px;padding:0 14px;border-radius:999px;border:1px solid #333;background:transparent;color:#cfcfcf;font:500 12.5px 'JetBrains Mono',monospace;cursor:pointer}
+.chip.on{border-color:var(--accent);background:rgba(8,153,129,.15);color:#fff}
+.cfg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}
+.cfg div{border:1px solid #242424;border-radius:10px;padding:10px 12px}
+.cfg span{display:block;font-size:11.5px;color:#8a8a8a}
+.cfg b{display:block;margin-top:4px;font-size:18px;font-weight:500;font-variant-numeric:tabular-nums}
+.cbars{margin-top:16px;display:grid;gap:6px}
+.cbar{display:grid;grid-template-columns:120px minmax(0,1fr) 70px;gap:10px;align-items:center;font-family:'JetBrains Mono',monospace;font-size:12px;color:#bdbdbd;cursor:pointer;padding:4px 6px;border-radius:6px;border:0;background:transparent;width:100%;text-align:left}
+.cbar.on{background:#1b1b1b;color:#fff}
+.cbar .axis{position:relative;height:12px}
+.cbar .axis::before{content:"";position:absolute;left:50%;top:-3px;bottom:-3px;width:1px;background:#444}
+.cbar .bar{position:absolute;top:2px;height:8px;border-radius:4px}
+.cbar .val{text-align:right}
+.caveat{margin-top:14px;font-size:13px;line-height:1.55;color:#8a8a8a}
+.disc{margin-top:18px;font-size:12px;color:#777}
+.selwrap{display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:#8a8a8a}
+.selwrap select{min-height:40px;padding:0 12px;border-radius:8px;border:1px solid #333;background:#121212;color:#fff;font:500 13.5px Inter,sans-serif;text-transform:none;letter-spacing:0}
+.selwrap select:focus{outline:2px solid var(--accent);outline-offset:1px}
+.surfbox{position:relative;margin-top:10px}
+#surf{display:block;width:100%;height:clamp(300px,42vw,460px);cursor:grab;touch-action:none}
+#surf:active{cursor:grabbing}
+.tip{position:absolute;z-index:2;min-width:176px;padding:10px 12px;border-radius:10px;background:rgba(12,12,12,.95);border:1px solid #333;font-family:'JetBrains Mono',monospace;font-size:12px;display:grid;grid-template-columns:auto auto;gap:3px 16px;pointer-events:none}
+.tip b{grid-column:1/-1;color:#fff;font-weight:500;margin-bottom:4px}
+.tip span{color:#9a9a9a}.tip em{font-style:normal;color:#fff;text-align:right}
+.draghint{position:absolute;right:6px;bottom:6px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;color:#8a8a8a;text-transform:uppercase}
+.goldp{border-color:rgba(201,152,40,.45);box-shadow:0 0 60px rgba(201,152,40,.08) inset}
+.serif{font-family:Georgia,'Times New Roman',serif}
+.icbar{position:relative;height:12px;border-radius:6px;background:#222;margin-top:18px}
+.icbar .band{position:absolute;top:0;bottom:0;border-radius:6px;background:linear-gradient(90deg,#8a6a1c,#e0aa34,#8a6a1c)}
+.icbar .zero{position:absolute;top:-4px;bottom:-4px;width:2px;background:#e5533d}
+.icbar .dot{position:absolute;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px #111}
+.icends{display:flex;justify-content:space-between;margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#8a8a8a}
+#ridge{display:block;width:100%;height:260px;margin-top:10px}
+@media (max-width:1000px){.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}.grid2{grid-template-columns:1fr}}
+@media (max-width:760px){
+  #analitica{left:16px;right:16px;padding-top:110px}
+  .orow{grid-template-columns:110px minmax(0,1fr) 96px;gap:10px}
+  .cfg{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cbar{grid-template-columns:96px minmax(0,1fr) 60px}
+}
+
+/* ---------- panel de cobro ---------- */
+.pay{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:20px;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .35s ease}
+.pay.on{opacity:1;pointer-events:auto}
+.pay-box{position:relative;width:min(460px,100%);max-height:calc(100vh - 40px);overflow-y:auto;border:1px solid #1f3a35;border-radius:18px;background:linear-gradient(180deg,#0b1513,#070707 60%);box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 60px rgba(8,153,129,.12);padding:28px;transform:translateY(24px) scale(.97);transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.pay.on .pay-box{transform:none}
+.pay-x{position:absolute;top:14px;right:14px;width:44px;height:44px;border-radius:50%;border:1px solid #333;background:transparent;color:#fff;cursor:pointer;display:grid;place-items:center}
+.pay-x:hover{border-color:var(--accent)}
+.pay h3{margin:12px 0 0;font-size:26px;font-weight:600;letter-spacing:-.02em}
+.pay .desc{margin:6px 0 0;font-size:14.5px;color:var(--sub)}
+.price{display:flex;align-items:baseline;gap:8px;margin-top:20px;padding:16px 18px;border:1px solid #242424;border-radius:12px;background:rgba(255,255,255,.02)}
+.price b{font-size:30px;font-weight:600;letter-spacing:-.02em}
+.price span{color:#8a8a8a;font-size:14px}
+.pay ul{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:8px}
+.pay li{display:flex;gap:10px;font-size:14px;color:#cfcfcf;line-height:1.4}
+.pay li svg{flex:none;margin-top:2px;color:var(--accent)}
+.method{display:flex;align-items:center;gap:12px;margin-top:20px;padding:14px 16px;border:1px solid var(--accent);border-radius:12px;background:rgba(8,153,129,.08)}
+.method .ic{width:40px;height:28px;border-radius:6px;border:1px solid #2f5a52;display:grid;place-items:center;color:#fff}
+.method small{display:block;color:#8a8a8a;font-size:12.5px;margin-top:2px}
+.paybtn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:18px;min-height:56px;border-radius:999px;border:0;background:var(--accent);color:#000;font:700 15px Inter,sans-serif;letter-spacing:.06em;cursor:pointer;transition:box-shadow .25s,transform .25s}
+.paybtn:hover{color:#000;transform:translateY(-1px);box-shadow:0 0 36px rgba(8,153,129,.55)}
+.secure{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;font-size:12.5px;color:#8a8a8a;text-align:center}
+.paynote{margin-top:12px;font-size:13px;color:#ffb36b;text-align:center;min-height:18px}
+body.pay-open{overflow:hidden}
+
+/* ---------- velas 3D de partículas ---------- */
+.candles{position:relative;margin-top:40px;height:clamp(340px,42vw,540px)}
+#velas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y}
+.quote{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none;padding:0 20px}
+.quote p{margin:16px 0 0;max-width:760px;font-weight:500;font-size:clamp(34px,4.6vw,72px);line-height:1.02;letter-spacing:-.035em;color:#f2f2f2;text-shadow:0 0 30px rgba(0,0,0,.85)}
+.quote p span{color:var(--mute)}
+.candles .hint2{position:absolute;right:4px;bottom:4px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;color:#8a8a8a;text-transform:uppercase}
+
+/* ---------- intro ---------- */
+.orbe-intro{position:fixed;inset:0;z-index:100;background:#000;transition:opacity .35s ease}
+.orbe-intro.done{opacity:0;pointer-events:none}
+#introCv{position:absolute;inset:0;width:100%;height:100%;display:block}
+.skip{position:absolute;right:20px;bottom:20px;min-height:44px;padding:0 18px;border:1px solid #333;border-radius:999px;background:rgba(0,0,0,.6);color:#cfcfcf;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;z-index:2}
+.skip:hover{border-color:var(--accent);color:#fff}
+@media (prefers-reduced-motion:reduce){.orbe-intro{display:none}}
+
+/* ---------- rango de esperanza 3D ---------- */
+.ic3d{position:relative;margin-top:18px;border-top:1px solid rgba(201,152,40,.25);padding-top:16px}
+.ic3d-h span{display:block;font-size:15px;font-weight:600;color:#fff;text-transform:none}
+.ic3d-h small{display:block;margin-top:4px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#8a8a8a}
+.ic3d-leg{display:flex;flex-wrap:wrap;gap:16px;margin-top:10px;font-size:12.5px;color:#bdbdbd}
+.ic3d-leg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+#ic3d{display:block;width:100%;height:clamp(300px,36vw,460px);margin-top:6px;cursor:grab;touch-action:none}
+#ic3d:active{cursor:grabbing}
+ .ic3d-ctl{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.ic3d-ctl button{min-height:38px;padding:0 14px;border-radius:999px;border:1px solid #333;background:transparent;color:#cfcfcf;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.ic3d-ctl button.on{border-color:#e0aa34;background:rgba(224,170,52,.14);color:#fff}
+.ic3d-hint{position:absolute;right:4px;bottom:4px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;color:#8a8a8a;text-transform:uppercase}
+@media (max-width:760px){
+  .links{display:none}
+  #home{left:20px;right:20px;top:auto;bottom:56px;transform:none;max-width:none}
+  #home.off{transform:translateY(30px)}
+  #nosotros{left:20px;right:20px;width:auto;padding-top:38vh}
+  #nosotros.off{transform:translateY(30px)}
+  #servicios{right:20px;padding-top:32vh}
+  .cards{grid-template-columns:1fr}
+  .perks{grid-template-columns:1fr}
+  .hint{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .view,.view .st{transition:opacity .2s !important;transform:none !important}
+}
+</style>
+</head>
+<body>
+<div class="orbe-intro" id="intro" aria-label="Introducción animada de ORBE">
+  <canvas id="introCv" aria-hidden="true"></canvas>
+  <button type="button" class="skip" id="skip">Saltar intro</button>
+</div>
+<script>
+/* ================= ESCENAS (se usan en la intro y en las tarjetas) ================= */
+const G = '#3ec9a7', R = '#ff5b5b', ACC = '#089981';
+function rngFrom(seed) { let s = seed >>> 0 || 1; return () => (s = (s * 16807) % 2147483647) / 2147483647; }
+function pricePath(n, seed, vol = 1) {
+  const r = rngFrom(seed); let v = 0, tr = 0; const p = [];
+  for (let i = 0; i < n; i++) { tr = tr * 0.9 + (r() - 0.5) * 0.5 * vol; v += tr + (r() - 0.5) * vol; p.push(v); }
+  const lo = Math.min(...p), hi = Math.max(...p); return p.map((x) => (x - lo) / (hi - lo || 1));
+}
+const fmt = (n) => n.toLocaleString('en-US');
+const PATHS = { a: pricePath(240, 11, 1.2), b: pricePath(240, 23), c: pricePath(240, 5, 1.4), d: pricePath(240, 77) };
+
+function txt(ctx, s, x, y, size, color, weight = 400, align = 'left', font = 'Inter') {
+  ctx.font = `${weight} ${size}px ${font === 'mono' ? '"SF Mono",Menlo,Consolas,monospace' : 'Inter,sans-serif'}`;
+  ctx.fillStyle = color; ctx.textAlign = align; ctx.fillText(s, x, y);
+}
+
+const SCENES = {
+  // 1) aviso de señal que se escribe solo
+  alert(ctx, W, H, t) {
+    const s = Math.min(W, H * 1.6) / 340;
+    const lines = [['▼ Señal ORBE · NQ', '#fff', 15], ['Precio', '#cfcfcf', 12], ['20,564', '#8a8a8a', 11], ['Hora de la señal', '#cfcfcf', 12], ['08:35 CDMX', '#8a8a8a', 11], ['Gráfica · 1m', '#cfcfcf', 12], ['Ejemplo ilustrativo · no es asesoría financiera', '#6a6a6a', 9.5]];
+    const x = W * 0.16, y0 = H * 0.18;
+    ctx.fillStyle = 'rgba(255,255,255,.08)'; ctx.fillRect(x - 12 * s, y0 - 18 * s, 2 * s, lines.length * 19 * s + 6 * s);
+    let total = 0; lines.forEach((l, i) => {
+      const chars = Math.max(0, Math.min(l[0].length, Math.floor((t * 38) - total)));
+      total += l[0].length + 4;
+      txt(ctx, l[0].slice(0, chars), x, y0 + i * 19 * s, l[2] * s, l[1], i === 0 ? 500 : 400, 'left', i ? 'mono' : 'Inter');
+    });
+    if (Math.floor(t * 2) % 2 === 0) { ctx.fillStyle = ACC; ctx.fillRect(x - 12 * s, y0 + lines.length * 19 * s, 6 * s, 2 * s); }
+  },
+  // 2) número grande + trazo de precio con marcador
+  pnl(ctx, W, H, t) {
+    const p = PATHS.a, n = Math.min(p.length, Math.floor(t * 70) + 2);
+    const val = Math.min(1091, Math.round(1091 * Math.min(1, t / 2.2)));
+    txt(ctx, '+$' + fmt(val), W * 0.08, H * 0.3, Math.min(W * 0.17, H * 0.24), G, 400);
+    const top = H * 0.42, h = H * 0.48;
+    ctx.strokeStyle = '#d0d0d0'; ctx.lineWidth = Math.max(1, W / 400); ctx.beginPath();
+    for (let i = 0; i < n; i++) { const x = W * 0.06 + i / (p.length - 1) * W * 0.88, y = top + (1 - p[i]) * h; i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }
+    ctx.stroke();
+    if (n > 60) {
+      const i = 60, x = W * 0.06 + i / (p.length - 1) * W * 0.88, y = top + (1 - p[i]) * h;
+      ctx.setLineDash([3, 4]); ctx.strokeStyle = 'rgba(255,255,255,.35)'; ctx.beginPath(); ctx.moveTo(x, top - 8); ctx.lineTo(x, H - 6); ctx.moveTo(W * 0.06, y); ctx.lineTo(W * 0.94, y); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = G; ctx.beginPath(); ctx.moveTo(x, y + 6); ctx.lineTo(x - 6, y + 16); ctx.lineTo(x + 6, y + 16); ctx.closePath(); ctx.fill();
+    }
+  },
+  // 3) flujo de números + estadísticas reales
+  data(ctx, W, H, t) {
+    const r = rngFrom(3 + Math.floor(t * 12)); const fs = Math.max(7, Math.min(10, W / 70));
+    ctx.font = `${fs}px "SF Mono",Menlo,monospace`; ctx.textAlign = 'left';
+    const colW = fs * 11, rows = Math.ceil(H / (fs * 1.3)) + 1, cols = Math.ceil(W / colW);
+    for (let c = 0; c < cols; c++) for (let j = 0; j < rows; j++) {
+      const k = r(); ctx.fillStyle = k > 0.96 ? 'rgba(62,201,167,.8)' : k > 0.93 ? 'rgba(255,91,91,.7)' : 'rgba(150,150,150,.28)';
+      const yy = ((j * fs * 1.3 + t * 40 * (c % 2 ? 1 : 0.7)) % (H + fs * 2)) - fs;
+      ctx.fillText(`${String(10 + ((j + c) % 50)).padStart(2, '0')}:${String((j * 7 + c) % 60).padStart(2, '0')} ${(20480 + r() * 80).toFixed(2)}`, c * colW + 4, yy);
+    }
+    const stats = [['OPERACIONES', 476], ['GANADORAS', 298], ['PERDEDORAS', 178], ['TASA DE ACIERTO', 62.6, '%'], ['FACTOR', 1.07]];
+    const s = Math.min(W / 300, H / 230);
+    stats.forEach((st, i) => {
+      const k = Math.min(1, Math.max(0, (t - i * 0.25) / 1.2)), v = st[1] * (1 - Math.pow(1 - k, 3));
+      const y = H * 0.18 + i * 40 * s;
+      ctx.fillStyle = 'rgba(0,0,0,.7)'; ctx.fillRect(W * 0.08 - 4, y - 30 * s, 190 * s, 36 * s);
+      txt(ctx, st[0], W * 0.08, y - 18 * s, 8 * s, '#fff', 500, 'left', 'mono');
+      txt(ctx, (st[1] % 1 ? v.toFixed(st[1] < 2 ? 2 : 1) : fmt(Math.round(v))) + (st[2] || ''), W * 0.08, y + 2 * s, 22 * s, '#fff', 300);
+    });
+  },
+  // 4) gráfica con triángulos de compra y venta
+  signals(ctx, W, H, t) {
+    const p = PATHS.c, n = p.length, top = H * 0.16, h = H * 0.62;
+    const X = (i) => W * 0.05 + i / (n - 1) * W * 0.9, Y = (v) => top + (1 - v) * h;
+    // banda de ruido gris
+    const r = rngFrom(9); ctx.fillStyle = 'rgba(200,200,200,.07)';
+    for (let i = 0; i < n; i += 2) { const y = Y(p[i]) + (r() - 0.5) * 18; ctx.fillRect(X(i), y, 2, 10 + r() * 30); }
+    const m = Math.min(n, Math.floor(t * 90) + 2);
+    ctx.strokeStyle = '#e6e6e6'; ctx.lineWidth = Math.max(1, W / 450); ctx.beginPath();
+    for (let i = 0; i < m; i++) i ? ctx.lineTo(X(i), Y(p[i])) : ctx.moveTo(X(i), Y(p[i])); ctx.stroke();
+    for (let i = 8; i < m - 4; i++) {
+      const isTop = p[i] > p[i - 6] && p[i] > p[i + 4] && p[i] >= Math.max(...p.slice(i - 6, i + 5));
+      const isBot = p[i] < p[i - 6] && p[i] < p[i + 4] && p[i] <= Math.min(...p.slice(i - 6, i + 5));
+      const sz = Math.max(4, W / 90);
+      if (isTop) { ctx.fillStyle = R; ctx.beginPath(); const x = X(i), y = Y(p[i]) - 6; ctx.moveTo(x, y); ctx.lineTo(x - sz, y - sz * 1.6); ctx.lineTo(x + sz, y - sz * 1.6); ctx.fill(); }
+      if (isBot) { ctx.fillStyle = G; ctx.beginPath(); const x = X(i), y = Y(p[i]) + 6; ctx.moveTo(x, y); ctx.lineTo(x - sz, y + sz * 1.6); ctx.lineTo(x + sz, y + sz * 1.6); ctx.fill(); }
+    }
+  },
+  // 5) muro de gráficas + cifra grande
+  wall(ctx, W, H, t) {
+    const cols = W > H ? 3 : 2, rows = 2, gw = W / cols, gh = H / rows, keys = ['a', 'b', 'c', 'd', 'b', 'a'];
+    for (let c = 0; c < cols; c++) for (let j = 0; j < rows; j++) {
+      const p = PATHS[keys[(c + j * cols) % 6]], off = Math.floor(t * 40 + (c * 31 + j * 17)) % p.length;
+      const x0 = c * gw + 6, y0 = j * gh + 6, w = gw - 12, h = gh - 12;
+      ctx.strokeStyle = 'rgba(255,255,255,.07)'; ctx.strokeRect(x0, y0, w, h);
+      ctx.strokeStyle = '#d8d8d8'; ctx.lineWidth = 1; ctx.beginPath();
+      for (let i = 0; i < 120; i++) { const v = p[(off + i) % p.length]; const x = x0 + i / 119 * w, y = y0 + h * 0.12 + (1 - v) * h * 0.76; i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); } ctx.stroke();
+      ctx.fillStyle = 'rgba(62,201,167,.6)'; ctx.fillRect(x0, y0 + h * (0.3 + 0.1 * ((c + j) % 3)), w, 1);
+      ctx.fillStyle = 'rgba(255,91,91,.55)'; ctx.fillRect(x0, y0 + h * (0.62 + 0.08 * (c % 2)), w, 1);
+    }
+    const v = Math.round(163650 * Math.min(1, t / 2));
+    ctx.fillStyle = 'rgba(0,0,0,.55)'; ctx.fillRect(0, H * 0.06, W, Math.min(W * 0.12, H * 0.2) + 10);
+    txt(ctx, '+$' + fmt(v), W * 0.06, H * 0.06 + Math.min(W * 0.11, H * 0.18), Math.min(W * 0.11, H * 0.18), G, 400);
+  },
+  // 6) matriz de glifos
+  matrix(ctx, W, H, t) {
+    const G2 = ['─', '│', '┌', '┐', '└', '┘', '├', '┤', '┬', '┴', '┼', '═', '║', '╋', '▪', '·', 'H', 'L'];
+    const fs = Math.max(9, Math.min(18, W / 36)), r = rngFrom(1 + Math.floor(t * 8));
+    ctx.font = `${fs}px "SF Mono",Menlo,monospace`; ctx.textAlign = 'center';
+    for (let y = fs; y < H + fs; y += fs * 1.25) for (let x = fs / 2; x < W; x += fs * 0.95) {
+      const k = r(); if (k < 0.35) continue;
+      ctx.fillStyle = k > 0.985 ? ACC : `rgba(235,235,235,${0.35 + k * 0.6})`;
+      ctx.fillText(G2[(r() * G2.length) | 0], x, y);
+    }
+  },
+  // 7) cierre con el logo
+  // 7) cierre: el logo se arma con partículas (igual que el orbe) y viaja a su lugar en la portada
+  end(ctx, W, H, t) {
+    const small = W < 760;
+    const ease = (x) => x <= 0 ? 0 : x >= 1 ? 1 : x * x * (3 - 2 * x);
+    const form = ease(t / 1.1);                 // partículas se juntan
+    const fly = ease((t - 2.0) / 1.5);          // viaja a la posición del orbe de la portada
+    const txtA = Math.min(ease((t - 0.5) / 0.6), 1 - ease((t - 1.8) / 0.5));
+    // posición inicial (centro del cierre) y final (orbe de la portada en ORBE v16)
+    const s0 = Math.min(W * 0.1, H * 0.13), x0 = W / 2, y0 = H * (small ? 0.3 : 0.32);
+    const s1 = small ? Math.min(W * 0.27, H * 0.24) : Math.min(W * 0.17, H * 0.24);
+    const x1 = small ? W * 0.5 : W * 0.64, y1 = H * (small ? 0.36 : 0.53);
+    const cx = x0 + (x1 - x0) * fly, cy = y0 + (y1 - y0) * fly, S = s0 + (s1 - s0) * fly;
+    if (!SCENES._pts) {
+      const r = rngFrom(4242), P = [];
+      for (let i = 0; i < 5200; i++) {
+        const k = r(); let type, a, b, rr;
+        if (k < 0.6) { type = 0; a = Math.acos(2 * r() - 1); b = r() * Math.PI * 2; rr = 1; }
+        else { type = 1; a = r() * Math.PI * 2; rr = 1.5 + Math.pow(r(), 1.6) * 0.32; b = (r() - 0.5) * 0.025; }
+        P.push({ type, a, b, rr, sx: (r() - 0.5) * 2, sy: (r() - 0.5) * 2, hot: r() < (type === 1 ? 0.55 : 0.03), rz: r() });
+      }
+      SCENES._pts = P;
+    }
+    const tt = performance.now() / 1000, rotY = tt * 0.36, cX = Math.cos(1.22), sX = Math.sin(1.22), cZ = Math.cos(-0.5), sZ = Math.sin(-0.5), camD = 5.2;
+    const cY = Math.cos(rotY), sY = Math.sin(rotY);
+    const B = [[[], [], [], []], [[], [], [], []]];
+    for (const p of SCENES._pts) {
+      let x, y, z;
+      if (p.type === 1) { const ang = p.a + tt * 0.15 * (1.6 / p.rr); x = Math.cos(ang) * p.rr; z = Math.sin(ang) * p.rr; y = p.b; const y2 = y * cX - z * sX, z2 = y * sX + z * cX; y = y2; z = z2; }
+      else { const st = Math.sin(p.a); x = st * Math.cos(p.b); y = Math.cos(p.a); z = st * Math.sin(p.b); const x2 = x * cY + z * sY, z2 = -x * sY + z * cY; x = x2; z = z2; const y2 = y * Math.cos(0.35) - z * Math.sin(0.35), z3 = y * Math.sin(0.35) + z * Math.cos(0.35); y = y2; z = z3; }
+      const xr = x * cZ - y * sZ, yr = x * sZ + y * cZ; x = xr; y = yr;
+      const f = camD / (camD - z);
+      let px = cx + x * S * f, py = cy + y * S * f;
+      px = p.sx * W * 0.5 + W / 2 + (px - (p.sx * W * 0.5 + W / 2)) * form;   // de disperso a formado
+      py = p.sy * H * 0.5 + H / 2 + (py - (p.sy * H * 0.5 + H / 2)) * form;
+      let vis = 1; if (p.type === 1 && z < 0) { const dx = (px - cx) / S, dy = (py - cy) / S; if (dx * dx + dy * dy < 1) vis = 0.12; }
+      let lum = (p.type === 0 ? 0.25 + 0.75 * Math.max(0, (z + 1) / 2) : 0.55 + 0.45 * Math.max(0, (z + 1.8) / 3.6)) * vis;
+      lum *= 0.85 + 0.15 * Math.sin(tt * 3 + p.rz * 40);
+      const lvl = lum > 0.8 ? 3 : lum > 0.55 ? 2 : lum > 0.3 ? 1 : 0;
+      B[p.hot ? 1 : 0][lvl].push(px, py);
+    }
+    ctx.globalCompositeOperation = 'lighter';
+    const alphas = [0.18, 0.38, 0.62, 0.95], cols = ['#e9e9e9', ACC], pR = small ? 1.1 : 1.25;
+    for (let c = 0; c < 2; c++) { ctx.fillStyle = cols[c]; for (let l = 0; l < 4; l++) { const arr = B[c][l]; if (!arr.length) continue; ctx.globalAlpha = alphas[l] * (1 - fly * 0.35); ctx.beginPath(); const sz = pR * (0.8 + l * 0.18); for (let k = 0; k < arr.length; k += 2) ctx.rect(arr[k] - sz / 2, arr[k + 1] - sz / 2, sz, sz); ctx.fill(); } }
+    ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1;
+    // texto del cierre (igual estilo que la portada)
+    if (txtA > 0) {
+      const sc = Math.min(W / 700, H / 520), ty = y0 + s0 * 2.2;
+      ctx.globalAlpha = txtA;
+      txt(ctx, '[ ORBE ]', W / 2, ty, 12 * sc, ACC, 400, 'center', 'mono');
+      txt(ctx, 'Los datos primero,', W / 2, ty + 58 * sc, 50 * sc, '#f2f2f2', 500, 'center');
+      txt(ctx, 'la decisión después.', W / 2, ty + 112 * sc, 50 * sc, '#8f8f8f', 500, 'center');
+      ctx.globalAlpha = 1;
+    }
+  }
+};
+
+function paint(cv, scene, t, bgA = 1) {
+  const W = cv.clientWidth || 1, H = cv.clientHeight || 1, DPR = Math.min(2, devicePixelRatio || 1);
+  if (cv.width !== Math.round(W * DPR) || cv.height !== Math.round(H * DPR)) { cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR); }
+  const ctx = cv.getContext('2d'); ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  ctx.clearRect(0, 0, W, H); ctx.fillStyle = `rgba(0,0,0,${bgA})`; ctx.fillRect(0, 0, W, H);
+  SCENES[scene](ctx, W, H, t);
+}
+
+/* ================= INTRO ================= */
+(() => {
+  const intro = document.getElementById('intro'), cv = document.getElementById('introCv');
+  const SEQ = [['alert', 2.2], ['pnl', 2.4], ['data', 2.6], ['signals', 2.2], ['wall', 2.4], ['matrix', 1.0], ['end', 3.7]];
+  let t0 = 0, running = false;
+  function glitch(ctx, W, H, k) {           // corte tipo transición del video
+    const r = rngFrom(Math.floor(performance.now() / 40));
+    for (let i = 0; i < 10 * k; i++) { const y = r() * H, h = 2 + r() * 18; ctx.drawImage(cv, 0, y * (cv.width / W), cv.width, h * (cv.height / H), (r() - 0.5) * 40, y, W, h); }
+  }
+  function frame(now) {
+    if (!running) return;
+    requestAnimationFrame(frame);
+    let t = (now - t0) / 1000, i = 0;
+    while (i < SEQ.length && t > SEQ[i][1]) { t -= SEQ[i][1]; i++; }
+    if (i >= SEQ.length) { finish(); return; }
+    let bgA = 1;
+    if (SEQ[i][0] === 'end') { const k = Math.max(0, Math.min(1, (t - 2.0) / 1.5)); bgA = 1 - k * k * (3 - 2 * k); intro.style.background = 'transparent'; }
+    else intro.style.background = '#000';
+    paint(cv, SEQ[i][0], t, bgA);
+    const left = SEQ[i][1] - t;
+    if (left < 0.18 && i < SEQ.length - 1) { const ctx = cv.getContext('2d'); glitch(ctx, cv.clientWidth, cv.clientHeight, 1 - left / 0.18); }
+  }
+  function start() { intro.classList.remove('done'); intro.removeAttribute('inert'); running = true; t0 = performance.now(); requestAnimationFrame(frame); }
+  function finish() { running = false; intro.classList.add('done'); intro.setAttribute('inert', ''); }
+  document.getElementById('skip').addEventListener('click', finish);
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) finish(); else start();
+})();
+
+</script>
+<section class="hero">
+  <canvas id="orbe" aria-hidden="true"></canvas>
+
+  <nav class="top" aria-label="Principal">
+    <a href="#inicio" class="brand" aria-label="ORBE, inicio" data-go="home">
+      <svg width="44" height="34" viewBox="0 0 76 60" aria-hidden="true">
+        <g transform="rotate(-28 38 30)"><ellipse cx="38" cy="30" rx="36" ry="8" fill="none" stroke="#089981" stroke-width="2.6"/></g>
+        <circle cx="36" cy="30" r="21" fill="#000" stroke="#fff" stroke-width="3.4"/>
+        <g transform="rotate(-28 38 30)"><path d="M2 30 A36 8 0 0 0 74 30" fill="none" stroke="#089981" stroke-width="2.6"/></g>
+      </svg>
+      <span>ORBE</span>
+    </a>
+    <div class="links">
+      <a href="#inicio" data-go="home" class="on">Inicio</a>
+      <a href="#nosotros" data-go="nosotros">Nosotros</a>
+      <a href="#analitica" data-go="analitica">Analítica</a>
+      <a href="#servicios" data-go="servicios">Servicios</a>
+    </div>
+  </nav>
+
+  <!-- INICIO -->
+  <div class="view" id="home">
+    <div class="kicker st">[ ORBE ]</div>
+    <h1 class="st">Trading con data <span>y análisis.</span></h1>
+    <p class="lead st">En ORBE no operamos por intuición. Cada decisión se basa en probabilidades y en la estadística del mercado: medimos, comparamos y solo entramos cuando los números están a nuestro favor.</p>
+    <div class="st">
+      <a href="#nosotros" class="cta" data-go="nosotros" aria-label="ORBE: ir a Nosotros"><span style="font-family:Montserrat,sans-serif;font-weight:500;letter-spacing:.42em;margin-right:-.42em">O R B E</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- NOSOTROS -->
+  <div class="view off" id="nosotros" aria-hidden="true" inert>
+    <div class="kicker st">[ Nosotros ]</div>
+    <h2 class="st">El uso del patrimonio e inversiones <span>es responsabilidad de cada quien.</span></h2>
+    <p class="intro st">En ORBE, las inversiones se pueden llegar a medir con datos históricos, probabilidades y estadística, para convertir el comportamiento del mercado en una serie de reglas claras y repetibles.</p>
+    <div class="pillars st">
+      <div class="pillar"><div class="n">01</div><div><h3>Data</h3><p>Registramos y analizamos cada operación. Lo que no se mide, no se puede mejorar.</p></div></div>
+      <div class="pillar"><div class="n">02</div><div><h3>Probabilidad</h3><p>Solo tomamos escenarios donde la estadística muestra una ventaja, no corazonadas.</p></div></div>
+      <div class="pillar"><div class="n">03</div><div><h3>Gestión de riesgo</h3><p>Cada entrada tiene un riesgo definido antes de abrirse. La disciplina es parte del sistema.</p></div></div>
+    </div>
+    <p class="note st"><strong style="color:#fff;font-weight:600">Nuestra historia.</strong> ORBE fue fundada por Iaan Fischer en 2023. Hemos operado distintos mercados, entre ellos Forex, pero nos especializamos en el Nasdaq 100 y el S&amp;P 500 en el mercado de futuros (NQ1! y ES1!).</p>
+    <div class="row st">
+      <a href="#analitica" class="next" data-go="analitica">Ver analítica
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <button type="button" class="back" data-go="home">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+        Inicio</button>
+    </div>
+  </div>
+
+  <!-- ANALÍTICA -->
+  <div class="view off" id="analitica" aria-hidden="true" inert>
+    <div class="kicker st">[ Analítica ]</div>
+    <h2 class="st">Los números <span>detrás de cada operación.</span></h2>
+    <p class="sub st">Modelo B · SL 45 · TP1 30 · TP2 60 · ES · 476 operaciones (2 ene 2025 – 6 nov 2026) · 2 contratos</p>
+
+    <div class="grid2 st" style="margin-top:28px">
+      <div class="panel">
+        <div class="lbl"><i></i>Tasa de acierto</div>
+        <div class="big" data-count="62.6" data-dec="1" data-suf="%">62.6%</div>
+        <div class="meter" title="62.6% de las operaciones cerraron en positivo"><b data-w="62.6" style="width:62.6%"></b><u data-l="50" style="left:50%;opacity:1"></u></div>
+        <div class="mono"><strong>298</strong> ganadoras · <strong>178</strong> perdedoras<br>ganadora = cerró con P&amp;L positivo</div>
+      </div>
+      <div class="panel">
+        <div class="lbl"><i style="background:#c9a227"></i>Factor de beneficio</div>
+        <div class="big" data-count="1.07" data-dec="2">1.07</div>
+        <div class="meter" title="Del bruto total, 51.6% fue ganancia y 48.4% pérdida"><b data-w="51.6" style="width:51.6%"></b><u data-l="50" style="left:50%;opacity:1"></u></div>
+        <div class="mono">bruto ganado <strong>$216,298</strong><br>bruto perdido <strong>$202,831</strong></div>
+      </div>
+    </div>
+
+    <div class="panel st" style="margin-top:14px">
+      <div class="ph">
+        <h3>Cómo termina cada operación</h3>
+        <div class="seg" role="group" aria-label="Medir por">
+          <button type="button" class="on" data-mode="n">Operaciones</button>
+          <button type="button" data-mode="usd">Dólares</button>
+        </div>
+      </div>
+      <div class="out" id="outRows"></div>
+      <div class="detail" id="outDetail" aria-live="polite">Pasa el cursor o toca una fila para ver el detalle.</div>
+    </div>
+
+    <div class="panel st" style="margin-top:14px">
+      <div class="ph">
+        <div>
+          <h3>Superficie 3D: stop × objetivos</h3>
+          <div class="mono" style="margin-top:6px">176 backtests con 2 contratos, TP2 = 2 × TP1 y break-even tras TP1. Verde gana, rojo pierde.</div>
+        </div>
+        <label class="selwrap"><span>Altura y color</span>
+          <select id="surfMet">
+            <option value="3">Esperanza por operación (USD)</option>
+            <option value="4">Factor de beneficio</option>
+            <option value="5">Tasa de acierto (%)</option>
+          </select>
+        </label>
+      </div>
+      <div class="ic3d-ctl" id="surfViews" role="group" aria-label="Vista de la superficie">
+        <button type="button" class="on" data-v="persp">Perspectiva</button>
+        <button type="button" data-v="contra">Contrapicada</button>
+      </div>
+      <div class="surfbox">
+        <canvas id="surf" aria-label="Superficie 3D de 176 combinaciones de stop y objetivos. Arrastra para girar."></canvas>
+        <div class="tip" id="surfTip" hidden></div>
+        <div class="draghint">Arrastra para girar</div>
+      </div>
+      <p class="caveat" id="surfText"></p>
+    </div>
+
+    <div class="st" style="margin-top:14px">
+      <div class="panel goldp">
+        <div class="lbl" style="font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#9a8a5a">Rango de esperanza por operación · IC 95%</div>
+        <div class="ic serif"><span class="neg" id="icLo">−$55.85</span><small>a</small><span class="pos" id="icHi">+$115.68</span></div>
+        <div class="icbar"><span class="band" id="icBand"></span><span class="zero" id="icZero"></span><span class="dot" id="icDot"></span></div>
+        <div class="icends"><span id="icMin">−$86</span><span id="icMax">+$146</span></div>
+        <p class="detail" id="icText" aria-live="polite"></p>
+        <div class="ic3d">
+          <div class="ic3d-h"><span>Rango de esperanza en 3D</span><small>Distribución bootstrap (20,000 remuestreos) por nivel de comisión · banda ámbar = IC 95% · plano rojo = $0</small></div>
+          <div class="ic3d-leg"><span><i style="background:#e0aa34"></i>IC 95%</span><span><i style="background:#e5533d"></i>$0</span><span><i style="background:#fff"></i>Tus costos</span></div>
+          <div class="ic3d-ctl" role="group" aria-label="Vista del modelo 3D">
+            <button type="button" class="on" data-v="persp">Perspectiva</button>
+            <button type="button" data-v="aerea">Vista aérea</button>
+            <button type="button" data-v="contra">Contrapicada</button>
+            <button type="button" id="ic3dSpin">Detener giro</button>
+          </div>
+          <canvas id="ic3d" aria-label="Modelo 3D de la distribución de la esperanza por operación para cada nivel de comisión. Arrastra para girar."></canvas>
+          <div class="ic3d-hint">Arrastra para girar</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="disc st">Resultados históricos y de backtest. No garantizan resultados futuros.</p>
+
+    <div class="row st">
+      <a href="#servicios" class="next" data-go="servicios">Ver servicios
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <button type="button" class="back" data-go="nosotros">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+        Nosotros</button>
+    </div>
+  </div>
+
+  <!-- SERVICIOS -->
+  <div class="view off" id="servicios" aria-hidden="true" inert>
+    <div class="head">
+      <div class="kicker st">[ Servicios ]</div>
+      <h2 class="st">Lo que hacemos <span>con los datos.</span></h2>
+    </div>
+    <div class="cards st">
+      <div class="card" data-card>
+        <button type="button" class="card-h" aria-expanded="false" aria-controls="srv01">
+          <span><span class="n">01</span><h3>ORBE-free</h3><span class="short" style="display:block">Empieza gratis con la comunidad ORBE.</span></span>
+          <span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </button>
+        <div class="card-b" id="srv01" role="region"><div><div class="card-in">
+          <div class="cprice"><b>Gratis</b></div>
+          <ul class="perks">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Acceso a la comunidad gratis</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Señales 1–2 por semana gratis</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Participación en el sorteo de señales ORBE-GRAND</span></li>
+          </ul>
+          <a href="https://discord.gg/kXYuPzdPh" class="join" target="_blank" rel="noopener">INSCRIBIRME
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div></div></div>
+      </div>
+      <div class="card" data-card>
+        <button type="button" class="card-h" aria-expanded="false" aria-controls="srv02">
+          <span><span class="n">02</span><h3>ORBE-GRAND</h3><span class="short" style="display:block">La comunidad completa, con señales todos los días.</span></span>
+          <span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </button>
+        <div class="card-b" id="srv02" role="region"><div><div class="card-in">
+          <div class="cprice"><b>$1,099</b><span>MXN / mes</span></div>
+          <ul class="perks">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Acceso a la comunidad ORBE-GRAND</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Señales de las operativas todos los días</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Videos con base en la introducción</span></li>
+          </ul>
+          <a href="#pago-grand" class="join" data-pay="grand">INSCRIBIRME
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div></div></div>
+      </div>
+      <div class="card" data-card>
+        <button type="button" class="card-h" aria-expanded="false" aria-controls="srv03">
+          <span><span class="n">03</span><h3>ORBE-PRO</h3><span class="short" style="display:block">Metodología completa, señales diarias y cuenta de fondeo.</span></span>
+          <span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </button>
+        <div class="card-b" id="srv03" role="region"><div><div class="card-in">
+          <div class="cprice"><b>$2,999</b><span>MXN</span></div>
+          <ul class="perks">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Acceso a ORBE-PRO</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Acceso al contenido de la metodología</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Señales diarias</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Cuenta de fondeo de 25k de APEX</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>50% de descuento en ORBE-LAB al adquirir ORBE-PRO</span></li>
+          </ul>
+          <a href="#pago-pro" class="join" data-pay="pro">INSCRIBIRME
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div></div></div>
+      </div>
+      <div class="card" data-card>
+        <button type="button" class="card-h" aria-expanded="false" aria-controls="srv04">
+          <span><span class="n">04</span><h3>ORBE-LAB</h3><span class="short" style="display:block">Aprende la estrategia uno a uno y opera en vivo.</span></span>
+          <span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+        </button>
+        <div class="card-b" id="srv04" role="region"><div><div class="card-in">
+          <div class="cprice"><b>$10,000</b><span>MXN · pago único · 3 meses de acceso</span></div>
+          <ul class="perks">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Enseñanza 1 a 1 de la estrategia y la metodología</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Acceso a ORBE-LAB</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Aprende distintas estrategias para pasar cuentas de fondeo</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>En vivo todos los días durante la operativa</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Adquisición de los indicadores de la estrategia y plantillas personalizadas para seguimiento</span></li>
+          </ul>
+          <a href="#pago-lab" class="join" data-pay="lab">INSCRIBIRME
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div></div></div>
+      </div>
+    </div>
+    <div class="candles st">
+      <canvas id="velas" aria-hidden="true"></canvas>
+      <div class="quote">
+        <div class="kicker">[ ORBE ]</div>
+        <p>Opera la probabilidad, <span>no la emoción.</span></p>
+      </div>
+      <div class="hint2">Mueve el cursor sobre las velas</div>
+    </div>
+    <div class="row st">
+      <button type="button" class="back" data-go="analitica">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+        Analítica</button>
+    </div>
+  </div>
+
+  <div class="hint">Mueve el cursor sobre el orbe</div>
+</section>
+
+<script>
+(() => {
+  const ACCENT = '#089981';
+  const DENSITY = 1.6;
+  const SPIN = 3;
+
+  const cv = document.getElementById('orbe');
+  const ctx = cv.getContext('2d');
+  const host = cv.parentNode;
+  let W = 1, H = 1, DPR = 1, pts = null;
+  const mouse = { x: -9999, y: -9999, px: -9999, py: -9999, gx: 0, gy: 0, t: 0 };
+
+  // ---------- views ----------
+  const VIEWS = {
+    home:      { el: document.getElementById('home'),      hash: '#inicio',    title: 'ORBE — Trading con data y análisis' },
+    nosotros:  { el: document.getElementById('nosotros'),  hash: '#nosotros',  title: 'ORBE — Nosotros' },
+    analitica: { el: document.getElementById('analitica'), hash: '#analitica', title: 'ORBE — Analítica' },
+    servicios: { el: document.getElementById('servicios'), hash: '#servicios', title: 'ORBE — Servicios' }
+  };
+  // where the orbe sits in each view: fractions of width/height and size
+  const POS = {
+    home:      { d: { x: 0.64, y: 0.53, s: 1.0,  z: -0.5 },  m: { x: 0.5, y: 0.36, s: 1.0,  z: -0.5 } },
+    nosotros:  { d: { x: 0.27, y: 0.52, s: 0.92, z: -0.32 }, m: { x: 0.5, y: 0.2,  s: 0.6,  z: -0.32 } },
+    analitica: { d: { x: 0.9,  y: 0.15, s: 0.34, z: -0.4 },  m: { x: 0.84, y: 0.09, s: 0.32, z: -0.4 } },
+    servicios: { d: { x: 0.5,  y: 0.26, s: 0.55, z: -0.15 }, m: { x: 0.5, y: 0.16, s: 0.5,  z: -0.15 } }
+  };
+  let view = 'home', burst = 0, cur = null;
+
+  function go(next, push) {
+    if (!VIEWS[next] || next === view) return;
+    view = next; burst = 1;
+    if (pts) for (const p of pts) { const a = Math.random() * Math.PI * 2, f = 4 + Math.random() * 10; p.vx += Math.cos(a) * f; p.vy += Math.sin(a) * f; }
+    for (const k in VIEWS) {
+      const on = k === next, el = VIEWS[k].el;
+      el.classList.toggle('off', !on); el.toggleAttribute('inert', !on); el.setAttribute('aria-hidden', !on);
+      if (on) el.scrollTop = 0;
+    }
+    document.body.classList.toggle('is-sub', next !== 'home');
+    document.querySelectorAll('.links a[data-go]').forEach((a) => a.classList.toggle('on', a.dataset.go === next));
+    document.title = VIEWS[next].title;
+    if (next === 'analitica' && window.__orbeAnalytics) { try { window.__orbeAnalytics.enter(); } catch (err) { console.warn(err); } }
+    if (push !== false) { try { history.pushState(null, '', VIEWS[next].hash); } catch (err) { /* algunos visores no permiten cambiar la dirección */ } }
+  }
+  const fromHash = () => ({ '#nosotros': 'nosotros', '#analitica': 'analitica', '#servicios': 'servicios' })[location.hash] || 'home';
+  document.querySelectorAll('[data-go]').forEach((el) => el.addEventListener('click', (e) => { e.preventDefault(); go(el.dataset.go); }));
+  window.addEventListener('popstate', () => go(fromHash(), false));
+  if (fromHash() !== 'home') { go(fromHash(), false); burst = 0; }
+
+  // ---------- canvas ----------
+  host.addEventListener('pointermove', (e) => {
+    const r = cv.getBoundingClientRect();
+    const nx = e.clientX - r.left, ny = e.clientY - r.top;
+    if (performance.now() - mouse.t > 60) { mouse.px = nx; mouse.py = ny; }
+    mouse.x = nx; mouse.y = ny; mouse.t = performance.now();
+  });
+
+  function size() {
+    W = cv.clientWidth || 1; H = cv.clientHeight || 1;
+    DPR = Math.min(2, window.devicePixelRatio || 1);
+    cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR);
+    pts = null;
+  }
+  window.addEventListener('resize', size);
+  size();
+
+  function build() {
+    const small = W < 760;
+    const N = Math.round((small ? 3600 : 8000) * DENSITY);
+    const P = [];
+    let s = 1234567;
+    const rnd = () => { s = (s * 16807) % 2147483647; return s / 2147483647; };
+    for (let i = 0; i < N; i++) {
+      const k = rnd();
+      let type, a, b, r;
+      if (k < 0.6) { type = 0; a = Math.acos(2 * rnd() - 1); b = rnd() * Math.PI * 2; r = 1 + (rnd() - 0.5) * 0.04; }
+      else if (k < 0.95) { type = 1; a = rnd() * Math.PI * 2; r = 1.5 + Math.pow(rnd(), 1.6) * 0.32; b = (rnd() - 0.5) * 0.025; }
+      else { type = 2; a = Math.acos(2 * rnd() - 1); b = rnd() * Math.PI * 2; r = 1.25 + rnd() * 1.6; }
+      P.push({ type, a, b, r, ox: 0, oy: 0, vx: 0, vy: 0, rz: rnd(), hot: rnd() < (type === 1 ? 0.55 : 0.03) });
+    }
+    pts = P;
+  }
+
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const ease = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  let spinPhase = 0, lastT = 0;
+
+  function frame(t) {
+    if (!pts) build();
+    const dt = Math.min(0.05, t - lastT); lastT = t;
+    const small = W < 760;
+    const m = mouse;
+
+    burst *= Math.pow(0.2, dt);
+    spinPhase += dt * 0.12 * SPIN * (1 + burst * 4);
+
+    const tgx = m.x > -999 ? (m.x / W - 0.5) : 0, tgy = m.y > -999 ? (m.y / H - 0.5) : 0;
+    m.gx += (tgx - m.gx) * 0.04; m.gy += (tgy - m.gy) * 0.04;
+
+    // glide the orbe toward the active view's spot
+    const tp = POS[view][small ? 'm' : 'd'];
+    if (!cur) cur = Object.assign({}, tp);
+    const k2 = Math.min(1, dt * 2.6);
+    for (const key in tp) cur[key] += (tp[key] - cur[key]) * k2;
+    const baseS = small ? Math.min(W * 0.27, H * 0.24) : Math.min(W * 0.17, H * 0.24);
+    const cx = W * cur.x, cy = H * cur.y, S = baseS * cur.s;
+    const camD = 5.2;
+
+    const rotY = spinPhase + m.gx * 0.5;
+    const tiltX = 1.22 + m.gy * 0.25 + burst * 0.35;
+    const tiltZ = cur.z;
+    const cY = Math.cos(rotY), sY = Math.sin(rotY);
+    const cX = Math.cos(tiltX), sX = Math.sin(tiltX);
+    const cZ = Math.cos(tiltZ), sZ = Math.sin(tiltZ);
+
+    const mdx = m.x - m.px, mdy = m.y - m.py;
+    const mlen = Math.hypot(mdx, mdy);
+    const radius = Math.min(150, 40 + mlen * 4);
+    const force = Math.min(1, mlen / 25);
+    m.px += (m.x - m.px) * 0.35; m.py += (m.y - m.py) * 0.35;
+
+    const B = [[[], [], [], []], [[], [], [], []]];
+    const pR = small ? 1.1 : 1.25;
+
+    for (let i = 0; i < pts.length; i++) {
+      const p = pts[i];
+      let x, y, z;
+      if (p.type === 1) {
+        const ang = p.a + t * 0.05 * SPIN * (1.6 / p.r) + burst * 0.6 * (1.6 / p.r);
+        x = Math.cos(ang) * p.r; z = Math.sin(ang) * p.r; y = p.b;
+        const y2 = y * cX - z * sX, z2 = y * sX + z * cX; y = y2; z = z2;
+      } else {
+        const st = Math.sin(p.a);
+        x = st * Math.cos(p.b) * p.r; y = Math.cos(p.a) * p.r; z = st * Math.sin(p.b) * p.r;
+        const x2 = x * cY + z * sY, z2 = -x * sY + z * cY; x = x2; z = z2;
+        if (p.type === 2) { y += Math.sin(t * 0.4 + p.rz * 20) * 0.03; }
+        else { const y2 = y * Math.cos(0.35) - z * Math.sin(0.35), z3 = y * Math.sin(0.35) + z * Math.cos(0.35); y = y2; z = z3; }
+      }
+      const xr = x * cZ - y * sZ, yr = x * sZ + y * cZ; x = xr; y = yr;
+      const gy = m.gx * 0.25, xg = x * Math.cos(gy) + z * Math.sin(gy), zg = -x * Math.sin(gy) + z * Math.cos(gy);
+      x = xg; z = zg;
+
+      const f = camD / (camD - z);
+      let sx = cx + x * S * f, sy = cy + y * S * f;
+
+      if (mlen > 0.3) {
+        const dx = sx + p.ox - m.x, dy = sy + p.oy - m.y;
+        const d2 = dx * dx + dy * dy;
+        if (d2 < radius * radius) {
+          const w = (1 - Math.sqrt(d2) / radius) * force;
+          p.vx += (mdx * 0.18 - dy * 0.02) * w + dx * 0.004 * w * 8;
+          p.vy += (mdy * 0.18 + dx * 0.02) * w + dy * 0.004 * w * 8;
+        }
+      }
+      p.vx += -p.ox * 0.018; p.vy += -p.oy * 0.018;
+      p.vx *= 0.9; p.vy *= 0.9;
+      p.ox += p.vx; p.oy += p.vy;
+      sx += p.ox; sy += p.oy;
+
+      let vis = 1;
+      if (p.type !== 0 && z < 0) {
+        const ddx = (sx - cx) / S, ddy = (sy - cy) / S;
+        if (ddx * ddx + ddy * ddy < 1) vis = 0.12;
+      }
+      let lum;
+      if (p.type === 0) lum = 0.25 + 0.75 * Math.max(0, (z + 1) / 2);
+      else if (p.type === 1) lum = 0.55 + 0.45 * Math.max(0, (z + 1.8) / 3.6);
+      else lum = 0.3;
+      const tw = 0.85 + 0.15 * Math.sin(t * 3 + p.rz * 40);
+      lum *= vis * tw;
+      const lvl = lum > 0.8 ? 3 : lum > 0.55 ? 2 : lum > 0.3 ? 1 : 0;
+      B[p.hot ? 1 : 0][lvl].push(sx, sy);
+    }
+
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = 'rgba(0,0,0,0.42)';
+    ctx.fillRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+    const alphas = [0.18, 0.38, 0.62, 0.95];
+    const cols = ['#e9e9e9', ACCENT];
+    for (let c = 0; c < 2; c++) {
+      ctx.fillStyle = cols[c];
+      for (let l = 0; l < 4; l++) {
+        const arr = B[c][l]; if (!arr.length) continue;
+        ctx.globalAlpha = alphas[l];
+        ctx.beginPath();
+        const sz = pR * (0.8 + l * 0.18);
+        for (let k = 0; k < arr.length; k += 2) ctx.rect(arr[k] - sz / 2, arr[k + 1] - sz / 2, sz, sz);
+        ctx.fill();
+      }
+    }
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = 'source-over';
+  }
+
+  const t0 = performance.now();
+  (function loop(now) { requestAnimationFrame(loop); frame((now - t0) / 1000); })(t0);
+})();
+</script>
+
+<script>
+(() => {
+  const GROSS = [-1125,-1125,375,375,375,-1125,375,-1125,-1125,-1125,1125,-1125,-1125,375,1125,1125,-1125,1125,375,1125,375,-1125,375,-1125,-1125,375,375,1125,-1125,1125,-1125,-613,1125,-1125,-1125,1125,-1125,1125,375,-1125,375,375,1125,375,375,-1125,-1125,375,-1125,1125,1125,375,375,1125,-1125,-1125,-1125,-1125,1125,-1125,375,-1125,375,375,375,1125,1125,1125,-1125,375,375,1125,-1125,375,1125,1125,-1125,-1125,1125,-1125,-1125,-1125,-1125,-1125,375,1125,1125,-1125,-1125,1125,1125,1125,-1125,-1125,-1125,375,-1125,-1125,-1125,375,375,1125,1125,-1125,375,-1125,1125,-1125,-1125,375,375,-1125,375,1125,375,375,-1125,1125,375,1125,375,-1125,1125,1125,375,-1125,375,1125,375,225.2,1125,-1125,-1125,1125,375,375,1125,375,1125,1125,375,-1125,-1125,375,1125,-1125,1125,-1125,1125,-1125,375,1125,-1125,1125,-1125,-1125,1125,1125,1125,1125,375,-1125,375,375,1125,375,375,375,-1125,-1125,373.5,-1125,375,-1125,1125,375,-1125,-1125,1125,834.4,375,-808.6,375,375,-1125,1125,-1125,1125,375,1125,-1125,-1125,1125,1125,1125,-1125,1125,564.7,1125,-1125,-1125,1125,-1125,-1125,1125,1125,-1125,1125,375,-1125,-1125,375,375,-1125,1125,1125,375,375,375,375,-1125,375,1125,375,375,375,-1125,-1125,-1125,375,375,375,-1125,-1.2,1125,-1125,-1125,1125,375,-1125,1125,375,-1125,1125,1125,375,1125,1125,375,375,-1125,-1125,1125,-439.1,-1125,-1125,375,1125,1125,-1125,375,375,-1125,1125,375,-1125,375,1125,375,-1125,375,-1125,1125,1125,375,1125,1125,-1125,375,1125,375,375,-1125,1125,-1125,1125,-1125,-1125,-1125,-1125,1125,375,-1125,1125,1125,-1125,1125,-1125,-1125,1125,1125,-1125,-1125,1125,375,1125,-1125,1125,-1125,1125,-1125,375,375,-1125,1125,1125,375,375,375,-1125,375,1125,-1125,1125,375,-1125,375,1125,1125,375,1125,375,-1125,375,1125,-1125,-1125,-1125,-1125,-1125,-1125,375,-1125,1125,375,375,375,1125,-1125,1125,1125,-1125,1125,-1125,-1125,1125,375,375,375,1125,-1125,-1125,1125,1125,375,-1125,1125,1125,-1125,1125,-1125,1125,-1125,375,375,375,-1125,375,375,-1125,375,1125,1125,1125,-1125,-648.8,1125,1125,375,1125,-1125,-1125,375,-1125,375,-1125,375,-1125,-1125,375,-1125,1125,375,1125,375,375,1125,375,-1125,-1125,-1125,375,-1125,375,375,-1125,1125,-1125,-1125,375,1125,-1125,1125,-1125,1125,375,375,1125,1125,-1125,1125,112.1,-1125,375,-1125,1125,-1125,1125,375,-1125,375,1125,-1125,375,-1125,375,1125,1125,375,375,-1125,375,-1125,-1125,375,-1125,-1125,1125,375,1125,-1125,1125,1125,-1125,1125,1125,-1125,1125,1125,375,1125,1125,375,375,-1125,1125];   // P&L de cada operación antes de costos (2 contratos)
+  const SURF = [[15,10,20,-30.06,0.8216,0.5861,-14310.2],[15,15,30,-11.95,0.9401,0.5105,-5685.95],[15,20,40,19.29,1.0887,0.4664,9182.6],[15,25,50,32.55,1.1403,0.4307,15494.35],[15,30,60,45.01,1.1818,0.3929,21425.4],[15,35,70,64.18,1.2497,0.3697,30550.4],[15,40,80,63.99,1.2371,0.3382,30461.2],[15,45,90,59.77,1.2113,0.3046,28449.1],[15,50,100,68.48,1.2353,0.2815,32594.65],[15,55,110,70.47,1.2352,0.2605,33543.35],[15,60,120,67.9,1.2209,0.2416,32321.8],[20,10,20,-29.54,0.8395,0.6534,-14060.2],[20,15,30,-13.13,0.9418,0.5756,-6248.45],[20,20,40,16.93,1.0676,0.5294,8057.6],[20,25,50,35.57,1.1326,0.4958,16931.85],[20,30,60,46.32,1.1594,0.4538,22050.4],[20,35,70,68.21,1.2251,0.4307,32469.45],[20,40,80,60.8,1.1882,0.3929,28942.75],[20,45,90,54.21,1.1594,0.3592,25805.65],[20,50,100,63.35,1.1801,0.334,30155.55],[20,55,110,63.05,1.1726,0.3088,30012.75],[20,60,120,60.23,1.1595,0.2857,28670.3],[25,10,20,-19.03,0.8989,0.7122,-9060.2],[25,15,30,2.1,1.009,0.6429,1001.55],[25,20,40,22.18,1.0826,0.5903,10557.6],[25,25,50,35.18,1.1198,0.5525,16744.35],[25,30,60,41.86,1.1292,0.5063,19925.4],[25,35,70,61.12,1.178,0.4769,29094.45],[25,40,80,53.71,1.1453,0.437,25567.75],[25,45,90,43.65,1.1114,0.4013,20775.65],[25,50,100,53.27,1.1303,0.3718,25357.1],[25,55,110,54.59,1.1283,0.3466,25986.2],[25,60,120,53.95,1.1224,0.3235,25680.05],[30,10,20,-29.3,0.8566,0.7374,-13947.6],[30,15,30,-6.75,0.9732,0.6765,-3210.75],[30,20,40,14.25,1.0489,0.6261,6782.8],[30,25,50,31.37,1.0981,0.5903,14931.15],[30,30,60,26.36,1.0731,0.5378,12549.7],[30,35,70,42.87,1.1112,0.5063,20406.25],[30,40,80,35.86,1.086,0.4664,17067.05],[30,45,90,23.94,1.0541,0.4307,11394.6],[30,50,100,37.29,1.0811,0.4055,17751.2],[30,55,110,35.33,1.0734,0.3782,16817.8],[30,60,120,37.71,1.0755,0.355,17949.15],[35,10,20,-25.07,0.8793,0.7689,-11935.6],[35,15,30,-4.36,0.9833,0.7101,-2073.75],[35,20,40,23.47,1.0774,0.6639,11169.8],[35,25,50,31.52,1.0924,0.6218,15005.65],[35,30,60,21.4,1.055,0.5693,10186.7],[35,35,70,34.42,1.0828,0.5378,16386.05],[35,40,80,27.19,1.0603,0.4979,12940.25],[35,45,90,18.89,1.0395,0.4643,8991.45],[35,50,100,37.39,1.0757,0.4433,17797.75],[35,55,110,28.23,1.0541,0.4118,13439.45],[35,60,120,32.49,1.0598,0.3887,15464.9],[40,10,20,-33.48,0.8469,0.7857,-15935.6],[40,15,30,-16.17,0.9421,0.7269,-7698.75],[40,20,40,24.52,1.0775,0.6912,11669.8],[40,25,50,30.22,1.0841,0.6492,14384.55],[40,30,60,19.96,1.0485,0.5987,9503.1],[40,35,70,27.82,1.0626,0.5651,13241.15],[40,40,80,15.85,1.0326,0.5231,7545.35],[40,45,90,17.8,1.0348,0.4937,8474.55],[40,50,100,28.15,1.0529,0.4685,13399.7],[40,55,110,17.81,1.0315,0.437,8478.9],[40,60,120,18.79,1.0319,0.4139,8941.85],[45,10,20,-19.87,0.9064,0.813,-9459.4],[45,15,30,-6.64,0.9763,0.7542,-3160.05],[45,20,40,29.46,1.0908,0.7164,14021],[45,25,50,33.58,1.0902,0.6744,15985.75],[45,30,60,23.46,1.055,0.6261,11165.2],[45,35,70,35.77,1.0776,0.5945,17028.25],[45,40,80,24.6,1.0484,0.5525,11707.45],[45,45,90,25.67,1.048,0.5231,12218.05],[45,50,100,42.32,1.0758,0.4979,20143.2],[45,55,110,25.28,1.0423,0.4643,12034.9],[45,60,120,22.43,1.036,0.4412,10678.55],[50,10,20,-30.38,0.8644,0.8214,-14459.4],[50,15,30,-19.11,0.9356,0.7647,-9097.55],[50,20,40,13.7,1.0397,0.7269,6521],[50,25,50,12.97,1.0325,0.6849,6173.25],[50,30,60,-1.75,0.9962,0.6366,-834.8],[50,35,70,16.62,1.0338,0.6071,7913.25],[50,40,80,2.3,1.0042,0.5651,1092.45],[50,45,90,-2.15,0.9963,0.5357,-1021.95],[50,50,100,12,1.02,0.5084,5712.7],[50,55,110,-10.94,0.983,0.4748,-5208.1],[50,60,120,-14.58,0.9783,0.4517,-6937.95],[55,10,20,-31.43,0.8621,0.834,-14959.4],[55,15,30,-18.32,0.9393,0.7815,-8722.55],[55,20,40,9.76,1.0275,0.7437,4646],[55,25,50,5.29,1.0128,0.7017,2519.75],[55,30,60,-21.12,0.9565,0.6492,-10050.8],[55,35,70,-4.75,0.9909,0.6176,-2259.25],[55,40,80,-18.7,0.9674,0.5777,-8903.45],[55,45,90,-20.65,0.9658,0.5504,-9830.35],[55,50,100,-11.89,0.9813,0.521,-5658.2],[55,55,110,-35.77,0.9474,0.4874,-17027.8],[55,60,120,-38.76,0.9454,0.4643,-18450.95],[60,10,20,-7.27,0.9652,0.8592,-3459.4],[60,15,30,3.67,1.0127,0.8067,1748.85],[60,20,40,27.29,1.0785,0.7689,12992.4],[60,25,50,19.15,1.0466,0.7269,9116.15],[60,30,60,-9.16,0.9813,0.6744,-4357.85],[60,35,70,2.36,1.0044,0.6408,1121.2],[60,40,80,0.87,1.0015,0.605,414.5],[60,45,90,-9.4,0.9849,0.5735,-4472.1],[60,50,100,6.79,1.0104,0.5462,3229.95],[60,55,110,-17.89,0.9745,0.5126,-8514.65],[60,60,120,-23.92,0.9674,0.4895,-11387.65],[65,10,20,-19.87,0.9107,0.8613,-9459.4],[65,15,30,-15.1,0.9512,0.8088,-7188.65],[65,20,40,4.19,1.0112,0.771,1992.4],[65,25,50,-3.17,0.9927,0.7311,-1508.85],[65,30,60,-33.34,0.9356,0.6807,-15868],[65,35,70,-24.58,0.9565,0.6471,-11701.45],[65,40,80,-22.42,0.9635,0.6134,-10670.25],[65,45,90,-33.9,0.9482,0.5819,-16134.95],[65,50,100,-18.29,0.9734,0.5546,-8706.7],[65,55,110,-46.63,0.937,0.521,-22194.8],[65,60,120,-58.33,0.9248,0.4979,-27765.45],[70,10,20,-18.47,0.9171,0.8697,-8794.1],[70,15,30,-19.25,0.9392,0.8172,-9164.45],[70,20,40,-2.3,0.994,0.7794,-1096.2],[70,25,50,-8.08,0.9819,0.7416,-3847.45],[70,30,60,-40.19,0.9242,0.6933,-19131.95],[70,35,70,-27.37,0.9526,0.6618,-13027.9],[70,40,80,-19.03,0.9694,0.6324,-9058.3],[70,45,90,-30.49,0.9542,0.6008,-14514.3],[70,50,100,-20.8,0.9704,0.5714,-9898.55],[70,55,110,-56.2,0.9261,0.5378,-26749.5],[70,60,120,-69.87,0.9125,0.5147,-33257.65],[75,10,20,-15.85,0.9286,0.8782,-7544.1],[75,15,30,-18.6,0.9416,0.8277,-8851.95],[75,20,40,-4.19,0.9892,0.7899,-1993.3],[75,25,50,-13.51,0.9705,0.7521,-6432.05],[75,30,60,-36.3,0.9326,0.708,-17279.05],[75,35,70,-31.31,0.9471,0.6744,-14903.2],[75,40,80,-17.5,0.9724,0.6471,-8330.7],[75,45,90,-27.91,0.959,0.6155,-13286.7],[75,50,100,-18.74,0.974,0.5861,-8920.95],[75,55,110,-50.86,0.9347,0.5546,-24209.4],[75,60,120,-65.19,0.9204,0.5315,-31030.05],[80,10,20,-8.42,0.9612,0.8866,-4005.9],[80,15,30,-16.94,0.947,0.8361,-8063.75],[80,20,40,-4.9,0.9876,0.7983,-2330.1],[80,25,50,-18.68,0.9601,0.7605,-8893.85],[80,30,60,-32.15,0.9407,0.7206,-15305.25],[80,35,70,-27.16,0.9546,0.687,-12929.4],[80,40,80,-12.3,0.9809,0.6597,-5856.9],[80,45,90,-29.11,0.958,0.6282,-13857.75],[80,50,100,-23.43,0.9682,0.5966,-11151.6],[80,55,110,-58.3,0.9269,0.5651,-27752.55],[80,60,120,-76.45,0.9091,0.5399,-36388.7],[85,10,20,-21.28,0.9074,0.8866,-10130.9],[85,15,30,-30.46,0.9088,0.8382,-14501.25],[85,20,40,-16.32,0.9599,0.8025,-7768.3],[85,25,50,-27.61,0.9426,0.7668,-13144.55],[85,30,60,-34.12,0.9381,0.7311,-16243.45],[85,35,70,-31.1,0.949,0.6975,-14805.1],[85,40,80,-15.59,0.9763,0.6702,-7420.1],[85,45,90,-36.69,0.9483,0.6366,-17464.05],[85,50,100,-26.54,0.9647,0.6071,-12632.9],[85,55,110,-60.76,0.9254,0.5756,-28922.95],[85,60,120,-83.63,0.9029,0.5504,-39809.1],[90,10,20,-23.65,0.8986,0.8908,-11255.9],[90,15,30,-33.22,0.9019,0.8445,-15813.75],[90,20,40,-22.36,0.9461,0.8088,-10643.3],[90,25,50,-29.19,0.9403,0.7752,-13894.55],[90,30,60,-38.33,0.9319,0.7395,-18243.45],[90,35,70,-31.5,0.9492,0.708,-14992.6],[90,40,80,-17.16,0.9744,0.6807,-8170.1],[90,45,90,-31.17,0.9567,0.6492,-14839.05],[90,50,100,-18.66,0.9756,0.6197,-8882.9],[90,55,110,-54.72,0.9341,0.5882,-26047.2],[90,60,120,-79.35,0.9098,0.563,-37770.35]];     // [SL, TP1, TP2, esperanza, factor, acierto, neto]
+  const C = { tp2: '#169c86', be: '#4a90d9', cierre: '#c08a12', sesion: '#7d7d7d', stop: '#e5533d' };
+  const money = (v, d = 0) => (v < 0 ? '−$' : '+$') + Math.abs(v).toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+  const root = document.getElementById('analitica');
+  const fitCanvas = (cv) => {
+    const W = cv.clientWidth || 300, H = cv.clientHeight || 200, DPR = Math.min(2, devicePixelRatio || 1);
+    if (cv.width !== Math.round(W * DPR) || cv.height !== Math.round(H * DPR)) { cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR); }
+    const ctx = cv.getContext('2d'); ctx.setTransform(DPR, 0, 0, DPR, 0, 0); return { ctx, W, H };
+  };
+
+  // ---------- count-ups + meters ----------
+  function enter() {
+    root.querySelectorAll('[data-count]').forEach((el) => {
+      const to = +el.dataset.count, dec = +el.dataset.dec || 0, pre = el.dataset.pre || '', suf = el.dataset.suf || '';
+      const t0 = performance.now();
+      (function step(now) {
+        const k = Math.min(1, (now - t0) / 1300), e = 1 - Math.pow(1 - k, 3);
+        el.textContent = pre + (to * e).toFixed(dec) + suf;
+        if (k < 1) requestAnimationFrame(step);
+      })(t0);
+      setTimeout(() => { el.textContent = pre + to.toFixed(dec) + suf; }, 1500);
+    });
+    root.querySelectorAll('.meter b').forEach((b) => { b.style.transition = 'none'; b.style.width = '0'; void b.offsetWidth; b.style.transition = ''; b.style.width = b.dataset.w + '%'; });
+    root.querySelectorAll('.meter u').forEach((u) => { u.style.opacity = '1'; u.style.left = u.dataset.l + '%'; });
+    drawRows(); drawSurf();
+  }
+
+  // ---------- cómo termina cada operación ----------
+  const OUT = [
+    { k: 'tp2', nm: 'TP1 + TP2', n: 150, usd: 163650 },
+    { k: 'be', nm: 'TP1 + BE', n: 143, usd: 48763 },
+    { k: 'cierre', nm: 'TP1 + cierre', n: 2, usd: 1331 },
+    { k: 'sesion', nm: 'Cierre fin de sesión (14:59 / 13:59 CDMX)', n: 8, usd: -2072 },
+    { k: 'stop', nm: 'Stop (−2)', n: 173, usd: -200507 }
+  ];
+  const TOTAL = 476;
+  let mode = 'n', sel = null;
+  const rowsEl = document.getElementById('outRows'), detEl = document.getElementById('outDetail');
+  rowsEl.innerHTML = OUT.map((o, i) => `<button type="button" class="orow" data-i="${i}"><span class="nm">${o.nm}</span><span class="track"><span class="fill" style="background:${C[o.k]}"></span></span><span class="v"></span></button>`).join('');
+  const rows = [...rowsEl.children];
+  function drawRows() {
+    const maxUsd = Math.max(...OUT.map((o) => Math.abs(o.usd)));
+    rows.forEach((r, i) => {
+      const o = OUT[i];
+      const w = mode === 'n' ? o.n / TOTAL * 100 / 0.4 : Math.abs(o.usd) / maxUsd * 100;
+      r.querySelector('.fill').style.width = Math.max(1, Math.min(100, w)) + '%';
+      r.querySelector('.v').textContent = mode === 'n' ? `${o.n} (${Math.round(o.n / TOTAL * 100)}%)` : money(o.usd);
+      r.classList.toggle('sel', sel === i);
+    });
+  }
+  function detail(i) {
+    const o = OUT[i]; sel = i; drawRows();
+    detEl.innerHTML = `<strong>${o.nm}:</strong> ${o.n} operaciones (${(o.n / TOTAL * 100).toFixed(1)}%), resultado ${money(o.usd)} · promedio <strong>${money(o.usd / o.n)}</strong> por operación.`;
+  }
+  rows.forEach((r, i) => ['mouseenter', 'focus', 'click'].forEach((ev) => r.addEventListener(ev, () => detail(i))));
+  root.querySelectorAll('.seg button').forEach((b) => b.addEventListener('click', () => {
+    mode = b.dataset.mode; root.querySelectorAll('.seg button').forEach((x) => x.classList.toggle('on', x === b)); drawRows();
+  }));
+
+  // ---------- superficie 3D ----------
+  const SLs = [...new Set(SURF.map((r) => r[0]))], TPs = [...new Set(SURF.map((r) => r[1]))];
+  const at = (sl, tp) => SURF.find((r) => r[0] === sl && r[1] === tp);
+  const surfCv = document.getElementById('surf'), tip = document.getElementById('surfTip'), metSel = document.getElementById('surfMet');
+  let yaw = -0.62, pitch = 0.52, drag = null, hover = null, proj = [];
+  const SPITCH = { persp: 0.52, contra: -0.36 }; let smode = 'persp', tween = 0;
+  const META = {
+    3: { name: 'USD POR OPERACIÓN', th: 0, fmt: (v) => money(v, 0) },
+    4: { name: 'FACTOR DE BENEFICIO', th: 1, fmt: (v) => v.toFixed(2) },
+    5: { name: 'ACIERTO %', th: null, fmt: (v) => Math.round(v * 100) + '%' }
+  };
+  function color(t, shade) {          // t: -1 (pierde) .. +1 (gana)
+    const red = [235, 98, 112], grn = [46, 201, 90], mid = [120, 112, 96];
+    const a = t < 0 ? red : grn, k = Math.min(1, Math.abs(t) * 1.6);
+    const c = mid.map((m, i) => m + (a[i] - m) * k).map((v) => Math.round(Math.min(255, v * shade)));
+    return `rgb(${c[0]},${c[1]},${c[2]})`;
+  }
+  function drawSurf() {
+    if (!surfCv.clientWidth) return;
+    const { ctx, W, H } = fitCanvas(surfCv);
+    ctx.clearRect(0, 0, W, H);
+    const m = +metSel.value, meta = META[m];
+    const vals = SURF.map((r) => r[m]);
+    const vmin = Math.min(...vals), vmax = Math.max(...vals);
+    const th = meta.th === null ? (vmin + vmax) / 2 : meta.th;
+    const span = Math.max(Math.abs(vmax - th), Math.abs(vmin - th));
+    const ny = (v) => ((v - vmin) / (vmax - vmin) - 0.5) * 1.1;
+    const P = (x, y, z) => {                 // rotate + perspective
+      const cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch);
+      const x1 = x * cy - z * sy, z1 = x * sy + z * cy;
+      const y2 = y * cp - z1 * sp, z2 = y * sp + z1 * cp;
+      const f = 4.2 / (4.2 + z2), s = Math.min(W, H * 1.6) * 0.36;
+      return [W / 2 + x1 * s * f, H * (0.56 + Math.max(0, -pitch) * 0.34) - y2 * s * f, z2];
+    };
+    const X = (i) => (i / (SLs.length - 1) - 0.5) * 2.2, Z = (j) => (j / (TPs.length - 1) - 0.5) * 1.6;
+    // floor grid + axes
+    ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(255,255,255,.08)';
+    const fy = -0.62;
+    for (let i = 0; i < SLs.length; i += 3) { const a = P(X(i), fy, Z(0)), b = P(X(i), fy, Z(TPs.length - 1)); ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke(); }
+    for (let j = 0; j < TPs.length; j += 2) { const a = P(X(0), fy, Z(j)), b = P(X(SLs.length - 1), fy, Z(j)); ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke(); }
+    // threshold plane
+    if (meta.th !== null && th > vmin && th < vmax) {
+      const y0 = ny(th), c = [P(X(0), y0, Z(0)), P(X(SLs.length - 1), y0, Z(0)), P(X(SLs.length - 1), y0, Z(TPs.length - 1)), P(X(0), y0, Z(TPs.length - 1))];
+      ctx.fillStyle = 'rgba(255,255,255,.06)'; ctx.beginPath(); c.forEach((p, k) => (k ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]))); ctx.closePath(); ctx.fill();
+    }
+    // vertices
+    proj = [];
+    const V = SLs.map((sl, i) => TPs.map((tp, j) => { const r = at(sl, tp); const p = P(X(i), ny(r[m]), Z(j)); proj.push({ r, p }); return { r, p, y: ny(r[m]) }; }));
+    // quads, painter's order
+    const quads = [];
+    for (let i = 0; i < SLs.length - 1; i++) for (let j = 0; j < TPs.length - 1; j++) {
+      const q = [V[i][j], V[i + 1][j], V[i + 1][j + 1], V[i][j + 1]];
+      const avg = q.reduce((s, v) => s + v.r[m], 0) / 4;
+      const depth = q.reduce((s, v) => s + v.p[2], 0) / 4;
+      const slope = Math.abs(q[0].y - q[2].y) + Math.abs(q[1].y - q[3].y);
+      quads.push({ q, t: (avg - th) / span, depth, shade: 1.05 - Math.min(0.35, slope * 1.4) });
+    }
+    quads.sort((a, b) => b.depth - a.depth);
+    for (const Q of quads) {
+      ctx.beginPath(); Q.q.forEach((v, k) => (k ? ctx.lineTo(v.p[0], v.p[1]) : ctx.moveTo(v.p[0], v.p[1]))); ctx.closePath();
+      ctx.fillStyle = color(Q.t, Q.shade); ctx.fill();
+      ctx.strokeStyle = 'rgba(0,0,0,.28)'; ctx.lineWidth = 0.8; ctx.stroke();
+    }
+    // axis labels
+    ctx.fillStyle = '#9a9a9a'; ctx.font = '12px JetBrains Mono, monospace'; ctx.textAlign = 'center';
+    SLs.forEach((sl, i) => { if (sl % 15 === 0) { const p = P(X(i), fy, Z(0) - 0.18); ctx.fillText(sl, p[0], p[1]); } });
+    TPs.forEach((tp, j) => { if (tp % 10 === 0) { const p = P(X(SLs.length - 1) + 0.2, fy, Z(j)); ctx.fillText(tp, p[0], p[1]); } });
+    ctx.fillStyle = '#cfcfcf'; ctx.font = '12px JetBrains Mono, monospace';
+    let p = P(0, fy, Z(0) - 0.42); ctx.fillText('STOP (TICKS)', p[0], p[1]);
+    p = P(X(SLs.length - 1) + 0.5, fy, 0); ctx.fillText('TP1 (TICKS)', p[0], p[1]);
+    ctx.textAlign = 'left'; ctx.fillStyle = '#9a9a9a'; ctx.fillText(meta.name, 14, 22);
+    // markers
+    const best = SURF.reduce((a, r) => (r[m] > a[m] ? r : a));
+    const mine = at(45, 30);
+    const mark = (r, label) => {
+      const o = proj.find((v) => v.r === r).p;
+      ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(o[0], o[1], 5.5, 0, Math.PI * 2); ctx.fill();
+      ctx.font = '14px JetBrains Mono, monospace'; ctx.fillText(label, o[0] + 10, o[1] - 8);
+    };
+    mark(best, 'Mejor'); mark(mine, 'Tu config');
+    if (hover) { ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(hover.p[0], hover.p[1], 7, 0, Math.PI * 2); ctx.stroke(); }
+    // summary
+    const pos = SURF.filter((r) => r[3] > 0).length;
+    const bE = SURF.reduce((a, r) => (r[3] > a[3] ? r : a));
+    document.getElementById('surfText').innerHTML =
+      `<strong style="color:#fff">${pos} de ${SURF.length}</strong> combinaciones dan esperanza positiva. La mejor es SL ${bE[0]} con TP ${bE[1]}/${bE[2]}: <strong style="color:#fff">${money(bE[3])}</strong> por operación (factor ${bE[4].toFixed(2)}). Tu SL 45 con TP 30/60 da <strong style="color:#fff">${money(mine[3])}</strong> (factor ${mine[4].toFixed(2)}). Los stops cortos (15–20 ticks) salen mejor en este periodo, pero elegirlos mirando estos mismos datos es sobreajuste: habría que confirmarlo en otros años.`;
+  }
+  function showTip(v, x, y) {
+    const r = v.r;
+    tip.innerHTML = `<b>SL ${r[0]} · TP ${r[1]}/${r[2]}</b><span>Esperanza</span><em>${money(r[3], 2)}</em><span>Factor</span><em>${r[4].toFixed(3)}</em><span>Acierto</span><em>${(r[5] * 100).toFixed(1)}%</em><span>Neto</span><em>${money(r[6])}</em>`;
+    tip.hidden = false;
+    const bw = surfCv.clientWidth;
+    tip.style.left = Math.min(bw - 190, Math.max(4, x + 14)) + 'px'; tip.style.top = Math.max(4, y - 96) + 'px';
+  }
+  surfCv.addEventListener('pointerdown', (e) => { drag = { x: e.clientX, y: e.clientY }; surfCv.setPointerCapture(e.pointerId); tip.hidden = true; });
+  surfCv.addEventListener('pointermove', (e) => {
+    const rc = surfCv.getBoundingClientRect(), x = e.clientX - rc.left, y = e.clientY - rc.top;
+    if (drag) {
+      yaw += (e.clientX - drag.x) * 0.008; pitch = Math.max(-0.6, Math.min(1.25, pitch + (e.clientY - drag.y) * 0.006)); cancelAnimationFrame(tween);
+      drag = { x: e.clientX, y: e.clientY }; drawSurf(); return;
+    }
+    let bestV = null, bd = 22 * 22;
+    for (const v of proj) { const d = (v.p[0] - x) ** 2 + (v.p[1] - y) ** 2; if (d < bd) { bd = d; bestV = v; } }
+    hover = bestV; drawSurf();
+    if (bestV) showTip(bestV, bestV.p[0], bestV.p[1]); else tip.hidden = true;
+  });
+  surfCv.addEventListener('pointerup', () => { drag = null; });
+  surfCv.addEventListener('pointerleave', () => { if (!drag) { hover = null; tip.hidden = true; drawSurf(); } });
+  metSel.addEventListener('change', drawSurf);
+  const sBtns = [...document.querySelectorAll('#surfViews [data-v]')];
+  const syncS = () => sBtns.forEach((b) => b.classList.toggle('on', b.dataset.v === smode));
+  function goPitch() {               // transición suave entre vistas
+    cancelAnimationFrame(tween);
+    const step = () => { const d = SPITCH[smode] - pitch; if (Math.abs(d) < 0.003) { pitch = SPITCH[smode]; drawSurf(); return; } pitch += d * 0.12; drawSurf(); tween = requestAnimationFrame(step); };
+    tween = requestAnimationFrame(step);
+  }
+  sBtns.forEach((b) => b.addEventListener('click', () => { smode = b.dataset.v; syncS(); goPitch(); }));
+  surfCv.addEventListener('pointerup', () => { smode = pitch < 0 ? 'contra' : 'persp'; syncS(); });
+
+  // ---------- rango de esperanza (bootstrap real con tus operaciones) ----------
+  const LEVELS = [0, 1.25, 1.5, 3, 4.5, 6, 7.5, 9];
+  const MINE = 1.25, SLIP = 1, TICK = 12.5, B = 20000;
+  const costOp = (c) => 2 * (SLIP * TICK + c);
+  let s = 45 >>> 0;
+  const rnd = () => { s |= 0; s = (s + 0x6D2B79F5) | 0; let t = Math.imul(s ^ (s >>> 15), 1 | s); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  const N = GROSS.length;
+  const boot = new Float64Array(B);                // medias con costo 0; cada comisión solo desplaza
+  for (let b = 0; b < B; b++) { let acc = 0; for (let k = 0; k < N; k++) acc += GROSS[(rnd() * N) | 0]; boot[b] = acc / N; }
+  const sorted = Float64Array.from(boot).sort();
+  const q = (p) => sorted[Math.min(B - 1, Math.floor(p * B))];
+  const meanG = GROSS.reduce((a, v) => a + v, 0) / N;
+  const stats = (c) => {
+    const sh = costOp(c);
+    let le0 = 0; for (let b = 0; b < B; b++) if (boot[b] - sh <= 0) le0++;
+    return { mean: meanG - sh, lo: q(0.025) - sh, hi: q(0.975) - sh, min: sorted[0] - sh, max: sorted[B - 1] - sh, p0: le0 / B };
+  };
+  let comm = MINE;
+  function updIC() {
+    const st = stats(comm);
+    const lo = document.getElementById('icLo'), hi = document.getElementById('icHi');
+    lo.textContent = money(st.lo, 2); hi.textContent = money(st.hi, 2);
+    lo.className = st.lo < 0 ? 'neg' : 'pos'; hi.className = st.hi < 0 ? 'neg' : 'pos';
+    const pct = (v) => ((v - st.min) / (st.max - st.min) * 100) + '%';
+    const band = document.getElementById('icBand');
+    band.style.left = pct(st.lo); band.style.width = ((st.hi - st.lo) / (st.max - st.min) * 100) + '%';
+    document.getElementById('icZero').style.left = pct(0);
+    document.getElementById('icDot').style.left = pct(st.mean);
+    document.getElementById('icMin').textContent = money(st.min); document.getElementById('icMax').textContent = money(st.max);
+    document.getElementById('icText').innerHTML =
+      `Esperanza observada <strong>${money(st.mean, 2)}</strong> por operación (${N} ops, 2025–2026). Con 95% de confianza la esperanza real está entre ${money(st.lo, 2)} y ${money(st.hi, 2)}${st.lo < 0 && st.hi > 0 ? '; <strong>el rango incluye el $0</strong>' : ''}. Probabilidad de que la esperanza sea ≤ 0: <strong>${(st.p0 * 100).toFixed(1)}%</strong>.`;
+  }
+
+  addEventListener('resize', () => { if (!root.classList.contains('off')) { drawSurf(); } });
+  updIC();
+
+  // ---------- modelo 3D del rango de esperanza (por nivel de comisión) ----------
+  const ic3 = document.getElementById('ic3d');
+  const LEVELS3 = [0, 1.25, 1.5, 3, 4.5, 6, 7.5, 9];
+  const XMIN = -170, XMAX = 210, NB = 90, bw3 = (XMAX - XMIN) / NB;
+  const base = new Float64Array(NB);                 // densidad con costo 0; cada comisión la desplaza
+  const sh0 = costOp(0);
+  for (let b = 0; b < B; b++) { const k = Math.floor((boot[b] - sh0 - XMIN) / bw3); if (k >= 0 && k < NB) base[k]++; }
+  const sm = new Float64Array(NB);                   // suavizado ligero
+  for (let k = 0; k < NB; k++) { let a = 0, w = 0; for (let j = -2; j <= 2; j++) { const q = k + j; if (q >= 0 && q < NB) { const ww = 3 - Math.abs(j); a += base[q] * ww; w += ww; } } sm[k] = a / w; }
+  const peak3 = Math.max(...sm);
+  const dens3 = (v) => { const x = (v - XMIN) / bw3 - 0.5, k = Math.floor(x), f = x - k; const a = sm[Math.max(0, Math.min(NB - 1, k))], b2 = sm[Math.max(0, Math.min(NB - 1, k + 1))]; return (a + (b2 - a) * f) / peak3; };
+  // datos fijos por nivel (se calculan una sola vez: así no se traba)
+  const L3 = LEVELS3.length, Z = (i) => -0.9 + i / (L3 - 1) * 1.8, X = (v) => (v - XMIN) / (XMAX - XMIN) * 2 - 1;
+  const H3 = 0.85, VSTEP = 4;
+  const RIDGES = LEVELS3.map((lv, i) => {
+    const st = stats(lv), sh = costOp(lv) - sh0, pts = [];
+    for (let v = XMIN; v <= XMAX; v += VSTEP) pts.push([v, dens3(v + sh)]);
+    return { lv, i, st, sh, pts, mine: lv === MINE };
+  });
+  const cam3 = { yaw: -0.5, pitch: 0.42 }; let drag3 = null, last3 = 0, spin3 = true, mode3 = 'persp', lastDraw = 0;
+  const PITCH = { persp: 0.42, aerea: 1.5, contra: -0.38 };
+  const heat = (d, mine) => { const k = Math.max(0, Math.min(1, d)); return mine ? `rgba(255,${Math.round(190 + 50 * k)},${Math.round(80 + 120 * k)},${0.15 + 0.85 * k})` : `rgba(224,170,52,${0.06 + 0.8 * k})`; };
+  function draw3(now) {
+    requestAnimationFrame(draw3);
+    if (root.classList.contains('off') || !ic3.clientWidth) { last3 = now; return; }
+    const rc = ic3.getBoundingClientRect(); if (rc.bottom < 0 || rc.top > innerHeight) { last3 = now; return; }
+    if (now - lastDraw < 30) return;            // ~30 cuadros por segundo es suficiente y más fluido
+    lastDraw = now;
+    const dt3 = Math.min(0.05, (now - last3) / 1000 || 0); last3 = now;
+    if (spin3 && !drag3) cam3.yaw += dt3 * (Math.PI * 2 / 18);
+    if (!drag3) cam3.pitch += (PITCH[mode3] - cam3.pitch) * Math.min(1, dt3 * 4);
+    const W = ic3.clientWidth, H = ic3.clientHeight, DPR = Math.min(2, devicePixelRatio || 1);
+    if (ic3.width !== Math.round(W * DPR) || ic3.height !== Math.round(H * DPR)) { ic3.width = Math.round(W * DPR); ic3.height = Math.round(H * DPR); }
+    const c = ic3.getContext('2d'); c.setTransform(DPR, 0, 0, DPR, 0, 0); c.clearRect(0, 0, W, H);
+    const aer = Math.max(0, Math.min(1, (cam3.pitch - 0.8) / 0.6));    // 0 = perspectiva, 1 = aérea
+    const yaw = cam3.yaw, cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(cam3.pitch), sp = Math.sin(cam3.pitch);
+    const S = Math.min(W, H * 1.8) * (0.4 + aer * 0.06);
+    const P = (x, y, z) => { const x1 = x * cy - z * sy, z1 = x * sy + z * cy, y2 = y * cp - z1 * sp, z2 = y * sp + z1 * cp, f = 4 / (4 + z2); return [W / 2 + x1 * S * f, H * (0.62 - aer * 0.1 + Math.max(0, -cam3.pitch) * 0.32) - y2 * S * f, z2]; };
+    const quad = (a, b, d, e, fill) => { c.beginPath(); c.moveTo(a[0], a[1]); c.lineTo(b[0], b[1]); c.lineTo(d[0], d[1]); c.lineTo(e[0], e[1]); c.closePath(); c.fillStyle = fill; c.fill(); };
+    // piso
+    c.strokeStyle = 'rgba(255,255,255,.07)'; c.lineWidth = 1;
+    for (let v = -150; v <= 200; v += 50) { const a = P(X(v), 0, -1), b = P(X(v), 0, 1); c.beginPath(); c.moveTo(a[0], a[1]); c.lineTo(b[0], b[1]); c.stroke(); }
+    const hgt = H3 * (1 - aer * 0.85);          // en vista aérea las crestas se aplanan y se ve el mapa de calor
+    const order = RIDGES.map((r) => ({ r, d: P(0, 0, Z(r.i))[2] })).sort((a, b) => b.d - a.d);
+    // mapa de calor en el piso (vista aérea)
+    if (aer > 0.02) {
+      const dz = 0.9 / (L3 - 1);
+      c.globalAlpha = aer;
+      for (const { r } of order) {
+        const z = Z(r.i);
+        for (let k = 0; k < r.pts.length - 1; k++) {
+          const [v0, d0] = r.pts[k], [v1] = r.pts[k + 1];
+          if (d0 < 0.01) continue;
+          const inIC = v0 >= r.st.lo && v0 <= r.st.hi;
+          quad(P(X(v0), 0, z - dz), P(X(v1), 0, z - dz), P(X(v1), 0, z + dz), P(X(v0), 0, z + dz), inIC ? heat(d0, r.mine) : `rgba(200,200,200,${0.05 + 0.25 * d0})`);
+        }
+      }
+      c.globalAlpha = 1;
+    }
+    // plano rojo en $0
+    const zero = X(0);
+    const pa = P(zero, 0, -1), pb = P(zero, 0, 1), pc = P(zero, Math.max(hgt, 0.02) * 1.05, 1), pd = P(zero, Math.max(hgt, 0.02) * 1.05, -1);
+    quad(pa, pb, pc, pd, `rgba(229,83,61,${0.16 + aer * 0.2})`);
+    c.strokeStyle = 'rgba(229,83,61,.75)'; c.lineWidth = 1.5; c.beginPath(); c.moveTo(pa[0], pa[1]); c.lineTo(pb[0], pb[1]); c.stroke();
+    // crestas (de atrás hacia adelante)
+    for (const { r } of order) {
+      const z = Z(r.i), pts = r.pts;
+      const fillRange = (from, to, fill) => {
+        c.beginPath(); let started = false, lastV = from;
+        for (const [v, d] of pts) { if (v < from || v > to) continue; const p = P(X(v), d * hgt, z); if (!started) { const b0 = P(X(v), 0, z); c.moveTo(b0[0], b0[1]); started = true; } c.lineTo(p[0], p[1]); lastV = v; }
+        if (!started) return; const e = P(X(lastV), 0, z); c.lineTo(e[0], e[1]); c.closePath(); c.fillStyle = fill; c.fill();
+      };
+      const solid = 1 - aer * 0.75;
+      fillRange(XMIN, XMAX, r.mine ? `rgba(40,30,10,${0.92 * solid})` : `rgba(14,14,14,${0.94 * solid})`);
+      fillRange(r.st.lo, r.st.hi, r.mine ? `rgba(224,170,52,${0.95 * solid})` : `rgba(201,152,40,${0.55 * solid})`);
+      c.beginPath(); pts.forEach(([v, d], k) => { const p = P(X(v), d * hgt, z); k ? c.lineTo(p[0], p[1]) : c.moveTo(p[0], p[1]); });
+      c.strokeStyle = r.mine ? '#fff' : 'rgba(230,230,230,.5)'; c.lineWidth = r.mine ? 2 : 1; c.stroke();
+      const lp = P(1.05, 0, z); c.fillStyle = r.mine ? '#fff' : '#8a8a8a'; c.font = '11px "JetBrains Mono",monospace'; c.textAlign = 'left'; c.fillText('$' + r.lv.toFixed(2), lp[0], lp[1] + 4);
+      if (r.mine) {
+        const m = P(X(r.st.mean), dens3(r.st.mean + r.sh) * hgt + 0.05, z);
+        c.fillStyle = '#fff'; c.beginPath(); c.arc(m[0], m[1], 4.5, 0, Math.PI * 2); c.fill();
+        c.fillText('IC 95%: ' + money(r.st.lo) + ' a ' + money(r.st.hi), m[0] + 10, m[1] - 8);
+      }
+    }
+    // eje de valores
+    c.fillStyle = '#9a9a9a'; c.font = '11px "JetBrains Mono",monospace'; c.textAlign = 'center';
+    for (let v = -150; v <= 200; v += 50) { const p = P(X(v), 0, -1.12); c.fillText(v === 0 ? '$0' : (v < 0 ? '−$' : '+$') + Math.abs(v), p[0], p[1] + 4); }
+    const pl = P(1.2, 0, 0); c.fillText('COMISIÓN', pl[0], pl[1] - 10);
+  }
+  ic3.addEventListener('pointerdown', (e) => { drag3 = { x: e.clientX, y: e.clientY }; ic3.setPointerCapture(e.pointerId); });
+  ic3.addEventListener('pointermove', (e) => { if (!drag3) return; cam3.yaw += (e.clientX - drag3.x) * 0.008; cam3.pitch = Math.max(-0.6, Math.min(1.55, cam3.pitch + (e.clientY - drag3.y) * 0.006)); drag3 = { x: e.clientX, y: e.clientY }; });
+  const endDrag = () => { if (!drag3) return; drag3 = null; mode3 = cam3.pitch > 1 ? 'aerea' : cam3.pitch < 0 ? 'contra' : 'persp'; syncBtns(); };
+  ic3.addEventListener('pointerup', endDrag); ic3.addEventListener('pointercancel', endDrag);
+  const ctlBtns = [...document.querySelectorAll('.ic3d-ctl [data-v]')];
+  const syncBtns = () => ctlBtns.forEach((b) => b.classList.toggle('on', b.dataset.v === mode3));
+  ctlBtns.forEach((b) => b.addEventListener('click', () => { mode3 = b.dataset.v; syncBtns(); }));
+  const spinBtn = document.getElementById('ic3dSpin');
+  if (spinBtn) spinBtn.addEventListener('click', () => { spin3 = !spin3; spinBtn.textContent = spin3 ? 'Detener giro' : 'Girar'; });
+  requestAnimationFrame(draw3);
+  window.__orbeAnalytics = { enter };
+  if (!root.classList.contains('off')) enter();
+})();
+</script>
+
+<script>
+(() => {
+  const cards = [...document.querySelectorAll('[data-card]')];
+  cards.forEach((c) => c.querySelector('.card-h').addEventListener('click', () => {
+    const open = !c.classList.contains('open');
+    cards.forEach((o) => { o.classList.remove('open'); o.querySelector('.card-h').setAttribute('aria-expanded', 'false'); });
+    if (open) {
+      c.classList.add('open'); c.querySelector('.card-h').setAttribute('aria-expanded', 'true');
+      setTimeout(() => c.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 250);
+    }
+  }));
+})();
+</script>
+
+<div class="pay" id="pay" role="dialog" aria-modal="true" aria-labelledby="payTitle" aria-hidden="true" inert>
+  <div class="pay-box">
+    <button type="button" class="pay-x" id="payClose" aria-label="Cerrar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="kicker">[ Inscripción ]</div>
+    <h3 id="payTitle">ORBE-GRAND</h3>
+    <p class="desc" id="payDesc"></p>
+    <div class="price"><b id="payPrice">$1,099</b><span id="payPer">MXN / mes</span></div>
+    <ul id="payList"></ul>
+    <div class="method">
+      <span class="ic" aria-hidden="true"><svg width="22" height="16" viewBox="0 0 24 18" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="1" width="22" height="16" rx="3"/><path d="M1 6h22M5 13h5"/></svg></span>
+      <div><strong style="font-size:14.5px">Tarjeta de crédito o débito</strong><small>Visa · Mastercard · American Express</small></div>
+    </div>
+    <a class="paybtn" id="payGo" href="#" target="_blank" rel="noopener">PAGAR CON TARJETA
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <div class="secure"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>El pago se hace en una página segura del procesador de pagos. ORBE no ve ni guarda los datos de tu tarjeta.</div>
+    <div class="paynote" id="payNote" aria-live="polite"></div>
+  </div>
+</div>
+<script>
+(() => {
+  // ====== CONFIGURA AQUÍ ======
+  // Pega el enlace de pago de cada plan (Mercado Pago, Stripe Payment Link, etc.) y su precio.
+  const PLANES = {
+    grand: {
+      nombre: 'ORBE-GRAND', precio: '$1,099', periodo: 'MXN / mes', enlace: 'https://mpago.la/1fZPt1k',
+      desc: 'La comunidad completa, con señales todos los días.',
+      incluye: ['Comunidad ORBE-GRAND', 'Señales de las operativas todos los días', 'Videos con base en la introducción']
+    },
+    pro: {
+      nombre: 'ORBE-PRO', precio: '$2,999', periodo: 'MXN', enlace: '',
+      desc: 'Metodología completa, señales diarias y cuenta de fondeo.',
+      incluye: ['Acceso a ORBE-PRO', 'Contenido de la metodología', 'Señales diarias', 'Cuenta de fondeo de 25k de APEX', '−50% en ORBE-LAB']
+    },
+    lab: {
+      nombre: 'ORBE-LAB', precio: '$10,000', periodo: 'MXN · pago único · 3 meses de acceso', enlace: 'https://mpago.li/2uLfDsp',
+      desc: 'Aprende la estrategia uno a uno y opera en vivo.',
+      incluye: ['Enseñanza 1 a 1 de la estrategia y la metodología', 'Acceso a ORBE-LAB', 'Estrategias para pasar cuentas de fondeo', 'En vivo todos los días durante la operativa', 'Indicadores de la estrategia y plantillas personalizadas']
+    }
+  };
+  // ============================
+  const pay = document.getElementById('pay'), go = document.getElementById('payGo'), note = document.getElementById('payNote');
+  const chk = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>';
+  let lastFocus = null;
+  function open(key) {
+    const p = PLANES[key]; if (!p) return;
+    document.getElementById('payTitle').textContent = p.nombre;
+    document.getElementById('payDesc').textContent = p.desc;
+    document.getElementById('payPrice').textContent = p.precio;
+    document.getElementById('payPer').textContent = p.periodo;
+    document.getElementById('payList').innerHTML = p.incluye.map((t) => `<li>${chk}<span>${t}</span></li>`).join('');
+    go.href = p.enlace || '#'; go.dataset.ok = p.enlace ? '1' : '';
+    note.textContent = '';
+    lastFocus = document.activeElement;
+    pay.classList.add('on'); pay.removeAttribute('inert'); pay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('pay-open');
+    setTimeout(() => document.getElementById('payClose').focus(), 50);
+  }
+  function close() {
+    pay.classList.remove('on'); pay.setAttribute('inert', ''); pay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('pay-open');
+    if (lastFocus) lastFocus.focus();
+  }
+  document.querySelectorAll('[data-pay]').forEach((b) => b.addEventListener('click', (e) => { e.preventDefault(); open(b.dataset.pay); }));
+  document.getElementById('payClose').addEventListener('click', close);
+  pay.addEventListener('click', (e) => { if (e.target === pay) close(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && pay.classList.contains('on')) close(); });
+  go.addEventListener('click', (e) => { if (!go.dataset.ok) { e.preventDefault(); note.textContent = 'El enlace de pago aún no está configurado.'; } });
+})();
+</script>
+
+<script>
+(() => {
+  const cv = document.getElementById('velas'); if (!cv) return;
+  const ctx = cv.getContext('2d');
+  const view = document.getElementById('servicios');
+  const ACCENT = '#089981';
+  let seed = 7;
+  const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+  const N = 44, SP = 1;
+  let last = 100, trend = 0;
+
+  // cada vela es una nube de partículas: superficie de la caja + mecha
+  function make() {
+    trend = trend * 0.92 + (rnd() - 0.47) * 0.6;
+    const o = last, c = o + trend + (rnd() - 0.5) * 3.2;
+    const h = Math.max(o, c) + rnd() * 1.6, l = Math.min(o, c) - rnd() * 1.6;
+    last = c;
+    const up = c >= o, P = [];
+    const nb = Math.round(70 + Math.min(220, Math.abs(c - o) * 70));
+    for (let k = 0; k < nb; k++) {
+      // punto en la superficie de una caja [-1,1]^3
+      const f = (rnd() * 6) | 0; let u = rnd() * 2 - 1, v = rnd() * 2 - 1, w = rnd() < 0.5 ? -1 : 1;
+      let x, y, z; if (f < 2) { x = w; y = u; z = v; } else if (f < 4) { x = u; y = v; z = w; } else { x = u; y = w; z = v; }
+      P.push({ t: 0, x, y, z, ox: 0, oy: 0, vx: 0, vy: 0, r: rnd(), hot: up ? rnd() < 0.7 : rnd() < 0.04 });
+    }
+    const nw = 26;
+    for (let k = 0; k < nw; k++) P.push({ t: 1, x: (rnd() - 0.5) * 0.15, y: rnd(), z: (rnd() - 0.5) * 0.15, ox: 0, oy: 0, vx: 0, vy: 0, r: rnd(), hot: up && rnd() < 0.5 });
+    return { o, h, l, c, P };
+  }
+  let data = Array.from({ length: N + 2 }, make);
+  let shift = 0, W = 1, H = 1, DPR = 1;
+  const mouse = { x: -9999, y: -9999, px: -9999, py: -9999, t: 0 };
+  cv.addEventListener('pointermove', (e) => {
+    const r = cv.getBoundingClientRect(), nx = e.clientX - r.left, ny = e.clientY - r.top;
+    if (performance.now() - mouse.t > 60) { mouse.px = nx; mouse.py = ny; }
+    mouse.x = nx; mouse.y = ny; mouse.t = performance.now();
+  });
+  cv.addEventListener('pointerleave', () => { mouse.x = mouse.y = mouse.px = mouse.py = -9999; });
+  function size() {
+    W = cv.clientWidth || 1; H = cv.clientHeight || 1; DPR = Math.min(2, devicePixelRatio || 1);
+    cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR);
+  }
+  addEventListener('resize', size); size();
+
+  let lastT = performance.now();
+  function frame(now) {
+    requestAnimationFrame(frame);
+    if (view.classList.contains('off') || !cv.clientWidth) { lastT = now; return; }
+    if (cv.clientWidth !== W || cv.clientHeight !== H) size();
+    const dt = Math.min(0.05, (now - lastT) / 1000); lastT = now;
+    shift += dt * 0.8;
+    while (shift >= SP) { shift -= SP; data.shift(); data.push(make()); }
+
+    const t = now / 1000;
+    const yaw = -0.55 + Math.sin(t * 0.18) * 0.2, pitch = 0.3 + Math.sin(t * 0.13) * 0.06;
+    const cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch);
+    let lo = Infinity, hi = -Infinity; data.forEach((d) => { lo = Math.min(lo, d.l); hi = Math.max(hi, d.h); });
+    const mid = (lo + hi) / 2, yScale = 9 / Math.max(10, hi - lo);
+    const span = N * SP, S = Math.min(W / (span * 0.6), H / 7.2);
+    const proj = (x, y, z) => {
+      const x1 = x * cy - z * sy, z1 = x * sy + z * cy;
+      const y2 = y * cp - z1 * sp, z2 = y * sp + z1 * cp;
+      const f = 22 / (22 + z2);
+      return [W / 2 + x1 * S * f, H * 0.55 - y2 * S * f, z2];
+    };
+
+    // movimiento del cursor (como en el orbe)
+    const m = mouse, mdx = m.x - m.px, mdy = m.y - m.py, mlen = Math.hypot(mdx, mdy);
+    const radius = Math.min(140, 40 + mlen * 4), force = Math.min(1, mlen / 25);
+    m.px += (m.x - m.px) * 0.35; m.py += (m.y - m.py) * 0.35;
+
+    const B = [[[], [], [], []], [[], [], [], []]];
+    const bw = 0.3, bd = 0.3;
+    data.forEach((d, i) => {
+      const x0 = (i - shift) * SP - span / 2;
+      const edge = Math.min(1, Math.max(0, (span / 2 + 1 - Math.abs(x0)) / 4));
+      if (edge <= 0) return;
+      const Y = (v) => (v - mid) * yScale;
+      const top = Y(Math.max(d.o, d.c)), bot = Y(Math.min(d.o, d.c)) - 0.05;
+      const hy = Y(d.h), ly = Y(d.l);
+      for (const p of d.P) {
+        let x, y, z;
+        if (p.t === 0) { x = x0 + p.x * bw; y = bot + (p.y + 1) / 2 * (top - bot); z = p.z * bd; }
+        else { x = x0 + p.x; y = ly + p.y * (hy - ly); z = p.z; }
+        const q = proj(x, y, z);
+        let sx = q[0], sy2 = q[1];
+        if (mlen > 0.3) {
+          const dx = sx + p.ox - m.x, dy = sy2 + p.oy - m.y, d2 = dx * dx + dy * dy;
+          if (d2 < radius * radius) {
+            const w = (1 - Math.sqrt(d2) / radius) * force;
+            p.vx += (mdx * 0.18 - dy * 0.02) * w + dx * 0.03 * w;
+            p.vy += (mdy * 0.18 + dx * 0.02) * w + dy * 0.03 * w;
+          }
+        }
+        p.vx += -p.ox * 0.018; p.vy += -p.oy * 0.018; p.vx *= 0.9; p.vy *= 0.9; p.ox += p.vx; p.oy += p.vy;
+        sx += p.ox; sy2 += p.oy;
+        let lum = (0.35 + 0.65 * Math.max(0, Math.min(1, (6 - q[2]) / 12))) * edge;
+        lum *= 0.85 + 0.15 * Math.sin(t * 3 + p.r * 40);
+        if (p.t === 1) lum *= 0.6;
+        const lvl = lum > 0.8 ? 3 : lum > 0.55 ? 2 : lum > 0.3 ? 1 : 0;
+        B[p.hot ? 1 : 0][lvl].push(sx, sy2);
+      }
+    });
+
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+    const alphas = [0.18, 0.38, 0.62, 0.95], cols = ['#e9e9e9', ACCENT], pR = W < 760 ? 1.1 : 1.3;
+    for (let c = 0; c < 2; c++) {
+      ctx.fillStyle = cols[c];
+      for (let l = 0; l < 4; l++) {
+        const arr = B[c][l]; if (!arr.length) continue;
+        ctx.globalAlpha = alphas[l]; ctx.beginPath();
+        const sz = pR * (0.8 + l * 0.18);
+        for (let k = 0; k < arr.length; k += 2) ctx.rect(arr[k] - sz / 2, arr[k + 1] - sz / 2, sz, sz);
+        ctx.fill();
+      }
+    }
+    ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
