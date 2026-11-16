@@ -37,6 +37,7 @@ jobs:
           mkdir -p _site
           cp index.html three.min.js data-modelo-b.json .nojekyll _site/
           cp -r gym/dist _site/gym
+          cp -r orbe _site/orbe
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
