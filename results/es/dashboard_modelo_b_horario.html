@@ -1,0 +1,253 @@
+<meta name="dash-one-writer">
+<style>
+  .hb { display: grid; gap: var(--cds-gap-xl); font-family: var(--font-anthropic-sans); color: var(--color-fg); }
+  .hb h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+  .hb h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; }
+  .hb p { margin: 0; max-width: 74ch; line-height: 1.5; }
+  .hb-muted { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+  .hb-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-sm); min-width: 0; }
+  .hb-controls { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); align-items: end; }
+  .hb-controls label { display: grid; gap: var(--cds-gap-xs); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .hb-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--cds-gap-md); }
+  .hb-kpi { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md) var(--cds-pad-lg); display: grid; gap: 2px; }
+  .hb-kpi-l { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .hb-kpi-v { font-family: var(--font-anthropic-serif); font-size: 1.7rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .hb-good { color: var(--color-ok); } .hb-bad { color: var(--color-bad); }
+  .hb-chart { position: relative; min-height: 260px; min-width: 0; }
+  .hb-chart svg { display: block; overflow: visible; }
+  .hb-chart text { fill: var(--cds-text-secondary); font-size: var(--cds-font-size-caption); font-family: var(--font-anthropic-sans); }
+  .hb-chart .ax path, .hb-chart .ax line { stroke: var(--cds-chart-axis); }
+  .hb-chart .grid line { stroke: var(--cds-chart-grid); }
+  .hb-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); box-shadow: var(--cds-shadow-popover); border-radius: var(--cds-radius); padding: var(--cds-pad-sm) var(--cds-pad-md); font-size: var(--cds-font-size-caption); line-height: 1.45; white-space: nowrap; z-index: 5; font-variant-numeric: tabular-nums; }
+  .hb-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .hb-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .hb-sw { width: 14px; height: 3px; border-radius: 2px; display: inline-block; background: var(--color-fg-muted); }
+  .hb-band { width: 14px; height: 10px; border-radius: 2px; display: inline-block; background: color-mix(in srgb, var(--color-warn) 18%, transparent); border: 1px solid color-mix(in srgb, var(--color-warn) 40%, transparent); }
+  .hb-wrap { overflow-x: auto; min-width: 0; }
+  .hb table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+  .hb th { text-align: right; font-weight: var(--cds-font-weight-medium); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .hb td { text-align: right; padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .hb th:first-child, .hb td:first-child { text-align: left; }
+  .hb tr.sel td { background: color-mix(in srgb, var(--color-fg) 6%, transparent); font-weight: var(--cds-font-weight-medium); }
+  [data-dash-source-state=refreshing] { opacity: .5; }
+</style>
+
+<div class="hb">
+  <header id="encabezado" style="display: grid; gap: var(--cds-gap-sm);">
+    <h1>Modelo B y el horario de verano</h1>
+    <p data-draw="frase">—</p>
+    <p class="hb-muted">ES con 2 contratos, a favor de la EMA 20 de 3 minutos, SL 45 · TP1 30 · TP2 60 ticks, break-even tras TP1. Ciudad de México ya no cambia de horario, Nueva York sí: las 9:12 CDMX son las 10:12 NY en invierno (42 min tras la apertura) y las 11:12 NY en verano (1 h 42 min tras la apertura). Datos de enero 2025 al 6 de noviembre de 2026.</p>
+  </header>
+
+  <div class="hb-controls">
+    <label for="sel-modo">Hora de entrada
+      <select class="dash-select" id="sel-modo" aria-label="Hora de entrada">
+        <option value="9:12 CDMX (como operas)">9:12 CDMX (como operas)</option>
+        <option value="10:12 NY fijo">10:12 NY todo el año</option>
+        <option value="11:12 NY fijo">11:12 NY todo el año</option>
+        <option value="9:42 NY fijo">9:42 NY todo el año</option>
+      </select>
+    </label>
+  </div>
+
+  <section class="hb-kpis" id="indicadores">
+    <div class="hb-kpi"><span class="hb-kpi-l">Neto total</span><span class="hb-kpi-v" data-draw="k-net">—</span></div>
+    <div class="hb-kpi"><span class="hb-kpi-l">Invierno NY</span><span class="hb-kpi-v" data-draw="k-inv">—</span></div>
+    <div class="hb-kpi"><span class="hb-kpi-l">Verano NY</span><span class="hb-kpi-v" data-draw="k-ver">—</span></div>
+    <div class="hb-kpi"><span class="hb-kpi-l">Factor de beneficio</span><span class="hb-kpi-v" data-draw="k-pf">—</span></div>
+    <div class="hb-kpi"><span class="hb-kpi-l">Días ganados</span><span class="hb-kpi-v" data-draw="k-wr">—</span></div>
+    <div class="hb-kpi"><span class="hb-kpi-l">Drawdown máximo</span><span class="hb-kpi-v" data-draw="k-dd">—</span></div>
+  </section>
+
+  <section class="hb-card" id="tabla">
+    <h2>Neto por hora de entrada, año y temporada</h2>
+    <div class="hb-wrap">
+      <table data-source="resumen" data-row-key="clave" aria-label="Neto por modo y periodo">
+        <thead><tr><th data-field="modo">Hora de entrada</th><th data-field="periodo">Periodo</th><th data-field="n">Días</th><th data-field="wr">Ganados</th><th data-field="pf">Factor</th><th data-field="net">Neto USD</th><th data-field="avg">Por día</th></tr></thead>
+        <tbody data-draw="tabla"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="hb-card" id="curvas">
+    <h2>Curva de capital de cada hora de entrada</h2>
+    <div class="hb-legend">
+      <span><i class="hb-sw" data-sw="0"></i>9:12 CDMX (como operas)</span>
+      <span><i class="hb-sw" data-sw="1"></i>10:12 NY todo el año</span>
+      <span><i class="hb-sw" data-sw="2"></i>11:12 NY todo el año</span>
+      <span><i class="hb-sw" data-sw="3"></i>9:42 NY todo el año</span>
+      <span><i class="hb-band"></i>Horario de verano en NY</span>
+    </div>
+    <div class="hb-chart" data-draw="curvas" data-source="curvas"></div>
+  </section>
+
+  <section class="hb-card" id="temporadas">
+    <h2>Invierno frente a verano</h2>
+    <p class="hb-muted">Neto de cada hora de entrada en los días de invierno y de verano de Nueva York.</p>
+    <div class="hb-chart" data-draw="barras" data-source="resumen"></div>
+  </section>
+</div>
+
+<script>
+  dash.calc('resumen', {
+    inputs: ['ops'],
+    title: 'Resumen por hora de entrada y periodo',
+    description: 'Días, % ganados, factor, neto, media y drawdown de cada hora de entrada en total, por año y por temporada de Nueva York.',
+    fn: (ops) => {
+      const out = [];
+      const st = (modo, periodo, v) => {
+        const s = [...v].sort((a, b) => (a.date < b.date ? -1 : 1)).map((o) => Number(o.usd));
+        let eq = 0, pk = 0, dd = 0; for (const x of s) { eq += x; pk = Math.max(pk, eq); dd = Math.max(dd, pk - eq); }
+        const gw = d3.sum(s.filter((x) => x > 0)), gl = -d3.sum(s.filter((x) => x < 0));
+        out.push({ clave: `${modo}|${periodo}`, modo, periodo, n: s.length, wr: s.filter((x) => x > 0).length / s.length, pf: gw / gl, net: eq, avg: eq / s.length, maxdd: dd });
+      };
+      for (const [modo, v] of d3.group(ops, (o) => o.modo)) {
+        st(modo, 'Todo', v);
+        for (const y of ['2025', '2026']) st(modo, y, v.filter((o) => String(o.year) === y));
+        for (const t of ['Invierno NY', 'Verano NY']) st(modo, t, v.filter((o) => o.temporada === t));
+      }
+      return out;
+    },
+  });
+
+  dash.calc('curvas', {
+    inputs: ['ops'],
+    title: 'Curvas de capital',
+    description: 'USD acumulados día a día de cada hora de entrada, con la temporada de Nueva York de cada día.',
+    fn: (ops) => {
+      const out = [];
+      for (const [modo, v] of d3.group(ops, (o) => o.modo)) {
+        let eq = 0;
+        for (const o of [...v].sort((a, b) => (a.date < b.date ? -1 : 1))) { eq += Number(o.usd); out.push({ modo, date: o.date, eq, temporada: o.temporada }); }
+      }
+      return out;
+    },
+  });
+
+  (() => {
+    const MODOS = ['9:12 CDMX (como operas)', '10:12 NY fijo', '11:12 NY fijo', '9:42 NY fijo'];
+    const fmt = d3.format(',.0f');
+    const money = (v) => (v < 0 ? '−' : '') + '$' + fmt(Math.abs(v));
+    const modo = () => dash.params().modo || MODOS[0];
+    const col = (m) => dash.colors[MODOS.indexOf(m)];
+    const enc = encodeURIComponent;
+    const mark = (tag, f, where, t, cls) => { const e = document.createElement(tag); e.dataset.source = 'resumen'; e.dataset.field = f; e.dataset.where = where; e.textContent = t; if (cls) e.className = cls; return e; };
+    const row = (m, p) => { const d = dash.data('resumen'); return d.status === 'ok' && d.data ? d.data.find((r) => r.modo === m && r.periodo === p) : null; };
+
+    for (const el of document.querySelectorAll('#sel-modo')) el.addEventListener('change', () => dash.setParams({ modo: el.value }));
+    dash.onData(() => {
+      for (const el of document.querySelectorAll('#sel-modo')) if (document.activeElement !== el) el.value = modo();
+      for (const sw of document.querySelectorAll('[data-sw]')) sw.style.background = dash.colors[Number(sw.dataset.sw)] || 'var(--color-fg-muted)';
+    });
+
+    const kpi = (name, periodo, field, f, cls) => dash.draw(name, (el) => {
+      const r = row(modo(), periodo); if (!r) { el.replaceChildren('—'); return; }
+      el.replaceChildren(mark('span', field, 'clave=' + enc(r.clave), f(r[field])));
+      el.className = 'hb-kpi-v ' + (cls ? cls(r[field]) : '');
+    });
+    const sg = (v) => (v >= 0 ? 'hb-good' : 'hb-bad');
+    kpi('k-net', 'Todo', 'net', money, sg);
+    kpi('k-inv', 'Invierno NY', 'net', money, sg);
+    kpi('k-ver', 'Verano NY', 'net', money, sg);
+    kpi('k-pf', 'Todo', 'pf', d3.format('.2f'), (v) => (v >= 1 ? 'hb-good' : 'hb-bad'));
+    kpi('k-wr', 'Todo', 'wr', d3.format('.0%'));
+    kpi('k-dd', 'Todo', 'maxdd', money, () => 'hb-bad');
+
+    dash.draw('frase', (el) => {
+      const a = row(MODOS[0], 'Invierno NY'), b = row(MODOS[0], 'Verano NY'), c = row(MODOS[1], 'Todo'), t = row(MODOS[0], 'Todo');
+      if (!a || !b || !c || !t) { el.replaceChildren('—'); return; }
+      const w = (r) => 'clave=' + enc(r.clave);
+      el.replaceChildren('Operando a las 9:12 CDMX el modelo B dejó ', mark('b', 'net', w(t), money(t.net), sg(t.net)), ', pero casi todo en verano: ',
+        mark('b', 'net', w(b), money(b.net), sg(b.net)), ' a las 11:12 NY frente a ', mark('b', 'net', w(a), money(a.net), sg(a.net)),
+        ' en invierno a las 10:12 NY. Entrando siempre a las 10:12 NY el resultado habría sido ', mark('b', 'net', w(c), money(c.net), sg(c.net)),
+        '. Desde el 2 de noviembre de 2026 estás en invierno: tus 9:12 CDMX son las 10:12 NY hasta el 8 de marzo de 2027.');
+    });
+
+    dash.draw('tabla', (tb) => {
+      const d = dash.data('resumen'); if (d.status !== 'ok' || !d.data) { tb.replaceChildren(); return; }
+      const orden = ['Todo', '2025', '2026', 'Invierno NY', 'Verano NY'];
+      const rs = [...d.data].sort((a, b) => MODOS.indexOf(a.modo) - MODOS.indexOf(b.modo) || orden.indexOf(a.periodo) - orden.indexOf(b.periodo));
+      tb.replaceChildren(...rs.map((r) => {
+        const tr = document.createElement('tr'); tr.dataset.key = enc(r.clave);
+        if (r.modo === modo()) tr.className = 'sel';
+        [[r.periodo === 'Todo' ? r.modo : ''], [r.periodo], [fmt(r.n)], [d3.format('.0%')(r.wr)], [d3.format('.2f')(r.pf), r.pf >= 1 ? 'hb-good' : 'hb-bad'], [money(r.net), sg(r.net)], [money(r.avg), sg(r.avg)]]
+          .forEach(([t, c]) => { const td = document.createElement('td'); td.textContent = t; if (c) td.className = c; tr.append(td); });
+        return tr;
+      }));
+    });
+
+    dash.draw('curvas', (el) => {
+      const d = dash.data('curvas'); if (d.status !== 'ok' || !d.data || !d.data.length) { el.replaceChildren('—'); return; }
+      const parse = d3.utcParse('%Y-%m-%d');
+      const series = MODOS.map((m) => ({ m, rows: d.data.filter((r) => r.modo === m).map((r) => ({ d: parse(r.date), eq: r.eq, t: r.temporada })) }));
+      const all = series.flatMap((s) => s.rows);
+      const W = el.clientWidth || 600, H = 300, mb = 24, mr = 70;
+      el.replaceChildren();
+      const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Curvas de capital del modelo B según la hora de entrada, con el horario de verano marcado');
+      const y = d3.scaleLinear().domain(d3.extent([0, ...all.map((r) => r.eq)])).nice();
+      const probe = svg.append('text').text(money(y.domain()[0]));
+      const ml = Math.ceil(probe.node().getComputedTextLength() || 50) + 10; probe.remove();
+      const x = d3.scaleUtc().domain(d3.extent(all, (r) => r.d)).range([ml, W - mr]);
+      y.range([H - mb, 8]);
+      // bandas de verano (días consecutivos con temporada verano en la serie de referencia)
+      const ref = series[0].rows; let start = null;
+      ref.forEach((r, i) => {
+        const v = r.t === 'Verano NY';
+        if (v && start === null) start = r.d;
+        if ((!v || i === ref.length - 1) && start !== null) {
+          const end = v ? r.d : ref[i - 1].d;
+          svg.append('rect').attr('x', x(start)).attr('y', 8).attr('width', Math.max(1, x(end) - x(start))).attr('height', H - mb - 8)
+            .style('fill', 'color-mix(in srgb, var(--color-warn) 14%, transparent)');
+          start = null;
+        }
+      });
+      svg.append('g').attr('class', 'grid').selectAll('line').data(y.ticks(5)).join('line').attr('x1', ml).attr('x2', W - mr).attr('y1', y).attr('y2', y);
+      svg.append('g').attr('class', 'ax').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(y).ticks(5).tickFormat(money).tickSize(0)).call((g) => g.select('.domain').remove());
+      svg.append('g').attr('class', 'ax').attr('transform', `translate(0,${H - mb})`).call(d3.axisBottom(x).ticks(Math.max(2, Math.floor((W - ml - mr) / 90))).tickFormat(d3.utcFormat('%b %Y')).tickSizeOuter(0));
+      svg.append('line').attr('x1', ml).attr('x2', W - mr).attr('y1', y(0)).attr('y2', y(0)).style('stroke', 'var(--cds-chart-reference)');
+      for (const s of series) svg.append('path').datum(s.rows).attr('fill', 'none').style('stroke', col(s.m)).attr('stroke-width', s.m === modo() ? 2.6 : 1.3).attr('opacity', s.m === modo() ? 1 : 0.7).attr('d', d3.line().x((r) => x(r.d)).y((r) => y(r.eq)));
+      const ends = series.map((s) => ({ s, v: s.rows.at(-1).eq, y: y(s.rows.at(-1).eq) })).sort((a, b) => a.y - b.y);
+      for (let i = 1; i < ends.length; i++) ends[i].y = Math.max(ends[i].y, ends[i - 1].y + 14);
+      svg.append('g').selectAll('text').data(ends).join('text').attr('x', W - mr + 6).attr('y', (e) => e.y + 4).style('fill', (e) => col(e.s.m)).text((e) => money(e.v));
+      const tip = document.createElement('div'); tip.className = 'hb-tip'; tip.hidden = true; el.appendChild(tip);
+      const guide = svg.append('line').attr('y1', 8).attr('y2', H - mb).style('stroke', 'var(--cds-chart-reference)').attr('opacity', 0);
+      const bis = d3.bisector((r) => r.d).right;
+      svg.append('rect').attr('x', ml).attr('y', 0).attr('width', W - ml - mr).attr('height', H - mb).attr('fill', 'transparent')
+        .on('pointermove', (ev) => {
+          const [mx] = d3.pointer(ev); const dt = x.invert(mx); guide.attr('x1', mx).attr('x2', mx).attr('opacity', 1);
+          const lines = [d3.utcFormat('%d %b %Y')(dt)];
+          for (const s of series) { const i = bis(s.rows, dt) - 1; if (i >= 0) lines.push(`${s.m}: ${money(s.rows[i].eq)}`); }
+          tip.replaceChildren(...lines.map((t) => { const q = document.createElement('div'); q.textContent = t; return q; }));
+          tip.hidden = false; const b = el.getBoundingClientRect();
+          tip.style.left = Math.max(0, Math.min(ev.clientX - b.left + 12, el.clientWidth - tip.offsetWidth)) + 'px'; tip.style.top = Math.max(0, ev.clientY - b.top - tip.offsetHeight - 10) + 'px';
+        })
+        .on('pointerleave', () => { tip.hidden = true; guide.attr('opacity', 0); });
+    });
+
+    dash.draw('barras', (el) => {
+      const d = dash.data('resumen'); if (d.status !== 'ok' || !d.data) { el.replaceChildren('—'); return; }
+      const temps = ['Invierno NY', 'Verano NY'];
+      const W = el.clientWidth || 600, H = 240, mb = 40;
+      const vals = d.data.filter((r) => temps.includes(r.periodo));
+      el.replaceChildren();
+      const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Neto en invierno y en verano de cada hora de entrada');
+      const y = d3.scaleLinear().domain(d3.extent([0, ...vals.map((r) => r.net)])).nice();
+      const probe = svg.append('text').text(money(y.domain()[0]));
+      const ml = Math.ceil(probe.node().getComputedTextLength() || 50) + 10; probe.remove();
+      y.range([H - mb, 10]);
+      const x0 = d3.scaleBand().domain(MODOS).range([ml, W - 8]).padding(0.25);
+      const x1 = d3.scaleBand().domain(temps).range([0, x0.bandwidth()]).padding(0.1);
+      svg.append('g').attr('class', 'grid').selectAll('line').data(y.ticks(5)).join('line').attr('x1', ml).attr('x2', W - 8).attr('y1', y).attr('y2', y);
+      svg.append('g').attr('class', 'ax').attr('transform', `translate(${ml},0)`).call(d3.axisLeft(y).ticks(5).tickFormat(money).tickSize(0)).call((g) => g.select('.domain').remove());
+      svg.append('line').attr('x1', ml).attr('x2', W - 8).attr('y1', y(0)).attr('y2', y(0)).style('stroke', 'var(--cds-chart-reference)');
+      for (const r of vals) {
+        const bx = x0(r.modo) + x1(r.periodo);
+        svg.append('rect').attr('x', bx).attr('width', x1.bandwidth()).attr('y', y(Math.max(0, r.net))).attr('height', Math.max(1, Math.abs(y(r.net) - y(0))))
+          .style('fill', r.net >= 0 ? 'var(--color-ok)' : 'var(--color-bad)').attr('opacity', r.periodo === 'Verano NY' ? 1 : 0.6);
+        svg.append('text').attr('x', bx + x1.bandwidth() / 2).attr('y', r.net >= 0 ? y(r.net) - 4 : y(r.net) + 12).attr('text-anchor', 'middle').text(money(r.net));
+        svg.append('text').attr('x', bx + x1.bandwidth() / 2).attr('y', H - mb + 14).attr('text-anchor', 'middle').text(r.periodo === 'Verano NY' ? 'Ver.' : 'Inv.');
+      }
+      for (const m of MODOS) svg.append('text').attr('x', x0(m) + x0.bandwidth() / 2).attr('y', H - 6).attr('text-anchor', 'middle').style('font-weight', m === modo() ? 700 : 400).text(m.replace(' (como operas)', '').replace(' fijo', ' NY').replace('NY NY', 'NY'));
+    });
+  })();
+</script>
