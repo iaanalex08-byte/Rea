@@ -46,3 +46,15 @@ Resultado con datos hasta el 13 nov 2026 (479 operaciones con perfil del día an
 | A + C: además saltar si el perfil del día ya es P (compra) o b (venta) | 264 | 1.11 | 1.49 | 1.27 | +27,867 | −8,589 |
 
 El modelo funciona mejor cuando el precio está lejos del valor de ayer, sobre todo si está del lado contrario a la señal (vuelta al valor), y peor dentro del valor (rotación) o persiguiendo un movimiento que ya extendió. La mejora se mantiene con cajas de 0.5, 1 y 2 puntos y con áreas de valor de 60, 70 y 80 %, pero la muestra es chica: una prueba de permutación da p ≈ 0.03–0.06 y los filtros se eligieron mirando los datos, así que hay que seguir validándolos con operaciones nuevas.
+
+### Bracket para EMA + perfil A + C
+
+`backtest/rejilla_filtro.py` prueba SL × TP1 × TP2 (en ticks) sobre los días que pasan los filtros A + C, con la misma lógica que `engine.run` (con 45/30/60 da exactamente lo mismo).
+
+| Bracket | Ops | Ganadoras | PF 2025 | PF 2026 | PF total | Neto | DD máx |
+|---|---|---|---|---|---|---|---|
+| 45 / 30 / 60 (actual) | 264 | 66.3 % | 1.11 | 1.49 | 1.27 | +27,867 | −8,589 |
+| 25 / 30 / 160 | 264 | 55.3 % | 1.47 | 1.65 | 1.55 | +42,519 | −6,360 |
+| 25 / 35 / 160 | 264 | 53.0 % | 1.48 | 1.76 | 1.60 | +49,207 | −5,610 |
+
+La zona buena es amplia (SL 20–30, TP1 30–40, TP2 100–200) y también mejora el Modelo B sin filtros de perfil (PF 1.07 → 1.24 con 25/30/160), así que no depende de una sola combinación. Se probaron unas 340 combinaciones: valídalo con operaciones nuevas antes de cambiar el tamaño.
