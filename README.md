@@ -73,3 +73,18 @@ python3 backtest/mejoras.py datos/ mejoras.json data-modelo-b.json
 | Propuesta: EMA 20 de 5 min + A + C + 35/30/120 | 264 | 1.44 | 1.65 | 1.53 | +47,155 | −5,340 | 1.07 a 1.53 |
 
 La versión actual solo es buena justo a las 9:12; la propuesta queda arriba de 1 en todos los minutos probados. Filtrar por cercanía a la EMA da PF 2.15, pero solo a las 9:12, así que no se adopta. No ayudan: otra hora de entrada, quitar el break-even, filtrar por día de la semana, por noticias o por rango.
+
+### Prueba fuera de muestra 2023–2024 (`backtest/cuatro_anios.py`)
+
+```
+python3 backtest/cuatro_anios.py datos_2023_2025/ datos/ cuatro_anios.json
+```
+
+| Versión | PF 2023 | PF 2024 | PF 2025 | PF 2026 | PF 4 años | DD máx |
+|---|---|---|---|---|---|---|
+| Solo EMA · 45/30/60 | 1.05 | 1.09 | 1.01 | 1.14 | 1.07 | −12,637 |
+| Actual · EMA 20 de 3 min + A + C · 45/30/60 | 1.12 | 0.94 | 1.11 | 1.49 | 1.14 | −17,464 |
+| **Recomendada · EMA 20 de 3 min + A + C · 35/30/120** | **1.15** | **1.14** | **1.34** | **1.58** | **1.29** | **−8,989** |
+| EMA 20 de 5 min + A + C · 35/30/120 | 1.07 | 1.12 | 1.44 | 1.65 | 1.29 | −13,307 |
+
+La recomendada es la única con PF > 1 en los cuatro años y la menor caída; solo cambia el bracket. La EMA de 5 min, el bracket 25/30/160 y el filtro de cercanía a la EMA se ven bien en 2025–2026 pero no se sostienen en 2023–2024.

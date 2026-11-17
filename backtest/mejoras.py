@@ -91,8 +91,9 @@ if __name__ == '__main__':
     F5 = con_filtros(df, rf.dias(df, ema_len=20, ema_tf=5))
     AC5 = [d for d in F5 if d['pasa']]
     th5 = float(np.median([abs(d['entry'] - d['ema']) for d in AC5 if d['date'].startswith('2025')]))
-    rows.append(fila('Propuesta', 'EMA 20 de 5 min + A + C + 35/30/120', 'Recomendada', AC5, br=(35, 30, 120), base_ref=ref))
-    rows.append(fila('Propuesta', 'EMA 20 de 5 min + A + C + 25/30/160', 'Alternativa con objetivo más lejano', AC5, br=(25, 30, 160), base_ref=ref))
+    rows.append(fila('Propuesta', 'EMA 20 de 3 min + A + C + 35/30/120', 'Recomendada: solo cambia el bracket; PF > 1 en 2023, 2024, 2025 y 2026', AC, br=(35, 30, 120), base_ref=ref))
+    rows.append(fila('Propuesta', 'EMA 20 de 5 min + A + C + 35/30/120', 'Mejor en 2025–2026, pero PF 1.07 en 2023', AC5, br=(35, 30, 120), base_ref=ref))
+    rows.append(fila('Propuesta', 'EMA 20 de 5 min + A + C + 25/30/160', 'PF 0.99 en 2023 y 1.00 en 2024', AC5, br=(25, 30, 160), base_ref=ref))
     rows.append(fila('Propuesta', 'Lo anterior + precio cerca de la EMA', f'≤ {th5:.1f} pts · no recomendada: solo funciona a las 9:12',
                      [d for d in AC5 if abs(d['entry'] - d['ema']) <= th5], br=(35, 30, 120), base_ref=ref))
 
@@ -102,6 +103,7 @@ if __name__ == '__main__':
         Fb = [d for d in con_filtros(df, rf.dias(df, hm=hm), hm=hm) if d['pasa']]
         Fm = [d for d in con_filtros(df, rf.dias(df, ema_len=20, ema_tf=5, hm=hm), hm=hm) if d['pasa']]
         rows.append(fila('Minuto · actual', f'9:{mi:02d}', 'EMA 20 de 3 min + A + C + 45/30/60', Fb, base_ref=ref))
+        rows.append(fila('Minuto · recomendada', f'9:{mi:02d}', 'EMA 20 de 3 min + A + C + 35/30/120', Fb, br=(35, 30, 120), base_ref=ref))
         rows.append(fila('Minuto · propuesta', f'9:{mi:02d}', 'EMA 20 de 5 min + A + C + 35/30/120', Fm, br=(35, 30, 120), base_ref=ref))
         rows.append(fila('Minuto · propuesta + cerca EMA', f'9:{mi:02d}', f'≤ {th5:.1f} pts de la EMA', [d for d in Fm if abs(d['entry'] - d['ema']) <= th5],
                          br=(35, 30, 120), base_ref=ref))
