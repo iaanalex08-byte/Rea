@@ -1,11 +1,13 @@
 // This Pine Script® code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
 // Modelo B · ES · entrada 9:12 hora de Ciudad de México
-// SL 45 ticks · TP1 30 ticks (contrato 1) · TP2 60 ticks (contrato 2) · break-even tras TP1 · cierre 15:59 Nueva York
+// SL 35 ticks · TP1 30 ticks (contrato 1) · TP2 120 ticks (contrato 2) · break-even tras TP1 · cierre 15:59 Nueva York
+// Bracket 35/30/120: el único con PF > 1 en 2023, 2024, 2025 y 2026 con EMA 20 de 3 min + A + C (ver backtest/cuatro_anios.py).
+// El bracket anterior era 45/30/60; se puede volver a él en la configuración.
 // Filtros de perfil (ver backtest/analisis_perfil.py): A = saltar si la entrada cae dentro del área de valor de ayer,
 // C = saltar si el perfil del día ya es P (en compras) o b (en ventas). El perfil se arma por tiempo (TPO) con las velas del gráfico.
 // Úsalo en un gráfico de 1 minuto para que coincida con el backtest.
 //@version=6
-indicator("Modelo B · ES 9:12 CDMX · SL 45 · TP1 30 · TP2 60", shorttitle = "Modelo B", overlay = true, max_labels_count = 500, max_lines_count = 500, max_bars_back = 5000)
+indicator("Modelo B · ES 9:12 CDMX · SL 35 · TP1 30 · TP2 120", shorttitle = "Modelo B", overlay = true, max_labels_count = 500, max_lines_count = 500, max_bars_back = 5000)
 
 // ───────────── Entradas ─────────────
 const string TZ_MX = "America/Mexico_City"
@@ -20,9 +22,9 @@ int    preMin = input.int(5, "Aviso previo (minutos antes de la entrada)", minva
 bool   showPre = input.bool(true, "Mostrar flecha de aviso previo", group = gEnt)
 
 string gBr  = "Bracket (ticks)"
-int    slT  = input.int(45, "Stop loss",          minval = 1, group = gBr)
+int    slT  = input.int(35, "Stop loss",          minval = 1, group = gBr)
 int    tp1T = input.int(30, "TP1 (contrato 1)",   minval = 1, group = gBr)
-int    tp2T = input.int(60, "TP2 (contrato 2)",   minval = 1, group = gBr)
+int    tp2T = input.int(120, "TP2 (contrato 2)",   minval = 1, group = gBr)
 bool   useBE = input.bool(true, "Stop a break-even al tocar TP1", group = gBr)
 
 string gCl = "Cierre forzado (hora de Nueva York)"

@@ -88,3 +88,5 @@ python3 backtest/cuatro_anios.py datos_2023_2025/ datos/ cuatro_anios.json
 | EMA 20 de 5 min + A + C · 35/30/120 | 1.07 | 1.12 | 1.44 | 1.65 | 1.29 | −13,307 |
 
 La recomendada es la única con PF > 1 en los cuatro años y la menor caída; solo cambia el bracket. La EMA de 5 min, el bracket 25/30/160 y el filtro de cercanía a la EMA se ven bien en 2025–2026 pero no se sostienen en 2023–2024.
+
+El indicador `pine/modelo_b_indicador.pine` ya usa 35/30/120 por defecto (antes 45/30/60).
