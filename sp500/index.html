@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cinco caminos S&amp;P 500</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,800;125,900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e9e5dc;--paper:#f2efe8;--ink:#111;--red:#e1261c;--mute:#7a766e;--soft:#3a3833}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:"Instrument Serif",Georgia,serif;-webkit-font-smoothing:antialiased;display:grid;place-items:center;padding:24px 16px;min-height:100vh}
+.wrap{width:min(100%,560px);container-type:inline-size}
+.card{background:var(--paper);border:1.5px solid var(--ink);padding:9cqw 6.5cqw 5cqw;position:relative;overflow:hidden}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+.top{display:flex;justify-content:space-between;font-size:3.3cqw;font-weight:500;letter-spacing:.02em;padding-bottom:1.6cqw;position:relative}
+.top::after{content:"";position:absolute;left:0;bottom:0;height:1.5px;background:var(--ink);width:100%;transform-origin:left;transform:scaleX(0);animation:grow 1.1s .15s cubic-bezier(.6,0,.2,1) forwards}
+.top span:first-child b{font-weight:500;margin:0 2.4cqw}
+.kicker{color:var(--red);font-size:3.3cqw;font-weight:500;letter-spacing:.04em;margin-top:5.5cqw}
+h1{font-family:"Archivo",system-ui,sans-serif;font-stretch:118%;font-weight:900;text-transform:uppercase;font-size:7.35cqw;line-height:1;letter-spacing:-.03em;margin-top:2.6cqw}
+h1 .ln{display:block;overflow:hidden;padding-bottom:.06em}
+h1 .ln>span{display:block;transform:translateY(110%);animation:rise .9s cubic-bezier(.2,.75,.15,1) forwards;animation-delay:var(--d)}
+h1 .red{color:var(--red)}
+.dek{font-size:5.4cqw;line-height:1.28;margin-top:3.6cqw;color:#1c1b19;max-width:92%}
+.rv{opacity:0;transform:translateY(10px);animation:up .8s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:var(--d)}
+.chart{position:relative;margin-top:4cqw;margin-left:-3cqw}
+canvas{display:block;width:calc(100% + 3cqw);aspect-ratio:1/.8}
+.legend{display:flex;flex-wrap:wrap;gap:1cqw 4cqw;font-size:2.25cqw;margin-top:.6cqw;padding-left:6cqw;letter-spacing:.02em;color:var(--soft)}
+.legend i{display:inline-block;width:6cqw;height:0;border-top:2px solid var(--ink);vertical-align:middle;margin-right:1.4cqw}
+.legend i.d{border-top-style:dashed}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:4.2cqw;margin-top:5cqw}
+.stat{border-top:1.5px solid var(--ink);padding-top:2.6cqw}
+.stat .n{font-family:"Archivo",system-ui,sans-serif;font-stretch:125%;font-weight:900;font-size:6.6cqw;letter-spacing:-.02em;line-height:1.1;font-variant-numeric:tabular-nums}
+.stat .n.red{color:var(--red)}
+.stat p{font-size:4.3cqw;line-height:1.2;margin-top:2cqw;color:#1c1b19}
+.stat .n.pop{animation:pop .5s cubic-bezier(.3,1.6,.5,1)}
+.quote{border-left:3px solid var(--red);padding-left:3.4cqw;font-size:5.2cqw;line-height:1.25;margin-top:6.5cqw}
+.by{font-size:3.4cqw;font-weight:700;letter-spacing:.03em;margin-top:3.2cqw}
+.src{font-size:2.25cqw;color:var(--mute);line-height:1.75;margin-top:2cqw;letter-spacing:.02em;text-transform:uppercase}
+.replay{position:absolute;right:2.4cqw;top:2.2cqw;font:500 2.4cqw "IBM Plex Mono",monospace;background:none;border:1px solid #bdb8ad;color:var(--mute);border-radius:99px;padding:.6cqw 2cqw;cursor:pointer;transition:color .2s,border-color .2s}
+.replay:hover{color:var(--ink);border-color:var(--ink)}
+@keyframes rise{to{transform:none}}
+@keyframes up{to{opacity:1;transform:none}}
+@keyframes grow{to{transform:scaleX(1)}}
+@keyframes pop{0%{transform:scale(.7);opacity:.2}100%{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){
+  h1 .ln>span,.rv,.top::after{animation:none!important;transform:none!important;opacity:1!important}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<article class="card">
+  <button class="replay" id="replay" aria-label="Repetir animación">↻ repetir</button>
+  <div class="top mono"><span>DREAMERS<b>|</b>ACADEMY</span><span>GREGORY TREJO</span></div>
+  <div class="kicker mono rv" style="--d:.35s">[ LOS ESCENARIOS DE UBS ]</div>
+  <h1>
+    <span class="ln"><span style="--d:.45s">Cinco caminos</span></span>
+    <span class="ln"><span style="--d:.58s">para el S&amp;P 500</span></span>
+    <span class="ln"><span class="red" style="--d:.71s">hasta 2028</span></span>
+  </h1>
+  <p class="dek rv" style="--d:1s">Un camino base y cuatro de riesgo, desde 7.900 a fin de 2026. El peor: que la IA decepcione.</p>
+
+  <div class="chart rv" style="--d:1.15s">
+    <canvas id="chart" aria-label="Gráfico animado del S&P 500 real y cinco escenarios de UBS hasta fin de 2028"></canvas>
+    <div class="legend mono"><span><i></i>S&amp;P 500 REAL</span><span><i class="d"></i>ESCENARIOS DE UBS (A FIN DE CADA TRIMESTRE)</span></div>
+  </div>
+
+  <div class="stats">
+    <div class="stat rv" style="--d:1.3s"><div class="n" id="s1">+0%</div><p>la base a fin de 2028 (9.600)</p></div>
+    <div class="stat rv" style="--d:1.4s"><div class="n red" id="s2">0%</div><p>el mínimo si la IA decepciona (5.550 aprox.)</p></div>
+    <div class="stat rv" style="--d:1.5s"><div class="n" id="s3">0 de 4</div><p>escenarios de riesgo al alza: el de $60</p></div>
+  </div>
+
+  <blockquote class="quote rv" style="--d:1.6s">Para UBS, el mayor daño no viene del petróleo ni de las tasas: viene de una IA que decepciona y lleva a recesión.</blockquote>
+  <div class="by mono rv" style="--d:1.7s">DREAMERS ACADEMY · ANALISTA GREGORY TREJO</div>
+  <p class="src mono rv" style="--d:1.75s">Fuente: UBS Global Econ and Strategy Outlook (FactSet, estimaciones de UBS); valores leídos del gráfico, aproximados. S&amp;P 500: promedios mensuales y cierre del 11-nov-2026. Contenido educativo, no es asesoría financiera.</p>
+</article>
+</div>
+
+<script>
+(()=>{
+const cv=document.getElementById('chart'),ctx=cv.getContext('2d');
+const field=document.createElement('canvas'),fx=field.getContext('2d',{willReadFrequently:true});
+const REDUCED=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const LOOP=19, START_DELAY=1.4, FREEZE=new URLSearchParams(location.search).has('t');
+const INK='#111',RED='#e1261c',MUTE='#7a766e';
+
+/* ---------- data (leídos del gráfico, aproximados) ---------- */
+const realV=[5600,5900,6050,6000,6050,5700,5400,5800,6000,6300,6400,6600,6750,6750,6900,6950,6900,6650,7000,7400,7450,7500,7700,7650,7619];
+const real=realV.map((v,k)=>[2024.95+k*(2026.86-2024.95)/(realV.length-1),v]);
+const qx=k=>2026.99+k*.25;
+const mk=a=>a.map((v,k)=>[qx(k),v]);
+const S={
+  base:  {pts:mk([7900,8250,8550,8800,9000,9150,9300,9450,9600]), rgb:[17,17,17],   w:1.05,dash:[3.2,2.2],t0:5.0,t1:7.2, cap:'BASE',cap2:null,               css:INK,  slot:1},
+  oil60: {pts:mk([7900,8480,8950,9300,9580,9780,10000,10250,10450]),rgb:[105,102,96],w:.85,dash:[3.2,2.2],t0:5.8,t1:8.0, cap:'PETRÓLEO A $60',  css:'#57544e',slot:0},
+  oil150:{pts:mk([7900,8150,8130,7900,7480,7550,8000,8550,9050]), rgb:[150,146,138],w:.8, dash:[.9,1.6],t0:6.6,t1:8.8, cap:'PETRÓLEO A $150', css:'#6e6a62',slot:2},
+  bond:  {pts:mk([7900,7700,7300,7350,7520,7820,8120,8420,8700]), rgb:[150,146,138],w:.8, dash:[.9,1.6],t0:7.4,t1:9.6, cap:'BONO A 10 AÑOS 6,5%',css:'#6e6a62',slot:3},
+  ai:    {pts:mk([7900,7000,5550,5600,6450,6850,6950,7000,7200]), rgb:[225,38,28],  w:1.1, dash:null,     t0:10.2,t1:13.0,cap:'LA IA DECEPCIONA',css:RED,  slot:4},
+};
+const ORDER=['oil150','bond','oil60','base','ai']; // z-order in field
+
+/* ---------- helpers ---------- */
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const seg=(t,a,b)=>clamp((t-a)/(b-a));
+const smooth=(a,b,x)=>{const u=clamp((x-a)/(b-a));return u*u*(3-2*u)};
+const eio=u=>u<.5?4*u*u*u:1-Math.pow(-2*u+2,3)/2;
+const eo=u=>1-Math.pow(1-u,3);
+const hash=(a,b)=>{const s=Math.sin(a*127.1+b*311.7)*43758.5453;return s-Math.floor(s)};
+const fmt=n=>{n=Math.round(n);const s=String(Math.abs(n));return (n<0?'−':'')+s.replace(/\B(?=(\d{3})+(?!\d))/g,'.')};
+
+/* ---------- layout ---------- */
+let W,H,DPR,P,step,rowStep,cols,rows,R,seeds,X,Y,paths={};
+function buildPath(pts){
+  const p=pts.map(([x,v])=>[X(x),Y(v)]);const cum=[0];
+  for(let k=1;k<p.length;k++)cum.push(cum[k-1]+Math.hypot(p[k][0]-p[k-1][0],p[k][1]-p[k-1][1]));
+  return {p,cum,len:cum[cum.length-1]};
+}
+function resize(){
+  const r=cv.getBoundingClientRect();W=r.width;H=r.height;
+  DPR=Math.min(2,devicePixelRatio||1);cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);
+  P={l:W*.115,r:W*.655,t:H*.035,b:H*.885};
+  X=x=>P.l+(x-2024.85)/(2029.05-2024.85)*(P.r-P.l);
+  Y=v=>P.b-(v-4550)/(11050-4550)*(P.b-P.t);
+  step=Math.max(3.4,W/118);rowStep=step*1.55;R=step*.52;
+  cols=Math.ceil(W/step);rows=Math.ceil(H/rowStep);
+  field.width=cols;field.height=rows;
+  seeds=new Float32Array(cols*rows);
+  for(let j=0;j<rows;j++)for(let i=0;i<cols;i++)seeds[j*cols+i]=.55*hash(i,j)+.45*hash(j*3.1,7.7);
+  paths.real=buildPath(real);
+  for(const k in S)paths[k]=buildPath(S[k].pts);
+}
+addEventListener('resize',resize);
+
+/* partial polyline, returns head point */
+function partial(g,path,u){
+  const L=path.len*u,{p,cum}=path;g.beginPath();g.moveTo(p[0][0],p[0][1]);
+  let hx=p[0][0],hy=p[0][1];
+  for(let k=1;k<p.length;k++){
+    if(cum[k]<=L){g.lineTo(p[k][0],p[k][1]);hx=p[k][0];hy=p[k][1];}
+    else{const f=(L-cum[k-1])/(cum[k]-cum[k-1]);hx=p[k-1][0]+(p[k][0]-p[k-1][0])*f;hy=p[k-1][1]+(p[k][1]-p[k-1][1])*f;g.lineTo(hx,hy);break;}
+  }
+  return [hx,hy];
+}
+
+/* ---------- timeline ---------- */
+function state(t){
+  const st={grid:eo(seg(t,0,.8)),real:eio(seg(t,.4,3.6)),band:eo(seg(t,3.9,4.7)),start:eo(seg(t,4.5,4.9))};
+  for(const k in S){const s=S[k];st[k]=k==='ai'?seg(t,s.t0,s.t1):eio(seg(t,s.t0,s.t1));}
+  // dissolve out at end of loop
+  st.vis=1-smooth(LOOP-1.6,LOOP-.3,t);
+  return st;
+}
+
+/* ---------- stats (count once) ---------- */
+const fired={};
+function countTo(el,from,to,fn,dur=900){
+  const t0=performance.now();el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop');
+  (function f(n){const u=eo(clamp((n-t0)/dur));el.textContent=fn(from+(to-from)*u);if(u<1)requestAnimationFrame(f)})(t0);
+}
+function stats(st,instant){
+  const d=instant?1:900;
+  if(st.base>=1&&!fired.s1){fired.s1=1;countTo(s1,0,22,v=>'+'+Math.round(v)+'%',d)}
+  if(st.ai>=.27&&!fired.s2){fired.s2=1;countTo(s2,0,30,v=>(v>.5?'−':'')+Math.round(v)+'%',d)}
+  if(st.oil60>=1&&!fired.s3){fired.s3=1;countTo(s3,0,1,v=>Math.round(v)+' de 4',d)}
+}
+
+/* ---------- render ---------- */
+const LEVELS=[0,.28,.54,.78,1];
+function render(t){
+  const st=state(t),tick=Math.floor(t*7);
+  /* 1. luminance/colour field at one pixel per dot */
+  fx.setTransform(1,0,0,1,0,0);fx.clearRect(0,0,cols,rows);
+  fx.setTransform(cols/W,0,0,rows/H,0,0);
+  if(st.band>0){fx.fillStyle=`rgba(196,188,170,${.24*st.band})`;fx.fillRect(X(2026.99),P.t,X(2029.05)-X(2026.99),P.b-P.t);}
+  fx.lineJoin='round';fx.lineCap='round';
+  if(st.real>0){fx.strokeStyle='rgb(17,17,17)';fx.lineWidth=rowStep*1.35;fx.setLineDash([]);partial(fx,paths.real,st.real);fx.stroke();}
+  for(const k of ORDER){
+    const s=S[k];if(st[k]<=0)continue;
+    fx.strokeStyle=`rgb(${s.rgb})`;fx.lineWidth=rowStep*1.3*s.w;
+    fx.setLineDash(s.dash?s.dash.map(d=>d*step):[]);partial(fx,paths[k],st[k]);fx.stroke();
+  }
+  fx.setLineDash([]);
+  const d=fx.getImageData(0,0,cols,rows).data;
+
+  /* 2. dots */
+  ctx.setTransform(DPR,0,0,DPR,0,0);ctx.clearRect(0,0,W,H);
+  const m=st.vis;let last='';
+  for(let j=0;j<rows;j++){
+    let shift=0;
+    if(hash(j,tick)>.972)shift=Math.round((hash(tick,j)-.5)*8);
+    const y=(j+.5)*rowStep;
+    for(let i=0;i<cols;i++){
+      const si=clamp(i-shift,0,cols-1),k=(j*cols+si)*4,a=d[k+3]/255;
+      if(a<.05)continue;
+      const seed=seeds[j*cols+i];
+      if(seed>m)continue;
+      let v=a*(.88+.12*Math.sin(t*3.2+seed*40));
+      if(m<.999){const g=m-seed;if(g<.12){v*=g/.12;if(hash(i+tick,j)<=.4)v*=.3;}}
+      let lv=0;for(let q=LEVELS.length-1;q>0;q--)if(v>=LEVELS[q]-.13){lv=q;break}
+      if(!lv)continue;
+      const rad=lv===1?R*.4:R*LEVELS[lv];
+      const c=`rgb(${d[k]},${d[k+1]},${d[k+2]})`;
+      if(c!==last){ctx.fillStyle=c;last=c}
+      ctx.beginPath();ctx.arc((i+.5)*step,y,rad,0,6.2832);ctx.fill();
+    }
+  }
+
+  /* 3. crisp overlay: axes, labels, annotations */
+  overlay(st,t);
+  if(!REDUCED)stats(st,false);
+}
+
+function overlay(st,t){
+  const g=ctx,fs=W*.026,m=st.vis;
+  g.save();g.globalAlpha=st.grid;
+  // grid
+  g.strokeStyle='#bdb7ab';g.lineWidth=1;g.setLineDash([1,4]);
+  for(let v=5000;v<=11000;v+=1000){g.beginPath();g.moveTo(P.l,Y(v));g.lineTo(P.r,Y(v));g.stroke();}
+  g.setLineDash([]);
+  // axes
+  g.strokeStyle=INK;g.lineWidth=1.4;g.beginPath();g.moveTo(P.l,P.t-4);g.lineTo(P.l,P.b);g.lineTo(P.r,P.b);g.stroke();
+  g.fillStyle='#222';g.font=`400 ${fs}px "IBM Plex Mono",monospace`;g.textAlign='right';g.textBaseline='middle';
+  for(let v=5000;v<=11000;v+=1000)g.fillText(fmt(v),P.l-W*.018,Y(v));
+  g.textAlign='center';g.textBaseline='top';
+  for(let y=2025;y<=2029;y++)g.fillText(y,X(y),P.b+H*.025);
+  g.restore();
+
+  g.save();g.globalAlpha=m;
+  // band label
+  if(st.band>0){g.globalAlpha=m*st.band;g.fillStyle='#5f5b53';g.font=`400 ${fs*.92}px "IBM Plex Mono",monospace`;g.textAlign='left';g.textBaseline='top';g.fillText('PROYECCIÓN UBS',X(2027)+W*.012,P.t+H*.02);g.globalAlpha=m;}
+
+  // real line head + 11-NOV
+  if(st.real>0&&st.real<1){const h=headOf(paths.real,st.real);glow(h,INK);}
+  if(st.real>=1){
+    const a=eo(seg(t,3.6,4.1));g.globalAlpha=m*a;
+    const [px,py]=paths.real.p[paths.real.p.length-1];
+    g.fillStyle=INK;g.beginPath();g.arc(px,py,3.4,0,7);g.fill();
+    const lx=X(2025.3),ly=Y(8650);
+    g.strokeStyle=INK;g.lineWidth=.9;g.beginPath();g.moveTo(lx+W*.16,ly+fs*.5);g.lineTo(px-2,py-2);g.stroke();
+    g.fillStyle=INK;g.font=`500 ${fs}px "IBM Plex Mono",monospace`;g.textAlign='left';g.textBaseline='bottom';
+    g.fillText('11-NOV: '+fmt(7619*eo(seg(t,3.6,4.4))),lx,ly+fs*.4);
+    g.globalAlpha=m;
+  }
+
+  // scenario labels
+  const lx0=P.r+W*.03,num=W*.047,gap=num*1.95,topY=Y(10450);
+  const slotY=s=>s===4?Y(7200)+num*.35:topY+gap*s;
+  for(const k in S){
+    const s=S[k],u=st[k];if(u<=0)continue;
+    const path=paths[k],[ex,ey]=path.p[path.p.length-1];
+    if(u<1)glow(headOf(path,u),s.css);
+    const a=clamp(u*3);g.globalAlpha=m*a;
+    const ny=slotY(s.slot);
+    // leader
+    if(u>=1){g.strokeStyle=s.css;g.lineWidth=.9;g.beginPath();g.moveTo(ex+3,ey);g.lineTo(lx0-3,ny-num*.15);g.stroke();}
+    g.fillStyle=s.css;g.textAlign='left';
+    g.font=`${k==='base'?700:500} ${fs*.9}px "IBM Plex Mono",monospace`;g.textBaseline='bottom';
+    g.fillText(s.cap,lx0,ny-num*.52);
+    const val=path===paths.ai?currentVal(S.ai.pts,u):S[k].pts[0][1]+(S[k].pts[8][1]-S[k].pts[0][1])*u;
+    g.fillStyle=k==='ai'?RED:(k==='base'?INK:'#55524b');
+    g.font=`900 ${num}px "Archivo",sans-serif`;g.textBaseline='middle';
+    g.fillText(fmt(val),lx0,ny);
+    g.globalAlpha=m;
+  }
+
+  // start point (7.900)
+  if(st.start>0){
+    g.globalAlpha=m*st.start;const x=X(2026.99),y=Y(7900),r=4.2*(.6+.4*st.start);
+    g.fillStyle='#fff';g.strokeStyle=INK;g.lineWidth=1.6;g.beginPath();g.arc(x,y,r,0,7);g.fill();g.stroke();
+    g.globalAlpha=m;
+  }
+
+  // AI vertices + minimum
+  if(st.ai>0){
+    const pa=paths.ai,L=pa.len*st.ai;g.fillStyle=RED;
+    for(let k=1;k<pa.p.length;k++){if(pa.cum[k]<=L+.5){const pp=eo(clamp((L-pa.cum[k])/(pa.len*.05)+.4));g.beginPath();g.arc(pa.p[k][0],pa.p[k][1],3.1*pp,0,7);g.fill();}}
+    if(L>=pa.cum[2]){
+      const a=eo(seg(t,S.ai.t0+.85,S.ai.t0+1.4));g.globalAlpha=m*a;
+      const [mx,my]=pa.p[2],ax=X(2025.55),ay=Y(5020);
+      g.strokeStyle=RED;g.lineWidth=.9;g.beginPath();g.moveTo(ax+W*.31,ay-fs*.5);g.lineTo(mx-2,my+2);g.stroke();
+      g.font=`600 ${fs*.95}px "IBM Plex Mono",monospace`;g.textAlign='left';g.textBaseline='middle';g.fillStyle=RED;
+      g.fillText('MÍNIMO ≈'+fmt(5550)+' (−30%)',ax,ay);g.fillText('A MEDIADOS DE 2027',ax+fs*1.25,ay+fs*1.35);
+      // pulse ring on minimum
+      const pu=((t-S.ai.t0-.8)%1.6)/1.6;
+      if(t<LOOP-1.6){g.globalAlpha=m*a*(1-pu)*.7;g.lineWidth=1.2;g.beginPath();g.arc(mx,my,4+pu*14,0,7);g.stroke();}
+      g.globalAlpha=m;
+    }
+  }
+  g.restore();
+}
+function headOf(path,u){const L=path.len*u,{p,cum}=path;for(let k=1;k<p.length;k++)if(cum[k]>=L){const f=(L-cum[k-1])/(cum[k]-cum[k-1]||1);return[p[k-1][0]+(p[k][0]-p[k-1][0])*f,p[k-1][1]+(p[k][1]-p[k-1][1])*f]}return p[p.length-1]}
+function currentVal(pts,u){const n=pts.length-1,f=u*n,k=Math.min(n-1,Math.floor(f)),r=f-k;return pts[k][1]+(pts[k+1][1]-pts[k][1])*r}
+function glow([x,y],c){const g=ctx;g.save();g.shadowColor=c;g.shadowBlur=10;g.fillStyle=c;g.beginPath();g.arc(x,y,3.2,0,7);g.fill();g.restore()}
+
+/* ---------- loop ---------- */
+let t0=performance.now();
+function frame(now){
+  const el=(now-t0)/1000-START_DELAY;
+  render(el<0?0:el%LOOP);
+  if(!FREEZE)requestAnimationFrame(frame);
+}
+document.getElementById('replay').onclick=()=>{t0=performance.now()-START_DELAY*1000;};
+window.__render=render;
+
+const go=()=>{resize();
+  if(REDUCED){const t=LOOP-2.2;render(t);stats(state(t),true);addEventListener('resize',()=>render(t));return}
+  if(FREEZE){const t=+new URLSearchParams(location.search).get('t');render(t);stats(state(t),true);return}
+  requestAnimationFrame(frame);};
+(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(go);
+})();
+</script>
+</body>
+</html>
