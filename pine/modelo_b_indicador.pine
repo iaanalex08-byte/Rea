@@ -7,7 +7,7 @@
 // C = saltar si el perfil del día ya es P (en compras) o b (en ventas). El perfil se arma por tiempo (TPO) con las velas del gráfico.
 // Úsalo en un gráfico de 1 minuto para que coincida con el backtest.
 //@version=6
-indicator("Modelo B · ES 9:12 CDMX · SL 35 · TP1 30 · TP2 120", shorttitle = "Modelo B", overlay = true, max_labels_count = 500, max_lines_count = 500, max_bars_back = 5000)
+indicator("Modelo B · ES 9:12 CDMX · SL 35 · TP1 30 · TP2 120", shorttitle = "Modelo B", overlay = true, max_labels_count = 500, max_lines_count = 500, max_boxes_count = 500, max_bars_back = 5000)
 
 // ───────────── Entradas ─────────────
 const string TZ_MX = "America/Mexico_City"
@@ -39,6 +39,7 @@ float  slip = input.float(1.0, "Deslizamiento por contrato (ticks)", minval = 0,
 string gVi       = "Visual"
 bool   showEma   = input.bool(true, "Mostrar EMA", group = gVi)
 bool   showTable = input.bool(true, "Mostrar tabla de estadísticas", group = gVi)
+bool   showBox   = input.bool(true, "Mostrar cajas de SL, TP1 y TP2", group = gVi)
 color  cUp   = input.color(#1FAE89, "Color compra / ganancia", group = gVi)
 color  cDn   = input.color(#E2582F, "Color venta / pérdida", group = gVi)
 
@@ -103,6 +104,9 @@ var line  lnEnt    = na
 var line  lnSl     = na
 var line  lnTp1    = na
 var line  lnTp2    = na
+var box   bxSl     = na
+var box   bxTp1    = na
+var box   bxTp2    = na
 
 // Estadísticas acumuladas
 var int   nOps   = 0
@@ -283,6 +287,16 @@ if isEntryBar and dayKey != lastDay and dir == 0 and not na(emaHtf)
         lnSl  := line.new(bar_index, sl,  bar_index, sl,  color = cDn, width = 1, style = line.style_dashed)
         lnTp1 := line.new(bar_index, tp1, bar_index, tp1, color = color.new(cUp, 30), width = 1, style = line.style_dashed)
         lnTp2 := line.new(bar_index, tp2, bar_index, tp2, color = cUp, width = 1, style = line.style_dashed)
+        if showBox
+            float usdSl  = slT  * tickValue * 2 * qty
+            float usdTp1 = tp1T * tickValue * qty
+            float usdTp2 = tp2T * tickValue * qty
+            bxSl  := box.new(bar_index, math.max(ent, sl), bar_index, math.min(ent, sl), border_color = color.new(cDn, 40), bgcolor = color.new(cDn, 82),
+                 text = "SL " + str.tostring(sl, format.mintick) + " · −" + str.tostring(usdSl, "#,##0") + " USD", text_color = cDn, text_size = size.small, text_halign = text.align_right)
+            bxTp1 := box.new(bar_index, math.max(ent, tp1), bar_index, math.min(ent, tp1), border_color = color.new(cUp, 40), bgcolor = color.new(cUp, 80),
+                 text = "TP1 " + str.tostring(tp1, format.mintick) + " · +" + str.tostring(usdTp1, "#,##0") + " USD", text_color = cUp, text_size = size.small, text_halign = text.align_right)
+            bxTp2 := box.new(bar_index, math.max(tp1, tp2), bar_index, math.min(tp1, tp2), border_color = color.new(cUp, 60), bgcolor = color.new(cUp, 90),
+                 text = "TP2 " + str.tostring(tp2, format.mintick) + " · +" + str.tostring(usdTp2, "#,##0") + " USD", text_color = cUp, text_size = size.small, text_halign = text.align_right)
         string conf = preDay == dayKey ? (preDir == dir ? "\nconfirma el previo" : "\ncambió respecto al previo") : ""
         string marca = skipIt ? "\n⚠ filtro: " + why : ""
         label.new(bar_index, dir == 1 ? low : high, (dir == 1 ? "COMPRA" : "VENTA") + " 9:12 CDMX\n" + str.tostring(ent, format.mintick) + conf + marca,
@@ -336,6 +350,10 @@ if dir != 0
             leg2Open := false
         evCl := true
     endLine(lnEnt)
+    if showBox and not na(bxSl)
+        box.set_right(bxSl, bar_index)
+        box.set_right(bxTp1, bar_index)
+        box.set_right(bxTp2, bar_index)
     endLine(lnSl)
     endLine(lnTp2)
     if leg1Open

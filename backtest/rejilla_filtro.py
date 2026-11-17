@@ -14,7 +14,8 @@ from engine import load, run, resample, ema3, TICK, TV, COST
 from perfil import rasgos
 
 
-def dias(df1, ema_len=20, ema_tf=3, hm=(9, 12)):
+def dias(df1, ema_len=20, ema_tf=3, hm=(9, 12), lado=None):
+    """lado=1 o -1 fuerza la dirección (por ejemplo, comprar siempre); None la decide la EMA."""
     """Para cada día: dirección, entrada y los minutos desde la entrada hasta el cierre, en ticks a favor."""
     ex = resample(df1, 1)
     ema = ema3(df1, ema_len, ema_tf)
@@ -30,7 +31,7 @@ def dias(df1, ema_len=20, ema_tf=3, hm=(9, 12)):
         if idx[s].weekday() >= 5:
             continue
         ent = O[s]
-        d = 1 if ent > ema.asof(idx[s]) else -1
+        d = lado if lado else (1 if ent > ema.asof(idx[s]) else -1)
         e = s
         while e < len(C) and mxd[e] == mxd[s] and not closing[e]:
             e += 1
@@ -74,6 +75,25 @@ def bracket(day, sl, tp1, tp2, be=True):
     else:
         r2 = cl
     return (r1 + r2) * TV - COST
+
+
+def salida(day, sl, tp1, tp2):
+    """Nombre de la salida del día con el bracket dado, con los mismos nombres que engine.run."""
+    up, dn = day['up'], day['dn']
+    i_sl = _first(dn <= -sl)
+    i_t1 = _first(up >= tp1)
+    if i_sl is not None and (i_t1 is None or i_sl <= i_t1):
+        return 'Stop (−2)'
+    if i_t1 is None:
+        return 'Cierre 15:59'
+    if up[i_t1] >= tp2:
+        return 'TP1 + TP2'
+    r, u = dn[i_t1 + 1:], up[i_t1 + 1:]
+    i_be = _first(r <= 0) if len(r) else None
+    i_t2 = _first(u >= tp2) if len(u) else None
+    if i_be is not None and (i_t2 is None or i_be <= i_t2):
+        return 'TP1 + BE'
+    return 'TP1 + TP2' if i_t2 is not None else 'TP1 + cierre'
 
 
 def metr(u):
