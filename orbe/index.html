@@ -164,7 +164,7 @@ body.is-sub .hint{opacity:0}
 .selwrap select{min-height:40px;padding:0 12px;border-radius:8px;border:1px solid #333;background:#121212;color:#fff;font:500 13.5px Inter,sans-serif;text-transform:none;letter-spacing:0}
 .selwrap select:focus{outline:2px solid var(--accent);outline-offset:1px}
 .surfbox{position:relative;margin-top:10px}
-#surf{display:block;width:100%;height:clamp(300px,42vw,460px);cursor:grab;touch-action:none}
+#surf{display:block;width:100%;height:clamp(340px,46vw,520px);cursor:grab;touch-action:none}
 #surf:active{cursor:grabbing}
 .tip{position:absolute;z-index:2;min-width:176px;padding:10px 12px;border-radius:10px;background:rgba(12,12,12,.95);border:1px solid #333;font-family:'JetBrains Mono',monospace;font-size:12px;display:grid;grid-template-columns:auto auto;gap:3px 16px;pointer-events:none}
 .tip b{grid-column:1/-1;color:#fff;font-weight:500;margin-bottom:4px}
@@ -655,8 +655,8 @@ function paint(cv, scene, t, bgA = 1) {
     <div class="panel st" style="margin-top:14px">
       <div class="ph">
         <div>
-          <h3>Factor de beneficio por año en 3D</h3>
-          <div class="mono" style="margin-top:6px">5 brackets (SL / TP1 / TP2) × 4 años (2023–2026), 2 contratos, costos incluidos. Verde = factor arriba de 1, rojo = abajo; plano rojo = factor 1.</div>
+          <h3>Superficie 3D: factor de beneficio por año</h3>
+          <div class="mono" style="margin-top:6px">5 brackets (SL / TP1 / TP2) × 4 años (2023–2026), 2 contratos, costos incluidos. Verde = factor arriba de 1, rojo = abajo; plano gris = factor 1.</div>
         </div>
         <label class="selwrap"><span>Versión</span>
           <select id="surfMet">
@@ -672,7 +672,7 @@ function paint(cv, scene, t, bgA = 1) {
         <button type="button" data-v="contra">Contrapicada</button>
       </div>
       <div class="surfbox">
-        <canvas id="surf" aria-label="Barras 3D del factor de beneficio por año para 5 brackets. Arrastra para girar."></canvas>
+        <canvas id="surf" aria-label="Superficie 3D del factor de beneficio por año para 5 brackets. Arrastra para girar."></canvas>
         <div class="tip" id="surfTip" hidden></div>
         <div class="draghint">Arrastra para girar</div>
       </div>
@@ -1073,8 +1073,8 @@ function paint(cv, scene, t, bgA = 1) {
   const BRK = ['45 / 30 / 60', '35 / 30 / 120', '30 / 30 / 100', '25 / 30 / 160', '45 / 30 / 120'], YRS = [2023, 2024, 2025, 2026];
   const rowOf = (v, b) => PFY.find((r) => r[0] === VARS[v][0] && r[1] === VARS[v][1] && r[2] === BRK[b]);
   const surfCv = document.getElementById('surf'), tip = document.getElementById('surfTip'), metSel = document.getElementById('surfMet');
-  let yaw = -0.62, pitch = 0.5, drag = null, hover = null, proj = [];
-  const SPITCH = { persp: 0.5, contra: -0.36 }; let smode = 'persp', tween = 0;
+  let yaw = -0.38, pitch = 0.42, drag = null, hover = null, proj = [];
+  const SPITCH = { persp: 0.42, contra: -0.36 }; let smode = 'persp', tween = 0;
   const PFMAX = 1.9;
   const barCol = (pf, sh) => {
     const t = Math.max(-1, Math.min(1, (pf - 1) / 0.6));
@@ -1090,67 +1090,81 @@ function paint(cv, scene, t, bgA = 1) {
     const P = (x, y, z) => {
       const cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch);
       const x1 = x * cy - z * sy, z1 = x * sy + z * cy;
-      const y2 = y * cp - z1 * sp, z2 = y * sp + z1 * cp;
-      const f = 4.2 / (4.2 + z2), s = Math.min(W, H * 1.6) * 0.34;
-      return [W / 2 + x1 * s * f, H * (0.64 + Math.max(0, -pitch) * 0.22) - y2 * s * f, z2];
+      const y2 = y * cp + z1 * sp, z2 = -y * sp + z1 * cp;
+      const f = 4.2 / (4.2 + z2), s = W < 600 ? W * 0.28 : Math.min(W * 0.9, H * 1.5) * 0.25;
+      return [W / 2 + x1 * s * f, H * ((W < 600 ? 0.42 : 0.36) + Math.max(0, -pitch) * 0.2) - y2 * s * f, z2];
     };
-    const X = (b) => (b / (BRK.length - 1) - 0.5) * 2.2, Z = (y) => (y / (YRS.length - 1) - 0.5) * 1.5;
-    const Yh = (pf) => pf / PFMAX * 1.25, fy = 0;
-    const hw = 0.17, hd = 0.15;
-    // piso
-    ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(255,255,255,.08)';
-    for (let b = 0; b < BRK.length; b++) { const a = P(X(b), fy, Z(0) - 0.3), c = P(X(b), fy, Z(3) + 0.3); ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(c[0], c[1]); ctx.stroke(); }
-    for (let y = 0; y < YRS.length; y++) { const a = P(X(0) - 0.35, fy, Z(y)), c = P(X(4) + 0.35, fy, Z(y)); ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(c[0], c[1]); ctx.stroke(); }
-    // barras
-    const bars = [];
-    for (let b = 0; b < BRK.length; b++) {
-      const r = rowOf(v, b);
-      for (let y = 0; y < YRS.length; y++) {
-        const pf = r[3][y], x = X(b), z = Z(y), h = Yh(pf);
-        bars.push({ r, b, y, pf, x, z, h, d: P(x, h / 2, z)[2] });
-      }
+    const NBk = BRK.length, NY = YRS.length;
+    const X = (b) => (b / (NBk - 1) - 0.5) * 2.2, Z = (y) => (y / (NY - 1) - 0.5) * 1.6;
+    const LO = 0.8, HI = 1.9, fy = -0.62;
+    const Yv = (pf) => fy + (pf - LO) / (HI - LO) * 1.05;
+    const face = (pts, fill, stroke, lw) => { ctx.beginPath(); pts.forEach((p, k) => (k ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]))); ctx.closePath(); if (fill) { ctx.fillStyle = fill; ctx.fill(); } if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = lw || 1; ctx.stroke(); } };
+    const x0 = X(0) - 0.12, x1 = X(NBk - 1) + 0.12, z0 = Z(0) - 0.12, z1 = Z(NY - 1) + 0.12;
+    // piso y rejilla
+    face([P(x0, fy, z0), P(x1, fy, z0), P(x1, fy, z1), P(x0, fy, z1)], 'rgba(255,255,255,.025)');
+    ctx.strokeStyle = 'rgba(255,255,255,.09)'; ctx.lineWidth = 1;
+    for (let b = 0; b < NBk; b++) { const p = P(X(b), fy, z0), q = P(X(b), fy, z1); ctx.beginPath(); ctx.moveTo(p[0], p[1]); ctx.lineTo(q[0], q[1]); ctx.stroke(); }
+    for (let y = 0; y < NY; y++) { const p = P(x0, fy, Z(y)), q = P(x1, fy, Z(y)); ctx.beginPath(); ctx.moveTo(p[0], p[1]); ctx.lineTo(q[0], q[1]); ctx.stroke(); }
+    // eje vertical en la esquina trasera izquierda
+    const tick = [0.8, 1.0, 1.2, 1.4, 1.6, 1.8];
+    ctx.font = '12px JetBrains Mono, monospace'; ctx.textAlign = 'right';
+    const corners = [[x0, z0], [x1, z0], [x1, z1], [x0, z1]]; const [cx, cz] = corners.reduce((m, c) => (P(c[0], fy, c[1])[2] > P(m[0], fy, m[1])[2] ? c : m));
+    const ax = P(cx, fy, cz), axT = P(cx, Yv(1.85), cz);
+    ctx.strokeStyle = 'rgba(255,255,255,.18)'; ctx.beginPath(); ctx.moveTo(ax[0], ax[1]); ctx.lineTo(axT[0], axT[1]); ctx.stroke();
+    tick.forEach((t) => { const p = P(cx, Yv(t), cz); ctx.strokeStyle = 'rgba(255,255,255,.12)'; const p2 = P(cx === x0 ? x1 : x0, Yv(t), cz); ctx.beginPath(); ctx.moveTo(p[0], p[1]); ctx.lineTo(p2[0], p2[1]); ctx.stroke();  });
+    // vértices
+    const V = BRK.map((br, b) => { const r = rowOf(v, b); return YRS.map((yr, y) => { const pf = r[3][y]; return { r, b, y, pf, p: P(X(b), Yv(pf), Z(y)) }; }); });
+    proj = V.flat().map((o) => ({ B: o, p: o.p }));
+    // plano de factor 1 (semitransparente)
+    const y1 = Yv(1);
+    const plane = () => face([P(x0, y1, z0), P(x1, y1, z0), P(x1, y1, z1), P(x0, y1, z1)], 'rgba(170,170,170,.2)', 'rgba(229,83,61,.6)');
+    // cuadros de la superficie en orden de profundidad
+    const quads = [];
+    for (let b = 0; b < NBk - 1; b++) for (let y = 0; y < NY - 1; y++) {
+      const q = [V[b][y], V[b + 1][y], V[b + 1][y + 1], V[b][y + 1]];
+      const avg = q.reduce((a2, o) => a2 + o.pf, 0) / 4;
+      const depth = q.reduce((a2, o) => a2 + o.p[2], 0) / 4;
+      const slope = Math.abs(q[0].pf - q[2].pf) + Math.abs(q[1].pf - q[3].pf);
+      quads.push({ q, avg, depth, shade: 1.02 - Math.min(0.3, slope * 0.45) });
     }
-    bars.sort((a, c) => c.d - a.d);
-    proj = [];
-    const face = (pts, fill, stroke) => { ctx.beginPath(); pts.forEach((p, k) => (k ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]))); ctx.closePath(); ctx.fillStyle = fill; ctx.fill(); if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = 0.8; ctx.stroke(); } };
-    const y1 = Yh(1);
-    const plane = () => {
-      const c = [P(X(0) - 0.35, y1, Z(0) - 0.3), P(X(4) + 0.35, y1, Z(0) - 0.3), P(X(4) + 0.35, y1, Z(3) + 0.3), P(X(0) - 0.35, y1, Z(3) + 0.3)];
-      face(c, 'rgba(229,83,61,.10)', 'rgba(229,83,61,.55)');
-    };
-    if (pitch < 0) plane();
-    for (const B of bars) {
-      const { x, z, h } = B;
-      const c = (dx, yy, dz) => P(x + dx, yy, z + dz);
-      const hl = B.b === 1, sel = hover && hover.b === B.b && hover.y === B.y;
-      const st = sel ? '#fff' : hl ? 'rgba(255,255,255,.55)' : 'rgba(0,0,0,.35)';
-      // caras visibles: dibuja las 4 laterales ordenadas y la tapa
-      const sides = [
-        [c(-hw, 0, -hd), c(hw, 0, -hd), c(hw, h, -hd), c(-hw, h, -hd)],
-        [c(hw, 0, -hd), c(hw, 0, hd), c(hw, h, hd), c(hw, h, -hd)],
-        [c(hw, 0, hd), c(-hw, 0, hd), c(-hw, h, hd), c(hw, h, hd)],
-        [c(-hw, 0, hd), c(-hw, 0, -hd), c(-hw, h, -hd), c(-hw, h, hd)]
-      ].map((f, i) => ({ f, i, d: f.reduce((s, p) => s + p[2], 0) / 4 })).sort((a, b2) => b2.d - a.d);
-      sides.forEach((s, k) => face(s.f, barCol(B.pf, 0.62 + 0.12 * (s.i % 2) + 0.05 * k), st));
-      const top = [c(-hw, h, -hd), c(hw, h, -hd), c(hw, h, hd), c(-hw, h, hd)];
-      face(top, barCol(B.pf, pitch < 0 ? 0.55 : 1.08), st);
-      const tp = P(x, h, z); proj.push({ B, p: tp });
-      if (hl && W > 520) { ctx.fillStyle = '#fff'; ctx.font = '11px JetBrains Mono, monospace'; ctx.textAlign = 'center'; ctx.fillText(B.pf.toFixed(2), tp[0], tp[1] - 8); }
+    quads.sort((a2, c2) => c2.depth - a2.depth);
+    plane();
+    for (const Q of quads) {
+      const t = Math.max(-1, Math.min(1, (Q.avg - 1) / 0.5));
+      const red = [214, 120, 128], grn = [96, 170, 104], mid = [120, 118, 104];
+      const a3 = t < 0 ? red : grn, k = Math.min(1, Math.abs(t) * 1.5 + 0.2);
+      const col = mid.map((m, i) => Math.round(Math.min(255, (m + (a3[i] - m) * k) * Q.shade)));
+      face(Q.q.map((o) => o.p), `rgba(${col[0]},${col[1]},${col[2]},.92)`, 'rgba(0,0,0,.55)', 0.9);
     }
-    if (pitch >= 0) plane();
-    // ejes
-    ctx.fillStyle = '#9a9a9a'; ctx.font = '11px JetBrains Mono, monospace'; ctx.textAlign = 'center';
-    BRK.forEach((br, b) => { const p = P(X(b), fy, Z(0) - 0.5); ctx.fillStyle = b === 1 ? '#fff' : b === 0 ? '#c9a227' : '#9a9a9a'; ctx.fillText(br.replace(/ /g, ''), p[0], p[1]); });
-    ctx.fillStyle = '#9a9a9a';
-    YRS.forEach((yr, y) => { const p = P(X(4) + 0.6, fy, Z(y)); ctx.fillText(yr, p[0], p[1]); });
-    const pl = P(X(4) + 0.5, y1, Z(3) + 0.3); ctx.fillStyle = '#e5533d'; ctx.textAlign = 'left'; ctx.fillText('PF = 1', pl[0] + 6, pl[1]);
-    ctx.textAlign = 'left'; ctx.fillStyle = '#9a9a9a'; ctx.font = '12px JetBrains Mono, monospace';
-    ctx.fillText('FACTOR DE BENEFICIO POR AÑO · ' + VARS[v][0].toUpperCase() + ' · ' + VARS[v][1].replace('EMA 20 de ', '').toUpperCase(), 14, 22);
+    // etiquetas de ejes
+    const fs2 = W < 600 ? '10px' : '12px';
+    ctx.font = fs2 + ' JetBrains Mono, monospace'; ctx.textAlign = 'right';
+    tick.forEach((t) => { const p = P(cx, Yv(t), cz); ctx.fillStyle = t === 1 ? '#e5533d' : '#9a9a9a'; ctx.fillText(t.toFixed(1), p[0] - 8, p[1] + 4); });
+    ctx.font = fs2 + ' JetBrains Mono, monospace'; ctx.textAlign = 'center';
+    BRK.forEach((br, b) => { const p = P(X(b), fy, z0 - 0.3); ctx.fillStyle = b === 1 ? '#fff' : '#9a9a9a'; ctx.fillText(br.replace(/ /g, ''), Math.max(34, Math.min(W - 34, p[0])), p[1]); });
+    YRS.forEach((yr, y) => { const p = P(x1 + 0.32, fy, Z(y)); ctx.fillStyle = '#9a9a9a'; ctx.fillText(yr, p[0], p[1] + 4); });
+    ctx.fillStyle = '#cfcfcf';
+    let p = P(0, fy, z0 - 0.62); ctx.fillText('Bracket SL / TP1 / TP2', p[0], p[1]);
+    p = P(x1 + 0.72, fy, 0); ctx.fillText('Año', p[0], p[1]);
+    // tu configuración: 35/30/120 en 2026
+    const me = V[1][NY - 1], base = P(X(1), fy, Z(NY - 1));
+    ctx.setLineDash([4, 4]); ctx.strokeStyle = 'rgba(255,255,255,.7)'; ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.moveTo(base[0], base[1]); ctx.lineTo(me.p[0], me.p[1]); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(me.p[0], me.p[1], 6, 0, Math.PI * 2); ctx.fill();
+    ctx.font = '600 14px Inter, system-ui, sans-serif'; ctx.textAlign = 'left';
+    const lab = (W < 600 ? 'Tu config · PF ' : 'Tu configuración · PF ') + me.r[4].toFixed(2) + (W < 600 ? '' : ' total');
+    if (W < 600) ctx.font = '600 12px Inter, system-ui, sans-serif';
+    const lw2 = ctx.measureText(lab).width; const lx = me.p[0] + 12 + lw2 > W - 6 ? me.p[0] - 12 - lw2 : me.p[0] + 12;
+    ctx.fillText(lab, lx, me.p[1] - 10);
+    if (hover) { ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(hover.p ? hover.p[0] : 0, hover.p ? hover.p[1] : 0, 7, 0, Math.PI * 2); ctx.stroke(); }
+    ctx.font = '12px JetBrains Mono, monospace'; ctx.fillStyle = '#9a9a9a';
+    if (W < 600) ctx.font = '10px JetBrains Mono, monospace';
+    ctx.fillText((W < 600 ? 'PF POR AÑO · ' : 'FACTOR DE BENEFICIO POR AÑO · ') + VARS[v][0].toUpperCase() + ' · ' + VARS[v][1].replace('EMA 20 de ', '').toUpperCase(), 14, 22);
     // resumen
     const rN = rowOf(v, 1), rA = rowOf(v, 0);
-    const okYears = rN[3].filter((p) => p > 1).length;
+    const okYears = rN[3].filter((x) => x > 1).length;
     document.getElementById('surfText').innerHTML =
-      `Cada barra es un año y cada fila un bracket de SL / TP1 / TP2. Con <strong style="color:#fff">${VARS[v][0]} · ${VARS[v][1]}</strong>, la configuración nueva <strong style="color:#fff">35 / 30 / 120</strong> tiene factor <strong style="color:#fff">${rN[4].toFixed(2)}</strong>, acierto ${rN[5].toFixed(1)}%, neto ${money(rN[6])} y caída máxima ${money(rN[7])}; queda arriba de 1 en ${okYears} de 4 años. La anterior <span style="color:#c9a227">45 / 30 / 60</span> tiene factor ${rA[4].toFixed(2)}.`;
+      `La altura es el factor de beneficio de cada año y cada bracket; verde arriba de 1, rojo abajo, y el plano gris marca el factor 1. Con <strong style="color:#fff">${VARS[v][0]} · ${VARS[v][1]}</strong>, tu configuración <strong style="color:#fff">35 / 30 / 120</strong> tiene factor <strong style="color:#fff">${rN[4].toFixed(2)}</strong>, acierto ${rN[5].toFixed(1)}%, neto ${money(rN[6])} y caída máxima ${money(rN[7])}; queda arriba de 1 en ${okYears} de 4 años. La anterior 45 / 30 / 60 tiene factor ${rA[4].toFixed(2)}.`;
   }
   function showTip(o, x, y) {
     const B = o.B, r = B.r;
