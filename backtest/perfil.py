@@ -78,7 +78,7 @@ def _hvns(n, k=3):
     return out
 
 
-def rasgos(T, df1):
+def rasgos(T, df1, hm=(9, 12)):
     """Agrega a cada operación del Modelo B los rasgos del perfil al momento de entrar."""
     P = perfiles_diarios(df1)
     x = rth(df1)
@@ -106,7 +106,7 @@ def rasgos(T, df1):
         ahead = [(v - e) * s for v in lv if (v - e) * s > 0.5]
         room = min(ahead) if ahead else np.inf
         # 3. perfil en desarrollo desde las 9:30 NY hasta la entrada
-        t0 = pd.Timestamp(f'{t.date} 09:12', tz='America/Mexico_City').tz_convert('America/New_York')
+        t0 = pd.Timestamp(f'{t.date} {hm[0]:02d}:{hm[1]:02d}', tz='America/Mexico_City').tz_convert('America/New_York')
         hh = t0.hour * 60 + t0.minute
         dev = g[g.nym < hh]
         if len(dev) >= 20:

@@ -58,3 +58,18 @@ El modelo funciona mejor cuando el precio está lejos del valor de ayer, sobre t
 | 25 / 35 / 160 | 264 | 53.0 % | 1.48 | 1.76 | 1.60 | +49,207 | −5,610 |
 
 La zona buena es amplia (SL 20–30, TP1 30–40, TP2 100–200) y también mejora el Modelo B sin filtros de perfil (PF 1.07 → 1.24 con 25/30/160), así que no depende de una sola combinación. Se probaron unas 340 combinaciones: valídalo con operaciones nuevas antes de cambiar el tamaño.
+
+### Qué mejorar (`backtest/mejoras.py`)
+
+Prueba cada idea contra la base (EMA 20 de 3 min + A + C + 45/30/60 a las 9:12 CDMX) y solo la cuenta como mejora si sube el PF en 2025 **y** en 2026: bracket, break-even, hora de entrada, parámetros de la EMA, filtros de rango, distancia a la EMA, apertura, día de la semana y noticias. También mide qué tan sensible es cada versión al minuto exacto de entrada (9:06 a 9:18).
+
+```
+python3 backtest/mejoras.py datos/ mejoras.json data-modelo-b.json
+```
+
+| Versión | Ops | PF 2025 | PF 2026 | PF total | Neto | DD máx | PF de 9:06 a 9:18 |
+|---|---|---|---|---|---|---|---|
+| Actual: EMA 20 de 3 min + A + C + 45/30/60 | 264 | 1.11 | 1.49 | 1.27 | +27,867 | −8,589 | 0.87 a 1.27 |
+| Propuesta: EMA 20 de 5 min + A + C + 35/30/120 | 264 | 1.44 | 1.65 | 1.53 | +47,155 | −5,340 | 1.07 a 1.53 |
+
+La versión actual solo es buena justo a las 9:12; la propuesta queda arriba de 1 en todos los minutos probados. Filtrar por cercanía a la EMA da PF 2.15, pero solo a las 9:12, así que no se adopta. No ayudan: otra hora de entrada, quitar el break-even, filtrar por día de la semana, por noticias o por rango.

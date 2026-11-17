@@ -14,7 +14,7 @@ from engine import load, run, resample, ema3, TICK, TV, COST
 from perfil import rasgos
 
 
-def dias(df1, ema_len=20, ema_tf=3):
+def dias(df1, ema_len=20, ema_tf=3, hm=(9, 12)):
     """Para cada día: dirección, entrada y los minutos desde la entrada hasta el cierre, en ticks a favor."""
     ex = resample(df1, 1)
     ema = ema3(df1, ema_len, ema_tf)
@@ -26,7 +26,7 @@ def dias(df1, ema_len=20, ema_tf=3):
     gap = np.r_[(idx[1:] - idx[:-1]) > pd.Timedelta(minutes=30), True]
     closing = ((ny.hour == 15) & (ny.minute + 1 > 59)) | gap
     out = []
-    for s in np.where((mx.hour == 9) & (mx.minute == 12))[0]:
+    for s in np.where((mx.hour == hm[0]) & (mx.minute == hm[1]))[0]:
         if idx[s].weekday() >= 5:
             continue
         ent = O[s]
@@ -41,7 +41,7 @@ def dias(df1, ema_len=20, ema_tf=3):
         dn = ((L[sl_] - ent) if d == 1 else (ent - H[sl_])) / TICK     # peor excursión (negativa = en contra)
         op = ((O[sl_] - ent) * d) / TICK
         cl = (C[e] - ent) * d / TICK
-        out.append(dict(date=str(mxd[s]), dir=d, up=up, dn=dn, op=op, cl=cl))
+        out.append(dict(date=str(mxd[s]), dir=d, entry=ent, ema=float(ema.asof(idx[s])), up=up, dn=dn, op=op, cl=cl))
     return out
 
 
@@ -50,7 +50,7 @@ def _first(mask):
     return i if mask[i] else None
 
 
-def bracket(day, sl, tp1, tp2):
+def bracket(day, sl, tp1, tp2, be=True):
     """Resultado en USD de un día con el bracket dado (en ticks)."""
     up, dn, op, cl = day['up'], day['dn'], day['op'], day['cl']
     i_sl = _first(dn <= -sl)
@@ -64,10 +64,11 @@ def bracket(day, sl, tp1, tp2):
     if up[i_t1] >= tp2:
         return (r1 + tp2) * TV - COST
     rest_dn, rest_up = dn[i_t1 + 1:], up[i_t1 + 1:]
-    i_be = _first(rest_dn <= 0) if len(rest_dn) else None
+    lvl = 0 if be else -sl
+    i_be = _first(rest_dn <= lvl) if len(rest_dn) else None
     i_t2 = _first(rest_up >= tp2) if len(rest_up) else None
     if i_be is not None and (i_t2 is None or i_be <= i_t2):
-        r2 = min(op[i_t1 + 1 + i_be], 0.0)
+        r2 = min(op[i_t1 + 1 + i_be], float(lvl))
     elif i_t2 is not None:
         r2 = tp2
     else:
