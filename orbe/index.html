@@ -112,6 +112,14 @@ body.is-sub .hint{opacity:0}
 #analitica h2 span{color:var(--mute)}
 .sub{margin:12px 0 0;font-size:14px;color:#8a8a8a}
 .grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:28px}
+.eqgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}
+.eqh{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.eqv{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:15px;color:#169c86}
+.eqbox{position:relative;margin-top:10px}
+.eqbox canvas{display:block;width:100%;height:120px;touch-action:none}
+.eqtip{position:absolute;top:0;padding:5px 8px;border-radius:8px;background:rgba(12,12,12,.95);border:1px solid #333;font-family:'JetBrains Mono',monospace;font-size:11px;color:#fff;white-space:nowrap;pointer-events:none}
+.eqm{margin-top:8px;font-size:11.5px}
+@media (max-width:760px){.eqgrid{grid-template-columns:1fr}}
 .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .grid2{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:14px;margin-top:14px}
 .panel{border:1px solid #242424;border-radius:14px;padding:20px 22px;background:rgba(14,14,14,.82);backdrop-filter:blur(8px)}
@@ -640,6 +648,19 @@ function paint(cv, scene, t, bgA = 1) {
       </div>
     </div>
 
+    <div class="eqgrid st">
+      <div class="panel eqp" data-y="2025">
+        <div class="eqh"><span class="lbl"><i></i>Equity 2025</span><b class="eqv"></b></div>
+        <div class="eqbox"><canvas aria-label="Curva de capital 2025"></canvas><div class="eqtip" hidden></div></div>
+        <div class="mono eqm"></div>
+      </div>
+      <div class="panel eqp" data-y="2026">
+        <div class="eqh"><span class="lbl"><i></i>Equity 2026</span><b class="eqv"></b></div>
+        <div class="eqbox"><canvas aria-label="Curva de capital 2026"></canvas><div class="eqtip" hidden></div></div>
+        <div class="mono eqm"></div>
+      </div>
+    </div>
+
     <div class="panel st" style="margin-top:14px">
       <div class="ph">
         <h3>Cómo termina cada operación</h3>
@@ -1033,8 +1054,49 @@ function paint(cv, scene, t, bgA = 1) {
     });
     root.querySelectorAll('.meter b').forEach((b) => { b.style.transition = 'none'; b.style.width = '0'; void b.offsetWidth; b.style.transition = ''; b.style.width = b.dataset.w + '%'; });
     root.querySelectorAll('.meter u').forEach((u) => { u.style.opacity = '1'; u.style.left = u.dataset.l + '%'; });
-    drawRows(); drawSurf();
+    drawRows(); drawSurf(); drawEqAll();
   }
+
+
+  // ---------- equity por año (2D) ----------
+  const EQ = [["2025-01-07",341.0],["2025-01-08",341.0],["2025-01-10",-909.0],["2025-01-13",341.0],["2025-01-14",-909.0],["2025-01-17",-909.0],["2025-01-20",-909.0],["2025-01-21",-909.0],["2025-01-22",341.0],["2025-01-23",1841.0],["2025-01-28",1841.0],["2025-01-31",341.0],["2025-02-04",341.0],["2025-02-05",-909.0],["2025-02-06",-909.0],["2025-02-07",341.0],["2025-02-10",341.0],["2025-02-11",341.0],["2025-02-12",-909.0],["2025-02-14",-909.0],["2025-02-18",-909.0],["2025-02-20",-909.0],["2025-02-24",-909.0],["2025-02-25",1841.0],["2025-02-27",-909.0],["2025-02-28",341.0],["2025-03-04",-909.0],["2025-03-11",341.0],["2025-03-13",1841.0],["2025-03-17",-909.0],["2025-03-21",-909.0],["2025-04-01",341.0],["2025-04-04",341.0],["2025-04-07",1841.0],["2025-04-08",341.0],["2025-04-09",-909.0],["2025-04-10",341.0],["2025-04-14",341.0],["2025-04-16",341.0],["2025-04-17",1841.0],["2025-04-21",341.0],["2025-04-22",-909.0],["2025-04-23",-909.0],["2025-04-25",-909.0],["2025-04-30",-909.0],["2025-05-01",-909.0],["2025-05-05",1841.0],["2025-05-06",1841.0],["2025-05-08",-909.0],["2025-05-12",341.0],["2025-05-13",341.0],["2025-05-14",-909.0],["2025-05-21",-909.0],["2025-05-22",-909.0],["2025-05-23",341.0],["2025-05-26",341.0],["2025-05-29",-909.0],["2025-06-02",-909.0],["2025-06-03",1841.0],["2025-06-05",-909.0],["2025-06-06",-909.0],["2025-06-10",-909.0],["2025-06-11",341.0],["2025-06-12",1261.95],["2025-06-16",341.0],["2025-06-19",341.0],["2025-06-20",1841.0],["2025-06-23",341.0],["2025-06-24",-909.0],["2025-06-25",939.65],["2025-06-26",1451.45],["2025-06-27",341.0],["2025-06-30",-909.0],["2025-07-01",341.0],["2025-07-03",341.0],["2025-07-04",191.2],["2025-07-08",-909.0],["2025-07-09",-909.0],["2025-07-10",1841.0],["2025-07-11",341.0],["2025-07-14",341.0],["2025-07-15",1841.0],["2025-07-16",-909.0],["2025-07-18",854.85],["2025-07-21",341.0],["2025-07-22",-909.0],["2025-07-23",-909.0],["2025-07-24",341.0],["2025-07-31",1841.0],["2025-08-01",-909.0],["2025-08-04",341.0],["2025-08-05",1841.0],["2025-08-06",-909.0],["2025-08-07",1841.0],["2025-08-11",-909.0],["2025-08-12",1841.0],["2025-08-18",341.0],["2025-08-19",-909.0],["2025-08-20",341.0],["2025-08-22",341.0],["2025-08-25",341.0],["2025-08-26",341.0],["2025-08-27",341.0],["2025-08-29",-909.0],["2025-09-02",-909.0],["2025-09-03",341.0],["2025-09-05",1841.0],["2025-09-10",-909.0],["2025-09-11",1150.95],["2025-09-15",341.0],["2025-09-16",-909.0],["2025-09-17",341.0],["2025-09-18",341.0],["2025-09-22",1841.0],["2025-09-23",-909.0],["2025-09-24",1841.0],["2025-09-30",-909.0],["2025-10-01",1841.0],["2025-10-02",341.0],["2025-10-03",341.0],["2025-10-08",530.7],["2025-10-15",-909.0],["2025-10-17",341.0],["2025-10-20",1355.4],["2025-10-22",1841.0],["2025-10-24",-913.4],["2025-10-27",-909.0],["2025-10-29",341.0],["2025-11-06",341.0],["2025-11-07",341.0],["2025-11-12",341.0],["2025-11-13",341.0],["2025-11-17",341.0],["2025-11-18",-909.0],["2025-11-26",-909.0],["2025-11-28",1134.15],["2025-12-02",-909.0],["2025-12-05",-909.0],["2025-12-08",1841.0],["2025-12-16",1841.0],["2025-12-18",341.0],["2025-12-22",-909.0],["2025-12-29",-909.0],["2026-01-05",341.0],["2026-01-08",-909.0],["2026-01-09",-932.8],["2026-01-13",341.0],["2026-01-14",-909.0],["2026-01-15",341.0],["2026-01-16",341.0],["2026-01-19",341.0],["2026-01-20",-909.0],["2026-01-28",817.05],["2026-02-03",341.0],["2026-02-05",341.0],["2026-02-09",1841.0],["2026-02-11",341.0],["2026-02-18",341.0],["2026-02-19",341.0],["2026-02-20",-909.0],["2026-02-23",1841.0],["2026-02-24",-909.0],["2026-02-25",-909.0],["2026-02-26",1841.0],["2026-02-27",-909.0],["2026-03-04",1841.0],["2026-03-05",-909.0],["2026-03-09",1841.0],["2026-03-10",341.0],["2026-03-11",1841.0],["2026-03-13",1841.0],["2026-03-16",-935.8],["2026-03-17",-909.0],["2026-03-18",-909.0],["2026-03-20",-909.0],["2026-03-25",341.0],["2026-03-26",1841.0],["2026-03-31",341.0],["2026-04-02",341.0],["2026-04-07",-909.0],["2026-04-08",1841.0],["2026-04-10",-909.0],["2026-04-13",341.0],["2026-04-14",1841.0],["2026-04-15",1841.0],["2026-04-16",341.0],["2026-04-17",1841.0],["2026-04-21",-909.0],["2026-04-28",-909.0],["2026-05-01",-909.0],["2026-05-04",341.0],["2026-05-05",-909.0],["2026-05-06",1841.0],["2026-05-11",341.0],["2026-05-12",-909.0],["2026-05-13",-909.0],["2026-05-15",341.0],["2026-05-19",341.0],["2026-05-29",-909.0],["2026-06-01",-909.0],["2026-06-03",1841.0],["2026-06-04",341.0],["2026-06-05",-909.0],["2026-06-08",341.0],["2026-06-15",1841.0],["2026-06-18",341.0],["2026-06-22",-909.0],["2026-06-23",341.0],["2026-06-30",341.0],["2026-07-02",-909.0],["2026-07-06",1841.0],["2026-07-07",341.0],["2026-07-08",341.0],["2026-07-09",341.0],["2026-07-10",-909.0],["2026-07-15",-909.0],["2026-07-17",-909.0],["2026-07-23",341.0],["2026-07-29",1841.0],["2026-08-03",1841.0],["2026-08-04",341.0],["2026-08-05",-909.0],["2026-08-10",341.0],["2026-08-13",341.0],["2026-08-17",1295.35],["2026-08-18",-909.0],["2026-08-20",341.0],["2026-08-24",-909.0],["2026-08-25",341.0],["2026-08-26",-909.0],["2026-08-27",1841.0],["2026-08-31",341.0],["2026-09-01",341.0],["2026-09-02",729.0],["2026-09-03",-909.0],["2026-09-07",78.1],["2026-09-08",-909.0],["2026-09-09",341.0],["2026-09-11",341.0],["2026-09-14",-909.0],["2026-09-15",689.0],["2026-09-16",341.0],["2026-09-21",1841.0],["2026-09-22",-909.0],["2026-09-23",341.0],["2026-09-24",-909.0],["2026-09-25",341.0],["2026-09-28",1841.0],["2026-09-29",-909.0],["2026-09-30",341.0],["2026-10-01",341.0],["2026-10-02",-909.0],["2026-10-05",341.0],["2026-10-06",-909.0],["2026-10-07",-909.0],["2026-10-14",341.0],["2026-10-20",1841.0],["2026-10-23",341.0],["2026-10-26",-909.0],["2026-10-27",772.4],["2026-10-28",341.0],["2026-10-30",1841.0],["2026-11-11",-909.0],["2026-11-13",341.0]];
+  const mesN = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+  const fmtF = (f) => +f.slice(8, 10) + ' ' + mesN[+f.slice(5, 7) - 1];
+  const eqPanels = [...root.querySelectorAll('.eqp')].map((el) => {
+    const yr = el.dataset.y, ops = EQ.filter((e) => e[0].startsWith(yr));
+    let c = 0, pk = 0, dd = 0, w = 0; const pts = [{ f: null, v: 0 }];
+    ops.forEach(([f, u]) => { c += u; pk = Math.max(pk, c); dd = Math.min(dd, c - pk); if (u > 0) w++; pts.push({ f, v: c }); });
+    const v = el.querySelector('.eqv'); v.textContent = money(c); v.style.color = c >= 0 ? '#169c86' : '#e5533d';
+    el.querySelector('.eqm').innerHTML = `${ops.length} ops · acierto ${(w / ops.length * 100).toFixed(1)}% · caída máx. ${money(dd)}`;
+    return { el, cv: el.querySelector('canvas'), tip: el.querySelector('.eqtip'), pts, hov: null };
+  });
+  function drawEq(P) {
+    if (!P.cv.clientWidth) return;
+    const { ctx, W, H } = fitCanvas(P.cv); ctx.clearRect(0, 0, W, H);
+    const vs = P.pts.map((p) => p.v), lo = Math.min(0, ...vs), hi = Math.max(0, ...vs), pad = 6;
+    const X = (i) => pad + i / (P.pts.length - 1) * (W - pad * 2), Y = (v) => pad + (hi - v) / (hi - lo || 1) * (H - pad * 2);
+    ctx.strokeStyle = 'rgba(255,255,255,.12)'; ctx.setLineDash([3, 4]); ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(pad, Y(0)); ctx.lineTo(W - pad, Y(0)); ctx.stroke(); ctx.setLineDash([]);
+    const g = ctx.createLinearGradient(0, Y(hi), 0, Y(0)); g.addColorStop(0, 'rgba(22,156,134,.35)'); g.addColorStop(1, 'rgba(22,156,134,0)');
+    ctx.beginPath(); P.pts.forEach((p, i) => (i ? ctx.lineTo(X(i), Y(p.v)) : ctx.moveTo(X(i), Y(p.v))));
+    ctx.lineTo(X(P.pts.length - 1), Y(0)); ctx.lineTo(X(0), Y(0)); ctx.closePath(); ctx.fillStyle = g; ctx.fill();
+    ctx.beginPath(); P.pts.forEach((p, i) => (i ? ctx.lineTo(X(i), Y(p.v)) : ctx.moveTo(X(i), Y(p.v))));
+    ctx.strokeStyle = '#169c86'; ctx.lineWidth = 2; ctx.lineJoin = 'round'; ctx.stroke();
+    if (P.hov != null) {
+      const i = P.hov, x = X(i), y = Y(P.pts[i].v);
+      ctx.strokeStyle = 'rgba(255,255,255,.3)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(x, pad); ctx.lineTo(x, H - pad); ctx.stroke();
+      ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(x, y, 4, 0, Math.PI * 2); ctx.fill();
+      P.tip.textContent = (P.pts[i].f ? fmtF(P.pts[i].f) + ' · op ' + i + ' · ' : 'inicio · ') + money(P.pts[i].v);
+      P.tip.hidden = false; P.tip.style.left = Math.max(0, Math.min(W - P.tip.offsetWidth, x - P.tip.offsetWidth / 2)) + 'px';
+      P.tip.style.top = (y < 40 ? y + 10 : y - 34) + 'px';
+    } else P.tip.hidden = true;
+  }
+  eqPanels.forEach((P) => {
+    const pick = (e) => { const rc = P.cv.getBoundingClientRect(); P.hov = Math.max(0, Math.min(P.pts.length - 1, Math.round((e.clientX - rc.left - 6) / (rc.width - 12) * (P.pts.length - 1)))); drawEq(P); };
+    P.cv.addEventListener('pointermove', pick); P.cv.addEventListener('pointerdown', pick);
+    P.cv.addEventListener('pointerleave', () => { P.hov = null; drawEq(P); });
+  });
+  const drawEqAll = () => eqPanels.forEach(drawEq);
 
   // ---------- cómo termina cada operación ----------
   const OUT = [
@@ -1231,7 +1293,7 @@ function paint(cv, scene, t, bgA = 1) {
       `Esperanza observada <strong>${money(st.mean, 2)}</strong> por operación (${N} ops, 2025–2026). Con 95% de confianza la esperanza real está entre ${money(st.lo, 2)} y ${money(st.hi, 2)}${st.lo < 0 && st.hi > 0 ? '; <strong>el rango incluye el $0</strong>' : ''}. Probabilidad de que la esperanza sea ≤ 0: <strong>${(st.p0 * 100).toFixed(1)}%</strong>.`;
   }
 
-  addEventListener('resize', () => { if (!root.classList.contains('off')) { drawSurf(); } });
+  addEventListener('resize', () => { if (!root.classList.contains('off')) { drawSurf(); drawEqAll(); } });
   updIC();
 
   // ---------- modelo 3D del rango de esperanza (por nivel de comisión) ----------
