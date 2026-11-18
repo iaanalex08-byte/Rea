@@ -6,6 +6,7 @@ Rasgos medidos antes de la entrada:
   gap a favor / en contra      el signo del gap respecto a la dirección de la operación
   tamaño                       chico (< 5 pts), mediano (5–15) o grande (> 15)
   gap cerrado                  entre las 9:30 NY y la entrada el precio ya tocó el cierre de ayer
+  regla del Modelo B           operar solo si el gap mide 22.6 pts o menos (umbral elegido en otra sesión con SPXUSD)
 Modelos:
   Modelo B "Más dinero": 10:12 NY, EMA 20 de 3 min, A y C por volumen, sin BOS en contra, VWAP; 30/40/160 sin BE.
   SP500 9:00 CDMX con confirmación: noche 20–50 pts y últimos 12 min a favor; SL 60, TP1 60 + BE, TP2 120 ticks.
@@ -56,7 +57,8 @@ def rasgos(G, fecha, t0_ny, s):
     return {"Gap a favor": gp * s > 0, "Gap en contra": gp * s < 0, "Gap " + tam: True,
             "Gap cerrado antes de entrar": cerrado, "Gap sin cerrar": not cerrado,
             "Gap a favor sin cerrar": gp * s > 0 and not cerrado, "Gap en contra ya cerrado": gp * s < 0 and cerrado,
-            "Gap a favor mediano o grande": gp * s >= 5}
+            "Gap a favor mediano o grande": gp * s >= 5,
+            "Gap de 22.6 pts o menos (regla del Modelo B)": abs(gp) <= 22.6}
 
 
 def met(u, y):
