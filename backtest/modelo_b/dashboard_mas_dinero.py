@@ -24,6 +24,24 @@ BR = (30, 40, 160, False)
 DIAS = ["lunes", "martes", "miércoles", "jueves", "viernes"]
 
 
+def salida(day, sl, tp1, tp2):
+    """Salida real del bracket sin break-even: tras TP1 el segundo contrato sigue con el stop original."""
+    up, dn = day["up"], day["dn"]
+    i_sl = rf._first(dn <= -sl); i_t1 = rf._first(up >= tp1)
+    if i_sl is not None and (i_t1 is None or i_sl <= i_t1):
+        return "Stop"
+    if i_t1 is None:
+        return "Cierre 15:59"
+    if up[i_t1] >= tp2:
+        return "TP1 + TP2"
+    r, u = dn[i_t1 + 1:], up[i_t1 + 1:]
+    i_s = rf._first(r <= -sl) if len(r) else None
+    i_t2 = rf._first(u >= tp2) if len(u) else None
+    if i_s is not None and (i_t2 is None or i_s <= i_t2):
+        return "TP1 + stop"
+    return "TP1 + TP2" if i_t2 is not None else "TP1 + cierre 15:59"
+
+
 def guardar(nombre, rows, entrada):
     meta = [{"label": "dashboard_mas_dinero.py", "value": CODE, "type": "code", "lang": "python"}, {"label": "Entrada", "value": entrada},
             {"label": "Reglas", "value": "10:12 NY · EMA 20 de 3 min · A y C por perfil de volumen · sin BOS en contra · VWAP a favor · SL 30, TP1 40, TP2 160 ticks sin BE · 2 ES y 34 USD de costo; 8 MES y 2.49 USD por MES"}]
@@ -53,7 +71,7 @@ for d, u in zip([d for d, k in zip(F, m) if k], U[m]):
     s2 += u; s8 += u8
     fecha = pd.Timestamp(d["date"])
     rows.append(dict(fecha=d["date"], anio=d["date"][:4], mes=d["date"][:7], dia=DIAS[fecha.dayofweek], direccion="Compra" if d["dir"] == 1 else "Venta",
-                     salida=rf.salida(d, *BR[:3]).replace("Stop (−2)", "Stop"), ticks=round(float(ticks), 2), usd_2es=round(float(u), 2),
+                     salida=salida(d, *BR[:3]), ticks=round(float(ticks), 2), usd_2es=round(float(u), 2),
                      usd_8mes=round(float(u8), 2), saldo_2es=round(s2, 2), saldo_8mes=round(s8, 2), gana=bool(u > 0)))
 guardar("operaciones.json", rows, "Una fila por operación del modelo, en orden")
 fo = pd.read_csv("backtest/resultados/modelo_b_fondeo.csv")
