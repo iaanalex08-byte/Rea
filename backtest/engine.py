@@ -107,6 +107,42 @@ def run(df1, exec_tf=1, ema_len=20, ema_tf=3, sl=45, tp1=30, tp2=60, side_mode='
     return pd.DataFrame(out)
 
 
+def features(df1, T):
+    """Volatility measures known at the 9:12 CDMX entry, one row per trade date (points, not ticks).
+
+    rango_apertura: high - low from the 9:30 New York open to the entry.
+    rango_ayer: previous session's 9:30-16:00 New York range.
+    atr10: mean of the previous 10 session ranges.
+    gap: |9:30 open - previous 16:00 close|.
+    dist_ema: |entry - EMA20 of 3-minute closes|.
+    rel_apertura: rango_apertura / atr10.
+    """
+    ny = df1.index.tz_convert('America/New_York')
+    mins = ny.hour * 60 + ny.minute
+    rth = df1[(mins >= 570) & (mins < 960)]
+    d = rth.index.tz_convert('America/New_York').date
+    ses = rth.groupby(d).agg(h=('h', 'max'), l=('l', 'min'), o=('o', 'first'), c=('c', 'last'))
+    ses['rng'] = ses.h - ses.l
+    ses['rango_ayer'] = ses.rng.shift(1)
+    ses['atr10'] = ses.rng.shift(1).rolling(10).mean()
+    ses['gap'] = (ses.o - ses.c.shift(1)).abs()
+    rows = []
+    for r in T.itertuples():
+        day = pd.Timestamp(r.date).date()
+        if day not in ses.index:
+            rows.append(dict(date=r.date))
+            continue
+        t0 = pd.Timestamp(f'{r.date} 09:12', tz='America/Mexico_City').tz_convert('UTC')
+        o930 = pd.Timestamp(f'{r.date} 09:30', tz='America/New_York').tz_convert('UTC')
+        w = df1[(df1.index >= o930) & (df1.index < t0)]
+        s = ses.loc[day]
+        rows.append(dict(date=r.date, rango_apertura=w.h.max() - w.l.min(), rango_ayer=s.rango_ayer,
+                         atr10=s.atr10, gap=s.gap, dist_ema=abs(r.entry - r.ema)))
+    F = pd.DataFrame(rows)
+    F['rel_apertura'] = F.rango_apertura / F.atr10
+    return F
+
+
 def stats(T):
     u = T.usd.values
     gp, gl = u[u > 0].sum(), -u[u <= 0].sum()
