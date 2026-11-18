@@ -2,7 +2,7 @@
 """Ciclo combinado en Lucid 50K Flex: Modelo B "Más dinero" (10:12 NY) + SP500 9:00 CDMX con confirmación.
 
 Evaluación: meta +3,000, caída 2,000 al cierre del día que sigue al saldo más alto y se congela en +100,
-  consistencia 40 % (el mejor día no puede pasar del 40 % de la ganancia). Hasta 60 días hábiles.
+  consistencia 40 % (el mejor día no puede pasar del 40 % de la ganancia). Sin límite de días.
 Fondeada (supuestos, verificar con Lucid): misma caída; retiro cuando hay 5 días con +150 o más desde el último
   retiro y saldo positivo; se retira el 50 % de la ganancia y el trader cobra el 90 % de eso. 12 meses o hasta quemarse.
 Tamaño: Modelo B en MES (riesgo 30 ticks) y SP500 en MES (riesgo 60 ticks = 15 pts, el doble por contrato),
@@ -81,7 +81,7 @@ def pnl_dia(lst, mb, sp, por_gap):
 
 def evaluacion(dias, ops, i0, mb, sp, por_gap):
     bal = hwm = mx = 0.0
-    for k in range(i0, min(len(dias), i0 + 60)):
+    for k in range(i0, len(dias)):
         if dias[k] not in ops:
             continue
         u = pnl_dia(ops[dias[k]], mb, sp, por_gap)
@@ -90,7 +90,7 @@ def evaluacion(dias, ops, i0, mb, sp, por_gap):
             return "pierde", k
         if bal >= META and mx <= CONS * bal:
             return "pasa", k
-    return "no termina", min(len(dias), i0 + 60) - 1
+    return "no termina", len(dias) - 1
 
 
 def fondeada(dias, ops, i0, mb, sp, por_gap):
@@ -129,6 +129,7 @@ def main():
         cob = np.mean([x[0] for x in F]) if F else 0
         filas.append(dict(variante=nom, mes_eval=f"{ev[0]} B + {ev[1]} SP", mes_fondeada=f"{fo[0]} B + {fo[1]} SP",
                           pasa_eval_pct=round(100 * p, 1), pierde_eval_pct=round(100 * sum(r == "pierde" for r in fin) / len(res), 1),
+                          pasa_de_las_que_terminan=round(100 * len(pasa) / len(fin), 1) if fin else None,
                           dias_habiles_para_pasar=int(np.median([k - i + 1 for i, k in pasa])) if pasa else None,
                           llega_1er_retiro_pct=round(100 * len(prim) / len(F), 1) if F else None,
                           dias_habiles_1er_retiro=int(np.median(prim)) if prim else None,
