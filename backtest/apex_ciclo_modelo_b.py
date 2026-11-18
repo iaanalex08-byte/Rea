@@ -10,8 +10,8 @@ Cuenta PA (supuestos, verificar con Apex): misma caída de $1,000 intradía; dí
   retiro cuando hay 5 días de >= $100 y el saldo pasa de $1,600: se retira lo que pase de $1,100. 12 meses o hasta quemarse.
 Se prueba empezando en cada día con señal hasta nov 2025 (para que haya 12 meses de datos después).
 
-    python3 backtest/apex_ciclo_modelo_b.py
-Salida: backtest/resultados/apex_ciclo_modelo_b.csv
+    python3 backtest/apex_ciclo_modelo_b.py [rascacielos|modelo4|modelo6]   (qué se usa para los días mínimos)
+Salida: backtest/resultados/apex_ciclo_modelo_b_<días mínimos>.csv
 """
 import math
 import sys
@@ -52,6 +52,31 @@ def todo_en_una(d, k, meta, bal, peak):
     return "cierre", b, max(peak, b)
 
 
+def modelo_dia(d, n, bal, peak, br=(30, 40, 160)):
+    """Un día del Modelo B con n MES (30/40/160 sin BE), límite intradía. -> (estado, bal, peak)"""
+    sl, t1, t2 = br
+    tick = 1.25 * n / 2
+    up, dn = d["up"], d["dn"]
+    legs = [True, True]; real = 0.0
+    for i in range(len(up)):
+        ab = sum(legs)
+        if bal + (real + ab * dn[i]) * tick <= min(peak - DD, LOCK):
+            return "quemada", min(peak - DD, LOCK), peak
+        if dn[i] <= -sl:
+            real += ab * -sl; legs = [False, False]
+        else:
+            if legs[0] and up[i] >= t1:
+                real += t1; legs[0] = False
+            if legs[1] and up[i] >= t2:
+                real += t2; legs[1] = False
+        peak = max(peak, bal + (real + sum(legs) * up[i]) * tick)
+        if not any(legs):
+            break
+    real += sum(legs) * d["cl"]
+    b = bal + real * tick - n * 2.49
+    return "ok", b, max(peak, b)
+
+
 def main():
     df = cargar()
     F = dias_ny(df, 10, 12, 20, 3)
@@ -66,6 +91,7 @@ def main():
     allday = [d for d in pd.bdate_range("2024-01-02", "2026-11-04").date]
     starts = [i for i, d in enumerate(allday) if d in sig and d <= pd.Timestamp("2025-11-04").date()]
     out = []
+    dias_min = sys.argv[1] if len(sys.argv) > 1 else "rascacielos"   # o "modelo4", "modelo6"
     for k_eval in (2, 3):
         for k_col in (0, 2, 3):
             rows = []
@@ -98,13 +124,23 @@ def main():
                         break
                 while not burned and k < end:
                     d = allday[k]; k += 1
-                    if d not in rz:
-                        continue
-                    pnl, mae = rz[d]
-                    thr = min(peak - DD, LOCK)
-                    if bal - mae <= thr or bal + pnl < thr:
-                        burned = True; break
-                    bal += pnl; peak = max(peak, bal); good += pnl >= 100
+                    if dias_min.startswith("modelo"):
+                        if d not in sig:
+                            continue
+                        antes = bal
+                        st, bal, peak = modelo_dia(sig[d], int(dias_min[6:]), bal, peak)
+                        if st == "quemada" or bal <= min(peak - DD, LOCK):
+                            burned = True; break
+                        pnl = bal - antes
+                    else:
+                        if d not in rz:
+                            continue
+                        pnl, mae = rz[d]
+                        thr = min(peak - DD, LOCK)
+                        if bal - mae <= thr or bal + pnl < thr:
+                            burned = True; break
+                        bal += pnl; peak = max(peak, bal)
+                    good += pnl >= 100
                     if good >= 5 and bal >= 1600:
                         cob += bal - 1100; nret += 1; bal = 1100.0; good = 0
                 rows.append(dict(pasa=True, cobrado=cob, retiros=nret, colchon=col, quemada=burned))
@@ -116,7 +152,7 @@ def main():
                             se_quema_pct=round(100 * pa.quemada.mean(), 1), cobrado_por_PA=round(pa.cobrado.mean()),
                             neto_por_eval=round(p * pa.cobrado.mean() - FEE), costo_por_PA=round(FEE / p) if p else None))
     O = pd.DataFrame(out)
-    O.to_csv("backtest/resultados/apex_ciclo_modelo_b.csv", index=False)
+    O.to_csv(f"backtest/resultados/apex_ciclo_modelo_b_{dias_min}.csv", index=False)
     pd.set_option("display.width", 220)
     print(O.to_string(index=False))
 
