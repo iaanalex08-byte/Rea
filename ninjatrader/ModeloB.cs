@@ -10,6 +10,8 @@
 //   6. VWAP: precio arriba del VWAP de la sesión para comprar, abajo para vender.
 //   Bracket: SL 30 ticks, TP1 40 ticks (mitad), TP2 160 ticks (otra mitad), sin break-even, cierre 15:59 NY.
 //   Tamaño sugerido: 8 MES en la evaluación Lucid 50K, 6 MES ya fondeado.
+//   Tamaño por gap: si entre las 9:30 NY y la entrada el precio ya tocó el cierre de ayer (gap cerrado), tamaño
+//   completo; si no, la mitad. Con gap cerrado el backtest dio PF 2.84 y 65 % ganadoras; sin cerrar, PF 1.44.
 //
 // Uso: NinjaScript Editor -> Indicators -> New Indicator -> nombre "ModeloB" -> borrar todo, pegar este archivo -> F5.
 // Gráfico de ES o MES en 1 Minute (tipo Minute) con al menos 5 días cargados. Agregar el indicador ModeloB.
@@ -55,6 +57,8 @@ namespace NinjaTrader.NinjaScript.Indicators
 		private DateTime fechaRTH = DateTime.MinValue;
 		private double yPoc = double.NaN, yVah = double.NaN, yVal = double.NaN;
 		private double sumPV, sumV;
+		private double cierreAyer = double.NaN, ultimoCierreRTH = double.NaN, minHoy = double.MaxValue, maxHoy = double.MinValue;
+		private int contratosHoy;
 		// velas de 3 minutos armadas con las de 1 minuto
 		private readonly List<double> h3 = new List<double>(), l3 = new List<double>(), c3 = new List<double>();
 		private readonly List<DateTime> t3 = new List<DateTime>();
@@ -91,7 +95,9 @@ namespace NinjaTrader.NinjaScript.Indicators
 		public double NivelPts { get; set; }
 		[Range(50, 95), Display(Name = "Área de valor (%)", Order = 10, GroupName = "1. Reglas")]
 		public int AreaValor { get; set; }
-		[Range(1, 100), Display(Name = "Contratos (para el resultado en $)", Order = 1, GroupName = "2. Resultado")]
+		[Display(Name = "Tamaño por gap (mitad si el gap no se ha cerrado)", Order = 11, GroupName = "1. Reglas")]
+		public bool TamanoPorGap { get; set; }
+		[Range(1, 100), Display(Name = "Contratos (tamaño completo)", Order = 1, GroupName = "2. Resultado")]
 		public int Contratos { get; set; }
 		[Display(Name = "$ por tick por contrato (MES 1.25, ES 12.5)", Order = 2, GroupName = "2. Resultado")]
 		public double ValorTick { get; set; }
@@ -115,6 +121,7 @@ namespace NinjaTrader.NinjaScript.Indicators
 				MinutosBos = 60; Fuerza = 2; NivelPts = 1.0; AreaValor = 70;
 				Contratos = 8; ValorTick = 1.25; Costo = 2.49;
 				Alertar = true;
+				TamanoPorGap = true;
 				AddPlot(new Stroke(Brushes.SteelBlue, DashStyleHelper.Dash, 1), PlotStyle.Line, "VAH ayer");
 				AddPlot(new Stroke(Brushes.SteelBlue, DashStyleHelper.Dash, 1), PlotStyle.Line, "VAL ayer");
 				AddPlot(new Stroke(Brushes.Goldenrod, 2), PlotStyle.Line, "POC ayer");
@@ -230,6 +237,8 @@ namespace NinjaTrader.NinjaScript.Indicators
 					Niveles(ayerPerfil, out yPoc, out yVah, out yVal, out pos);
 				}
 				hoy = new Perfil();
+				cierreAyer = ultimoCierreRTH;
+				minHoy = double.MaxValue; maxHoy = double.MinValue;
 				fechaRTH = aperturaNY.Date;
 				sumPV = 0; sumV = 0;
 				enTrade = false; lado = 0;
@@ -238,6 +247,8 @@ namespace NinjaTrader.NinjaScript.Indicators
 			if (rth)
 			{
 				Agregar(hoy, Low[0], High[0], Volume[0]);
+				ultimoCierreRTH = Close[0];
+				minHoy = Math.Min(minHoy, Low[0]); maxHoy = Math.Max(maxHoy, High[0]);
 				double tp = (High[0] + Low[0] + Close[0]) / 3;
 				sumPV += tp * Volume[0]; sumV += Volume[0];
 			}
@@ -267,6 +278,10 @@ namespace NinjaTrader.NinjaScript.Indicators
 				bool bosContra = eventos.Any(e => e.Bos && e.Dir == -s && e.T > desde && e.T <= cierreNY);
 				bool okV = !double.IsNaN(vwap) && (precio - vwap) * s > 0;
 				bool opera = okA && okC && !bosContra && okV;
+				bool hayGap = !double.IsNaN(cierreAyer);
+				bool gapCerrado = hayGap && minHoy <= cierreAyer && cierreAyer <= maxHoy;
+				int completo = Contratos, mitad = Math.Max(1, Contratos / 2);
+				contratosHoy = !TamanoPorGap || gapCerrado ? completo : mitad;
 				string si = "✔", no = "✖";
 				panel = "Modelo B · " + fechaRTH.ToString("dd/MM") + " · entrada " + HoraNY + ":" + MinutoNY.ToString("00") + " NY\n"
 					+ "EMA 20 (3 min): " + (s == 1 ? "COMPRA" : "VENTA") + "\n"
@@ -274,6 +289,8 @@ namespace NinjaTrader.NinjaScript.Indicators
 					+ (okC ? si : no) + " C: perfil de hoy no ya a favor" + (hayHoy ? "" : " (pocos datos)") + "\n"
 					+ (!bosContra ? si : no) + " Sin BOS en contra (" + MinutosBos + " min)\n"
 					+ (okV ? si : no) + " VWAP a favor\n"
+					+ (hayGap ? "Gap " + ((gapCerrado ? "CERRADO" : "sin cerrar") + " (cierre de ayer " + cierreAyer.ToString("0.00") + ")") : "Gap: falta el cierre de ayer") + "\n"
+					+ "Tamaño: " + contratosHoy + " contratos" + (TamanoPorGap ? (gapCerrado ? " (completo)" : " (mitad)") : "") + "\n"
 					+ (minCi == minEntrada ? "DECISIÓN: " : "Si fuera ahora: ") + (opera ? (s == 1 ? "COMPRA" : "VENTA") : "NO OPERAR");
 
 				if (minCi == minEntrada)
@@ -292,7 +309,7 @@ namespace NinjaTrader.NinjaScript.Indicators
 						else Draw.ArrowDown(this, tag + "f", false, 0, High[0] + 2 * TickSize, Brushes.Red);
 						Draw.Text(this, tag + "t", (s == 1 ? "COMPRA" : "VENTA") + " " + entrada.ToString("0.00"), 0, s == 1 ? Low[0] - 8 * TickSize : High[0] + 8 * TickSize, s == 1 ? Brushes.LimeGreen : Brushes.Red);
 						if (Alertar)
-							Alert(tag, Priority.High, "Modelo B: " + (s == 1 ? "COMPRA" : "VENTA") + " a mercado. SL " + sl.ToString("0.00") + " · TP1 " + tp1.ToString("0.00") + " · TP2 " + tp2.ToString("0.00"),
+							Alert(tag, Priority.High, "Modelo B: " + (s == 1 ? "COMPRA" : "VENTA") + " " + contratosHoy + " contratos a mercado. SL " + sl.ToString("0.00") + " · TP1 " + tp1.ToString("0.00") + " · TP2 " + tp2.ToString("0.00"),
 								NinjaTrader.Core.Globals.InstallDir + @"\sounds\Alert1.wav", 10, Brushes.Black, Brushes.Yellow);
 					}
 					else
@@ -336,9 +353,9 @@ namespace NinjaTrader.NinjaScript.Indicators
 				if (!leg1 && !leg2)
 				{
 					enTrade = false;
-					double usd = (r1 + r2) * (Contratos / 2.0) * ValorTick - Contratos * Costo;
+					double usd = (r1 + r2) * (contratosHoy / 2.0) * ValorTick - contratosHoy * Costo;
 					string res = (r1 >= Tp1Ticks && r2 >= Tp2Ticks) ? "TP1 + TP2" : (r1 >= Tp1Ticks ? "TP1 + " + (cierre ? "cierre" : "stop") : (cierre ? "Cierre 15:59" : "Stop"));
-					Draw.Text(this, tag + "r", res + " " + Usd(usd) + " (" + Contratos + " contratos)", 0, lado == 1 ? High[0] + 6 * TickSize : Low[0] - 6 * TickSize, usd >= 0 ? Brushes.LimeGreen : Brushes.Red);
+					Draw.Text(this, tag + "r", res + " " + Usd(usd) + " (" + contratosHoy + " contratos)", 0, lado == 1 ? High[0] + 6 * TickSize : Low[0] - 6 * TickSize, usd >= 0 ? Brushes.LimeGreen : Brushes.Red);
 					panel = "Modelo B · " + fechaRTH.ToString("dd/MM") + "\nResultado: " + res + " " + Usd(usd);
 				}
 			}
