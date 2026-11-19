@@ -15,9 +15,11 @@ from estructura import cargar, velas, eventos  # noqa: E402
 from variaciones import dias_ny, bos_contra  # noqa: E402
 
 df = cargar(); ev = eventos(velas(df, 3)); filas = []
-for h, m in ((9, 45), (10, 0), (10, 12), (10, 30), (10, 45), (11, 0), (11, 15), (11, 30), (12, 0), (12, 30), (13, 0), (13, 30), (14, 0), (14, 30)):
+for h, m in ((10, 0), (10, 12), (10, 30), (10, 45), (11, 0), (11, 15), (11, 30), (12, 0), (12, 30), (13, 0), (13, 30), (14, 0), (14, 30)):
     F = dias_ny(df, h, m, 20, 3); bc = bos_contra(F, ev); V = pv.rasgos_volumen(F)
     F = [d for d in F if d["date"] in V]; f = pd.DataFrame([V[d["date"]] for d in F])
+    if f.empty:   # antes de 20 min de sesión no hay perfil de hoy suficiente
+        continue
     mk = f.A_vol.values & f.C_vol.values & np.array([not bc[d["date"]] for d in F]) & f["VWAP a favor"].values
     D = [d for d, x in zip(F, mk) if x]
     u = np.array([rf.bracket(d, 30, 40, 160, be=False) for d in D]); y = np.array([d["date"][:4] for d in D])
