@@ -1,0 +1,5 @@
+backtest/resultados/
+__pycache__/
+backtest/datos/
+backtest/datos_*/
+entrega/
