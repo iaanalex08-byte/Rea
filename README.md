@@ -12,6 +12,10 @@ Es un solo archivo, `index.html`, sin build. Para verla en tu computadora basta 
 
 Si el repositorio es privado, GitHub Pages requiere un plan de pago; con un repositorio público es gratis.
 
+## ORBE Terminal
+
+En `terminal/` hay una terminal de mercado en tiempo real (mapa de gamma, cripto, forex, volatilidad, insiders, Congreso y macro). Se publica en `https://<usuario>.github.io/<repositorio>/terminal/`. Detalles, fuentes de datos y configuración en [`terminal/README.md`](terminal/README.md).
+
 ## Datos
 
 `data-modelo-b.json` (la misma data va incrustada en `index.html`): operaciones, rejilla SL × TP1, configuraciones vecinas y riesgo del tablero "ES Modelo B · CDMX 45/30/60" (backtest con velas de 1 minuto SPXUSD de HistData), más velas diarias de ES=F 2026 (Yahoo Finance).

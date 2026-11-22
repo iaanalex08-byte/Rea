@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ORBE Terminal</title>
+<meta name="description" content="Terminal de mercado en tiempo real: mapa de gamma, cripto, forex, volatilidad, insiders, Congreso y macro.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/terminal.css">
+<script src="https://unpkg.com/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="./">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-name">ORBE</span><span class="brand-sub">Terminal</span>
+  </a>
+  <nav class="tabs" role="tablist" aria-label="Herramientas">
+    <button role="tab" data-view="qmap">Mapa de gamma</button>
+    <button role="tab" data-view="crypto">Cripto</button>
+    <button role="tab" data-view="forex">Forex</button>
+    <button role="tab" data-view="vol">Volatilidad</button>
+    <button role="tab" data-view="insiders">Insiders y Congreso</button>
+    <button role="tab" data-view="macro">Macro</button>
+  </nav>
+  <div class="clocks">
+    <span class="session" id="session">—</span>
+    <span class="clock"><b>NY</b> <span id="clock-ny">--:--:--</span></span>
+    <span class="clock"><b>CDMX</b> <span id="clock-mx">--:--:--</span></span>
+  </div>
+</header>
+
+<main id="view" class="view" aria-live="polite"></main>
+
+<footer class="foot">
+  <div class="sources" id="sources"></div>
+  <p class="disclaimer">Información de mercado con fines informativos. No es asesoría financiera ni recomendación de compra o venta.
+    Los paneles marcados <span class="tag tag-sim">SIM</span> usan datos simulados; <span class="tag tag-live">EN VIVO</span> y <span class="tag tag-daily">DIARIO</span> usan fuentes públicas reales.</p>
+</footer>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
