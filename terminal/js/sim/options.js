@@ -14,7 +14,7 @@ export const UNDERLYINGS = {
 };
 
 const R = 0.042; // risk-free rate
-const YEAR_SEC = 365 * 24 * 3600;
+export const YEAR_SEC = 365 * 24 * 3600;
 const SQ2PI = Math.sqrt(2 * Math.PI);
 const npdf = (x) => Math.exp(-0.5 * x * x) / SQ2PI;
 function ncdf(x) {
@@ -42,19 +42,19 @@ export function greeks(S, K, T, iv) {
 }
 
 // ---------- calendar ----------
-function nyParts(d) {
+export function nyParts(d) {
   const p = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'short' }).formatToParts(d);
   const g = (t) => p.find((x) => x.type === t).value;
   return { ymd: `${g('year')}-${g('month')}-${g('day')}`, wd: g('weekday') };
 }
 const isWeekday = (d) => { const w = d.getUTCDay(); return w > 0 && w < 6; };
-function thirdFriday(y, m) {
+export function thirdFriday(y, m) {
   const d = new Date(Date.UTC(y, m, 1));
   const first = (5 - d.getUTCDay() + 7) % 7;
   return new Date(Date.UTC(y, m, 1 + first + 14));
 }
 // Expiry close: 16:00 New York ≈ 21:00 UTC (20:00 in summer; 1h error is irrelevant here).
-const expiryTs = (d) => Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), 21, 0);
+export const expiryTs = (d) => Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), 21, 0);
 
 export function buildExpiries(now = Date.now()) {
   const { ymd } = nyParts(new Date(now));
@@ -85,102 +85,18 @@ export function buildExpiries(now = Date.now()) {
   return out.sort((a, b) => a.ts - b.ts).slice(0, 10);
 }
 
-// ---------- engine ----------
-export class OptionsSim {
-  constructor(symbol) {
-    this.symbol = symbol;
-    this.cfg = UNDERLYINGS[symbol];
-    const day = nyParts(new Date()).ymd;
-    this.seed = hashStr(symbol + day);
-    this.r = rng(this.seed ^ 0x9e3779b9);
-    this.volShock = 0; // added to ATM IV, mean-reverting, rises on selloffs
+// ---------- shared chain model ----------
+// Everything that turns an option chain into dealer exposure. Subclasses provide:
+//   spot, expiries [{key, ts, kind}], strikes [K], oi[expiry][strike] = {call, put, vol},
+//   iv(K, T, S) and cfg.width (strike range shown, as a fraction of spot).
+export class ChainModel {
+  constructor() {
     this.listeners = new Set();
     this.flowListeners = new Set();
     this.minuteFlow = new Map(); // minute ts -> {callBuy, callSell, putBuy, putSell, deltaNotional}
-    this.expiries = buildExpiries();
-    this.#buildHistory();
-    this.#buildChain();
-    this.lastSnap = null;
     this.big = []; // recent large trades, newest first
-    // Backfill the last two hours of flow so the charts are not empty on first load.
-    const now = Date.now();
-    for (const c of this.candles.slice(-120)) {
-      this.lastRet = (c.close - c.open) / c.open;
-      for (let k = 0; k < 20; k++) this.#trades(c.time, c.time * 1000 + k * 3000, c.close);
-    }
-    this.lastRet = 0;
-  }
-
-  // Intraday history of 1-minute candles ending now (seeded, deterministic per day).
-  #buildHistory() {
-    const hr = rng(this.seed);
-    const nowMin = Math.floor(Date.now() / 60000) * 60;
-    const n = 600;
-    const sig = this.cfg.baseVol / Math.sqrt(252 * 390);
-    let p = this.cfg.spot * (1 + (hr() - 0.5) * 0.03);
-    this.candles = [];
-    for (let i = n; i > 0; i--) {
-      const o = p;
-      let hi = o, lo = o;
-      for (let k = 0; k < 6; k++) {
-        p *= 1 + gauss(hr) * sig / Math.sqrt(6) + (this.cfg.spot - p) / this.cfg.spot * 0.002;
-        hi = Math.max(hi, p); lo = Math.min(lo, p);
-      }
-      this.candles.push({ time: nowMin - i * 60, open: o, high: hi, low: lo, close: p });
-    }
-    this.spot = p;
-    this.open = this.candles[Math.max(0, this.candles.length - 390)].open;
-    this.anchor = this.cfg.spot; // OI is centred where the market was when positions were opened
-  }
-
-  #buildChain() {
-    const { step, width, oiScale } = this.cfg;
-    const S0 = this.anchor;
-    const lo = Math.ceil((S0 * (1 - width * 1.4)) / step) * step;
-    const hi = Math.floor((S0 * (1 + width * 1.4)) / step) * step;
-    this.strikes = [];
-    for (let k = lo; k <= hi + 1e-9; k += step) this.strikes.push(+k.toFixed(2));
-    const or = rng(this.seed ^ 0x51ed27);
-    // A handful of "institutional" strikes with outsized positioning.
-    const hot = new Map();
-    for (let i = 0; i < 6; i++) {
-      const k = this.strikes[Math.floor(or() * this.strikes.length)];
-      hot.set(k, 2 + or() * 3);
-    }
-    this.oi = this.expiries.map((e) => {
-      const T = Math.max((e.ts - Date.now()) / 1000 / YEAR_SEC, 1 / 365);
-      const kindMul = e.kind === 'mensual' ? 2.6 : e.kind === 'semanal' ? 1.2 : e.kind === '0DTE' ? 0.8 : 0.6;
-      const spread = width * (0.35 + Math.sqrt(T) * 1.6);
-      return this.strikes.map((K) => {
-        const m = (K - S0) / S0;
-        const bell = Math.exp(-((m / spread) ** 2));
-        const round = K % (step * 10) === 0 ? 2.4 : K % (step * 5) === 0 ? 1.5 : 1;
-        const h = hot.get(K) ?? 1;
-        const noise = () => Math.exp(gauss(or) * 0.35);
-        const callBias = m > 0 ? 1.25 : 0.55; // calls sold/bought OTM above spot
-        const putBias = m < 0 ? 1.45 : 0.45;  // put hedges concentrate below
-        return {
-          call: Math.round(oiScale * kindMul * bell * round * h * callBias * noise()),
-          put: Math.round(oiScale * kindMul * bell * round * h * putBias * noise() * 1.1),
-          vol: 0,
-        };
-      });
-    });
-  }
-
-  // Term structure: upward sloping (contango) in calm markets. Selloffs raise volShock, which
-  // lifts the short end most and can invert the curve (backwardation) under stress.
-  atmIv(T) {
-    const calm = this.cfg.baseVol * (0.86 + 0.32 * Math.sqrt(Math.min(T, 1)));
-    return Math.max(0.05, calm + this.volShock * Math.exp(-T * 6));
-  }
-
-  // Smile/skew in standardized moneyness; short expiries are normalized at one week so the
-  // wings stay realistic instead of exploding as T → 0.
-  iv(K, T, S = this.spot) {
-    const Tm = Math.max(T, 7 / 365);
-    const m = Math.max(-2.5, Math.min(2.5, Math.log(K / S) / Math.sqrt(Tm)));
-    return Math.max(0.04, this.atmIv(T) * (1 - 0.35 * m + 0.6 * m * m));
+    this.lastSnap = null;
+    this.ready = Promise.resolve(this);
   }
 
   T(e, now = Date.now()) { return Math.max((e.ts - now) / 1000 / YEAR_SEC, 0.5 / (365 * 24)); }
@@ -277,14 +193,112 @@ export class OptionsSim {
     return this.lastSnap;
   }
 
+  onTick(f) { this.listeners.add(f); return () => this.listeners.delete(f); }
+  onFlow(f) { this.flowListeners.add(f); return () => this.flowListeners.delete(f); }
+  flowSeries() { return [...this.minuteFlow.values()]; }
+}
+
+// ---------- engine ----------
+export class OptionsSim extends ChainModel {
+  constructor(symbol) {
+    super();
+    this.symbol = symbol;
+    this.cfg = UNDERLYINGS[symbol];
+    const day = nyParts(new Date()).ymd;
+    this.seed = hashStr(symbol + day);
+    this.r = rng(this.seed ^ 0x9e3779b9);
+    this.volShock = 0; // added to ATM IV, mean-reverting, rises on selloffs
+    this.source = 'sim';
+    this.expiries = buildExpiries();
+    this.#buildHistory();
+    this.#buildChain();
+    // Backfill the last two hours of flow so the charts are not empty on first load.
+    const now = Date.now();
+    for (const c of this.candles.slice(-120)) {
+      this.lastRet = (c.close - c.open) / c.open;
+      for (let k = 0; k < 20; k++) this.#trades(c.time, c.time * 1000 + k * 3000, c.close);
+    }
+    this.lastRet = 0;
+  }
+
+  // Intraday history of 1-minute candles ending now (seeded, deterministic per day).
+  #buildHistory() {
+    const hr = rng(this.seed);
+    const nowMin = Math.floor(Date.now() / 60000) * 60;
+    const n = 600;
+    const sig = this.cfg.baseVol / Math.sqrt(252 * 390);
+    let p = this.cfg.spot * (1 + (hr() - 0.5) * 0.03);
+    this.candles = [];
+    for (let i = n; i > 0; i--) {
+      const o = p;
+      let hi = o, lo = o;
+      for (let k = 0; k < 6; k++) {
+        p *= 1 + gauss(hr) * sig / Math.sqrt(6) + (this.cfg.spot - p) / this.cfg.spot * 0.002;
+        hi = Math.max(hi, p); lo = Math.min(lo, p);
+      }
+      this.candles.push({ time: nowMin - i * 60, open: o, high: hi, low: lo, close: p });
+    }
+    this.spot = p;
+    this.open = this.candles[Math.max(0, this.candles.length - 390)].open;
+    this.anchor = this.cfg.spot; // OI is centred where the market was when positions were opened
+  }
+
+  #buildChain() {
+    const { step, width, oiScale } = this.cfg;
+    const S0 = this.anchor;
+    const lo = Math.ceil((S0 * (1 - width * 1.4)) / step) * step;
+    const hi = Math.floor((S0 * (1 + width * 1.4)) / step) * step;
+    this.strikes = [];
+    for (let k = lo; k <= hi + 1e-9; k += step) this.strikes.push(+k.toFixed(2));
+    const or = rng(this.seed ^ 0x51ed27);
+    // A handful of "institutional" strikes with outsized positioning.
+    const hot = new Map();
+    for (let i = 0; i < 6; i++) {
+      const k = this.strikes[Math.floor(or() * this.strikes.length)];
+      hot.set(k, 2 + or() * 3);
+    }
+    this.oi = this.expiries.map((e) => {
+      const T = Math.max((e.ts - Date.now()) / 1000 / YEAR_SEC, 1 / 365);
+      const kindMul = e.kind === 'mensual' ? 2.6 : e.kind === 'semanal' ? 1.2 : e.kind === '0DTE' ? 0.8 : 0.6;
+      const spread = width * (0.35 + Math.sqrt(T) * 1.6);
+      return this.strikes.map((K) => {
+        const m = (K - S0) / S0;
+        const bell = Math.exp(-((m / spread) ** 2));
+        const round = K % (step * 10) === 0 ? 2.4 : K % (step * 5) === 0 ? 1.5 : 1;
+        const h = hot.get(K) ?? 1;
+        const noise = () => Math.exp(gauss(or) * 0.35);
+        const callBias = m > 0 ? 1.25 : 0.55; // calls sold/bought OTM above spot
+        const putBias = m < 0 ? 1.45 : 0.45;  // put hedges concentrate below
+        return {
+          call: Math.round(oiScale * kindMul * bell * round * h * callBias * noise()),
+          put: Math.round(oiScale * kindMul * bell * round * h * putBias * noise() * 1.1),
+          vol: 0,
+        };
+      });
+    });
+  }
+
+  // Term structure: upward sloping (contango) in calm markets. Selloffs raise volShock, which
+  // lifts the short end most and can invert the curve (backwardation) under stress.
+  atmIv(T) {
+    const calm = this.cfg.baseVol * (0.86 + 0.32 * Math.sqrt(Math.min(T, 1)));
+    return Math.max(0.05, calm + this.volShock * Math.exp(-T * 6));
+  }
+
+  // Smile/skew in standardized moneyness; short expiries are normalized at one week so the
+  // wings stay realistic instead of exploding as T → 0.
+  iv(K, T, S = this.spot) {
+    const Tm = Math.max(T, 7 / 365);
+    const m = Math.max(-2.5, Math.min(2.5, Math.log(K / S) / Math.sqrt(Tm)));
+    return Math.max(0.04, this.atmIv(T) * (1 - 0.35 * m + 0.6 * m * m));
+  }
+
   // ---- live loop ----
   start() {
     if (this.timer) return;
     this.timer = setInterval(() => this.#tick(), 1000);
   }
   stop() { clearInterval(this.timer); this.timer = null; }
-  onTick(f) { this.listeners.add(f); return () => this.listeners.delete(f); }
-  onFlow(f) { this.flowListeners.add(f); return () => this.flowListeners.delete(f); }
 
   #tick() {
     const r = this.r;
@@ -353,7 +367,6 @@ export class OptionsSim {
     }
   }
 
-  flowSeries() { return [...this.minuteFlow.values()]; }
 }
 
 // One running engine per symbol, shared by the gamma map, flow and volatility views.

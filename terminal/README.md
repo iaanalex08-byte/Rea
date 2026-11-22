@@ -7,28 +7,23 @@ Se publica en GitHub Pages en `/terminal/`.
 
 | Pestaña | Qué muestra | Fuente | Tipo |
 |---|---|---|---|
-| Mapa de gamma | GEX y DEX por strike, call wall, put wall, gamma flip, mapa de calor vencimiento × strike, delta nocional por minuto, flujo inusual | Simulador (`js/sim/options.js`) | SIM |
+| Mapa de gamma | GEX y DEX por strike, call wall, put wall, gamma flip, mapa de calor vencimiento × strike, delta nocional por minuto, flujo inusual | Tradier o Polygon vía proxy; si no, simulador | En vivo (15 min de retraso gratis) o SIM |
 | Cripto | Precios y velas en vivo, liquidaciones de futuros, dominancia | Binance (data-api / data-stream, con respaldo Binance.US y Coinbase), Binance Futures y Bybit, CoinGecko | En vivo |
 | Forex | Fuerza relativa, matriz de cruces, gráfico de cualquier par | Banco Central Europeo vía Frankfurter | Diario |
-| Volatilidad | Superficie de IV en 3D, skew por vencimiento, estructura temporal | Simulador | SIM |
+| Volatilidad | Superficie de IV en 3D, skew por vencimiento, estructura temporal | Tradier o Polygon vía proxy; si no, simulador | En vivo o SIM |
 | Insiders y Congreso | Compras y ventas de directivos (Form 4), compras en grupo, operaciones de legisladores | SEC EDGAR y Quiver Quantitative, vía GitHub Action | Cada 30 min |
 | Macro | Curva del Tesoro, diferenciales 10A−2A y 10A−3M, ciclo del G20 | home.treasury.gov, Banco Mundial | Diario / anual |
 
 Cada panel indica con una etiqueta si sus datos son **SIM**, **EN VIVO**, **DIARIO** o **ANUAL**.
 
-## Opciones: por qué está simulado y cómo conectar datos reales
+## Opciones: simulador o datos reales
 
-Los datos de opciones en tiempo real (cadena completa con open interest) no tienen fuente gratuita
-que se pueda usar desde una página. El simulador calcula griegas con Black-Scholes sobre una cadena
-sintética (open interest por strike y vencimiento, superficie de volatilidad) y mueve el precio según
-el régimen de gamma: con gamma positiva el precio tiende a quedarse cerca del strike con más gamma,
-con gamma negativa los movimientos se amplifican.
+Sin configuración, el mapa de gamma y la volatilidad usan un simulador: griegas de Black-Scholes
+sobre una cadena sintética, con un precio que se mueve según el régimen de gamma.
 
-Para usar datos reales hay que reemplazar `OptionsSim` por un proveedor (Polygon, ThetaData, Tradier,
-CBOE DataShop…) que entregue lo mismo: `spot`, `candles`, `expiries`, `strikes`, `oi[vencimiento][strike]`
-e `iv(K, T)`. Los cálculos de exposición (`snapshot`) y todas las vistas funcionan sin cambios.
-La clave del proveedor **no** debe ir en el código de la página (sería pública): se necesita un pequeño
-servidor o función que la guarde y reenvíe los datos.
+Para datos reales, publica el proxy de `terminal/worker/` (Cloudflare Worker, gratis) y pon su
+dirección en `terminal/js/config.js`. Funciona gratis con la cuenta de desarrollador de Tradier
+(15 min de retraso) y también con Polygon. Pasos en [`worker/README.md`](worker/README.md).
 
 ## Insiders y Congreso (GitHub Action)
 

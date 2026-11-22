@@ -1,0 +1,21 @@
+name = "orbe-options"
+main = "options-proxy.js"
+compatibility_date = "2025-06-01"
+
+[vars]
+# "tradier" o "polygon"
+PROVIDER = "tradier"
+# Tradier: "true" usa la cuenta de desarrollador gratuita (sandbox, 15 min de retraso).
+TRADIER_SANDBOX = "true"
+# Polygon: "true" si tu plan tiene 15 min de retraso (Starter).
+POLYGON_DELAYED = "true"
+# Orígenes que pueden consultar el proxy (tu GitHub Pages). Sin barra final.
+ALLOWED_ORIGINS = "https://iaanalex08-byte.github.io"
+SYMBOLS = "SPY,QQQ,SPX,IWM"
+MAX_EXPIRIES = "10"
+STRIKE_RANGE = "0.15"
+CACHE_SECONDS = "20"
+
+# Las claves NO van aquí. Guárdalas como secretos cifrados:
+#   npx wrangler secret put TRADIER_TOKEN
+#   npx wrangler secret put POLYGON_KEY

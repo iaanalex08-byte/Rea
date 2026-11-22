@@ -1,7 +1,9 @@
 // Gamma map: price with dealer levels, GEX/DEX/OI by strike, expiry × strike heatmap,
 // delta-notional flow per minute and an unusual-flow tape.
 
-import { UNDERLYINGS, getSim } from '../sim/options.js';
+import { UNDERLYINGS } from '../sim/options.js';
+import { getEngine, sourceLabel } from '../options/engine.js';
+import { ageText } from '../options/real.js';
 import { h, $, $$, esc, num, price, compact, signCls, makeChart, candleStyle, fitCanvas, status, tag, fmtTime } from '../util.js';
 
 const COLORS = { call: '#22ab94', put: '#f23645', flip: '#e8a33d', spot: '#e9edf1', grid: '#161d25', text: '#a7b0bb', mute: '#6e7884' };
@@ -12,14 +14,14 @@ export function mount(root) {
   if (!UNDERLYINGS[symbol]) symbol = 'SPY';
   let filter = 'all';
   let metric = 'gex';
-  let sim, offTick, offFlow, timer;
+  let sim = null, offTick, offFlow, timer, closed = false, attachSeq = 0;
   let snap = null;
 
   root.append(h(`
     <div class="grid" style="gap:12px">
       <section class="panel">
         <div class="panel-head">
-          <h2>Mapa de gamma</h2>${tag('sim')}
+          <h2>Mapa de gamma</h2><span id="q-tag">${tag('wait')}</span>
           <select id="q-sym" aria-label="Subyacente">${Object.keys(UNDERLYINGS).map((s) => `<option${s === symbol ? ' selected' : ''}>${s}</option>`).join('')}</select>
           <div class="seg" id="q-filter" role="group" aria-label="Vencimientos">
             <button data-f="all" aria-pressed="true">Todos</button>
@@ -60,8 +62,8 @@ export function mount(root) {
 
       <div class="grid g-side">
         <section class="panel">
-          <div class="panel-head"><h2>Delta nocional por minuto</h2><span class="spacer"></span>
-            <div class="legend"><span><i style="background:${COLORS.call}"></i>Compra neta de delta</span><span><i style="background:${COLORS.put}"></i>Venta neta</span><span><i style="background:#4c8dff"></i>Acumulado</span></div>
+          <div class="panel-head"><h2 id="q-flow-title">Delta nocional por minuto</h2><span class="spacer"></span>
+            <div class="legend"><span><i style="background:${COLORS.call}"></i><span id="q-flow-up">Compra neta de delta</span></span><span><i style="background:${COLORS.put}"></i><span id="q-flow-down">Venta neta</span></span><span><i style="background:#4c8dff"></i>Acumulado</span></div>
           </div>
           <div class="panel-body flush"><div class="chart short" id="q-flow"></div></div>
         </section>
@@ -95,7 +97,7 @@ export function mount(root) {
   const tip = $('#q-tip', root);
   let barRows = [];
   function drawBars() {
-    if (!snap) return;
+    if (!snap || !sim) return;
     const { ctx, w, h: H } = fitCanvas(bars, 470);
     ctx.clearRect(0, 0, w, H);
     const S = snap.spot;
@@ -179,7 +181,7 @@ export function mount(root) {
   const htip = $('#q-htip', root);
   let heatGeom = null;
   function drawHeat() {
-    if (!snap) return;
+    if (!snap || !sim) return;
     const S = snap.spot;
     const cols = sim.strikes.map((K, i) => [K, i]).filter(([K]) => Math.abs(K - S) / S <= sim.cfg.width * 0.4);
     let picked = cols;
@@ -244,12 +246,12 @@ export function mount(root) {
   const statsEl = $('#q-stats', root);
   function drawStats() {
     if (!snap) return;
-    const first = sim.candles[Math.max(0, sim.candles.length - 390)].open;
+    const first = sim.candles.length ? sim.candles[Math.max(0, sim.candles.length - 390)].open : snap.spot;
     const chg = (snap.spot / first - 1) * 100;
     const pos = snap.total >= 0;
     const distFlip = snap.flip ? (snap.spot / snap.flip - 1) * 100 : null;
     const items = [
-      ['Spot', price(snap.spot), `<span class="${signCls(chg)}">${chg > 0 ? '+' : ''}${num(chg)}% sesión</span>`],
+      ['Spot', price(snap.spot), sim.source === 'real' ? `datos ${ageText(sim.asOf)}${sim.error ? ' · <span class="down">sin actualizar</span>' : ''}` : `<span class="${signCls(chg)}">${chg > 0 ? '+' : ''}${num(chg)}% sesión</span>`],
       ['GEX neta', `<span class="${signCls(snap.total)}">${compact(snap.total)}</span>`, '$ por 1% de movimiento'],
       ['Régimen', `<span class="${pos ? 'up' : 'down'}">${pos ? 'Gamma +' : 'Gamma −'}</span>`, pos ? 'Dealers frenan: rango, reversión' : 'Dealers aceleran: tendencia, volatilidad'],
       ['Gamma flip', `<span class="c-flip">${snap.flip ? price(snap.flip) : 'fuera de rango'}</span>`, distFlip == null ? '' : `spot ${distFlip > 0 ? '+' : ''}${num(distFlip)}% vs flip`],
@@ -263,6 +265,7 @@ export function mount(root) {
 
   // ---------- wiring ----------
   function refresh() {
+    if (!sim) return;
     snap = sim.snapshot(filter);
     setLine('call', snap.callWall, COLORS.call, 'Call wall');
     setLine('put', snap.putWall, COLORS.put, 'Put wall');
@@ -279,26 +282,44 @@ export function mount(root) {
     sel.innerHTML = `<option value="">Vencimiento…</option>` + sim.expiries.map((e) => `<option value="${e.key}">${e.key} · ${e.kind}</option>`).join('');
   }
 
-  function attach(sym) {
+  async function attach(sym) {
+    const my = ++attachSeq;
     offTick?.(); offFlow?.();
-    sim = getSim(sym);
+    sim = null;
+    $('#q-tag', root).innerHTML = tag('wait');
+    status.set('opt', `Opciones ${sym}: conectando…`, 'wait');
+    const engine = await getEngine(sym);
+    if (my !== attachSeq || closed) return;
+    sim = engine;
+    const real = sim.source === 'real';
     candles.setData(sim.candles);
     chart.timeScale().scrollToRealTime();
     fillExpirySelect();
+    // With a chain snapshot (no trade feed) the aggressor side is unknown: show the delta
+    // notional of traded volume instead of net buying/selling.
+    $('#q-flow-title', root).textContent = real ? 'Delta nocional del volumen por minuto' : 'Delta nocional por minuto';
+    $('#q-flow-up', root).textContent = real ? 'Delta del volumen (calls dominan)' : 'Compra neta de delta';
+    $('#q-flow-down', root).textContent = real ? 'Delta del volumen (puts dominan)' : 'Venta neta';
     offTick = sim.onTick((bar) => candles.update(bar));
     const addTrade = (t, fresh) => {
       if (t.premium < UNUSUAL_MIN) return;
       if (tapeEmpty) { tape.innerHTML = ''; tapeEmpty = false; }
       const li = document.createElement('li');
-      if (fresh) li.className = 'new' + (t.side === 'venta' ? ' sell' : '');
-      li.innerHTML = `<span class="muted">${fmtTime(t.ts)}</span><span><b class="${t.type === 'C' ? 'up' : 'down'}">${esc(sym)} ${num(t.K, t.K % 1 ? 1 : 0)}${t.type}</b> ${t.expiry.slice(5)} · ${t.side} ${num(t.size, 0)} @ ${num(t.price)}</span><span class="${t.side === 'compra' ? 'up' : 'down'}">$${compact(t.premium)}</span>`;
+      const tone = t.side === 'compra' ? 'up' : t.side === 'venta' ? 'down' : t.type === 'C' ? 'up' : 'down';
+      if (fresh) li.className = 'new' + (tone === 'down' ? ' sell' : '');
+      li.innerHTML = `<span class="muted">${fmtTime(t.ts)}</span><span><b class="${t.type === 'C' ? 'up' : 'down'}">${esc(sym)} ${num(t.K, t.K % 1 ? 1 : 0)}${t.type}</b> ${t.expiry.slice(5)} · ${t.side} ${num(t.size, 0)} @ ${num(t.price)}</span><span class="${tone}">$${compact(t.premium)}</span>`;
       if (fresh) tape.prepend(li); else tape.append(li);
       while (tape.children.length > 80) tape.lastChild.remove();
     };
+    if (real && !sim.big.length) tape.innerHTML = '<li class="muted" style="display:block">El flujo se calcula con el volumen operado entre actualizaciones (cada 20 s) desde que abriste la página.</li>';
     sim.big.forEach((t) => addTrade(t, false));
     offFlow = sim.onFlow((t) => addTrade(t, true));
+    const [label, kind] = sourceLabel(sim, sym);
+    $('#q-tag', root).innerHTML = tag(kind === 'err' ? 'sim' : kind);
+    status.set('opt', label, kind, real ? 'Cadena de opciones vía tu proxy' : 'Configura OPTIONS_API en js/config.js para datos reales');
+    clearInterval(timer);
+    timer = setInterval(refresh, real ? 5000 : 1000);
     refresh();
-    status.set('opt', `Opciones ${sym}: simulador (Black-Scholes, OI sintético)`, 'sim', 'Conecta un proveedor de opciones para datos reales');
   }
 
   $('#q-sym', root).addEventListener('change', (e) => {
@@ -322,11 +343,11 @@ export function mount(root) {
   }));
 
   attach(symbol);
-  timer = setInterval(refresh, 1000);
   const onResize = () => { drawBars(); drawHeat(); };
   window.addEventListener('resize', onResize);
 
   return () => {
+    closed = true;
     clearInterval(timer);
     offTick?.(); offFlow?.();
     window.removeEventListener('resize', onResize);

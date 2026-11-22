@@ -1,6 +1,7 @@
 // Volatility: implied-volatility surface, skew by expiry and term structure (simulated chain).
 
-import { UNDERLYINGS, getSim } from '../sim/options.js';
+import { UNDERLYINGS } from '../sim/options.js';
+import { getEngine, sourceLabel } from '../options/engine.js';
 import { h, $, num, signCls, status, tag } from '../util.js';
 import { loadPlotly, AXIS, LAYOUT, CONFIG } from '../plotly.js';
 
@@ -11,7 +12,7 @@ export async function mount(root) {
   root.append(h(`
     <div class="grid" style="gap:12px">
       <section class="panel">
-        <div class="panel-head"><h2>Volatilidad implícita</h2>${tag('sim')}
+        <div class="panel-head"><h2>Volatilidad implícita</h2><span id="v-tag">${tag('wait')}</span>
           <select id="v-sym" aria-label="Subyacente">${Object.keys(UNDERLYINGS).map((s) => `<option${s === symbol ? ' selected' : ''}>${s}</option>`).join('')}</select>
           <span class="spacer"></span><span class="note">Skew, estructura temporal y volatilidad por strike. La IV sube cuando el subyacente cae.</span>
         </div>
@@ -38,8 +39,7 @@ export async function mount(root) {
     $('#v-surface', root).innerHTML = `<div class="empty"><h3>${e.message}</h3>Revisa tu conexión y vuelve a abrir la pestaña.</div>`;
     return () => {};
   }
-  let sim = getSim(symbol);
-  let timer, first = true;
+  let sim = null, timer, first = true, closed = false, seq = 0;
 
   function data() {
     const S = sim.spot;
@@ -52,6 +52,7 @@ export async function mount(root) {
   }
 
   function draw() {
+    if (!sim || !sim.expiries.length) return;
     const { S, exps, ms, z } = data();
     const dteLabels = exps.map((x) => num(x.dte, x.dte < 2 ? 1 : 0));
     Plotly.react($('#v-surface', root), [{
@@ -107,16 +108,27 @@ export async function mount(root) {
     $('#v-stats', root).innerHTML = items.map(([k, v, s]) => `<div class="stat"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s}</div></div>`).join('');
   }
 
+  async function use(sym) {
+    const my = ++seq;
+    $('#v-tag', root).innerHTML = tag('wait');
+    const engine = await getEngine(sym);
+    if (my !== seq || closed) return;
+    sim = engine; first = true;
+    const [label, kind] = sourceLabel(sim, sym);
+    $('#v-tag', root).innerHTML = tag(kind === 'err' ? 'sim' : kind);
+    status.set('vol', label.replace(/^Opciones/, 'Volatilidad'), kind);
+    clearInterval(timer);
+    draw();
+    timer = setInterval(draw, sim.source === 'real' ? 20000 : 4000);
+  }
   $('#v-sym', root).addEventListener('change', (e) => {
     symbol = e.target.value; localStorage.setItem('orbe.qmap.symbol', symbol);
-    sim = getSim(symbol); first = true; draw();
-    status.set('vol', `Volatilidad ${symbol}: simulador`, 'sim');
+    use(symbol);
   });
 
-  status.set('vol', `Volatilidad ${symbol}: simulador`, 'sim', 'Superficie paramétrica que reacciona al precio simulado');
-  draw();
-  timer = setInterval(draw, 4000);
+  await use(symbol);
   return () => {
+    closed = true;
     clearInterval(timer);
     ['#v-surface', '#v-skew', '#v-term'].forEach((s) => { const el = $(s, root); if (el) Plotly.purge(el); });
     status.clear(['vol']);
