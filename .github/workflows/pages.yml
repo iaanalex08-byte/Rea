@@ -4,6 +4,10 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Los commits que hace la Action de datos no disparan "push"; se republica al terminar.
+  workflow_run:
+    workflows: ["Datos de la terminal (insiders y Congreso)"]
+    types: [completed]
 
 permissions:
   contents: read
@@ -38,6 +42,8 @@ jobs:
           cp index.html three.min.js data-modelo-b.json .nojekyll _site/
           cp -r gym/dist _site/gym
           cp -r orbe _site/orbe
+          mkdir -p _site/terminal
+          cp -r terminal/index.html terminal/css terminal/js terminal/data _site/terminal/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

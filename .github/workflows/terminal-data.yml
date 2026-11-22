@@ -1,0 +1,38 @@
+name: Datos de la terminal (insiders y Congreso)
+
+on:
+  schedule:
+    # Cada 30 min de 7:00 a 19:30 hora de Nueva York (12–23 UTC), lunes a viernes.
+    - cron: "*/30 12-23 * * 1-5"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: terminal-data
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Descargar Form 4 (SEC) y operaciones del Congreso
+        env:
+          # Configúralo en Settings → Secrets and variables → Actions → Variables.
+          SEC_USER_AGENT: ${{ vars.SEC_USER_AGENT }}
+          # Opcional, en Settings → Secrets and variables → Actions → Secrets.
+          QUIVER_API_KEY: ${{ secrets.QUIVER_API_KEY }}
+        run: node terminal/tools/fetch-insiders.mjs
+      - name: Guardar cambios
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add terminal/data
+          if git diff --cached --quiet; then echo "Sin cambios"; exit 0; fi
+          git commit -m "Terminal: actualizar datos de insiders y Congreso"
+          git push
