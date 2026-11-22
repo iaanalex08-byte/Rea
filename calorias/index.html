@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ORBE Calorías</title>
+<meta name="description" content="Cuenta calorías y macros, escanea códigos de barras y sigue tu progreso. Tus datos se quedan en tu teléfono.">
+<meta name="theme-color" content="#089981">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Calorías">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="mark" aria-hidden="true"></span><b>ORBE</b> Calorías</div>
+</header>
+
+<main id="view" class="view"></main>
+
+<nav class="tabbar" aria-label="Secciones">
+  <a href="#hoy" data-tab="hoy"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5V20a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/></svg>Hoy</a>
+  <button type="button" class="add-fab" id="fab" aria-label="Agregar alimento"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+  <a href="#progreso" data-tab="progreso"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Progreso</a>
+  <a href="#perfil" data-tab="perfil"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Perfil</a>
+</nav>
+
+<dialog id="add" class="sheet full" aria-label="Agregar alimento"></dialog>
+<dialog id="portion" class="sheet" aria-label="Cantidad"></dialog>
+<dialog id="form" class="sheet" aria-label="Formulario"></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

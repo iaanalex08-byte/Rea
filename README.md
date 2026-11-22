@@ -12,6 +12,10 @@ Es un solo archivo, `index.html`, sin build. Para verla en tu computadora basta 
 
 Si el repositorio es privado, GitHub Pages requiere un plan de pago; con un repositorio público es gratis.
 
+## ORBE Calorías
+
+En `calorias/` hay una app para contar calorías y macros: registro por comida, meta diaria calculada, buscador de alimentos básicos y de productos (Open Food Facts), escaneo de códigos de barras, recetas, agua y peso. Se instala en el celular desde el navegador y guarda los datos solo en el teléfono. Se publica en `https://<usuario>.github.io/<repositorio>/calorias/`.
+
 ## ORBE Terminal
 
 En `terminal/` hay una terminal de mercado en tiempo real (mapa de gamma, cripto, forex, volatilidad, insiders, Congreso y macro). Se publica en `https://<usuario>.github.io/<repositorio>/terminal/`. Detalles, fuentes de datos y configuración en [`terminal/README.md`](terminal/README.md).

@@ -44,6 +44,7 @@ jobs:
           cp -r orbe _site/orbe
           mkdir -p _site/terminal
           cp -r terminal/index.html terminal/css terminal/js terminal/data _site/terminal/
+          cp -r calorias _site/calorias
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
