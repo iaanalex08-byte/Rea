@@ -46,6 +46,7 @@ class Params:
     filt_vwap: bool = True
     filt_gap: bool = False
     gap_max: float = 8.0          # puntos: no se opera si el gap de apertura va en contra por esto o más
+    skip_months: tuple = ()       # meses que no se operan, p. ej. (2, 3) para saltar febrero y marzo (opcional)
     c_frac: float = 0.38
     va_frac: float = 0.70
     bos_bars: int = 20
@@ -254,6 +255,8 @@ def run(prep, chosen, p: Params = Params(), start=None, end=None, signals=None):
     for f, on in (('A', p.filt_a), ('C', p.filt_c), ('BOS', p.filt_bos), ('VWAP', p.filt_vwap), ('GAP', p.filt_gap)):
         if on:
             keep &= signals[f].values
+    if p.skip_months:
+        keep &= ~pd.to_datetime(signals.fecha).dt.month.isin(p.skip_months).values
     trades = []
     for s in signals[keep].to_dict('records'):
         a, b, out = simulate(prep, s, p)

@@ -25,6 +25,8 @@ int    bosMin = input.int(60, "BOS: ventana (minutos)", minval = 15, group = gFi
 bool   useVw  = input.bool(true, "VWAP del día a favor", group = gFi)
 bool   useGap = input.bool(true, "Gap de apertura no en contra", group = gFi)
 float  gapMax = input.float(8.0, "Gap máximo en contra (puntos)", minval = 0, step = 0.25, group = gFi)
+bool   skipFM = input.bool(false, "Opcional: no operar en febrero ni marzo", group = gFi,
+     tooltip = "Backtest 2018–2026: sube el factor de 1.45 a 1.59 y el neto casi no cambia, pero la caída máxima empeora y solo mejora 5 de 9 años.")
 
 string gBr   = "Bracket (ticks)"
 int    slT   = input.int(35,  "Stop loss (todo)",      minval = 1, group = gBr)
@@ -249,7 +251,9 @@ if isSignal and not active and not na(ema3)
         bool  okVw  = not na(vwapPrev) and (d > 0 ? px > vwapPrev : px < vwapPrev)
         float gap   = d * (rthOpen - prevClose)
         bool  okGap = not na(gap) and gap > -gapMax
-        bool  pasa  = (not useA or okA) and (not useC or okC) and (not useBos or okBos) and (not useVw or okVw) and (not useGap or okGap)
+        int   mesNy = month(time, TZ)
+        bool  okMes = not (skipFM and (mesNy == 2 or mesNy == 3))
+        bool  pasa  = (not useA or okA) and (not useC or okC) and (not useBos or okBos) and (not useVw or okVw) and (not useGap or okGap) and okMes
 
         sFecha := str.format_time(time, "dd/MM/yyyy", TZ)
         sDir   := d > 0 ? "Compra" : "Venta"
@@ -296,6 +300,7 @@ if isSignal and not active and not na(ema3)
             why += useBos and not okBos ? " BOS" : ""
             why += useVw and not okVw ? " VWAP" : ""
             why += useGap and not okGap ? " Gap" : ""
+            why += not okMes ? " Feb/Mar" : ""
             sVer := "No se opera:" + why
             cVer := color.gray
             evSkip := true
