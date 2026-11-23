@@ -1,0 +1,60 @@
+{
+"rows": [
+{
+"paso": "Días hábiles con datos",
+"dias": 2293,
+"ganadoras": 52.7,
+"pf": 1.05,
+"neto": 18608
+},
+{
+"paso": "A: fuera del valor de ayer",
+"dias": 1561,
+"ganadoras": 53.4,
+"pf": 1.09,
+"neto": 22390
+},
+{
+"paso": "C: perfil de hoy no ya a favor",
+"dias": 1024,
+"ganadoras": 55.1,
+"pf": 1.14,
+"neto": 23132
+},
+{
+"paso": "Sin BOS en contra",
+"dias": 806,
+"ganadoras": 56.7,
+"pf": 1.24,
+"neto": 29189
+},
+{
+"paso": "VWAP a favor",
+"dias": 750,
+"ganadoras": 56.9,
+"pf": 1.26,
+"neto": 29210
+},
+{
+"paso": "Gap no en contra (se opera)",
+"dias": 502,
+"ganadoras": 59.8,
+"pf": 1.45,
+"neto": 31215
+}
+],
+"meta": [
+{
+"label": "Origen",
+"value": "ES 1 min de NinjaTrader (36 contratos, 2018 – 20 nov 2026), contrato con más volumen cada día"
+},
+{
+"label": "Script",
+"value": "backtest/construir_dashboard.py + backtest/mas_dinero.py (MODELO_GAP)"
+},
+{
+"label": "Costos",
+"value": "MES: 2.49 USD ida y vuelta por contrato. ES: 1 tick de deslizamiento + 4.50 USD por contrato."
+}
+]
+}

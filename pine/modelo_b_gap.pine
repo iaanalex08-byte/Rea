@@ -1,0 +1,411 @@
+// This Pine Script® code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// Modelo B · Gap · ES
+// 10:12 Nueva York · EMA 20 de 3 min · filtros A, C, sin BOS en contra, VWAP a favor y gap no en contra
+// SL 35 · TP1 35 (mitad) · TP2 120 (otra mitad) · break-even tras TP1 · cierre 15:59 Nueva York
+// Úsalo en ES1! / MES1! con velas de 3 minutos y horario extendido (ETH), igual que el backtest.
+//@version=6
+indicator("Modelo B · Gap · ES 10:12 NY · SL 35 · TP1 35 · TP2 120", shorttitle = "MB Gap", overlay = true,
+     max_boxes_count = 500, max_lines_count = 500, max_labels_count = 500, max_bars_back = 500)
+
+// ───────────── Entradas ─────────────
+const string TZ = "America/New_York"
+
+string gEnt   = "Entrada (hora de Nueva York)"
+int    hEnt   = input.int(10, "Hora de entrada",   minval = 0, maxval = 23, group = gEnt)
+int    mEnt   = input.int(12, "Minuto de entrada", minval = 0, maxval = 59, group = gEnt)
+int    lenEma = input.int(20, "EMA de 3 min", minval = 1, group = gEnt)
+
+string gFi    = "Filtros"
+bool   useA   = input.bool(true, "A: precio fuera del área de valor de ayer", group = gFi)
+float  vaPct  = input.float(70, "Área de valor (% del volumen)", minval = 50, maxval = 95, group = gFi)
+bool   useC   = input.bool(true, "C: perfil de hoy no ya a favor (P / b)", group = gFi)
+float  cFrac  = input.float(0.38, "C: fracción para P / b", minval = 0.05, maxval = 0.5, step = 0.01, group = gFi)
+bool   useBos = input.bool(true, "Sin BOS en contra", group = gFi)
+int    bosMin = input.int(60, "BOS: ventana (minutos)", minval = 15, group = gFi)
+bool   useVw  = input.bool(true, "VWAP del día a favor", group = gFi)
+bool   useGap = input.bool(true, "Gap de apertura no en contra", group = gFi)
+float  gapMax = input.float(8.0, "Gap máximo en contra (puntos)", minval = 0, step = 0.25, group = gFi)
+
+string gBr   = "Bracket (ticks)"
+int    slT   = input.int(35,  "Stop loss (todo)",      minval = 1, group = gBr)
+int    tp1T  = input.int(35,  "TP1 (mitad)",           minval = 1, group = gBr)
+int    tp2T  = input.int(120, "TP2 (otra mitad)",      minval = 1, group = gBr)
+bool   useBE = input.bool(true, "Stop a break-even al tocar TP1", group = gBr)
+int    hCl   = input.int(15, "Cierre forzado: hora (NY)",   minval = 0, maxval = 23, group = gBr)
+int    mCl   = input.int(59, "Cierre forzado: minuto (NY)", minval = 0, maxval = 59, group = gBr)
+
+string gCo   = "Resumen en la tabla"
+int    nMes  = input.int(6, "Contratos MES (número par)", minval = 2, step = 2, group = gCo)
+float  cost  = input.float(2.49, "Costo por MES ida y vuelta (USD)", minval = 0, step = 0.01, group = gCo)
+
+string gVi      = "Visual"
+bool   showLv   = input.bool(true,  "Mostrar VAH / VAL / POC de ayer", group = gVi)
+bool   showVw   = input.bool(true,  "Mostrar VWAP del día", group = gVi)
+bool   showEma  = input.bool(true,  "Mostrar EMA de 3 min", group = gVi)
+bool   showSkip = input.bool(true,  "Marcar días descartados", group = gVi)
+bool   showTbl  = input.bool(true,  "Mostrar tabla", group = gVi)
+color  cUp  = input.color(#1FAE89, "Compra / ganancia", group = gVi)
+color  cDn  = input.color(#E2582F, "Venta / pérdida", group = gVi)
+color  cTP  = input.color(color.new(#1FAE89, 82), "Relleno caja TP", group = gVi)
+color  cSL  = input.color(color.new(#E2582F, 82), "Relleno caja SL", group = gVi)
+color  cLv  = input.color(color.new(#8C8C8C, 0), "Niveles de ayer", group = gVi)
+
+// ───────────── Utilidades ─────────────
+float tick  = syminfo.mintick
+float MES_TICK_USD = 1.25
+
+nyMin(int t) => hour(t, TZ) * 60 + minute(t, TZ)
+
+// Suma el volumen de la vela repartido entre sus ticks (perfil de volumen)
+addVol(map<int, float> m, float h, float l, float v) =>
+    int a = math.round(l / tick)
+    int b = math.round(h / tick)
+    float per = nz(v) / (b - a + 1)
+    for k = a to b
+        m.put(k, nz(m.get(k)) + per)
+    m.size()
+
+// VAH, VAL y POC: desde el POC se agrega el tick vecino con más volumen hasta juntar el % pedido
+valueArea(map<int, float> m, float frac) =>
+    float vah = na
+    float val = na
+    float poc = na
+    array<int> ks = m.keys()
+    int n = ks.size()
+    if n > 0
+        ks.sort(order.ascending)
+        array<float> vs = array.new<float>(n, 0.0)
+        float tot = 0.0
+        float best = -1.0
+        int pi = 0
+        for i = 0 to n - 1
+            float v = m.get(ks.get(i))
+            vs.set(i, v)
+            tot += v
+            if v > best
+                best := v
+                pi := i
+        int lo = pi
+        int hi = pi
+        float acc = best
+        while acc < frac * tot and (lo > 0 or hi < n - 1)
+            float up = hi < n - 1 ? vs.get(hi + 1) : -1.0
+            float dn = lo > 0 ? vs.get(lo - 1) : -1.0
+            if up >= dn
+                hi += 1
+                acc += up
+            else
+                lo -= 1
+                acc += dn
+        vah := ks.get(hi) * tick
+        val := ks.get(lo) * tick
+        poc := ks.get(pi) * tick
+    [vah, val, poc]
+
+// Dónde cae el POC dentro del rango (0 = mínimo, 1 = máximo)
+pocPosition(map<int, float> m, float hi, float lo) =>
+    float res = 0.5
+    array<int> ks = m.keys()
+    int n = ks.size()
+    if n > 0 and hi > lo
+        ks.sort(order.ascending)
+        float best = -1.0
+        int bk = ks.get(0)
+        for i = 0 to n - 1
+            int k = ks.get(i)
+            float v = m.get(k)
+            if v > best
+                best := v
+                bk := k
+        res := (bk * tick - lo) / (hi - lo)
+    res
+
+// BOS en contra en las n velas cerradas antes de esta (offset 1 = la más reciente).
+// Compra: un cierre debajo del último mínimo de swing (2 velas a cada lado). Venta: arriba del último máximo.
+bosAgainst(int dir, int n) =>
+    bool found = false
+    float lvl = na
+    int sj = 0
+    for k = 0 to n - 1
+        int j = k - 2
+        if j - 2 >= 0
+            float rj = dir > 0 ? low[n - j] : high[n - j]
+            bool isSw = true
+            for q = j - 2 to j + 2
+                if q != j
+                    float rq = dir > 0 ? low[n - q] : high[n - q]
+                    if dir > 0 ? rj >= rq : rj <= rq
+                        isSw := false
+            if isSw
+                lvl := rj
+                sj := j
+        if not found and not na(lvl) and k > sj + 2
+            float c = close[n - k]
+            if dir > 0 ? c < lvl : c > lvl
+                found := true
+    found
+
+okTxt(bool used, bool ok) => used ? (ok ? "✓" : "✕") : "–"
+
+// ───────────── Datos de la vela ─────────────
+// EMA de 3 min sin repintar: valor de la última vela de 3 min ya cerrada
+float ema3 = request.security(syminfo.tickerid, "3", ta.ema(close, lenEma)[1], lookahead = barmerge.lookahead_on)
+
+int   tfSec   = timeframe.in_seconds()
+int   bosN    = math.max(5, int(math.floor(bosMin * 60.0 / tfSec)))
+bool  bosL    = bosAgainst(1, bosN)
+bool  bosS    = bosAgainst(-1, bosN)
+
+int   mOpen   = nyMin(time)
+int   dNy     = dayofmonth(time, TZ)
+int   dow     = dayofweek(time, TZ)
+bool  weekday = dow >= dayofweek.monday and dow <= dayofweek.friday
+bool  isRth   = weekday and mOpen >= 570 and mOpen < 960
+bool  rthStart = isRth and (not isRth[1] or dNy != dNy[1])
+int   entMin  = hEnt * 60 + mEnt
+bool  isSignal = isRth and mOpen == entMin
+int   tEnd    = timestamp(TZ, year(time, TZ), month(time, TZ), dNy, hCl, mCl)
+int   tRthEnd = timestamp(TZ, year(time, TZ), month(time, TZ), dNy, 16, 0)
+
+// ───────────── Estado del día ─────────────
+var map<int, float> prof = map.new<int, float>()
+var float yVAH = na
+var float yVAL = na
+var float yPOC = na
+var float lastRthClose = na
+var float prevClose = na
+var float rthOpen = na
+var float hiT = na
+var float loT = na
+var float pvSum = 0.0
+var float vSum = 0.0
+
+if rthStart
+    if prof.size() > 0
+        [a, b, c] = valueArea(prof, vaPct / 100)
+        yVAH := a
+        yVAL := b
+        yPOC := c
+    prevClose := lastRthClose
+    rthOpen   := open
+    prof.clear()
+    hiT   := na
+    loT   := na
+    pvSum := 0.0
+    vSum  := 0.0
+    if showLv and not na(yVAH)
+        line.new(time, yVAH, tRthEnd, yVAH, xloc = xloc.bar_time, color = cLv, style = line.style_dotted)
+        line.new(time, yVAL, tRthEnd, yVAL, xloc = xloc.bar_time, color = cLv, style = line.style_dotted)
+        line.new(time, yPOC, tRthEnd, yPOC, xloc = xloc.bar_time, color = color.new(cLv, 40), style = line.style_dashed)
+        label.new(tRthEnd, yVAH, "VAH ayer", xloc = xloc.bar_time, style = label.style_label_left, color = color.new(color.black, 100), textcolor = cLv, size = size.tiny)
+        label.new(tRthEnd, yVAL, "VAL ayer", xloc = xloc.bar_time, style = label.style_label_left, color = color.new(color.black, 100), textcolor = cLv, size = size.tiny)
+
+// VWAP con las velas cerradas hasta antes de esta (para la señal)
+float vwapPrev = vSum > 0 ? pvSum / vSum : na
+
+// ───────────── Operación ─────────────
+var int   tDir   = 0
+var bool  active = false
+var bool  tp1Hit = false
+var float tEntry = na
+var float tStop  = na
+var float tTP1   = na
+var float tTP2   = na
+var int   tClose = 0
+var box   bxTP   = na
+var box   bxSL   = na
+var line  lnTP1  = na
+
+var int   nOps  = 0
+var int   nWin  = 0
+var float gWin  = 0.0
+var float gLoss = 0.0
+var float neto  = 0.0
+
+var string sFecha = "—"
+var string sDir   = "—"
+var string sA     = "—"
+var string sC     = "—"
+var string sBos   = "—"
+var string sVw    = "—"
+var string sGap   = "—"
+var string sVer   = "Esperando 10:12"
+var color  cVer   = color.gray
+
+bool evLong  = false
+bool evShort = false
+bool evSkip  = false
+bool evTp1   = false
+bool evExit  = false
+
+if isSignal and not active and not na(ema3)
+    float px = close[1]
+    int d = px > ema3 ? 1 : px < ema3 ? -1 : 0
+    if d != 0
+        bool  okA   = not na(yVAH) and (px > yVAH or px < yVAL)
+        float pos   = pocPosition(prof, hiT, loT)
+        bool  okC   = d > 0 ? pos < 1 - cFrac : pos > cFrac
+        bool  okBos = not (d > 0 ? bosL : bosS)
+        bool  okVw  = not na(vwapPrev) and (d > 0 ? px > vwapPrev : px < vwapPrev)
+        float gap   = d * (rthOpen - prevClose)
+        bool  okGap = not na(gap) and gap > -gapMax
+        bool  pasa  = (not useA or okA) and (not useC or okC) and (not useBos or okBos) and (not useVw or okVw) and (not useGap or okGap)
+
+        sFecha := str.format_time(time, "dd/MM/yyyy", TZ)
+        sDir   := d > 0 ? "Compra" : "Venta"
+        sA     := okTxt(useA, okA)
+        sC     := okTxt(useC, okC) + str.format("  POC al {0,number,#}%", pos * 100)
+        sBos   := okTxt(useBos, okBos)
+        sVw    := okTxt(useVw, okVw)
+        sGap   := okTxt(useGap, okGap) + (na(gap) ? "" : str.format("  {0}{1,number,#.##} pts", gap >= 0 ? "+" : "", gap))
+
+        if pasa
+            tDir   := d
+            active := true
+            tp1Hit := false
+            tEntry := px
+            tStop  := px - d * slT * tick
+            tTP1   := px + d * tp1T * tick
+            tTP2   := px + d * tp2T * tick
+            tClose := tEnd
+            bxTP  := box.new(time, math.max(tEntry, tTP2), tEnd, math.min(tEntry, tTP2), xloc = xloc.bar_time,
+                 border_color = color.new(cUp, 40), bgcolor = cTP,
+                 text = "TP2 " + str.tostring(tTP2, format.mintick), text_color = cUp, text_size = size.small,
+                 text_halign = text.align_right, text_valign = d > 0 ? text.align_top : text.align_bottom)
+            bxSL  := box.new(time, math.max(tEntry, tStop), tEnd, math.min(tEntry, tStop), xloc = xloc.bar_time,
+                 border_color = color.new(cDn, 40), bgcolor = cSL,
+                 text = "SL " + str.tostring(tStop, format.mintick), text_color = cDn, text_size = size.small,
+                 text_halign = text.align_right, text_valign = d > 0 ? text.align_bottom : text.align_top)
+            lnTP1 := line.new(time, tTP1, tEnd, tTP1, xloc = xloc.bar_time, color = cUp, style = line.style_dashed, width = 1)
+            label.new(tEnd, tTP1, "TP1 " + str.tostring(tTP1, format.mintick), xloc = xloc.bar_time, style = label.style_label_left,
+                 color = color.new(color.black, 100), textcolor = cUp, size = size.small)
+            label.new(time, tEntry, (d > 0 ? "COMPRA " : "VENTA ") + str.tostring(tEntry, format.mintick), xloc = xloc.bar_time,
+                 style = d > 0 ? label.style_label_up : label.style_label_down, yloc = d > 0 ? yloc.belowbar : yloc.abovebar,
+                 color = d > 0 ? cUp : cDn, textcolor = color.white, size = size.small)
+            sVer := "Se opera: " + sDir
+            cVer := d > 0 ? cUp : cDn
+            evLong  := d > 0
+            evShort := d < 0
+            alert(str.format("Modelo B · Gap: {0} {1} a {2}. SL {3} · TP1 {4} · TP2 {5}", sDir, syminfo.ticker,
+                 str.tostring(tEntry, format.mintick), str.tostring(tStop, format.mintick),
+                 str.tostring(tTP1, format.mintick), str.tostring(tTP2, format.mintick)), alert.freq_once_per_bar)
+        else
+            string why = ""
+            why += useA and not okA ? " A" : ""
+            why += useC and not okC ? " C" : ""
+            why += useBos and not okBos ? " BOS" : ""
+            why += useVw and not okVw ? " VWAP" : ""
+            why += useGap and not okGap ? " Gap" : ""
+            sVer := "No se opera:" + why
+            cVer := color.gray
+            evSkip := true
+            if showSkip
+                label.new(time, close[1], "✕" + why, xloc = xloc.bar_time, yloc = d > 0 ? yloc.belowbar : yloc.abovebar,
+                     style = d > 0 ? label.style_label_up : label.style_label_down,
+                     color = color.new(color.gray, 60), textcolor = color.white, size = size.tiny)
+
+// Seguimiento del bracket vela por vela (si en la misma vela se tocan stop y objetivo, cuenta el stop)
+if active
+    string out = ""
+    float tk = na
+    bool adv = tDir > 0 ? low <= tStop : high >= tStop
+    bool f1  = tDir > 0 ? high >= tTP1 : low <= tTP1
+    bool f2  = tDir > 0 ? high >= tTP2 : low <= tTP2
+    float stopTk = math.round(tDir * (tStop - tEntry) / tick)
+    if not tp1Hit
+        if adv
+            out := "Stop"
+            tk  := 2 * stopTk
+        else if f1
+            tp1Hit := true
+            evTp1  := true
+            if f2
+                out := "TP1 + TP2"
+                tk  := tp1T + tp2T
+            else if useBE
+                tStop := tEntry
+                box.set_top(bxSL, tEntry)
+                box.set_bottom(bxSL, tEntry)
+                box.set_text(bxSL, "")
+                line.new(time, tEntry, tClose, tEntry, xloc = xloc.bar_time, color = color.gray, style = line.style_dotted)
+    else
+        if adv
+            out := stopTk >= 0 ? "TP1 + break-even" : "TP1 + stop"
+            tk  := tp1T + stopTk
+        else if f2
+            out := "TP1 + TP2"
+            tk  := tp1T + tp2T
+    if out == "" and time_close >= tClose
+        float lt = math.round(tDir * (close - tEntry) / tick)
+        out := tp1Hit ? "TP1 + cierre 15:59" : "Cierre 15:59"
+        tk  := tp1Hit ? tp1T + lt : 2 * lt
+    if out != ""
+        active := false
+        evExit := true
+        box.set_right(bxTP, time_close)
+        box.set_right(bxSL, time_close)
+        line.set_x2(lnTP1, time_close)
+        float usd = nMes / 2 * tk * MES_TICK_USD - nMes * cost
+        nOps += 1
+        neto += usd
+        if usd > 0
+            nWin += 1
+            gWin += usd
+        else
+            gLoss -= usd
+        sVer := out + str.format("  {0}{1,number,#} ticks", tk >= 0 ? "+" : "", tk)
+        cVer := usd > 0 ? cUp : cDn
+        label.new(time_close, tDir > 0 ? high : low, out + "\n" + str.format("{0}{1,number,#} ticks", tk >= 0 ? "+" : "", tk),
+             xloc = xloc.bar_time, style = tDir > 0 ? label.style_label_down : label.style_label_up,
+             color = usd > 0 ? cUp : cDn, textcolor = color.white, size = size.tiny)
+
+// Acumulados de la sesión regular, después de evaluar la señal (la señal usa solo velas ya cerradas)
+if isRth
+    addVol(prof, high, low, volume)
+    hiT   := na(hiT) ? high : math.max(hiT, high)
+    loT   := na(loT) ? low : math.min(loT, low)
+    pvSum += hlc3 * volume
+    vSum  += volume
+    lastRthClose := close
+
+// ───────────── Dibujo ─────────────
+plot(showEma ? ema3 : na, "EMA 20 (3 min)", color = close > ema3 ? cUp : cDn, linewidth = 2)
+plot(showVw and isRth and vSum > 0 ? pvSum / vSum : na, "VWAP del día", color = #9B7FD4, style = plot.style_linebr, linewidth = 1)
+
+var table tb = table.new(position.top_right, 2, 13, bgcolor = color.new(#0F1112, 10), border_color = color.new(color.white, 85), border_width = 1)
+if showTbl and barstate.islast
+    color tx = color.white
+    color mu = color.new(color.white, 40)
+    table.cell(tb, 0, 0, tfSec != 180 ? "Modelo B · Gap · usa velas de 3 min" : "Modelo B · Gap", text_color = tfSec != 180 ? color.yellow : tx, text_size = size.small)
+    table.cell(tb, 1, 0, sFecha, text_color = mu, text_size = size.small)
+    table.cell(tb, 0, 1, "Señal EMA", text_color = mu, text_size = size.small)
+    table.cell(tb, 1, 1, sDir, text_color = tx, text_size = size.small)
+    table.cell(tb, 0, 2, "A fuera del valor", text_color = mu, text_size = size.small)
+    table.cell(tb, 1, 2, sA, text_color = tx, text_size = size.small)
+    table.cell(tb, 0, 3, "C perfil", text_color = mu, text_size = size.small)
+    table.cell(tb, 1, 3, sC, text_color = tx, text_size = size.small)
+    table.cell(tb, 0, 4, "Sin BOS en contra", text_color = mu, text_size = size.small)
+    table.cell(tb, 1, 4, sBos, text_color = tx, text_size = size.small)
+    table.cell(tb, 0, 5, "VWAP a favor", text_color = mu, text_size = size.small)
+    table.cell(tb, 1, 5, sVw, text_color = tx, text_size = size.small)
+    table.cell(tb, 0, 6, "Gap no en contra", text_color = mu, text_size = size.small)
+    table.cell(tb, 1, 6, sGap, text_color = tx, text_size = size.small)
+    table.cell(tb, 0, 7, "Resultado", text_color = mu, text_size = size.small)
+    table.cell(tb, 1, 7, sVer, text_color = color.white, bgcolor = color.new(cVer, 40), text_size = size.small)
+    table.cell(tb, 0, 8, str.format("En este gráfico · {0} MES", nMes), text_color = tx, text_size = size.small)
+    table.cell(tb, 1, 8, "", text_size = size.small)
+    table.cell(tb, 0, 9, "Operaciones", text_color = mu, text_size = size.small)
+    table.cell(tb, 1, 9, str.tostring(nOps), text_color = tx, text_size = size.small)
+    table.cell(tb, 0, 10, "Ganadoras", text_color = mu, text_size = size.small)
+    table.cell(tb, 1, 10, nOps > 0 ? str.format("{0,number,#.#}%", 100.0 * nWin / nOps) : "—", text_color = tx, text_size = size.small)
+    table.cell(tb, 0, 11, "Factor de beneficio", text_color = mu, text_size = size.small)
+    table.cell(tb, 1, 11, gLoss > 0 ? str.format("{0,number,#.##}", gWin / gLoss) : "—", text_color = tx, text_size = size.small)
+    table.cell(tb, 0, 12, "Neto con costos", text_color = mu, text_size = size.small)
+    table.cell(tb, 1, 12, str.format("{0}${1,number,#,###}", neto >= 0 ? "+" : "-", math.abs(neto)), text_color = neto >= 0 ? cUp : cDn, text_size = size.small)
+
+// ───────────── Alertas ─────────────
+alertcondition(evLong,  "MB Gap · Compra",      "Modelo B · Gap: COMPRA a las 10:12 NY en {{ticker}}; pasan los 6 filtros")
+alertcondition(evShort, "MB Gap · Venta",       "Modelo B · Gap: VENTA a las 10:12 NY en {{ticker}}; pasan los 6 filtros")
+alertcondition(evSkip,  "MB Gap · No se opera", "Modelo B · Gap: hoy no se opera en {{ticker}}; algún filtro falló")
+alertcondition(evTp1,   "MB Gap · TP1",         "Modelo B · Gap: TP1 tocado en {{ticker}}; stop del resto a break-even")
+alertcondition(evExit,  "MB Gap · Salida",      "Modelo B · Gap: la operación de hoy cerró en {{ticker}}")

@@ -44,6 +44,8 @@ class Params:
     filt_c: bool = True
     filt_bos: bool = True
     filt_vwap: bool = True
+    filt_gap: bool = False
+    gap_max: float = 8.0          # puntos: no se opera si el gap de apertura va en contra por esto o más
     c_frac: float = 0.38
     va_frac: float = 0.70
     bos_bars: int = 20
@@ -189,7 +191,9 @@ def day_signal(prep, contract, day, p: Params):
     tp = (morning.h + morning.l + morning.c) / 3
     vwap = (tp * morning.v).sum() / morning.v.sum()
     win = closed.iloc[-p.bos_bars:]
+    gap = d * (today.o.iloc[0] - yday.c.iloc[-1])      # apertura 9:30 contra cierre de ayer, a favor (+) o en contra (−)
     return {
+        'gap': gap, 'GAP': gap > -p.gap_max,
         'fecha': day, 'contrato': contract, 'dir': d, 'entrada': ent, 'ema': ema, 't': t_ent,
         'A': (ent > vah) or (ent < val),               # fuera del valor de ayer, de cualquier lado
         'C': not ((d > 0 and pos >= 1 - p.c_frac) or (d < 0 and pos <= p.c_frac)),
@@ -247,7 +251,7 @@ def run(prep, chosen, p: Params = Params(), start=None, end=None, signals=None):
                 rows.append(s)
         signals = pd.DataFrame(rows)
     keep = np.ones(len(signals), bool)
-    for f, on in (('A', p.filt_a), ('C', p.filt_c), ('BOS', p.filt_bos), ('VWAP', p.filt_vwap)):
+    for f, on in (('A', p.filt_a), ('C', p.filt_c), ('BOS', p.filt_bos), ('VWAP', p.filt_vwap), ('GAP', p.filt_gap)):
         if on:
             keep &= signals[f].values
     trades = []
@@ -273,3 +277,7 @@ def stats(t, col='usd_8mes'):
     return {'n': len(u), 'wr': (u > 0).mean(), 'pf': u[u > 0].sum() / loss if loss else np.inf,
             'net': u.sum(), 'mdd': (eq - np.maximum.accumulate(np.r_[0, eq])[1:]).min(),
             'avg': u.mean(), 'racha': mx}
+
+
+# Modelo final: 10:12 NY, 4 filtros + gap, bracket 35/35/120 con break-even tras TP1.
+MODELO_GAP = Params(sl=35, tp1=35, tp2=120, breakeven=True, filt_gap=True)

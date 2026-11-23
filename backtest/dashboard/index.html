@@ -1,0 +1,484 @@
+<meta name="dash-one-writer">
+<style>
+  .mg { display: flex; flex-direction: column; gap: var(--cds-gap-xl); max-width: 1100px; margin: 0 auto; font-family: var(--font-anthropic-sans); color: var(--color-fg); }
+  .mg h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+  .mg h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; text-wrap: balance; }
+  .mg h3 { font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); margin: 0; }
+  .mg p { margin: 0; line-height: 1.55; max-width: 70ch; }
+  .mg-sec { display: flex; flex-direction: column; gap: var(--cds-gap-md); }
+  .mg-muted { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+  .mg-lede { font-size: var(--cds-font-size-body); }
+  .mg-num { font-variant-numeric: tabular-nums; }
+  .mg-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: var(--cds-gap-md); }
+  .mg-tile { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: flex; flex-direction: column; gap: var(--cds-gap-xs); min-width: 0; }
+  .mg-tile .mg-big { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; }
+  .mg-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: flex; flex-direction: column; gap: var(--cds-gap-md); min-width: 0; }
+  .mg-steps { margin: 0; padding-left: 1.3em; display: flex; flex-direction: column; gap: var(--cds-gap-sm); line-height: 1.5; max-width: 75ch; }
+  .mg-steps b { font-weight: var(--cds-font-weight-medium); }
+  .mg-new { color: var(--color-ok); font-size: var(--cds-font-size-caption); font-weight: var(--cds-font-weight-medium); border: 1px solid var(--color-ok); border-radius: 999px; padding: 0 6px; margin-left: 4px; white-space: nowrap; }
+  .mg-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--cds-gap-lg); align-items: start; }
+  .mg-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--cds-gap-sm) var(--cds-gap-md); }
+  .mg-form label { display: flex; flex-direction: column; gap: 4px; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); min-width: 0; }
+  .mg-form input[type=number], .mg-form input[type=date], .mg-form input[type=text] { font: inherit; font-size: var(--cds-font-size-body); color: var(--color-fg); background-color: var(--color-bg); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: 6px 8px; min-width: 0; width: 100%; box-sizing: border-box; }
+  .mg-form .mg-wide { grid-column: 1 / -1; }
+  .mg-checks { display: flex; flex-direction: column; gap: var(--cds-gap-sm); }
+  .mg-checks label { display: flex; flex-direction: row; gap: 8px; align-items: flex-start; font-size: var(--cds-font-size-body); color: var(--color-fg); line-height: 1.4; }
+  .mg-checks input { margin-top: 3px; }
+  .mg-btn { font: inherit; font-weight: var(--cds-font-weight-medium); background-color: var(--color-fg); color: var(--color-bg); border: 0; border-radius: var(--cds-radius); padding: 8px 16px; cursor: pointer; align-self: flex-start; }
+  .mg-btn:focus-visible, .mg-form input:focus-visible, .mg-form select:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+  .mg-verdict { display: flex; flex-direction: column; gap: var(--cds-gap-sm); }
+  .mg-pill { display: inline-block; align-self: flex-start; padding: 4px 12px; border-radius: 999px; font-weight: var(--cds-font-weight-medium); }
+  .mg-pill.ok { background: color-mix(in srgb, var(--color-ok) 18%, transparent); color: var(--color-ok); }
+  .mg-pill.bad { background: color-mix(in srgb, var(--color-bad) 18%, transparent); color: var(--color-bad); }
+  .mg-pill.warn { background: color-mix(in srgb, var(--color-warn) 18%, transparent); color: var(--color-warn); }
+  .mg-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; }
+  .mg-list li { display: flex; gap: 8px; align-items: baseline; }
+  .mg-list .ok { color: var(--color-ok); } .mg-list .bad { color: var(--color-bad); }
+  .mg-levels { display: grid; grid-template-columns: auto auto 1fr; gap: 4px 16px; font-variant-numeric: tabular-nums; }
+  .mg-levels .sl { color: var(--color-bad); } .mg-levels .tp { color: var(--color-ok); }
+  .mg-tablewrap { overflow-x: auto; }
+  .mg table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; font-size: var(--cds-font-size-body); }
+  .mg th { text-align: right; font-weight: var(--cds-font-weight-medium); color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); padding: 6px 10px; border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .mg td { text-align: right; padding: 6px 10px; border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .mg th:first-child, .mg td:first-child { text-align: left; }
+  .mg td.pos { color: var(--color-ok); } .mg td.neg { color: var(--color-bad); }
+  .mg tr.mg-hl td { font-weight: var(--cds-font-weight-medium); background: color-mix(in srgb, var(--color-ok) 8%, transparent); }
+  .mg-chart { position: relative; min-height: 300px; }
+  .mg-chart svg text { fill: var(--cds-text-secondary); font-size: var(--cds-font-size-caption); }
+  .mg-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); box-shadow: var(--cds-shadow-popover); border-radius: var(--cds-radius); padding: 6px 10px; font-size: var(--cds-font-size-caption); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .mg-legend { display: flex; gap: var(--cds-gap-md); flex-wrap: wrap; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .mg-swatch { display: inline-block; width: 14px; height: 3px; vertical-align: middle; margin-right: 6px; }
+  .mg details summary { cursor: pointer; font-weight: var(--cds-font-weight-medium); }
+  .mg details[open] { display: flex; flex-direction: column; gap: var(--cds-gap-sm); }
+</style>
+
+<div class="mg">
+  <header class="mg-sec" id="inicio">
+    <h1>Modelo B · Gap</h1>
+    <p class="mg-lede">Con ES real de 1 minuto de 2018 a 2026, el modelo operó <b class="mg-num" data-draw="kpi" data-fmt="int" data-source="resumen" data-field="ops" data-row="0">—</b> días, ganó el <b class="mg-num" data-draw="kpi" data-fmt="pct" data-source="resumen" data-field="ganadoras" data-row="0">—</b> de las veces y dejó <b class="mg-num" data-draw="kpi" data-fmt="usd" data-source="resumen" data-field="neto" data-row="0">—</b> con 8 MES. El factor de beneficio fue <b class="mg-num" data-draw="kpi" data-fmt="pf" data-source="resumen" data-field="pf_2018_2022" data-row="0">—</b> en 2018–2022 y <b class="mg-num" data-draw="kpi" data-fmt="pf" data-source="resumen" data-field="pf_2023_2026" data-row="0">—</b> en 2023–2026, años que no se usaron para elegir el filtro de gap.</p>
+    <p class="mg-muted">ES (S&amp;P 500) · entrada 10:12 Nueva York · SL 35 · TP1 35 · TP2 120 ticks · break-even tras TP1 · cierre 15:59 NY · costos incluidos (2.49 USD por MES ida y vuelta) · 36 contratos de NinjaTrader, de dic 2017 a nov 2026.</p>
+  </header>
+
+  <section class="mg-tiles" id="numeros" aria-label="Resultados del backtest">
+    <div class="mg-tile"><span class="mg-muted">Ganancia total · 8 MES</span><span class="mg-big" data-draw="kpi" data-fmt="usd" data-source="resumen" data-field="neto" data-row="0">—</span><span class="mg-muted">2018 – 2026</span></div>
+    <div class="mg-tile"><span class="mg-muted">Factor de beneficio</span><span class="mg-big" data-draw="kpi" data-fmt="pf" data-source="resumen" data-field="pf" data-row="0">—</span><span class="mg-muted">Ganancias ÷ pérdidas</span></div>
+    <div class="mg-tile"><span class="mg-muted">Operaciones ganadoras</span><span class="mg-big" data-draw="kpi" data-fmt="pct" data-source="resumen" data-field="ganadoras" data-row="0">—</span><span class="mg-muted"><span data-draw="kpi" data-fmt="int" data-source="resumen" data-field="ops" data-row="0">—</span> operaciones, una por semana aprox.</span></div>
+    <div class="mg-tile"><span class="mg-muted">Caída máxima · 8 MES</span><span class="mg-big" data-draw="kpi" data-fmt="usd" data-source="resumen" data-field="caida_max" data-row="0">—</span><span class="mg-muted">Mayor bajada desde un máximo</span></div>
+    <div class="mg-tile"><span class="mg-muted">Peor racha</span><span class="mg-big" data-draw="kpi" data-fmt="int" data-source="resumen" data-field="racha" data-row="0">—</span><span class="mg-muted">perdedoras seguidas</span></div>
+  </section>
+
+  <section class="mg-sec" id="reglas">
+    <h2>Reglas y rutina del día</h2>
+    <ol class="mg-steps">
+      <li><b>Antes de abrir:</b> marca el VAH, el VAL y el POC del perfil de volumen de ayer (9:30–16:00 NY, 70 % del volumen) y anota el cierre de ayer a las 16:00 NY.</li>
+      <li><b>9:30 NY:</b> anota la apertura. El gap es la apertura menos el cierre de ayer.</li>
+      <li><b>10:12 NY</b> (9:12 CDMX en invierno, 8:12 CDMX cuando EE. UU. está en horario de verano): al cierre de la vela de 3 min, precio arriba de la EMA 20 de 3 min = compra; abajo = venta.</li>
+      <li><b>A:</b> el precio está fuera del área de valor de ayer (arriba del VAH o abajo del VAL).</li>
+      <li><b>C:</b> el perfil de hoy (9:30 a 10:12) no está ya a favor. POC en el 38 % de arriba es forma P: no compres. POC en el 38 % de abajo es forma b: no vendas.</li>
+      <li><b>Sin BOS en contra:</b> en los últimos 60 min (20 velas de 3 min) ningún cierre rompe el último mínimo de swing si compras, o el último máximo si vendes (swing de 2 velas a cada lado).</li>
+      <li><b>VWAP a favor:</b> arriba del VWAP del día (desde las 9:30) para comprar, abajo para vender.</li>
+      <li><b>Gap no en contra</b><span class="mg-new">nuevo</span>: si el ES abrió 8 puntos o más en contra de la señal, no se opera. Para comprar, la apertura no puede estar 8 o más puntos abajo del cierre de ayer; para vender, no puede estar 8 o más puntos arriba.</li>
+      <li><b>Si pasan los 6:</b> entra a mercado con bracket SL 35 ticks para todo, TP1 35 ticks con la mitad y TP2 120 ticks con la otra mitad. Al tocar TP1, el stop del resto pasa a break-even.</li>
+      <li><b>15:59 NY:</b> cierra lo que quede abierto. Una sola operación por día.</li>
+    </ol>
+  </section>
+
+  <section class="mg-sec" id="checklist">
+    <h2>Checklist de las 10:12</h2>
+    <p class="mg-muted">Llena los precios y marca los filtros. La página calcula la señal, el gap y los niveles del bracket. Aquí no se guarda nada; para guardar el día usa la bitácora.</p>
+    <div class="mg-two">
+      <form class="mg-card" id="ck-form" autocomplete="off">
+        <div class="mg-form">
+          <label for="ck-close">Cierre de ayer (16:00 NY)<input id="ck-close" type="number" step="0.25" inputmode="decimal" value="6000"></label>
+          <label for="ck-open">Apertura de hoy (9:30 NY)<input id="ck-open" type="number" step="0.25" inputmode="decimal" value="6004.5"></label>
+          <label for="ck-price">Precio a las 10:12<input id="ck-price" type="number" step="0.25" inputmode="decimal" value="6011.25"></label>
+          <label for="ck-ema">EMA 20 de 3 min<input id="ck-ema" type="number" step="0.25" inputmode="decimal" value="6006"></label>
+          <label for="ck-mes">MES a operar<select id="ck-mes" class="dash-select"><option value="2">2 MES</option><option value="4">4 MES</option><option value="6" selected>6 MES</option><option value="8">8 MES</option><option value="10">10 MES</option></select></label>
+        </div>
+        <div class="mg-checks">
+          <label for="ck-a"><input id="ck-a" type="checkbox" checked>A: el precio está fuera del área de valor de ayer</label>
+          <label for="ck-c"><input id="ck-c" type="checkbox" checked>C: el perfil de hoy no está ya a favor (sin P al comprar, sin b al vender)</label>
+          <label for="ck-bos"><input id="ck-bos" type="checkbox" checked>Sin BOS en contra en los últimos 60 min</label>
+          <label for="ck-vwap"><input id="ck-vwap" type="checkbox" checked>VWAP a favor</label>
+        </div>
+        <p class="mg-muted">Los precios de ejemplo son inventados; cámbialos por los del día.</p>
+      </form>
+      <div class="mg-card" id="ck-resultado" aria-live="polite">
+        <div class="mg-verdict" data-draw="veredicto">—</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mg-sec" id="saldo">
+    <h2>Saldo acumulado del backtest</h2>
+    <p class="mg-muted">Cada punto es una operación, con 8 MES y costos. Debajo, la caída desde el máximo. Pasa el cursor o el dedo por la gráfica para ver cada operación.</p>
+    <div class="mg-legend"><span><span class="mg-swatch" style="background: var(--cds-chart-muted)"></span>2018–2022: con estos años se eligió el filtro de gap</span><span><span class="mg-swatch" data-draw="leyenda-oos"></span>2023 en adelante: años de prueba</span></div>
+    <div class="mg-chart" data-draw="curva" data-source="operaciones">—</div>
+  </section>
+
+  <section class="mg-sec" id="anual">
+    <h2>Año por año · 8 MES</h2>
+    <div class="mg-tablewrap">
+      <table data-source="anual" data-row-key="anio">
+        <thead><tr><th data-field="anio">Año</th><th data-field="ops">Operaciones</th><th data-field="ganadoras">Ganadoras</th><th data-field="pf">Factor</th><th data-field="neto">Resultado</th><th data-field="caida">Caída máx.</th></tr></thead>
+        <tbody data-draw="t-anual"></tbody>
+      </table>
+    </div>
+    <p class="mg-muted">2026 llega hasta el 20 de noviembre. 2024 y 2025 fueron los años más flojos: el modelo puede pasar meses sin avanzar.</p>
+  </section>
+
+  <section class="mg-sec" id="embudo">
+    <h2>Qué deja pasar cada filtro</h2>
+    <p class="mg-muted">Cada renglón muestra los días que siguen vivos después de ese filtro y cómo les fue con el mismo bracket 35/35/120 en 8 MES. El gap es el filtro que más sube el factor.</p>
+    <div class="mg-tablewrap">
+      <table data-source="embudo" data-row-key="paso">
+        <thead><tr><th data-field="paso">Paso</th><th data-field="dias">Días</th><th data-field="ganadoras">Ganadoras</th><th data-field="pf">Factor</th><th data-field="neto">Resultado 8 MES</th></tr></thead>
+        <tbody data-draw="t-embudo"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="mg-sec" id="versiones">
+    <h2>Contra las otras versiones del Modelo B</h2>
+    <p class="mg-muted">Mismos datos y periodo (2018–2026), 8 MES. Un factor parecido en los dos periodos es señal de que la regla no está sobreajustada.</p>
+    <div class="mg-tablewrap">
+      <table data-source="versiones" data-row-key="version">
+        <thead><tr><th data-field="version">Versión</th><th data-field="ops">Ops</th><th data-field="ganadoras">Ganadoras</th><th data-field="pf">Factor</th><th data-field="pf_2018_2022">2018–22</th><th data-field="pf_2023_2026">2023–26</th><th data-field="neto">Resultado</th><th data-field="caida_max">Caída máx.</th><th data-field="racha">Peor racha</th></tr></thead>
+        <tbody data-draw="t-versiones"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="mg-sec" id="lucid">
+    <h2>Evaluación Lucid 50K por tamaño</h2>
+    <p class="mg-muted">Se arranca una cuenta en cada operación del backtest y se sigue hasta llegar a +3,000 o tocar la caída de 2,000 (al cierre, sube con el máximo y se congela en el saldo inicial). No incluye la regla de consistencia ni el límite diario.</p>
+    <div class="mg-tablewrap">
+      <table data-source="lucid" data-row-key="mes">
+        <thead><tr><th data-field="mes">MES</th><th data-field="perdida_stop">Pérdida en stop</th><th data-field="pasa_pct">Pasa</th><th data-field="ops_pasar">Ops para pasar</th><th data-field="ops_perder">Ops para perder</th><th data-field="caida_max">Caída máx. 2018–26</th><th data-field="neto">Resultado 2018–26</th></tr></thead>
+        <tbody data-draw="t-lucid"></tbody>
+      </table>
+    </div>
+    <p class="mg-muted">Con 4 MES ninguna cuenta se perdió, pero tarda unas 84 operaciones (más de un año y medio). Con 6 u 8 MES pasa en 8 a 12 meses, a cambio de perder más cuentas.</p>
+  </section>
+
+  <section class="mg-sec" id="bitacora">
+    <h2>Bitácora</h2>
+    <p class="mg-muted">Anota cada día, también los que no operaste. Lo que guardas solo lo ves tú. Si guardas la misma fecha otra vez, se reemplaza.</p>
+    <form class="mg-card" id="bt-form" autocomplete="off">
+      <div class="mg-form">
+        <label for="bt-fecha">Fecha<input id="bt-fecha" type="date" required></label>
+        <label for="bt-dir">Dirección<select id="bt-dir" class="dash-select"><option>Compra</option><option>Venta</option></select></label>
+        <label for="bt-res">Resultado<select id="bt-res" class="dash-select"><option>TP1 + TP2</option><option>TP1 + break-even</option><option>TP1 + cierre 15:59</option><option>Stop</option><option>Cierre 15:59</option><option>No operada</option></select></label>
+        <label for="bt-pnl">P&amp;L ($)<input id="bt-pnl" type="number" step="0.01" inputmode="decimal" value="0"></label>
+        <label for="bt-mes">Contratos MES<input id="bt-mes" type="number" step="1" min="0" value="6"></label>
+        <label for="bt-gap">Gap a favor (+) o en contra (−), pts<input id="bt-gap" type="number" step="0.25" inputmode="decimal" value="0"></label>
+        <label class="mg-wide" for="bt-notas">Notas<input id="bt-notas" type="text" maxlength="300"></label>
+      </div>
+      <button class="mg-btn" type="submit">Guardar día</button>
+      <p class="mg-muted" id="bt-ok" hidden>Guardado.</p>
+      <p class="mg-muted" id="bt-err" hidden>No se guardó. Revisa la fecha e intenta de nuevo.</p>
+    </form>
+    <div class="mg-tiles" aria-label="Mis números">
+      <div class="mg-tile"><span class="mg-muted">Neto real</span><span class="mg-big" data-draw="mio" data-fmt="usd" data-source="mis-numeros" data-field="neto" data-row="0">—</span></div>
+      <div class="mg-tile"><span class="mg-muted">Operadas</span><span class="mg-big" data-draw="mio" data-fmt="int" data-source="mis-numeros" data-field="operadas" data-row="0">—</span></div>
+      <div class="mg-tile"><span class="mg-muted">Ganadoras</span><span class="mg-big" data-draw="mio" data-fmt="pct" data-source="mis-numeros" data-field="ganadoras" data-row="0">—</span><span class="mg-muted">Backtest: <span data-draw="kpi" data-fmt="pct" data-source="resumen" data-field="ganadoras" data-row="0">—</span></span></div>
+      <div class="mg-tile"><span class="mg-muted">Factor de beneficio</span><span class="mg-big" data-draw="mio" data-fmt="pf" data-source="mis-numeros" data-field="pf" data-row="0">—</span><span class="mg-muted">Backtest: <span data-draw="kpi" data-fmt="pf" data-source="resumen" data-field="pf" data-row="0">—</span></span></div>
+    </div>
+    <div class="mg-tablewrap">
+      <table data-source="bitacora" data-row-key="fecha">
+        <thead><tr><th data-field="fecha">Fecha</th><th data-field="direccion">Dirección</th><th data-field="resultado">Resultado</th><th data-field="pnl">P&amp;L</th><th data-field="mes">MES</th><th data-field="gap">Gap</th><th data-field="notas">Notas</th></tr></thead>
+        <tbody data-draw="t-bitacora"></tbody>
+      </table>
+    </div>
+    <p class="mg-muted" data-draw="bt-vacio">—</p>
+  </section>
+
+  <details class="mg-sec" id="notas">
+    <summary>Cómo se hizo el backtest</summary>
+    <p>Velas de 1 minuto de los 36 contratos trimestrales de ES exportados de NinjaTrader. Cada día se usa el contrato con más volumen entre 9:30 y 16:00 NY, y todos los niveles del día (perfil de ayer, EMA, VWAP, gap) salen de ese mismo contrato.</p>
+    <p>El bracket se simula vela por vela de 1 minuto desde las 10:12. Si en la misma vela se tocan el stop y un objetivo, cuenta el stop. El filtro de gap (8 puntos) y el TP1 de 35 se eligieron mirando 2018–2022; 2023–2026 sirve de prueba.</p>
+    <p>Se probaron unas 30 ideas más (salidas tempranas, trailing, volatilidad, día de la semana, solo compras). Ninguna mejoró de forma pareja los dos periodos, así que quedaron fuera.</p>
+  </details>
+</div>
+
+<script>
+  const fmtInt = d3.format(',.0f');
+  const usd = (v) => (v < 0 ? '-$' : '+$') + fmtInt(Math.abs(v));
+  const fmt = {
+    int: (v) => fmtInt(v),
+    pct: (v) => d3.format('.1f')(v) + ' %',
+    pf: (v) => (v == null || !isFinite(v) ? '—' : d3.format('.2f')(v)),
+    usd: (v) => usd(v),
+  };
+
+  dash.calc('resumen', {
+    title: 'Resumen del backtest (8 MES)',
+    description: 'Totales de todas las operaciones: neto, factor, ganadoras, caída máxima y peor racha; el factor también por periodo.',
+    inputs: ['operaciones'],
+    fn: (operaciones) => {
+      const u = operaciones.map((r) => +r.usd_8mes);
+      const is = operaciones.filter((r) => r.anio <= '2022').map((r) => +r.usd_8mes);
+      const oos = operaciones.filter((r) => r.anio >= '2023').map((r) => +r.usd_8mes);
+      const sum = (a) => a.reduce((s, x) => s + x, 0);
+      const pfx = (a) => { const g = sum(a.filter((x) => x > 0)), l = -sum(a.filter((x) => x < 0)); return l > 0 ? Math.round((g / l) * 100) / 100 : null; };
+      let s = 0, pk = 0, dd = 0, r = 0, m = 0;
+      for (const x of u) { s += x; pk = Math.max(pk, s); dd = Math.min(dd, s - pk); r = x < 0 ? r + 1 : 0; m = Math.max(m, r); }
+      return [{
+        ops: u.length,
+        ganadoras: Math.round((1000 * u.filter((x) => x > 0).length) / Math.max(1, u.length)) / 10,
+        neto: Math.round(sum(u)),
+        pf: pfx(u), pf_2018_2022: pfx(is), pf_2023_2026: pfx(oos),
+        caida_max: Math.round(dd), racha: m,
+      }];
+    },
+  });
+
+  dash.calc('anual', {
+    title: 'Resultados por año (8 MES)',
+    description: 'Operaciones, ganadoras, factor, resultado y caída máxima de cada año.',
+    inputs: ['operaciones'],
+    fn: (operaciones) => {
+      const out = [];
+      for (const [anio, rows] of d3.group(operaciones, (r) => r.anio)) {
+        const u = rows.map((r) => +r.usd_8mes);
+        const g = u.filter((x) => x > 0).reduce((a, b) => a + b, 0), l = -u.filter((x) => x < 0).reduce((a, b) => a + b, 0);
+        let s = 0, pk = 0, dd = 0;
+        for (const x of u) { s += x; pk = Math.max(pk, s); dd = Math.min(dd, s - pk); }
+        out.push({ anio, ops: u.length, ganadoras: Math.round((1000 * u.filter((x) => x > 0).length) / u.length) / 10,
+          pf: l > 0 ? Math.round((g / l) * 100) / 100 : null, neto: Math.round(g - l), caida: Math.round(dd) });
+      }
+      return out.sort((a, b) => d3.ascending(a.anio, b.anio));
+    },
+  });
+
+  dash.calc('mis-numeros', {
+    title: 'Mis números reales',
+    description: 'Totales de los días que guardaste en la bitácora, sin contar los no operados.',
+    inputs: ['bitacora'],
+    fn: (bitacora) => {
+      const op = bitacora.filter((r) => r.resultado !== 'No operada');
+      const u = op.map((r) => +r.pnl || 0);
+      const g = u.filter((x) => x > 0).reduce((a, b) => a + b, 0), l = -u.filter((x) => x < 0).reduce((a, b) => a + b, 0);
+      return [{ operadas: op.length, neto: Math.round(g - l),
+        ganadoras: op.length ? Math.round((1000 * u.filter((x) => x > 0).length) / op.length) / 10 : null,
+        pf: l > 0 ? Math.round((g / l) * 100) / 100 : null }];
+    },
+  });
+
+  dash.draw('kpi', (el) => {
+    const d = dash.data('resumen');
+    el.classList.toggle('dash-skeleton', d.status === 'loading');
+    if (d.status !== 'ok' || !d.data || !d.data[0]) { el.textContent = '—'; return; }
+    const v = d.data[0][el.dataset.field];
+    el.textContent = v == null ? '—' : fmt[el.dataset.fmt](v);
+  });
+
+  dash.draw('mio', (el) => {
+    const d = dash.data('mis-numeros');
+    if (d.status !== 'ok' || !d.data || !d.data[0]) { el.textContent = '—'; return; }
+    const v = d.data[0][el.dataset.field];
+    el.textContent = v == null ? '—' : fmt[el.dataset.fmt](v);
+  });
+
+  dash.draw('leyenda-oos', (el) => { el.style.background = dash.colors[0]; });
+
+  function cell(tr, text, cls) { const td = document.createElement('td'); td.textContent = text; if (cls) td.className = cls; tr.appendChild(td); return td; }
+  function errorRow(tb, cols, msg) { const tr = document.createElement('tr'); const td = document.createElement('td'); td.colSpan = cols; td.textContent = msg; tr.appendChild(td); tb.replaceChildren(tr); }
+
+  dash.draw('t-anual', (tb) => {
+    const d = dash.data('anual');
+    if (d.status === 'error') return errorRow(tb, 6, 'No se pudo cargar el backtest.');
+    if (d.status !== 'ok' || !d.data) return tb.replaceChildren();
+    tb.replaceChildren(...d.data.map((r) => {
+      const tr = document.createElement('tr'); tr.dataset.key = r.anio;
+      cell(tr, r.anio); cell(tr, fmtInt(r.ops)); cell(tr, fmt.pct(r.ganadoras)); cell(tr, fmt.pf(r.pf), r.pf >= 1 ? 'pos' : 'neg');
+      cell(tr, usd(r.neto), r.neto >= 0 ? 'pos' : 'neg'); cell(tr, usd(r.caida));
+      return tr;
+    }));
+  });
+
+  dash.draw('t-embudo', (tb) => {
+    const d = dash.data('embudo');
+    if (d.status === 'error') return errorRow(tb, 5, 'No se pudo cargar el embudo.');
+    if (d.status !== 'ok') return tb.replaceChildren();
+    tb.replaceChildren(...d.data.map((r, i) => {
+      const tr = document.createElement('tr'); tr.dataset.key = r.paso; if (i === d.data.length - 1) tr.className = 'mg-hl';
+      cell(tr, r.paso); cell(tr, fmtInt(r.dias)); cell(tr, fmt.pct(r.ganadoras)); cell(tr, fmt.pf(r.pf)); cell(tr, usd(r.neto), r.neto >= 0 ? 'pos' : 'neg');
+      return tr;
+    }));
+  });
+
+  dash.draw('t-versiones', (tb) => {
+    const d = dash.data('versiones');
+    if (d.status === 'error') return errorRow(tb, 9, 'No se pudo cargar la comparación.');
+    if (d.status !== 'ok') return tb.replaceChildren();
+    tb.replaceChildren(...d.data.map((r) => {
+      const tr = document.createElement('tr'); tr.dataset.key = r.version; if (/este/.test(r.version)) tr.className = 'mg-hl';
+      cell(tr, r.version); cell(tr, fmtInt(r.ops)); cell(tr, fmt.pct(r.ganadoras)); cell(tr, fmt.pf(r.pf));
+      cell(tr, fmt.pf(r.pf_2018_2022)); cell(tr, fmt.pf(r.pf_2023_2026)); cell(tr, usd(r.neto), r.neto >= 0 ? 'pos' : 'neg'); cell(tr, usd(r.caida_max)); cell(tr, fmtInt(r.racha));
+      return tr;
+    }));
+  });
+
+  dash.draw('t-lucid', (tb) => {
+    const d = dash.data('lucid');
+    if (d.status === 'error') return errorRow(tb, 7, 'No se pudo cargar la simulación.');
+    if (d.status !== 'ok') return tb.replaceChildren();
+    tb.replaceChildren(...d.data.map((r) => {
+      const tr = document.createElement('tr'); tr.dataset.key = r.mes;
+      cell(tr, r.mes + ' MES'); cell(tr, '-$' + fmtInt(r.perdida_stop)); cell(tr, fmt.pct(r.pasa_pct), r.pasa_pct >= 80 ? 'pos' : r.pasa_pct < 60 ? 'neg' : '');
+      cell(tr, fmtInt(r.ops_pasar)); cell(tr, r.ops_perder == null ? 'nunca' : fmtInt(r.ops_perder)); cell(tr, usd(r.caida_max)); cell(tr, usd(r.neto), 'pos');
+      return tr;
+    }));
+  });
+
+  dash.draw('t-bitacora', (tb) => {
+    const d = dash.data('bitacora');
+    if (d.status !== 'ok') return tb.replaceChildren();
+    const rows = d.data.slice().sort((a, b) => d3.descending(a.fecha, b.fecha));
+    tb.replaceChildren(...rows.map((r) => {
+      const tr = document.createElement('tr'); tr.dataset.key = r.fecha;
+      const p = +r.pnl || 0;
+      cell(tr, r.fecha); cell(tr, r.direccion || ''); cell(tr, r.resultado || '');
+      cell(tr, r.resultado === 'No operada' ? '—' : usd(p), p >= 0 ? 'pos' : 'neg');
+      cell(tr, r.mes == null ? '' : String(r.mes)); cell(tr, r.gap == null ? '' : d3.format('+.2f')(+r.gap)); cell(tr, r.notas || '');
+      return tr;
+    }));
+  });
+
+  dash.draw('bt-vacio', (el) => {
+    const d = dash.data('bitacora');
+    if (d.status === 'ok' && d.data.length === 0) { el.hidden = false; el.textContent = 'Todavía no hay días anotados. Llena el checklist y guarda tu primer día arriba.'; }
+    else if (d.status === 'error') { el.hidden = false; el.textContent = 'No se pudo leer tu bitácora.'; }
+    else { el.hidden = true; el.textContent = ''; }
+  });
+
+  dash.draw('curva', {
+    mount(el) {
+      el.replaceChildren();
+      const tip = document.createElement('div'); tip.className = 'mg-tip'; tip.hidden = true;
+      el.appendChild(tip);
+      return { tip };
+    },
+    update(el, made) {
+      const d = dash.data('operaciones');
+      el.querySelectorAll('svg, .mg-msg').forEach((n) => n.remove());
+      made.tip.hidden = true;
+      if (d.status !== 'ok' || !d.data.length) {
+        const p = document.createElement('p'); p.className = 'mg-muted mg-msg';
+        p.textContent = d.status === 'error' ? 'No se pudo cargar el backtest.' : '—';
+        el.appendChild(p); return;
+      }
+      const parse = d3.utcParse('%Y-%m-%d'), fd = d3.utcFormat('%d/%m/%Y');
+      const rows = d.data.map((r) => ({ t: parse(r.fecha), s: +r.saldo_8mes, u: +r.usd_8mes, sal: r.salida, dir: r.direccion }));
+      let pk = 0; rows.forEach((r) => { pk = Math.max(pk, r.s); r.dd = r.s - pk; });
+      const W = Math.max(280, el.clientWidth), H = 260, hDD = 70, gap = 18, bottom = 24;
+      const svg = d3.select(el).insert('svg', ':first-child').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H + gap + hDD + bottom}`)
+        .attr('role', 'img').attr('aria-label', 'Saldo acumulado con 8 MES de 2018 a 2026 y, debajo, la caída desde el máximo');
+      const yS = d3.scaleLinear().domain([Math.min(0, d3.min(rows, (r) => r.s)), d3.max(rows, (r) => r.s)]).nice().range([H, 8]);
+      const yD = d3.scaleLinear().domain([d3.min(rows, (r) => r.dd), 0]).nice().range([H + gap + hDD, H + gap]);
+      const probe = svg.append('text').text(usd(-88888).replace('+', '')); const ml = probe.node().getComputedTextLength() + 10; probe.remove();
+      const x = d3.scaleUtc().domain(d3.extent(rows, (r) => r.t)).range([ml, W - 10]);
+      svg.append('g').selectAll('line').data(yS.ticks(5)).join('line').attr('x1', ml).attr('x2', W - 10).attr('y1', yS).attr('y2', yS).style('stroke', 'var(--cds-chart-grid)');
+      svg.append('g').selectAll('text').data(yS.ticks(5)).join('text').attr('x', ml - 6).attr('y', (v) => yS(v) + 4).attr('text-anchor', 'end').text((v) => (v < 0 ? '-$' : '$') + fmtInt(Math.abs(v)));
+      svg.append('g').selectAll('text').data([yD.domain()[0]]).join('text').attr('x', ml - 6).attr('y', (v) => yD(v) + 4).attr('text-anchor', 'end').text((v) => '-$' + fmtInt(Math.abs(v)));
+      svg.append('text').attr('x', ml + 4).attr('y', H + gap - 4).text('Caída desde el máximo');
+      const nt = W < 500 ? 4 : 9;
+      svg.append('g').selectAll('text').data(x.ticks(nt)).join('text').attr('x', x).attr('y', H + gap + hDD + 18).attr('text-anchor', 'middle').text(d3.utcFormat('%Y'));
+      const split = parse('2023-01-01');
+      svg.append('line').attr('x1', x(split)).attr('x2', x(split)).attr('y1', 8).attr('y2', H + gap + hDD).style('stroke', 'var(--cds-chart-reference)').style('stroke-dasharray', '4 3');
+      const line = d3.line().x((r) => x(r.t)).y((r) => yS(r.s));
+      const before = rows.filter((r) => r.t < split);
+      const after = rows.filter((r) => r.t >= split);
+      if (before.length && after.length) after.unshift(before[before.length - 1]);
+      svg.append('path').datum(before).attr('d', line).style('fill', 'none').style('stroke', 'var(--cds-chart-muted)').style('stroke-width', 1.8);
+      svg.append('path').datum(after).attr('d', line).style('fill', 'none').style('stroke', dash.colors[0]).style('stroke-width', 1.8);
+      svg.append('path').datum(rows).attr('d', d3.area().x((r) => x(r.t)).y0(yD(0)).y1((r) => yD(r.dd))).style('fill', 'var(--cds-chart-status-critical)').style('opacity', 0.35);
+      svg.append('line').attr('x1', ml).attr('x2', W - 10).attr('y1', yD(0)).attr('y2', yD(0)).style('stroke', 'var(--cds-chart-axis)');
+      const last = rows[rows.length - 1];
+      svg.append('circle').attr('cx', x(last.t)).attr('cy', yS(last.s)).attr('r', 4).style('fill', dash.colors[0]);
+      const dot = svg.append('circle').attr('r', 4).style('fill', 'var(--color-fg)').style('display', 'none');
+      const bis = d3.bisector((r) => r.t).center;
+      const move = (ev) => {
+        const [mx] = d3.pointer(ev, svg.node());
+        const r = rows[bis(rows, x.invert(mx))]; if (!r) return;
+        const sc = W / svg.node().getBoundingClientRect().width;
+        dot.style('display', null).attr('cx', x(r.t)).attr('cy', yS(r.s));
+        made.tip.hidden = false;
+        made.tip.textContent = `${fd(r.t)} · ${r.dir} · ${r.sal} · ${usd(r.u)} · saldo ${usd(r.s)}`;
+        const tw = made.tip.offsetWidth;
+        made.tip.style.left = Math.max(0, Math.min(el.clientWidth - tw, x(r.t) / sc - tw / 2)) + 'px';
+        made.tip.style.top = Math.max(0, yS(r.s) / sc - 44) + 'px';
+      };
+      svg.append('rect').attr('x', ml).attr('y', 0).attr('width', W - 10 - ml).attr('height', H + gap + hDD).style('fill', 'transparent')
+        .on('pointermove', move).on('pointerdown', move).on('pointerleave', () => { made.tip.hidden = true; dot.style('display', 'none'); });
+    },
+  });
+
+  dash.draw('veredicto', {
+    mount(el) {
+      const get = (id) => document.getElementById(id);
+      const num = (id) => { const e = get(id); return e && e.value !== '' ? Number(e.value) : NaN; };
+      const chk = (id) => { const e = get(id); return !!(e && e.checked); };
+      const TICK = 0.25, SL = 35, TP1 = 35, TP2 = 120, GAP = 8, COST = 2.49;
+      const upd = () => {
+        const close = num('ck-close'), open = num('ck-open'), price = num('ck-price'), ema = num('ck-ema');
+        const mesEl = get('ck-mes'); const mes = mesEl ? Number(mesEl.value) : 6;
+        el.replaceChildren();
+        const add = (tag, text, cls) => { const n = document.createElement(tag); if (text != null) n.textContent = text; if (cls) n.className = cls; el.appendChild(n); return n; };
+        if ([close, open, price, ema].some((v) => !isFinite(v))) { add('p', 'Llena los cuatro precios para ver la señal.', 'mg-muted'); return; }
+        if (price === ema) { add('span', 'El precio está justo en la EMA: no hay señal clara.', 'mg-pill warn'); return; }
+        const dir = price > ema ? 1 : -1, lado = dir > 0 ? 'Compra' : 'Venta';
+        const gap = dir * (open - close);
+        const items = [
+          ['EMA', 'Señal EMA 20: ' + lado + ' (' + d3.format('+.2f')(price - ema) + ' pts)', true],
+          ['A', 'A: fuera del valor de ayer', chk('ck-a')],
+          ['C', 'C: perfil de hoy no ya a favor', chk('ck-c')],
+          ['BOS', 'Sin BOS en contra', chk('ck-bos')],
+          ['VWAP', 'VWAP a favor', chk('ck-vwap')],
+          ['Gap', 'Gap ' + (gap >= 0 ? 'a favor ' : 'en contra ') + d3.format('.2f')(Math.abs(gap)) + ' pts (límite: 8 en contra)', gap > -GAP],
+        ];
+        const pasa = items.every((i) => i[2]);
+        add('h3', pasa ? 'Se opera: ' + lado : 'No se opera hoy');
+        add('span', pasa ? 'Pasan los 6 filtros' : 'Falla: ' + items.filter((i) => !i[2]).map((i) => i[0]).join(', '), 'mg-pill ' + (pasa ? 'ok' : 'bad'));
+        const ul = add('ul', null, 'mg-list');
+        items.forEach(([, t, ok]) => { const li = document.createElement('li'); const s = document.createElement('span'); s.textContent = ok ? '✓' : '✕'; s.className = ok ? 'ok' : 'bad'; li.append(s, document.createTextNode(t)); ul.appendChild(li); });
+        if (!pasa) { add('p', 'Anota el día como «No operada» en la bitácora.', 'mg-muted'); return; }
+        const r = (v) => d3.format(',.2f')(Math.round(v / TICK) * TICK);
+        const lv = add('div', null, 'mg-levels');
+        [['Stop (todo)', price - dir * SL * TICK, 'sl', '−' + SL + ' ticks'], ['TP1 (mitad)', price + dir * TP1 * TICK, 'tp', '+' + TP1 + ' ticks'], ['TP2 (otra mitad)', price + dir * TP2 * TICK, 'tp', '+' + TP2 + ' ticks']]
+          .forEach(([n, v, c, t]) => { const a = document.createElement('span'); a.textContent = n; const b = document.createElement('span'); b.textContent = r(v); b.className = c; const z = document.createElement('span'); z.textContent = t; z.className = 'mg-muted'; lv.append(a, b, z); });
+        const loss = mes * SL * 1.25 + mes * COST;
+        add('p', `Con ${mes} MES: si toca el stop pierdes unos $${d3.format(',.0f')(loss)}. Al tocar TP1 sale la mitad (${mes / 2} MES) y el stop del resto pasa a ${r(price)}.`, 'mg-muted');
+      };
+      const inputs = Array.from(document.querySelectorAll('#ck-form input, #ck-form select'));
+      inputs.forEach((i) => { i.addEventListener('input', upd); i.addEventListener('change', upd); });
+      upd();
+      return { upd, inputs };
+    },
+    update(el, made) { made.upd(); },
+    unmount(el, made) { made.inputs.forEach((i) => { i.removeEventListener('input', made.upd); i.removeEventListener('change', made.upd); }); },
+  });
+
+  document.querySelectorAll('#ck-form').forEach((f) => f.addEventListener('submit', (e) => e.preventDefault()));
+
+  document.querySelectorAll('#bt-fecha').forEach((el) => { if (!el.value) el.value = d3.timeFormat('%Y-%m-%d')(new Date()); });
+
+  document.querySelectorAll('#bt-form').forEach((form) => form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const v = (id) => { const n = document.getElementById(id); return n ? n.value : ''; };
+    const fecha = v('bt-fecha');
+    const show = (ok) => {
+      document.querySelectorAll('#bt-ok').forEach((p) => { p.hidden = !ok; });
+      document.querySelectorAll('#bt-err').forEach((p) => { p.hidden = ok; });
+    };
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(fecha)) return show(false);
+    const row = { fecha, direccion: v('bt-dir'), resultado: v('bt-res'), pnl: Number(v('bt-pnl')) || 0,
+      mes: Number(v('bt-mes')) || 0, gap: Number(v('bt-gap')) || 0, notas: v('bt-notas').slice(0, 300) };
+    try {
+      const [db, user] = await Promise.all([claude.use('db'), claude.use('user')]);
+      await db.doc(`data/users/${await user.id()}/bitacora/ops/${fecha}`).set(row);
+      show(true);
+    } catch { show(false); }
+  }));
+</script>

@@ -1,0 +1,77 @@
+{
+"rows": [
+{
+"mes": 2,
+"perdida_stop": 92,
+"neto": 7804,
+"caida_max": -928,
+"cuentas": 304,
+"pasan": 304,
+"pasa_pct": 100.0,
+"ops_pasar": 189,
+"ops_perder": null
+},
+{
+"mes": 4,
+"perdida_stop": 185,
+"neto": 15608,
+"caida_max": -1856,
+"cuentas": 465,
+"pasan": 465,
+"pasa_pct": 100.0,
+"ops_pasar": 84,
+"ops_perder": null
+},
+{
+"mes": 6,
+"perdida_stop": 277,
+"neto": 23411,
+"caida_max": -2784,
+"cuentas": 472,
+"pasan": 404,
+"pasa_pct": 85.6,
+"ops_pasar": 49,
+"ops_perder": 40
+},
+{
+"mes": 8,
+"perdida_stop": 370,
+"neto": 31215,
+"caida_max": -3712,
+"cuentas": 481,
+"pasan": 377,
+"pasa_pct": 78.4,
+"ops_pasar": 33,
+"ops_perder": 21
+},
+{
+"mes": 10,
+"perdida_stop": 462,
+"neto": 39019,
+"caida_max": -4641,
+"cuentas": 485,
+"pasan": 330,
+"pasa_pct": 68.0,
+"ops_pasar": 23,
+"ops_perder": 15
+}
+],
+"meta": [
+{
+"label": "Origen",
+"value": "ES 1 min de NinjaTrader (36 contratos, 2018 – 20 nov 2026), contrato con más volumen cada día"
+},
+{
+"label": "Script",
+"value": "backtest/construir_dashboard.py + backtest/mas_dinero.py (MODELO_GAP)"
+},
+{
+"label": "Costos",
+"value": "MES: 2.49 USD ida y vuelta por contrato. ES: 1 tick de deslizamiento + 4.50 USD por contrato."
+},
+{
+"label": "Reglas",
+"value": "Meta +3,000; caída máxima 2,000 al cierre, sube con el máximo y se congela en el saldo inicial. Sin regla de consistencia ni límite diario."
+}
+]
+}

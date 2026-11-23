@@ -1,0 +1,62 @@
+{
+"rows": [
+{
+"version": "Más dinero (30/40/160, 4 filtros)",
+"ops": 750,
+"ganadoras": 49.5,
+"pf": 1.2,
+"pf_2018_2022": 1.11,
+"pf_2023_2026": 1.31,
+"neto": 23185,
+"caida_max": -5292,
+"racha": 8
+},
+{
+"version": "Modelo A + C (9:12 CDMX, 35/30/120 BE)",
+"ops": 1041,
+"ganadoras": 57.1,
+"pf": 1.07,
+"pf_2018_2022": 1.12,
+"pf_2023_2026": 1.02,
+"neto": 10848,
+"caida_max": -10579,
+"racha": 8
+},
+{
+"version": "Mezcla (10:12 NY, 4 filtros, 35/30/120 BE)",
+"ops": 750,
+"ganadoras": 59.6,
+"pf": 1.21,
+"pf_2018_2022": 1.2,
+"pf_2023_2026": 1.23,
+"neto": 22500,
+"caida_max": -5552,
+"racha": 5
+},
+{
+"version": "Modelo B · Gap (este)",
+"ops": 502,
+"ganadoras": 59.8,
+"pf": 1.45,
+"pf_2018_2022": 1.48,
+"pf_2023_2026": 1.42,
+"neto": 31215,
+"caida_max": -3712,
+"racha": 5
+}
+],
+"meta": [
+{
+"label": "Origen",
+"value": "ES 1 min de NinjaTrader (36 contratos, 2018 – 20 nov 2026), contrato con más volumen cada día"
+},
+{
+"label": "Script",
+"value": "backtest/construir_dashboard.py + backtest/mas_dinero.py (MODELO_GAP)"
+},
+{
+"label": "Costos",
+"value": "MES: 2.49 USD ida y vuelta por contrato. ES: 1 tick de deslizamiento + 4.50 USD por contrato."
+}
+]
+}
