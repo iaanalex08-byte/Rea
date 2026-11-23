@@ -102,7 +102,7 @@
     const traces = [
       { type: 'surface', x: g.x, y: g.y, z, colorscale: [[0, '#D2552D'], [0.35, '#E8C98A'], [0.6, '#8FCBB6'], [1, '#10715A']],
         cmin: m === 'neto' ? Math.min(...flat) : 0.9, cmax: m === 'neto' ? Math.max(...flat) : 1.6,
-        contours: { z: { show: true, usecolormap: true, highlightcolor: fg, project: { z: true } } },
+        contours: { z: { show: false, highlightcolor: fg } },
         colorbar: { title: { text: MET[m], font: { color: muted } }, tickfont: { color: muted }, len: 0.7, thickness: 12 },
         hovertemplate: `${AX[s].x}: %{x}<br>${AX[s].y}: %{y}<br>${MET[m]}: %{z:.2f}<extra></extra>`, opacity: 0.96 },
       { type: 'surface', x: g.x, y: g.y, z: z.map((r) => r.map(() => ref)), showscale: false, opacity: 0.18,
