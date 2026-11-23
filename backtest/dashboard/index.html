@@ -161,6 +161,25 @@
     <p class="mg-muted">Con 4 MES ninguna cuenta se perdió, pero tarda unas 84 operaciones (más de un año y medio). Con 6 u 8 MES pasa en 8 a 12 meses, a cambio de perder más cuentas.</p>
   </section>
 
+  <section class="mg-sec" id="riesgo">
+    <h2>Calculadora de riesgo</h2>
+    <p class="mg-muted">Pon tu capital y cuánto arriesgas por operación. La página repite 5,000 veces el futuro tomando al azar operaciones reales del backtest, medidas en múltiplos del riesgo (el stop completo vale −1). Supone que el modelo se comporta como en 2018–2026.</p>
+    <div class="mg-two">
+      <form class="mg-card" id="rk-form" autocomplete="off">
+        <div class="mg-form">
+          <label for="rk-cap">Capital inicial ($)<input id="rk-cap" type="number" min="1" step="1" inputmode="decimal" value="100"></label>
+          <label for="rk-modo">Cómo arriesgas<select id="rk-modo" class="dash-select"><option value="fijo" selected>Monto fijo ($)</option><option value="pct">% del saldo (compuesto)</option></select></label>
+          <label for="rk-val">Riesgo por operación ($ o %)<input id="rk-val" type="number" min="0.1" step="0.1" inputmode="decimal" value="10"></label>
+          <label for="rk-ops">Horizonte<select id="rk-ops" class="dash-select"><option value="29">6 meses (29 ops)</option><option value="57" selected>1 año (57 ops)</option><option value="114">2 años (114 ops)</option><option value="171">3 años (171 ops)</option></select></label>
+        </div>
+        <p class="mg-muted">Riesgo = lo que pierdes si toca el stop de 35 ticks. Ejemplo cargado: $100 de capital y $10 por operación (10 %).</p>
+      </form>
+      <div class="mg-card" id="rk-resultado" aria-live="polite">
+        <div class="mg-verdict" data-draw="calc-riesgo" data-source="operaciones">—</div>
+      </div>
+    </div>
+  </section>
+
   <section class="mg-sec" id="bitacora">
     <h2>Bitácora</h2>
     <p class="mg-muted">Anota cada día, también los que no operaste. Lo que guardas solo lo ves tú. Si guardas la misma fecha otra vez, se reemplaza.</p>
@@ -459,6 +478,74 @@
     update(el, made) { made.upd(); },
     unmount(el, made) { made.inputs.forEach((i) => { i.removeEventListener('input', made.upd); i.removeEventListener('change', made.upd); }); },
   });
+
+  dash.draw('calc-riesgo', {
+    mount(el) {
+      const R_STOP = 369.92, MES1 = 46.24, MES2 = 92.48, SIMS = 5000;
+      const get = (id) => document.getElementById(id);
+      const val = (id) => { const e = get(id); return e && e.value !== '' ? Number(e.value) : NaN; };
+      const pctl = (arr, p) => { const a = arr.slice().sort((x, y) => x - y); return a[Math.min(a.length - 1, Math.max(0, Math.floor(p * (a.length - 1))))]; };
+      const money = (v) => (v < 0 ? '-$' : '$') + d3.format(',.0f')(Math.abs(v));
+      const upd = () => {
+        el.replaceChildren();
+        const add = (tag, text, cls) => { const n = document.createElement(tag); if (text != null) n.textContent = text; if (cls) n.className = cls; el.appendChild(n); return n; };
+        const d = dash.data('operaciones');
+        if (d.status === 'error') { add('p', 'No se pudo cargar el backtest para simular.', 'mg-muted'); return; }
+        if (d.status !== 'ok' || !d.data.length) { add('p', '—', 'mg-muted'); return; }
+        const cap = val('rk-cap'), v = val('rk-val'), n = Number((get('rk-ops') || {}).value || 57);
+        const modo = (get('rk-modo') || {}).value || 'fijo';
+        if (!(cap > 0) || !(v > 0)) { add('p', 'Pon un capital y un riesgo mayores a cero.', 'mg-muted'); return; }
+        const riesgo0 = modo === 'fijo' ? v : cap * v / 100;
+        const pct0 = 100 * riesgo0 / cap;
+        if (pct0 >= 100) { add('span', 'Arriesgas todo tu capital en una sola operación: un stop te deja en cero.', 'mg-pill bad'); return; }
+        const R = d.data.map((r) => +r.usd_8mes / R_STOP);
+        let s = 12345;
+        const rnd = () => { s |= 0; s = (s + 0x6D2B79F5) | 0; let t = Math.imul(s ^ (s >>> 15), 1 | s); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+        const step = (bal, r) => modo === 'fijo' ? bal + r * v : bal * (1 + (v / 100) * r);
+        const fin = [], dds = []; let ruin = 0, mitad = 0, pierde = 0;
+        for (let k = 0; k < SIMS; k++) {
+          let bal = cap, pk = cap, dd = 0, low = cap, dead = false;
+          for (let i = 0; i < n; i++) {
+            bal = step(bal, R[Math.floor(rnd() * R.length)]);
+            if (bal <= 0) { bal = 0; dead = true; dd = Math.max(dd, 1); break; }
+            pk = Math.max(pk, bal); dd = Math.max(dd, (pk - bal) / pk); low = Math.min(low, bal);
+          }
+          fin.push(bal); dds.push(dd);
+          if (dead) ruin++; if (low <= cap / 2 || dead) mitad++; if (bal < cap) pierde++;
+        }
+        let real = cap, realLow = cap, realDead = false;
+        for (const r of R) { real = step(real, r); if (real <= 0) { real = 0; realDead = true; break; } realLow = Math.min(realLow, real); }
+        const nivel = pct0 <= 2 ? ['Conservador', 'ok'] : pct0 <= 5 ? ['Moderado', 'warn'] : pct0 <= 10 ? ['Agresivo', 'bad'] : ['Muy agresivo', 'bad'];
+        add('h3', `Arriesgas ${money(riesgo0)} por operación: ${d3.format('.1f')(pct0)} % de tu capital`);
+        add('span', nivel[0], 'mg-pill ' + nivel[1]);
+        const lv = add('div', null, 'mg-levels');
+        [['Resultado típico', fin.length ? pctl(fin, 0.5) : 0, 'tp'], ['Peor 5 %', pctl(fin, 0.05), pctl(fin, 0.05) < cap ? 'sl' : 'tp'], ['Mejor 5 %', pctl(fin, 0.95), 'tp']]
+          .forEach(([a, b, c]) => { const x = document.createElement('span'); x.textContent = a; const y = document.createElement('span'); y.textContent = money(b); y.className = c;
+            const z = document.createElement('span'); z.className = 'mg-muted'; z.textContent = `${b >= cap ? '+' : ''}${d3.format('.0f')(100 * (b - cap) / cap)} %`; lv.append(x, y, z); });
+        const ul = add('ul', null, 'mg-list');
+        [[`Terminas con menos de lo que pusiste: ${d3.format('.0f')(100 * pierde / SIMS)} % de las veces`, pierde / SIMS < 0.15],
+         [`Pasas por la mitad de tu capital o menos: ${d3.format('.1f')(100 * mitad / SIMS)} %`, mitad / SIMS < 0.05],
+         [`Te quedas en $0: ${d3.format('.1f')(100 * ruin / SIMS)} %`, ruin / SIMS < 0.0005],
+         [`Caída típica desde un máximo: ${d3.format('.0f')(100 * pctl(dds, 0.5))} % · en el peor 5 %: ${d3.format('.0f')(100 * pctl(dds, 0.95))} %`, pctl(dds, 0.95) < 0.25]]
+          .forEach(([t, ok]) => { const li = document.createElement('li'); const sp = document.createElement('span'); sp.textContent = ok ? '✓' : '!'; sp.className = ok ? 'ok' : 'bad'; li.append(sp, document.createTextNode(t)); ul.appendChild(li); });
+        add('p', `Con la historia real de 2018–2026 (${R.length} operaciones en orden): ${realDead ? 'la cuenta llegaba a $0.' : `${money(cap)} terminaban en ${money(real)}; lo más bajo fue ${money(realLow)}.`}`, 'mg-muted');
+        const mes = Math.floor(riesgo0 / MES1);
+        add('p', riesgo0 < MES1
+          ? `En futuros no alcanza: el mínimo es ${money(MES1)} (1 MES) o ${money(MES2)} (2 MES, para partir en TP1 y TP2). Con este riesgo necesitas un CFD del US500 con lotes fraccionados, donde el spread cuesta algo más.`
+          : riesgo0 < MES2
+            ? `En futuros alcanza para 1 MES (${money(MES1)} de riesgo), sin partir en TP1 y TP2.`
+            : `En futuros equivale a unos ${mes - (mes % 2)} MES (cada MES arriesga ${money(MES1)} con el stop de 35 ticks).`, 'mg-muted');
+      };
+      const inputs = Array.from(document.querySelectorAll('#rk-form input, #rk-form select'));
+      inputs.forEach((i) => { i.addEventListener('input', upd); i.addEventListener('change', upd); });
+      upd();
+      return { upd, inputs };
+    },
+    update(el, made) { made.upd(); },
+    unmount(el, made) { made.inputs.forEach((i) => { i.removeEventListener('input', made.upd); i.removeEventListener('change', made.upd); }); },
+  });
+
+  document.querySelectorAll('#rk-form').forEach((f) => f.addEventListener('submit', (e) => e.preventDefault()));
 
   document.querySelectorAll('#ck-form').forEach((f) => f.addEventListener('submit', (e) => e.preventDefault()));
 
