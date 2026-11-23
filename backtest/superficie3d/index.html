@@ -1,0 +1,148 @@
+<title>Superficie del Modelo B</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600&display=swap">
+<style>
+  /* Layout: una columna; arriba la lectura, en medio la superficie que se gira, abajo los controles y la tabla de la meseta. */
+  :root {
+    --bg: #F3F2ED; --panel: #FBFAF6; --line: #D3D0C5; --fg: #16202A; --muted: #5D6873;
+    --gain: #10715A; --loss: #A73E1C; --mark: #D2552D;
+    --display: 'Space Grotesk', Arial, sans-serif; --body: 'Inter', Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --bg: #10161D; --panel: #18212B; --line: #2E3B48; --fg: #EEF1EF; --muted: #93A3A8;
+    --gain: #4CC9A4; --loss: #F08A62; --mark: #F08A62; color-scheme: dark; } }
+  :root[data-theme="dark"] {
+    --bg: #10161D; --panel: #18212B; --line: #2E3B48; --fg: #EEF1EF; --muted: #93A3A8;
+    --gain: #4CC9A4; --loss: #F08A62; --mark: #F08A62; color-scheme: dark; }
+  body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 15px; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding-block: 32px 48px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: flex; flex-direction: column; gap: 20px; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gain); margin: 0; }
+  h1 { font-family: var(--display); font-size: clamp(28px, 5vw, 42px); font-weight: 700; margin: 0; text-wrap: balance; line-height: 1.1; }
+  p { margin: 0; line-height: 1.55; max-width: 68ch; }
+  .muted { color: var(--muted); font-size: 13px; }
+  .controls { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: end; }
+  .controls label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--muted); }
+  select { font: inherit; font-size: 15px; color: var(--fg); background-color: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 7px 10px; max-width: 100%; }
+  select:focus-visible { outline: 2px solid var(--gain); outline-offset: 2px; }
+  .plot { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; height: min(70vh, 620px); min-height: 380px; width: 100%; }
+  .reading { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+  .stat { border-top: 2px solid var(--line); padding-top: 10px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .stat b { font-family: var(--display); font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .stat .gain { color: var(--gain); }
+  .tablewrap { overflow-x: auto; }
+  table { border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 13px; }
+  th, td { padding: 6px 10px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  th { color: var(--muted); font-weight: 600; }
+  td.sel { outline: 2px solid var(--mark); outline-offset: -2px; font-weight: 600; }
+  .note { font-size: 13px; color: var(--muted); }
+</style>
+
+<div class="wrap">
+  <header style="display:flex;flex-direction:column;gap:10px;">
+    <p class="eyebrow">Modelo B · Gap · 2018–2026 · 8 MES con costos</p>
+    <h1>¿Está el modelo en una meseta o en un pico?</h1>
+    <p id="lectura">Cargando la superficie…</p>
+  </header>
+
+  <div class="controls">
+    <label for="sup">Superficie
+      <select id="sup">
+        <option value="sl_tp1">Stop × TP1 (TP2 = 120, gap 8)</option>
+        <option value="gap_sl">Umbral de gap × stop (TP1 35, TP2 120)</option>
+        <option value="tp1_tp2">TP1 × TP2 (stop 35, gap 8)</option>
+      </select>
+    </label>
+    <label for="met">Altura
+      <select id="met">
+        <option value="pf">Factor de beneficio, 9 años</option>
+        <option value="pf_is">Factor 2018–2022 (años de ajuste)</option>
+        <option value="pf_oos">Factor 2023–2026 (años de prueba)</option>
+        <option value="neto">Neto en USD, 9 años</option>
+      </select>
+    </label>
+  </div>
+
+  <div id="plot" class="plot" role="img" aria-label="Superficie 3D del resultado del Modelo B según dos parámetros; el punto naranja marca la configuración elegida"></div>
+  <p class="muted">Arrastra para girar, rueda o pellizco para acercar. El punto naranja es la configuración que usas: stop 35, TP1 35, TP2 120 y gap de 8 puntos. El plano gris marca el factor 1 (o $0 en neto).</p>
+
+  <section class="reading" aria-label="Lectura de la superficie">
+    <div class="stat"><span class="muted">Tu configuración</span><b id="s-sel" class="gain">—</b></div>
+    <div class="stat"><span class="muted">Máximo de la superficie</span><b id="s-max">—</b><span class="muted" id="s-maxat"></span></div>
+    <div class="stat"><span class="muted">Mínimo de la superficie</span><b id="s-min">—</b><span class="muted" id="s-minat"></span></div>
+    <div class="stat"><span class="muted">Combinaciones con factor mayor a 1.2</span><b id="s-share">—</b></div>
+  </section>
+
+  <div class="tablewrap"><table id="tabla" aria-label="Valores de la superficie"></table></div>
+
+  <p class="note">Una meseta, donde los vecinos dan casi lo mismo, significa que la regla no depende de un número exacto y es menos probable que esté sobreajustada. Un pico aislado sería mala señal. Cada punto es un backtest completo con velas de 1 minuto de ES (502 operaciones con la configuración elegida).</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.27.0/plotly.min.js"></script>
+<script>
+(function () {
+  const SEL = { sl_tp1: { x: 35, y: 35 }, gap_sl: { x: 8, y: 35 }, tp1_tp2: { x: 120, y: 35 } };
+  const AX = {
+    sl_tp1: { x: 'TP1 (ticks)', y: 'Stop (ticks)', name: (x, y) => `stop ${y}, TP1 ${x}` },
+    gap_sl: { x: 'Gap máx. en contra (pts)', y: 'Stop (ticks)', name: (x, y) => `gap ${x} pts, stop ${y}` },
+    tp1_tp2: { x: 'TP2 (ticks)', y: 'TP1 (ticks)', name: (x, y) => `TP1 ${y}, TP2 ${x}` },
+  };
+  const MET = { pf: 'Factor', pf_is: 'Factor 2018–22', pf_oos: 'Factor 2023–26', neto: 'Neto USD' };
+  const supEl = document.getElementById('sup'), metEl = document.getElementById('met'), plotEl = document.getElementById('plot');
+  let DATA = null;
+  const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  const fmt = (m, v) => v == null ? '—' : m === 'neto' ? (v < 0 ? '-$' : '+$') + Math.abs(Math.round(v)).toLocaleString('en-US') : v.toFixed(2);
+
+  function draw() {
+    if (!DATA || !window.Plotly) return;
+    const s = supEl.value, m = metEl.value, g = DATA[s], z = g[m];
+    const sel = SEL[s], xi = g.x.indexOf(sel.x), yi = g.y.indexOf(sel.y), zSel = z[yi][xi];
+    const fg = css('--fg'), muted = css('--muted'), line = css('--line'), mark = css('--mark');
+    const flat = z.flat().filter((v) => v != null);
+    const ref = m === 'neto' ? 0 : 1;
+    const traces = [
+      { type: 'surface', x: g.x, y: g.y, z, colorscale: [[0, '#D2552D'], [0.35, '#E8C98A'], [0.6, '#8FCBB6'], [1, '#10715A']],
+        cmin: m === 'neto' ? Math.min(...flat) : 0.9, cmax: m === 'neto' ? Math.max(...flat) : 1.6,
+        contours: { z: { show: true, usecolormap: true, highlightcolor: fg, project: { z: true } } },
+        colorbar: { title: { text: MET[m], font: { color: muted } }, tickfont: { color: muted }, len: 0.7, thickness: 12 },
+        hovertemplate: `${AX[s].x}: %{x}<br>${AX[s].y}: %{y}<br>${MET[m]}: %{z:.2f}<extra></extra>`, opacity: 0.96 },
+      { type: 'surface', x: g.x, y: g.y, z: z.map((r) => r.map(() => ref)), showscale: false, opacity: 0.18,
+        colorscale: [[0, muted], [1, muted]], hoverinfo: 'skip' },
+      { type: 'scatter3d', mode: 'markers+text', x: [sel.x], y: [sel.y], z: [zSel], text: ['Tu modelo'], textposition: 'top center',
+        textfont: { color: mark, size: 13 }, marker: { size: 7, color: mark, line: { color: fg, width: 1 } },
+        hovertemplate: `Tu modelo<br>${MET[m]}: %{z:.2f}<extra></extra>` },
+    ];
+    const axis = (t) => ({ title: { text: t, font: { color: muted } }, tickfont: { color: muted }, gridcolor: line, zerolinecolor: line, showbackground: false });
+    const layout = { paper_bgcolor: 'rgba(0,0,0,0)', margin: { l: 0, r: 0, t: 0, b: 0 }, showlegend: false, font: { family: 'Inter, Arial, sans-serif', color: fg },
+      scene: { xaxis: axis(AX[s].x), yaxis: axis(AX[s].y), zaxis: axis(MET[m]), camera: { eye: { x: 1.6, y: -1.5, z: 0.9 } }, aspectmode: 'manual', aspectratio: { x: 1, y: 1, z: 0.6 } } };
+    Plotly.react(plotEl, traces, layout, { responsive: true, displaylogo: false, modeBarButtonsToRemove: ['toImage'] });
+
+    let max = -Infinity, min = Infinity; const at = {};
+    z.forEach((r, i) => r.forEach((v, j) => { if (v == null) return; if (v > max) { max = v; at.max = AX[s].name(g.x[j], g.y[i]); } if (v < min) { min = v; at.min = AX[s].name(g.x[j], g.y[i]); } }));
+    const pfz = g[m === 'neto' ? 'pf' : m].flat().filter((v) => v != null);
+    document.getElementById('s-sel').textContent = fmt(m, zSel);
+    document.getElementById('s-max').textContent = fmt(m, max);
+    document.getElementById('s-maxat').textContent = at.max;
+    document.getElementById('s-min').textContent = fmt(m, min);
+    document.getElementById('s-minat').textContent = at.min;
+    document.getElementById('s-share').textContent = Math.round(100 * pfz.filter((v) => v > 1.2).length / pfz.length) + ' %';
+    const pos = Math.round(100 * flat.filter((v) => v < zSel).length / flat.length);
+    document.getElementById('lectura').textContent =
+      `Tu configuración da ${fmt(m, zSel)} y supera al ${pos} % de las ${flat.length} combinaciones de esta superficie. ` +
+      `El rango completo va de ${fmt(m, min)} a ${fmt(m, max)}: ` +
+      (m === 'neto' ? (min > 0 ? 'todas ganan dinero, sin precipicios.' : 'hay zonas en pérdida; revisa dónde caen.') :
+        (min > 1 ? 'todas tienen factor mayor a 1, así que es una meseta, no un pico.' : 'hay zonas debajo de 1; revisa dónde caen.'));
+
+    const t = document.getElementById('tabla'); t.replaceChildren();
+    const hr = document.createElement('tr'); const h0 = document.createElement('th'); h0.textContent = `${AX[s].y} \\ ${AX[s].x}`; hr.appendChild(h0);
+    g.x.forEach((x) => { const th = document.createElement('th'); th.textContent = x; hr.appendChild(th); }); t.appendChild(hr);
+    g.y.forEach((y, i) => { const tr = document.createElement('tr'); const th = document.createElement('th'); th.textContent = y; tr.appendChild(th);
+      g.x.forEach((x, j) => { const td = document.createElement('td'); td.textContent = fmt(m, z[i][j]); if (i === yi && j === xi) td.className = 'sel'; tr.appendChild(td); }); t.appendChild(tr); });
+  }
+
+  supEl.addEventListener('change', draw); metEl.addEventListener('change', draw);
+  try { window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', draw); } catch (e) {}
+  new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  fetch('superficie.json').then((r) => r.json()).then((d) => { DATA = d; draw(); })
+    .catch(() => { document.getElementById('lectura').textContent = 'No se pudieron cargar los datos de la superficie. Recarga la página.'; });
+})();
+</script>
