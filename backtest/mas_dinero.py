@@ -34,6 +34,7 @@ NY = 'America/New_York'
 @dataclass(frozen=True)
 class Params:
     entry: str = '10:12'
+    entry_tz: str = NY            # 'America/Mexico_City' para entrar a la misma hora de CDMX todo el año
     ema_len: int = 20
     sl: int = 30
     tp1: int = 40
@@ -172,7 +173,7 @@ def day_signal(prep, contract, day, p: Params):
         return None
     today, yday = P['days'][day], P['days'][prev_day]
     eh, em = map(int, p.entry.split(':'))
-    t_ent = pd.Timestamp(day).tz_localize(NY) + pd.Timedelta(hours=eh, minutes=em)
+    t_ent = (pd.Timestamp(day).tz_localize(p.entry_tz) + pd.Timedelta(hours=eh, minutes=em)).tz_convert(NY)
     b3 = P['b3']
     closed = b3[b3.index < t_ent]                      # velas de 3 min ya cerradas
     if len(closed) < p.ema_len * 3 or closed.index[-1] != t_ent - pd.Timedelta(minutes=3):
