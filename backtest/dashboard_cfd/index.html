@@ -1,0 +1,278 @@
+<meta name="dash-one-writer">
+<style>
+  .cf { display: flex; flex-direction: column; gap: var(--cds-gap-xl); max-width: 1100px; margin: 0 auto; font-family: var(--font-anthropic-sans); color: var(--color-fg); }
+  .cf h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+  .cf h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; text-wrap: balance; }
+  .cf h3 { font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); margin: 0; }
+  .cf p { margin: 0; line-height: 1.55; max-width: 72ch; }
+  .cf-sec { display: flex; flex-direction: column; gap: var(--cds-gap-md); }
+  .cf-muted { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+  .cf-num { font-variant-numeric: tabular-nums; }
+  .cf-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: var(--cds-gap-md); }
+  .cf-tile { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: flex; flex-direction: column; gap: var(--cds-gap-xs); min-width: 0; }
+  .cf-big { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; }
+  .cf-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: flex; flex-direction: column; gap: var(--cds-gap-md); min-width: 0; }
+  .cf-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--cds-gap-lg); align-items: start; }
+  .cf-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--cds-gap-sm) var(--cds-gap-md); }
+  .cf-form label { display: flex; flex-direction: column; gap: 4px; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); min-width: 0; }
+  .cf-form input { font: inherit; font-size: var(--cds-font-size-body); color: var(--color-fg); background-color: var(--color-bg); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: 6px 8px; min-width: 0; width: 100%; box-sizing: border-box; }
+  .cf-form input:focus-visible, .cf-form select:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+  .cf-sub { grid-column: 1 / -1; font-size: var(--cds-font-size-caption); font-weight: var(--cds-font-weight-medium); color: var(--color-fg); padding-top: 4px; }
+  .cf-out { display: flex; flex-direction: column; gap: var(--cds-gap-sm); }
+  .cf-pill { display: inline-block; align-self: flex-start; padding: 4px 12px; border-radius: 999px; font-weight: var(--cds-font-weight-medium); }
+  .cf-pill.ok { background: color-mix(in srgb, var(--color-ok) 18%, transparent); color: var(--color-ok); }
+  .cf-pill.warn { background: color-mix(in srgb, var(--color-warn) 18%, transparent); color: var(--color-warn); }
+  .cf-pill.bad { background: color-mix(in srgb, var(--color-bad) 18%, transparent); color: var(--color-bad); }
+  .cf-grid3 { display: grid; grid-template-columns: auto auto 1fr; gap: 4px 16px; font-variant-numeric: tabular-nums; }
+  .cf-grid3 .ok { color: var(--color-ok); } .cf-grid3 .bad { color: var(--color-bad); }
+  .cf-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; }
+  .cf-list li { display: flex; gap: 8px; align-items: baseline; }
+  .cf-list .ok { color: var(--color-ok); } .cf-list .bad { color: var(--color-bad); }
+  .cf-steps { margin: 0; padding-left: 1.3em; display: flex; flex-direction: column; gap: var(--cds-gap-sm); line-height: 1.5; max-width: 75ch; }
+  .cf-steps b { font-weight: var(--cds-font-weight-medium); }
+  .cf-tablewrap { overflow-x: auto; }
+  .cf table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; font-size: var(--cds-font-size-body); }
+  .cf th { text-align: right; font-weight: var(--cds-font-weight-medium); color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); padding: 6px 10px; border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .cf td { text-align: right; padding: 6px 10px; border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .cf td.pos { color: var(--color-ok); } .cf td.neg { color: var(--color-bad); }
+  .cf-chart { position: relative; min-height: 300px; }
+  .cf-chart svg text { fill: var(--cds-text-secondary); font-size: var(--cds-font-size-caption); }
+  .cf-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); box-shadow: var(--cds-shadow-popover); border-radius: var(--cds-radius); padding: 6px 10px; font-size: var(--cds-font-size-caption); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .cf-legend { display: flex; gap: var(--cds-gap-md); flex-wrap: wrap; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .cf-sw { display: inline-block; width: 14px; height: 3px; vertical-align: middle; margin-right: 6px; }
+</style>
+
+<div class="cf">
+  <header class="cf-sec" id="inicio">
+    <h1>Modelo B · Gap en CFD US500</h1>
+    <p>Las mismas 502 operaciones del backtest con ES (2018–2026), cobrando el spread del CFD en vez de comisión. Con 0.5 puntos de spread y medio punto de deslizamiento en los stops, el factor de beneficio queda en <b class="cf-num" data-draw="eq" data-fmt="pf" data-source="referencia" data-field="pf_05" data-row="0">—</b>. El modelo deja de ganar con un spread de unos <b class="cf-num" data-draw="eq" data-fmt="pts" data-source="referencia" data-field="spread_equilibrio" data-row="0">—</b> puntos.</p>
+    <p class="cf-muted">Stop 8.75 pts (35 ticks) · TP1 8.75 pts (mitad) · TP2 30 pts (otra mitad) · break-even tras TP1 · entrada 10:12 NY · cierre 15:59 NY, sin costo nocturno.</p>
+  </header>
+
+  <section class="cf-tiles" id="resumen" aria-label="Resumen con spread de 0.5 puntos">
+    <div class="cf-tile"><span class="cf-muted">Factor con 0.5 pts de spread</span><span class="cf-big" data-draw="eq" data-fmt="pf" data-source="referencia" data-field="pf_05" data-row="0">—</span><span class="cf-muted">y 0.5 pts de deslizamiento en stops</span></div>
+    <div class="cf-tile"><span class="cf-muted">Ganancia media por operación</span><span class="cf-big" data-draw="eq" data-fmt="r" data-source="referencia" data-field="esp_05" data-row="0">—</span><span class="cf-muted">en veces lo arriesgado</span></div>
+    <div class="cf-tile"><span class="cf-muted">Operaciones ganadoras</span><span class="cf-big" data-draw="eq" data-fmt="pct" data-source="referencia" data-field="win_05" data-row="0">—</span><span class="cf-muted">502 operaciones, 2018–2026</span></div>
+    <div class="cf-tile"><span class="cf-muted">Spread donde deja de ganar</span><span class="cf-big" data-draw="eq" data-fmt="pts" data-source="referencia" data-field="spread_equilibrio" data-row="0">—</span><span class="cf-muted">puntos, con 0.5 de deslizamiento</span></div>
+  </section>
+
+  <section class="cf-sec" id="curva-spread">
+    <h2>Cuánto se come el spread</h2>
+    <p class="cf-muted">Factor de beneficio de los 9 años según el spread de tu broker. Debajo de la línea de 1, el modelo pierde dinero. Pasa el cursor por los puntos para ver cada valor.</p>
+    <div class="cf-legend"><span><span class="cf-sw" data-draw="sw0"></span>Sin deslizamiento</span><span><span class="cf-sw" data-draw="sw1"></span>0.5 pts de deslizamiento en stops</span></div>
+    <div class="cf-chart" data-draw="curva" data-source="escenarios">—</div>
+  </section>
+
+  <section class="cf-sec" id="escenarios">
+    <h2>Escenarios de spread</h2>
+    <div class="cf-tablewrap">
+      <table data-source="escenarios" data-row-key="escenario">
+        <thead><tr><th data-field="escenario" style="text-align:left">Spread · deslizamiento (pts)</th><th data-field="pf">Factor</th><th data-field="pf_is">2018–22</th><th data-field="pf_oos">2023–26</th><th data-field="win">Ganadoras</th><th data-field="esp">Media por op</th></tr></thead>
+        <tbody data-draw="t-esc"></tbody>
+      </table>
+    </div>
+    <p class="cf-muted">Media por op: ganancia promedio en veces lo arriesgado (el stop completo, más spread y deslizamiento, vale −1). Con futuros MES el modelo da 0.17.</p>
+  </section>
+
+  <section class="cf-sec" id="calculadora">
+    <h2>Calculadora para tu cuenta CFD</h2>
+    <p class="cf-muted">Pon el spread que ves en tu broker a las 10:12 NY, tu capital y tu riesgo. La página repite 5,000 veces el futuro con las operaciones reales y te dice qué tamaño de lote abrir.</p>
+    <div class="cf-two">
+      <form class="cf-card" id="cf-form" autocomplete="off">
+        <div class="cf-form">
+          <p class="cf-sub">Tu broker</p>
+          <label for="cf-spread">Spread a las 10:12 (pts)<input id="cf-spread" type="number" min="0" step="0.05" inputmode="decimal" value="0.5"></label>
+          <label for="cf-slip">Deslizamiento en stops (pts)<input id="cf-slip" type="number" min="0" step="0.05" inputmode="decimal" value="0.5"></label>
+          <label for="cf-vpp">$ por punto con 1 lote<input id="cf-vpp" type="number" min="0.0001" step="0.01" inputmode="decimal" value="1"></label>
+          <label for="cf-minlot">Lote mínimo<input id="cf-minlot" type="number" min="0.0001" step="0.01" inputmode="decimal" value="0.01"></label>
+          <p class="cf-sub">Tu cuenta</p>
+          <label for="cf-cap">Capital ($)<input id="cf-cap" type="number" min="1" step="1" inputmode="decimal" value="100"></label>
+          <label for="cf-modo">Cómo arriesgas<select id="cf-modo" class="dash-select"><option value="pct" selected>% del saldo</option><option value="fijo">Monto fijo ($)</option></select></label>
+          <label for="cf-val">Riesgo (% o $)<input id="cf-val" type="number" min="0.1" step="0.1" inputmode="decimal" value="2"></label>
+          <label for="cf-ops">Horizonte<select id="cf-ops" class="dash-select"><option value="29">6 meses</option><option value="57" selected>1 año</option><option value="114">2 años</option><option value="171">3 años</option></select></label>
+        </div>
+        <p class="cf-muted">Valores de ejemplo: revisa en tu plataforma el valor por punto y el lote mínimo del US500; cambian de un broker a otro.</p>
+      </form>
+      <div class="cf-card" aria-live="polite">
+        <div class="cf-out" data-draw="calc" data-source="operaciones">—</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cf-sec" id="reglas">
+    <h2>Cómo operarlo en CFD</h2>
+    <ol class="cf-steps">
+      <li><b>Señal en ES1!, orden en el CFD.</b> El volumen del CFD no es volumen real: el área de valor, el POC, el VWAP y el gap salen mal en su gráfico. Usa el indicador «MB Gap» en ES1! de 3 minutos.</li>
+      <li><b>Distancias en puntos desde tu entrada en el CFD.</b> El CFD y el ES no cotizan al mismo precio. Stop a 8.75 pts, TP1 a 8.75 pts con la mitad, TP2 a 30 pts con la otra mitad.</li>
+      <li><b>Al tocar TP1, mueve el stop del resto a tu entrada.</b> Si a las 15:59 NY sigue abierta, ciérrala.</li>
+      <li><b>Revisa el spread en vivo a las 10:12.</b> El spread publicado suele ser el mínimo. Si ese día está arriba de 1 punto, no operes.</li>
+      <li><b>Tamaño:</b> la calculadora de arriba te da el lote. Redondea hacia abajo al múltiplo del lote mínimo.</li>
+    </ol>
+  </section>
+</div>
+
+<script>
+  const SL = 8.75;
+  const f2 = d3.format('.2f');
+  const money = (v) => (v < 0 ? '-$' : '$') + d3.format(',.0f')(Math.abs(v));
+  const FMT = { pf: (v) => f2(v), pts: (v) => d3.format('.2f')(v), r: (v) => (v >= 0 ? '+' : '') + f2(v), pct: (v) => d3.format('.1f')(v) + ' %' };
+  const isStop = (op) => op.stop === true || op.stop === 'true';
+  window.cfR = (op, spread, slip) => ((+op.puntos) - spread - (isStop(op) ? slip : 0)) / (SL + spread + slip);
+
+  dash.calc('escenarios', {
+    title: 'Escenarios de spread',
+    description: 'Factor, ganadoras y media por operación para varios spreads, con y sin 0.5 puntos de deslizamiento en stops.',
+    inputs: ['operaciones'],
+    fn: (operaciones) => {
+      const out = [];
+      const stopOf = (op) => op.stop === true || op.stop === 'true';
+      const pf = (a) => { const g = a.filter((x) => x > 0).reduce((s, x) => s + x, 0), l = -a.filter((x) => x < 0).reduce((s, x) => s + x, 0); return l > 0 ? Math.round((g / l) * 100) / 100 : null; };
+      for (const slip of [0, 0.5]) {
+        for (const spread of [0.2, 0.3, 0.5, 0.7, 1.0, 1.25, 1.5, 2.0, 2.5]) {
+          const R = operaciones.map((op) => ((+op.puntos) - spread - (stopOf(op) ? slip : 0)) / (8.75 + spread + slip));
+          const is = R.filter((_, i) => operaciones[i].anio <= '2022'), oos = R.filter((_, i) => operaciones[i].anio >= '2023');
+          out.push({ escenario: `${spread.toFixed(2)} · ${slip.toFixed(1)}`, spread, slip, pf: pf(R), pf_is: pf(is), pf_oos: pf(oos),
+            win: Math.round((1000 * R.filter((x) => x > 0).length) / R.length) / 10, esp: Math.round((R.reduce((s, x) => s + x, 0) / R.length) * 1000) / 1000 });
+        }
+      }
+      return out;
+    },
+  });
+
+  dash.calc('referencia', {
+    title: 'Referencia: spread 0.5 y equilibrio',
+    description: 'Factor, media y ganadoras con 0.5 pts de spread y 0.5 de deslizamiento, y el spread en que la media llega a cero.',
+    inputs: ['operaciones'],
+    fn: (operaciones) => {
+      const stopOf = (op) => op.stop === true || op.stop === 'true';
+      const Rs = (sp, sl) => operaciones.map((op) => ((+op.puntos) - sp - (stopOf(op) ? sl : 0)) / (8.75 + sp + sl));
+      const mean = (a) => a.reduce((s, x) => s + x, 0) / a.length;
+      const R = Rs(0.5, 0.5);
+      const g = R.filter((x) => x > 0).reduce((s, x) => s + x, 0), l = -R.filter((x) => x < 0).reduce((s, x) => s + x, 0);
+      let lo = 0, hi = 6;
+      for (let i = 0; i < 40; i++) { const mid = (lo + hi) / 2; if (mean(Rs(mid, 0.5)) > 0) lo = mid; else hi = mid; }
+      return [{ pf_05: Math.round((g / l) * 100) / 100, esp_05: Math.round(mean(R) * 1000) / 1000,
+        win_05: Math.round((1000 * R.filter((x) => x > 0).length) / R.length) / 10, spread_equilibrio: Math.round(lo * 100) / 100 }];
+    },
+  });
+
+  dash.draw('eq', (el) => {
+    const d = dash.data('referencia');
+    el.classList.toggle('dash-skeleton', d.status === 'loading');
+    if (d.status !== 'ok' || !d.data || !d.data[0]) { el.textContent = '—'; return; }
+    const v = d.data[0][el.dataset.field];
+    el.textContent = v == null ? '—' : FMT[el.dataset.fmt](v);
+  });
+
+  dash.draw('sw0', (el) => { el.style.background = dash.colors[0]; });
+  dash.draw('sw1', (el) => { el.style.background = dash.colors[1]; });
+
+  dash.draw('t-esc', (tb) => {
+    const d = dash.data('escenarios');
+    if (d.status === 'error') { const tr = document.createElement('tr'); const td = document.createElement('td'); td.colSpan = 6; td.textContent = 'No se pudo calcular.'; tr.appendChild(td); return tb.replaceChildren(tr); }
+    if (d.status !== 'ok' || !d.data) return tb.replaceChildren();
+    tb.replaceChildren(...d.data.filter((r) => r.slip === 0.5 || [0.3, 0.5, 1.0].includes(r.spread)).sort((a, b) => a.spread - b.spread || a.slip - b.slip).map((r) => {
+      const tr = document.createElement('tr'); tr.dataset.key = r.escenario;
+      const td = (t, c, left) => { const x = document.createElement('td'); x.textContent = t; if (c) x.className = c; if (left) x.style.textAlign = 'left'; tr.appendChild(x); };
+      td(r.escenario, '', true); td(f2(r.pf), r.pf >= 1.3 ? 'pos' : r.pf < 1.1 ? 'neg' : ''); td(f2(r.pf_is)); td(f2(r.pf_oos));
+      td(d3.format('.1f')(r.win) + ' %'); td((r.esp >= 0 ? '+' : '') + d3.format('.3f')(r.esp), r.esp > 0 ? 'pos' : 'neg');
+      return tr;
+    }));
+  });
+
+  dash.draw('curva', {
+    mount(el) { el.replaceChildren(); const tip = document.createElement('div'); tip.className = 'cf-tip'; tip.hidden = true; el.appendChild(tip); return { tip }; },
+    update(el, made) {
+      const d = dash.data('escenarios');
+      el.querySelectorAll('svg, .cf-msg').forEach((n) => n.remove()); made.tip.hidden = true;
+      if (d.status !== 'ok' || !d.data) { const p = document.createElement('p'); p.className = 'cf-muted cf-msg'; p.textContent = d.status === 'error' ? 'No se pudo calcular la curva.' : '—'; el.appendChild(p); return; }
+      const W = Math.max(280, el.clientWidth), H = 280, ml = 44, mb = 30, mt = 10, mr = 12;
+      const series = [0, 0.5].map((s) => d.data.filter((r) => r.slip === s).sort((a, b) => a.spread - b.spread));
+      const x = d3.scaleLinear().domain([0.2, 2.5]).range([ml, W - mr]);
+      const y = d3.scaleLinear().domain([0.85, 1.6]).range([H - mb, mt]);
+      const svg = d3.select(el).insert('svg', ':first-child').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Factor de beneficio según el spread del CFD: baja de cerca de 1.5 con spread de 0.2 a menos de 1 con spread de 2.5');
+      svg.append('g').selectAll('line').data(y.ticks(5)).join('line').attr('x1', ml).attr('x2', W - mr).attr('y1', y).attr('y2', y).style('stroke', 'var(--cds-chart-grid)');
+      svg.append('g').selectAll('text').data(y.ticks(5)).join('text').attr('x', ml - 6).attr('y', (v) => y(v) + 4).attr('text-anchor', 'end').text(d3.format('.1f'));
+      svg.append('g').selectAll('text').data(W < 450 ? [0.5, 1.5, 2.5] : [0.5, 1, 1.5, 2, 2.5]).join('text').attr('x', x).attr('y', H - 8).attr('text-anchor', 'middle').text((v) => v + ' pts');
+      svg.append('line').attr('x1', ml).attr('x2', W - mr).attr('y1', y(1)).attr('y2', y(1)).style('stroke', 'var(--cds-chart-status-critical)').style('stroke-dasharray', '5 4');
+      svg.append('text').attr('x', W - mr).attr('y', y(1) - 6).attr('text-anchor', 'end').text('Factor 1: no gana ni pierde');
+      const line = d3.line().x((r) => x(r.spread)).y((r) => y(Math.max(0.85, r.pf)));
+      series.forEach((s, i) => {
+        svg.append('path').datum(s).attr('d', line).style('fill', 'none').style('stroke', dash.colors[i]).style('stroke-width', 2.5);
+        svg.append('g').selectAll('circle').data(s).join('circle').attr('cx', (r) => x(r.spread)).attr('cy', (r) => y(Math.max(0.85, r.pf))).attr('r', 5).style('fill', dash.colors[i])
+          .on('pointerenter pointerdown', (ev, r) => {
+            made.tip.hidden = false; made.tip.textContent = `Spread ${r.spread} · desliz. ${r.slip}: factor ${f2(r.pf)} · media ${(r.esp >= 0 ? '+' : '') + d3.format('.3f')(r.esp)}`;
+            const sc = W / svg.node().getBoundingClientRect().width, tw = made.tip.offsetWidth;
+            made.tip.style.left = Math.max(0, Math.min(el.clientWidth - tw, x(r.spread) / sc - tw / 2)) + 'px'; made.tip.style.top = Math.max(0, y(Math.max(0.85, r.pf)) / sc - 40) + 'px';
+          })
+          .on('pointerleave', () => { made.tip.hidden = true; });
+      });
+    },
+  });
+
+  dash.draw('calc', {
+    mount(el) {
+      const SIMS = 5000;
+      const get = (id) => document.getElementById(id);
+      const num = (id) => { const e = get(id); return e && e.value !== '' ? Number(e.value) : NaN; };
+      const pctl = (a, p) => { const s = a.slice().sort((x, y) => x - y); return s[Math.min(s.length - 1, Math.max(0, Math.floor(p * (s.length - 1))))]; };
+      const lot = d3.format(',.4~f');
+      const upd = () => {
+        el.replaceChildren();
+        const add = (tag, text, cls) => { const n = document.createElement(tag); if (text != null) n.textContent = text; if (cls) n.className = cls; el.appendChild(n); return n; };
+        const d = dash.data('operaciones');
+        if (d.status === 'error') { add('p', 'No se pudo cargar el backtest.', 'cf-muted'); return; }
+        if (d.status !== 'ok' || !d.data.length) { add('p', '—', 'cf-muted'); return; }
+        const spread = num('cf-spread'), slip = num('cf-slip'), vpp = num('cf-vpp'), minlot = num('cf-minlot'), cap = num('cf-cap'), v = num('cf-val');
+        const n = Number((get('cf-ops') || {}).value || 57), modo = (get('cf-modo') || {}).value || 'pct';
+        if (![spread, slip, vpp, minlot, cap, v].every((x) => isFinite(x)) || cap <= 0 || v <= 0 || vpp <= 0 || minlot <= 0 || spread < 0 || slip < 0) { add('p', 'Revisa que todos los campos tengan números válidos y mayores a cero.', 'cf-muted'); return; }
+        const R = d.data.map((op) => window.cfR(op, spread, slip));
+        const mean = R.reduce((s, x) => s + x, 0) / R.length;
+        const g = R.filter((x) => x > 0).reduce((s, x) => s + x, 0), l = -R.filter((x) => x < 0).reduce((s, x) => s + x, 0), pf = g / l;
+        const riesgo = modo === 'fijo' ? v : cap * v / 100, pct = 100 * riesgo / cap;
+        const stopPts = SL + spread + slip;
+        const lotes = riesgo / (stopPts * vpp), lotesR = Math.floor(lotes / minlot + 1e-9) * minlot;
+        const nivel = mean <= 0 ? ['Con este spread el modelo pierde', 'bad'] : pf < 1.15 ? ['Ventaja muy chica con este spread', 'warn'] : ['El modelo conserva su ventaja', 'ok'];
+        add('h3', `Factor ${f2(pf)} · media ${(mean >= 0 ? '+' : '') + d3.format('.3f')(mean)} veces el riesgo`);
+        add('span', nivel[0], 'cf-pill ' + nivel[1]);
+        add('p', lotesR > 0
+          ? `Abre ${lot(lotesR)} lotes (${lot(lotesR / 2)} a TP1 y ${lot(lotesR / 2)} a TP2). Arriesgas ${money(lotesR * stopPts * vpp)}, ${d3.format('.1f')(100 * lotesR * stopPts * vpp / cap)} % del capital, con el stop a ${f2(stopPts)} pts contando spread y deslizamiento.`
+          : `Con ${money(riesgo)} de riesgo no alcanza ni el lote mínimo (${minlot}): necesitas arriesgar al menos ${money(minlot * stopPts * vpp)} por operación.`);
+        if (lotesR > 0 && lotesR / 2 < minlot - 1e-9) add('p', 'La mitad del lote queda debajo del mínimo: no podrás partir la posición en TP1 y TP2. Cierra todo en TP1 o sube el riesgo.', 'cf-muted');
+        if (mean <= 0 || pct >= 100) return;
+        const f = modo === 'fijo' ? null : v / 100;
+        let s = 777; const rnd = () => { s |= 0; s = (s + 0x6D2B79F5) | 0; let t = Math.imul(s ^ (s >>> 15), 1 | s); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+        const fin = [], dds = []; let mitad = 0, ruin = 0, pierde = 0;
+        for (let k = 0; k < SIMS; k++) {
+          let bal = cap, pk = cap, dd = 0, low = cap, dead = false;
+          for (let i = 0; i < n; i++) {
+            const r = R[Math.floor(rnd() * R.length)];
+            bal = f == null ? bal + r * v : bal * (1 + f * r);
+            if (bal <= 0) { bal = 0; dead = true; dd = 1; break; }
+            pk = Math.max(pk, bal); dd = Math.max(dd, (pk - bal) / pk); low = Math.min(low, bal);
+          }
+          fin.push(bal); dds.push(dd); if (dead) ruin++; if (low <= cap / 2 || dead) mitad++; if (bal < cap) pierde++;
+        }
+        const g3 = add('div', null, 'cf-grid3');
+        [['Resultado típico', pctl(fin, 0.5)], ['Peor 5 %', pctl(fin, 0.05)], ['Mejor 5 %', pctl(fin, 0.95)]].forEach(([a, b]) => {
+          const x1 = document.createElement('span'); x1.textContent = a; const x2 = document.createElement('span'); x2.textContent = money(b); x2.className = b >= cap ? 'ok' : 'bad';
+          const x3 = document.createElement('span'); x3.className = 'cf-muted'; x3.textContent = `${b >= cap ? '+' : ''}${d3.format('.0f')(100 * (b - cap) / cap)} %`; g3.append(x1, x2, x3); });
+        const ul = add('ul', null, 'cf-list');
+        [[`Terminas con menos de lo que pusiste: ${d3.format('.0f')(100 * pierde / SIMS)} %`, pierde / SIMS < 0.15],
+         [`Pasas por la mitad del capital o menos: ${d3.format('.1f')(100 * mitad / SIMS)} %`, mitad / SIMS < 0.05],
+         [`Te quedas en $0: ${d3.format('.1f')(100 * ruin / SIMS)} %`, ruin / SIMS < 0.0005],
+         [`Caída típica desde un máximo: ${d3.format('.0f')(100 * pctl(dds, 0.5))} % · peor 5 %: ${d3.format('.0f')(100 * pctl(dds, 0.95))} %`, pctl(dds, 0.95) < 0.25]]
+          .forEach(([t, ok]) => { const li = document.createElement('li'); const sp = document.createElement('span'); sp.textContent = ok ? '✓' : '!'; sp.className = ok ? 'ok' : 'bad'; li.append(sp, document.createTextNode(t)); ul.appendChild(li); });
+        add('p', `Simulación de ${n} operaciones con las reales de 2018–2026 en orden aleatorio. No incluye días en que el spread se abre más de lo normal.`, 'cf-muted');
+      };
+      const inputs = Array.from(document.querySelectorAll('#cf-form input, #cf-form select'));
+      inputs.forEach((i) => { i.addEventListener('input', upd); i.addEventListener('change', upd); });
+      upd();
+      return { upd, inputs };
+    },
+    update(el, made) { made.upd(); },
+    unmount(el, made) { made.inputs.forEach((i) => { i.removeEventListener('input', made.upd); i.removeEventListener('change', made.upd); }); },
+  });
+
+  document.querySelectorAll('#cf-form').forEach((f) => f.addEventListener('submit', (e) => e.preventDefault()));
+</script>
