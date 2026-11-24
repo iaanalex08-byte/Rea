@@ -5,7 +5,7 @@
 // Úsalo en ES1! / MES1! con velas de 3 minutos y horario extendido (ETH), igual que el backtest.
 //@version=6
 indicator("Modelo B · Gap · ES 10:12 NY · SL 35 · TP1 35 · TP2 120", shorttitle = "MB Gap", overlay = true,
-     max_boxes_count = 500, max_lines_count = 500, max_labels_count = 500, max_bars_back = 500)
+     max_boxes_count = 500, max_lines_count = 500, max_labels_count = 500, max_bars_back = 500, calc_bars_count = 20000)
 
 // ───────────── Entradas ─────────────
 const string TZ = "America/New_York"
@@ -155,8 +155,6 @@ float ema3 = request.security(syminfo.tickerid, "3", ta.ema(close, lenEma)[1], l
 
 int   tfSec   = timeframe.in_seconds()
 int   bosN    = math.max(5, int(math.floor(bosMin * 60.0 / tfSec)))
-bool  bosL    = bosAgainst(1, bosN)
-bool  bosS    = bosAgainst(-1, bosN)
 
 int   mOpen   = nyMin(time)
 int   dNy     = dayofmonth(time, TZ)
@@ -247,7 +245,7 @@ if isSignal and not active and not na(ema3)
         bool  okA   = not na(yVAH) and (px > yVAH or px < yVAL)
         float pos   = pocPosition(prof, hiT, loT)
         bool  okC   = d > 0 ? pos < 1 - cFrac : pos > cFrac
-        bool  okBos = not (d > 0 ? bosL : bosS)
+        bool  okBos = not bosAgainst(d, bosN)   // solo se calcula a la hora de entrada
         bool  okVw  = not na(vwapPrev) and (d > 0 ? px > vwapPrev : px < vwapPrev)
         float gap   = d * (rthOpen - prevClose)
         bool  okGap = not na(gap) and gap > -gapMax

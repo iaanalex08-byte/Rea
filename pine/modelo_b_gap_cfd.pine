@@ -5,7 +5,7 @@
 // Las cajas se dibujan en el precio del CFD, en puntos desde tu entrada: SL 8.75 · TP1 8.75 (mitad) · TP2 30 (otra mitad).
 //@version=6
 indicator("Modelo B · Gap · CFD US500 · señal de ES1!", shorttitle = "MB Gap CFD", overlay = true,
-     max_boxes_count = 500, max_lines_count = 500, max_labels_count = 500, max_bars_back = 500)
+     max_boxes_count = 500, max_lines_count = 500, max_labels_count = 500, max_bars_back = 500, calc_bars_count = 20000)
 
 // ───────────── Entradas ─────────────
 const string TZ = "America/New_York"
@@ -153,8 +153,6 @@ esSignal() =>
     var float vSum = 0.0
     float e3 = ta.ema(close, lenEma)
     int bN = math.max(5, int(math.floor(bosMin * 60.0 / timeframe.in_seconds())))
-    bool bL = bosAgainst(1, bN)
-    bool bS = bosAgainst(-1, bN)
     int mO = nyMin(time)
     int dN = dayofmonth(time, TZ)
     int dw = dayofweek(time, TZ)
@@ -189,7 +187,7 @@ esSignal() =>
             okA := not na(yVAH) and (px > yVAH or px < yVAL)
             pos := pocPosition(prof, hiT, loT, tk)
             okC := d > 0 ? pos < 1 - cFrac : pos > cFrac
-            okB := not (d > 0 ? bL : bS)
+            okB := not bosAgainst(d, bN)   // solo se calcula a la hora de entrada
             okV := not na(vw) and (d > 0 ? px > vw : px < vw)
             gap := d * (rthOpen - prevClose)
             okG := not na(gap) and gap > -gapMax
