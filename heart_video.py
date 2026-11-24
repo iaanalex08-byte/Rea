@@ -131,7 +131,7 @@ def space(t, zoom, heart_amt, text_t):
         word = '@#%8&B@#M%W8'
         for li, m in enumerate(TXT):
             r0 = [ROWS - 35, ROWS - 22][li]
-            reveal = np.clip(text_t * 1.3 - li * 0.6, 0, 1)
+            reveal = np.clip(text_t * 1.8 - li * 0.8, 0, 1)
             cut = int(COLS * reveal)
             mm = m.copy(); mm[:, cut:] = 0
             on = mm > 0.15
