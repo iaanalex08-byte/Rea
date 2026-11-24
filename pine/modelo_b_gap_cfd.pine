@@ -49,8 +49,8 @@ bool   showSkip = input.bool(true, "Marcar días descartados", group = gVi)
 bool   showTbl  = input.bool(true, "Mostrar tabla", group = gVi)
 color  cUp  = input.color(#1FAE89, "Compra / ganancia", group = gVi)
 color  cDn  = input.color(#E2582F, "Venta / pérdida", group = gVi)
-color  cTP  = input.color(color.new(#1FAE89, 82), "Relleno caja TP", group = gVi)
-color  cSL  = input.color(color.new(#E2582F, 82), "Relleno caja SL", group = gVi)
+color  cTP  = input.color(color.new(#1FAE89, 75), "Relleno caja TP", group = gVi)
+color  cSL  = input.color(color.new(#E2582F, 70), "Relleno caja SL", group = gVi)
 
 // ───────────── Utilidades (se ejecutan sobre ES) ─────────────
 nyMin(int t) => hour(t, TZ) * 60 + minute(t, TZ)
@@ -340,9 +340,9 @@ if active
                 p2 := t2Pts
             else if useBE
                 tStop := tEntry
-                box.set_top(bxSL, tEntry)
-                box.set_bottom(bxSL, tEntry)
-                box.set_text(bxSL, "")
+                box.set_border_style(bxSL, line.style_dashed)
+                box.set_bgcolor(bxSL, color.new(cDn, 90))
+                box.set_text(bxSL, "SL → BE " + str.tostring(tEntry, format.mintick))
                 line.new(time, tEntry, tClose, tEntry, xloc = xloc.bar_time, color = color.gray, style = line.style_dotted)
     else
         if adv
