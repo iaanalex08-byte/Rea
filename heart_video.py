@@ -1,7 +1,7 @@
 import numpy as np, subprocess, sys, wave
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
-W, H, FPS, DUR = 1080, 1920, 30, 16.0
+W, H, FPS, DUR = 1080, 1920, 30, 17.0
 BAR = 64
 CW, CH = 14, 24
 COLS, ROWS = W // CW, (H - BAR) // CH
@@ -92,7 +92,7 @@ def text_mask(lines, height_rows):
         out.append(np.asarray(im.resize((w, height_rows), Image.LANCZOS), np.float32) / 255)
     return out
 
-TXT = text_mask(['TE AMO', 'GETSE'], 14)
+TXT = text_mask(['TE AMO'], 12) + text_mask(['Getse'], 19)
 
 def space(t, zoom, heart_amt, text_t):
     x, y = X / zoom, Y / zoom
@@ -112,8 +112,8 @@ def space(t, zoom, heart_amt, text_t):
                     b[r + dr, c + dc] = tw * 0.6; col[r + dr, c + dc] = (1, 0.9, 0.95); ch[r + dr, c + dc] = ASC + ord(cc)
     # heart
     if heart_amt > 0:
-        s = 0.62 * heart_amt * (1 + 0.07 * beat(t))
-        hx, hy = x / s, -(y + 0.40) / s + 0.1
+        s = 0.55 * heart_amt * (1 + 0.07 * beat(t))
+        hx, hy = x / s, -(y + 0.62) / s + 0.1
         f = (hx ** 2 + (1.15 * hy - np.sqrt(np.abs(hx)) * 0.85) ** 2 - 1.0) * 0.5
         inside = f < 0
         depth = np.clip(-f * 4, 0, 1) ** 0.35
@@ -128,19 +128,19 @@ def space(t, zoom, heart_amt, text_t):
         b = np.where(inside, hb, b); col[inside] = hc[inside]; ch[inside | glow] = -1
     # big ascii text
     if text_t > 0:
-        word = 'TEAMOGETSE#@'
+        word = '@#%8&B@#M%W8'
         for li, m in enumerate(TXT):
-            r0 = int(ROWS * 0.55) + li * 15
+            r0 = [ROWS - 35, ROWS - 22][li]
             reveal = np.clip(text_t * 1.3 - li * 0.6, 0, 1)
             cut = int(COLS * reveal)
             mm = m.copy(); mm[:, cut:] = 0
-            on = mm > 0.2
+            on = mm > 0.15
             rs = slice(r0, r0 + m.shape[0])
             sub_b, sub_c, sub_ch = b[rs], col[rs], ch[rs]
             pul = 0.75 + 0.25 * beat(t)
             sub_b[on] = (0.75 + 0.25 * mm[on]) * pul
-            sub_c[on] = (1.0, 0.55, 0.75)
-            sub_b[~on & (m > 0.02)] = 0; sub_ch[~on & (m > 0.02)] = -1
+            sub_c[on] = (1.0, 0.55, 0.75) if li == 0 else (1.0, 0.78, 0.9)
+            sub_b[~on] = 0; sub_ch[~on] = -1
             idx = (np.arange(COLS)[None, :] + np.arange(m.shape[0])[:, None] * 3) % len(word)
             lit = np.vectorize(lambda k: ASC + ord(word[k]))(idx)
             sub_ch[on] = lit[on]
@@ -180,12 +180,12 @@ def compose(b, col, ch, t):
 
 prompt_font = ImageFont.truetype(FONT, 30, layout_engine=ImageFont.Layout.BASIC)
 def overlay_prompt(arr, t):
-    if t < 12.2: return arr
+    if t < 13.6: return arr
     s = ">>> print('te amo, Getse')"
-    n = min(len(s), int((t - 12.2) * 14))
+    n = min(len(s), int((t - 13.6) * 14))
     im = Image.fromarray(arr); d = ImageDraw.Draw(im)
     cur = '_' if int(t * 3) % 2 == 0 else ' '
-    d.text((40, H - 90), s[:n] + cur, font=prompt_font, fill=(255, 170, 205))
+    d.text((40, BAR + 24), s[:n] + cur, font=prompt_font, fill=(255, 170, 205))
     return np.asarray(im)
 
 ff = subprocess.Popen(['ffmpeg', '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', f'{W}x{H}',
@@ -205,7 +205,7 @@ for k in range(N):
         ch = np.full(X.shape, -1)
         # space visible inside pupil
         sz = zoom_e * pupil_r / 1.9
-        sb, scol, sch = space(t, max(sz, 0.05), smooth(5.0, 7.5, t), 0)
+        sb, scol, sch = space(t, max(sz, 0.05), smooth(7.0, 10.0, t), 0)
         b = np.where(pu, sb, b); col[pu] = scol[pu]; ch = np.where(pu, sch, ch)
         # intro reveal
         rev = jit < t / 1.3
@@ -215,7 +215,7 @@ for k in range(N):
             b = np.where(pu, b, b * (1 - fade))
     else:
         z = (zoom_e * pupil_r / 1.9) * (1 + 0) if False else 1.0
-        b, col, ch = space(t, 1.0, smooth(5.0, 7.5, t), smooth(9.0, 11.5, t))
+        b, col, ch = space(t, 1.0, smooth(7.0, 10.0, t), smooth(10.5, 13.0, t))
         if t < 7.4:
             b *= smooth(7.0, 7.4, t) * 0.6 + 0.4
     if t > DUR - 0.6:
@@ -225,27 +225,8 @@ for k in range(N):
     if k % 60 == 0: print(k, flush=True)
 ff.stdin.close(); ff.wait()
 
-# ---------- audio: soft pad + heartbeats ----------
-SR = 44100
-ts = np.arange(int(DUR * SR)) / SR
-pad = np.zeros_like(ts)
-for f_, a in ((220.0, 0.5), (277.18, 0.35), (329.63, 0.35), (440.0, 0.15)):
-    pad += a * np.sin(2 * np.pi * f_ * ts) * (0.7 + 0.3 * np.sin(2 * np.pi * 0.2 * ts + f_))
-pad *= 0.10 * smooth(0, 2.5, ts) * (1 - smooth(DUR - 1.5, DUR, ts))
-hb = np.zeros_like(ts)
-t0 = 5.0
-while t0 < DUR:
-    for off, amp in ((0.05, 1.0), (0.27, 0.6)):
-        st = t0 + off - 0.03
-        m = (ts >= st) & (ts < st + 0.25)
-        tt = ts[m] - st
-        hb[m] += amp * np.sin(2 * np.pi * (55 + 30 * np.exp(-tt * 30)) * tt) * np.exp(-tt * 18)
-    t0 += 0.95
-hb *= 0.55 * smooth(5.0, 7.5, ts) * (1 - smooth(DUR - 0.8, DUR, ts))
-mix = np.clip(pad + hb, -1, 1)
-with wave.open(OUT + '.wav', 'wb') as w:
-    w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR)
-    w.writeframes((mix * 32000).astype(np.int16).tobytes())
-subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', OUT + '.noaudio.mp4', '-i', OUT + '.wav', '-c:v', 'copy',
-                '-c:a', 'aac', '-b:a', '160k', '-shortest', OUT], check=True)
+# ---------- audio: song from user's recording ----------
+SONG = sys.argv[2]
+subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', OUT + '.noaudio.mp4', '-t', str(DUR), '-i', SONG, '-map', '0:v', '-map', '1:a',
+                '-c:v', 'copy', '-af', f'afade=t=in:d=0.3,afade=t=out:st={DUR-0.8}:d=0.8', '-c:a', 'aac', '-b:a', '192k', '-shortest', OUT], check=True)
 print('done')
