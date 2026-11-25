@@ -50,6 +50,7 @@ class Params:
     c_frac: float = 0.38
     va_frac: float = 0.70
     bos_bars: int = 20
+    bar_min: int = 3              # minutos de las velas de la EMA y del BOS (3 = el modelo; 1 o 5 para probar)
     close_at: str = '15:59'
 
 
@@ -155,10 +156,10 @@ def prepare(contracts):
     """Precalcula por contrato: velas RTH por día, EMA de 3 min."""
     prep = {}
     for k, df in contracts.items():
-        b3 = df.resample('3min', label='left', closed='left').agg(
-            {'o': 'first', 'h': 'max', 'l': 'min', 'c': 'last', 'v': 'sum'}).dropna()
+        agg = {'o': 'first', 'h': 'max', 'l': 'min', 'c': 'last', 'v': 'sum'}
+        bars = {m: (df if m == 1 else df.resample(f'{m}min', label='left', closed='left').agg(agg).dropna()) for m in (1, 3, 5)}
         r = _rth(df)
-        prep[k] = {'m1': df, 'b3': b3, 'days': {d: g for d, g in r.groupby(r.index.date)}}
+        prep[k] = {'m1': df, 'b3': bars[3], 'bars': bars, 'days': {d: g for d, g in r.groupby(r.index.date)}}
     return prep
 
 
@@ -177,9 +178,9 @@ def day_signal(prep, contract, day, p: Params):
     today, yday = P['days'][day], P['days'][prev_day]
     eh, em = map(int, p.entry.split(':'))
     t_ent = (pd.Timestamp(day).tz_localize(p.entry_tz) + pd.Timedelta(hours=eh, minutes=em)).tz_convert(NY)
-    b3 = P['b3']
-    closed = b3[b3.index < t_ent]                      # velas de 3 min ya cerradas
-    if len(closed) < p.ema_len * 3 or closed.index[-1] != t_ent - pd.Timedelta(minutes=3):
+    b3 = P['bars'][p.bar_min] if 'bars' in P else P['b3']
+    closed = b3[b3.index < t_ent]                      # velas ya cerradas (de bar_min minutos)
+    if len(closed) < p.ema_len * 3 or closed.index[-1] != t_ent - pd.Timedelta(minutes=p.bar_min):
         return None
     ema = closed.c.ewm(span=p.ema_len, adjust=False).mean().iloc[-1]
     ent = closed.c.iloc[-1]
