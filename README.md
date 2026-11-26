@@ -40,3 +40,7 @@ En `backtest/`: `engine.py` es el motor del Modelo B y `run.py` lo corre en vela
 ## App Gym
 
 En `gym/`: app de rutinas, entrenamientos y peso corporal (React + Vite + Zustand, PWA). Se publica en `/gym/`. Ver `gym/README.md`.
+
+## Simulador EGEL-NUTRI
+
+En `ceneval/` hay un simulador de examen tipo CENEVAL para el EGEL-NUTRI: banco de reactivos basado en la guía de estudio (`ceneval/preguntas.js`), simulacro cronometrado con la proporción oficial por área y subárea, modo práctica con explicación, hoja de respuestas, resultados por área con dictamen estimado y repaso de los fallados. Se publica en `https://<usuario>.github.io/<repositorio>/ceneval/`.

@@ -1,0 +1,776 @@
+<title>Simulador EGEL-NUTRI</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Simulador de examen tipo CENEVAL para el EGEL-NUTRI, con reactivos basados en la guía de estudio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: hoja de examen centrada (columna de lectura) + hoja de respuestas de burbujas a la derecha; en teléfono, la hoja baja a un panel. */
+:root {
+  --bg: #EEF3F2;
+  --surface: #FFFFFF;
+  --surface-2: #F6F9F8;
+  --ink: #14232A;
+  --muted: #586B71;
+  --line: #D3DEDB;
+  --accent: #0E6E61;
+  --accent-ink: #FFFFFF;
+  --accent-soft: #DCEFEA;
+  --area-a: #0E6E61;
+  --area-b: #3C54A6;
+  --area-c: #A75B17;
+  --ok: #1E8049;
+  --ok-soft: #DDF2E5;
+  --bad: #B83227;
+  --bad-soft: #F8E0DC;
+  --mark: #B47A06;
+  --mark-soft: #FBEFD3;
+  --shadow: 0 1px 2px rgba(20,35,42,.06), 0 6px 20px rgba(20,35,42,.06);
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Source Sans 3", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1618; --surface: #162125; --surface-2: #1B282C; --ink: #E3ECEA; --muted: #98ABAE; --line: #2A3B3F;
+    --accent: #45BBA7; --accent-ink: #062722; --accent-soft: #173A35;
+    --area-a: #45BBA7; --area-b: #93A5F2; --area-c: #E1A05C;
+    --ok: #4CC47F; --ok-soft: #173426; --bad: #EF7A6E; --bad-soft: #3D1E1B; --mark: #E8B84A; --mark-soft: #3A2E12;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.25);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1618; --surface: #162125; --surface-2: #1B282C; --ink: #E3ECEA; --muted: #98ABAE; --line: #2A3B3F;
+  --accent: #45BBA7; --accent-ink: #062722; --accent-soft: #173A35;
+  --area-a: #45BBA7; --area-b: #93A5F2; --area-c: #E1A05C;
+  --ok: #4CC47F; --ok-soft: #173426; --bad: #EF7A6E; --bad-soft: #3D1E1B; --mark: #E8B84A; --mark-soft: #3A2E12;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.25);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 17px/1.55 var(--f-body);
+  -webkit-font-smoothing: antialiased;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--surface); }
+button, select, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.15; text-wrap: balance; margin: 0; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.eyebrow { font: 600 12px/1.2 var(--f-body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  border: 1px solid var(--line); background: var(--surface); border-radius: 10px;
+  padding: 10px 16px; font-weight: 600; min-height: 44px;
+}
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.primary:hover { filter: brightness(1.08); }
+.btn.ghost { background: transparent; }
+.btn.danger { color: var(--bad); }
+.btn[disabled] { opacity: .45; cursor: not-allowed; }
+
+/* ---------- Inicio ---------- */
+.top { background: var(--surface); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 12px; }
+.brand { display: flex; align-items: center; gap: 10px; font: 700 18px/1 var(--f-display); }
+.brand svg { flex: none; }
+.hero { padding-block: 40px 28px; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 36px; align-items: start; }
+.hero h1 { font-size: clamp(34px, 5.2vw, 56px); font-weight: 800; letter-spacing: -.02em; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.lead { color: var(--muted); max-width: 60ch; margin: 14px 0 0; font-size: 18px; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 22px; }
+.facts div { display: flex; flex-direction: column; }
+.facts b { font: 700 26px/1.1 var(--f-display); }
+.facts span { color: var(--muted); font-size: 14px; }
+
+.setup { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; box-shadow: var(--shadow); display: grid; gap: 18px; }
+.setup h2 { font-size: 22px; }
+.field { display: grid; gap: 8px; }
+.field > label, .field > .lbl { font-weight: 700; font-size: 15px; }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg input { position: absolute; opacity: 0; pointer-events: none; }
+.seg label {
+  border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; font-size: 15px; cursor: pointer; background: var(--surface-2);
+}
+.seg input:checked + label { background: var(--accent-soft); border-color: var(--accent); color: var(--ink); font-weight: 700; }
+.seg input:focus-visible + label { outline: 3px solid var(--accent); outline-offset: 2px; }
+select { width: 100%; min-height: 44px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-2); padding: 8px 12px; }
+.hint { font-size: 14px; color: var(--muted); margin: 0; }
+.resume { border: 1px dashed var(--accent); background: var(--accent-soft); border-radius: 12px; padding: 12px 14px; display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+
+.section { padding-block: 18px 40px; }
+.section h2 { font-size: 24px; margin-bottom: 14px; }
+.grid2 { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 24px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px; min-width: 0; }
+.tbl-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 700; }
+td.num, th.num { text-align: right; font-family: var(--f-mono); font-variant-numeric: tabular-nums; font-size: 14px; }
+tr.area td { font-weight: 700; background: var(--surface-2); }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; vertical-align: 1px; }
+.hist { display: grid; gap: 8px; }
+.hist-row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.hist-row:last-child { border-bottom: 0; }
+.score-pill { font: 700 15px/1 var(--f-mono); padding: 6px 10px; border-radius: 8px; }
+.empty { color: var(--muted); font-size: 15px; }
+.tips { margin: 0; padding-left: 18px; color: var(--muted); font-size: 15px; display: grid; gap: 6px; }
+
+/* ---------- Examen ---------- */
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--surface); border-bottom: 1px solid var(--line); }
+.bar .wrap { display: flex; align-items: center; gap: 10px 16px; padding-block: 10px; flex-wrap: wrap; }
+.bar .title { font: 700 16px/1.2 var(--f-display); }
+.bar .spacer { flex: 1; }
+.timer { font: 700 18px/1 var(--f-mono); font-variant-numeric: tabular-nums; padding: 8px 12px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--line); }
+.timer.low { color: var(--bad); border-color: var(--bad); }
+.progress { height: 4px; background: var(--line); }
+.progress i { display: block; height: 100%; background: var(--accent); transition: width .25s; }
+.exam { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 24px; padding-block: 24px 48px; align-items: start; }
+.sheet { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: clamp(18px, 3vw, 32px); box-shadow: var(--shadow); min-width: 0; }
+.q-meta { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; margin-bottom: 14px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; border-radius: 999px; padding: 4px 10px; border: 1px solid currentColor; }
+.qnum { font: 700 14px/1 var(--f-mono); color: var(--muted); }
+.caso { background: var(--surface-2); border-left: 4px solid var(--accent); border-radius: 0 10px 10px 0; padding: 12px 16px; margin-bottom: 16px; font-size: 16px; }
+.caso .eyebrow { margin-bottom: 4px; }
+.base { font-size: 19px; line-height: 1.5; margin: 0 0 14px; max-width: 68ch; }
+.items { margin: 0 0 18px; padding: 0; list-style: none; display: grid; gap: 6px; max-width: 68ch; }
+.items li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 6px; }
+.items li b { font-family: var(--f-mono); font-size: 15px; color: var(--muted); padding-top: 1px; }
+.relate { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 8px 18px; margin: 0 0 18px; max-width: 72ch; }
+.relate .col { display: grid; gap: 6px; align-content: start; }
+.relate .col div { background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; font-size: 16px; }
+.opts { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.opt {
+  width: 100%; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; align-items: center; text-align: left;
+  background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; padding: 10px 14px; min-height: 56px; line-height: 1.4;
+}
+.opt:hover:not([disabled]) { border-color: var(--accent); }
+.bub {
+  width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--muted); display: grid; place-items: center;
+  font: 700 15px/1 var(--f-mono); color: var(--muted); transition: background .15s, color .15s;
+}
+.opt.sel { border-color: var(--accent); background: var(--accent-soft); }
+.opt.sel .bub { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.opt.right { border-color: var(--ok); background: var(--ok-soft); }
+.opt.right .bub { background: var(--ok); border-color: var(--ok); color: #fff; }
+.opt.wrong { border-color: var(--bad); background: var(--bad-soft); }
+.opt.wrong .bub { background: var(--bad); border-color: var(--bad); color: #fff; }
+.opt[disabled] { cursor: default; }
+.fb { margin-top: 16px; border-radius: 12px; padding: 14px 16px; border: 1px solid var(--line); background: var(--surface-2); }
+.fb.ok { border-color: var(--ok); }
+.fb.no { border-color: var(--bad); }
+.fb h3 { font-size: 17px; margin-bottom: 4px; }
+.fb.ok h3 { color: var(--ok); }
+.fb.no h3 { color: var(--bad); }
+.fb p { margin: 0; }
+.fb .ref { font-size: 14px; color: var(--muted); margin-top: 6px; }
+.nav { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+.nav .spacer { flex: 1; }
+.btn.marked { border-color: var(--mark); color: var(--mark); background: var(--mark-soft); }
+
+.answers { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 80px); background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px; display: grid; gap: 12px; max-height: calc(100vh - 110px); overflow: auto; }
+.answers h2 { font-size: 17px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: 13px; color: var(--muted); }
+.legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; background: var(--k); border: 1px solid var(--line); }
+.cells { display: grid; grid-template-columns: repeat(auto-fill, minmax(38px, 1fr)); gap: 6px; }
+.cell {
+  height: 38px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface-2);
+  font: 700 13px/1 var(--f-mono); color: var(--muted); position: relative; padding: 0;
+}
+.cell.done { background: var(--accent-soft); color: var(--ink); border-color: var(--accent); }
+.cell.ok { background: var(--ok-soft); border-color: var(--ok); color: var(--ink); }
+.cell.no { background: var(--bad-soft); border-color: var(--bad); color: var(--ink); }
+.cell.cur { outline: 2px solid var(--ink); outline-offset: 1px; }
+.cell.flag::after { content: ""; position: absolute; top: 3px; right: 3px; width: 7px; height: 7px; border-radius: 50%; background: var(--mark); }
+.area-sep { grid-column: 1 / -1; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-top: 4px; }
+.sheet-toggle { display: none; }
+.collapsible { display: grid; gap: 12px; }
+
+/* ---------- Diálogo ---------- */
+.scrim { position: fixed; inset: 0; background: rgba(8,16,18,.55); z-index: 50; display: grid; place-items: center; padding: 16px; }
+.dialog { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; max-width: 460px; width: 100%; padding: 22px; display: grid; gap: 12px; box-shadow: var(--shadow); }
+.dialog h2 { font-size: 22px; }
+.dialog p { margin: 0; color: var(--muted); }
+.dialog .row { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; margin-top: 6px; }
+
+/* ---------- Resultados ---------- */
+.res-head { padding-block: 32px 12px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 28px; align-items: center; }
+.ring { width: 150px; height: 150px; }
+.res-head h1 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; }
+.res-head p { color: var(--muted); margin: 8px 0 0; }
+.areas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding-block: 16px; }
+.area-card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: grid; gap: 10px; min-width: 0; border-top: 4px solid var(--c); }
+.area-card h3 { font-size: 17px; }
+.area-card .big { font: 800 34px/1 var(--f-display); }
+.meter { height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; }
+.meter i { display: block; height: 100%; background: var(--c); }
+.dict { font-size: 13px; font-weight: 700; border-radius: 6px; padding: 4px 8px; justify-self: start; }
+.dict.ans { background: var(--bad-soft); color: var(--bad); }
+.dict.ds { background: var(--accent-soft); color: var(--accent); }
+.dict.dss { background: var(--ok-soft); color: var(--ok); }
+.subs { display: grid; gap: 6px; font-size: 14px; }
+.subs div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
+.subs span:last-child { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+.scale { font-size: 14px; color: var(--muted); }
+.review { display: grid; gap: 14px; padding-block: 8px 48px; }
+.rv { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; border-left: 5px solid var(--k); min-width: 0; }
+.rv .base { font-size: 17px; margin-bottom: 10px; }
+.rv dl { margin: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px 12px; font-size: 15px; }
+.rv dt { color: var(--muted); font-weight: 600; }
+.rv dd { margin: 0; }
+.rv .expl { margin: 10px 0 0; font-size: 15px; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+footer { color: var(--muted); font-size: 13px; padding-block: 24px 40px; border-top: 1px solid var(--line); }
+
+@media (max-width: 900px) {
+  .hero, .grid2 { grid-template-columns: minmax(0, 1fr); }
+  .exam { grid-template-columns: minmax(0, 1fr); }
+  .answers { position: static; max-height: none; }
+  .answers[data-collapsed="true"] .collapsible { display: none; }
+  .sheet-toggle { display: inline-flex; }
+  .areas { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .base { font-size: 17px; }
+  .res-head { grid-template-columns: minmax(0, 1fr); justify-items: start; }
+  .relate { grid-template-columns: minmax(0, 1fr); }
+  .bar .title { display: none; }
+  .nav .btn { flex: 1 1 auto; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div id="app"></div>
+
+<script src="preguntas.js"></script>
+<script>
+(function () {
+"use strict";
+const AREAS = window.AREAS, CASOS = window.CASOS;
+const BANK = window.PREGUNTAS.map((r, i) => ({
+  id: i, area: r[0], sub: r[1], tema: r[2], pag: r[3], base: r[4], opts: r[5], expl: r[6],
+  g: r[7] && r[7].g || null, l: r[7] && r[7].l || null
+}));
+const LETTERS = ["A", "B", "C", "D"];
+const SEC_PER_ITEM = 150; // 2.5 min por reactivo, ritmo aproximado de una sesión del EGEL
+const KEY = "egelnutri.sim.v1";
+const app = document.getElementById("app");
+
+/* ---------- almacenamiento local (opcional) ---------- */
+function load() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } }
+function save() { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) { /* sin almacenamiento */ } }
+let store = load();
+store.history = store.history || [];
+let S = null;          // sesión activa
+let timerId = null;
+
+/* ---------- utilidades ---------- */
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+const areaColor = a => `var(--area-${a.toLowerCase()})`;
+const fmtTime = s => { s = Math.max(0, Math.round(s)); const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = s % 60; return (h ? h + ":" + String(m).padStart(2, "0") : m) + ":" + String(x).padStart(2, "0"); };
+const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
+function fecha(t) { try { return new Date(t).toLocaleDateString("es-MX", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }); } catch (e) { return ""; } }
+
+/* Orden de opciones: barajadas; si todas empiezan con número, se ordenan de menor a mayor como en el examen impreso. */
+function optionOrder(q) {
+  let idx = shuffle([0, 1, 2, 3]);
+  const allNum = q.opts.every(o => /^[\d$−-]/.test(o));
+  if (allNum) {
+    const n = o => parseFloat(o.replace(/[$,]/g, "").replace("−", "-"));
+    idx.sort((a, b) => (n(q.opts[a]) - n(q.opts[b])) || q.opts[a].localeCompare(q.opts[b]));
+  }
+  return idx;
+}
+
+/* Unidades: un caso clínico con sus reactivos viaja junto. */
+function unitsOf(list) {
+  const map = new Map();
+  list.forEach(q => { const k = q.g || "q" + q.id; if (!map.has(k)) map.set(k, []); map.get(k).push(q); });
+  return [...map.values()];
+}
+
+function buildExam(cfg) {
+  let pool = BANK.filter(q => (cfg.area === "todas" || q.area === cfg.area) && (!cfg.sub || q.sub === +cfg.sub));
+  if (cfg.ids) pool = BANK.filter(q => cfg.ids.includes(q.id));
+  const total = cfg.n === "todos" || cfg.ids ? pool.length : Math.min(+cfg.n, pool.length);
+  let chosen = [];
+  if (cfg.ids || total >= pool.length) {
+    chosen = pool;
+  } else {
+    // cuotas por subárea según la tabla oficial de reactivos
+    const subs = [];
+    Object.keys(AREAS).forEach(a => {
+      if (cfg.area !== "todas" && a !== cfg.area) return;
+      Object.keys(AREAS[a].sub).forEach(s => {
+        if (cfg.sub && +s !== +cfg.sub) return;
+        const items = pool.filter(q => q.area === a && q.sub === +s);
+        if (items.length) subs.push({ a, s: +s, w: OFFICIAL[a + s], items });
+      });
+    });
+    const wsum = subs.reduce((t, x) => t + x.w, 0);
+    let assigned = 0;
+    subs.forEach(x => { x.quota = Math.floor(total * x.w / wsum); assigned += x.quota; });
+    subs.slice().sort((p, q) => (total * q.w / wsum % 1) - (total * p.w / wsum % 1)).forEach(x => { if (assigned < total) { x.quota++; assigned++; } });
+    subs.forEach(x => {
+      let got = 0;
+      for (const u of shuffle(unitsOf(x.items))) {
+        if (got >= x.quota) break;
+        if (got + u.length > x.quota + 1 && got > 0) continue;
+        chosen.push(...u); got += u.length;
+      }
+    });
+  }
+  // orden: por área (como las sesiones del examen), unidades barajadas, casos juntos
+  const order = [];
+  ["A", "B", "C"].forEach(a => shuffle(unitsOf(chosen.filter(q => q.area === a))).forEach(u => order.push(...u)));
+  return order.map(q => ({ id: q.id, ord: optionOrder(q), ans: null, flag: false, checked: false }));
+}
+
+const OFFICIAL = { A1: 34, A2: 31, A3: 11, A4: 10, B1: 21, B2: 24, B3: 11, C1: 19, C2: 14, C3: 19, C4: 8 };
+
+/* ---------- dictamen estimado (escala CENEVAL 700–1300) ---------- */
+function indice(p) {
+  if (p < .6) return Math.round(700 + p / .6 * 299);
+  if (p < .8) return Math.round(1000 + (p - .6) / .2 * 149);
+  return Math.round(1150 + (p - .8) / .2 * 150);
+}
+function dictamen(p) {
+  if (p >= .8) return { k: "dss", t: "Desempeño sobresaliente" };
+  if (p >= .6) return { k: "ds", t: "Desempeño satisfactorio" };
+  return { k: "ans", t: "Aún no satisfactorio" };
+}
+
+/* ============ INICIO ============ */
+function viewHome() {
+  stopTimer();
+  const counts = {};
+  BANK.forEach(q => { counts[q.area] = (counts[q.area] || 0) + 1; counts[q.area + q.sub] = (counts[q.area + q.sub] || 0) + 1; });
+  const saved = store.session && !store.session.done ? store.session : null;
+  const rows = Object.entries(AREAS).map(([a, A]) => `
+    <tr class="area"><td><span class="dot" style="background:${areaColor(a)}"></span>${a}. ${esc(A.nombre)}</td><td class="num">${A.reactivos}</td><td class="num">${A.pct}</td><td class="num">${counts[a] || 0}</td></tr>
+    ${Object.entries(A.sub).map(([s, n]) => `<tr><td style="padding-left:28px">${s}. ${esc(n)}</td><td class="num">${OFFICIAL[a + s]}</td><td class="num">${(OFFICIAL[a + s] / 202 * 100).toFixed(1)}</td><td class="num">${counts[a + s] || 0}</td></tr>`).join("")}
+  `).join("");
+  const hist = store.history.slice(0, 8);
+
+  app.innerHTML = `
+  <header class="top"><div class="wrap">
+    <div class="brand">${logo()} EGEL-NUTRI</div>
+    <span class="eyebrow">Simulador tipo CENEVAL</span>
+  </div></header>
+
+  <main>
+  <section class="wrap hero">
+    <div>
+      <p class="eyebrow">Examen General para el Egreso de la Licenciatura en Nutrición</p>
+      <h1>Practica el examen <em>como si fuera el día</em>.</h1>
+      <p class="lead">Reactivos de opción múltiple con cuatro opciones, casos clínicos, ordenamiento, selección de elementos y relación de columnas. Al final ves tu resultado por área con un dictamen estimado y la explicación de cada respuesta.</p>
+      <div class="facts">
+        <div><b class="mono">${BANK.length}</b><span>reactivos en el banco</span></div>
+        <div><b class="mono">3</b><span>áreas · 11 subáreas</span></div>
+        <div><b class="mono">${Object.keys(CASOS).length}</b><span>casos con varios reactivos</span></div>
+      </div>
+    </div>
+
+    <form class="setup" id="setup" novalidate>
+      <h2>Arma tu examen</h2>
+      ${saved ? `<div class="resume"><span>Tienes un examen sin terminar: reactivo ${saved.i + 1} de ${saved.qs.length}.</span><button type="button" class="btn primary" id="resume">Continuar</button></div>` : ""}
+      <div class="field">
+        <span class="lbl">Modo</span>
+        <div class="seg">
+          <input type="radio" name="mode" id="m-exam" value="exam" checked><label for="m-exam">Simulacro</label>
+          <input type="radio" name="mode" id="m-prac" value="practice"><label for="m-prac">Práctica con explicación</label>
+        </div>
+        <p class="hint" id="mode-hint">Sin retroalimentación hasta terminar, con cronómetro.</p>
+      </div>
+      <div class="field">
+        <label for="area">Contenido</label>
+        <select id="area" name="area">
+          <option value="todas">Examen completo (las 3 áreas, proporción oficial)</option>
+          ${Object.entries(AREAS).map(([a, A]) => `<option value="${a}">${a}. ${esc(A.nombre)}</option>`).join("")}
+        </select>
+        <select id="sub" name="sub" hidden></select>
+      </div>
+      <div class="field">
+        <span class="lbl">Número de reactivos</span>
+        <div class="seg" id="nseg">
+          ${["20", "50", "100", "todos"].map((n, i) => `<input type="radio" name="n" id="n-${n}" value="${n}" ${i === 1 ? "checked" : ""}><label for="n-${n}">${n === "todos" ? "Todos" : n}</label>`).join("")}
+        </div>
+      </div>
+      <div class="field">
+        <span class="lbl">Tiempo</span>
+        <div class="seg">
+          <input type="radio" name="t" id="t-on" value="on" checked><label for="t-on">Con límite</label>
+          <input type="radio" name="t" id="t-off" value="off"><label for="t-off">Sin límite</label>
+        </div>
+        <p class="hint" id="t-hint"></p>
+      </div>
+      <button class="btn primary" type="submit">Comenzar examen</button>
+    </form>
+  </section>
+
+  <section class="wrap section grid2">
+    <div class="panel">
+      <h2>Estructura del examen</h2>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Área / subárea</th><th class="num">Reactivos</th><th class="num">%</th><th class="num">En banco</th></tr></thead>
+        <tbody>${rows}<tr class="area"><td>Total</td><td class="num">202</td><td class="num">100</td><td class="num">${BANK.length}</td></tr></tbody>
+      </table></div>
+      <p class="hint" style="margin-top:10px">El EGEL-NUTRI real tiene 202 reactivos en dos sesiones, más 20 % de reactivos piloto que no cuentan. El simulacro reparte las preguntas con esta misma proporción.</p>
+    </div>
+    <div style="display:grid;gap:24px;align-content:start;min-width:0">
+      <div class="panel">
+        <h2>Tus intentos</h2>
+        ${hist.length ? `<div class="hist">${hist.map(h => `
+          <div class="hist-row">
+            <span class="score-pill" style="background:${h.p >= 80 ? "var(--ok-soft)" : h.p >= 60 ? "var(--accent-soft)" : "var(--bad-soft)"}">${h.p} %</span>
+            <span>${esc(h.label)}<br><small style="color:var(--muted)">${h.ok} de ${h.n} · ${fecha(h.t)}</small></span>
+            <span class="mono" style="color:var(--muted);font-size:13px">${h.mode === "practice" ? "Práctica" : "Simulacro"}</span>
+          </div>`).join("")}</div>` : `<p class="empty">Aquí aparecerán tus resultados. Se guardan solo en este navegador.</p>`}
+      </div>
+      <div class="panel">
+        <h2>Antes de empezar</h2>
+        <ul class="tips">
+          <li>Lee el verbo de cada pregunta: selecciona, ordena, relaciona, calcula.</li>
+          <li>En los casos clínicos, varios reactivos comparten el mismo planteamiento.</li>
+          <li>Usa las teclas A–D o 1–4 para responder y las flechas para avanzar.</li>
+          <li>Marca para revisar lo que te genere duda y regresa desde la hoja de respuestas.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  </main>
+  <footer><div class="wrap">Reactivos elaborados a partir de la Guía para el EGEL-NUTRI (Nutria Creativa, 2021). El dictamen es una estimación de práctica; no reproduce la calificación oficial del CENEVAL.</div></footer>`;
+
+  const f = $("#setup");
+  const subSel = $("#sub");
+  const upd = () => {
+    const a = f.area.value;
+    if (a === "todas") { subSel.hidden = true; subSel.innerHTML = ""; }
+    else {
+      subSel.hidden = false;
+      const cur = subSel.value;
+      subSel.innerHTML = `<option value="">Todas las subáreas de ${esc(AREAS[a].corto.toLowerCase())}</option>` +
+        Object.entries(AREAS[a].sub).map(([s, n]) => `<option value="${s}">${a}${s}. ${esc(n)} (${counts[a + s] || 0})</option>`).join("");
+      if ([...subSel.options].some(o => o.value === cur)) subSel.value = cur;
+    }
+    const prac = f.mode.value === "practice";
+    $("#mode-hint").textContent = prac ? "Calificas cada reactivo al momento y ves la explicación." : "Sin retroalimentación hasta terminar, como el examen real.";
+    const n = sizeOf({ area: a, sub: subSel.value, n: f.n.value });
+    $("#t-hint").textContent = f.t.value === "on" ? `${n} reactivos · ${fmtTime(n * SEC_PER_ITEM)} (2.5 min por reactivo).` : `${n} reactivos sin cronómetro.`;
+  };
+  f.addEventListener("change", upd);
+  upd();
+  f.addEventListener("submit", e => {
+    e.preventDefault();
+    const cfg = { mode: f.mode.value, area: f.area.value, sub: subSel.value || null, n: f.n.value, timed: f.t.value === "on" };
+    start(cfg);
+  });
+  const r = $("#resume");
+  if (r) r.addEventListener("click", () => { S = store.session; viewExam(); });
+}
+function sizeOf(cfg) {
+  const pool = BANK.filter(q => (cfg.area === "todas" || q.area === cfg.area) && (!cfg.sub || q.sub === +cfg.sub));
+  return cfg.n === "todos" ? pool.length : Math.min(+cfg.n, pool.length);
+}
+function labelOf(cfg) {
+  if (cfg.ids) return "Repaso de reactivos fallados";
+  if (cfg.area === "todas") return "Examen completo";
+  return cfg.sub ? `${cfg.area}${cfg.sub}. ${AREAS[cfg.area].sub[cfg.sub]}` : `${cfg.area}. ${AREAS[cfg.area].nombre}`;
+}
+function logo() {
+  return `<svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect x="1" y="1" width="26" height="26" rx="7" fill="var(--accent)"/><circle cx="9" cy="10" r="3" fill="none" stroke="var(--accent-ink)" stroke-width="2"/><circle cx="19" cy="10" r="3" fill="var(--accent-ink)"/><circle cx="9" cy="19" r="3" fill="none" stroke="var(--accent-ink)" stroke-width="2"/><circle cx="19" cy="19" r="3" fill="none" stroke="var(--accent-ink)" stroke-width="2"/></svg>`;
+}
+
+/* ============ EXAMEN ============ */
+function start(cfg) {
+  const qs = buildExam(cfg);
+  if (!qs.length) return;
+  S = { cfg, qs, i: 0, t0: Date.now(), limit: cfg.timed ? qs.length * SEC_PER_ITEM : null, used: 0, label: labelOf(cfg), done: false };
+  store.session = S; save();
+  viewExam();
+}
+
+function stopTimer() { if (timerId) { clearInterval(timerId); timerId = null; } }
+function tick() {
+  S.used += 1;
+  if (S.used % 5 === 0) save();
+  const el = $("#timer");
+  if (!el) return;
+  if (S.limit) {
+    const left = S.limit - S.used;
+    el.textContent = fmtTime(left);
+    el.classList.toggle("low", left <= 300);
+    if (left <= 0) { finish(true); }
+  } else el.textContent = fmtTime(S.used);
+}
+
+function viewExam() {
+  stopTimer();
+  const practice = S.cfg.mode === "practice";
+  app.innerHTML = `
+  <div class="bar"><div class="wrap">
+    <button class="btn ghost" id="home" aria-label="Salir al inicio">${logo()}</button>
+    <span class="title">${esc(S.label)}</span>
+    <span class="spacer"></span>
+    <span class="timer" id="timer" title="${S.limit ? "Tiempo restante" : "Tiempo transcurrido"}">${fmtTime(S.limit ? S.limit - S.used : S.used)}</span>
+    <button class="btn" id="finish">Terminar</button>
+  </div><div class="progress"><i id="prog"></i></div></div>
+  <main class="wrap exam">
+    <article class="sheet" id="sheet" aria-live="polite"></article>
+    <aside class="answers" id="answers" data-collapsed="true">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+        <h2>Hoja de respuestas</h2>
+        <button class="btn sheet-toggle" id="toggle" aria-expanded="false">Ver</button>
+      </div>
+      <div class="collapsible">
+        <div class="legend">
+          ${practice ? `<span style="--k:var(--ok-soft)">Correcta</span><span style="--k:var(--bad-soft)">Incorrecta</span>` : `<span style="--k:var(--accent-soft)">Respondida</span>`}
+          <span style="--k:var(--surface-2)">Pendiente</span><span style="--k:var(--mark)">Para revisar</span>
+        </div>
+        <div class="cells" id="cells"></div>
+        <p class="hint mono" id="count"></p>
+      </div>
+    </aside>
+  </main>`;
+  $("#home").addEventListener("click", () => { save(); viewHome(); });
+  $("#finish").addEventListener("click", askFinish);
+  $("#toggle").addEventListener("click", e => {
+    const a = $("#answers"), c = a.dataset.collapsed === "true";
+    a.dataset.collapsed = c ? "false" : "true";
+    e.currentTarget.textContent = c ? "Ocultar" : "Ver";
+    e.currentTarget.setAttribute("aria-expanded", String(c));
+  });
+  renderQ();
+  renderCells();
+  timerId = setInterval(tick, 1000);
+}
+
+function renderItems(q) {
+  if (!q.l) return "";
+  const rel = q.l.every(x => /^(\d\.|[a-z]\))\s/.test(x));
+  if (rel) {
+    const left = q.l.filter(x => /^\d\./.test(x)), right = q.l.filter(x => /^[a-z]\)/.test(x));
+    return `<div class="relate"><div class="col">${left.map(x => `<div>${esc(x)}</div>`).join("")}</div><div class="col">${right.map(x => `<div>${esc(x)}</div>`).join("")}</div></div>`;
+  }
+  return `<ol class="items">${q.l.map((x, i) => `<li><b>${i + 1}.</b><span>${esc(x)}</span></li>`).join("")}</ol>`;
+}
+
+function renderQ() {
+  const st = S.qs[S.i], q = BANK[st.id], A = AREAS[q.area];
+  const practice = S.cfg.mode === "practice";
+  const lock = practice && st.checked;
+  const correctPos = st.ord.indexOf(0);
+  const caso = q.g ? CASOS[q.g] : null;
+  const sameCase = q.g ? S.qs.filter(x => BANK[x.id].g === q.g) : [];
+  const casePos = q.g ? sameCase.indexOf(st) + 1 : 0;
+  $("#sheet").innerHTML = `
+    <div class="q-meta">
+      <span class="qnum">Reactivo ${S.i + 1} / ${S.qs.length}</span>
+      <span class="chip" style="color:${areaColor(q.area)}">${q.area}${q.sub} · ${esc(A.sub[q.sub])}</span>
+    </div>
+    ${caso ? `<div class="caso"><p class="eyebrow">Caso · reactivo ${casePos} de ${sameCase.length}</p>${esc(caso)}</div>` : ""}
+    <p class="base">${esc(q.base)}</p>
+    ${renderItems(q)}
+    <ul class="opts" role="radiogroup" aria-label="Opciones de respuesta">
+      ${st.ord.map((oi, pos) => {
+        let cls = "opt";
+        if (st.ans === pos) cls += " sel";
+        if (lock) { if (pos === correctPos) cls += " right"; else if (st.ans === pos) cls += " wrong"; }
+        return `<li><button type="button" class="${cls}" data-pos="${pos}" role="radio" aria-checked="${st.ans === pos}" ${lock ? "disabled" : ""}>
+          <span class="bub">${LETTERS[pos]}</span><span>${esc(q.opts[oi])}</span></button></li>`;
+      }).join("")}
+    </ul>
+    ${lock ? feedback(q, st) : ""}
+    <div class="nav">
+      <button class="btn" id="prev" ${S.i === 0 ? "disabled" : ""}>← Anterior</button>
+      <button class="btn ${st.flag ? "marked" : ""}" id="flag" aria-pressed="${st.flag}">${st.flag ? "Marcado para revisar" : "Marcar para revisar"}</button>
+      <span class="spacer"></span>
+      ${practice && !st.checked ? `<button class="btn primary" id="check" ${st.ans === null ? "disabled" : ""}>Calificar</button>` : ""}
+      ${S.i < S.qs.length - 1 ? `<button class="btn ${practice && !st.checked ? "" : "primary"}" id="next">Siguiente →</button>` : `<button class="btn primary" id="end">Terminar examen</button>`}
+    </div>`;
+  $("#prog").style.width = (S.qs.filter(x => x.ans !== null).length / S.qs.length * 100) + "%";
+  $("#sheet").querySelectorAll(".opt").forEach(b => b.addEventListener("click", () => choose(+b.dataset.pos)));
+  $("#prev").addEventListener("click", () => go(S.i - 1));
+  $("#flag").addEventListener("click", () => { st.flag = !st.flag; save(); renderQ(); renderCells(); });
+  const nx = $("#next"); if (nx) nx.addEventListener("click", () => go(S.i + 1));
+  const en = $("#end"); if (en) en.addEventListener("click", askFinish);
+  const ck = $("#check"); if (ck) ck.addEventListener("click", check);
+}
+function feedback(q, st) {
+  const ok = st.ord[st.ans] === 0;
+  const right = LETTERS[st.ord.indexOf(0)];
+  return `<div class="fb ${ok ? "ok" : "no"}">
+    <h3>${ok ? "Correcta" : "Incorrecta · la respuesta es la " + right}</h3>
+    <p>${esc(q.expl)}</p>
+    <p class="ref">Tema: ${esc(q.tema)} · guía, p. ${q.pag}</p>
+  </div>`;
+}
+function choose(pos) {
+  const st = S.qs[S.i];
+  if (S.cfg.mode === "practice" && st.checked) return;
+  st.ans = pos; save(); renderQ(); renderCells();
+}
+function check() {
+  const st = S.qs[S.i];
+  if (st.ans === null) return;
+  st.checked = true; save(); renderQ(); renderCells();
+}
+function go(i) {
+  if (i < 0 || i >= S.qs.length) return;
+  S.i = i; save(); renderQ(); renderCells();
+  window.scrollTo({ top: 0, behavior: "auto" });
+}
+function renderCells() {
+  const practice = S.cfg.mode === "practice";
+  let lastArea = null, html = "";
+  S.qs.forEach((st, i) => {
+    const q = BANK[st.id];
+    if (q.area !== lastArea) { lastArea = q.area; html += `<div class="area-sep" style="color:${areaColor(q.area)}">${q.area}. ${esc(AREAS[q.area].corto)}</div>`; }
+    let cls = "cell";
+    if (practice && st.checked) cls += st.ord[st.ans] === 0 ? " ok" : " no";
+    else if (st.ans !== null) cls += " done";
+    if (st.flag) cls += " flag";
+    if (i === S.i) cls += " cur";
+    html += `<button class="${cls}" data-i="${i}" aria-label="Reactivo ${i + 1}${st.ans !== null ? ", respondido" : ""}${st.flag ? ", marcado" : ""}">${i + 1}</button>`;
+  });
+  $("#cells").innerHTML = html;
+  $("#cells").querySelectorAll(".cell").forEach(c => c.addEventListener("click", () => go(+c.dataset.i)));
+  const n = S.qs.filter(x => x.ans !== null).length, f = S.qs.filter(x => x.flag).length;
+  $("#count").textContent = `${n}/${S.qs.length} respondidos${f ? ` · ${f} por revisar` : ""}`;
+}
+
+function askFinish() {
+  const pend = S.qs.filter(x => x.ans === null).length, flag = S.qs.filter(x => x.flag).length;
+  const d = document.createElement("div");
+  d.className = "scrim";
+  d.innerHTML = `<div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlg-t">
+    <h2 id="dlg-t">¿Terminar el examen?</h2>
+    <p>${pend ? `Te faltan <b>${pend}</b> reactivos por responder; cuentan como incorrectos.` : "Respondiste todos los reactivos."}${flag ? ` Tienes ${flag} marcados para revisar.` : ""}</p>
+    <div class="row"><button class="btn" id="dlg-no">Seguir respondiendo</button><button class="btn primary" id="dlg-yes">Terminar y calificar</button></div>
+  </div>`;
+  document.body.appendChild(d);
+  const close = () => d.remove();
+  $("#dlg-no", d).addEventListener("click", close);
+  $("#dlg-yes", d).addEventListener("click", () => { close(); finish(false); });
+  d.addEventListener("click", e => { if (e.target === d) close(); });
+  $("#dlg-yes", d).focus();
+}
+
+function finish(timeout) {
+  stopTimer();
+  S.done = true; S.timeout = timeout; S.t1 = Date.now();
+  const ok = S.qs.filter(x => x.ans !== null && x.ord[x.ans] === 0).length;
+  store.history.unshift({ t: S.t1, label: S.label, n: S.qs.length, ok, p: pct(ok, S.qs.length), mode: S.cfg.mode });
+  store.history = store.history.slice(0, 30);
+  store.session = null; save();
+  viewResults();
+}
+
+/* ============ RESULTADOS ============ */
+function viewResults(filter = "todas") {
+  const res = S.qs.map(st => ({ st, q: BANK[st.id], ok: st.ans !== null && st.ord[st.ans] === 0 }));
+  const ok = res.filter(r => r.ok).length, n = res.length, p = ok / n;
+  const by = {};
+  res.forEach(r => {
+    const a = r.q.area, s = a + r.q.sub;
+    by[a] = by[a] || { ok: 0, n: 0 }; by[a].n++; if (r.ok) by[a].ok++;
+    by[s] = by[s] || { ok: 0, n: 0 }; by[s].n++; if (r.ok) by[s].ok++;
+  });
+  const R = 64, C = 2 * Math.PI * R;
+  const ring = `<svg class="ring" viewBox="0 0 150 150" role="img" aria-label="${pct(ok, n)} por ciento de aciertos">
+    <circle cx="75" cy="75" r="${R}" fill="none" stroke="var(--line)" stroke-width="12"/>
+    <circle cx="75" cy="75" r="${R}" fill="none" stroke="var(--accent)" stroke-width="12" stroke-linecap="round" stroke-dasharray="${C * p} ${C}" transform="rotate(-90 75 75)"/>
+    <text x="75" y="80" text-anchor="middle" fill="var(--ink)" style="font:800 32px var(--f-display)">${pct(ok, n)}%</text>
+    <text x="75" y="102" text-anchor="middle" fill="var(--muted)" style="font:600 12px var(--f-body)">${ok} de ${n}</text></svg>`;
+  const shown = res.filter(r => filter === "todas" || (filter === "mal" && !r.ok) || (filter === "bien" && r.ok) || (filter === "marcadas" && r.st.flag));
+  const wrongIds = res.filter(r => !r.ok).map(r => r.q.id);
+
+  app.innerHTML = `
+  <header class="top"><div class="wrap">
+    <div class="brand">${logo()} EGEL-NUTRI</div>
+    <button class="btn" id="home">Inicio</button>
+  </div></header>
+  <main class="wrap">
+    <section class="res-head">
+      ${ring}
+      <div>
+        <p class="eyebrow">${esc(S.label)} · ${S.cfg.mode === "practice" ? "Práctica" : "Simulacro"}</p>
+        <h1>${p >= .8 ? "Resultado sobresaliente" : p >= .6 ? "Resultado satisfactorio" : "Todavía hay temas por reforzar"}</h1>
+        <p>Tiempo usado: <span class="mono">${fmtTime(S.used)}</span>${S.limit ? ` de <span class="mono">${fmtTime(S.limit)}</span>` : ""}${S.timeout ? " · se terminó el tiempo" : ""}. Índice global estimado: <b class="mono">${indice(p)}</b>.</p>
+        <div class="filters" style="margin-top:14px">
+          <button class="btn primary" id="again">Nuevo examen</button>
+          ${wrongIds.length ? `<button class="btn" id="retry">Practicar los ${wrongIds.length} fallados</button>` : ""}
+        </div>
+      </div>
+    </section>
+
+    <section class="areas">
+      ${Object.keys(AREAS).filter(a => by[a]).map(a => {
+        const x = by[a], pp = x.ok / x.n, d = dictamen(pp);
+        return `<div class="area-card" style="--c:${areaColor(a)}">
+          <p class="eyebrow">Área ${a}</p>
+          <h3>${esc(AREAS[a].nombre)}</h3>
+          <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap"><span class="big mono">${pct(x.ok, x.n)}%</span><span style="color:var(--muted)">${x.ok}/${x.n} · índice ${indice(pp)}</span></div>
+          <div class="meter"><i style="width:${pct(x.ok, x.n)}%"></i></div>
+          <span class="dict ${d.k}">${d.t}</span>
+          <div class="subs">${Object.keys(AREAS[a].sub).filter(s => by[a + s]).map(s => `<div><span>${a}${s}. ${esc(AREAS[a].sub[s])}</span><span>${by[a + s].ok}/${by[a + s].n}</span></div>`).join("")}</div>
+        </div>`;
+      }).join("")}
+    </section>
+    <p class="scale">Escala del CENEVAL por área: 700 a 999 Aún no satisfactorio, 1000 a 1149 Desempeño satisfactorio, 1150 a 1300 Desempeño sobresaliente. Aquí se estima con 60 % y 80 % de aciertos como cortes.</p>
+
+    <section style="padding-block:20px 8px;display:grid;gap:12px">
+      <h2 style="font-size:24px">Revisión de respuestas</h2>
+      <div class="filters" role="group" aria-label="Filtrar reactivos">
+        ${[["todas", "Todas"], ["mal", "Incorrectas"], ["bien", "Correctas"], ["marcadas", "Marcadas"]].map(([k, t]) => `<button class="btn ${filter === k ? "primary" : ""}" data-f="${k}">${t}</button>`).join("")}
+      </div>
+    </section>
+    <section class="review">
+      ${shown.length ? shown.map(r => {
+        const i = S.qs.indexOf(r.st), q = r.q;
+        const yours = r.st.ans === null ? "Sin respuesta" : `${LETTERS[r.st.ans]}) ${q.opts[r.st.ord[r.st.ans]]}`;
+        const right = `${LETTERS[r.st.ord.indexOf(0)]}) ${q.opts[0]}`;
+        return `<article class="rv" style="--k:${r.ok ? "var(--ok)" : "var(--bad)"}">
+          <div class="q-meta"><span class="qnum">Reactivo ${i + 1}</span><span class="chip" style="color:${areaColor(q.area)}">${q.area}${q.sub} · ${esc(q.tema)}</span>${r.st.flag ? `<span class="chip" style="color:var(--mark)">Marcado</span>` : ""}</div>
+          ${q.g ? `<div class="caso">${esc(CASOS[q.g])}</div>` : ""}
+          <p class="base">${esc(q.base)}</p>
+          ${renderItems(q)}
+          <dl><dt>Tu respuesta</dt><dd style="color:${r.ok ? "var(--ok)" : "var(--bad)"}">${esc(yours)}</dd>${r.ok ? "" : `<dt>Correcta</dt><dd>${esc(right)}</dd>`}</dl>
+          <p class="expl">${esc(q.expl)} <span style="color:var(--muted)">(guía, p. ${q.pag})</span></p>
+        </article>`;
+      }).join("") : `<p class="empty">No hay reactivos en este filtro.</p>`}
+    </section>
+  </main>`;
+  $("#home").addEventListener("click", viewHome);
+  $("#again").addEventListener("click", viewHome);
+  const rt = $("#retry");
+  if (rt) rt.addEventListener("click", () => start({ mode: "practice", area: "todas", sub: null, n: "todos", timed: false, ids: wrongIds }));
+  app.querySelectorAll("[data-f]").forEach(b => b.addEventListener("click", () => { viewResults(b.dataset.f); }));
+  window.scrollTo({ top: 0 });
+}
+
+/* ---------- teclado ---------- */
+document.addEventListener("keydown", e => {
+  if (!S || S.done || !$("#sheet") || document.querySelector(".scrim")) return;
+  if (e.target.matches("input, select, textarea") || e.metaKey || e.ctrlKey || e.altKey) return;
+  const k = e.key.toLowerCase();
+  const map = { a: 0, b: 1, c: 2, d: 3, "1": 0, "2": 1, "3": 2, "4": 3 };
+  if (k in map) { choose(map[k]); e.preventDefault(); }
+  else if (k === "arrowright") go(S.i + 1);
+  else if (k === "arrowleft") go(S.i - 1);
+  else if (k === "enter" && S.cfg.mode === "practice" && !S.qs[S.i].checked && S.qs[S.i].ans !== null) check();
+});
+
+viewHome();
+})();
+</script>

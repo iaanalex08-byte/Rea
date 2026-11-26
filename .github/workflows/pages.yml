@@ -45,6 +45,9 @@ jobs:
           mkdir -p _site/terminal
           cp -r terminal/index.html terminal/css terminal/js terminal/data _site/terminal/
           cp -r calorias _site/calorias
+          mkdir -p _site/ceneval
+          { echo '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'; cat ceneval/index.html; } > _site/ceneval/index.html
+          cp ceneval/preguntas.js _site/ceneval/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
