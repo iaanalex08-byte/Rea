@@ -149,7 +149,7 @@ def choose_contracts(contracts):
     nbars = pd.concat([_rth(df).groupby(_rth(df).index.date).size().rename(k) for k, df in contracts.items()],
                       axis=1).fillna(0).max(axis=1)
     ok = [d for d in v.index if d.weekday() < 5 and nbars.get(d, 0) >= 100]
-    return v.loc[ok].idxmax(axis=1)
+    return v.loc[ok].idxmax(axis=1).sort_index()   # en orden cronológico: la curva, las rachas y la caída dependen de él
 
 
 def prepare(contracts):

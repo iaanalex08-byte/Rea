@@ -1,0 +1,259 @@
+<meta name="dash-one-writer">
+<style>
+  .ob { display: flex; flex-direction: column; gap: var(--cds-gap-xl); max-width: 1100px; margin: 0 auto; font-family: var(--font-anthropic-sans); color: var(--color-fg); }
+  .ob h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+  .ob h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; text-wrap: balance; }
+  .ob h3 { font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); margin: 0; }
+  .ob p { margin: 0; line-height: 1.55; max-width: 72ch; }
+  .ob-sec { display: flex; flex-direction: column; gap: var(--cds-gap-md); }
+  .ob-muted { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+  .ob-num { font-variant-numeric: tabular-nums; }
+  .ob-controls { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); align-items: end; }
+  .ob-controls label { display: flex; flex-direction: column; gap: 4px; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .ob-hero { display: grid; grid-template-columns: minmax(220px, 1fr) 2fr; gap: var(--cds-gap-lg); align-items: stretch; }
+  @media (max-width: 720px) { .ob-hero { grid-template-columns: 1fr; } }
+  .ob-win { background: var(--color-panel); border: 2px solid var(--color-ok); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: flex; flex-direction: column; gap: var(--cds-gap-xs); justify-content: center; }
+  .ob-win .ob-giant { font-family: var(--font-anthropic-serif); font-size: calc(var(--cds-font-size-title) * 2.2); line-height: 1; color: var(--color-ok); font-variant-numeric: tabular-nums; }
+  .ob-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--cds-gap-md); }
+  .ob-tile { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md); display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .ob-big { font-family: var(--font-anthropic-serif); font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; }
+  .ob-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--cds-gap-lg); align-items: start; }
+  .ob-tablewrap { overflow-x: auto; }
+  .ob table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; font-size: var(--cds-font-size-body); }
+  .ob th { text-align: right; font-weight: var(--cds-font-weight-medium); color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); padding: 6px 10px; border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .ob td { text-align: right; padding: 6px 10px; border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .ob th:first-child, .ob td:first-child { text-align: left; }
+  .ob td.pos { color: var(--color-ok); } .ob td.neg { color: var(--color-bad); }
+  .ob tr.ob-hl td { font-weight: var(--cds-font-weight-medium); background: color-mix(in srgb, var(--color-ok) 8%, transparent); }
+  .ob-chart { position: relative; min-height: 300px; }
+  .ob-chart svg text { fill: var(--cds-text-secondary); font-size: var(--cds-font-size-caption); }
+  .ob-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); box-shadow: var(--cds-shadow-popover); border-radius: var(--cds-radius); padding: 6px 10px; font-size: var(--cds-font-size-caption); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .ob-steps { margin: 0; padding-left: 1.3em; display: flex; flex-direction: column; gap: var(--cds-gap-sm); line-height: 1.5; max-width: 75ch; }
+  .ob-steps b { font-weight: var(--cds-font-weight-medium); }
+  .ob-warn { border-left: 3px solid var(--color-warn); padding-left: var(--cds-pad-md); }
+</style>
+
+<div class="ob">
+  <header class="ob-sec" id="inicio">
+    <h1>ORB con retroceso · ES</h1>
+    <p>Rango de 8:30 a 8:35 CDMX, ruptura, retroceso al nivel roto y entrada a favor con objetivo 1:2. De 2021 a noviembre 2026 se operaron <b class="ob-num" data-draw="k" data-fmt="int" data-source="resumen" data-field="ops" data-row="0">—</b> días con la configuración elegida abajo; ganó <b class="ob-num" data-draw="k" data-fmt="pct" data-source="resumen" data-field="ganadoras" data-row="0">—</b> de las veces, contra 33.3 % que hace falta con 1:2 para no perder.</p>
+    <p class="ob-muted">ES de 1 minuto (NinjaTrader), contrato con más volumen cada día · costos incluidos · si en una vela se tocan stop y objetivo cuenta el stop · resultados en R (1R = lo que arriesgas) y en dólares con 1 contrato.</p>
+  </header>
+
+  <section class="ob-controls" id="controles" aria-label="Configuración">
+    <label for="ob-contrato">Contrato y costos<select id="ob-contrato" class="dash-select"><option value="ES">ES · 1 tick + $4.50</option><option value="MES">MES · 1 tick + $2.49</option></select></label>
+    <label for="ob-stop">Stop mínimo para operar<select id="ob-stop" class="dash-select"><option value="0">Sin mínimo (tal cual)</option><option value="2">2 pts (8 ticks)</option><option value="3">3 pts (12 ticks)</option><option value="4">4 pts (16 ticks)</option></select></label>
+    <p class="ob-muted" style="max-width: 46ch;">Con stops chicos la comisión se come la ventaja. La configuración recomendada es ES con stop de 2 puntos o más.</p>
+  </section>
+
+  <section class="ob-hero" id="resumen">
+    <div class="ob-win">
+      <span class="ob-muted">Winrate general</span>
+      <span class="ob-giant" data-draw="k" data-fmt="pct" data-source="resumen" data-field="ganadoras" data-row="0">—</span>
+      <span class="ob-muted">Para no perder con 1:2 se necesita 33.3 %</span>
+    </div>
+    <div class="ob-tiles">
+      <div class="ob-tile"><span class="ob-muted">Profit factor</span><span class="ob-big" data-draw="k" data-fmt="pf" data-source="resumen" data-field="pf" data-row="0">—</span></div>
+      <div class="ob-tile"><span class="ob-muted">Esperanza por operación</span><span class="ob-big" data-draw="k" data-fmt="r" data-source="resumen" data-field="esperanza_r" data-row="0">—</span><span class="ob-muted">veces lo arriesgado</span></div>
+      <div class="ob-tile"><span class="ob-muted">Neto en R</span><span class="ob-big" data-draw="k" data-fmt="r1" data-source="resumen" data-field="neto_r" data-row="0">—</span></div>
+      <div class="ob-tile"><span class="ob-muted">Neto con 1 contrato</span><span class="ob-big" data-draw="k" data-fmt="usd" data-source="resumen" data-field="neto_usd" data-row="0">—</span></div>
+      <div class="ob-tile"><span class="ob-muted">Caída máxima</span><span class="ob-big" data-draw="k" data-fmt="r1" data-source="resumen" data-field="caida_r" data-row="0">—</span><span class="ob-muted">en R</span></div>
+      <div class="ob-tile"><span class="ob-muted">Peor racha</span><span class="ob-big" data-draw="k" data-fmt="int" data-source="resumen" data-field="racha_perd" data-row="0">—</span><span class="ob-muted">stops seguidos</span></div>
+      <div class="ob-tile"><span class="ob-muted">Mejor racha</span><span class="ob-big" data-draw="k" data-fmt="int" data-source="resumen" data-field="racha_gan" data-row="0">—</span><span class="ob-muted">ganadoras seguidas</span></div>
+      <div class="ob-tile"><span class="ob-muted">Stop típico</span><span class="ob-big" data-draw="k" data-fmt="pts" data-source="resumen" data-field="stop_mediana" data-row="0">—</span><span class="ob-muted">puntos (mediana)</span></div>
+    </div>
+  </section>
+
+  <section class="ob-sec" id="curva">
+    <h2>Curva de capital en R</h2>
+    <p class="ob-muted">Cada punto es una operación, con costos. Pasa el cursor o el dedo para ver la fecha, el resultado y el saldo.</p>
+    <div class="ob-chart" data-draw="curva" data-source="filtradas">—</div>
+  </section>
+
+  <section class="ob-sec" id="anual">
+    <h2>Winrate y resultado por año</h2>
+    <div class="ob-tablewrap">
+      <table data-source="anual" data-row-key="anio">
+        <thead><tr><th data-field="anio">Año</th><th data-field="ops">Operaciones</th><th data-field="ganadoras">Winrate</th><th data-field="pf">Factor</th><th data-field="neto_r">Neto R</th><th data-field="neto_usd">Neto 1 contrato</th><th data-field="caida_r">Caída máx. R</th></tr></thead>
+        <tbody data-draw="t-anual"></tbody>
+      </table>
+    </div>
+    <p class="ob-muted">2026 llega hasta el 20 de noviembre.</p>
+  </section>
+
+  <section class="ob-grid" id="grupos">
+    <div class="ob-sec" id="por-direccion">
+      <h3>Compras contra ventas</h3>
+      <div class="ob-tablewrap"><table data-source="por_direccion" data-row-key="grupo"><thead><tr><th data-field="grupo">Dirección</th><th data-field="ops">Ops</th><th data-field="ganadoras">Winrate</th><th data-field="pf">Factor</th><th data-field="esperanza_r">Media R</th></tr></thead><tbody data-draw="t-dir"></tbody></table></div>
+    </div>
+    <div class="ob-sec" id="por-temporada">
+      <h3>Hora del rango en Nueva York</h3>
+      <div class="ob-tablewrap"><table data-source="por_temporada" data-row-key="grupo"><thead><tr><th data-field="grupo">8:30 CDMX equivale a</th><th data-field="ops">Ops</th><th data-field="ganadoras">Winrate</th><th data-field="pf">Factor</th><th data-field="esperanza_r">Media R</th></tr></thead><tbody data-draw="t-temp"></tbody></table></div>
+      <p class="ob-muted">México ya no cambia de horario: en verano de EE. UU. el rango cae a las 10:30 NY.</p>
+    </div>
+    <div class="ob-sec" id="por-dia">
+      <h3>Mejores días</h3>
+      <div class="ob-tablewrap"><table data-source="por_dia" data-row-key="grupo"><thead><tr><th data-field="grupo">Día</th><th data-field="ops">Ops</th><th data-field="ganadoras">Winrate</th><th data-field="pf">Factor</th><th data-field="esperanza_r">Media R</th></tr></thead><tbody data-draw="t-dia"></tbody></table></div>
+    </div>
+    <div class="ob-sec" id="por-salida">
+      <h3>Cómo terminan</h3>
+      <div class="ob-tablewrap"><table data-source="por_salida" data-row-key="grupo"><thead><tr><th data-field="grupo">Salida</th><th data-field="ops">Ops</th><th data-field="pct">% de ops</th><th data-field="esperanza_r">Media R</th></tr></thead><tbody data-draw="t-sal"></tbody></table></div>
+    </div>
+  </section>
+
+  <section class="ob-sec" id="embudo">
+    <h2>Qué pasa cada día</h2>
+    <p class="ob-muted">Todos los días hábiles de 2021 a 2026, antes del filtro de stop mínimo.</p>
+    <div class="ob-tablewrap"><table data-source="estados" data-row-key="estado"><thead><tr><th data-field="estado">Resultado del día</th><th data-field="dias">Días</th></tr></thead><tbody data-draw="t-est"></tbody></table></div>
+  </section>
+
+  <section class="ob-sec" id="variantes">
+    <h2>Variantes probadas (ES con costos)</h2>
+    <p class="ob-muted">Un factor parecido en 2021–2023 y en 2024–2026 indica que la regla no depende de unos pocos años buenos.</p>
+    <div class="ob-tablewrap">
+      <table data-source="variantes" data-row-key="variante">
+        <thead><tr><th data-field="variante">Variante</th><th data-field="ops">Ops</th><th data-field="ganadoras">Winrate</th><th data-field="pf">Factor</th><th data-field="pf_2021_2023">2021–23</th><th data-field="pf_2024_2026">2024–26</th><th data-field="esperanza_r">Media R</th><th data-field="neto_r">Neto R</th><th data-field="caida_r">Caída R</th></tr></thead>
+        <tbody data-draw="t-var"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="ob-sec" id="reglas">
+    <h2>Reglas usadas en el backtest</h2>
+    <ol class="ob-steps">
+      <li><b>Rango:</b> máximo y mínimo de las velas de 1 minuto de 8:30 a 8:35 CDMX.</li>
+      <li><b>Ruptura:</b> la primera vela de 1 minuto que cierra fuera del rango marca la dirección del día.</li>
+      <li><b>Retroceso:</b> el precio regresa a tocar el nivel roto (en compra, el máximo del rango; en venta, el mínimo).</li>
+      <li><b>Entrada:</b> cuando vuelve a cruzar ese nivel a favor, con orden stop en el nivel.</li>
+      <li><b>Stop:</b> el extremo del retroceso. <b>Objetivo:</b> 2 veces el riesgo. Si a las 15:59 NY sigue abierta, se cierra.</li>
+      <li><b>No se opera</b> si toca el otro lado del rango antes de entrar, si no entra antes de las 12:00 NY, o si el stop es menor al mínimo elegido arriba.</li>
+    </ol>
+    <p class="ob-warn">ES y YM se mueven en la misma dirección casi siempre, pero no con los mismos rangos ni retrocesos: un resultado en MYM no se traslada a ES. Además, el caso de la presentación (86 % de acierto, factor 1.21) gana $750 y pierde $4,000 por operación, una estructura muy distinta a este 1:2.</p>
+  </section>
+</div>
+
+<script>
+  const f2 = d3.format('.2f'), fi = d3.format(',.0f');
+  const usd = (v) => (v < 0 ? '-$' : '+$') + fi(Math.abs(v));
+  const FMT = { int: (v) => fi(v), pct: (v) => d3.format('.1f')(v) + ' %', pf: (v) => (v == null ? '—' : f2(v)), r: (v) => (v >= 0 ? '+' : '') + d3.format('.3f')(v), r1: (v) => (v >= 0 ? '+' : '') + d3.format('.1f')(v), usd: (v) => usd(v), pts: (v) => f2(v) };
+
+  function stats(rows) {
+    const R = rows.map((r) => r.Rn);
+    const g = R.filter((x) => x > 0).reduce((s, x) => s + x, 0), l = -R.filter((x) => x < 0).reduce((s, x) => s + x, 0);
+    let s = 0, pk = 0, dd = 0, cl = 0, cw = 0, ml = 0, mw = 0;
+    for (const x of R) { s += x; pk = Math.max(pk, s); dd = Math.min(dd, s - pk); if (x < 0) { cl++; cw = 0; } else { cw++; cl = 0; } ml = Math.max(ml, cl); mw = Math.max(mw, cw); }
+    return { ops: R.length, ganadoras: R.length ? Math.round((1000 * R.filter((x) => x > 0).length) / R.length) / 10 : null,
+      pf: l > 0 ? Math.round((g / l) * 100) / 100 : null, esperanza_r: R.length ? Math.round((1000 * (g - l)) / R.length) / 1000 : null,
+      neto_r: Math.round((g - l) * 10) / 10, neto_usd: Math.round(rows.reduce((t, r) => t + r.usd, 0)), caida_r: Math.round(dd * 10) / 10, racha_perd: ml, racha_gan: mw };
+  }
+  window.obStats = stats;
+
+  dash.calc('filtradas', {
+    title: 'Operaciones con costos y stop mínimo',
+    description: 'Las operaciones del backtest con el costo del contrato elegido restado y sin las de stop menor al mínimo elegido.',
+    inputs: ['operaciones'],
+    fn: (operaciones) => {
+      const p = dash.params(); const c = { ES: { pts: 0.34, ppt: 50 }, MES: { pts: 0.748, ppt: 5 } }[p.contrato || 'ES'] || { pts: 0.34, ppt: 50 };
+      const min = Number(p.stop_min ?? 2);
+      let saldo = 0;
+      return operaciones.filter((o) => +o.riesgo_pts >= min).sort((a, b) => (a.fecha < b.fecha ? -1 : 1)).map((o) => {
+        const Rn = Math.round(((+o.pts - c.pts) / +o.riesgo_pts) * 10000) / 10000; saldo += Rn;
+        return { fecha: o.fecha, anio: o.anio, dia: o.dia, direccion: o.direccion, rango_ny: o.rango_ny, salida: o.salida, riesgo_pts: +o.riesgo_pts,
+          Rn, usd: Math.round((+o.pts - c.pts) * c.ppt * 100) / 100, saldo_r: Math.round(saldo * 100) / 100 };
+      });
+    },
+  });
+
+  dash.calc('resumen', {
+    title: 'Resumen', description: 'Winrate, factor, esperanza, neto, caída, rachas y stop típico de las operaciones filtradas.',
+    inputs: ['filtradas'],
+    fn: (filtradas) => {
+      const s = window.obStats(filtradas); const st = filtradas.map((r) => r.riesgo_pts).sort((a, b) => a - b);
+      return [{ ...s, stop_mediana: st.length ? st[Math.floor(st.length / 2)] : null }];
+    },
+  });
+
+  dash.calc('anual', {
+    title: 'Por año', description: 'Las mismas métricas para cada año.',
+    inputs: ['filtradas'],
+    fn: (filtradas) => Array.from(d3.group(filtradas, (r) => r.anio), ([anio, rows]) => ({ anio, ...window.obStats(rows) })).sort((a, b) => d3.ascending(a.anio, b.anio)),
+  });
+
+  const grupo = (id, key, title, orden) => dash.calc(id, {
+    title, description: 'Operaciones, winrate, factor y media en R por grupo.',
+    inputs: ['filtradas'],
+    fn: (filtradas) => {
+      const out = Array.from(d3.group(filtradas, (r) => r[key]), ([g, rows]) => { const s = window.obStats(rows); return { grupo: g, ops: s.ops, ganadoras: s.ganadoras, pf: s.pf, esperanza_r: s.esperanza_r, pct: Math.round((1000 * rows.length) / filtradas.length) / 10 }; });
+      return orden ? out.sort((a, b) => orden.indexOf(a.grupo) - orden.indexOf(b.grupo)) : out.sort((a, b) => b.ops - a.ops);
+    },
+  });
+  grupo('por_direccion', 'direccion', 'Por dirección');
+  grupo('por_temporada', 'rango_ny', 'Por hora del rango en NY');
+  grupo('por_dia', 'dia', 'Por día de la semana', ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']);
+  grupo('por_salida', 'salida', 'Por tipo de salida');
+
+  document.querySelectorAll('#ob-contrato').forEach((el) => { el.value = dash.params().contrato || 'ES'; el.addEventListener('change', () => dash.setParams({ contrato: el.value })); });
+  document.querySelectorAll('#ob-stop').forEach((el) => { el.value = String(dash.params().stop_min ?? 2); el.addEventListener('change', () => dash.setParams({ stop_min: Number(el.value) })); });
+
+  dash.draw('k', (el) => {
+    const d = dash.data('resumen');
+    el.classList.toggle('dash-skeleton', d.status === 'loading');
+    if (d.status !== 'ok' || !d.data || !d.data[0]) { el.textContent = '—'; return; }
+    const v = d.data[0][el.dataset.field]; el.textContent = v == null ? '—' : FMT[el.dataset.fmt](v);
+  });
+
+  function cell(tr, t, cls) { const td = document.createElement('td'); td.textContent = t; if (cls) td.className = cls; tr.appendChild(td); }
+  function fill(tb, id, key, render, n) {
+    const d = dash.data(id);
+    if (d.status === 'error') { const tr = document.createElement('tr'); const td = document.createElement('td'); td.colSpan = n; td.textContent = 'No se pudo cargar.'; tr.appendChild(td); return tb.replaceChildren(tr); }
+    if (d.status !== 'ok' || !d.data) return tb.replaceChildren();
+    tb.replaceChildren(...d.data.map((r) => { const tr = document.createElement('tr'); tr.dataset.key = r[key]; render(tr, r); return tr; }));
+  }
+  const pfCls = (v) => (v == null ? '' : v >= 1.15 ? 'pos' : v < 1 ? 'neg' : '');
+  dash.draw('t-anual', (tb) => fill(tb, 'anual', 'anio', (tr, r) => { cell(tr, r.anio); cell(tr, fi(r.ops)); cell(tr, FMT.pct(r.ganadoras)); cell(tr, FMT.pf(r.pf), pfCls(r.pf)); cell(tr, FMT.r1(r.neto_r), r.neto_r >= 0 ? 'pos' : 'neg'); cell(tr, usd(r.neto_usd), r.neto_usd >= 0 ? 'pos' : 'neg'); cell(tr, FMT.r1(r.caida_r)); }, 7));
+  const g4 = (tr, r) => { cell(tr, r.grupo); cell(tr, fi(r.ops)); cell(tr, FMT.pct(r.ganadoras)); cell(tr, FMT.pf(r.pf), pfCls(r.pf)); cell(tr, FMT.r(r.esperanza_r), r.esperanza_r >= 0 ? 'pos' : 'neg'); };
+  dash.draw('t-dir', (tb) => fill(tb, 'por_direccion', 'grupo', g4, 5));
+  dash.draw('t-temp', (tb) => fill(tb, 'por_temporada', 'grupo', g4, 5));
+  dash.draw('t-dia', (tb) => fill(tb, 'por_dia', 'grupo', g4, 5));
+  dash.draw('t-sal', (tb) => fill(tb, 'por_salida', 'grupo', (tr, r) => { cell(tr, r.grupo); cell(tr, fi(r.ops)); cell(tr, FMT.pct(r.pct)); cell(tr, FMT.r(r.esperanza_r), r.esperanza_r >= 0 ? 'pos' : 'neg'); }, 4));
+  dash.draw('t-est', (tb) => fill(tb, 'estados', 'estado', (tr, r) => { cell(tr, r.estado); cell(tr, fi(r.dias)); }, 2));
+  dash.draw('t-var', (tb) => fill(tb, 'variantes', 'variante', (tr, r) => { if (/recomendada/.test(r.variante)) tr.className = 'ob-hl'; cell(tr, r.variante); cell(tr, fi(r.ops)); cell(tr, FMT.pct(r.ganadoras)); cell(tr, f2(r.pf), pfCls(r.pf)); cell(tr, f2(r.pf_2021_2023), pfCls(r.pf_2021_2023)); cell(tr, f2(r.pf_2024_2026), pfCls(r.pf_2024_2026)); cell(tr, FMT.r(r.esperanza_r), r.esperanza_r >= 0 ? 'pos' : 'neg'); cell(tr, FMT.r1(r.neto_r)); cell(tr, FMT.r1(r.caida_r)); }, 9));
+
+  dash.draw('curva', {
+    mount(el) { el.replaceChildren(); const tip = document.createElement('div'); tip.className = 'ob-tip'; tip.hidden = true; el.appendChild(tip); return { tip }; },
+    update(el, made) {
+      const d = dash.data('filtradas');
+      el.querySelectorAll('svg, .ob-msg').forEach((n) => n.remove()); made.tip.hidden = true;
+      if (d.status !== 'ok' || !d.data || !d.data.length) { const p = document.createElement('p'); p.className = 'ob-muted ob-msg'; p.textContent = d.status === 'error' ? 'No se pudo cargar el backtest.' : '—'; el.appendChild(p); return; }
+      const parse = d3.utcParse('%Y-%m-%d'), fd = d3.utcFormat('%d/%m/%Y');
+      const rows = d.data.map((r) => ({ t: parse(r.fecha), s: r.saldo_r, R: r.Rn, sal: r.salida, dir: r.direccion }));
+      let pk = 0; rows.forEach((r) => { pk = Math.max(pk, r.s); r.dd = r.s - pk; });
+      const W = Math.max(280, el.clientWidth), H = 240, hD = 70, gap = 18, ml = 44, mr = 10;
+      const svg = d3.select(el).insert('svg', ':first-child').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H + gap + hD + 24}`).attr('role', 'img').attr('aria-label', 'Saldo acumulado en R de 2021 a 2026 y, debajo, la caída desde el máximo');
+      const y = d3.scaleLinear().domain([Math.min(0, d3.min(rows, (r) => r.s)), Math.max(1, d3.max(rows, (r) => r.s))]).nice().range([H, 8]);
+      const yd = d3.scaleLinear().domain([Math.min(-1, d3.min(rows, (r) => r.dd)), 0]).nice().range([H + gap + hD, H + gap]);
+      const x = d3.scaleUtc().domain(d3.extent(rows, (r) => r.t)).range([ml, W - mr]);
+      svg.append('g').selectAll('line').data(y.ticks(5)).join('line').attr('x1', ml).attr('x2', W - mr).attr('y1', y).attr('y2', y).style('stroke', 'var(--cds-chart-grid)');
+      svg.append('g').selectAll('text').data(y.ticks(5)).join('text').attr('x', ml - 6).attr('y', (v) => y(v) + 4).attr('text-anchor', 'end').text((v) => v + 'R');
+      svg.append('text').attr('x', ml - 6).attr('y', yd(yd.domain()[0]) + 4).attr('text-anchor', 'end').text(Math.round(yd.domain()[0]) + 'R');
+      svg.append('text').attr('x', ml + 4).attr('y', H + gap - 4).text('Caída desde el máximo');
+      svg.append('g').selectAll('text').data(x.ticks(W < 500 ? 4 : 7)).join('text').attr('x', x).attr('y', H + gap + hD + 18).attr('text-anchor', 'middle').text(d3.utcFormat('%Y'));
+      svg.append('line').attr('x1', ml).attr('x2', W - mr).attr('y1', y(0)).attr('y2', y(0)).style('stroke', 'var(--cds-chart-axis)');
+      svg.append('path').datum(rows).attr('d', d3.line().x((r) => x(r.t)).y((r) => y(r.s))).style('fill', 'none').style('stroke', dash.colors[0]).style('stroke-width', 1.8);
+      svg.append('path').datum(rows).attr('d', d3.area().x((r) => x(r.t)).y0(yd(0)).y1((r) => yd(r.dd))).style('fill', 'var(--cds-chart-status-critical)').style('opacity', 0.35);
+      const last = rows[rows.length - 1];
+      svg.append('circle').attr('cx', x(last.t)).attr('cy', y(last.s)).attr('r', 4).style('fill', dash.colors[0]);
+      const dot = svg.append('circle').attr('r', 4).style('fill', 'var(--color-fg)').style('display', 'none');
+      const bis = d3.bisector((r) => r.t).center;
+      const move = (ev) => {
+        const [mx] = d3.pointer(ev, svg.node()); const r = rows[bis(rows, x.invert(mx))]; if (!r) return;
+        const sc = W / svg.node().getBoundingClientRect().width;
+        dot.style('display', null).attr('cx', x(r.t)).attr('cy', y(r.s));
+        made.tip.hidden = false; made.tip.textContent = `${fd(r.t)} · ${r.dir} · ${r.sal} · ${(r.R >= 0 ? '+' : '') + f2(r.R)}R · saldo ${(r.s >= 0 ? '+' : '') + d3.format('.1f')(r.s)}R`;
+        const tw = made.tip.offsetWidth; made.tip.style.left = Math.max(0, Math.min(el.clientWidth - tw, x(r.t) / sc - tw / 2)) + 'px'; made.tip.style.top = Math.max(0, y(r.s) / sc - 44) + 'px';
+      };
+      svg.append('rect').attr('x', ml).attr('y', 0).attr('width', W - mr - ml).attr('height', H + gap + hD).style('fill', 'transparent')
+        .on('pointermove', move).on('pointerdown', move).on('pointerleave', () => { made.tip.hidden = true; dot.style('display', 'none'); });
+    },
+  });
+</script>

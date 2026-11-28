@@ -8,8 +8,8 @@
 "pf_2018_2022": 1.11,
 "pf_2023_2026": 1.31,
 "neto": 23185,
-"caida_max": -5292,
-"racha": 8
+"caida_max": -6705,
+"racha": 9
 },
 {
 "version": "Modelo A + C (9:12 CDMX, 35/30/120 BE)",
@@ -19,7 +19,7 @@
 "pf_2018_2022": 1.12,
 "pf_2023_2026": 1.02,
 "neto": 10848,
-"caida_max": -10579,
+"caida_max": -8460,
 "racha": 8
 },
 {
@@ -30,8 +30,8 @@
 "pf_2018_2022": 1.2,
 "pf_2023_2026": 1.23,
 "neto": 22500,
-"caida_max": -5552,
-"racha": 5
+"caida_max": -3803,
+"racha": 8
 },
 {
 "version": "Modelo B · Gap (este)",
@@ -41,8 +41,8 @@
 "pf_2018_2022": 1.48,
 "pf_2023_2026": 1.42,
 "neto": 31215,
-"caida_max": -3712,
-"racha": 5
+"caida_max": -4527,
+"racha": 6
 }
 ],
 "meta": [
