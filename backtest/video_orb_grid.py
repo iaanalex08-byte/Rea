@@ -47,3 +47,27 @@ pd.set_option('display.width', 200)
 print('días operados', len(P))
 print('mejores con winrate >= 80 %'); print(r[r['gana%'] >= 80].sort_values('PF', ascending=False).head(8).to_string(index=False))
 print('cuántas combinaciones ganan (PF > 1) con winrate >= 80 %:', ((r['gana%'] >= 80) & (r.PF > 1)).sum(), 'de', (r['gana%'] >= 80).sum())
+
+def rachas(x):
+    w = l = bw = bl = 0; lu = peor = 0.0; corridas = []
+    for v in x:
+        if v > 0:
+            if l: corridas.append(('P', l))
+            w, l, lu = w + 1, 0, 0.0
+        else:
+            if w: corridas.append(('G', w))
+            l, w = l + 1, 0; lu += v
+            if l > bl or (l == bl and lu < peor): peor = lu
+        bw, bl = max(bw, w), max(bl, l)
+    corridas.append(('G', w) if w else ('P', l))
+    return bw, bl, peor, corridas
+
+print('\nRachas (después de costos de ES)')
+for tp, sl, nombre in ((8, 43, 'Proporción del Dow 2 / 10.75'), (16, 80, '4 / 20'), (20, 168, '5 / 42 (mejor con 80 % o más)'), (40, 184, '10 / 46 (mejor de todas)')):
+    x = np.array([res(p, tp, sl) for p in P]) - COST
+    bw, bl, peor, cor = rachas(x)
+    perd = [n for k, n in cor if k == 'P']; gan = [n for k, n in cor if k == 'G']
+    print(f'{nombre}: gana {round(100 * (x > 0).mean(), 1)} %, mejor racha ganadora {bw}, peor racha perdedora {bl} '
+          f'({round(peor * 12.5)} con 1 ES), racha ganadora media {round(np.mean(gan), 1)}, '
+          f'rachas de 2+ perdedoras {sum(n >= 2 for n in perd)}, de 3+ {sum(n >= 3 for n in perd)}')
+    print('   por año (mejor ganadora / peor perdedora):', {int(k): rachas(x[y == k])[:2] for k in np.unique(y)})
